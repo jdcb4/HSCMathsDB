@@ -7,9 +7,10 @@ The current corpus is not a complete transcription of all NESA papers. Entries m
 ## Current status
 
 - Project scaffold: Vite + React + TypeScript.
-- Git repository: not initialised.
+- Git repository: initialised and connected to `jdcb4/HSCMathsDB`.
 - Dependencies: installed with pnpm.
 - Package scripts: available in `package.json`.
+- Deployment: GitHub Pages through GitHub Actions.
 
 ## Quick start
 
@@ -22,6 +23,12 @@ Run all checks:
 
 ```powershell
 pnpm run verify
+```
+
+Build the GitHub Pages artefact:
+
+```powershell
+pnpm run build:github-pages
 ```
 
 Data-specific checks:

@@ -6,10 +6,9 @@ Before manifests exist, versioning is not active. During initial setup, add vers
 
 ## Version sources
 
-After setup, document every version source. Common examples:
+Current version sources:
 
 - `package.json` at the repository root
-- app-specific manifests such as `app.json`, `manifest.json`, `wrangler.toml`, or `electron-builder.yml`
 
 ## Bump rules
 

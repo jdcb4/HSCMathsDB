@@ -2,6 +2,13 @@
 
 Newest entries go at the top.
 
+## 0.8.0 - 2026-06-06
+
+- Added a GitHub Actions workflow that validates, tests, builds, uploads, and deploys the static Vite app to GitHub Pages.
+- Added a GitHub Pages build script using the `/HSCMathsDB/` base path.
+- Updated public asset rendering so diagram paths resolve correctly when the app is served from the GitHub Pages repository subpath.
+- Documented the GitHub Pages deployment target and workflow.
+
 ## 0.7.0 - 2026-06-06
 
 - Added first-class course metadata and course-aware filtering/source coverage for Advanced, Standard, Extension 1, Extension 2, and the Mathematics 2 Unit archive.

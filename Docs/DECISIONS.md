@@ -125,3 +125,13 @@ Record these during setup if they are known:
 **Rejected alternatives:** Making Gemini the default was rejected because lower cost did not outweigh the quality preference. Making GLM the default was rejected because its quality was not clearly better than MiniMax and its observed cost was higher.
 
 **Supersedes:** Not applicable.
+
+## 2026-06-06: Deploy the static app to GitHub Pages
+
+**Decision:** Deploy GoalCheck HSC from the `main` branch to GitHub Pages using a GitHub Actions workflow that builds the Vite app and publishes `dist/`.
+
+**Reasoning:** The app is a static client-side corpus browser with no runtime server, database, auth, or secrets, so GitHub Pages fits the current hosting needs and keeps deployment close to the repository.
+
+**Rejected alternatives:** Branch-based Pages deployment was rejected because Vite needs a build step. Server-backed hosts were deferred until the product needs server-side search, editing workflows, authentication, or managed persistence.
+
+**Supersedes:** Not applicable.

@@ -11,7 +11,7 @@ GoalCheck HSC is a Vite React TypeScript web app for browsing NSW HSC mathematic
 - App scaffold: Vite + React + TypeScript.
 - Git repository: initialised locally.
 - Package manager: pnpm.
-- Runtime/deployment target: static web app; hosting provider not chosen.
+- Runtime/deployment target: static Vite web app deployed to GitHub Pages from GitHub Actions.
 
 ## Important folders
 
@@ -58,6 +58,7 @@ GoalCheck HSC is a Vite React TypeScript web app for browsing NSW HSC mathematic
 | `pnpm test`                                  | Vitest once.                                                                    |
 | `pnpm run test:watch`                        | Vitest in watch mode.                                                           |
 | `pnpm run build`                             | Production build.                                                               |
+| `pnpm run build:github-pages`                | Production build with the `/HSCMathsDB/` base path required by GitHub Pages.    |
 | `pnpm run verify`                            | Data validation + typecheck + lint + test + build.                              |
 
 ## Key docs

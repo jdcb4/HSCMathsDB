@@ -1,29 +1,34 @@
 # Deployment
 
-Deployment hosting is not chosen yet. The app currently builds as a static Vite site.
+GoalCheck HSC deploys as a static Vite site to GitHub Pages from the `main` branch.
 
-## Current build artefact
+## GitHub Pages
 
 ```powershell
-pnpm run build
+pnpm run build:github-pages
 ```
 
-The production output is `dist/`. No runtime environment variables are required for the current static app.
+The production output is `dist/`. The GitHub Pages build uses Vite base path `/HSCMathsDB/` because the repository is deployed at `https://jdcb4.github.io/HSCMathsDB/`.
 
-## When hosting is chosen
+Deployment is handled by `.github/workflows/deploy.yml`:
 
-Document:
+- trigger: push to `main` or manual `workflow_dispatch`
+- package manager: pnpm 9.15.0 through Corepack
+- Node.js: 22.19.0
+- checks before deploy: data validation, typecheck, lint, tests, and GitHub Pages build
+- artefact: `dist/`, uploaded with `actions/upload-pages-artifact`
+- target environment: `github-pages`, deployed with `actions/deploy-pages`
 
-- hosting provider or runtime
-- build command
-- output directory or deploy artefact
-- required environment variables
-- secrets management approach
-- preview deployment process, if any
-- production deployment process
-- rollback process, if any
-- verification command before deploy
+No runtime environment variables or repository secrets are required for the current static app.
+
+The repository GitHub Pages setting must use **Build and deployment > Source: GitHub Actions**.
 
 ## Local verification before deploy
 
 Run `pnpm run verify`.
+
+To verify the exact Pages build locally, run:
+
+```powershell
+pnpm run build:github-pages
+```

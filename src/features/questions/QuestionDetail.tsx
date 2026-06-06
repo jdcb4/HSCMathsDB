@@ -2,6 +2,7 @@ import { ExternalLink, Image as ImageIcon } from "lucide-react";
 import { type SyntheticEvent, useState } from "react";
 import type { Paper, Question, SyllabusNode, WorkedSolution } from "../../domain/hscSchemas";
 import { MathText } from "../math/MathText";
+import { resolvePublicAssetPath } from "./questionAssetPaths";
 import { formatMultipartQuestionPrompt } from "./questionPromptFormatting";
 
 type DetailPanelKey = "officialAnswer" | "markingFeedback" | "workedSolution";
@@ -102,7 +103,11 @@ export function QuestionDetail({
                 key={asset.id}
                 className="rounded-md border border-border-default bg-surface-raised p-3"
               >
-                <img src={asset.path} alt={asset.alt} className="h-auto w-full rounded-sm" />
+                <img
+                  src={resolvePublicAssetPath(asset.path)}
+                  alt={asset.alt}
+                  className="h-auto w-full rounded-sm"
+                />
                 <figcaption className="mt-2 flex items-center gap-2 text-caption text-text-secondary">
                   <ImageIcon size={14} />
                   {asset.label}
