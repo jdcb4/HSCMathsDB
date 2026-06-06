@@ -2,6 +2,11 @@
 
 Newest entries go at the top.
 
+## 0.12.0 - 2026-06-06
+
+- Added 2024 Mathematics Standard, Extension 1, and Extension 2 source-pack catalog records and source-linked paper records to prepare repeatable ingestion.
+- Aligned the public corpus metadata version with the current package version.
+
 ## 0.11.0 - 2026-06-06
 
 - Added a reusable Standard/Extension exam-ingestion core with paper-specific profiles for source files, expected counts, section structure, and explicit PDF text boundaries.

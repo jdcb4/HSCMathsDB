@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "0.9.0",
+    "version": "0.12.0",
     "title": "GoalCheck HSC mathematics corpus",
     "updatedAt": "2026-06-06",
     "sourceSummary": "Validated corpus linking NSW mathematics exam-pack sources, Standard and Extension draft imports, the Mathematics archive, 2017 syllabus nodes, and 2024 syllabus conversion nodes."
@@ -336,6 +336,60 @@
       "importedQuestionCount": 31,
       "assetStatus": "complete",
       "notes": "Visible on the current Mathematics Advanced exam-papers listing. Source PDFs are cached and all thirty-one official draft questions have been promoted, including diagram crops from the rendered exam paper.",
+      "assets": []
+    },
+    {
+      "id": "source-std-2024",
+      "courseId": "standard",
+      "paperIds": ["std1-2024", "std2-2024"],
+      "collectionId": "nesa-math-standard-papers",
+      "year": 2024,
+      "courseName": "Mathematics Standard",
+      "title": "Mathematics Standard 2024 HSC exam pack",
+      "packPageUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+      "syllabusEra": "standard-2017",
+      "officialListStatus": "listed",
+      "importStatus": "not-started",
+      "expectedQuestionCount": 68,
+      "importedQuestionCount": 0,
+      "assetStatus": "pending-extraction",
+      "notes": "Visible on the current Mathematics Standard exam-papers listing. The pack contains separate Standard 1 and Standard 2 exam papers, marking guidelines, and Section II marking feedback PDFs.",
+      "assets": []
+    },
+    {
+      "id": "source-ext1-2024",
+      "courseId": "extension-1",
+      "paperId": "ext1-2024",
+      "collectionId": "nesa-math-extension-1-papers",
+      "year": 2024,
+      "courseName": "Mathematics Extension 1",
+      "title": "Mathematics Extension 1 2024 HSC exam pack",
+      "packPageUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+      "syllabusEra": "extension-1-2017",
+      "officialListStatus": "listed",
+      "importStatus": "not-started",
+      "expectedQuestionCount": 14,
+      "importedQuestionCount": 0,
+      "assetStatus": "pending-extraction",
+      "notes": "Visible on the current Mathematics Extension 1 exam-papers listing. Source PDFs need caching, extraction, and profile review before transcription.",
+      "assets": []
+    },
+    {
+      "id": "source-ext2-2024",
+      "courseId": "extension-2",
+      "paperId": "ext2-2024",
+      "collectionId": "nesa-math-extension-2-papers",
+      "year": 2024,
+      "courseName": "Mathematics Extension 2",
+      "title": "Mathematics Extension 2 2024 HSC exam pack",
+      "packPageUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-2/2024",
+      "syllabusEra": "extension-2-2017",
+      "officialListStatus": "listed",
+      "importStatus": "not-started",
+      "expectedQuestionCount": 16,
+      "importedQuestionCount": 0,
+      "assetStatus": "pending-extraction",
+      "notes": "Visible on the current Mathematics Extension 2 exam-papers listing. Source PDFs need caching, extraction, and profile review before transcription.",
       "assets": []
     },
     {
@@ -1683,6 +1737,42 @@
       "courseName": "Mathematics Advanced",
       "syllabusEra": "advanced-2017",
       "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-advanced",
+      "sourceStatus": "source-linked"
+    },
+    {
+      "id": "std1-2024",
+      "courseId": "standard",
+      "year": 2024,
+      "courseName": "Mathematics Standard 1",
+      "syllabusEra": "standard-2017",
+      "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+      "sourceStatus": "source-linked"
+    },
+    {
+      "id": "std2-2024",
+      "courseId": "standard",
+      "year": 2024,
+      "courseName": "Mathematics Standard 2",
+      "syllabusEra": "standard-2017",
+      "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+      "sourceStatus": "source-linked"
+    },
+    {
+      "id": "ext1-2024",
+      "courseId": "extension-1",
+      "year": 2024,
+      "courseName": "Mathematics Extension 1",
+      "syllabusEra": "extension-1-2017",
+      "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+      "sourceStatus": "source-linked"
+    },
+    {
+      "id": "ext2-2024",
+      "courseId": "extension-2",
+      "year": 2024,
+      "courseName": "Mathematics Extension 2",
+      "syllabusEra": "extension-2-2017",
+      "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-2/2024",
       "sourceStatus": "source-linked"
     },
     {
