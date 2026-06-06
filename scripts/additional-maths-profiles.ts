@@ -25,7 +25,279 @@ export const additionalMathsProfiles: ExamIngestionProfile[] = [
       range(11, 28),
       [519, 567, 613, 679, 820, 966, 1014, 1062, 1123, 1205, 1348, 1391, 1479, 1536, 1593, 1644, 1688, 1749],
       1803
-    )
+    ),
+    questionOverrides: {
+      3: {
+        promptLatex: [
+          "3 Consider the network diagram.",
+          "Which vertex has degree 4?",
+          "A. \\(A\\)",
+          "B. \\(B\\)",
+          "C. \\(C\\)",
+          "D. \\(D\\)"
+        ].join("\n"),
+        assets: [
+          {
+            id: "std1-2025-q03-network-degree",
+            type: "diagram",
+            label: "Network diagram",
+            alt: "Network with vertices A, B, C, D, E and F, used to identify the vertex with degree 4.",
+            path: "/assets/diagrams/std1-2025-q03-network-degree.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      5: {
+        promptLatex: [
+          "5 A baker makes and sells cakes. The straight-line graphs represent cost \\(C\\) and revenue \\(R\\) in dollars, and \\(n\\) is the number of cakes.",
+          "What profit will the baker make by selling 6 cakes?",
+          "A. \\(\\$10\\)",
+          "B. \\(\\$20\\)",
+          "C. \\(\\$40\\)",
+          "D. \\(\\$60\\)"
+        ].join("\n"),
+        assets: [
+          {
+            id: "std1-2025-q05-cake-cost-revenue-graph",
+            type: "graph",
+            label: "Cake cost and revenue graph",
+            alt: "Straight-line graphs of revenue R equals 10n and cost C equals 20 plus 5n against number of cakes.",
+            path: "/assets/diagrams/std1-2025-q05-cake-cost-revenue-graph.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      6: {
+        promptLatex: [
+          "6 The network shows the distances, in kilometres, along a series of roads that connect towns.",
+          "What is the value of the largest weighted edge included in the minimum spanning tree for this network?",
+          "A. 7",
+          "B. 8",
+          "C. 9",
+          "D. 10"
+        ].join("\n"),
+        assets: [
+          {
+            id: "std1-2025-q06-weighted-road-network",
+            type: "diagram",
+            label: "Weighted road network",
+            alt: "Weighted network of towns with edge distances 4, 5, 5, 6, 7, 7, 8, 9 and 10 kilometres.",
+            path: "/assets/diagrams/std1-2025-q06-weighted-road-network.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      7: {
+        promptLatex: [
+          "7 A biased die is made from this net. The die is rolled once.",
+          "What is the probability of rolling a 2?",
+          "A. \\(\\frac16\\)",
+          "B. \\(\\frac14\\)",
+          "C. \\(\\frac13\\)",
+          "D. \\(\\frac12\\)"
+        ].join("\n"),
+        assets: [
+          {
+            id: "std1-2025-q07-biased-die-net",
+            type: "diagram",
+            label: "Biased die net",
+            alt: "Net of a biased die with repeated numbered faces used to determine the probability of rolling 2.",
+            path: "/assets/diagrams/std1-2025-q07-biased-die-net.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      14: {
+        promptLatex: [
+          "Question 14\n(5 marks) The time, in minutes, it takes to travel by road between six towns is recorded and shown in the network diagram below.",
+          "(a) In this network the shortest path corresponds to the minimum travel time. What is the minimum travel time between towns \\(A\\) and \\(F\\), and what is the corresponding path?",
+          "New roads are built to connect a town \\(G\\) to towns \\(A\\) and \\(D\\). The table gives the times it takes to travel by the new roads.",
+          "(b) Add the new roads and times to the network diagram below.",
+          "(c) Explain whether the path in part (a) is still the shortest path from \\(A\\) to \\(F\\) after the new roads are added."
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "(a) Minimum travel time \\(=15+20+10+5+8=58\\) minutes. Path: \\(A\\)-\\(B\\)-\\(C\\)-\\(D\\)-\\(E\\)-\\(F\\).",
+          "(b) The completed diagram connects \\(A\\) to \\(G\\) with time 8 minutes and \\(G\\) to \\(D\\) with time 22 minutes.",
+          "(c) The path in part (a) is not the shortest path any more, as \\(A\\)-\\(G\\)-\\(D\\)-\\(E\\)-\\(F\\) takes 43 minutes."
+        ].join("\n"),
+        assets: [
+          {
+            id: "std1-2025-q14-town-network-new-roads",
+            type: "diagram",
+            label: "Town network and new-road table",
+            alt: "Town network with towns A to F and travel times, plus a table and blank network for adding new roads through town G.",
+            path: "/assets/diagrams/std1-2025-q14-town-network-new-roads.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      15: {
+        promptLatex: [
+          "Question 15\n(8 marks) A researcher is using the statistical investigation process to investigate a possible relationship between average number of minutes per day a person spends watching television, and the average number of minutes per day the person spends exercising.",
+          "(a) State the statistical question being posed.",
+          "Participants were asked to record the number of minutes they spent watching television each day and the number of minutes they spent exercising each day. The averages for each participant were recorded and graphed, and a line of best fit was included.",
+          "(b) From the graph, identify the dependent variable.",
+          "(c) Describe the bivariate dataset in terms of its form and direction.",
+          "(d) The points \\((0,70)\\) and \\((60,10)\\) lie on the line of best fit. By first plotting these points on the graph, find the gradient and the \\(y\\)-intercept of the line of best fit.",
+          "(e) Explain why it is NOT appropriate to extrapolate the line of best fit to predict the average number of minutes of exercise per day for someone who watches an average of 2 hours of television per day."
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "(a) Is there a relationship between average number of minutes per day watching television and average number of minutes per day exercising?",
+          "(b) Average minutes per day exercising.",
+          "(c) Form: linear. Direction: negative.",
+          "(d) The gradient is \\(m=\\frac{10-70}{60-0}=-\\frac{60}{60}=-1\\). The \\(y\\)-intercept is 70.",
+          "(e) The number of minutes per day exercising will be negative."
+        ].join("\n"),
+        assets: [
+          {
+            id: "std1-2025-q15-tv-exercise-scatterplot",
+            type: "graph",
+            label: "Television and exercise scatterplot",
+            alt: "Scatterplot of average minutes watching television against average minutes exercising, with a negative line of best fit.",
+            path: "/assets/diagrams/std1-2025-q15-tv-exercise-scatterplot.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      19: {
+        promptLatex: [
+          "Question 19\n(4 marks) At the end of the 2024-2025 financial year, Alex's taxable income was \\(\\$148\\ 600\\).",
+          "(a) The table shows the income tax rate for Australian residents for the 2024-2025 financial year. Using the table, calculate Alex's tax payable.",
+          "(b) The Medicare levy is 2% of taxable income. Calculate the Medicare levy payable by Alex."
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "(a) Tax payable \\(=31\\ 288+0.37(148\\ 600-135\\ 000)=\\$36\\ 320\\).",
+          "(b) \\(2\\%\\times148\\ 600=\\$2972\\)."
+        ].join("\n"),
+        assets: [
+          {
+            id: "std1-2025-q19-income-tax-table",
+            type: "table",
+            label: "Income tax rates table",
+            alt: "Table of Australian resident income tax rates for taxable income ranges from zero dollars to over 190 thousand dollars.",
+            path: "/assets/diagrams/std1-2025-q19-income-tax-table.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      20: {
+        promptLatex: [
+          "Question 20\n(7 marks) A map of a park containing a duck pond is shown.",
+          "A fence is built passing through the points \\(A\\), \\(B\\) and \\(C\\) around the duck pond.",
+          "(a) Using the scale provided on the map, calculate the length of the fence \\(AB\\).",
+          "(b) The length of \\(AB\\) is equal to the length of \\(BC\\). Use Pythagoras' theorem to calculate the length of \\(AC\\) in metres. Give your answer correct to 3 significant figures.",
+          "(c) What is the true bearing of point \\(A\\) from point \\(C\\)?"
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "(a) \\(15\\times5=75\\text{ m}\\), or \\(7.5\\times10=75\\text{ m}\\).",
+          "(b) Length of \\(AC=\\sqrt{75^2+75^2}=106.066\\ldots\\), so \\(AC=106\\text{ m}\\), correct to 3 significant figures.",
+          "(c) \\(\\tan\\theta=\\frac{75}{75}\\), so \\(\\theta=45^\\circ\\). The true bearing is \\(180^\\circ+(90^\\circ-45^\\circ)=225^\\circ\\)."
+        ].join("\n"),
+        assets: [
+          {
+            id: "std1-2025-q20-park-map",
+            type: "diagram",
+            label: "Park map with fence points",
+            alt: "Grid map of a park with points A, B and C around a duck pond, a north arrow, and a 10 metre scale.",
+            path: "/assets/diagrams/std1-2025-q20-park-map.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      22: {
+        promptLatex: [
+          "Question 22\n(4 marks) An isosceles triangle is drawn inside a circle as shown. The base of the triangle is 4.8 cm long, the length of other sides is 4 cm and the height is \\(h\\) cm.",
+          "(a) Calculate the height, \\(h\\), of triangle \\(ABC\\).",
+          "(b) The area of triangle \\(ABC\\) is \\(7.68\\text{ cm}^2\\). The radius of the circle is 2.5 cm. Express the area of triangle \\(ABC\\) as a percentage of the area of the circle, correct to 1 decimal place."
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "(a) \\(h^2=4^2-2.4^2=10.24\\), so \\(h=\\sqrt{10.24}=3.2\\text{ cm}\\).",
+          "(b) Area of circle \\(=\\pi(2.5)^2=19.635\\ldots\\). Therefore \\(\\frac{7.68}{19.635\\ldots}\\times100\\%=39.1\\%\\)."
+        ].join("\n"),
+        assets: [
+          {
+            id: "std1-2025-q22-circle-triangle",
+            type: "diagram",
+            label: "Triangle inside circle",
+            alt: "Isosceles triangle ABC inside a circle, with equal sides 4 centimetres, base 4.8 centimetres, and height h.",
+            path: "/assets/diagrams/std1-2025-q22-circle-triangle.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      26: {
+        promptLatex: [
+          "Question 26\n(4 marks) A scale of 1:50 is used to draw a rectangular area on a 2 mm grid as shown. The actual rectangular area is to be tiled.",
+          "The tiles cost \\(\\$150\\) per square metre and the tiler orders 15% extra tiles to allow for cutting and breakage. The tiler charges \\(\\$90\\) per hour and will take 20 hours to complete the tiling.",
+          "Calculate the total cost of the tiles and tiling. Give your answer to the nearest dollar."
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "The drawing measures 10.4 cm by 9.6 cm. Using the scale, the actual dimensions are \\(10.4\\times50=520\\text{ cm}=5.2\\text{ m}\\) and \\(9.6\\times50=480\\text{ cm}=4.8\\text{ m}\\).",
+          "Area \\(=5.2\\times4.8=24.96\\text{ m}^2\\). Total tile area required \\(=24.96+15\\%\\times24.96=28.704\\text{ m}^2\\).",
+          "Tile cost \\(=150\\times28.704=\\$4305.60\\). Tiler cost \\(=90\\times20=\\$1800\\). Total cost \\(=\\$6105.60\\), so \\(\\$6106\\) to the nearest dollar."
+        ].join("\n"),
+        assets: [
+          {
+            id: "std1-2025-q26-tiling-grid",
+            type: "diagram",
+            label: "Scale rectangular tiling grid",
+            alt: "Rectangle drawn on a 2 millimetre grid using a 1 to 50 scale for a tiling cost calculation.",
+            path: "/assets/diagrams/std1-2025-q26-tiling-grid.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      27: {
+        promptLatex: [
+          "Question 27\n(4 marks) The graph shows the salvage value of a car over 5 years.",
+          "The salvage values are based on the declining-balance method.",
+          "By what amount will the car's value depreciate during the 10th year?"
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "\\(\\$44\\ 000=\\$55\\ 000(1-r)\\), so \\(1-r=\\frac{44\\ 000}{55\\ 000}=0.8\\) and \\(r=0.2=20\\%\\).",
+          "Value after 9 years \\(=55\\ 000(1-0.2)^9=\\$7381.98\\). Value of depreciation during the 10th year \\(=7381.98\\times0.2=\\$1476.40\\)."
+        ].join("\n"),
+        assets: [
+          {
+            id: "std1-2025-q27-car-salvage-graph",
+            type: "graph",
+            label: "Car salvage value graph",
+            alt: "Graph showing a car value declining from 55 thousand dollars at year 0 to 44 thousand dollars at year 1 over a 5 year time axis.",
+            path: "/assets/diagrams/std1-2025-q27-car-salvage-graph.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      28: {
+        promptLatex: [
+          "Question 28\n(4 marks) The table provides information about a \\(\\$2\\) coin and a \\(\\$5\\) note.",
+          "(a) Calculate the mass of a \\(\\$2\\) coin in grams, correct to 1 decimal place.",
+          "(b) Suppose the \\(\\$2\\) coin is to be replaced with a note that has the same mass as a \\(\\$5\\) note. What is the mass of \\(\\$1000\\) in \\(\\$2\\) notes in grams? Give your answer correct to the nearest gram."
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "(a) 500 \\(\\$2\\) coins have a mass of 3.3 kg, so the mass of one \\(\\$2\\) coin is \\(\\frac{3.3}{500}=0.0066\\text{ kg}=6.6\\text{ g}\\).",
+          "(b) 200 notes have a mass of 157 g, so one note has mass \\(\\frac{157}{200}=0.785\\text{ g}\\). The mass of 500 notes is \\(0.785\\times500=392.5\\text{ g}\\), which is 393 g to the nearest gram."
+        ].join("\n"),
+        assets: [
+          {
+            id: "std1-2025-q28-coin-note-table",
+            type: "table",
+            label: "Coin and note mass table",
+            alt: "Table comparing the number and total mass of 2 dollar coins and 5 dollar notes needed to make 1000 dollars.",
+            path: "/assets/diagrams/std1-2025-q28-coin-note-table.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      }
+    }
   },
   {
     id: "std2-2025",

@@ -2,6 +2,12 @@
 
 Newest entries go at the top.
 
+## 0.19.0 - 2026-06-06
+
+- Added source-reviewed prompt and answer overrides for 2025 Mathematics Standard 1 visual and formula-heavy questions.
+- Added reviewed exam-derived visual assets for 2025 Mathematics Standard 1 Questions 3, 5, 6, 7, 14, 15, 19, 20, 22, 26, 27, and 28.
+- Brought the 2025 Mathematics Standard 1 ingestion audit to zero errors and zero warnings.
+
 ## 0.18.0 - 2026-06-06
 
 - Reingested the 2025 Mathematics Standard 1, Standard 2, Extension 1, and Extension 2 draft records through the reusable profile importer after removing the previous generated records for those papers.
