@@ -2,6 +2,11 @@
 
 Newest entries go at the top.
 
+## 0.19.1 - 2026-06-06
+
+- Documented how current PDF math extraction works and why it produces glyph text rather than reusable TeX.
+- Expanded the ingestion automation feasibility plan with a benchmark-first path for Marker, MinerU, Mathpix, and LLM proposal generation.
+
 ## 0.19.0 - 2026-06-06
 
 - Added source-reviewed prompt and answer overrides for 2025 Mathematics Standard 1 visual and formula-heavy questions.
