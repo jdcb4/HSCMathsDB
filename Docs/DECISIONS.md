@@ -135,3 +135,13 @@ Record these during setup if they are known:
 **Rejected alternatives:** Branch-based Pages deployment was rejected because Vite needs a build step. Server-backed hosts were deferred until the product needs server-side search, editing workflows, authentication, or managed persistence.
 
 **Supersedes:** Not applicable.
+
+## 2026-06-06: Use PyMuPDF for PDF layout inventory
+
+**Decision:** Use PyMuPDF as the local Python dependency for PDF page layout inventory, including text block, image block, and vector drawing bounds.
+
+**Reasoning:** The remaining ingestion bottleneck is repeatable diagram discovery and crop proposal generation. PyMuPDF exposes embedded image metadata and vector drawing paths from PDFs, which lets the import workflow generate reviewable crop candidates before manual inspection.
+
+**Rejected alternatives:** Continuing with only `pypdf` was rejected because it extracts embedded images and text but does not provide enough vector drawing/layout information for NESA exam diagrams. Jumping directly to paid OCR or LLM vision was rejected as the first step because deterministic layout inventory is cheaper, local, and auditable.
+
+**Supersedes:** Not applicable.

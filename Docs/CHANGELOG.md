@@ -2,6 +2,12 @@
 
 Newest entries go at the top.
 
+## 0.16.0 - 2026-06-06
+
+- Added a PyMuPDF layout-inventory command that records exam-paper text blocks, embedded image blocks, vector drawing bounds, and drawing clusters into ignored review metadata.
+- Added a diagram crop-proposal command that combines layout inventory with rendered page metadata to generate ready-to-run crop commands for candidate visual assets.
+- Documented the repeatable layout inventory and crop proposal workflow for future Standard and Extension paper imports.
+
 ## 0.15.0 - 2026-06-06
 
 - Added source-reviewed prompt and answer overrides for 2024 Mathematics Extension 1 questions with damaged extracted notation.

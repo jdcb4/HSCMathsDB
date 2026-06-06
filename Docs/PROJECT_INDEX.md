@@ -28,7 +28,9 @@ GoalCheck HSC is a Vite React TypeScript web app for browsing NSW HSC mathematic
 - `var/extracted-text` - ignored local text extraction output used during transcription.
 - `var/question-candidates` - ignored raw candidate records extracted from source text.
 - `var/extracted-images` - ignored embedded-image extraction output used during diagram review.
+- `var/layout-inventory` - ignored PDF layout metadata for text blocks, images, and vector drawing clusters.
 - `var/rendered-pages` - ignored rendered PDF pages used for vector diagram review.
+- `var/diagram-crop-proposals` - ignored proposed crop rectangles generated from layout inventory and rendered pages.
 - `var/diagram-crops` - ignored crop candidates produced from rendered PDF pages.
 - `Docs` - durable project documentation.
 
@@ -49,7 +51,9 @@ GoalCheck HSC is a Vite React TypeScript web app for browsing NSW HSC mathematic
 | `pnpm run data:report-candidates`             | Summarize ignored candidate extraction output.                                   |
 | `pnpm run data:audit-ingested-exams`          | Audit promoted question records for ingestion-quality regressions.               |
 | `pnpm run data:extract-images`                | Extract embedded PDF images into ignored local output.                           |
+| `pnpm run data:inventory-layout`              | Inventory cached PDF text, image, and vector drawing layout into ignored JSON.   |
 | `pnpm run data:render-pages`                  | Render cached PDF pages into ignored PNG page images.                            |
+| `pnpm run data:propose-diagram-crops`         | Generate reviewable diagram crop proposals from inventory and rendered pages.    |
 | `pnpm run data:generate-explanation-samples`  | Generate ignored LLM explanation comparison samples for manual review.           |
 | `pnpm run data:generate-worked-solutions`     | Generate or refresh primary worked-solution sidecar records through OpenRouter.  |
 | `pnpm run data:report-worked-solutions`       | Report worked-solution sidecar coverage and model counts.                        |
