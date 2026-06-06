@@ -177,7 +177,11 @@ export async function generateWorkedSolution({
   const response = await callOpenRouter({ apiKey, model, question, withJsonMode: true }).catch(
     async (error: unknown) => {
       const message = error instanceof Error ? error.message : String(error);
-      if (!message.includes("response_format") && !message.includes("json") && !message.includes("null content")) {
+      if (
+        !message.includes("response_format") &&
+        !message.includes("json") &&
+        !message.includes("null content")
+      ) {
         throw error;
       }
 

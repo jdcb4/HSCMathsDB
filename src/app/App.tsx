@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
 import { ArrowLeftRight, BookOpen, Database, FileText, Filter, Link as LinkIcon, Search } from "lucide-react";
-import { LlmExplanationReview } from "../features/dev/LlmExplanationReview";
 import { QuestionDetail } from "../features/questions/QuestionDetail";
 import { QuestionList } from "../features/questions/QuestionList";
 import { SourceCatalog } from "../features/sources/SourceCatalog";
@@ -21,7 +20,7 @@ import {
 import { database, syllabusConversion, workedSolutionsDatabase } from "../services/hscDatabase";
 import type { QuestionStyle } from "../domain/hscSchemas";
 
-type ViewMode = "questions" | "syllabus" | "sources" | "llm-review";
+type ViewMode = "questions" | "syllabus" | "sources";
 
 type Filters = {
   search: string;
@@ -38,8 +37,6 @@ const defaultFilters: Filters = {
   style: "all",
   syllabusNodeId: "all"
 };
-
-const showDevViews = import.meta.env.DEV;
 
 const syllabusViewLabels: Record<SyllabusEraView, string> = {
   "advanced-2017": "2017 syllabus",
@@ -173,28 +170,8 @@ export function App() {
             {summary.transcriptionCounts.verified} verified questions. Full official-paper transcription and
             diagram extraction are tracked in the source catalog.
           </div>
-          <div className="flex flex-col gap-2 rounded-md border border-border-default bg-surface-sunken px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <p className="text-caption font-semibold uppercase text-accent-info">Syllabus view</p>
-              <p className="text-body-sm text-text-secondary">{syllabusViewLabels[preferredSyllabusEra]}</p>
-            </div>
-            <div className="flex rounded-md border border-border-default bg-surface-raised p-1">
-              <SyllabusViewButton
-                active={preferredSyllabusEra === "advanced-2017"}
-                onClick={() => setSyllabusEra("advanced-2017")}
-              >
-                2017
-              </SyllabusViewButton>
-              <SyllabusViewButton
-                active={preferredSyllabusEra === "advanced-2024"}
-                onClick={() => setSyllabusEra("advanced-2024")}
-              >
-                2024
-              </SyllabusViewButton>
-            </div>
-          </div>
-          <div className="flex flex-col gap-3 lg:flex-row lg:items-end">
-            <label className="flex min-w-0 flex-1 flex-col gap-1 text-caption font-medium text-text-secondary">
+          <div className="flex flex-col gap-3">
+            <label className="flex min-w-0 flex-col gap-1 text-caption font-medium text-text-secondary">
               Search
               <span className="flex items-center gap-2 rounded-md border border-border-default bg-surface-sunken px-3 py-2 text-body text-text-primary focus-within:shadow-focus">
                 <Search size={17} className="shrink-0 text-text-subtle" />
@@ -206,42 +183,57 @@ export function App() {
                 />
               </span>
             </label>
-            <FilterSelect label="Year" value={filters.year} onChange={(value) => setFilter("year", value)}>
-              <option value="all">All years</option>
-              {options.years.map((year) => (
-                <option key={year} value={year}>
-                  {year}
-                </option>
-              ))}
-            </FilterSelect>
-            <FilterSelect label="Topic" value={filters.topic} onChange={(value) => setFilter("topic", value)}>
-              <option value="all">All topics</option>
-              {options.topics.map((topic) => (
-                <option key={topic} value={topic}>
-                  {topic}
-                </option>
-              ))}
-            </FilterSelect>
-            <FilterSelect label="Style" value={filters.style} onChange={(value) => setFilter("style", value)}>
-              <option value="all">All styles</option>
-              {options.styles.map((style) => (
-                <option key={style} value={style}>
-                  {style}
-                </option>
-              ))}
-            </FilterSelect>
-            <FilterSelect
-              label="Syllabus"
-              value={filters.syllabusNodeId}
-              onChange={(value) => setFilter("syllabusNodeId", value)}
-            >
-              <option value="all">All content</option>
-              {visibleSyllabusNodes.map((node) => (
-                <option key={node.id} value={node.id}>
-                  {node.code} {node.title}
-                </option>
-              ))}
-            </FilterSelect>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+              <FilterSelect label="Year" value={filters.year} onChange={(value) => setFilter("year", value)}>
+                <option value="all">All years</option>
+                {options.years.map((year) => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ))}
+              </FilterSelect>
+              <FilterSelect
+                label="Topic"
+                value={filters.topic}
+                onChange={(value) => setFilter("topic", value)}
+              >
+                <option value="all">All topics</option>
+                {options.topics.map((topic) => (
+                  <option key={topic} value={topic}>
+                    {topic}
+                  </option>
+                ))}
+              </FilterSelect>
+              <FilterSelect
+                label="Style"
+                value={filters.style}
+                onChange={(value) => setFilter("style", value)}
+              >
+                <option value="all">All styles</option>
+                {options.styles.map((style) => (
+                  <option key={style} value={style}>
+                    {style}
+                  </option>
+                ))}
+              </FilterSelect>
+              <FilterSelect
+                label="Syllabus content"
+                value={filters.syllabusNodeId}
+                onChange={(value) => setFilter("syllabusNodeId", value)}
+              >
+                <option value="all">All content</option>
+                {visibleSyllabusNodes.map((node) => (
+                  <option key={node.id} value={node.id}>
+                    {node.code} {node.title}
+                  </option>
+                ))}
+              </FilterSelect>
+              <SyllabusViewControl
+                value={preferredSyllabusEra}
+                onChange={setSyllabusEra}
+                label={syllabusViewLabels[preferredSyllabusEra]}
+              />
+            </div>
           </div>
         </div>
       </header>
@@ -270,15 +262,6 @@ export function App() {
             >
               Sources
             </ModeButton>
-            {showDevViews ? (
-              <ModeButton
-                active={viewMode === "llm-review"}
-                icon={<Database size={17} />}
-                onClick={() => setViewMode("llm-review")}
-              >
-                LLM review
-              </ModeButton>
-            ) : null}
           </div>
           {viewMode === "questions" ? (
             <QuestionList
@@ -294,23 +277,13 @@ export function App() {
               questionCountsByNode={visibleQuestionCountsBySyllabusNode}
               onSelectNode={setSelectedSyllabusNodeId}
             />
-          ) : viewMode === "llm-review" && showDevViews ? (
-            <div className="rounded-md border border-border-default bg-surface-raised p-4">
-              <p className="text-caption font-semibold uppercase text-accent-info">Dev</p>
-              <h2 className="mt-1 text-h4 font-semibold">LLM explanation review</h2>
-              <p className="mt-2 text-body-sm text-text-secondary">
-                Compare generated worked solutions for the sample question set.
-              </p>
-            </div>
           ) : (
             <SourceCatalog packs={sourcePacks} />
           )}
         </aside>
 
         <section className="min-w-0">
-          {viewMode === "llm-review" && showDevViews ? (
-            <LlmExplanationReview />
-          ) : viewMode === "questions" && selectedQuestion ? (
+          {viewMode === "questions" && selectedQuestion ? (
             <QuestionDetail
               question={selectedQuestion}
               paper={database.papers.find((paper) => paper.id === selectedQuestion.paperId)}
@@ -388,30 +361,6 @@ export function App() {
   );
 }
 
-function SyllabusViewButton({
-  active,
-  onClick,
-  children
-}: {
-  active: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`inline-flex min-h-9 min-w-20 items-center justify-center rounded-sm px-3 text-body-sm font-medium ${
-        active
-          ? "bg-accent-primary text-text-onAccent"
-          : "text-text-secondary hover:bg-surface-sunken hover:text-text-primary"
-      }`}
-    >
-      {children}
-    </button>
-  );
-}
-
 function CoverageMetric({ label, value }: { label: string; value: number }) {
   return (
     <div className="rounded-md border border-border-default bg-surface-sunken p-4">
@@ -443,20 +392,71 @@ function FilterSelect({
   children: React.ReactNode;
 }) {
   return (
-    <label className="flex min-w-40 flex-col gap-1 text-caption font-medium text-text-secondary">
+    <label className="flex min-w-0 flex-col gap-1 text-caption font-medium text-text-secondary">
       {label}
       <span className="flex items-center gap-2 rounded-md border border-border-default bg-surface-sunken px-3 py-2 text-body text-text-primary focus-within:shadow-focus">
         <Filter size={16} className="shrink-0 text-text-subtle" />
         <select
           value={value}
           onChange={(event) => onChange(event.target.value)}
-          className="min-w-0 flex-1 bg-transparent outline-none"
+          className="min-w-0 flex-1 truncate bg-transparent outline-none"
           aria-label={label}
         >
           {children}
         </select>
       </span>
     </label>
+  );
+}
+
+function SyllabusViewControl({
+  value,
+  onChange,
+  label
+}: {
+  value: SyllabusEraView;
+  onChange: (value: SyllabusEraView) => void;
+  label: string;
+}) {
+  return (
+    <div className="flex min-w-0 flex-col gap-1 text-caption font-medium text-text-secondary">
+      Syllabus view
+      <div
+        className="flex items-center gap-1 rounded-md border border-border-default bg-surface-sunken p-1 text-body-sm"
+        aria-label={`Current syllabus view: ${label}`}
+      >
+        <SyllabusViewButton active={value === "advanced-2017"} onClick={() => onChange("advanced-2017")}>
+          2017
+        </SyllabusViewButton>
+        <SyllabusViewButton active={value === "advanced-2024"} onClick={() => onChange("advanced-2024")}>
+          2024
+        </SyllabusViewButton>
+      </div>
+    </div>
+  );
+}
+
+function SyllabusViewButton({
+  active,
+  onClick,
+  children
+}: {
+  active: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`inline-flex min-h-9 flex-1 items-center justify-center rounded-sm px-3 text-body-sm font-medium ${
+        active
+          ? "bg-accent-primary text-text-onAccent"
+          : "text-text-secondary hover:bg-surface-raised hover:text-text-primary"
+      }`}
+    >
+      {children}
+    </button>
   );
 }
 

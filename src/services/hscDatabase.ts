@@ -21,13 +21,25 @@ function validateSyllabusConversionAgainstDatabase(
   hscDatabase: HscDatabase
 ): SyllabusConversion {
   const syllabusNodeIds = new Set(hscDatabase.syllabus.map((node) => node.id));
-  const missingOldAppNodeIds = conversion.oldSyllabus.nodes
-    .map((node) => node.appNodeId)
-    .filter((nodeId): nodeId is string => Boolean(nodeId))
-    .filter((nodeId) => !syllabusNodeIds.has(nodeId));
-  const missingNewNodeIds = conversion.newSyllabus.nodes
-    .map((node) => node.id)
-    .filter((nodeId) => !syllabusNodeIds.has(nodeId));
+  const missingOldAppNodeIds: string[] = [];
+  const missingNewNodeIds: string[] = [];
+
+  conversion.courses.forEach((course) => {
+    const oldAppNodeIds = course.oldSyllabus.nodes
+      .map((node) => node.appNodeId)
+      .filter((nodeId): nodeId is string => Boolean(nodeId));
+    const newNodeIds = course.newSyllabus.nodes.map((node) => node.id);
+    const courseHasCorpusNodes =
+      oldAppNodeIds.some((nodeId) => syllabusNodeIds.has(nodeId)) ||
+      newNodeIds.some((nodeId) => syllabusNodeIds.has(nodeId));
+
+    if (!courseHasCorpusNodes) {
+      return;
+    }
+
+    missingOldAppNodeIds.push(...oldAppNodeIds.filter((nodeId) => !syllabusNodeIds.has(nodeId)));
+    missingNewNodeIds.push(...newNodeIds.filter((nodeId) => !syllabusNodeIds.has(nodeId)));
+  });
 
   if (missingOldAppNodeIds.length > 0 || missingNewNodeIds.length > 0) {
     throw new Error(

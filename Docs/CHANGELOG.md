@@ -2,6 +2,22 @@
 
 Newest entries go at the top.
 
+## 0.5.0 - 2026-06-06
+
+- Generalised the syllabus conversion artifact to support multiple mathematics courses.
+- Added conversion-only mappings for Mathematics Extension 1, Mathematics Extension 2, and Mathematics Standard 2017-to-2024 syllabuses.
+- Added a separate `SyllabusConversion` staging builder and staged additional-course conversion artifact.
+- Updated conversion validation so future courses can be mapped before their exam corpora are imported.
+
+## 0.4.0 - 2026-06-06
+
+- Reworked question detail flow so answers appear before collapsed worked solutions, with syllabus links last.
+- Renamed the answer section to identify it as the official HSC marking-guide answer.
+- Removed the temporary LLM comparison tab from the app.
+- Fixed question ordering so question numbers sort numerically within each year.
+- Made filter control sizing stable across syllabus views and reduced the syllabus toggle prominence.
+- Added display formatting for multipart question prompts such as `(a)` and `(b)`.
+
 ## 0.3.1 - 2026-06-06
 
 - Fixed Vite development styling by wiring Tailwind/PostCSS directly into the Vite CSS pipeline.

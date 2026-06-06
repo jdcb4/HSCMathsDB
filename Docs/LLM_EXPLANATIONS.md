@@ -259,13 +259,12 @@ The report should show:
 - explanations needing review
 - missing explanations by paper
 
-## Dev comparison samples
+## Comparison samples
 
-Use the dev-only sample workflow to compare candidate models before committing to the production explanation pipeline:
+Use the sample workflow to compare candidate models before committing to the production explanation pipeline:
 
 ```powershell
 pnpm run data:generate-explanation-samples
-pnpm run dev
 ```
 
 The script uses `OPENROUTER_API_KEY` from `.env` or the shell environment, calls the configured OpenRouter models, records per-response generation time, and writes ignored output to:
@@ -275,7 +274,7 @@ var/llm-explanation-samples/samples.json
 var/llm-explanation-samples/raw/
 ```
 
-The Vite dev server exposes this ignored file at `/__dev/llm-explanation-samples`. The app shows an `LLM review` tab only in development mode, so generated sample drafts are not part of the production build.
+Generated sample drafts are ignored local artifacts and are not part of the production build. Review the JSON output directly when comparing candidate models.
 
 ## End-user display
 

@@ -40,7 +40,7 @@ The corpus has two related but distinct layers:
 
 Student-facing worked explanations are planned as a separate validated sidecar keyed by `questionId`, not embedded directly into each question record. See `Docs/LLM_EXPLANATIONS.md`.
 
-The 2017-to-2024 syllabus conversion is a separate validated artifact in `src/data/syllabus-conversion.json`. The corpus contains displayable nodes for both syllabus eras, but questions only need native `syllabusNodeIds`; selectors resolve alternate-era display through the conversion map. See `Docs/SYLLABUS_CONVERSION.md`.
+The 2017-to-2024 syllabus conversion is a separate validated multi-course artifact in `src/data/syllabus-conversion.json`. The current corpus contains displayable Mathematics Advanced nodes for both syllabus eras, but questions only need native `syllabusNodeIds`; selectors resolve alternate-era display through the conversion map. Future Extension 1, Extension 2, and Standard imports can use the prebuilt conversion-only course mappings once their displayable corpus nodes are added. See `Docs/SYLLABUS_CONVERSION.md`.
 
 Move to SQLite, Postgres, or a search index only when the complete corpus, full-text search, collaborative editing, or ingestion workflow makes JSON unsuitable. Document that migration in `Docs/DECISIONS.md`.
 

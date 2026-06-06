@@ -164,31 +164,37 @@ export const SyllabusConversionMappingSchema = z.object({
   notes: z.string().min(1)
 });
 
+export const SyllabusConversionCourseSchema = z.object({
+  id: z.string().min(1),
+  title: z.string().min(1),
+  oldSyllabus: z.object({
+    id: z.string().min(1),
+    title: z.string().min(1),
+    sourceUrl: z.string().url(),
+    sourceDocxUrl: z.string().url(),
+    implementation: z.object({
+      replacedBy: z.string().min(1),
+      replacementNotes: z.string().min(1)
+    }),
+    nodes: z.array(SyllabusConversionNodeSchema).min(1)
+  }),
+  newSyllabus: z.object({
+    id: z.string().min(1),
+    title: z.string().min(1),
+    overviewUrl: z.string().url(),
+    contentUrl: z.string().url(),
+    nodes: z.array(SyllabusConversionNodeSchema).min(1)
+  }),
+  mappings: z.array(SyllabusConversionMappingSchema).min(1)
+});
+
 export const SyllabusConversionSchema = z
   .object({
-    schemaVersion: z.literal(1),
+    schemaVersion: z.literal(2),
     updatedAt: z.string().min(1),
     purpose: z.string().min(1),
     sourceSummary: z.string().min(1),
-    oldSyllabus: z.object({
-      id: z.literal("advanced-2017"),
-      title: z.string().min(1),
-      sourceUrl: z.string().url(),
-      sourceDocxUrl: z.string().url(),
-      implementation: z.object({
-        replacedBy: z.literal("advanced-2024"),
-        replacementNotes: z.string().min(1)
-      }),
-      nodes: z.array(SyllabusConversionNodeSchema).min(1)
-    }),
-    newSyllabus: z.object({
-      id: z.literal("advanced-2024"),
-      title: z.string().min(1),
-      overviewUrl: z.string().url(),
-      contentUrl: z.string().url(),
-      nodes: z.array(SyllabusConversionNodeSchema).min(1)
-    }),
-    mappings: z.array(SyllabusConversionMappingSchema).min(1),
+    courses: z.array(SyllabusConversionCourseSchema).min(1),
     questionCategorisationModel: z.object({
       recommendedPrimaryKey: z.string().min(1),
       recommendedSecondaryKey: z.string().min(1),
@@ -197,49 +203,51 @@ export const SyllabusConversionSchema = z
     })
   })
   .superRefine((conversion, context) => {
-    const oldNodeIds = new Set(conversion.oldSyllabus.nodes.map((node) => node.id));
-    const newNodeIds = new Set(conversion.newSyllabus.nodes.map((node) => node.id));
-    const contentGroupIds = new Set(
-      [...conversion.oldSyllabus.nodes, ...conversion.newSyllabus.nodes].flatMap((node) =>
-        node.contentGroups.map((group) => group.id)
-      )
-    );
+    conversion.courses.forEach((course, courseIndex) => {
+      const oldNodeIds = new Set(course.oldSyllabus.nodes.map((node) => node.id));
+      const newNodeIds = new Set(course.newSyllabus.nodes.map((node) => node.id));
+      const contentGroupIds = new Set(
+        [...course.oldSyllabus.nodes, ...course.newSyllabus.nodes].flatMap((node) =>
+          node.contentGroups.map((group) => group.id)
+        )
+      );
 
-    conversion.mappings.forEach((mapping, mappingIndex) => {
-      if (!oldNodeIds.has(mapping.oldNodeId)) {
-        context.addIssue({
-          code: "custom",
-          message: `Mapping ${mapping.id} references missing old node ${mapping.oldNodeId}`,
-          path: ["mappings", mappingIndex, "oldNodeId"]
-        });
-      }
-
-      if (!newNodeIds.has(mapping.newNodeId)) {
-        context.addIssue({
-          code: "custom",
-          message: `Mapping ${mapping.id} references missing new node ${mapping.newNodeId}`,
-          path: ["mappings", mappingIndex, "newNodeId"]
-        });
-      }
-
-      mapping.oldContentGroupIds.forEach((groupId, groupIndex) => {
-        if (!contentGroupIds.has(groupId)) {
+      course.mappings.forEach((mapping, mappingIndex) => {
+        if (!oldNodeIds.has(mapping.oldNodeId)) {
           context.addIssue({
             code: "custom",
-            message: `Mapping ${mapping.id} references missing old content group ${groupId}`,
-            path: ["mappings", mappingIndex, "oldContentGroupIds", groupIndex]
+            message: `Mapping ${mapping.id} references missing old node ${mapping.oldNodeId}`,
+            path: ["courses", courseIndex, "mappings", mappingIndex, "oldNodeId"]
           });
         }
-      });
 
-      mapping.newContentGroupIds.forEach((groupId, groupIndex) => {
-        if (!contentGroupIds.has(groupId)) {
+        if (!newNodeIds.has(mapping.newNodeId)) {
           context.addIssue({
             code: "custom",
-            message: `Mapping ${mapping.id} references missing new content group ${groupId}`,
-            path: ["mappings", mappingIndex, "newContentGroupIds", groupIndex]
+            message: `Mapping ${mapping.id} references missing new node ${mapping.newNodeId}`,
+            path: ["courses", courseIndex, "mappings", mappingIndex, "newNodeId"]
           });
         }
+
+        mapping.oldContentGroupIds.forEach((groupId, groupIndex) => {
+          if (!contentGroupIds.has(groupId)) {
+            context.addIssue({
+              code: "custom",
+              message: `Mapping ${mapping.id} references missing old content group ${groupId}`,
+              path: ["courses", courseIndex, "mappings", mappingIndex, "oldContentGroupIds", groupIndex]
+            });
+          }
+        });
+
+        mapping.newContentGroupIds.forEach((groupId, groupIndex) => {
+          if (!contentGroupIds.has(groupId)) {
+            context.addIssue({
+              code: "custom",
+              message: `Mapping ${mapping.id} references missing new content group ${groupId}`,
+              path: ["courses", courseIndex, "mappings", mappingIndex, "newContentGroupIds", groupIndex]
+            });
+          }
+        });
       });
     });
   });
@@ -318,5 +326,6 @@ export type SourcePack = z.infer<typeof SourcePackSchema>;
 export type WorkedSolution = z.infer<typeof WorkedSolutionSchema>;
 export type WorkedSolutionsDatabase = z.infer<typeof WorkedSolutionsDatabaseSchema>;
 export type SyllabusConversion = z.infer<typeof SyllabusConversionSchema>;
+export type SyllabusConversionCourse = z.infer<typeof SyllabusConversionCourseSchema>;
 export type SyllabusConversionNode = z.infer<typeof SyllabusConversionNodeSchema>;
 export type SyllabusConversionMapping = z.infer<typeof SyllabusConversionMappingSchema>;

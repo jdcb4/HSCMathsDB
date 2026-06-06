@@ -67,7 +67,10 @@ async function main() {
     selectedQuestions = selectedQuestions.slice(0, args.limit);
   }
 
-  const tasks = selectedQuestions.map((question) => ({ question, questionInput: buildQuestionInput(question) }));
+  const tasks = selectedQuestions.map((question) => ({
+    question,
+    questionInput: buildQuestionInput(question)
+  }));
   let taskIndex = 0;
 
   async function worker() {
@@ -101,10 +104,18 @@ async function main() {
       }
 
       try {
-        const rawPath = path.join(rawDirectory, `${safeFileName(task.question.id)}__${safeFileName(args.model)}.json`);
+        const rawPath = path.join(
+          rawDirectory,
+          `${safeFileName(task.question.id)}__${safeFileName(args.model)}.json`
+        );
         const result = args.dryRun
           ? createDryRunResult()
-          : await generateWorkedSolution({ apiKey, model: args.model, question: task.questionInput, rawPath });
+          : await generateWorkedSolution({
+              apiKey,
+              model: args.model,
+              question: task.questionInput,
+              rawPath
+            });
 
         solutionsByQuestionId.set(
           task.question.id,
@@ -142,7 +153,9 @@ async function main() {
       : 0;
 
   console.log(`Worked solutions: ${solutionsByQuestionId.size}/${database.questions.length}`);
-  console.log(`${args.model}: ${generatedForModel.length} records, average ${Math.round(averageMs / 100) / 10}s`);
+  console.log(
+    `${args.model}: ${generatedForModel.length} records, average ${Math.round(averageMs / 100) / 10}s`
+  );
   console.log(`Errors: ${errors.length}`);
 }
 

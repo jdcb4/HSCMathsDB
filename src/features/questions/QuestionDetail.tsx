@@ -1,6 +1,7 @@
 import { ExternalLink, Image as ImageIcon } from "lucide-react";
 import type { Paper, Question, SyllabusNode, WorkedSolution } from "../../domain/hscSchemas";
 import { MathText } from "../math/MathText";
+import { formatMultipartQuestionPrompt } from "./questionPromptFormatting";
 
 export function QuestionDetail({
   question,
@@ -44,7 +45,7 @@ export function QuestionDetail({
       <section className="rounded-md border border-border-subtle bg-surface-sunken p-4">
         <h3 className="mb-3 text-h4 font-semibold">Question</h3>
         <div className="text-body text-text-primary">
-          <MathText block>{question.promptLatex}</MathText>
+          <MathText block>{formatMultipartQuestionPrompt(question.promptLatex)}</MathText>
         </div>
         {question.assets.length > 0 ? (
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
@@ -64,113 +65,115 @@ export function QuestionDetail({
         ) : null}
       </section>
 
-      {workedSolution ? (
-        <section className="space-y-4 rounded-md border border-border-subtle bg-surface-sunken p-4">
-          <div className="flex flex-col gap-2 lg:flex-row lg:items-start lg:justify-between">
-            <div>
-              <h3 className="text-h4 font-semibold">Worked solution</h3>
-              <p className="mt-1 text-caption text-text-secondary">Generated with {workedSolution.model}</p>
-            </div>
-            <span className="inline-flex w-fit rounded-md border border-border-default px-2 py-1 text-caption font-medium text-text-secondary">
-              {workedSolution.reviewStatus}
-            </span>
-          </div>
-
-          {workedSolution.needsReview ? (
-            <div className="rounded-md border border-accent-warning bg-surface-raised p-3 text-body-sm text-text-secondary">
-              {workedSolution.reviewNote}
-            </div>
-          ) : null}
-
-          <div className="grid gap-3 lg:grid-cols-2">
-            <div className="rounded-md border border-border-subtle bg-surface-raised p-3">
-              <h4 className="mb-2 text-body-sm font-semibold">Idea</h4>
-              <MathText block>{workedSolution.summaryLatex}</MathText>
-            </div>
-            <div className="rounded-md border border-border-subtle bg-surface-raised p-3">
-              <h4 className="mb-2 text-body-sm font-semibold">How to start</h4>
-              <MathText block>{workedSolution.approachLatex}</MathText>
-            </div>
-          </div>
-
-          <ol className="space-y-2">
-            {workedSolution.steps.map((step, index) => (
+      <section className="rounded-md border border-border-subtle bg-surface-sunken p-4">
+        <h3 className="mb-3 text-h4 font-semibold">Answer (Official HSC marking guide)</h3>
+        <div className="text-body text-text-primary">
+          <MathText block>{question.answerLatex}</MathText>
+        </div>
+        {question.workingLatex.length > 0 ? (
+          <ol className="mt-4 space-y-2 text-body-sm text-text-secondary">
+            {question.workingLatex.map((step, index) => (
               <li
-                key={`${workedSolution.questionId}-worked-step-${index}`}
+                key={`${question.id}-step-${index}`}
                 className="rounded-md border border-border-subtle bg-surface-raised p-3"
               >
-                <p className="mb-2 text-body-sm font-semibold">{step.title}</p>
-                <MathText block>{step.bodyLatex}</MathText>
+                <MathText block>{step}</MathText>
               </li>
             ))}
           </ol>
+        ) : null}
+      </section>
 
-          <div className="rounded-md border border-border-subtle bg-surface-raised p-3">
-            <h4 className="mb-2 text-body-sm font-semibold">Final answer</h4>
-            <MathText block>{workedSolution.finalAnswerLatex}</MathText>
-          </div>
-
-          {workedSolution.commonMistakesLatex.length > 0 ? (
-            <div className="rounded-md border border-border-subtle bg-surface-raised p-3">
-              <h4 className="mb-2 text-body-sm font-semibold">Common mistakes</h4>
-              <ul className="space-y-2 text-body-sm text-text-secondary">
-                {workedSolution.commonMistakesLatex.map((mistake, index) => (
-                  <li key={`${workedSolution.questionId}-mistake-${index}`}>
-                    <MathText block>{mistake}</MathText>
-                  </li>
-                ))}
-              </ul>
+      {workedSolution ? (
+        <details className="rounded-md border border-border-subtle bg-surface-sunken p-4">
+          <summary className="cursor-pointer text-h4 font-semibold text-text-primary">
+            Worked Solution
+          </summary>
+          <div className="mt-4 space-y-4">
+            <div className="flex flex-col gap-2 lg:flex-row lg:items-start lg:justify-between">
+              <div>
+                <p className="text-caption text-text-secondary">Generated with {workedSolution.model}</p>
+              </div>
+              <span className="inline-flex w-fit rounded-md border border-border-default px-2 py-1 text-caption font-medium text-text-secondary">
+                {workedSolution.reviewStatus}
+              </span>
             </div>
-          ) : null}
 
-          {workedSolution.checkLatex ? (
-            <div className="rounded-md border border-border-subtle bg-surface-raised p-3">
-              <h4 className="mb-2 text-body-sm font-semibold">Quick check</h4>
-              <MathText block>{workedSolution.checkLatex}</MathText>
+            {workedSolution.needsReview ? (
+              <div className="rounded-md border border-accent-warning bg-surface-raised p-3 text-body-sm text-text-secondary">
+                {workedSolution.reviewNote}
+              </div>
+            ) : null}
+
+            <div className="grid gap-3 lg:grid-cols-2">
+              <div className="rounded-md border border-border-subtle bg-surface-raised p-3">
+                <h4 className="mb-2 text-body-sm font-semibold">Idea</h4>
+                <MathText block>{workedSolution.summaryLatex}</MathText>
+              </div>
+              <div className="rounded-md border border-border-subtle bg-surface-raised p-3">
+                <h4 className="mb-2 text-body-sm font-semibold">How to start</h4>
+                <MathText block>{workedSolution.approachLatex}</MathText>
+              </div>
             </div>
-          ) : null}
-        </section>
-      ) : null}
 
-      <section className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_280px]">
-        <div className="rounded-md border border-border-subtle bg-surface-sunken p-4">
-          <h3 className="mb-3 text-h4 font-semibold">Answer</h3>
-          <div className="text-body text-text-primary">
-            <MathText block>{question.answerLatex}</MathText>
-          </div>
-          {question.workingLatex.length > 0 ? (
-            <ol className="mt-4 space-y-2 text-body-sm text-text-secondary">
-              {question.workingLatex.map((step, index) => (
+            <ol className="space-y-2">
+              {workedSolution.steps.map((step, index) => (
                 <li
-                  key={`${question.id}-step-${index}`}
+                  key={`${workedSolution.questionId}-worked-step-${index}`}
                   className="rounded-md border border-border-subtle bg-surface-raised p-3"
                 >
-                  <MathText block>{step}</MathText>
+                  <p className="mb-2 text-body-sm font-semibold">{step.title}</p>
+                  <MathText block>{step.bodyLatex}</MathText>
                 </li>
               ))}
             </ol>
-          ) : null}
-        </div>
 
-        <div className="rounded-md border border-border-subtle bg-surface-sunken p-4">
-          <h3 className="mb-3 text-h4 font-semibold">{syllabusViewLabel} links</h3>
-          <div className="space-y-2">
-            {syllabusNodes.map((node) => (
-              <button
-                key={node.id}
-                type="button"
-                onClick={() => onOpenSyllabusNode(node.id)}
-                className="w-full rounded-md border border-border-default bg-surface-raised p-3 text-left hover:border-accent-info"
-              >
-                <p className="text-caption font-semibold uppercase text-accent-info">{node.code}</p>
-                <p className="text-body-sm font-medium">{node.title}</p>
-                <p className="mt-1 text-caption text-text-secondary">{node.topic}</p>
-              </button>
-            ))}
-            {syllabusNodes.length === 0 ? (
-              <p className="text-body-sm text-text-secondary">No mapped syllabus link.</p>
+            <div className="rounded-md border border-border-subtle bg-surface-raised p-3">
+              <h4 className="mb-2 text-body-sm font-semibold">Final answer</h4>
+              <MathText block>{workedSolution.finalAnswerLatex}</MathText>
+            </div>
+
+            {workedSolution.commonMistakesLatex.length > 0 ? (
+              <div className="rounded-md border border-border-subtle bg-surface-raised p-3">
+                <h4 className="mb-2 text-body-sm font-semibold">Common mistakes</h4>
+                <ul className="space-y-2 text-body-sm text-text-secondary">
+                  {workedSolution.commonMistakesLatex.map((mistake, index) => (
+                    <li key={`${workedSolution.questionId}-mistake-${index}`}>
+                      <MathText block>{mistake}</MathText>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+
+            {workedSolution.checkLatex ? (
+              <div className="rounded-md border border-border-subtle bg-surface-raised p-3">
+                <h4 className="mb-2 text-body-sm font-semibold">Quick check</h4>
+                <MathText block>{workedSolution.checkLatex}</MathText>
+              </div>
             ) : null}
           </div>
+        </details>
+      ) : null}
+
+      <section className="rounded-md border border-border-subtle bg-surface-sunken p-4">
+        <h3 className="mb-3 text-h4 font-semibold">{syllabusViewLabel} links</h3>
+        <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
+          {syllabusNodes.map((node) => (
+            <button
+              key={node.id}
+              type="button"
+              onClick={() => onOpenSyllabusNode(node.id)}
+              className="w-full rounded-md border border-border-default bg-surface-raised p-3 text-left hover:border-accent-info"
+            >
+              <p className="text-caption font-semibold uppercase text-accent-info">{node.code}</p>
+              <p className="text-body-sm font-medium">{node.title}</p>
+              <p className="mt-1 text-caption text-text-secondary">{node.topic}</p>
+            </button>
+          ))}
+          {syllabusNodes.length === 0 ? (
+            <p className="text-body-sm text-text-secondary">No mapped syllabus link.</p>
+          ) : null}
         </div>
       </section>
 

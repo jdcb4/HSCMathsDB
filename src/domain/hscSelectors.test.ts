@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { database, syllabusConversion } from "../services/hscDatabase";
 import {
+  compareQuestionNumbers,
   getDatasetSummary,
   getDisplaySyllabusNodesForQuestion,
   getLinkedSyllabusNodes,
@@ -22,6 +23,30 @@ describe("HSC selectors", () => {
     const results = queryQuestions(database, { syllabusNodeId: "ma-s2" });
 
     expect(results.map((question) => question.id)).toContain("adv-2025-q14-bivariate-data");
+  });
+
+  it("sorts question numbers numerically within a year", () => {
+    const results = queryQuestions(database, { year: 2023 });
+
+    expect(results.slice(0, 12).map((question) => question.questionNumber)).toEqual([
+      "Q1",
+      "Q2",
+      "Q3",
+      "Q4",
+      "Q5",
+      "Q6",
+      "Q7",
+      "Q8",
+      "Q9",
+      "Q10",
+      "Q11",
+      "Q12"
+    ]);
+    expect(
+      ["Q1", "Q10", "Q2"].sort((left, right) =>
+        compareQuestionNumbers({ questionNumber: left }, { questionNumber: right })
+      )
+    ).toEqual(["Q1", "Q2", "Q10"]);
   });
 
   it("supports question to syllabus lookup for promoted official drafts", () => {
@@ -217,6 +242,24 @@ describe("HSC selectors", () => {
   it("loads both 2017 and 2024 syllabus views from the corpus", () => {
     expect(getSyllabusNodesForView(database, "advanced-2017")).toHaveLength(14);
     expect(getSyllabusNodesForView(database, "advanced-2024")).toHaveLength(14);
+  });
+
+  it("loads conversion-only mappings for future mathematics courses", () => {
+    expect(syllabusConversion.courses.map((course) => course.id)).toEqual([
+      "advanced",
+      "extension-1",
+      "extension-2",
+      "standard"
+    ]);
+    expect(
+      syllabusConversion.courses.find((course) => course.id === "extension-1")?.mappings.length
+    ).toBeGreaterThan(0);
+    expect(
+      syllabusConversion.courses.find((course) => course.id === "extension-2")?.mappings.length
+    ).toBeGreaterThan(0);
+    expect(
+      syllabusConversion.courses.find((course) => course.id === "standard")?.mappings.length
+    ).toBeGreaterThan(0);
   });
 
   it("maps existing 2017-tagged questions into the 2024 syllabus view", () => {

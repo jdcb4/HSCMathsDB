@@ -4,6 +4,7 @@ import type {
   QuestionStyle,
   SourcePack,
   SyllabusConversion,
+  SyllabusConversionCourse,
   SyllabusNode,
   WorkedSolution,
   WorkedSolutionsDatabase
@@ -19,6 +20,11 @@ export type QuestionQuery = {
   syllabusNodeId?: string;
   syllabusConversion?: SyllabusConversion;
 };
+
+const questionNumberCollator = new Intl.Collator(undefined, {
+  numeric: true,
+  sensitivity: "base"
+});
 
 export function queryQuestions(database: HscDatabase, query: QuestionQuery): Question[] {
   const search = query.search?.trim().toLowerCase();
@@ -53,7 +59,14 @@ export function queryQuestions(database: HscDatabase, query: QuestionQuery): Que
 
       return searchable.includes(search);
     })
-    .sort((left, right) => right.year - left.year || left.questionNumber.localeCompare(right.questionNumber));
+    .sort((left, right) => right.year - left.year || compareQuestionNumbers(left, right));
+}
+
+export function compareQuestionNumbers(
+  left: Pick<Question, "questionNumber">,
+  right: Pick<Question, "questionNumber">
+) {
+  return questionNumberCollator.compare(left.questionNumber, right.questionNumber);
 }
 
 export function getLinkedSyllabusNodes(database: HscDatabase, question: Question): SyllabusNode[] {
@@ -161,21 +174,35 @@ function getMappedSyllabusNodeIds(
   targetSyllabusEra: SyllabusEraView,
   conversion: SyllabusConversion
 ): string[] {
+  const course = getConversionCourseForEra(conversion, targetSyllabusEra);
+  if (!course) {
+    return [];
+  }
+
   if (targetSyllabusEra === "advanced-2024") {
-    const oldNode = conversion.oldSyllabus.nodes.find((node) => node.appNodeId === nativeNodeId);
+    const oldNode = course.oldSyllabus.nodes.find((node) => node.appNodeId === nativeNodeId);
     if (!oldNode) {
       return [];
     }
 
-    return conversion.mappings
+    return course.mappings
       .filter((mapping) => mapping.oldNodeId === oldNode.id)
       .map((mapping) => mapping.newNodeId);
   }
 
-  return conversion.mappings
+  return course.mappings
     .filter((mapping) => mapping.newNodeId === nativeNodeId)
-    .map((mapping) => conversion.oldSyllabus.nodes.find((node) => node.id === mapping.oldNodeId)?.appNodeId)
+    .map((mapping) => course.oldSyllabus.nodes.find((node) => node.id === mapping.oldNodeId)?.appNodeId)
     .filter((nodeId): nodeId is string => Boolean(nodeId));
+}
+
+function getConversionCourseForEra(
+  conversion: SyllabusConversion,
+  syllabusEra: SyllabusEraView
+): SyllabusConversionCourse | undefined {
+  return conversion.courses.find(
+    (course) => course.oldSyllabus.id === syllabusEra || course.newSyllabus.id === syllabusEra
+  );
 }
 
 function isSyllabusEraView(syllabusEra: string): syllabusEra is SyllabusEraView {
