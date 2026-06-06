@@ -195,6 +195,8 @@ OpenRouter uses an OpenAI-compatible chat-completions style API, so the script c
 - `google/gemini-3.1-flash-lite`
 - `minimax/minimax-m2.5:nitro`
 
+The dev sample workflow also compares `z-ai/glm-4.7:nitro`.
+
 The script should accept flags:
 
 - `--model <id>`
@@ -250,6 +252,24 @@ The report should show:
 - stale explanations where `sourceQuestionHash` no longer matches
 - explanations needing review
 - missing explanations by paper
+
+## Dev comparison samples
+
+Use the dev-only sample workflow to compare candidate models before committing to the production explanation pipeline:
+
+```powershell
+pnpm run data:generate-explanation-samples
+pnpm run dev
+```
+
+The script uses `OPENROUTER_API_KEY` from `.env` or the shell environment, calls the configured OpenRouter models, records per-response generation time, and writes ignored output to:
+
+```text
+var/llm-explanation-samples/samples.json
+var/llm-explanation-samples/raw/
+```
+
+The Vite dev server exposes this ignored file at `/__dev/llm-explanation-samples`. The app shows an `LLM review` tab only in development mode, so generated sample drafts are not part of the production build.
 
 ## End-user display
 

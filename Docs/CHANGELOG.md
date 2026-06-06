@@ -2,6 +2,13 @@
 
 Newest entries go at the top.
 
+## 0.2.0 - 2026-06-06
+
+- Added a dev-only LLM explanation comparison workflow using OpenRouter sample generation for 12 representative questions.
+- Added per-model generation timing capture for comparing candidate LLM response speed.
+- Added a Vite development review view for comparing worked-solution drafts across candidate models.
+- Documented the LLM explanation prompt, output format, sidecar model, generation workflow, and review process.
+
 ## 0.1.0 - 2026-06-06
 
 - Completed the 2022 Mathematics Advanced official draft import by promoting Section I Q1-Q10 with answer-key-backed multiple-choice records and exam-derived graph assets.

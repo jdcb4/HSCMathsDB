@@ -1,6 +1,6 @@
 {
   "name": "goalcheck-hsc",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Browse NSW HSC Mathematics Advanced and Mathematics 2 Unit past-paper questions by year, topic, style, and syllabus content.",
   "type": "module",
   "scripts": {
@@ -13,6 +13,7 @@
     "data:extract-text": "python scripts/extract-source-text.py",
     "data:extract-images": "python scripts/extract-source-images.py",
     "data:render-pages": "tsx scripts/render-source-pages.ts",
+    "data:generate-explanation-samples": "tsx scripts/generate-llm-explanation-samples.ts",
     "data:report-coverage": "tsx scripts/report-import-coverage.ts",
     "data:report-candidates": "python scripts/report-question-candidates.py",
     "data:report-renders": "tsx scripts/report-source-renders.ts",
