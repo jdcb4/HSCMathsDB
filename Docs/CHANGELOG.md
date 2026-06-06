@@ -2,6 +2,12 @@
 
 Newest entries go at the top.
 
+## 0.13.0 - 2026-06-06
+
+- Added 2024 Mathematics Extension 1 and Extension 2 ingestion profiles and promoted all 30 questions as draft records through the reusable importer.
+- Tightened the ingestion audit membership-notation rule to avoid false positives on damaged factorial/perpendicular notation in marking-guide excerpts.
+- Corrected the 2024 Mathematics Standard source-pack expected count to 73 questions after source extraction showed Standard 1 has 32 questions and Standard 2 has 41 questions.
+
 ## 0.12.0 - 2026-06-06
 
 - Added 2024 Mathematics Standard, Extension 1, and Extension 2 source-pack catalog records and source-linked paper records to prepare repeatable ingestion.

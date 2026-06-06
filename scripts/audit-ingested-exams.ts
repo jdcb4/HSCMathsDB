@@ -164,7 +164,7 @@ function auditMathNotation(question: Question, collectedIssues: AuditIssue[]) {
   ] as Array<[string, string]>;
 
   for (const [field, value] of fields) {
-    if (/[A-Za-z0-9)]\s*!\s*[A-Z]/.test(value)) {
+    if (/[A-Za-z0-9)]\s*!\s*[RZC]\b/.test(value)) {
       collectedIssues.push({
         severity: "error",
         questionId: question.id,

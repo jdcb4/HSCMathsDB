@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "0.12.0",
+    "version": "0.13.0",
     "title": "GoalCheck HSC mathematics corpus",
     "updatedAt": "2026-06-06",
     "sourceSummary": "Validated corpus linking NSW mathematics exam-pack sources, Standard and Extension draft imports, the Mathematics archive, 2017 syllabus nodes, and 2024 syllabus conversion nodes."
@@ -350,7 +350,7 @@
       "syllabusEra": "standard-2017",
       "officialListStatus": "listed",
       "importStatus": "not-started",
-      "expectedQuestionCount": 68,
+      "expectedQuestionCount": 73,
       "importedQuestionCount": 0,
       "assetStatus": "pending-extraction",
       "notes": "Visible on the current Mathematics Standard exam-papers listing. The pack contains separate Standard 1 and Standard 2 exam papers, marking guidelines, and Section II marking feedback PDFs.",
@@ -367,10 +367,10 @@
       "packPageUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
       "syllabusEra": "extension-1-2017",
       "officialListStatus": "listed",
-      "importStatus": "not-started",
+      "importStatus": "in-progress",
       "expectedQuestionCount": 14,
-      "importedQuestionCount": 0,
-      "assetStatus": "pending-extraction",
+      "importedQuestionCount": 14,
+      "assetStatus": "partial",
       "notes": "Visible on the current Mathematics Extension 1 exam-papers listing. Source PDFs need caching, extraction, and profile review before transcription.",
       "assets": []
     },
@@ -385,10 +385,10 @@
       "packPageUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-2/2024",
       "syllabusEra": "extension-2-2017",
       "officialListStatus": "listed",
-      "importStatus": "not-started",
+      "importStatus": "in-progress",
       "expectedQuestionCount": 16,
-      "importedQuestionCount": 0,
-      "assetStatus": "pending-extraction",
+      "importedQuestionCount": 16,
+      "assetStatus": "partial",
       "notes": "Visible on the current Mathematics Extension 2 exam-papers listing. Source PDFs need caching, extraction, and profile review before transcription.",
       "assets": []
     },
@@ -1764,7 +1764,7 @@
       "courseName": "Mathematics Extension 1",
       "syllabusEra": "extension-1-2017",
       "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
-      "sourceStatus": "source-linked"
+      "sourceStatus": "partially-transcribed"
     },
     {
       "id": "ext2-2024",
@@ -1773,7 +1773,7 @@
       "courseName": "Mathematics Extension 2",
       "syllabusEra": "extension-2-2017",
       "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-2/2024",
-      "sourceStatus": "source-linked"
+      "sourceStatus": "partially-transcribed"
     },
     {
       "id": "adv-2023",
@@ -10459,6 +10459,830 @@
         "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-2/2025",
         "pageRef": "Exam paper pages 13-14",
         "markingGuideRef": "Marking guidelines pages 29-36",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext1-2024-q01-polynomials",
+      "paperId": "ext1-2024",
+      "year": 2024,
+      "questionNumber": "Q1",
+      "title": "1 The polynomial x 3 + 2 x 2 - 5 x - 6 has zeros - 1, - 3 and a What is the v...",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Functions",
+      "subtopic": "Polynomials",
+      "syllabusNodeIds": ["old-me1-f2"],
+      "promptLatex": "1 The polynomial x 3 + 2 x 2 - 5 x - 6 has zeros - 1, - 3 and a What is the value of a?\nA. - 2\nB. 2\nC. 3\nD. 6",
+      "answerLatex": "Official answer: B.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+        "pageRef": "Exam paper pages 2",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext1-2024-q02-further-calculus-skills",
+      "paperId": "ext1-2024",
+      "year": 2024,
+      "questionNumber": "Q2",
+      "title": "2 Consider the functions y = f ^ x h and y = g ^ x h, and the regions shaded...",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Calculus",
+      "subtopic": "Further Calculus Skills",
+      "syllabusNodeIds": ["old-me1-c2"],
+      "promptLatex": "2 Consider the functions y = f ^ x h and y = g ^ x h, and the regions shaded in the diagram below. -1 -2 -3 -4 x y O 1 2 3 4 y = f ^ x h y = g ^ x h Which of the following gives the total area of the shaded regions? 4\nA. f ^ x h - g ^ x h dx - 4; 4\nB. f ^ x h - g ^ x h dx - 4; -3 -1 1 4\nC. f ^ x h - g ^ x h dx + f ^ x h - g ^ x h dx + f ^ x h - g ^ x h dx + f ^ x h - g ^ x h dx - 4 - 3 - 1 1 -3 -1 1 4\nD. - f ^ x h - g ^ x h dx + f ^ x h - g ^ x h dx - f ^ x h - g ^ x h dx + f ^ x h - g ^ x h dx - 4 - 3 - 1 1",
+      "answerLatex": "Official answer: D.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+        "pageRef": "Exam paper pages 2-3",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext1-2024-q03-further-work-with-functions",
+      "paperId": "ext1-2024",
+      "year": 2024,
+      "questionNumber": "Q3",
+      "title": "3 Students from 4 different schools come together to form a choir",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Functions",
+      "subtopic": "Further Work with Functions",
+      "syllabusNodeIds": ["old-me1-f1"],
+      "promptLatex": "3 Students from 4 different schools come together to form a choir. What is the minimum size of the choir to know that there must be at least 20 students in the choir from one of the schools?\nA. 76\nB. 77\nC. 80\nD. 81",
+      "answerLatex": "Official answer: B.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+        "pageRef": "Exam paper pages 3",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext1-2024-q04-trigonometric-equations",
+      "paperId": "ext1-2024",
+      "year": 2024,
+      "questionNumber": "Q4",
+      "title": "4 What are the domain and range of the function y = 2 cos -1 ^ 2 x h + 2 sin...",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Trigonometric Functions",
+      "subtopic": "Trigonometric Equations",
+      "syllabusNodeIds": ["old-me1-t3"],
+      "promptLatex": "4 What are the domain and range of the function y = 2 cos -1 ^ 2 x h + 2 sin -1 ^ 2 x h?\nA. Domain: 6 - 0.5, 0.5 @ and Range: \" p,\nB. Domain: 6 - 0.5, 0.5 @ and Range: 6 - p, 3 p @\nC. Domain: 6 - 2, 2 @ and Range: \" p,\nD. Domain: 6 - 2, 2 @ and Range: 6 - p, 3 p @",
+      "answerLatex": "Official answer: A.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+        "pageRef": "Exam paper pages 3",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext1-2024-q05-trigonometric-equations",
+      "paperId": "ext1-2024",
+      "year": 2024,
+      "questionNumber": "Q5",
+      "title": "5 Consider the function g ^ x h = 2 sin -1 ^ 3 x h Which transformations have...",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Trigonometric Functions",
+      "subtopic": "Trigonometric Equations",
+      "syllabusNodeIds": ["old-me1-t3"],
+      "promptLatex": "5 Consider the function g ^ x h = 2 sin -1 ^ 3 x h Which transformations have been applied to f ^ x h = sin -1 ^ x h to obtain g ^ x h? 1 1\nA. Vertical dilation by a factor of and a horizontal dilation by a factor of 2 3 1\nB. Vertical dilation by a factor of and a horizontal dilation by a factor of 3 2 1\nC. Vertical dilation by a factor of 2 and a horizontal dilation by a factor of 3\nD. Vertical dilation by a factor of 2 and a horizontal dilation by a factor of 3",
+      "answerLatex": "Official answer: C.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+        "pageRef": "Exam paper pages 3-4",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext1-2024-q06-trigonometric-equations",
+      "paperId": "ext1-2024",
+      "year": 2024,
+      "questionNumber": "Q6",
+      "title": "6 How many real value(s) of x satisfy the equation; b; =; b sin ^ 4 x h;, whe...",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Trigonometric Functions",
+      "subtopic": "Trigonometric Equations",
+      "syllabusNodeIds": ["old-me1-t3"],
+      "promptLatex": "6 How many real value(s) of x satisfy the equation; b; =; b sin ^ 4 x h;, where x! 6 0, 2 p @ and b is not zero?\nA. 1\nB. 2\nC. 4\nD. 8",
+      "answerLatex": "Official answer: D.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+        "pageRef": "Exam paper pages 4",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext1-2024-q07-the-binomial-distribution",
+      "paperId": "ext1-2024",
+      "year": 2024,
+      "questionNumber": "Q7",
+      "title": "7 A driver’s knowledge test contains 30 multiple-choice questions, each with...",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Statistical Analysis",
+      "subtopic": "The Binomial Distribution",
+      "syllabusNodeIds": ["old-me1-s1"],
+      "promptLatex": "7 A driver’s knowledge test contains 30 multiple-choice questions, each with 4 options. An applicant must get at least 29 correct to pass. If an applicant correctly answers the first 25 questions and randomly guesses the last 5 questions, what is the probability that the applicant will pass the test? 1\nA. 256 15\nB. 1024 1\nC. 64 21\nD. 256",
+      "answerLatex": "Official answer: C.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+        "pageRef": "Exam paper pages 4",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext1-2024-q08-trigonometric-equations",
+      "paperId": "ext1-2024",
+      "year": 2024,
+      "questionNumber": "Q8",
+      "title": "8 A local council is proposing to ban dog-walking on the beach",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Trigonometric Functions",
+      "subtopic": "Trigonometric Equations",
+      "syllabusNodeIds": ["old-me1-t3"],
+      "promptLatex": "8 A local council is proposing to ban dog-walking on the beach. It is known that the 7 proportion of households that have a dog is 12 The local council wishes to poll n households about this proposal. Let p ˆ be the random variable representing the proportion of households polled that have a dog. What is the smallest sample size, n, for which the standard deviation of p ˆ is less than 0.06?\nA. 67\nB. 68\nC. 94\nD. 95",
+      "answerLatex": "Official answer: B.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+        "pageRef": "Exam paper pages 4-5",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext1-2024-q09-the-binomial-distribution",
+      "paperId": "ext1-2024",
+      "year": 2024,
+      "questionNumber": "Q9",
+      "title": "9 A bag contains n metal coins, n $ 3, that are made from either silver or br...",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Statistical Analysis",
+      "subtopic": "The Binomial Distribution",
+      "syllabusNodeIds": ["old-me1-s1"],
+      "promptLatex": "9 A bag contains n metal coins, n $ 3, that are made from either silver or bronze. There are k silver coins in the bag and the rest are bronze. Two coins are to be drawn at random from the bag, with the first coin drawn not being replaced before the second coin is drawn. Which of the following expressions will give the probability that the two coins drawn are made of the same metal? k ^ k - 1 h + ^ n - k h ^ n - k - 1 h\nA. n ^ n - 1 h n - 2 n n k\nB. d n d n d 1 - n 2 k n k n - k d n + d n 2 2\nC. n ^ n - 1 h k 2 + ^ n - k h 2\nD. n 2",
+      "answerLatex": "Official answer: A.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+        "pageRef": "Exam paper pages 5",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext1-2024-q10-trigonometric-equations",
+      "paperId": "ext1-2024",
+      "year": 2024,
+      "questionNumber": "Q10",
+      "title": "10 For real numbers a and b, where a! 0 and b! 0, we can find numbers a, b, g...",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Trigonometric Functions",
+      "subtopic": "Trigonometric Equations",
+      "syllabusNodeIds": ["old-me1-t3"],
+      "promptLatex": "10 For real numbers a and b, where a! 0 and b! 0, we can find numbers a, b, g, d and R such that a cos x + b sin x can be written in the following 4 forms: R sin ^ x + a h R sin ^ x - b h R cos ^ x + g h R cos ^ x - d h where R > 0 and 0 < a, b, g, d < 2 p What is the value of a + b + g + d?\nA. 0\nB. p\nC. 2 p\nD. 4 p",
+      "answerLatex": "Official answer: D.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+        "pageRef": "Exam paper pages 5-6",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext1-2024-q11-introduction-to-vectors",
+      "paperId": "ext1-2024",
+      "year": 2024,
+      "questionNumber": "Q11",
+      "title": "Use the Question 11 Writing Booklet\n(a)\nConsider the vectors a = 3 i + 2 j an...",
+      "marks": 15,
+      "style": "extended-response",
+      "topic": "Vectors",
+      "subtopic": "Introduction to Vectors",
+      "syllabusNodeIds": ["old-me1-v1"],
+      "promptLatex": "Question 11\n(15 marks) Use the Question 11 Writing Booklet\n(a)\nConsider the vectors a = 3 i + 2 j and b = - i + 4 j ̰̰̰̰̰̰\n(i)\nFind 2 a - b ̰̰ 1\n(ii)\nFind a $ b ̰̰ 1\n(b)\nSolve x 2 - 8 x - 9 # 0. 2\n(c)\nUsing the substitution u = x - 1, find x x - 1 dx 3 dy\n(d)\nSolve the differential equation = x y, given y > 0. Express your answer in dx f the form y = ^ e x h 2\n(e)\nDifferentiate the function f ^ x h = arcsin _ x 5 i 1\n(f)\nThe volume of a sphere of radius r cm, is given by V = p r 3, and the volume 3 of the sphere is increasing at a rate of 10 cm 3 s -1 dr 5 Show that the rate of increase of the radius is given by = cm s -1 dt 2 p r 2 4 2 p\n(g)\nThe region, R, is bounded by the curves y = sin x, y = x and the line x = 2 as shown in the diagram. 3 1 2 x O y 1 2 2 p y = x y = sin x R Find the area of the region R",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 11 (b)\n- \nProvides correct solution 2\n- \nAttempts to factor the LHS, or equivalent merit 1 Mathematics Extension 1 x 2 - 8 x - 9 # 0 y = x 2 - 8 x - 9 = ^ x - 9 h ^ x + 1 h x y O 9 -1 y = x 2 - 8 x - 9 - 1 # x # 9\nQuestion 11 (c)\n- \nProvides correct solution 3\n- \nObtains correct integral in terms of u, or equivalent merit 2\n- \nCorrectly substitutes for one element of the integrand, or equivalent merit 1 u = x - 1 1 x x - 1 $ dx = ^ u + 1 h u 2 $ du du = 1 dx 3 1 = du = c dx u 2 + u 2 m du 5 3 2 u 2 2 u 2 = + + C 5 3 5 3 2 _ x - 1 i 2 _ x - 1 i = + + C 5 3 Mathematics Extension 1\nQuestion 11 (d)\n- \nProvides correct solution 2\n- \nSeparates the variables, or equivalent merit 1 dy = xy dx dy = x dx y x 2 log y = + C as y > 0 e 2 x 2 + C y = e 2 Answers could include: x 2 Ae 2\nQuestion 11 (e)\n- \nProvides correct derivative 1 y = arcsin _ x 5 i Let f ^ x h = x 5 ` f l ^ x h = 5 x 4 dy f l ^ x h = dx 7 f ^ h A 2 1 - x 5 x 4 = 1 - x 10 Mathematics Extension 1\nQuestion 11 (f)\n- \nProvides correct solution 2 dr\n- \nCorrectly applies the chain rule to find an expression for, or equivalent merit dt 1 4 dV V = p r 3, = 10 cm 3 s -1 3 dt dV = 4 p r 2 dr dr dr dV = $ dt dV dt 1 = $ 10 4 p r 2 5 = cm s -1 2 p r 2\nQuestion 11 (g)\n- \nProvides correct solution 3\n- \nFinds the primitive of x - sin x OR\n- \nFinds the two relevant areas, or equivalent merit 2\n- \nConsiders the function x - sin x OR\n- \nCalculates the area of the triangle OR\n- \nConsiders the difference of two areas, or equivalent merit 1 Mathematics Extension 1 p 2 Area = ^ x - sin x h dx 0 p = x 2 2 = + cos x G 2 0 p 2 = e + 0 o - ^ 0 + 1 h 8 p 2 = - 1 8",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Extension 1 marking feedback",
+        "betterResponses": [
+          "factorise the quadratic and correctly test the regions to determine the solution",
+          "use acceptable notation to display their answer."
+        ],
+        "improvementAreas": [
+          "demonstrating awareness of the inequality sign in the question",
+          "using graphs to solve quadratic inequalities",
+          "demonstrating proper use of inequalities or brackets to specify intervals."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Extension 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+        "pageRef": "Exam paper pages 6-8",
+        "markingGuideRef": "Marking guidelines pages 3-7",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext1-2024-q12-introduction-to-vectors",
+      "paperId": "ext1-2024",
+      "year": 2024,
+      "questionNumber": "Q12",
+      "title": "Use the Question 12 Writing Booklet a 2 a + 5\n(a)\nThe vectors f p and d n are...",
+      "marks": 15,
+      "style": "extended-response",
+      "topic": "Vectors",
+      "subtopic": "Introduction to Vectors",
+      "syllabusNodeIds": ["old-me1-v1"],
+      "promptLatex": "Question 12\n(15 marks) Use the Question 12 Writing Booklet a 2 a + 5\n(a)\nThe vectors f p and d n are perpendicular. 2 a - 4 Find the possible values of a 3\n(b)\nThe region, R, is bounded by the function, y = x 3, the x -axis and the lines x = 1 and x = 2. What is the volume of the solid of revolution obtained when the region R is rotated about the x -axis? 3\n(c)\nA charity employs a worker to collect donations. There is a 0.31 chance that when the charity worker talks to someone a donation is made to the charity. Each day the charity worker must talk to exactly 100 people. Use the standard normal distribution and the information on page 13 to approximate the probability that, on a particular day, at least 35% of the people talked to made a donation. 3\n(d)\nUse mathematical induction to prove that 2 3 n + 13 is divisible by 7 for all integers n $ 1. 3 1\n(e)\nThe diagram shows the graph of y =; x - 5; 3 x y 5 1 5 NOT TO SCALE O x 1 For what values of x is $? 6; x - 5;",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 12 (a)\n- \nProvides correct solution 3\n- \nObtains the solution a = 1, or equivalent merit 2\n- \nObtains the equation a 2 ^ a + 5 h + 2 ^ a - 4 h = 0, or equivalent merit 1 Mathematics Extension 1 a 2 a + 5 f p $ d n = 0 as vectors are 9 2 a - 4 a 2 ^ a + 5 h + 2 ^ a - 4 h = 0 a 3 + 5 a 2 + 2 a - 8 = 0 Let a = 1 1 3 + 5 ^ 1 h 2 + 2 ^ 1 h - 8 = 1 + 5 + 2 - 8 = 0 ` a - 1 is a factor. Using sum and product of roots: a + b + g = - 5 1 + b + g = - 5 b + g = - 6 bg = 8 ` b = - 4, g = - 2 Hence, roots are 1, - 2, - 4 Answers could include: * Inspection and equating of coefficients * Division of polynomials * Other methods may also be used Mathematics Extension 1\nQuestion 12 (b)\n- \nProvides correct solution 3\n- \nObtains correct primitive, or equivalent merit 2\n- \nObtains a correct expression for the volume, or equivalent merit 1 2 2 V = p _ x 3 i dx 1 2 x 7 = p = G 7 1 p = ^ 128 - 1 h 7 127 p = 7\nQuestion 12 (c)\n- \nProvides correct solution 3\n- \nFinds the z -score, or equivalent merit 2\n- \nObtains relevant standard deviation, or equivalent merit 1 s = np ^ 1 - p h = 100 # 0.31 # 0.69 = 21.39 x - m z = s 35 - 31 = 21.39 Z 0.86 From normal distribution graph P ^ $ 35% make a donation h = 1 - 0.8051 = 0.1949 = 19.49%\nQuestion 12 (d)\n- \nProvides correct proof 3\n- \nEstablishes that p ^ n h & p ^ n + 1 h is true, or equivalent merit 2\n- \nEstablishes base case, or equivalent merit 1 Mathematics Extension 1 # Base case n = 1 2 3 1 + 13 = 2 3 + 13 = 8 + 13 = 21 (which is divisible by 7) Therefore true for n = 1 Assume true for n = k ie 2 3 k + 13 = 7 M where M is a positive integer Prove true for n = k + 1 ie 2 3 ] k +1 g + 13 = 7 N where N is a positive integer LHS = 2 3 k + 3 + 13 = 2 3 k $ 2 3 + 13 = ^ 7 M - 13 h 8 + 13 using assumption = 7 M ◊ 8 - 104 + 13 = 7 M ◊ 8 - 91 = 7 ^ 8 M - 13 h = 7 N where N = 8 M - 13 which is an integer 7 N is divisible by 7, as required. Hence, by mathematical induction, 2 3 n + 13 is divisible by 7, for all integers n $ 1.\nQuestion 12 (e)\n- \nProvides correct solution 3\n- \nObtains the three critical points 2, 3 and 6, or equivalent merit 2\n- \nRecognises the two cases OR\n- \nObserves that x = 6 is a critical point OR\n- \nGraphs the two curves on the same axis, or equivalent merit 1 Mathematics Extension 1 y 5 1 5 O x x 1 x > 5 = 6 x - 5 x 2 - 5 x = 6 x 2 - 5 x - 6 = 0 ^ x - 6 h ^ x + 1 h = 0 x = 6 since x > 5 ` 6 6, 3 h x - 1 x < 5 = 6 x - 5 x 2 - 5 x = - 6 x 2 - 5 x + 6 = 0 ^ x - 2 h ^ x - 3 h = 0 x = 2, 3 since x < 5 ` 6 2, 3 @ ` Solution is 6 2, 3 @, 6 6, 3 h Mathematics Extension 1 Question 13 (a) (i)\n- \nProvides correct explanation 1 All graphs passing through T must be decreasing to the left of T. So the y-intercept of such a curve, if any y-intercept, must be above T. The point S isn’t above T so S can’t be on any such curve. Question 13 (a) (ii)\n- \nProvides correct sketch 1 O P t S T (0, 2000) Question 13 (a) (iii)\n- \nProvides correct solution 2 d 2 P\n- \nObtains the equation = 0, or equivalent merit dt 2 1 Mathematics Extension 1 dP Rate of growth is a maximum when is a maximum. dt d 2 P ie when = 0 dt 2 0 = 1 # ^ 2000 - P h - P 2 P = 2000 P = 1000 From the direction field it can be seen that the slope at P = 1000 is the maximum slope. (Rather than a minimum slope or other type of stationary point.) Question 13 (b) (i)\n- \nProvides correct proof 2\n- \n2 Expands ` cos 2 x + sin 2 x j, or equivalent merit 1 Mathematics Extension 1 2 cos 4 x + sin 4 x = _ cos 2 x + sin 2 x i - 2 cos 2 x sin 2 x = 1 2 1 - ^ 2 cos x sin x h 2 2 1 = 1 - sin 2 2 x 2 1 = 1 - _ 1 - cos 2 2 x i 2 1 1 = 1 - + cos 2 2 x 2 2 1 1 = + cos 2 2 x 2 2 1 + cos 2 2 x = 2 Answers could include: * Use of double angle formula Question 13 (b) (ii)\n- \nProvides correct solution 3\n- \nObtains correct primitive, or equivalent merit 2\n- \nObtains correct integral involving cos 4 x, or equivalent merit 1 Mathematics Extension 1 p p 4 1 4 _ cos 4 x + sin 4 x i dx = _ 1 + cos 2 2 x i dx, using part (i) 0 2 0 p 1 4 1 = d 1 + ^ 1 + cos 4 x hn dx 2 0 2 p 1 4 3 1 = d + cos 4 x n dx 2 0 2 2 p 1 3 x 1 sin 4 x 4 = = + $ G 2 2 2 4 0 p 3 x 1 4 = = + sin 4 x G 4 16 0 3 p 1 = e d n + sin p o - ^ 0 + 0 h 4 4 16 3 p = + 0 16 3 p = 16",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Extension 1 marking feedback",
+        "betterResponses": [
+          "apply the scalar (dot) product to vectors expressed in component form",
+          "demonstrate an understanding of the properties of perpendicular vectors",
+          "apply the Factor Theorem to solve a cubic polynomial equation",
+          "use division of polynomials to factorise a cubic polynomial equation."
+        ],
+        "improvementAreas": [
+          "applying the scalar (dot) product rule to arrive at the correct cubic polynomial equation",
+          "understanding and applying the division of polynomials",
+          "factorising a cubic equation to arrive at possible values of 𝑎. Mathematics Extension 1 - HSC marking feedback 2024 Page 5 of 11"
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Extension 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+        "pageRef": "Exam paper pages 8-10",
+        "markingGuideRef": "Marking guidelines pages 7-15",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext1-2024-q13-introduction-to-vectors",
+      "paperId": "ext1-2024",
+      "year": 2024,
+      "questionNumber": "Q13",
+      "title": "Use the Question 13 Writing Booklet\n(a)\nIn an experiment, the population of i...",
+      "marks": 16,
+      "style": "extended-response",
+      "topic": "Vectors",
+      "subtopic": "Introduction to Vectors",
+      "syllabusNodeIds": ["old-me1-v1"],
+      "promptLatex": "Question 13\n(16 marks) Use the Question 13 Writing Booklet\n(a)\nIn an experiment, the population of insects, P ^ t h, was modelled by the logistic differential equation dP = P ^ 2000 - P h dt where t is the time in days after the beginning of the experiment. The diagram shows a direction field for this differential equation, with the point S representing the initial population. O P t S T (0, 2000)\n(i)\nExplain why the graph of the solution that passes through the point S cannot also pass through the point T 1\n(ii)\nOn the diagram provided on page 1 of the Question 13 Writing Booklet, clearly sketch the graph of the solution that passes through the point S 1\n(iii)\nFind the predicted value of the population, P ^ t h, at which the rate of growth of the population is largest. 2 1 + cos 2 2 x\n(b)\n(i)\nShow that cos 4 x + sin 4 x = 2 2 p 4\n(ii)\nHence, or otherwise, evaluate _ cos 4 x + sin 4 x i dx 0 ̰ 3 1 2\n(c)\nThe vector a is d n and the vector b is d n 3 - 1 The projection of a vector x onto the vector a is k a, where k is a real number. The projection of the vector x onto the vector b is p b, where p is a real number. Find the vector x in terms of k and p ̰̰̰̰̰̰̰̰ 4\n(d)\nUsing the substitution u = e x + 2 e - x, and considering u 2, find e 3 x - 2 e x dx 4 + 8 e 2 x + e 4 x 3",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 13 (c)\n- \nProvides correct solution 4\n- \nObtains both k and p in terms of the components of x merit, or equivalent 3\n- \nObtains k or p in terms of the components of x, or equivalent merit 2 a $ x b $ x\n- \nWrites a or b, or equivalent merit a $ a b $ b 1 Mathematics Extension 1 ̰̰̰̰̰̰̰̰̰̰̰̰ u Let x = d n v a $ x Then k a = a a $ a a $ x u + 3 v So k = = a $ a 10 u + 3 v = 10 k b $ x Also p b = b b $ b b $ x 2 u - v So p = = b $ b 5 2 u - v = 5 p Solving u + 3 v = 10 k ➀ 2 u - v = 5 p ➁ 3 # ➁ 6 u - 3 v = 15 p ➀ + 3 # ➁ 7 u = 10 k + 15 p 10 k + 15 p u = 7 v = - 5 p + 2 u 20 k + 30 p = - 5 p + 7 20 k - 5 p = 7 10 k + 15 p 7 5 2 k + 3 p x = = e o 20 k - 5 p 7 4 k - p 7 ̰̰̰̰̰̰̰̰̰̰̰̰̰̰̰̰̰̰̰̰̰̰\nQuestion 13 (d)\n- \nProvides correct solution 3\n- \nChanges the integrand into an appropriate form using algebra, or equivalent merit 2 du\n- \nObtains = e x - 2 e - x, or equivalent merit dx 1 Mathematics Extension 1 e 3 x - 2 e x dx 4 + 8 e 2 x + e 4 x Let u = e x + 2 e - x u 2 = e 2 x + 4 + 4 e -2 x du = e x - 2 e - x dx du = _ e x - 2 e - x i dx 4 + 8 e 2 x + e 4 x = e 2 x _ 4 e -2 x + 8 + e 2 x i = e 2 x _ 4 e -2 x + 4 + e 2 x i + 4 e 2 x e 3 x - 2 e x e 2 x _ e x - 2 e - x i dx = dx 4 + 8 e 2 x + e 4 x e 2 x _ 4 e -2 x + 4 + e 2 x i + 4 e 2 x _ e x - 2 e - x i dx = _ 4 e -2 x + 4 + e 2 x i + 4 du = u 2 + 4 1 u = tan -1 + C 2 2 1 e x + 2 e - x = tan -1 e o + C 2 2 Mathematics Extension 1",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Extension 1 marking feedback",
+        "betterResponses": [
+          "understand and apply the projection formula correctly",
+          "obtain both 𝑘 and 𝑝 in terms of components of 𝑥̰",
+          "solve simultaneous equations",
+          "arrive at the correct factorised answer of the components."
+        ],
+        "improvementAreas": [
+          "using the projection formula",
+          "recognising the component must be written as different variables, for example, u x v   =    ",
+          "solving simultaneous equations with fractions",
+          "understanding the difference between components and vectors."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Extension 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+        "pageRef": "Exam paper pages 10-12",
+        "markingGuideRef": "Marking guidelines pages 15-17",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext1-2024-q14-introduction-to-vectors",
+      "paperId": "ext1-2024",
+      "year": 2024,
+      "questionNumber": "Q14",
+      "title": "Use the Question 14 Writing Booklet\n(a)\nFind the domain and range of the func...",
+      "marks": 14,
+      "style": "extended-response",
+      "topic": "Vectors",
+      "subtopic": "Introduction to Vectors",
+      "syllabusNodeIds": ["old-me1-v1"],
+      "promptLatex": "Question 14\n(14 marks) Use the Question 14 Writing Booklet\n(a)\nFind the domain and range of the function that is the solution to the differential equation dy = + e x y dx and whose graph passes through the origin. 4 kx\n(b)\nFor what values of the constant k would the function f ^ x h = + arctan x 1 + x 2 have an inverse? 3\n(c)\n(i)\nExplain why the equation tan -1 ^ 3 x h + tan -1 ^ 10 x h = q, where - p < q < p, has exactly one solution. 1\n(ii)\nSolve tan -1 ^ 3 x h + tan -1 3 p ^ 10 x h = 4 2\n(d)\nA particle is projected from the origin, with initial speed V at an angle of q to the horizontal. The position vector of the particle, r ^ t h, where t is the time after projection and g is the acceleration due to gravity, is given by Vt cos q r ^ t h = gt 2 (Do NOT prove this.) Vt sin q - 2 Let D ^ t h be the distance of the particle from the origin at time t, so D ^ t h =; r ^ t h; 8 Show that for q < sin -1 e o the distance, D ^ t h, is increasing for all t > 0. 9 ̰̰̰ 4",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 14 (a)\n- \nProvides correct solution 4\n- \nObtains correct domain or range, or equivalent merit 3\n- \nIntegrates to obtain relation with constant evaluated, or equivalent merit 2\n- \nSeparates the variables, or equivalent merit 1 dy = e x + y = e x e y dx e - y dy = e x dx - e - y = e x + k y = 0, x = 0 - 1 = 1 + k k = - 2 - e - y = e x - 2 e - y = 2 - e x - y = ln _ 2 - e x i y = - ln _ 2 - e x i e x < 2 x < ln 2 Domain is ] - 3, ln 2 g To find the range: x -- > - 3 e x -- > 0 y -- > - ln 2 x -- > ln 2 e x -- > 2 ln _ 2 - e x i -- > - 3 y -- > 3 dy and = e x + y > 0 so graph is increasing dx Range is ] - ln 2, 3 g Mathematics Extension 1\nQuestion 14 (b)\n- \nProvides correct solution 3\n- \nCorrectly completes one of two cases, or equivalent merit 2\n- \nRecognises that f ^ x h needs to be monotonically increasing or monotonically decreasing, or equivalent merit 1 As f ^ x h is defined and differentiable for all reals, it will have an inverse if f l ^ x h $ 0 always or f l ^ x h # 0 always. k _ 1 + x 2 i - k x ^ 2 x h 1 f l ^ x h = + _ 2 2 1 + x 2 i 1 + x ^ k + 1 h - k x 2 + x 2 = _ 2 1 + x 2 i ^ k + 1 h + ^ 1 - k h x 2 ` _ 2 = and 1 + x 2 i is positive j _ 2 1 + x 2 i Case 1: f l ^ x h $ 0 ^ k + 1 h + ^ 1 - k h x 2 will always be greater or equal to zero if and only if ^ 1 - k h $ 0 and ^ k + 1 h $ 0. ` k # 1 and k $ - 1 ie - 1 # k # 1 Case 2: f l ^ x h # 0 ^ k + 1 h + ^ 1 - k h x 2 will always be less than or equal to zero if and only if ^ 1 - k h # 0 and ^ k + 1 h # 0. ` k $ 1 and k # - 1 ie no solution Hence, if - 1 # k # 1, then f l ^ x h is increasing and so has an inverse. Mathematics Extension 1 Question 14 (c) (i)\n- \nProvides correct explanation 1 The graphs of tan -1 ] 3 x g and tan -1 ] 10 x g are y = tan -1 ] x g shrunk horizontally. p p Both are increasing functions with a range c -, m 2 2 Adding gives an increasing function, considering large values of x shows the range of tan -1 ] 3 x g + tan -1 ] 10 x g is ] - p, p g For - p < q < p the line y = q will cross the graph of y = tan -1 ] 3 x g + tan -1 ] 10 x g at exactly one point. So, tan -1 ] 3 x g + tan -1 ] 10 x g = q has exactly one solution. Answers could include: y y = tan -1 ^ 3 x h + tan -1 ^ 10 x h p p y = tan -1 ^ 10 x h 2 p - O y = tan -1 ^ 3 x h x 2 - p Mathematics Extension 1 Question 14 (c) (ii)\n- \nProvides correct solution 2\n- \nObtains correct quadratic equation for x, or equivalent merit 1 3 p tan -1 ] 3 x g + tan -1 ] 10 x g = 4 -1 -1 3 p tan _ tan ] 3 x g + tan ] 10 x gi = tan 4 tan _ tan -1 ] 3 x gi + tan _ tan -1 ] 10 x gi = - 1 1 - tan _ tan -1 ] 3 x gi tan _ tan -1 ] 10 x gi 3 x + 10 x = - 1 1 - ] 3 x g ] 10 x g 13 x = - 1 + 30 x 2 30 x 2 - 13 x - 1 = 0 ] 2 x - 1 g] 15 x + 1 g = 0 1 1 x =, - 2 15 1 3 When x =, tan -1 d n + tan -1 ] 5 g > 0 2 2 1 -1 3 10 When x = -, tan d - n + tan -1 d - n < 0 15 15 15 1 The only solution is x = 2\nQuestion 14 (d)\n- \nProvides correct proof 4\n- \nExplains why D < 0 for their correct quadratic, or equivalent merit 3\n- \nObtains correct derivative of 7 D ^ t h A 2 or D ^ t h, or equivalent merit 2\n- \nObtains; D ^ t h;; 2 or D ^ t h;, or equivalent merit 1 Mathematics Extension 1 g 2 t 4 D 2 = V 2 t 2 cos 2 q + V 2 t 2 sin 2 q - Vgt 3 sin q + 4 g 2 t 4 = V 2 t 2 - Vgt 3 sin q + 4 d _ D 2 i = 2 V 2 t - 3 Vgt 2 sin q + g 2 t 3 dt = t _ 2 V 2 - 3 Vgt sin q + g 2 t 2 j d _ D 2 i D ^ t h is increasing for all t > 0 when > 0. dt When D < 0 9 V 2 g 2 sin 2 q - 4 # g 2 # 2 V 2 < 0 9 V 2 g 2 sin 2 q - 8 V 2 g 2 < 0 As V 2, g 2! 0 9 sin 2 q - 8 < 0 2 8 sin q < 9 p 8 For 0 # q #, sin q > 0 ` sin q < 2 9 ` q < sin -1 8 f p 9 Mathematics Extension 1 2024 HSC Mathematics Extension 1",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Extension 1 marking feedback",
+        "betterResponses": [
+          "separate the variables",
+          "integrate correctly and find the value of the constant",
+          "determine the domain and range for the function."
+        ],
+        "improvementAreas": [
+          "understanding how to integrate terms such as 𝑒 -𝑦",
+          "ensuring that they include a constant when completing an indefinite integral",
+          "taking care with their algebra, especially when calculating with minus signs",
+          "understanding when an absolute value sign may or may not be needed when using natural logarithms",
+          "understanding how to find the domain and range of a function such as 𝑦 = -𝑙𝑛(2 - 𝑒 𝑥 )",
+          "understanding the difference between the symbols ‘[’ and ‘(’ when using interval notation",
+          "leaving answers in exact form when they are simple terms such as 𝑙𝑛2."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Extension 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+        "pageRef": "Exam paper pages 12",
+        "markingGuideRef": "Marking guidelines pages 17-22",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2024-q01-further-work-with-vectors",
+      "paperId": "ext2-2024",
+      "year": 2024,
+      "questionNumber": "Q1",
+      "title": "1 Which of the following vectors is perpendicular to 3 i + 2 j - 5 k",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Vectors",
+      "subtopic": "Further Work with Vectors",
+      "syllabusNodeIds": ["old-me2-v1"],
+      "promptLatex": "1 Which of the following vectors is perpendicular to 3 i + 2 j - 5 k?\nA. - i - j + k\nB. i + j - k\nC. - 2 i + 3 j + k\nD. 3 i - 2 j + k ̰̰̰̰̰̰̰̰̰̰̰̰̰̰̰",
+      "answerLatex": "Official answer: D.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-2/2024",
+        "pageRef": "Exam paper pages 2",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2024-q02-the-nature-of-proof",
+      "paperId": "ext2-2024",
+      "year": 2024,
+      "questionNumber": "Q2",
+      "title": "2 Consider the following statement written in the formal language of proof d...",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Proof",
+      "subtopic": "The Nature of Proof",
+      "syllabusNodeIds": ["old-me2-p1"],
+      "promptLatex": "2 Consider the following statement written in the formal language of proof d p n d 3 p 6 q!, p 7 f! p, n; sin q = - cos f 2 2 Which of the following best represents this statement?\nA. There exists a q in the second quadrant such that for all f in the third quadrant sin q = - cos f\nB. There exists a f in the third quadrant such that for all q in the second quadrant sin q = - cos f\nC. For all q in the second quadrant there exists a f in the third quadrant such that sin q = - cos f\nD. For all f in the third quadrant there exists a q in the second quadrant such that sin q = - cos f",
+      "answerLatex": "Official answer: C.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-2/2024",
+        "pageRef": "Exam paper pages 2-3",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2024-q03-the-nature-of-proof",
+      "paperId": "ext2-2024",
+      "year": 2024,
+      "questionNumber": "Q3",
+      "title": "3 Consider the statement: ‘If a polygon is a square, then it is a rectangle",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Proof",
+      "subtopic": "The Nature of Proof",
+      "syllabusNodeIds": ["old-me2-p1"],
+      "promptLatex": "3 Consider the statement: ‘If a polygon is a square, then it is a rectangle.’ Which of the following is the converse of the statement above?\nA. If a polygon is a rectangle, then it is a square.\nB. If a polygon is a rectangle, then it is not a square.\nC. If a polygon is not a rectangle, then it is not a square.\nD. If a polygon is not a square, then it is not a rectangle.",
+      "answerLatex": "Official answer: A.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-2/2024",
+        "pageRef": "Exam paper pages 3",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2024-q04-further-integration",
+      "paperId": "ext2-2024",
+      "year": 2024,
+      "questionNumber": "Q4",
+      "title": "4 A monic polynomial, f ^ x h, of degree 3 with real coefficients has 3 and 2...",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Calculus",
+      "subtopic": "Further Integration",
+      "syllabusNodeIds": ["old-me2-c1"],
+      "promptLatex": "4 A monic polynomial, f ^ x h, of degree 3 with real coefficients has 3 and 2 + i as two of its roots. Which of the following could be f ^ x h?\nA. f ^ x h = x 3 - 7 x 2 - 17 x + 15\nB. f ^ x h = x 3 - 7 x 2 + 17 x - 15\nC. f ^ x h = x 3 + 7 x 2 - 17 x + 15\nD. f ^ x h = x 3 + 7 x 2 + 17 x - 15",
+      "answerLatex": "Official answer: B.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-2/2024",
+        "pageRef": "Exam paper pages 3",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2024-q05-applications-of-calculus-to-mechanics",
+      "paperId": "ext2-2024",
+      "year": 2024,
+      "questionNumber": "Q5",
+      "title": "5 A particle is moving in simple harmonic motion with period 10 seconds and a...",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Mechanics",
+      "subtopic": "Applications of Calculus to Mechanics",
+      "syllabusNodeIds": ["old-me2-m1"],
+      "promptLatex": "5 A particle is moving in simple harmonic motion with period 10 seconds and an amplitude of 8 m. The particle starts at the central point of motion and is initially moving to the left with a speed of V m s -1, where V > 0. What will be the position and velocity of the particle after 7.5 seconds?\nA. At the central point of motion with a velocity of V m s -1\nB. At the central point of motion with a velocity of - V m s -1\nC. 8 m to the left of the central point of motion with a velocity of 0 m s -1\nD. 8 m to the right of the central point of motion with a velocity of 0 m s -1",
+      "answerLatex": "Official answer: D.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-2/2024",
+        "pageRef": "Exam paper pages 3-4",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2024-q06-applications-of-calculus-to-mechanics",
+      "paperId": "ext2-2024",
+      "year": 2024,
+      "questionNumber": "Q6",
+      "title": "6 A light string passes over a smooth pulley",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Mechanics",
+      "subtopic": "Applications of Calculus to Mechanics",
+      "syllabusNodeIds": ["old-me2-m1"],
+      "promptLatex": "6 A light string passes over a smooth pulley. Attached to the ends of the string are masses of 9 kg and 5 kg, as shown. 5 kg 9 kg The acceleration due to gravity is g m s -2 What is the acceleration of the 9 kg mass? 2\nA. g 7\nB. 1 g 7\nC. g 2\nD. 4 g",
+      "answerLatex": "Official answer: A.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-2/2024",
+        "pageRef": "Exam paper pages 4",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2024-q07-further-integration",
+      "paperId": "ext2-2024",
+      "year": 2024,
+      "questionNumber": "Q7",
+      "title": "7 It is given that; z - 1 + i; = 2",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Calculus",
+      "subtopic": "Further Integration",
+      "syllabusNodeIds": ["old-me2-c1"],
+      "promptLatex": "7 It is given that; z - 1 + i; = 2. What is the maximum possible value of; z;?\nA. 2\nB. 10\nC. 2 + 2\nD. 2 - 2",
+      "answerLatex": "Official answer: C.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-2/2024",
+        "pageRef": "Exam paper pages 4-5",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2024-q08-further-integration",
+      "paperId": "ext2-2024",
+      "year": 2024,
+      "questionNumber": "Q8",
+      "title": "8 - Which of the following is equal to e z, where z = x + iy with x and y rea...",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Calculus",
+      "subtopic": "Further Integration",
+      "syllabusNodeIds": ["old-me2-c1"],
+      "promptLatex": "8 - Which of the following is equal to e z, where z = x + iy with x and y real numbers?\nA. e z\nB. e - z\nC. e 2 x e z\nD. e -2 x e z",
+      "answerLatex": "Official answer: A.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-2/2024",
+        "pageRef": "Exam paper pages 5",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2024-q09-using-complex-numbers",
+      "paperId": "ext2-2024",
+      "year": 2024,
+      "questionNumber": "Q9",
+      "title": "9 Consider the solutions of the equation z 4 = - 9",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Complex Numbers",
+      "subtopic": "Using Complex Numbers",
+      "syllabusNodeIds": ["old-me2-n2"],
+      "promptLatex": "9 Consider the solutions of the equation z 4 = - 9. What is the product of all of the solutions that have a positive principal argument?\nA. 3\nB. - 3\nC. 3 i\nD. - 3 i",
+      "answerLatex": "Official answer: B.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-2/2024",
+        "pageRef": "Exam paper pages 5",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2024-q10-further-work-with-vectors",
+      "paperId": "ext2-2024",
+      "year": 2024,
+      "questionNumber": "Q10",
+      "title": "10 Three unit vectors a, b and c, in 3 dimensions, are to be chosen so that a...",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Vectors",
+      "subtopic": "Further Work with Vectors",
+      "syllabusNodeIds": ["old-me2-v1"],
+      "promptLatex": "10 Three unit vectors a, b and c, in 3 dimensions, are to be chosen so that a 9 b, b 9 c and the angle q between a and a + b + c is as small as possible. What is the value of cos q?\nA. 0 1\nB. 3 1\nC. 2 2\nD. 5 ̰̰̰̰̰̰̰̰̰̰̰",
+      "answerLatex": "Official answer: D.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-2/2024",
+        "pageRef": "Exam paper pages 5-6",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2024-q11-using-complex-numbers",
+      "paperId": "ext2-2024",
+      "year": 2024,
+      "questionNumber": "Q11",
+      "title": "Use the Question 11 Writing Booklet\n(a)\nFind xe x dx 2\n(b)\nLet z = 2 + 3 i an...",
+      "marks": 16,
+      "style": "extended-response",
+      "topic": "Complex Numbers",
+      "subtopic": "Using Complex Numbers",
+      "syllabusNodeIds": ["old-me2-n2"],
+      "promptLatex": "Question 11\n(16 marks) Use the Question 11 Writing Booklet\n(a)\nFind xe x dx 2\n(b)\nLet z = 2 + 3 i and w = 1 - 5 i\n(i)\nFind z + - w 1\n(ii)\nFind z 2 ̰ 1 1 4\n(c)\nFind the angle between the two vectors u = 2 and v = - 4, giving your - 2 7 answer in radians, correct to 1 decimal place. ̰ 2 p 2 1\n(d)\nEvaluate d q 0 sin q + 1 3\n(e)\n(i)\nWrite the number 3 + i in modulus-argument form. ` j 2 7\n(ii)\nHence, or otherwise, write 3 + i in exact Cartesian form. 2 p\n(f)\nSketch the region defined by; z; < 3 and 0 # arg ^ z - i h # 2 3",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 11 (a)\n- \nProvides correct primitive 2\n- \nAttempts to use integration by parts 1 xe x dx = xe x - e x dx = xe x - e x + C u = x u l = 1 v l = e x v = e x Question 11 (b) (i)\n- \nProvides correct solution 1 z = 2 + 3 i, w = 1 - 5 i - z + w = 2 + 3 i + 1 + 5 i = 3 + 8 i Question 11 (b) (ii)\n- \nProvides correct solution 1 z 2 = ^ 2 + 3 i h 2 = 4 + 12 i + 9 i 2 = - 5 + 12 i Mathematics Extension 2 ̰̰ ̰̰̰̰\nQuestion 11 (c)\n- \nProvides correct solution 2\n- \nFinds u $ v, or equivalent merit 1 u $ v =; u;; v; cos q 4 - 8 - 14 = 1 + 4 + 4 $ 16 + 16 + 49 cos q - 18 = 3 $ 9 cos q 2 cos q = - 3 q = 2.3\nQuestion 11 (d)\n- \nProvides correct solution 3\n- \nObtains correct integral, or equivalent merit 2\n- \nAttempts to use the t substitution, or equivalent merit 1 1 2 dt p 2 1 1 + t 2 d q = 0 sin q + 1 2 t 1 + t 2 + 1 + 0 t 2 1 + t 2 1 1 = 2 dt ^ t + 1 h 2 0 1 = 2 ^ t + 1 h -2 dt 0 ^ 1 t + 1 h -1 = 2 - 1 0 1 = - 2 = 1 G t + 1 0 1 1 = - 2 d n + 2 d n 2 1 = - 1 + 2 = 1 q t = tan 2 q = 0 t = 0 p p q = t = tan = 1 2 4 Mathematics Extension 2 Question 11 (e) (i)\n- \nProvides correct solution 2\n- \nObtains correct modulus or argument, or equivalent merit 1 3 + i = 2 ^ cos q + i sin q h p p = 2 d cos + i sin n 6 6 p i = 2 e 6 q 2 1 3 1 tan q = 3 p q = 6 Question 11 (e) (ii)\n- \nProvides correct solution 2\n- \nObtains correct number in modulus-argument form, or equivalent merit 1 p 7 ` 3 + i j 7 i = d 2 e 6 n 7 p i = 128 e 6 128 = a - 3 - i k 2 = - 64 3 - 64 i Mathematics Extension 2\nQuestion 11 (f)\n- \nProvides correct sketch 3\n- \nProvides correct shading of the interior of the region, or equivalent merit 2\n- \nProvides correct sketch of interior of either; z; < 3 or p 0 # arg ^ z - i h #, or equivalent merit 2 1 y x O 3 3 i i Mathematics Extension 2 Question 12 (a) (i)\n- \nProvides correct answer 1 2 a $ b 10 $ b = - 0 b $ b 20 - 4 2 1 = - 0 2 - 4 - 1 = 0 2 ̰̰̰̰̰ Question 12 (a) (ii) ̰̰̰̰̰̰\n- \nProvides correct solution 2 a $ b\n- \nFinds a - b, or equivalent merit b $ b 1 - 1 2 2 a - 0 $ b = 2 $ 0 = 4 + 0 - 4 = 0 2 1 - 4 ` Vectors are perpendicular. ̰̰ Mathematics Extension 2",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Extension 2 marking feedback",
+        "betterResponses": [
+          "identity the need to use integration by parts",
+          "establish a correct anti-derivative with a constant."
+        ],
+        "improvementAreas": [
+          "choosing the correct expressions of 𝑢 = 𝑥 and 𝑑𝑣 = 𝑒 𝑥. Mathematics Extension 2 - HSC marking feedback 2024 Page 2 of 16"
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Extension 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-2/2024",
+        "pageRef": "Exam paper pages 6-7",
+        "markingGuideRef": "Marking guidelines pages 2-7",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2024-q12-using-complex-numbers",
+      "paperId": "ext2-2024",
+      "year": 2024,
+      "questionNumber": "Q12",
+      "title": "Use the Question 12 Writing Booklet ̰ 1 2\n(a)\nThe vector a is 2 and the vecto...",
+      "marks": 14,
+      "style": "extended-response",
+      "topic": "Complex Numbers",
+      "subtopic": "Using Complex Numbers",
+      "syllabusNodeIds": ["old-me2-n2"],
+      "promptLatex": "Question 12\n(14 marks) Use the Question 12 Writing Booklet ̰ 1 2\n(a)\nThe vector a is 2 and the vector b is 0 3 - 4 a $ b\n(i)\nFind b b $ b ̰̰̰̰̰̰ ̰ 1 a $ b\n(ii)\nShow that a - b is perpendicular to b b $ b ̰̰̰̰̰̰ 2\n(b)\nUse partial fractions to find 3 x 2 + 2 x + 1 _ i_ i dx x - 1 x 2 + 1 3\n(c)\nConsider the equation; z; = z + 8 + 12 i, where z = a + bi is a complex number and a, b are real numbers.\n(i)\nExplain why b = - 12. 1\n(ii)\nHence, or otherwise, find z 2\n(d)\nExplain why there is no integer n such that ^ n + 1 h 41 - 79 n 40 = 2. 2\n(e)\nThe line  passes through the points A ^ 3, 5, - 4 h and B ^ 7, 0, 2 h\n(i)\nFind a vector equation of the line  1\n(ii)\nDetermine, giving reasons, whether the point C ^ 10, 5, - 2 h lies on the line  2",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 12 (b)\n- \nProvides correct primitive 3\n- \nObtains correct integrand, or equivalent merit 2 A Bx + C\n- \nAttempts partial fractions using +, or equivalent merit x - 1 x 2 + 1 1 3 x 2 + 2 x + 1 dx _ x - 1 i _ x 2 + 1 i 3 x 2 + 2 x + 1 A Bx + C = + _ x - 1 i _ x 2 + 1 i x - 1 x 2 + 1 3 x 2 + 2 x + 1 = A _ x 2 + 1 i + ^ Bx + C h ^ x - 1 h x = 1 2 A = 6 ` A = 3 x = 0 A - C = 1 ` C = 2 x = - 1 2 A + ^ - B + C h^ - 2 h = 2 6 + 2 B - 4 = 2 2 B = 0 ` B = 0 3 x 2 + 2 x + 1 3 2 ` dx = + dx _ x - 1 i _ x 2 + 1 i x - 1 x 2 + 1 = 3 ln; x - 1; + 2 tan -1 x + C Mathematics Extension 2 Question 12 (c) (i)\n- \nProvides correct explanation 1; z; = z + 8 + 12 i LHS real so a + bi + 8 + 12 i real ` ^ b + 12 h i = 0 b = - 12 Question 12 (c) (ii)\n- \nProvides correct solution 2\n- \nObtains quadratic equation for a, or equivalent merit 1;; 2 a - 12 i = ^ a + 8 h 2 a 2 + 144 = a 2 + 16 a + 64 80 = 16 a a = 5 z = 5 - 12 i Mathematics Extension 2\nQuestion 12 (d)\n- \nProvides correct explanation 2\n- \nRecognises that considering n odd/even is a correct approach OR\n- \nProves the result for n odd or even, or equivalent merit 1 ^ n + 1 h 41 - 79 n 40 = 2 If n is odd, then ^ n + 1 h is even. ` ^ n + 1 h 41 is even and 79 n 40 is odd. But, even - odd! even If n is even, then ^ n + 1 h is odd. ` ^ n + 1 h 41 is odd and 79 n 40 is even. But, odd - even! even ` Original statement cannot be true. Mathematics Extension 2 Question 12 (e) (i)\n- \nProvides correct equation 1 A ^ 3, 5, - 4 h and B ^ 7, 0, 2 h 7 3 A direction vector = 0 - 5 2 - 4 4 = - 5 6 x 3 4 : y = 5 + l - 5 z - 4 6 Question 12 (e) (ii)\n- \nProvides correct solution 2\n- \nObtains one correct l value for one coordinate, or equivalent merit 1 10 3 4 5 = 5 + l - 5 - 2 - 4 6 7 10 = 3 + 4 l l = 4 5 = 5 - 5 l l = 0 Inconsistent values for l ` Point ^ 10, 5, - 2 h is not on  Mathematics Extension 2 Question 13 (a) (i)\n- \nProvides correct proof 1 p - 8 AB = p + 8 2 p - 5 2; AB; = p 2 - 16 p + 64 + p 2 + 12 p + 36 + 4 p 2 - 20 p + 25 = 6 p 2 - 24 p + 125 Question 13 (a) (ii)\n- \nProvides correct solution 2\n- \nFinds the correct value of p, or equivalent merit 1; 2 AB; is a quadratic equation. - b Axis of symmetry x = 2 a - ^ - 24 h ` p = 2 # 6 = 2 The parabola is concave up. Shortest distance (minimum) when p = 2 ` dist 2 = 6 ^ 2 h 2 - 24 ^ 2 h + 125 = 24 - 48 + 125 = 101 ` Shortest distance is 101. b distance will l be positive Mathematics Extension 2",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Extension 2 marking feedback",
+        "betterResponses": [
+          "break the expression into the required format for partial fractions",
+          "use methodical progress to determine the unknown quantities",
+          "check that the result of the partial fraction breakdown satisfies the original expression."
+        ],
+        "improvementAreas": [
+          "using absolute values for the natural logarithm anti-derivative",
+          "checking the results of the simultaneous equations",
+          "using the reference sheet to identify basic anti-derivatives."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Extension 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-2/2024",
+        "pageRef": "Exam paper pages 7-8",
+        "markingGuideRef": "Marking guidelines pages 7-12",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2024-q13-further-work-with-vectors",
+      "paperId": "ext2-2024",
+      "year": 2024,
+      "questionNumber": "Q13",
+      "title": "Use the Question 13 Writing Booklet\n(a)\nThe point A has position vector 8 i -...",
+      "marks": 16,
+      "style": "extended-response",
+      "topic": "Vectors",
+      "subtopic": "Further Work with Vectors",
+      "syllabusNodeIds": ["old-me2-v1"],
+      "promptLatex": "Question 13\n(16 marks) Use the Question 13 Writing Booklet\n(a)\nThe point A has position vector 8 i - 6 j + 5 k. The line  has vector equation x i + y j + z k = t _ i + j + 2 k i The point B lies on  and has position vector p i + p j + 2 p k\n(i)\nShow that; AB; 2 = 6 p 2 - 24 p + 125 ̰̰̰̰̰̰̰̰̰̰̰̰ 1\n(ii)\nHence, or otherwise, determine the shortest distance between the point A and the line  2\n(b)\nA particle is moving in simple harmonic motion, described by x p = - 4 ^ x + 1 h When the particle passes through the origin, the speed of the particle is 4 m s -1 What distance does the particle travel during a full period of its motion? 3\n(c)\nA particle of unit mass moves horizontally in a straight line. It experiences a resistive force proportional to v 2, where v m s -1 is the speed of the particle, so that the acceleration is given by - k v 2 Initially the particle is at the origin and has a velocity of 40 m s -1 to the right. After the particle has moved 15 m to the right, its velocity is 10 m s -1 (to the right).\n(i)\nShow that v = 40 e - k x 3 ln 4\n(ii)\nShow that k = 15 1\n(iii)\nAt what time will the particle’s velocity be 30 m s -1 to the right? 3\n(d)\nIt is known that for all positive real numbers x, y x + y $ 2 xy (Do NOT prove this.) 1 1 1 Show that if a, b, c are positive real numbers with + + = 1 then a b c a bc + b ac + c ab # abc 3",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 13 (b)\n- \nProvides correct solution 3\n- \nIntegrates to obtain v 2, or equivalent merit 2\n- \nFind correct period or n, or equivalent merit 1 x p = - 4 _ x - ^ - 1 hi ` n 2 = 4 ` n = 2 and c = - 1 d 1 e v 2 o = - 4 ^ x + 1 h dx 2 Integrate from x = 0, r = 4 to x = a - 1, v = 0 v 2 = 4 _ A 2 - ^ x + 1 h 2 i x = 0, v =! 4 16 = 4 _ A 2 - 1 2 i 4 = A 2 - 1 A 2 = 5 A =! 5 - 1 - 1 + 5 - 1 - 5 Distance travelled = 8 _ - 1 + 5 i - _ - 1 - 5 i B # 2 = 2 5 # 2 = 4 5 metres Question 13 (c) (i)\n- \nProvides correct proof 3\n- \nIntegrates the equation of motion, or equivalent merit 2\n- \nObtains equation of motion, or equivalent merit 1 v - k v 2 P mx p = - k v 2 m = 1, x p = - k v 2 dv v = - k v 2 dx dv = - k dx v ln v = - k x + C since v = 0 When t = 0, x = 0 and v = 40 ` ln 40 = 0 + C C = ln 40 ln v - ln 40 = - k x v ln d n = - k x 40 ` v = 40 e - k x Mathematics Extension 2 Question 13 (c) (ii)\n- \nProvides correct solution 1 x = 15, v = 10 10 = 40 e - k 15 1 = e -15 k 4 - 15 k = - ln 4 ln 4 k = 15 Mathematics Extension 2 Question 13 (c) (iii)\n- \nProvides correct solution 3\n- \nIntegrates equation of motion with respect to time, or equivalent merit 2\n- \nConsiders equation of motion with respect to time, or equivalent merit 1 x p = - k v 2 dv = - k v 2 dt dv = - k dt v 2 v -1 = - k t + C - 1 1 - = - k t + C v When t = 0 v = 40 1 - = C 40 1 1 ` - = - k t - v 40 When will v = 30? 1 1 1 k t = - = 30 40 120 1 15 t = # 120 ln 4 1 = 8 ln 4 ^ Z 0.09 seconds h Mathematics Extension 2\nQuestion 13 (d)\n- \nProvides correct proof 3 1 1 1\n- \nCorrectly applies the AM-GM inequality to + + = 1, or equivalent a b c merit 2\n- \nAttempts to apply the AM-GM inequality to a relevant expression, or equivalent merit 1 1 x + y $ 2 xy & xy # ^ x + y h ➀ 2 1 1 1 + + = 1 a b c ` bc + ac + ab = abc Now a bc + b ac + c ab 1 1 1 # a $ ^ b + c h + b $ ^ a + c h + c $ ^ a + b h, 2 2 2 Using AM - GM inequality from ➀ 1 # 6 ab + ac + ab + bc + ac + bc @ 2 1 # 7 2 ^ ab + ac + bc h A 2 # ab + ac + bc # abc Mathematics Extension 2",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Extension 2 marking feedback",
+        "betterResponses": [
+          "find 𝑛 = 2 and 𝑐 = -1 from the equation of motion, then find 𝑎 = √5 by either: - (1) finding an expression for 𝑣 2 using definite integration using 𝑑 𝑑𝑥 ( 1 2 𝑣 2 ) = -4(𝑥 + 1) - (2) finding an expression for 𝑣 2 using indefinite integration using 𝑑 𝑑𝑥 ( 1 2 𝑣 2 ) = -4(𝑥 + 1) then rearranging into the form 𝑣 2 = 𝑛 2 (𝑎 2 - (𝑥 - 𝑐) 2 ) - (3) using their equation for 𝑣 2 to find the extremities of motion - (4) finding expressions for displacement and velocity as functions of sine and cosine",
+          "find that the distance travelled in a full period of motion is 4𝑎 = 4√5, or twice the distance between the extremities of motion."
+        ],
+        "improvementAreas": [
+          "taking more care when solving simple equations within a longer solution",
+          "understanding when and how to correctly use the formula 𝑣 2 = 𝑛 2 (𝑎 2 - (𝑥 - 𝑐) 2 )",
+          "knowing that the distance travelled in one full period of motion is four times the amplitude or twice the distance between the extremities of motion, and that no further calculus is required. Mathematics Extension 2 - HSC marking feedback 2024 Page 7 of 16"
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Extension 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-2/2024",
+        "pageRef": "Exam paper pages 8-9",
+        "markingGuideRef": "Marking guidelines pages 12-16",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2024-q14-using-complex-numbers",
+      "paperId": "ext2-2024",
+      "year": 2024,
+      "questionNumber": "Q14",
+      "title": "Use the Question 14 Writing Booklet\n(a)\nProve that if a is any odd integer, t...",
+      "marks": 15,
+      "style": "extended-response",
+      "topic": "Complex Numbers",
+      "subtopic": "Using Complex Numbers",
+      "syllabusNodeIds": ["old-me2-n2"],
+      "promptLatex": "Question 14\n(15 marks) Use the Question 14 Writing Booklet\n(a)\nProve that if a is any odd integer, then a 2 - 1 is divisible by 8. 2\n(b)\nUse mathematical induction to prove that 2 n C < 2 2 n - 2, for all integers n $ 5. n 3 z p\n(c)\nFor the complex numbers z and w, it is known that arg d n = - w 2 z - w Find;; z + w 2\n(d)\nThe following argument attempts to prove that 0 = 1. 1 We evaluate dx using the method of integration by parts. x 1 1 dx = # 1 dx x x 1 1 = # x - - x dx x x 2 1 = 1 + dx x So we have 1 1 dx = 1 + dx x x 1 We may now subtract dx from both sides to show that 0 = 1. x Explain what is wrong with this argument. 2\n(e)\nThe diagram shows triangle OQA The point P lies on OA so that OP: OA = 3: 5. The point B lies on OQ so that OB: OQ = 1: 3. The point R is the intersection of AB and PQ The point T is chosen on AQ so that O, R and T are collinear. O P B A Q T R NOT TO SCALE Let a = OA, b = OB and PR = k PQ where k is a real number.\n(i)\nShow that 3 OR = ^ 1 - k h a + 3 k b 5 ̰̰̰̰ 2 Writing AR = h AB, where h is a real number, it can be shown that OR = ^ 1 - h h a + h b. (Do NOT prove this.) 1\n(ii)\nShow that k = 6 ̰̰ 2\n(iii)\nFind OT in terms of a and b ̰̰ 2",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 14 (a)\n- \nProvides correct proof 2\n- \nShows that a 2 - 1 is divisible by 4, or equivalent merit 1 a is odd so let a = 2 p + 1 where p is an integer a 2 - 1 = ^ 2 p + 1 h 2 - 1 = 4 p 2 + 4 p + 1 - 1 = 4 p 2 + 4 p = 4 p ^ p + 1 h One of p and p + 1 will be even. Case 1 p = 2 q is even, where q is an integer then a 2 - 1 = 4 # 2 q ^ p + 1 h = 8 q ^ p + 1 h Case 2 p + 1 = 2 r is even, where r is an integer then a 2 - 1 = 4 p # 2 r = 8 p r Both of which are divisible by 8. ` If a is any odd integer, then a 2 - 1 is divisible by 8. Mathematics Extension 2\nQuestion 14 (b)\n- \nProvides correct proof 3\n- \nProves that p ^ k h & p ^ k + 1 h, or equivalent merit 2\n- \nShowing true for n = 5 1 Prove: 2 n C < 2 2 n - 2 n $ 5 n Initial case: n = 5 10 C = 252 2 8 = 256 5 252 < 256 ` True for n = 5. Inductive step: Suppose statement is true for n = k Assume 2 k C < 2 2 k - 2 for k $ 5 k ^ 2 k h! ie < 2 2 k - 2 k! $ k! Prove that 2 k + 2 C < 2 2 k k +1 LHS = 2 k + 2 C k +1 ^ 2 k + 2 h! = ^ k + 1 h! ^ k + 1 h! ^ 2 k + 2 h^ 2 k + 1 h^ 2 k h! = ^ k + 1 h 2 $ ^ k! h 2 2 ^ k + 1 h^ 2 k + 1 h^ 2 k h! = ^ k + 1 h 2 $ ^ k h! 2 2 ^ 2 k + 1 h^ 2 k h! = ^ k + 1 h^ k! h 2 2 ^ 2 k + 1 h = $ 2 k C ^ k + 1 h k 2 2 k + 1 < $ 2 2 k - 2 ^ k + 1 h using assumption n = k ^ h 2 k + 1 = $ 2 2 k -1 ^ k + 1 h 2 k + 2 < $ 2 2 k -1 k + 1 = 2 $ 2 2 k -1 = 2 2 k = RHS 2 k + 2 C < 2 2 k k +1 as required Hence, the statement is true by mathematical induction for all integers n $ 5. Mathematics Extension 2\nQuestion 14 (c)\n- \nProvides correct solution 2 z\n- \nRecognises that is purely imaginary, or equivalent merit w 1 z p arg d n = - z, w are complex numbers. w 2 z ` is purely imaginary. w z - 1; z - w; w = z + w z + 1 w z ` Let = k i w k i - 1 =;; k i + 1 k 2 + 1 = k 2 + 1 = 1 Answers could include: w z + w z - w z z - w and z + w are the diagonals of a rectangle. `; z - w; =; z + w; Hence; z - w z + w; = 1 Mathematics Extension 2\nQuestion 14 (d)\n- \nProvides correct explanation 2\n- \nRecognises that constants of integration are involved, or equivalent merit 1 Using product rule d ^ uv h = u l v + u v l dx d ^ uv h u l v = - u v l dx d ^ uv h u l v dx = dx - u v l dx dx d ^ uv h But dx = u v + C not just u v dx So should have 1 1 dx = 1 + C + dx x x 0 = 1 + C for some constant C Answers could include: 1 1 dx = 1 + dx x x involves two indefinite integrals, and so two different constants ln; x; + C = 1 + ln 1; x; + C 2 C = 1 + C for some constants C and C 1 2 1 2 Mathematics Extension 2 Question 14 (e) (i) ̰\n- \nProvides correct solution 2\n- \nObtains OR in terms of a and PQ, or equivalent merit 1 3 OP = a PR = k PQ OQ = 3 b 5 OR = OP + PR 3 = a + k PQ 5 3 - 3 = a + k d a + 3 b n 5 5 3 = ^ 1 - k h a + 3 k b 5 ̰̰̰̰̰̰̰̰ Mathematics Extension 2 Question 14 (e) (ii)\n- \nProvides correct solution 2\n- \nEquates coefficients for a or b, or equivalent merit 1 ̰̰ Given OR = ^ 1 - h h a + h b 3 And, from part (i) OR = ^ 1 - k h a + 3 k b 5 Equating coefficients 3 1 - h = ^ 1 - k h and 3 k = h 5 3 1 - 3 k = ^ 1 - k h 5 5 - 15 k = 3 - 3 k 2 = 12 k 1 k = 6 ̰̰̰̰ Mathematics Extension 2 Question 14 (e) (iii) ̰̰\n- \nProvides correct solution 2\n- \nObtains a correct expression for OT in terms of a and b, or equivalent merit 1 Using part (ii), h = 3 k 1 1 ` h = 3 d n = 6 2 OT = l 1 1 OR = l d a + b n 2 2 l l = a + b 2 2 OT = OA + m AQ = a + m _ - a + 3 b i = ^ 1 - m h a + 3 m b Equating coefficients of b l = 3 m 2 ` l = 6 m Equating coefficients of a l = 1 - m 2 l = 2 - 2 m ` 6 m = 2 - 2 m 8 m = 2 1 3 m = and l = 4 2 3 ` OT = OR 2 3 3 = a + b 4 4 ̰̰̰̰̰̰̰̰̰̰̰̰̰ Mathematics Extension 2 Question 15 (a) (i)\n- \nProvides correct solution 1 Line  through A and B has equation OX = OA + l AB for points X on the line. 1 1 OM = a + b 2 2 1 1 = d a - a n + b 2 2 1 = OA + _ - a + b i 2 1 = OA + AB 2 ` M lies on  ̰̰̰̰̰̰̰ Question 15 (a) (ii)\n- \nProvides correct solution 2\n- \nObtains OG in terms of OC and CM, or equivalent merit 1 Line k through M and C has equation OX = OC + m CM, for points X on the line. 1 OG = _ a + b + c i 3 2 1 1 = d c - c n + a + b 3 3 3 2 1 1 = c + d a + b - c n 3 2 2 2 = OC + CM 3 ` G lies on line k OG! OC and OG! OM So G lies between C and M ̰̰̰̰̰̰̰̰̰̰̰ Mathematics Extension 2 Question 15 (a) (iii)\n- \nProvides correct solution 2\n- \nShows that G lies within the unit circle, or equivalent merit 1 The three points are on the unit circle. `; z; = 1 G A B M C 1 The point equivalent to G, ^ x + w + z h, lies on line CM and so is inside the unit circle. 3 1 And hence,; ^ x + w + z h < 1. 3; But,; xwz; = 1 and so all cube roots have modulus 1. 1 Therefore, ^ x + w + z h can’t be a cube root of xwz 3 Mathematics Extension 2",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Extension 2 marking feedback",
+        "betterResponses": [
+          "use a direct proof by letting 𝑎 = 2𝑘 + 1 for 𝑘 ∈ ℤ to show that 𝑎 2 - 1 = 4𝑘(𝑘 + 1), then noting that 𝑘 and 𝑘 + 1 are consecutive numbers where one is even and the other odd and so their product must be even, then lastly let 𝑘(𝑘 + 1) = 2𝑝 for 𝑝 ∈ ℤ, to conclude that 𝑎 2 - 1 is divisible by 8.",
+          "use cases to prove that 𝑘(𝑘 + 1) is even",
+          "use 𝑎 = 4𝑘 + 1 and 𝑎 = 4𝑘 + 3 (or 𝑎 = 4𝑘 - 1 ) and prove that in both cases 𝑎 2 - 1 is divisible by 8",
+          "use different methods of proof, for example, mathematical induction, proof by contrapositive and proof by contradiction can all be used to prove the result."
+        ],
+        "improvementAreas": [
+          "understanding that proving the result is true for only one of 𝑎 = 4𝑘 + 1 or 𝑎 = 4𝑘 + 3 or 𝑎 = 4𝑘 - 1 only proves the result is true for some odd values of 𝑎, not all odd values of 𝑎 as required",
+          "using mathematical induction appropriately. The base case must be the lowest number, in this case 𝑎 = 1, and the step value must be 2",
+          "setting up the proof properly to be able to prove the required result when using proof by contrapositive or proof by contradiction, rather than trying to prove the converse or inverse. Mathematics Extension 2 - HSC marking feedback 2024 Page 9 of 16"
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Extension 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-2/2024",
+        "pageRef": "Exam paper pages 9-11",
+        "markingGuideRef": "Marking guidelines pages 16-25",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2024-q15-using-complex-numbers",
+      "paperId": "ext2-2024",
+      "year": 2024,
+      "questionNumber": "Q15",
+      "title": "Use the Question 15 Writing Booklet\n(a)\nConsider the three vectors a = OA, b...",
+      "marks": 15,
+      "style": "extended-response",
+      "topic": "Complex Numbers",
+      "subtopic": "Using Complex Numbers",
+      "syllabusNodeIds": ["old-me2-n2"],
+      "promptLatex": "Question 15\n(15 marks) Use the Question 15 Writing Booklet\n(a)\nConsider the three vectors a = OA, b = OB and c = OC, where O is the origin and the points A, B and C are all different from each other and the origin. 1 The point M is the point such that _ a + b i = OM 2\n(i)\nShow that M lies on the line passing through A and B ̰̰̰̰̰ 1 1\n(ii)\nThe point G is the point such that a + b + c = OG 3 Show that G lies on the line passing through M and C, and lies between M and C _ ̰̰̰ i 2\n(iii)\nThe complex numbers x, w and z are all different and all have modulus 1. 1 Using part (ii), or otherwise, show that ^ x + w + z h is never a cube root 3 of xwz 2 a 1 1 n +\n(b)\nLet I = x 2 ^ a - x h 2 dx, where n $ 0. n 0 Show that ^ 2 n + 4 h I = a ^ 2 n + 1 h I, for n > 0. n n -1 3\n(c)\nA bar magnet is held vertically. An object that is repelled by the magnet is to be dropped from directly above the magnet and will maintain a vertical trajectory. Let x be the distance of the object above the magnet. N S g x x 3 27 g The object is subject to acceleration due to gravity, g, and an acceleration due 27 g to the magnet, so that the total acceleration of the object is given by x 3 27 g a = - g x 3 The object is released from rest at x = 6. 51 27\n(i)\nShow that v 2 = g e - 2 x - o 4 x 2 2\n(ii)\nFind where the object next comes to rest, giving your answer correct to 1 decimal place. 2\n(d)\nUsing a suitable substitution, find 2 x 2 dx 2 x - x 2 3",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 15 (b)\n- \nProvides correct solution 3\n- \nCorrectly uses integration by parts to obtain a single integral term, or equivalent merit 2\n- \nAttempts to use integration by parts, or equivalent merit 1 a 1 1 n + I = x 2 n ^ a - x h 2 dx 0 Using integration by parts, 1 1 n + u = x 2 v l = ^ a - x h 2 3 1 1 ^ a - x h 2 u l = d - n + n n x 2 v = 2 3 - 2 a 1 2 3 2 1 a 1 3 n + I = x 2 n d n - - n ^ a - x h 2 + d n + n x 2 ^ a - x h 2 dx 3 0 3 2 0 2 1 a 1 3 - = d n n + n x 2 ^ a - x h 2 dx 3 2 0 1 a 1 1 n - = ^ 2 n + 1 h x 2 ^ a - x h 1 ^ a - x h 2 dx 3 0 1 a 1 1 1 1 ^ h n - ^ h n + = 2 n + 1 ax 2 a - x 2 - x 2 ^ a - x h 2 dx 3 0 1 = ^ 2 n + 1 h _ a I - I n -1 n i 3 1 a I + ^ 2 n + 1 h I = ^ 2 n + 1 n n h I 3 3 n -1 ^ 3 + 2 n + 1 h a I = n ^ 2 n + 1 h I 3 3 n -1 ^ 2 n + 4 h I = a ^ 2 n + 1 h I n n -1 Mathematics Extension 2 Question 15 (c) (i)\n- \nProvides correct solution 2\n- \nCorrectly integrates the equation of motion, or equivalent merit 1 27 g a = - g t = 0 v = 0 x = 6 x 3 d 1 27 g e v 2 o = - g dx 2 x 3 1 d e v 2 o 2 = 27 gx -3 - g d x 1 2 27 gx -2 v = - gx + C 2 - 2 1 - 27 g v 2 = - gx + C 2 2 x 2 2 - 27 g v = - 2 gx + D _ D = 2 C i x 2 x = 6 v = 0 - 27 g 0 = - 12 g + D 36 3 D = g + 12 g 4 51 = g 4 - 27 g 51 v 2 = - 2 gx + g x 2 4 51 27 = g e - 2 x - o 4 x 2 Mathematics Extension 2 Question 15 (c) (ii)\n- \nProvides correct solution 2\n- \nObtains a correct quadratic equation, or equivalent merit 1 51 27 - 2 x - = 0 4 x 2 51 x 2 - 8 x 3 - 108 = 0 8 x 3 - 51 x 2 + 108 = 0 Since x = 6 is a solution, x - 6 is a factor. ^ x - 6 h _ 8 x 2 + bx - 18 i = 0 Equating terms in x 2, b - 48 = - 51 b = - 3 ^ x - 6 h _ 8 x 2 - 3 x - 18 i = 0 3! 9 - 4 ^ 8 h^ - 18 h x = 16 3! 585 x = 16 x 1.699 or - 1.324 Since x > 0 x 1.7\nQuestion 15 (d)\n- \nProvides correct solution in terms of x 3\n- \nProvides correct integral in terms of q, or equivalent merit 2\n- \nCompletes the square OR\n- \nAttempts to substitute, or equivalent merit 1 2 x 2 2 x 2 dx = dx 2 x - x 2 1 - _ 1 - 2 x + x 2 i 2 x 2 = dx 1 - ^ 1 - x h 2 2 ^ 1 - sin q h 2 = ^ - cos q h d q 1 - sin 2 q 1 - 2 sin q + sin 2 q = - 2 ^ cos q h d q cos q 1 = - 2 1 - 2 sin q + ^ 1 - cos 2 q h d q 2 = - 2 + 4 sin q - 1 + cos 2 q d q 1 = - 3 q - 4 cos q + sin 2 q + C 2 1 = - 3 sin -1 ^ 1 - x h - 4 2 x - x 2 + 2 sin q cos q + C 2 = - 3 sin -1 ^ 1 - x h - 4 2 x - x 2 + ^ 1 - x h 2 x - x 2 + C = - 3 sin -1 ^ 1 - x h - 3 2 x - x 2 - x 2 x - x 2 + C = - 3 sin -1 ^ 1 - x h - ^ x + 3 h 2 x - x 2 + C Let 1 - x = sin q - dx = cos q d q dx = - cos q d q x = 1 - sin q 1 1 q - x 1 - ^ 1 - x h 2 = 2 x - x 2 Mathematics Extension 2 Mathematics Extension 2 Question 15 (d) (continued) Answers could include: Using cos q = 1 - x as substitution 2 x 2 x 2 dx = 2 dx 2 x - x 2 1 - _ 1 - x i 2 ^ 1 - cos q h 2 2 sin q d q 1 - cos 2 q 1 - 2 cos q + cos 2 q = 2 sin q d q sin q 1 cos 2 q = 2 1 - 2 cos q + + d q 2 2 = 2 - 4 cos q + 1 + cos 2 q d q 3 - 4 cos q + cos 2 q d q 1 3 q - 4 sin q + sin 2 q + D 2 = 3 cos -1 ^ 1 - x h - 4 2 x - x 2 + 2 x - x 2 ^ 1 - x h + D = 3 cos -1 ^ 1 - x h - ^ x + 3 h 2 x - x 2 + D 2 x - x 2 = 1 - ^ 1 - x h 2 Let cos q = 1 - x x = 1 - cos q dx = sin q d q dx = sin q d q 2 x - x 2 1 q 1 - x = = = Mathematics Extension 2",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Extension 2 marking feedback",
+        "betterResponses": [
+          "separate appropriate factors and follow the procedure of integration by parts",
+          "include all relevant steps to communicate the procedure to satisfy the requirement to ‘show that’",
+          "manipulate the integrand into the required form."
+        ],
+        "improvementAreas": [
+          "choosing the correct factors to differentiate and integrate",
+          "setting out responses so they are easily followed and minimise errors in processes",
+          "using the index laws correctly",
+          "understanding that questions involving this form of recurrence relation most likely involve integration by parts."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Extension 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-2/2024",
+        "pageRef": "Exam paper pages 11-13",
+        "markingGuideRef": "Marking guidelines pages 25-30",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2024-q16-using-complex-numbers",
+      "paperId": "ext2-2024",
+      "year": 2024,
+      "questionNumber": "Q16",
+      "title": "Use the Question 16 Writing Booklet\n(a)\nConsider the function y = cos ^ kx h,...",
+      "marks": 14,
+      "style": "extended-response",
+      "topic": "Complex Numbers",
+      "subtopic": "Using Complex Numbers",
+      "syllabusNodeIds": ["old-me2-n2"],
+      "promptLatex": "Question 16\n(14 marks) Use the Question 16 Writing Booklet\n(a)\nConsider the function y = cos ^ kx h, where k > 0. The value of k has been chosen so that a circle can be drawn, centred at the origin, which has exactly two points of intersection with the graph of the function and so that the circle is never above the graph of the function. The point P ^ a, b h is the point of intersection in the first quadrant, so a > 0 and b > 0, as shown in the diagram. 4 x y O P ^ a, b h y = cos ^ kx h The vector joining the origin to the point P a, b is perpendicular to the tangent to the graph of the function at that point. (Do NOT prove this.) Show that k > 1. ^ h 2 p i\n(b)\nThe number w = e 3 is a complex cube root of unity. The number g is a cube root of w -\n(i)\nShow that g + g is a real root of z 3 - 3 z + 1 = 0. 3 2 p 4 p 8 p\n(ii)\nBy using part\n(i)\nto find the exact value of cos cos cos, 9 9 9 2 n p 2 n + 1 p 2 n + 2 p deduce the value(s) of cos cos cos for all integers 9 9 9 n $ 1. Justify your answer. 3\n(c)\nTwo particles, A and B, each have mass 1 kg and are in a medium that exerts a resistance to motion equal to kv, where k > 0 and v is the velocity of any particle. Both particles maintain vertical trajectories. The acceleration due to gravity is g m s -2, where g > 0. The two particles are simultaneously projected towards each other with the g same speed, v m s -1, where 0 < v < 0 0 k 2 v 0 The particle A is initially d metres directly above particle B, where d < k Find the time taken for the particles to meet. 4",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 16 (a)\n- \nProvides correct solution 4\n- \nAttempts to use a relevant trigonometric fact, with 2 a = k sin 2 ka to obtain result, or equivalent merit 3\n- \nObtains a correct equation involving sin 2 ka, or equivalent merit 2\n- \nProvides a correct expression using the slope of OP, or equivalent merit 1 At P ^ a, b h the slope of the curve is - k sin ka Since OP is perpendicular to the tangent at P b # ^ - k sin ka h = - 1 a a - = - k sin ka b But b = cos ka a = k sin ka cos ka 2 a = k sin 2 ka Let X = 2 a, then we have X = k sin kX If k # 1, then, as X > 0 k sin kX # sin kX < kX # X But X = k sin kX So by contradiction k > 1 Question 16 (b) (i)\n- \nProvides correct solution 3\n- \nObtains ^ g - + g h 3 - 3 ^ g + g - h + = g 3 - 1 + g 3 + 1, or equivalent merit 2\n- \nSubstitutes g + g - into z 3 - 3 z + 1 = 0, or equivalent merit 1 2 p i = 3; - q - q - w e as g; =; g; = 1, g = e i, g = e - i, g g = 1 ^ g + g - h 3 - ^ g + g - 3 h + 1 = g 3 + 3 g 2 g - + gg - 2 + g - - 3 3 - 3 g - 3 g + 1 = g 3 + - - - g 3 + 3 g + 3 g - 3 g - 3 g + 1 = g 3 - + g 3 + 1 2 p = 2 cos + 1 3 1 = 2 d - n + 1 2 = 0 as g - g = 1 2 p i g 3 = e 3 2 p i g - - 3 = e 3 Mathematics Extension 2 ` g + g - is a real root of z 3 - 3 z + 1 = 0. Mathematics Extension 2 Question 16 (b) (ii)\n- \nProvides correct solution 3\n- \nAttempts to use inductive reasoning, or equivalent merit 2 2 p 4 p 8 p 1\n- \nShows cos cos cos = -, or equivalent merit 9 9 9 8 1 2 p i 1 a 2 p i p p k 1 a 2 1 + 2 p k i a 2 + 4 p k i The cube roots of w = e 3 are e 3 3, e 3 3 and e 3 3 2 p i 8 p i 14 p i that is e 9, e 9 and e 9. By part (i) each of these plus its conjugate will be a root of z 3 - 3 z + 1 = 0. 2 p 8 p 14 p So 2 cos, 2 cos and 2 cos are roots of z 3 - 3 z + 1 = 0. 9 9 9 14 p 14 p Noting that cos = cos d - n 9 9 14 p = cos d 2 p - n 9 4 p = cos 9 2 p 4 p 8 p The roots of z 3 - 3 z + 1 = 0 are 2 cos, 2 cos and 2 cos 9 9 9 (These are different as cos q is decreasing for 0 < q < p.) The product of the roots is - 1. 2 p 4 p 8 p Hence 8 cos cos cos = - 1 9 9 9 2 p 4 p 8 p 1 cos cos cos = - 9 9 9 8 This is the base case of this induction. 2 k + 3 p 8 Noting that cos = cos d # 2 k p n 9 9 8 = cos d - # 2 k p n, cos even 9 8 = cos d 2 k p - 2 k p n, for k $ 1 9 2 k p = cos 9 2 k + 1 p 2 k + 2 p 2 k + 3 p 2 k p 2 k + 1 p 2 k + 2 p Hence cos cos cos = cos cos cos (verifying the 9 9 9 9 9 9 induction step). 2 n p 2 n + 1 p 2 n + 2 p 1 So cos cos cos = - for all integers n $ 1. 9 9 9 8\nQuestion 16 (c)\n- \nProvides correct solution 4\n- \nFinds position of either particle or  = x - x A in terms of t B, or equivalent merit 3 d \n- \nFinds velocity of either particle or, or equivalent merit dt 2\n- \nObtains correct equations of motion, or equivalent merit 1 Mathematics Extension 2 Let  = x - x A B d 2  = a - a A B dt 2 = - g - kv + g + kv A B = - k _ v - v A B i dx dx = - f A - B k p dt dt d = - k _ x - x dt A B i d  = - k dt d  = L e - kt, where L is a constant dt < d  t = 0, = - 2 v F dt 0 d  = - 2 v e - kt dt 0 2 v  0 = e - kt + C k 7 t = 0,  = d A 2 v 0 d = + C k kd - 2 v 0 C = k 2 v kd - 2 v 0 0  = e - kt + k k d - v 0 a A = - g - kv A x g a B = - g - kv B 0 v 0 7  = 0 2 v e - kt + kd - 2 v = 0 0 0 2 v - kd 0 = e - kt 2 v 0 2 v 0 = e kt 2 v - kd 0 1 2 v = e 0 t log p k 2 v - kd 0 A Mathematics Extension 2 Question 16 (c) (continued) Answers could include: The equation of motion for both particles is the same. dv = - ^ g + kv h dt dv = - dt g + kv 1 log; g + kv; = - t + C k 1 g + kV can never be 0, so can’t change sign x g g For A, v is initially - v > - 0 k g So v > - k Hence g + kv > 0 For B, v is v > 0 0 So g + kv > 0 0 Hence g + kv > 0 for all t So, in both cases, g + kv > 0 for all t 1 log ^ g + kv h = - t + C k 1 g + kv = L e - kt 1 g v = - + L e - kt k 1 Mathematics Extension 2 Question 16 (c), answers could include (continued) For Particle A, When t = 0, v = - v A 0 g L 1 - v = - + 0 k k L g 1 = - v k k 0 g g v = - + d - v n e - kt A k k 0 gt 1 g x = - - d - v n e - kt + L A k k k 0 2 When t = 0, x = d A 1 g d = - d - v n + L k k 0 2 1 g L = d + d - v n 2 k k 0 gt 1 g 1 g x = - - d - v n e - kt + d + d - v A n k k k 0 k k 0 or Particle B, When t = 0, v = v B 0 g L 3 v = - + 0 k k g g v = - + d + v e - kt B k k 0 n gt 1 g x = - - B d + v n e - kt + L k k k 0 4 When t = 0, x = 0 B 1 g 0 = - d + v n + L k k 0 4 gt 1 g 1 g x = - - d + v n e - kt + d + v n B k k k 0 k k 0 Particles meet when x = x A B gt 1 g 1 g gt 1 g 1 g - - d - v n e - kt + d + d - v n = - - d + v n e - kt + + v 0 d n k k k k k 0 k k k 0 k k 0 v v v v 0 0 e - kt + d - = - 0 e - kt + 0 k k k k 2 v 2 v 0 e - kt 0 = - d k k 2 v - kd - kt = 0 e > 0 2 v 0 1 2 v t = log f 0 p k 2 v - kd 0 F \u0006 \u0006 Mathematics Extension 2 2024 HSC Mathematics Extension 2",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Extension 2 marking feedback",
+        "betterResponses": [
+          "use derivatives to establish a relationship between orthogonal vectors",
+          "find a set of equations relating the 3 variables 𝑎, 𝑏 and 𝑘",
+          "simplify the trigonometric relationship between the variables to establish that 𝑘 > 1."
+        ],
+        "improvementAreas": [
+          "understanding that two tangential curves share a common point and a common tangent This would have given 𝑏 = cos 𝑘𝑎 and 𝑎 = 𝑘𝑏 sin 𝑘𝑎 from which the relationship 2𝑎 = 𝑘 sin 2𝑘𝑎 would have been potentially achieved",
+          "using contradiction methods as part of show and prove questions",
+          "using functional connections between variables when trigonometric and linear functions are related. Mathematics Extension 2 - HSC marking feedback 2024 Page 15 of 16"
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Extension 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-2/2024",
+        "pageRef": "Exam paper pages 13-14",
+        "markingGuideRef": "Marking guidelines pages 30-36",
         "transcriptionStatus": "draft"
       }
     }

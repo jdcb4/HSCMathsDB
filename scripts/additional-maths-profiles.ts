@@ -120,5 +120,57 @@ export const additionalMathsProfiles: ExamIngestionProfile[] = [
         ].join("\n")
       }
     }
+  },
+  {
+    id: "ext1-2024",
+    paperId: "ext1-2024",
+    sourcePackId: "source-ext1-2024",
+    courseId: "extension-1",
+    courseName: "Mathematics Extension 1",
+    year: 2024,
+    sourceRef: "2024 HSC Mathematics Extension 1 marking feedback",
+    examTextPath: "var/extracted-text/source-ext1-2024/source-ext1-2024-exam-paper-2024-hsc-maths-ext-1.txt",
+    markingGuideTextPath:
+      "var/extracted-text/source-ext1-2024/source-ext1-2024-marking-guide-2024-hsc-maths-ext-1-mg.txt",
+    markingFeedbackTextPath:
+      "var/extracted-text/source-ext1-2024/source-ext1-2024-marking-feedback-2024-hsc-mathematics-ext1-marking-feedback.txt",
+    examPackUrl:
+      "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+    expectedQuestionCount: 14,
+    sectionIQuestionCount: 10,
+    boundaries: makeBoundaries(
+      10,
+      [53, 106, 411, 429, 526, 602, 660, 683, 749, 896],
+      range(11, 14),
+      [1073, 1385, 1569, 1871],
+      2124,
+      1063
+    )
+  },
+  {
+    id: "ext2-2024",
+    paperId: "ext2-2024",
+    sourcePackId: "source-ext2-2024",
+    courseId: "extension-2",
+    courseName: "Mathematics Extension 2",
+    year: 2024,
+    sourceRef: "2024 HSC Mathematics Extension 2 marking feedback",
+    examTextPath: "var/extracted-text/source-ext2-2024/source-ext2-2024-exam-paper-2024-hsc-maths-ext-2.txt",
+    markingGuideTextPath:
+      "var/extracted-text/source-ext2-2024/source-ext2-2024-marking-guide-2024-hsc-maths-ext-2-mg.txt",
+    markingFeedbackTextPath:
+      "var/extracted-text/source-ext2-2024/source-ext2-2024-marking-feedback-2024-hsc-mathematics-ext2-marking-feedback.txt",
+    examPackUrl:
+      "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-2/2024",
+    expectedQuestionCount: 16,
+    sectionIQuestionCount: 10,
+    boundaries: makeBoundaries(
+      10,
+      [53, 132, 274, 292, 426, 473, 512, 566, 623, 653],
+      range(11, 16),
+      [736, 937, 1219, 1535, 1979, 2364],
+      2705,
+      726
+    )
   }
 ];
