@@ -1,0 +1,776 @@
+{
+  "generatedAt": "2026-06-06T15:08:04.963Z",
+  "promptVersion": "ingestion-methodology-benchmark-v1",
+  "modelCatalog": [
+    {
+      "id": "qwen/qwen3.7-plus",
+      "contextLength": 1000000,
+      "pricing": {
+        "prompt": "0.0000004",
+        "completion": "0.0000016",
+        "input_cache_read": "0.00000008",
+        "input_cache_write": "0.0000005"
+      }
+    },
+    {
+      "id": "minimax/minimax-m3",
+      "contextLength": 1048576,
+      "pricing": {
+        "prompt": "0.0000003",
+        "completion": "0.0000012",
+        "input_cache_read": "0.00000006"
+      }
+    },
+    {
+      "id": "google/gemini-3.1-flash-lite",
+      "contextLength": 1048576,
+      "pricing": {
+        "prompt": "0.00000025",
+        "completion": "0.0000015",
+        "image": "0.00000025",
+        "audio": "0.0000005",
+        "web_search": "0.014",
+        "internal_reasoning": "0.0000015",
+        "input_cache_read": "0.000000025",
+        "input_cache_write": "0.00000008333333333333334"
+      }
+    },
+    {
+      "id": "qwen/qwen3-vl-8b-instruct",
+      "contextLength": 256000,
+      "pricing": {
+        "prompt": "0.00000008",
+        "completion": "0.0000005"
+      }
+    },
+    {
+      "id": "google/gemini-2.5-flash-lite",
+      "contextLength": 1048576,
+      "pricing": {
+        "prompt": "0.0000001",
+        "completion": "0.0000004",
+        "image": "0.0000001",
+        "audio": "0.0000003",
+        "web_search": "0.014",
+        "internal_reasoning": "0.0000004",
+        "input_cache_read": "0.00000001",
+        "input_cache_write": "0.00000008333333333333334"
+      }
+    }
+  ],
+  "baseline": {
+    "papers": [
+      {
+        "paperId": "ext1-2025",
+        "questionCount": 14,
+        "assetQuestionNumbers": [7, 9, 12, 13, 14],
+        "assetCount": 5
+      },
+      {
+        "paperId": "ext2-2025",
+        "questionCount": 16,
+        "assetQuestionNumbers": [7, 8, 11, 16],
+        "assetCount": 4
+      }
+    ]
+  },
+  "methodologySummaries": [
+    {
+      "id": "guide-first-splitter",
+      "title": "Marking Guide First Splitter",
+      "description": "Uses the marking guide as the authoritative skeleton for question numbers and part labels before aligning exam text.",
+      "automationPotential": "high",
+      "reviewedImporterReplacementRisk": "low",
+      "recommendation": "Promote into the default pipeline as a skeleton stage."
+    },
+    {
+      "id": "layout-visual-detector",
+      "title": "Question-Aware Layout Visual Detector",
+      "description": "Combines PyMuPDF layout hints, rendered-page drawings, and visual cue text to decide which questions need assets.",
+      "automationPotential": "medium",
+      "reviewedImporterReplacementRisk": "low",
+      "recommendation": "Use as a cheap pre-filter before LLM vision calls."
+    },
+    {
+      "id": "llm-full-exam-text-schema",
+      "title": "LLM Whole Exam Text to Schema",
+      "description": "Sends extracted exam and marking-guide text to an LLM with a strict schema for question skeletons, visual flags, and risks.",
+      "automationPotential": "medium",
+      "reviewedImporterReplacementRisk": "medium",
+      "recommendation": "Use as an integrated proposal layer, not as direct corpus writes."
+    },
+    {
+      "id": "llm-page-image-question-schema",
+      "title": "LLM Page Image to Question Schema",
+      "description": "Sends rendered page images to vision models to recover TeX, multiple-choice options, and visual dependencies.",
+      "automationPotential": "high",
+      "reviewedImporterReplacementRisk": "medium",
+      "recommendation": "Use for pages flagged by deterministic audit/layout heuristics."
+    },
+    {
+      "id": "llm-page-image-visual-detector",
+      "title": "LLM Page Image Visual Detector",
+      "description": "Asks vision models to identify extractable visuals and draft crop descriptions or bounding boxes.",
+      "automationPotential": "high",
+      "reviewedImporterReplacementRisk": "low",
+      "recommendation": "Use to prioritise crops and draft asset metadata before human review."
+    }
+  ],
+  "trials": [
+    {
+      "id": "ext1-2025-guide-first-splitter",
+      "method": "guide-first-splitter",
+      "paperId": "ext1-2025",
+      "inputScope": "marking guide text + exam text",
+      "status": "ok",
+      "latencyMs": 1,
+      "metrics": {
+        "expectedQuestions": 14,
+        "guideQuestionCount": 14,
+        "answerKeyQuestionCount": 10,
+        "examQuestionCandidateCount": 14,
+        "guideRecall": 1,
+        "guidePrecision": 1,
+        "guidePartMarkers": 24
+      },
+      "strengths": [
+        "Finds the authoritative question list and part labels from the marking guide before splitting the exam.",
+        "Cheap, deterministic, and useful as a scaffold for the rest of the workflow."
+      ],
+      "weaknesses": [
+        "Does not recover prompt wording or visual crop bounds.",
+        "Section I answer-key pages can be sparse, so exam text/layout still needs a second pass."
+      ],
+      "recommendation": "Use this as the first pass for question and part skeletons.",
+      "outputPreview": "{\n  \"guideNumbers\": [\n    1,\n    2,\n    3,\n    4,\n    5,\n    6,\n    7,\n    8,\n    9,\n    10,\n    11,\n    12,\n    13,\n    14\n  ],\n  \"examNumbers\": [\n    1,\n    2,\n    3,\n    4,\n    5,\n    6,\n    7,\n    8,\n    9,\n    10,\n    11,\n    12,\n    13,\n    14\n  ]\n}"
+    },
+    {
+      "id": "ext1-2025-layout-visual-detector",
+      "method": "layout-visual-detector",
+      "paperId": "ext1-2025",
+      "inputScope": "PyMuPDF layout inventory + raw exam text",
+      "status": "ok",
+      "latencyMs": 2,
+      "metrics": {
+        "baselineVisualQuestions": 5,
+        "predictedVisualQuestions": 6,
+        "visualRecall": 0.8,
+        "visualPrecision": 0.667,
+        "visualHintPages": 5
+      },
+      "strengths": [
+        "Local, free, and transparent.",
+        "Good at flagging pages where vector drawings or tables make a manual/LLM visual pass worthwhile."
+      ],
+      "weaknesses": [
+        "Question mapping is approximate unless page-aware question boundaries are added.",
+        "Cannot decide whether a student-produced sketch needs no source asset."
+      ],
+      "recommendation": "Use before LLM calls to decide which pages/questions need image processing.",
+      "outputPreview": "{\n  \"baselineVisuals\": [\n    7,\n    9,\n    12,\n    13,\n    14\n  ],\n  \"predictedQuestions\": [\n    6,\n    7,\n    11,\n    12,\n    13,\n    14\n  ],\n  \"visualHintPages\": [\n    5,\n    11,\n    13,\n    18,\n    19\n  ]\n}"
+    },
+    {
+      "id": "ext2-2025-guide-first-splitter",
+      "method": "guide-first-splitter",
+      "paperId": "ext2-2025",
+      "inputScope": "marking guide text + exam text",
+      "status": "ok",
+      "latencyMs": 1,
+      "metrics": {
+        "expectedQuestions": 16,
+        "guideQuestionCount": 16,
+        "answerKeyQuestionCount": 10,
+        "examQuestionCandidateCount": 16,
+        "guideRecall": 1,
+        "guidePrecision": 1,
+        "guidePartMarkers": 43
+      },
+      "strengths": [
+        "Finds the authoritative question list and part labels from the marking guide before splitting the exam.",
+        "Cheap, deterministic, and useful as a scaffold for the rest of the workflow."
+      ],
+      "weaknesses": [
+        "Does not recover prompt wording or visual crop bounds.",
+        "Section I answer-key pages can be sparse, so exam text/layout still needs a second pass."
+      ],
+      "recommendation": "Use this as the first pass for question and part skeletons.",
+      "outputPreview": "{\n  \"guideNumbers\": [\n    1,\n    2,\n    3,\n    4,\n    5,\n    6,\n    7,\n    8,\n    9,\n    10,\n    11,\n    12,\n    13,\n    14,\n    15,\n    16\n  ],\n  \"examNumbers\": [\n    1,\n    2,\n    3,\n    4,\n    5,\n    6,\n    7,\n    8,\n    9,\n    10,\n    11,\n    12,\n    13,\n    14,\n    15,\n    16\n  ]\n}"
+    },
+    {
+      "id": "ext2-2025-layout-visual-detector",
+      "method": "layout-visual-detector",
+      "paperId": "ext2-2025",
+      "inputScope": "PyMuPDF layout inventory + raw exam text",
+      "status": "ok",
+      "latencyMs": 4,
+      "metrics": {
+        "baselineVisualQuestions": 4,
+        "predictedVisualQuestions": 9,
+        "visualRecall": 1,
+        "visualPrecision": 0.444,
+        "visualHintPages": 6
+      },
+      "strengths": [
+        "Local, free, and transparent.",
+        "Good at flagging pages where vector drawings or tables make a manual/LLM visual pass worthwhile."
+      ],
+      "weaknesses": [
+        "Question mapping is approximate unless page-aware question boundaries are added.",
+        "Cannot decide whether a student-produced sketch needs no source asset."
+      ],
+      "recommendation": "Use before LLM calls to decide which pages/questions need image processing.",
+      "outputPreview": "{\n  \"baselineVisuals\": [\n    7,\n    8,\n    11,\n    16\n  ],\n  \"predictedQuestions\": [\n    6,\n    7,\n    8,\n    11,\n    12,\n    13,\n    14,\n    15,\n    16\n  ],\n  \"visualHintPages\": [\n    5,\n    18,\n    19,\n    20,\n    22,\n    23\n  ]\n}"
+    },
+    {
+      "id": "ext1-2025-full-exam-text-google-gemini-3.1-flash-lite",
+      "method": "llm-full-exam-text-schema",
+      "model": "google/gemini-3.1-flash-lite",
+      "paperId": "ext1-2025",
+      "inputScope": "whole extracted exam text + whole marking guide text",
+      "status": "ok",
+      "latencyMs": 1,
+      "estimatedCostUsd": 0.007,
+      "metrics": {
+        "questionsExtracted": 10,
+        "questionRecall": 0.714,
+        "visualRecall": 0.4,
+        "visualPrecision": 1,
+        "extractionRiskCount": 0
+      },
+      "strengths": [
+        "Can see the whole paper and marking-guide structure in one call.",
+        "Useful for generating a draft skeleton and identifying risky questions."
+      ],
+      "weaknesses": [
+        "High blast radius if trusted directly.",
+        "Can compress or paraphrase wording unless outputs are treated as proposals only."
+      ],
+      "recommendation": "Use for triage only until schema adherence and question recall improve.",
+      "outputPreview": "{\n  \"paperId\": \"ext1-2025\",\n  \"questions\": [\n    {\n      \"questionNumber\": 1,\n      \"partLabels\": [],\n      \"hasVisual\": false,\n      \"needsAsset\": false,\n      \"visualDescription\": null,\n      \"promptLatex\": \"What is the solution to $|2x + 3| < 5$?\",\n      \"extractionRisks\": [],\n      \"confidence\": 1\n    },\n    {\n      \"questionNumber\": 2,\n      \"partLabels\": [],\n      \"hasVisual\": false,\n      \"needsAsset\": false,\n      \"visualDescription\": null,\n      \"promptLatex\": \"The projection of $\\\\mathbf{u}$ onto $\\\\mathbf{v}$ is given by $\\\\frac{\\\\mathbf{u} \\\\cdot \\\\mathbf{v}}{|\\\\mathbf{v}|^2} \\\\mathbf{v}$. What is the projection of $\\\\mathbf{u} = \\\\mathbf{i} + 2\\\\mathbf{j}$ onto $\\\\mathbf{v} = 2\\\\mathbf{i} - 3\\\\mathbf{j}$?\",\n      \"extractionRisks\": [],\n      \"confidence\": 1\n    },\n    {\n      \"questionNumber\": 3,\n      \"partLabels\": [],\n      \"hasVisual\": false,\n      \"needsAss\n\n... [truncated for benchmark prompt/report] ...\n\n\n      \"partLabels\": [],\n      \"hasVisual\": true,\n      \"needsAsset\": true,\n      \"visualDescription\": \"A vector diagram showing vectors a, b, and c forming a triangle with angle theta between a and b.\",\n      \"promptLatex\": \"The vectors $\\\\mathbf{a}, \\\\mathbf{b}$ and $\\\\mathbf{c}$ have magnitudes 3, 5 and 7 respectively. Given that $\\\\mathbf{a} + \\\\mathbf{b} + \\\\mathbf{c} = 0$, what is the size of angle $\\\\theta$ between $\\\\mathbf{a}$ and $\\\\mathbf{b}$?\",\n      \"extractionRisks\": [],\n      \"confidence\": 1\n    },\n    {\n      \"questionNumber\": 10,\n      \"partLabels\": [],\n      \"hasVisual\": false,\n      \"needsAsset\": false,\n      \"visualDescription\": null,\n      \"promptLatex\": \"For the function $f(x)$, it is known that $f(3) = 1, f'(3) = 2$ and $f''(3) = 4$. Let $g(x) = f^{-1}(x)$. What is the value of $g''(1)$?\",\n      \"extractionRisks\": [],\n      \"confidence\": 1\n    }\n  ]\n}"
+    },
+    {
+      "id": "ext1-2025-full-exam-text-google-gemini-2.5-flash-lite",
+      "method": "llm-full-exam-text-schema",
+      "model": "google/gemini-2.5-flash-lite",
+      "paperId": "ext1-2025",
+      "inputScope": "whole extracted exam text + whole marking guide text",
+      "status": "error",
+      "latencyMs": 1,
+      "metrics": {},
+      "strengths": [],
+      "weaknesses": ["Trial failed before producing a parseable proposal."],
+      "recommendation": "Inspect the raw error before using this method.",
+      "outputPreview": "",
+      "error": "Bad escaped character in JSON at position 7459 (line 154 column 935)"
+    },
+    {
+      "id": "ext1-2025-full-exam-text-minimax-minimax-m3",
+      "method": "llm-full-exam-text-schema",
+      "model": "minimax/minimax-m3",
+      "paperId": "ext1-2025",
+      "inputScope": "whole extracted exam text + whole marking guide text",
+      "status": "error",
+      "latencyMs": 259854,
+      "metrics": {},
+      "strengths": [],
+      "weaknesses": ["Trial failed before producing a parseable proposal."],
+      "recommendation": "Inspect the raw error before using this method.",
+      "outputPreview": "",
+      "error": "OpenRouter returned non-string content for minimax/minimax-m3"
+    },
+    {
+      "id": "ext1-2025-page-6-extract-google-gemini-3.1-flash-lite",
+      "method": "llm-page-image-question-schema",
+      "model": "google/gemini-3.1-flash-lite",
+      "paperId": "ext1-2025",
+      "inputScope": "Extension 1 page with vector-angle diagram; page image",
+      "status": "ok",
+      "latencyMs": 1,
+      "estimatedCostUsd": 0.001,
+      "metrics": {
+        "questionsExtracted": 2,
+        "questionRecall": 1,
+        "visualRecall": 1,
+        "visualPrecision": 1,
+        "texNoiseCount": 0
+      },
+      "strengths": [
+        "Can recover math notation and diagram context from the rendered page, bypassing damaged PDF text.",
+        "Good candidate for formula-heavy pages and multiple-choice visual options."
+      ],
+      "weaknesses": [
+        "One page can contain partial questions, continuations, or booklet material.",
+        "Still needs deterministic reconciliation against the marking-guide question skeleton."
+      ],
+      "recommendation": "Use as a high-value proposal pass for difficult pages.",
+      "outputPreview": "{\n  \"questions\": [\n    {\n      \"questionNumber\": 9,\n      \"promptLatex\": \"The vectors $\\\\underset{\\\\sim}{a}$, $\\\\underset{\\\\sim}{b}$ and $\\\\underset{\\\\sim}{c}$ have magnitudes 3, 5 and 7 respectively. Given that $\\\\underset{\\\\sim}{a} + \\\\underset{\\\\sim}{b} + \\\\underset{\\\\sim}{c} = \\\\underset{\\\\sim}{0}$, what is the size of angle $\\\\theta$ between $\\\\underset{\\\\sim}{a}$ and $\\\\underset{\\\\sim}{b}$?\",\n      \"options\": [\n        {\n          \"label\": \"A\",\n          \"textLatex\": \"$\\\\frac{\\\\pi}{6}$\"\n        },\n        {\n          \"label\": \"B\",\n          \"textLatex\": \"$\\\\frac{\\\\pi}{3}$\"\n        },\n        {\n          \"label\": \"C\",\n          \"textLatex\": \"$\\\\frac{2\\\\pi}{3}$\"\n        },\n        {\n          \"label\": \"D\",\n          \"textLatex\": \"$\\\\frac{5\\\\pi}{6}$\"\n        }\n      ],\n      \"hasVisual\": true,\n      \"needsAsset\": true,\n      \"visualDescription\": \"A vector diagram showing\n\n... [truncated for benchmark prompt/report] ...\n\nally upwards, vector a points to the right, and vector c points downwards and to the left. The angle theta is marked between vectors a and b.\",\n      \"confidence\": 1,\n      \"notes\": []\n    },\n    {\n      \"questionNumber\": 10,\n      \"promptLatex\": \"For the function $f(x)$, it is known that $f(3) = 1$, $f'(3) = 2$ and $f''(3) = 4$. Let $g(x) = f^{-1}(x)$. What is the value of $g''(1)$?\",\n      \"options\": [\n        {\n          \"label\": \"A\",\n          \"textLatex\": \"$\\\\frac{1}{4}$\"\n        },\n        {\n          \"label\": \"B\",\n          \"textLatex\": \"$-\\\\frac{1}{4}$\"\n        },\n        {\n          \"label\": \"C\",\n          \"textLatex\": \"$-\\\\frac{1}{2}$\"\n        },\n        {\n          \"label\": \"D\",\n          \"textLatex\": \"$-1$\"\n        }\n      ],\n      \"hasVisual\": false,\n      \"needsAsset\": false,\n      \"visualDescription\": null,\n      \"confidence\": 1,\n      \"notes\": []\n    }\n  ]\n}"
+    },
+    {
+      "id": "ext1-2025-page-6-visuals-google-gemini-3.1-flash-lite",
+      "method": "llm-page-image-visual-detector",
+      "model": "google/gemini-3.1-flash-lite",
+      "paperId": "ext1-2025",
+      "inputScope": "Extension 1 page with vector-angle diagram; page image",
+      "status": "ok",
+      "latencyMs": 1,
+      "estimatedCostUsd": 0,
+      "metrics": {
+        "visualsDetected": 1,
+        "extractableVisuals": 1,
+        "visualRecall": 1,
+        "visualPrecision": 1,
+        "bboxCount": 1
+      },
+      "strengths": [
+        "Targets the highest-friction manual step: deciding which diagrams/tables must become assets.",
+        "Can draft crop descriptions and alt text before human review."
+      ],
+      "weaknesses": [
+        "Bounding boxes are approximate and need coordinate verification.",
+        "Model may mark decorative or answer-space visuals unless constrained by the question skeleton."
+      ],
+      "recommendation": "Use before crop generation to prioritise pages and draft asset metadata.",
+      "outputPreview": "{\n  \"visuals\": [\n    {\n      \"questionNumber\": 9,\n      \"kind\": \"diagram\",\n      \"description\": \"Vector diagram showing vectors a, b, and c with angle theta between a and b\",\n      \"shouldExtract\": true,\n      \"confidence\": 1,\n      \"bbox\": {\n        \"x\": 340,\n        \"y\": 110,\n        \"width\": 320,\n        \"height\": 260\n      }\n    }\n  ]\n}"
+    },
+    {
+      "id": "ext1-2025-page-6-extract-google-gemini-2.5-flash-lite",
+      "method": "llm-page-image-question-schema",
+      "model": "google/gemini-2.5-flash-lite",
+      "paperId": "ext1-2025",
+      "inputScope": "Extension 1 page with vector-angle diagram; page image",
+      "status": "ok",
+      "latencyMs": 0,
+      "estimatedCostUsd": 0,
+      "metrics": {
+        "questionsExtracted": 2,
+        "questionRecall": 1,
+        "visualRecall": 1,
+        "visualPrecision": 1,
+        "texNoiseCount": 0
+      },
+      "strengths": [
+        "Can recover math notation and diagram context from the rendered page, bypassing damaged PDF text.",
+        "Good candidate for formula-heavy pages and multiple-choice visual options."
+      ],
+      "weaknesses": [
+        "One page can contain partial questions, continuations, or booklet material.",
+        "Still needs deterministic reconciliation against the marking-guide question skeleton."
+      ],
+      "recommendation": "Use as a high-value proposal pass for difficult pages.",
+      "outputPreview": "{\n  \"questions\": [\n    {\n      \"questionNumber\": 9,\n      \"promptLatex\": \"The vectors $\\\\mathbf{a}$, $\\\\mathbf{b}$ and $\\\\mathbf{c}$ have magnitudes 3, 5 and 7 respectively.\\n\\nNOT TO SCALE\\n\\nGiven that $\\\\mathbf{a} + \\\\mathbf{b} + \\\\mathbf{c} = \\\\mathbf{0}$, what is the size of angle $\\\\theta$ between $\\\\mathbf{a}$ and $\\\\mathbf{b}$?\",\n      \"options\": [\n        {\n          \"label\": \"A\",\n          \"textLatex\": \"\\\\frac{\\\\pi}{6}\"\n        },\n        {\n          \"label\": \"B\",\n          \"textLatex\": \"\\\\frac{\\\\pi}{3}\"\n        },\n        {\n          \"label\": \"C\",\n          \"textLatex\": \"\\\\frac{2\\\\pi}{3}\"\n        },\n        {\n          \"label\": \"D\",\n          \"textLatex\": \"\\\\frac{5\\\\pi}{6}\"\n        }\n      ],\n      \"hasVisual\": true,\n      \"needsAsset\": true,\n      \"visualDescription\": \"A 3D coordinate system with vectors a, b, and c originating from the origin. Vector a is along the positive x-axis. Vector b is along the positive y-axis. Vector c is in the negative z direction. The angle between a and b is labelled as theta.\",\n      \"confidence\": 1,\n      \"notes\": []\n    },\n    {\n      \"questionNumber\": 10,\n      \"promptLatex\": \"For the function $f(x)$, it is known that $f(3)=1$, $f'(3)=2$ and $f''(3)=4$.\\nLet $g(x) = f^{-1}(x)$.\\nWhat is the value of $g''(1)$?\",\n      \"options\": [\n        {\n          \"label\": \"A\",\n          \"textLatex\": \"\\\\frac{1}{4}\"\n        },\n        {\n          \"label\": \"B\",\n          \"textLatex\": \"-\\\\frac{1}{4}\"\n        },\n        {\n          \"label\": \"C\",\n          \"textLatex\": \"-\\\\frac{1}{2}\"\n        },\n        {\n          \"label\": \"D\",\n          \"textLatex\": \"-1\"\n        }\n      ],\n      \"hasVisual\": false,\n      \"needsAsset\": false,\n      \"visualDescription\": null,\n      \"confidence\": 1,\n      \"notes\": []\n    }\n  ]\n}"
+    },
+    {
+      "id": "ext1-2025-page-6-visuals-google-gemini-2.5-flash-lite",
+      "method": "llm-page-image-visual-detector",
+      "model": "google/gemini-2.5-flash-lite",
+      "paperId": "ext1-2025",
+      "inputScope": "Extension 1 page with vector-angle diagram; page image",
+      "status": "ok",
+      "latencyMs": 0,
+      "estimatedCostUsd": 0,
+      "metrics": {
+        "visualsDetected": 1,
+        "extractableVisuals": 1,
+        "visualRecall": 1,
+        "visualPrecision": 1,
+        "bboxCount": 1
+      },
+      "strengths": [
+        "Targets the highest-friction manual step: deciding which diagrams/tables must become assets.",
+        "Can draft crop descriptions and alt text before human review."
+      ],
+      "weaknesses": [
+        "Bounding boxes are approximate and need coordinate verification.",
+        "Model may mark decorative or answer-space visuals unless constrained by the question skeleton."
+      ],
+      "recommendation": "Use before crop generation to prioritise pages and draft asset metadata.",
+      "outputPreview": "{\n  \"visuals\": [\n    {\n      \"questionNumber\": 9,\n      \"kind\": \"graph\",\n      \"description\": \"A 3D coordinate system with vectors labeled a, b, and c. The angle theta is indicated between vectors a and b.\",\n      \"shouldExtract\": true,\n      \"confidence\": 1,\n      \"bbox\": {\n        \"x\": 379,\n        \"y\": 107,\n        \"width\": 466,\n        \"height\": 240\n      }\n    }\n  ]\n}"
+    },
+    {
+      "id": "ext1-2025-page-6-extract-qwen-qwen3-vl-8b-instruct",
+      "method": "llm-page-image-question-schema",
+      "model": "qwen/qwen3-vl-8b-instruct",
+      "paperId": "ext1-2025",
+      "inputScope": "Extension 1 page with vector-angle diagram; page image",
+      "status": "ok",
+      "latencyMs": 0,
+      "estimatedCostUsd": 0,
+      "metrics": {
+        "questionsExtracted": 2,
+        "questionRecall": 1,
+        "visualRecall": 1,
+        "visualPrecision": 1,
+        "texNoiseCount": 0
+      },
+      "strengths": [
+        "Can recover math notation and diagram context from the rendered page, bypassing damaged PDF text.",
+        "Good candidate for formula-heavy pages and multiple-choice visual options."
+      ],
+      "weaknesses": [
+        "One page can contain partial questions, continuations, or booklet material.",
+        "Still needs deterministic reconciliation against the marking-guide question skeleton."
+      ],
+      "recommendation": "Use as a high-value proposal pass for difficult pages.",
+      "outputPreview": "{\n  \"questions\": [\n    {\n      \"questionNumber\": 9,\n      \"promptLatex\": \"The vectors $\\\\mathbf{a}$, $\\\\mathbf{b}$ and $\\\\mathbf{c}$ have magnitudes 3, 5 and 7 respectively. Given that $\\\\mathbf{a} + \\\\mathbf{b} + \\\\mathbf{c} = \\\\mathbf{0}$, what is the size of angle $\\\\theta$ between $\\\\mathbf{a}$ and $\\\\mathbf{b}$?\",\n      \"options\": [\n        {\n          \"label\": \"A\",\n          \"textLatex\": \"$\\\\dfrac{\\\\pi}{6}$\"\n        },\n        {\n          \"label\": \"B\",\n          \"textLatex\": \"$\\\\dfrac{\\\\pi}{3}$\"\n        },\n        {\n          \"label\": \"C\",\n          \"textLatex\": \"$\\\\dfrac{2\\\\pi}{3}$\"\n        },\n        {\n          \"label\": \"D\",\n          \"textLatex\": \"$\\\\dfrac{5\\\\pi}{6}$\"\n        }\n      ],\n      \"hasVisual\": true,\n      \"needsAsset\": true,\n      \"visualDescription\": \"A diagram showing three vectors $\\\\mathbf{a}$, $\\\\mathbf{b}$, and $\\\\mathbf{c}$ originating from a common point, with angle $\\\\theta$ between vectors $\\\\mathbf{a}$ and $\\\\mathbf{b}$, and a note \\\"NOT TO SCALE\\\".\",\n      \"confidence\": 1,\n      \"notes\": []\n    },\n    {\n      \"questionNumber\": 10,\n      \"promptLatex\": \"For the function $f(x)$, it is known that $f(3) = 1$, $f'(3) = 2$ and $f''(3) = 4$. Let $g(x) = f^{-1}(x)$. What is the value of $g''(1)$?\",\n      \"options\": [\n        {\n          \"label\": \"A\",\n          \"textLatex\": \"$\\\\dfrac{1}{4}$\"\n        },\n        {\n          \"label\": \"B\",\n          \"textLatex\": \"$-\\\\dfrac{1}{4}$\"\n        },\n        {\n          \"label\": \"C\",\n          \"textLatex\": \"$-\\\\dfrac{1}{2}$\"\n        },\n        {\n          \"label\": \"D\",\n          \"textLatex\": \"$-1$\"\n        }\n      ],\n      \"hasVisual\": false,\n      \"needsAsset\": false,\n      \"visualDescription\": null,\n      \"confidence\": 1,\n      \"notes\": []\n    }\n  ]\n}"
+    },
+    {
+      "id": "ext1-2025-page-6-visuals-qwen-qwen3-vl-8b-instruct",
+      "method": "llm-page-image-visual-detector",
+      "model": "qwen/qwen3-vl-8b-instruct",
+      "paperId": "ext1-2025",
+      "inputScope": "Extension 1 page with vector-angle diagram; page image",
+      "status": "ok",
+      "latencyMs": 0,
+      "estimatedCostUsd": 0,
+      "metrics": {
+        "visualsDetected": 1,
+        "extractableVisuals": 1,
+        "visualRecall": 1,
+        "visualPrecision": 1,
+        "bboxCount": 1
+      },
+      "strengths": [
+        "Targets the highest-friction manual step: deciding which diagrams/tables must become assets.",
+        "Can draft crop descriptions and alt text before human review."
+      ],
+      "weaknesses": [
+        "Bounding boxes are approximate and need coordinate verification.",
+        "Model may mark decorative or answer-space visuals unless constrained by the question skeleton."
+      ],
+      "recommendation": "Use before crop generation to prioritise pages and draft asset metadata.",
+      "outputPreview": "{\n  \"visuals\": [\n    {\n      \"questionNumber\": 9,\n      \"kind\": \"graph\",\n      \"description\": \"A diagram showing three vectors a, b, and c originating from a common point, with angle θ between vectors a and b, and a note 'NOT TO SCALE'.\",\n      \"shouldExtract\": true,\n      \"confidence\": 0.95,\n      \"bbox\": {\n        \"x\": 300,\n        \"y\": 150,\n        \"width\": 200,\n        \"height\": 200\n      }\n    }\n  ]\n}"
+    },
+    {
+      "id": "ext2-2025-page-5-extract-google-gemini-3.1-flash-lite",
+      "method": "llm-page-image-question-schema",
+      "model": "google/gemini-3.1-flash-lite",
+      "paperId": "ext2-2025",
+      "inputScope": "Extension 2 graph-choice page; page image",
+      "status": "ok",
+      "latencyMs": 1,
+      "estimatedCostUsd": 0.001,
+      "metrics": {
+        "questionsExtracted": 1,
+        "questionRecall": 1,
+        "visualRecall": 1,
+        "visualPrecision": 1,
+        "texNoiseCount": 0
+      },
+      "strengths": [
+        "Can recover math notation and diagram context from the rendered page, bypassing damaged PDF text.",
+        "Good candidate for formula-heavy pages and multiple-choice visual options."
+      ],
+      "weaknesses": [
+        "One page can contain partial questions, continuations, or booklet material.",
+        "Still needs deterministic reconciliation against the marking-guide question skeleton."
+      ],
+      "recommendation": "Use as a high-value proposal pass for difficult pages.",
+      "outputPreview": "{\n  \"questions\": [\n    {\n      \"questionNumber\": 8,\n      \"promptLatex\": \"The graph shows the velocity $v$ of a particle as a function of its displacement $x$. Which of the following graphs best shows the acceleration $a$ of the particle as a function of its displacement $x$?\",\n      \"options\": [\n        {\n          \"label\": \"A\",\n          \"textLatex\": \"Graph A\"\n        },\n        {\n          \"label\": \"B\",\n          \"textLatex\": \"Graph B\"\n        },\n        {\n          \"label\": \"C\",\n          \"textLatex\": \"Graph C\"\n        },\n        {\n          \"label\": \"D\",\n          \"textLatex\": \"Graph D\"\n        }\n      ],\n      \"hasVisual\": true,\n      \"needsAsset\": true,\n      \"visualDescription\": \"A velocity-displacement graph showing a cubic-like curve, followed by four options (A, B, C, D) showing potential acceleration-displacement graphs.\",\n      \"confidence\": 1,\n      \"notes\": [\n        \"The question asks to relate $v(x)$ to $a(x) = v \\\\frac{dv}{dx}$.\"\n      ]\n    }\n  ]\n}"
+    },
+    {
+      "id": "ext2-2025-page-5-visuals-google-gemini-3.1-flash-lite",
+      "method": "llm-page-image-visual-detector",
+      "model": "google/gemini-3.1-flash-lite",
+      "paperId": "ext2-2025",
+      "inputScope": "Extension 2 graph-choice page; page image",
+      "status": "ok",
+      "latencyMs": 0,
+      "estimatedCostUsd": 0.001,
+      "metrics": {
+        "visualsDetected": 5,
+        "extractableVisuals": 1,
+        "visualRecall": 1,
+        "visualPrecision": 1,
+        "bboxCount": 5
+      },
+      "strengths": [
+        "Targets the highest-friction manual step: deciding which diagrams/tables must become assets.",
+        "Can draft crop descriptions and alt text before human review."
+      ],
+      "weaknesses": [
+        "Bounding boxes are approximate and need coordinate verification.",
+        "Model may mark decorative or answer-space visuals unless constrained by the question skeleton."
+      ],
+      "recommendation": "Use before crop generation to prioritise pages and draft asset metadata.",
+      "outputPreview": "{\n  \"visuals\": [\n    {\n      \"questionNumber\": 8,\n      \"kind\": \"graph\",\n      \"description\": \"Velocity vs displacement graph for a particle\",\n      \"shouldExtract\": true,\n      \"confidence\": 1,\n      \"bbox\": {\n        \"x\": 298,\n        \"y\": 113,\n        \"width\": 405,\n        \"height\": 206\n      }\n    },\n    {\n      \"questionNumber\": 8,\n      \"kind\": \"graph\",\n      \"description\": \"Option A: Acceleration vs displacement graph\",\n      \"shouldExtract\": true,\n      \"confidence\": 1,\n      \"bbox\": {\n        \"x\": 167,\n        \"y\": 393,\n        \"width\": 320,\n        \"height\": 200\n      }\n    },\n    {\n      \"questionNumber\": 8,\n      \"kind\": \"graph\",\n      \"description\": \"Option B: Acceleration vs displacement graph\",\n      \"shouldExtract\": true,\n      \"confidence\": 1,\n      \"bbox\": {\n        \"x\": 542,\n        \"y\": 393,\n        \"width\": 320,\n        \"height\": 200\n      }\n    },\n    {\n      \"questionNumber\": 8,\n      \"kind\": \"graph\",\n      \"description\": \"Option C: Acceleration vs displacement graph\",\n      \"shouldExtract\": true,\n      \"confidence\": 1,\n      \"bbox\": {\n        \"x\": 167,\n        \"y\": 596,\n        \"width\": 320,\n        \"height\": 200\n      }\n    },\n    {\n      \"questionNumber\": 8,\n      \"kind\": \"graph\",\n      \"description\": \"Option D: Acceleration vs displacement graph\",\n      \"shouldExtract\": true,\n      \"confidence\": 1,\n      \"bbox\": {\n        \"x\": 542,\n        \"y\": 596,\n        \"width\": 320,\n        \"height\": 200\n      }\n    }\n  ]\n}"
+    },
+    {
+      "id": "ext2-2025-page-5-extract-google-gemini-2.5-flash-lite",
+      "method": "llm-page-image-question-schema",
+      "model": "google/gemini-2.5-flash-lite",
+      "paperId": "ext2-2025",
+      "inputScope": "Extension 2 graph-choice page; page image",
+      "status": "ok",
+      "latencyMs": 0,
+      "estimatedCostUsd": 0,
+      "metrics": {
+        "questionsExtracted": 1,
+        "questionRecall": 1,
+        "visualRecall": 1,
+        "visualPrecision": 1,
+        "texNoiseCount": 0
+      },
+      "strengths": [
+        "Can recover math notation and diagram context from the rendered page, bypassing damaged PDF text.",
+        "Good candidate for formula-heavy pages and multiple-choice visual options."
+      ],
+      "weaknesses": [
+        "One page can contain partial questions, continuations, or booklet material.",
+        "Still needs deterministic reconciliation against the marking-guide question skeleton."
+      ],
+      "recommendation": "Use as a high-value proposal pass for difficult pages.",
+      "outputPreview": "{\n  \"questions\": [\n    {\n      \"questionNumber\": 8,\n      \"promptLatex\": \"The graph shows the velocity of a particle as a function of its displacement.\\\\n\\\\nWhich of the following graphs best shows the acceleration of the particle as a function of its displacement?\",\n      \"options\": [\n        {\n          \"label\": \"A\",\n          \"textLatex\": \"\"\n        },\n        {\n          \"label\": \"B\",\n          \"textLatex\": \"\"\n        },\n        {\n          \"label\": \"C\",\n          \"textLatex\": \"\"\n        },\n        {\n          \"label\": \"D\",\n          \"textLatex\": \"\"\n        }\n      ],\n      \"hasVisual\": true,\n      \"needsAsset\": true,\n      \"visualDescription\": \"A graph showing velocity (v) on the y-axis and displacement (x) on the x-axis. The curve starts from the bottom left, goes up through the origin, has a local maximum, then a local minimum, and finally increases towards the top right. It appears to be a cubic function.\",\n      \"confidence\": 0.9,\n      \"notes\": []\n    }\n  ]\n}"
+    },
+    {
+      "id": "ext2-2025-page-5-visuals-google-gemini-2.5-flash-lite",
+      "method": "llm-page-image-visual-detector",
+      "model": "google/gemini-2.5-flash-lite",
+      "paperId": "ext2-2025",
+      "inputScope": "Extension 2 graph-choice page; page image",
+      "status": "ok",
+      "latencyMs": 1,
+      "estimatedCostUsd": 0,
+      "metrics": {
+        "visualsDetected": 5,
+        "extractableVisuals": 1,
+        "visualRecall": 1,
+        "visualPrecision": 1,
+        "bboxCount": 5
+      },
+      "strengths": [
+        "Targets the highest-friction manual step: deciding which diagrams/tables must become assets.",
+        "Can draft crop descriptions and alt text before human review."
+      ],
+      "weaknesses": [
+        "Bounding boxes are approximate and need coordinate verification.",
+        "Model may mark decorative or answer-space visuals unless constrained by the question skeleton."
+      ],
+      "recommendation": "Use before crop generation to prioritise pages and draft asset metadata.",
+      "outputPreview": "{\n  \"visuals\": [\n    {\n      \"questionNumber\": 8,\n      \"kind\": \"graph\",\n      \"description\": \"Graph showing velocity (v) as a function of displacement (x). The graph starts with a negative slope, goes through the origin, has a local maximum, then a local minimum, and ends with a positive slope.\",\n      \"shouldExtract\": true,\n      \"confidence\": 1,\n      \"bbox\": {\n        \"x\": 317,\n        \"y\": 113,\n        \"width\": 430,\n        \"height\": 257\n      }\n    },\n    {\n      \"questionNumber\": 8,\n      \"kind\": \"graph\",\n      \"description\": \"Graph A shows acceleration (a) as a function of displacement (x). It has multiple local extrema and passes through the origin.\",\n      \"shouldExtract\": true,\n      \"confidence\": 1,\n      \"bbox\": {\n        \"x\": 168,\n        \"y\": 387,\n        \"width\": 245,\n        \"height\": 176\n      }\n    },\n    {\n      \"questionNumber\": 8,\n      \"kind\": \"graph\"\n\n... [truncated for benchmark prompt/report] ...\n\ndence\": 1,\n      \"bbox\": {\n        \"x\": 520,\n        \"y\": 387,\n        \"width\": 245,\n        \"height\": 176\n      }\n    },\n    {\n      \"questionNumber\": 8,\n      \"kind\": \"graph\",\n      \"description\": \"Graph C shows acceleration (a) as a function of displacement (x). It has a U-shape with a minimum near the origin and then increases.\",\n      \"shouldExtract\": true,\n      \"confidence\": 1,\n      \"bbox\": {\n        \"x\": 168,\n        \"y\": 578,\n        \"width\": 245,\n        \"height\": 176\n      }\n    },\n    {\n      \"questionNumber\": 8,\n      \"kind\": \"graph\",\n      \"description\": \"Graph D shows acceleration (a) as a function of displacement (x). It is a parabola opening upwards, with its vertex on the positive x-axis.\",\n      \"shouldExtract\": true,\n      \"confidence\": 1,\n      \"bbox\": {\n        \"x\": 520,\n        \"y\": 578,\n        \"width\": 245,\n        \"height\": 176\n      }\n    }\n  ]\n}"
+    },
+    {
+      "id": "ext2-2025-page-5-extract-qwen-qwen3-vl-8b-instruct",
+      "method": "llm-page-image-question-schema",
+      "model": "qwen/qwen3-vl-8b-instruct",
+      "paperId": "ext2-2025",
+      "inputScope": "Extension 2 graph-choice page; page image",
+      "status": "ok",
+      "latencyMs": 0,
+      "estimatedCostUsd": 0,
+      "metrics": {
+        "questionsExtracted": 1,
+        "questionRecall": 1,
+        "visualRecall": 1,
+        "visualPrecision": 1,
+        "texNoiseCount": 0
+      },
+      "strengths": [
+        "Can recover math notation and diagram context from the rendered page, bypassing damaged PDF text.",
+        "Good candidate for formula-heavy pages and multiple-choice visual options."
+      ],
+      "weaknesses": [
+        "One page can contain partial questions, continuations, or booklet material.",
+        "Still needs deterministic reconciliation against the marking-guide question skeleton."
+      ],
+      "recommendation": "Use as a high-value proposal pass for difficult pages.",
+      "outputPreview": "{\n  \"questions\": [\n    {\n      \"questionNumber\": 8,\n      \"promptLatex\": \"The graph shows the velocity of a particle as a function of its displacement. Which of the following graphs best shows the acceleration of the particle as a function of its displacement?\",\n      \"options\": [\n        {\n          \"label\": \"A\",\n          \"textLatex\": \"a graph of acceleration $a$ versus displacement $x$ with a curve that starts negative, goes positive, then negative, then positive, with arrows indicating increasing magnitude in both directions.\"\n        },\n        {\n          \"label\": \"B\",\n          \"textLatex\": \"a graph of acceleration $a$ versus displacement $x$ with a curve that starts negative, goes positive, then negative, then positive, with arrows indicating increasing magnitude in both directions.\"\n        },\n        {\n          \"label\": \"C\",\n          \"textLatex\": \"a graph of acceleration $a$ versus displacement $x$ with a curve that starts negative, goes to zero, then positive, then back to zero, with arrows indicating increasing magnitude in both directions.\"\n        },\n        {\n          \"label\": \"D\",\n          \"textLatex\": \"a graph of acceleration $a$ versus displacement $x$ with a curve that starts negative, goes to zero, then positive, then back to zero, with arrows indicating increasing magnitude in both directions.\"\n        }\n      ],\n      \"hasVisual\": true,\n      \"needsAsset\": true,\n      \"visualDescription\": \"A graph of velocity $v$ versus displacement $x$, showing a smooth curve that starts negative, crosses the x-axis, reaches a local maximum, crosses the x-axis again, reaches a local minimum, and then increases to positive infinity.\",\n      \"confidence\": 0.95,\n      \"notes\": []\n    }\n  ]\n}"
+    },
+    {
+      "id": "ext2-2025-page-5-visuals-qwen-qwen3-vl-8b-instruct",
+      "method": "llm-page-image-visual-detector",
+      "model": "qwen/qwen3-vl-8b-instruct",
+      "paperId": "ext2-2025",
+      "inputScope": "Extension 2 graph-choice page; page image",
+      "status": "ok",
+      "latencyMs": 0,
+      "estimatedCostUsd": 0,
+      "metrics": {
+        "visualsDetected": 2,
+        "extractableVisuals": 1,
+        "visualRecall": 1,
+        "visualPrecision": 1,
+        "bboxCount": 2
+      },
+      "strengths": [
+        "Targets the highest-friction manual step: deciding which diagrams/tables must become assets.",
+        "Can draft crop descriptions and alt text before human review."
+      ],
+      "weaknesses": [
+        "Bounding boxes are approximate and need coordinate verification.",
+        "Model may mark decorative or answer-space visuals unless constrained by the question skeleton."
+      ],
+      "recommendation": "Use before crop generation to prioritise pages and draft asset metadata.",
+      "outputPreview": "{\n  \"visuals\": [\n    {\n      \"questionNumber\": 8,\n      \"kind\": \"graph\",\n      \"description\": \"A graph showing velocity (v) as a function of displacement (x), with a smooth curve passing through the origin and crossing the x-axis twice.\",\n      \"shouldExtract\": true,\n      \"confidence\": 0.95,\n      \"bbox\": {\n        \"x\": 280,\n        \"y\": 150,\n        \"width\": 200,\n        \"height\": 200\n      }\n    },\n    {\n      \"questionNumber\": 8,\n      \"kind\": \"graph\",\n      \"description\": \"Four graphs labeled A, B, C, D showing acceleration (a) as a function of displacement (x), each with distinct curve shapes.\",\n      \"shouldExtract\": true,\n      \"confidence\": 0.95,\n      \"bbox\": {\n        \"x\": 150,\n        \"y\": 350,\n        \"width\": 400,\n        \"height\": 200\n      }\n    }\n  ]\n}"
+    },
+    {
+      "id": "ext2-2025-page-18-extract-google-gemini-3.1-flash-lite",
+      "method": "llm-page-image-question-schema",
+      "model": "google/gemini-3.1-flash-lite",
+      "paperId": "ext2-2025",
+      "inputScope": "Extension 2 writing-booklet complex plane; page image",
+      "status": "ok",
+      "latencyMs": 1,
+      "estimatedCostUsd": 0.001,
+      "metrics": {
+        "questionsExtracted": 1,
+        "questionRecall": 1,
+        "visualRecall": 1,
+        "visualPrecision": 1,
+        "texNoiseCount": 0
+      },
+      "strengths": [
+        "Can recover math notation and diagram context from the rendered page, bypassing damaged PDF text.",
+        "Good candidate for formula-heavy pages and multiple-choice visual options."
+      ],
+      "weaknesses": [
+        "One page can contain partial questions, continuations, or booklet material.",
+        "Still needs deterministic reconciliation against the marking-guide question skeleton."
+      ],
+      "recommendation": "Use as a high-value proposal pass for difficult pages.",
+      "outputPreview": "{\n  \"questions\": [\n    {\n      \"questionNumber\": 11,\n      \"promptLatex\": \"(a) The location of the complex number $z$ is shown on the diagram. Indicate the locations of $\\\\bar{z}$ and $i\\\\bar{z}$.\",\n      \"options\": [],\n      \"hasVisual\": true,\n      \"needsAsset\": true,\n      \"visualDescription\": \"An Argand diagram showing the complex number z in the first quadrant.\",\n      \"confidence\": 1,\n      \"notes\": []\n    }\n  ]\n}"
+    },
+    {
+      "id": "ext2-2025-page-18-visuals-google-gemini-3.1-flash-lite",
+      "method": "llm-page-image-visual-detector",
+      "model": "google/gemini-3.1-flash-lite",
+      "paperId": "ext2-2025",
+      "inputScope": "Extension 2 writing-booklet complex plane; page image",
+      "status": "ok",
+      "latencyMs": 0,
+      "estimatedCostUsd": 0,
+      "metrics": {
+        "visualsDetected": 1,
+        "extractableVisuals": 1,
+        "visualRecall": 1,
+        "visualPrecision": 1,
+        "bboxCount": 1
+      },
+      "strengths": [
+        "Targets the highest-friction manual step: deciding which diagrams/tables must become assets.",
+        "Can draft crop descriptions and alt text before human review."
+      ],
+      "weaknesses": [
+        "Bounding boxes are approximate and need coordinate verification.",
+        "Model may mark decorative or answer-space visuals unless constrained by the question skeleton."
+      ],
+      "recommendation": "Use before crop generation to prioritise pages and draft asset metadata.",
+      "outputPreview": "{\n  \"visuals\": [\n    {\n      \"questionNumber\": 11,\n      \"kind\": \"graph\",\n      \"description\": \"Complex plane diagram showing the location of a complex number z\",\n      \"shouldExtract\": true,\n      \"confidence\": 1,\n      \"bbox\": {\n        \"x\": 320,\n        \"y\": 168,\n        \"width\": 360,\n        \"height\": 260\n      }\n    }\n  ]\n}"
+    },
+    {
+      "id": "ext2-2025-page-18-extract-google-gemini-2.5-flash-lite",
+      "method": "llm-page-image-question-schema",
+      "model": "google/gemini-2.5-flash-lite",
+      "paperId": "ext2-2025",
+      "inputScope": "Extension 2 writing-booklet complex plane; page image",
+      "status": "ok",
+      "latencyMs": 0,
+      "estimatedCostUsd": 0,
+      "metrics": {
+        "questionsExtracted": 1,
+        "questionRecall": 1,
+        "visualRecall": 1,
+        "visualPrecision": 1,
+        "texNoiseCount": 0
+      },
+      "strengths": [
+        "Can recover math notation and diagram context from the rendered page, bypassing damaged PDF text.",
+        "Good candidate for formula-heavy pages and multiple-choice visual options."
+      ],
+      "weaknesses": [
+        "One page can contain partial questions, continuations, or booklet material.",
+        "Still needs deterministic reconciliation against the marking-guide question skeleton."
+      ],
+      "recommendation": "Use as a high-value proposal pass for difficult pages.",
+      "outputPreview": "{\n  \"questions\": [\n    {\n      \"questionNumber\": 11,\n      \"promptLatex\": \"The location of the complex number $z$ is shown on the diagram. Indicate the locations of $\\\\bar{z}$ and $i\\\\bar{z}$.\",\n      \"options\": [],\n      \"hasVisual\": true,\n      \"needsAsset\": true,\n      \"visualDescription\": \"A complex plane with the real axis labelled x and the imaginary axis labelled y. A point labelled z is shown in the first quadrant.\",\n      \"confidence\": 0.95,\n      \"notes\": []\n    }\n  ]\n}"
+    },
+    {
+      "id": "ext2-2025-page-18-visuals-google-gemini-2.5-flash-lite",
+      "method": "llm-page-image-visual-detector",
+      "model": "google/gemini-2.5-flash-lite",
+      "paperId": "ext2-2025",
+      "inputScope": "Extension 2 writing-booklet complex plane; page image",
+      "status": "ok",
+      "latencyMs": 0,
+      "estimatedCostUsd": 0,
+      "metrics": {
+        "visualsDetected": 1,
+        "extractableVisuals": 1,
+        "visualRecall": 1,
+        "visualPrecision": 1,
+        "bboxCount": 1
+      },
+      "strengths": [
+        "Targets the highest-friction manual step: deciding which diagrams/tables must become assets.",
+        "Can draft crop descriptions and alt text before human review."
+      ],
+      "weaknesses": [
+        "Bounding boxes are approximate and need coordinate verification.",
+        "Model may mark decorative or answer-space visuals unless constrained by the question skeleton."
+      ],
+      "recommendation": "Use before crop generation to prioritise pages and draft asset metadata.",
+      "outputPreview": "{\n  \"visuals\": [\n    {\n      \"questionNumber\": 11,\n      \"kind\": \"graph\",\n      \"description\": \"A Cartesian coordinate system with the y-axis pointing upwards and the x-axis pointing to the right. A point labeled 'z' is plotted in the first quadrant.\",\n      \"shouldExtract\": true,\n      \"confidence\": 0.95,\n      \"bbox\": {\n        \"x\": 169,\n        \"y\": 165,\n        \"width\": 508,\n        \"height\": 310\n      }\n    }\n  ]\n}"
+    },
+    {
+      "id": "ext2-2025-page-18-extract-qwen-qwen3-vl-8b-instruct",
+      "method": "llm-page-image-question-schema",
+      "model": "qwen/qwen3-vl-8b-instruct",
+      "paperId": "ext2-2025",
+      "inputScope": "Extension 2 writing-booklet complex plane; page image",
+      "status": "ok",
+      "latencyMs": 1,
+      "estimatedCostUsd": 0,
+      "metrics": {
+        "questionsExtracted": 1,
+        "questionRecall": 1,
+        "visualRecall": 1,
+        "visualPrecision": 1,
+        "texNoiseCount": 0
+      },
+      "strengths": [
+        "Can recover math notation and diagram context from the rendered page, bypassing damaged PDF text.",
+        "Good candidate for formula-heavy pages and multiple-choice visual options."
+      ],
+      "weaknesses": [
+        "One page can contain partial questions, continuations, or booklet material.",
+        "Still needs deterministic reconciliation against the marking-guide question skeleton."
+      ],
+      "recommendation": "Use as a high-value proposal pass for difficult pages.",
+      "outputPreview": "{\n  \"questions\": [\n    {\n      \"questionNumber\": 11,\n      \"promptLatex\": \"(a) The location of the complex number $z$ is shown on the diagram. Indicate the locations of $\\\\bar{z}$ and $i\\\\bar{z}$.\",\n      \"options\": [],\n      \"hasVisual\": true,\n      \"needsAsset\": true,\n      \"visualDescription\": \"A Cartesian coordinate system with x and y axes. A point labeled $z$ is plotted in the first quadrant, to the right of the origin and above the x-axis.\",\n      \"confidence\": 1,\n      \"notes\": []\n    }\n  ]\n}"
+    },
+    {
+      "id": "ext2-2025-page-18-visuals-qwen-qwen3-vl-8b-instruct",
+      "method": "llm-page-image-visual-detector",
+      "model": "qwen/qwen3-vl-8b-instruct",
+      "paperId": "ext2-2025",
+      "inputScope": "Extension 2 writing-booklet complex plane; page image",
+      "status": "ok",
+      "latencyMs": 0,
+      "estimatedCostUsd": 0,
+      "metrics": {
+        "visualsDetected": 1,
+        "extractableVisuals": 1,
+        "visualRecall": 1,
+        "visualPrecision": 1,
+        "bboxCount": 1
+      },
+      "strengths": [
+        "Targets the highest-friction manual step: deciding which diagrams/tables must become assets.",
+        "Can draft crop descriptions and alt text before human review."
+      ],
+      "weaknesses": [
+        "Bounding boxes are approximate and need coordinate verification.",
+        "Model may mark decorative or answer-space visuals unless constrained by the question skeleton."
+      ],
+      "recommendation": "Use before crop generation to prioritise pages and draft asset metadata.",
+      "outputPreview": "{\n  \"visuals\": [\n    {\n      \"questionNumber\": 11,\n      \"kind\": \"graph\",\n      \"description\": \"A Cartesian coordinate system with axes labeled x and y, showing a point labeled z in the first quadrant.\",\n      \"shouldExtract\": true,\n      \"confidence\": 0.95,\n      \"bbox\": {\n        \"x\": 280,\n        \"y\": 180,\n        \"width\": 250,\n        \"height\": 250\n      }\n    }\n  ]\n}"
+    }
+  ],
+  "conclusions": [
+    "A near-autonomous ingestion path should be staged: marking-guide skeleton, deterministic layout visual filter, selective LLM page-image extraction, then reviewed profile promotion.",
+    "The LLM should be allowed into the integrated flow as a proposal generator for page images and visual metadata, but direct writes to the canonical corpus remain too risky without review gates.",
+    "This run completed 23/25 trials successfully.",
+    "Page-image extraction is the most promising replacement for question-specific notation overrides because it reads the rendered math instead of damaged PDF glyph text.",
+    "Vision-based visual detection is a good companion to PyMuPDF because it can distinguish meaningful question diagrams from page furniture.",
+    "Whole-exam LLM extraction is useful for triage and skeleton proposals, but its output should be reconciled against marking-guide and page-level passes."
+  ]
+}

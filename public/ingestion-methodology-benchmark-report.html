@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ingestion Methodology Benchmark</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f7f7f4;
+        --ink: #202124;
+        --muted: #62625c;
+        --line: #d8d7ce;
+        --panel: #ffffff;
+        --accent: #0b6f68;
+        --accent-2: #7a4b00;
+        --bad: #a23b2a;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font:
+          14px/1.45 system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+      }
+      header {
+        padding: 24px clamp(18px, 4vw, 48px) 18px;
+        border-bottom: 1px solid var(--line);
+        background: var(--panel);
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 28px;
+        font-weight: 650;
+        letter-spacing: 0;
+      }
+      h2 {
+        margin: 0 0 12px;
+        font-size: 18px;
+      }
+      h3 {
+        margin: 0 0 8px;
+        font-size: 15px;
+      }
+      p {
+        margin: 0 0 10px;
+      }
+      main {
+        padding: 22px clamp(18px, 4vw, 48px) 48px;
+      }
+      .grid {
+        display: grid;
+        gap: 14px;
+      }
+      .summary {
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        margin-bottom: 22px;
+      }
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 14px;
+      }
+      .metric {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--accent);
+      }
+      .muted {
+        color: var(--muted);
+      }
+      .tabs {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin: 16px 0;
+      }
+      button {
+        border: 1px solid var(--line);
+        background: var(--panel);
+        color: var(--ink);
+        border-radius: 6px;
+        padding: 8px 10px;
+        cursor: pointer;
+      }
+      button.active {
+        border-color: var(--accent);
+        color: var(--accent);
+        font-weight: 650;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--panel);
+        border: 1px solid var(--line);
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 9px 10px;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+      }
+      th {
+        font-size: 12px;
+        color: var(--muted);
+        background: #fbfbf8;
+      }
+      tr:last-child td {
+        border-bottom: 0;
+      }
+      .pill {
+        display: inline-block;
+        border-radius: 999px;
+        padding: 2px 8px;
+        font-size: 12px;
+        background: #e8f2ef;
+        color: var(--accent);
+        white-space: nowrap;
+      }
+      .pill.error {
+        background: #f8e8e3;
+        color: var(--bad);
+      }
+      .pill.skipped {
+        background: #eee9df;
+        color: var(--accent-2);
+      }
+      details {
+        margin-top: 8px;
+      }
+      pre {
+        overflow: auto;
+        background: #1f2328;
+        color: #f5f7fa;
+        border-radius: 6px;
+        padding: 12px;
+        max-height: 320px;
+        white-space: pre-wrap;
+      }
+      .method-list {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      }
+      .hidden {
+        display: none;
+      }
+      @media (max-width: 760px) {
+        table,
+        thead,
+        tbody,
+        th,
+        td,
+        tr {
+          display: block;
+        }
+        thead {
+          display: none;
+        }
+        td {
+          border-bottom: 0;
+          padding: 6px 10px;
+        }
+        tr {
+          border-bottom: 1px solid var(--line);
+          padding: 8px 0;
+        }
+        td::before {
+          content: attr(data-label);
+          display: block;
+          color: var(--muted);
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Ingestion Methodology Benchmark</h1>
+      <p class="muted">A review surface for deterministic and LLM-assisted exam ingestion experiments.</p>
+    </header>
+    <main id="app">Loading benchmark results...</main>
+    <script>
+      const app = document.getElementById("app");
+      fetch("ingestion-methodology-benchmark-results.json")
+        .then((response) => response.json())
+        .then(render)
+        .catch((error) => {
+          app.textContent = "Could not load benchmark results: " + error.message;
+        });
+
+      function render(data) {
+        const ok = data.trials.filter((trial) => trial.status === "ok").length;
+        const errors = data.trials.filter((trial) => trial.status === "error").length;
+        const totalCost = data.trials.reduce((sum, trial) => sum + (trial.estimatedCostUsd || 0), 0);
+        const methods = [...new Set(data.trials.map((trial) => trial.method))];
+        app.innerHTML = `
+          <section class="grid summary">
+            <div class="card"><div class="metric">${ok}/${data.trials.length}</div><div class="muted">successful trials</div></div>
+            <div class="card"><div class="metric">${errors}</div><div class="muted">failed trials</div></div>
+            <div class="card"><div class="metric">$${totalCost.toFixed(4)}</div><div class="muted">estimated OpenRouter cost</div></div>
+            <div class="card"><div class="metric">${data.baseline.papers.map((paper) => paper.questionCount).reduce((a, b) => a + b, 0)}</div><div class="muted">baseline questions compared</div></div>
+          </section>
+          <section class="card">
+            <h2>Conclusions</h2>
+            <ul>${data.conclusions.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+          </section>
+          <section>
+            <div class="tabs">
+              <button class="active" data-filter="all">All</button>
+              ${methods.map((method) => `<button data-filter="${escapeHtml(method)}">${escapeHtml(method)}</button>`).join("")}
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Status</th>
+                  <th>Method</th>
+                  <th>Model</th>
+                  <th>Scope</th>
+                  <th>Metrics</th>
+                  <th>Recommendation</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${data.trials.map(renderTrial).join("")}
+              </tbody>
+            </table>
+          </section>
+          <section style="margin-top:22px">
+            <h2>Method Notes</h2>
+            <div class="grid method-list">
+              ${data.methodologySummaries.map(renderMethod).join("")}
+            </div>
+          </section>
+        `;
+        document.querySelectorAll("button[data-filter]").forEach((button) => {
+          button.addEventListener("click", () => {
+            document
+              .querySelectorAll("button[data-filter]")
+              .forEach((candidate) => candidate.classList.remove("active"));
+            button.classList.add("active");
+            const filter = button.getAttribute("data-filter");
+            document.querySelectorAll("tr[data-method]").forEach((row) => {
+              row.classList.toggle("hidden", filter !== "all" && row.getAttribute("data-method") !== filter);
+            });
+          });
+        });
+      }
+
+      function renderTrial(trial) {
+        const metricText = Object.entries(trial.metrics || {})
+          .map(([key, value]) => `${key}: ${value}`)
+          .join("<br>");
+        const statusClass =
+          trial.status === "error" ? " error" : trial.status === "skipped" ? " skipped" : "";
+        return `
+          <tr data-method="${escapeHtml(trial.method)}">
+            <td data-label="Status"><span class="pill${statusClass}">${escapeHtml(trial.status)}</span></td>
+            <td data-label="Method">${escapeHtml(trial.method)}</td>
+            <td data-label="Model">${escapeHtml(trial.model || "local")}</td>
+            <td data-label="Scope">${escapeHtml(trial.inputScope)}<br><span class="muted">${trial.latencyMs} ms${trial.estimatedCostUsd ? " · $" + trial.estimatedCostUsd.toFixed(5) : ""}</span></td>
+            <td data-label="Metrics">${metricText}</td>
+            <td data-label="Recommendation">${escapeHtml(trial.recommendation)}
+              ${trial.outputPreview ? `<details><summary>Preview</summary><pre>${escapeHtml(trial.outputPreview)}</pre></details>` : ""}
+              ${trial.error ? `<details><summary>Error</summary><pre>${escapeHtml(trial.error)}</pre></details>` : ""}
+            </td>
+          </tr>
+        `;
+      }
+
+      function renderMethod(method) {
+        return `
+          <article class="card">
+            <h3>${escapeHtml(method.title)}</h3>
+            <p>${escapeHtml(method.description)}</p>
+            <p><span class="pill">automation: ${escapeHtml(method.automationPotential)}</span></p>
+            <p class="muted">${escapeHtml(method.recommendation)}</p>
+          </article>
+        `;
+      }
+
+      function escapeHtml(value) {
+        return String(value).replace(
+          /[&<>"']/g,
+          (char) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#039;"
+            })[char]
+        );
+      }
+    </script>
+  </body>
+</html>

@@ -2,6 +2,12 @@
 
 Newest entries go at the top.
 
+## 0.22.0 - 2026-06-07
+
+- Added a reusable ingestion-methodology benchmark harness that compares marking-guide-first splitting, PyMuPDF layout visual detection, whole-exam LLM extraction, page-image LLM transcription, and page-image visual detection.
+- Published a review UX at `public/ingestion-methodology-benchmark-report.html` with generated comparison results at `public/ingestion-methodology-benchmark-results.json`.
+- Ran OpenRouter trials with Gemini 3.1 Flash Lite, Gemini 2.5 Flash Lite, MiniMax M3, and Qwen VL against reviewed 2025 Extension pages and recorded the results in the automation feasibility report.
+
 ## 0.21.0 - 2026-06-06
 
 - Added source-reviewed prompt and answer overrides for 2025 Mathematics Extension 1 and Extension 2 Section I and audit-flagged Section II questions.

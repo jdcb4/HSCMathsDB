@@ -1,6 +1,6 @@
 # Ingestion Automation Feasibility
 
-Last reviewed: 2026-06-06
+Last reviewed: 2026-06-07
 
 ## Current Math Extraction
 
@@ -152,6 +152,70 @@ Build a benchmark/proposal layer rather than adding another direct importer:
    questions and writes ignored proposal JSON.
 5. Keep `scripts/additional-maths-profiles.ts` as the durable source of reviewed overrides, but make overrides smaller
    by promoting reviewed proposals into reusable profile fields.
+
+## Benchmark Run - 2026-06-07
+
+The first live benchmark is implemented as:
+
+```powershell
+pnpm run data:benchmark-ingestion-methods
+```
+
+The script writes raw responses and full local results to ignored `var/ingestion-methodology-benchmark/`, and writes a
+reviewable UX to:
+
+- `public/ingestion-methodology-benchmark-report.html`
+- `public/ingestion-methodology-benchmark-results.json`
+
+The benchmark compared five methodology families against the reviewed 2025 Extension 1 and Extension 2 imports:
+
+- marking-guide-first splitting
+- PyMuPDF layout visual detection
+- whole-exam text plus marking-guide LLM extraction
+- page-image LLM question extraction
+- page-image LLM visual detection
+
+Models tested through OpenRouter:
+
+- `google/gemini-3.1-flash-lite`
+- `google/gemini-2.5-flash-lite`
+- `minimax/minimax-m3`
+- `qwen/qwen3-vl-8b-instruct`
+
+Observed results:
+
+- Marking-guide-first splitting is strong as the skeleton stage once Section I answer-key rows are combined with
+  Section II marking-guide headings. It reached perfect question-number recall and precision on the two reviewed
+  Extension papers.
+- PyMuPDF layout visual detection is useful as a cheap pre-filter. It reached full visual recall on Extension 2 but
+  over-flagged some questions, so it should trigger review/LLM passes rather than decide assets by itself.
+- Whole-exam LLM extraction was not reliable enough to replace the importer. Gemini 3.1 Flash Lite returned valid JSON
+  cheaply, but only found 10 of 14 Extension 1 questions and missed several visual dependencies. Gemini 2.5 Flash Lite
+  returned invalid escaped JSON on the whole-exam prompt, and MiniMax M3 returned non-string content for this JSON-mode
+  call.
+- Page-image LLM extraction was the strongest automation signal. Gemini 3.1 Flash Lite, Gemini 2.5 Flash Lite, and Qwen
+  VL all recovered the expected question numbers and visual dependencies for the tested hard pages, with no obvious TeX
+  noise in the parsed outputs.
+- Page-image visual detection also performed well on the tested pages. It correctly identified extractable visuals and
+  produced approximate bounding boxes, but the boxes should be treated as crop proposals rather than accepted assets.
+
+The benchmark cost recorded by the script for the successful OpenRouter calls was about USD 0.011. Treat this as a
+rough comparison figure rather than accounting-grade billing because provider image-token accounting may not map
+perfectly to the simple pricing fields exposed in the model catalog.
+
+Updated recommendation: use LLMs as an integrated proposal layer for rendered page images and visual metadata, not just
+as a deep fallback. The strongest near-autonomous workflow is:
+
+```text
+marking-guide skeleton
+raw pdfjs extraction
+question/page alignment
+PyMuPDF visual pre-filter
+LLM page-image transcription for flagged pages
+LLM visual metadata and crop-box proposal
+human review of proposal JSON/crops
+profile promotion and deterministic audit
+```
 
 ## Expected Workflow
 
