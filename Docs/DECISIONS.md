@@ -115,3 +115,13 @@ Record these during setup if they are known:
 **Rejected alternatives:** Embedding explanation text directly in each question was rejected because it would bloat core corpus diffs and mix source transcription with generated learning content. Generating explanations in the browser was rejected because it would expose API keys and create nondeterministic end-user behaviour.
 
 **Supersedes:** Not applicable.
+
+## 2026-06-06: Use MiniMax as the preferred worked-solution model
+
+**Decision:** Use `minimax/minimax-m2.5:nitro` as the default OpenRouter model for student-facing worked-solution generation, with `z-ai/glm-4.7:nitro` and `google/gemini-3.1-flash-lite` as fallback/comparison models.
+
+**Reasoning:** In the 12-question comparison, MiniMax outputs were preferred for explanation quality. GLM 4.7 and Gemini were both fast and acceptable, but GLM was materially more expensive, while Gemini was less preferred for answer style. MiniMax was about three times slower but still acceptable for the current bounded corpus size.
+
+**Rejected alternatives:** Making Gemini the default was rejected because lower cost did not outweigh the quality preference. Making GLM the default was rejected because its quality was not clearly better than MiniMax and its observed cost was higher.
+
+**Supersedes:** Not applicable.

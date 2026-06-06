@@ -25,7 +25,7 @@ const sampleQuestionIds = [
   "adv-2023-q31-conditional-probability-availability",
   "adv-2022-q13-trapezoidal-rule-root-integral",
   "adv-2022-q17-house-of-cards-series",
-  "adv-2022-q32-reducing-balance-loan-repayments"
+  "adv-2022-q21-investment-options-future-value"
 ];
 
 const LlmExplanationResponseSchema = z
@@ -180,7 +180,7 @@ async function main() {
       const sourceQuestionHash = hashQuestionInput(sample.question);
       const existing = existingByKey.get(`${sample.question.id}:${model}:${sourceQuestionHash}`);
 
-      if (existing && !args.force) {
+      if (existing?.status === "ok" && !args.force) {
         completedSamples.get(sample.question.id)?.explanations.push(existing);
         console.log(`Reused ${sample.question.id} via ${model}`);
         continue;
@@ -391,7 +391,7 @@ async function callOpenRouter({
   const body: Record<string, unknown> = {
     model,
     temperature: 0.2,
-    max_tokens: 3000,
+    max_tokens: 6000,
     messages: [
       {
         role: "system",
@@ -426,14 +426,15 @@ async function callOpenRouter({
   }
 
   const message = RawChatCompletionSchema.parse(raw).choices[0].message;
-  const content =
-    typeof message.content === "string"
-      ? message.content
-      : typeof message.reasoning === "string"
-        ? message.reasoning
-        : JSON.stringify(message);
+  if (typeof message.content !== "string") {
+    throw new Error(
+      withJsonMode
+        ? `OpenRouter returned null content for ${model} with JSON mode`
+        : `OpenRouter returned null content for ${model}`
+    );
+  }
 
-  return { content, raw };
+  return { content: message.content, raw };
 }
 
 function buildSystemPrompt(): string {
@@ -451,7 +452,8 @@ Style rules:
 - Explain the decision points: why this method is appropriate, what to notice first, and how each algebraic/probability/calculus step follows.
 - Use TeX for all mathematical notation.
 - Keep each step focused. Do not write a textbook chapter.
-- Keep each step body under 120 words.
+- Use exactly 4 worked steps unless the question genuinely needs more.
+- Keep each step body under 80 words.
 - Do not mention the marking guide, NESA, the prompt, JSON, or that you are an AI.
 - Do not invent alternative answers.
 - If a diagram is referenced, use only the supplied diagram description.

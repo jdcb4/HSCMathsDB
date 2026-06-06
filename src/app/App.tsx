@@ -11,9 +11,11 @@ import {
   getLinkedSyllabusNodes,
   getQuestionsForSyllabusNode,
   getSourcePackCoverage,
+  getWorkedSolutionCoverage,
+  getWorkedSolutionForQuestion,
   queryQuestions
 } from "../domain/hscSelectors";
-import { database } from "../services/hscDatabase";
+import { database, workedSolutionsDatabase } from "../services/hscDatabase";
 import type { QuestionStyle } from "../domain/hscSchemas";
 
 type ViewMode = "questions" | "syllabus" | "sources" | "llm-review";
@@ -44,6 +46,10 @@ export function App() {
 
   const options = useMemo(() => getFilterOptions(database), []);
   const summary = useMemo(() => getDatasetSummary(database), []);
+  const workedSolutionCoverage = useMemo(
+    () => getWorkedSolutionCoverage(database, workedSolutionsDatabase),
+    []
+  );
   const sourcePacks = useMemo(() => getSourcePackCoverage(database), []);
 
   const filteredQuestions = useMemo(
@@ -64,6 +70,9 @@ export function App() {
   );
 
   const selectedQuestionSyllabus = selectedQuestion ? getLinkedSyllabusNodes(database, selectedQuestion) : [];
+  const selectedWorkedSolution = selectedQuestion
+    ? getWorkedSolutionForQuestion(workedSolutionsDatabase, selectedQuestion.id)
+    : undefined;
   const selectedSyllabusNode =
     database.syllabus.find((node) => node.id === selectedSyllabusNodeId) ?? database.syllabus[0];
   const syllabusQuestions = selectedSyllabusNode
@@ -97,7 +106,11 @@ export function App() {
               <Metric icon={<FileText size={17} />} label="Questions" value={summary.questionCount} />
               <Metric icon={<BookOpen size={17} />} label="Syllabus" value={summary.syllabusNodeCount} />
               <Metric icon={<Database size={17} />} label="Sources" value={summary.sourcePackCount} />
-              <Metric icon={<LinkIcon size={17} />} label="Links" value={summary.linkCount} />
+              <Metric
+                icon={<LinkIcon size={17} />}
+                label="Worked"
+                value={workedSolutionCoverage.workedSolutionCount}
+              />
             </div>
           </div>
           <div className="rounded-md border border-border-default bg-surface-sunken px-4 py-3 text-body-sm text-text-secondary">
@@ -225,6 +238,7 @@ export function App() {
             <QuestionDetail
               question={selectedQuestion}
               paper={database.papers.find((paper) => paper.id === selectedQuestion.paperId)}
+              workedSolution={selectedWorkedSolution}
               syllabusNodes={selectedQuestionSyllabus}
               onOpenSyllabusNode={openSyllabusNode}
             />

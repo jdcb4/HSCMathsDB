@@ -1,15 +1,17 @@
 import { ExternalLink, Image as ImageIcon } from "lucide-react";
-import type { Paper, Question, SyllabusNode } from "../../domain/hscSchemas";
+import type { Paper, Question, SyllabusNode, WorkedSolution } from "../../domain/hscSchemas";
 import { MathText } from "../math/MathText";
 
 export function QuestionDetail({
   question,
   paper,
+  workedSolution,
   syllabusNodes,
   onOpenSyllabusNode
 }: {
   question: Question;
   paper?: Paper;
+  workedSolution?: WorkedSolution;
   syllabusNodes: SyllabusNode[];
   onOpenSyllabusNode: (nodeId: string) => void;
 }) {
@@ -59,6 +61,76 @@ export function QuestionDetail({
           </div>
         ) : null}
       </section>
+
+      {workedSolution ? (
+        <section className="space-y-4 rounded-md border border-border-subtle bg-surface-sunken p-4">
+          <div className="flex flex-col gap-2 lg:flex-row lg:items-start lg:justify-between">
+            <div>
+              <h3 className="text-h4 font-semibold">Worked solution</h3>
+              <p className="mt-1 text-caption text-text-secondary">
+                Generated with {workedSolution.model}
+              </p>
+            </div>
+            <span className="inline-flex w-fit rounded-md border border-border-default px-2 py-1 text-caption font-medium text-text-secondary">
+              {workedSolution.reviewStatus}
+            </span>
+          </div>
+
+          {workedSolution.needsReview ? (
+            <div className="rounded-md border border-accent-warning bg-surface-raised p-3 text-body-sm text-text-secondary">
+              {workedSolution.reviewNote}
+            </div>
+          ) : null}
+
+          <div className="grid gap-3 lg:grid-cols-2">
+            <div className="rounded-md border border-border-subtle bg-surface-raised p-3">
+              <h4 className="mb-2 text-body-sm font-semibold">Idea</h4>
+              <MathText block>{workedSolution.summaryLatex}</MathText>
+            </div>
+            <div className="rounded-md border border-border-subtle bg-surface-raised p-3">
+              <h4 className="mb-2 text-body-sm font-semibold">How to start</h4>
+              <MathText block>{workedSolution.approachLatex}</MathText>
+            </div>
+          </div>
+
+          <ol className="space-y-2">
+            {workedSolution.steps.map((step, index) => (
+              <li
+                key={`${workedSolution.questionId}-worked-step-${index}`}
+                className="rounded-md border border-border-subtle bg-surface-raised p-3"
+              >
+                <p className="mb-2 text-body-sm font-semibold">{step.title}</p>
+                <MathText block>{step.bodyLatex}</MathText>
+              </li>
+            ))}
+          </ol>
+
+          <div className="rounded-md border border-border-subtle bg-surface-raised p-3">
+            <h4 className="mb-2 text-body-sm font-semibold">Final answer</h4>
+            <MathText block>{workedSolution.finalAnswerLatex}</MathText>
+          </div>
+
+          {workedSolution.commonMistakesLatex.length > 0 ? (
+            <div className="rounded-md border border-border-subtle bg-surface-raised p-3">
+              <h4 className="mb-2 text-body-sm font-semibold">Common mistakes</h4>
+              <ul className="space-y-2 text-body-sm text-text-secondary">
+                {workedSolution.commonMistakesLatex.map((mistake, index) => (
+                  <li key={`${workedSolution.questionId}-mistake-${index}`}>
+                    <MathText block>{mistake}</MathText>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+
+          {workedSolution.checkLatex ? (
+            <div className="rounded-md border border-border-subtle bg-surface-raised p-3">
+              <h4 className="mb-2 text-body-sm font-semibold">Quick check</h4>
+              <MathText block>{workedSolution.checkLatex}</MathText>
+            </div>
+          ) : null}
+        </section>
+      ) : null}
 
       <section className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_280px]">
         <div className="rounded-md border border-border-subtle bg-surface-sunken p-4">

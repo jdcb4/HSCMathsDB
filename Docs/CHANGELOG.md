@@ -4,6 +4,8 @@ Newest entries go at the top.
 
 ## 0.2.0 - 2026-06-06
 
+- Added primary worked-solution sidecar support with generated/reviewed status metadata and question-detail rendering.
+- Added reusable OpenRouter worked-solution generation and reporting scripts.
 - Added a dev-only LLM explanation comparison workflow using OpenRouter sample generation for 12 representative questions.
 - Added per-model generation timing capture for comparing candidate LLM response speed.
 - Added a Vite development review view for comparing worked-solution drafts across candidate models.

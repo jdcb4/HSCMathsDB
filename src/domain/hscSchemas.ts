@@ -90,6 +90,40 @@ export const QuestionSchema = z.object({
   })
 });
 
+export const WorkedSolutionStepSchema = z.object({
+  title: z.string().min(1),
+  bodyLatex: z.string().min(1)
+});
+
+export const WorkedSolutionSchema = z.object({
+  questionId: z.string().min(1),
+  promptVersion: z.string().min(1),
+  model: z.string().min(1),
+  generatedAt: z.string().datetime(),
+  sourceQuestionHash: z.string().min(1),
+  reviewStatus: z.enum(["generated", "reviewed", "needs-review", "rejected"]),
+  needsReview: z.boolean(),
+  reviewNote: z.string(),
+  latencyMs: z.number().int().min(0),
+  summaryLatex: z.string().min(1),
+  approachLatex: z.string().min(1),
+  steps: z.array(WorkedSolutionStepSchema).min(2),
+  finalAnswerLatex: z.string().min(1),
+  commonMistakesLatex: z.array(z.string().min(1)).default([]),
+  checkLatex: z.string().min(1).optional()
+});
+
+export const WorkedSolutionsDatabaseSchema = z.object({
+  meta: z.object({
+    version: z.string().min(1),
+    generatedAt: z.string().min(1),
+    defaultModel: z.string().min(1),
+    promptVersion: z.string().min(1),
+    notes: z.string().min(1)
+  }),
+  workedSolutions: z.array(WorkedSolutionSchema)
+});
+
 export const HscDatabaseSchema = z
   .object({
     meta: z.object({
@@ -161,3 +195,5 @@ export type Question = z.infer<typeof QuestionSchema>;
 export type SyllabusNode = z.infer<typeof SyllabusNodeSchema>;
 export type Paper = z.infer<typeof PaperSchema>;
 export type SourcePack = z.infer<typeof SourcePackSchema>;
+export type WorkedSolution = z.infer<typeof WorkedSolutionSchema>;
+export type WorkedSolutionsDatabase = z.infer<typeof WorkedSolutionsDatabaseSchema>;

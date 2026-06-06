@@ -14,6 +14,8 @@
     "data:extract-images": "python scripts/extract-source-images.py",
     "data:render-pages": "tsx scripts/render-source-pages.ts",
     "data:generate-explanation-samples": "tsx scripts/generate-llm-explanation-samples.ts",
+    "data:generate-worked-solutions": "tsx scripts/generate-worked-solutions.ts",
+    "data:report-worked-solutions": "tsx scripts/report-worked-solutions.ts",
     "data:report-coverage": "tsx scripts/report-import-coverage.ts",
     "data:report-candidates": "python scripts/report-question-candidates.py",
     "data:report-renders": "tsx scripts/report-source-renders.ts",

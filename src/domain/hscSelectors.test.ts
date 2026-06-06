@@ -5,6 +5,7 @@ import {
   getLinkedSyllabusNodes,
   getQuestionsForSyllabusNode,
   getSourcePackCoverage,
+  getWorkedSolutionCoverage,
   queryQuestions
 } from "./hscSelectors";
 
@@ -215,6 +216,23 @@ describe("HSC selectors", () => {
 
     expect(summary.linkCount).toBeGreaterThan(database.questions.length);
     expect(summary.questionCountsBySyllabusNode["ma-f1"]).toBeGreaterThan(0);
+  });
+
+  it("summarises worked solution coverage", () => {
+    const coverage = getWorkedSolutionCoverage(database, {
+      meta: {
+        version: "test",
+        generatedAt: "2026-06-06T00:00:00.000Z",
+        defaultModel: "test-model",
+        promptVersion: "test-prompt",
+        notes: "Test data"
+      },
+      workedSolutions: []
+    });
+
+    expect(coverage.totalQuestions).toBe(database.questions.length);
+    expect(coverage.workedSolutionCount).toBe(0);
+    expect(coverage.missingCount).toBe(database.questions.length);
   });
 
   it("tracks source packs separately from imported question records", () => {

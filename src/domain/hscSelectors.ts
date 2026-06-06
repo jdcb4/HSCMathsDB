@@ -1,4 +1,12 @@
-import type { HscDatabase, Question, QuestionStyle, SourcePack, SyllabusNode } from "./hscSchemas";
+import type {
+  HscDatabase,
+  Question,
+  QuestionStyle,
+  SourcePack,
+  SyllabusNode,
+  WorkedSolution,
+  WorkedSolutionsDatabase
+} from "./hscSchemas";
 
 export type QuestionQuery = {
   search?: string;
@@ -110,6 +118,47 @@ export function getSourcePackCoverage(database: HscDatabase): SourcePack[] {
         : pack.importedQuestionCount
     }))
     .sort((left, right) => right.year - left.year || left.title.localeCompare(right.title));
+}
+
+export function getWorkedSolutionForQuestion(
+  workedSolutionsDatabase: WorkedSolutionsDatabase,
+  questionId: string
+): WorkedSolution | undefined {
+  return workedSolutionsDatabase.workedSolutions.find(
+    (workedSolution) =>
+      workedSolution.questionId === questionId &&
+      workedSolution.reviewStatus !== "rejected"
+  );
+}
+
+export function getWorkedSolutionCoverage(
+  database: HscDatabase,
+  workedSolutionsDatabase: WorkedSolutionsDatabase
+) {
+  const questionIds = new Set(database.questions.map((question) => question.id));
+  const currentWorkedSolutions = workedSolutionsDatabase.workedSolutions.filter((workedSolution) =>
+    questionIds.has(workedSolution.questionId)
+  );
+  const questionIdsWithWorkedSolutions = new Set(
+    currentWorkedSolutions
+      .filter((workedSolution) => workedSolution.reviewStatus !== "rejected")
+      .map((workedSolution) => workedSolution.questionId)
+  );
+
+  return {
+    totalQuestions: database.questions.length,
+    workedSolutionCount: questionIdsWithWorkedSolutions.size,
+    missingCount: Math.max(0, database.questions.length - questionIdsWithWorkedSolutions.size),
+    generatedCount: currentWorkedSolutions.filter(
+      (workedSolution) => workedSolution.reviewStatus === "generated"
+    ).length,
+    reviewedCount: currentWorkedSolutions.filter(
+      (workedSolution) => workedSolution.reviewStatus === "reviewed"
+    ).length,
+    needsReviewCount: currentWorkedSolutions.filter(
+      (workedSolution) => workedSolution.reviewStatus === "needs-review"
+    ).length
+  };
 }
 
 function unique<T>(values: T[]): T[] {
