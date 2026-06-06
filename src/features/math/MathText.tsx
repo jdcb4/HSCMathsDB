@@ -46,7 +46,7 @@ export function MathText({ children, block = false }: { children: string; block?
     <span
       key={children}
       ref={containerRef}
-      className={block ? "block whitespace-pre-line" : ""}
+      className={block ? "math-text block whitespace-pre-line" : "math-text"}
       style={{ display: block ? "block" : "inline" }}
     >
       {children}

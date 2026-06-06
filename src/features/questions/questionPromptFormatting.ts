@@ -1,16 +1,28 @@
 const MULTIPART_MARKER_PATTERN = /\s+\(([a-z])\)\s+/g;
+const OPTION_MARKER_PATTERN = /,?\s+([A-D])\.\s+/g;
 
 export function formatMultipartQuestionPrompt(promptLatex: string): string {
-  const markers = [...promptLatex.matchAll(MULTIPART_MARKER_PATTERN)].map((match) => match[1]);
+  const withOptionBreaks = formatMultipleChoiceOptions(promptLatex);
+  const markers = [...withOptionBreaks.matchAll(MULTIPART_MARKER_PATTERN)].map((match) => match[1]);
 
   if (!hasConsecutiveMultipartMarkers(markers)) {
-    return promptLatex;
+    return withOptionBreaks;
   }
 
-  return promptLatex.replace(MULTIPART_MARKER_PATTERN, (match) => {
+  return withOptionBreaks.replace(MULTIPART_MARKER_PATTERN, (match) => {
     const markerText = match.trim();
     return `\n\n${markerText} `;
   });
+}
+
+function formatMultipleChoiceOptions(promptLatex: string): string {
+  if (!promptLatex.includes("Options:")) {
+    return promptLatex;
+  }
+
+  return promptLatex
+    .replace(/\s+Options:\s+/, "\n\nOptions:\n")
+    .replace(OPTION_MARKER_PATTERN, (_match, option: string) => `\n${option}. `);
 }
 
 function hasConsecutiveMultipartMarkers(markers: string[]): boolean {

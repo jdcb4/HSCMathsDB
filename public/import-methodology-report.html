@@ -444,6 +444,12 @@
           comparing against rendered pages and marking guides, mapping each question to syllabus nodes, and
           iterating diagram crops until they are both complete and clean.
         </p>
+        <p>
+          The corrected ingestion standard is stricter than the early draft workflow: exam prompts should be
+          near-verbatim, official marking-guide working should preserve the guide's steps, HSC marking
+          feedback should be ingested for each available Section II question, and LLM worked solutions should
+          live as an additional explanatory layer rather than replacing the raw/formatted official material.
+        </p>
       </section>
 
       <section>
@@ -494,9 +500,20 @@
             <div>
               <h3>Normalize records into the JSON corpus</h3>
               <p>
-                Each question is manually promoted into <code>src/data/hsc-math-advanced.json</code> with TeX
-                prompt text, answer text, working notes, tags, source page references, and one or more
-                syllabus node IDs. Records remain <code>draft</code> until independent review.
+                Each question is manually promoted into <code>src/data/hsc-math-advanced.json</code> with
+                near-verbatim TeX prompt text, official marking-guide answer and working steps, tags, source
+                page references, and one or more syllabus node IDs. Records remain <code>draft</code> until
+                independent review.
+              </p>
+            </div>
+          </article>
+          <article class="step">
+            <div>
+              <h3>Ingest HSC marking feedback</h3>
+              <p>
+                Extracted marking-feedback text is parsed into per-question cards with better-response and
+                improvement-area bullets. Multipart feedback is grouped back under part headings so users can
+                see what belongs to each subquestion.
               </p>
             </div>
           </article>

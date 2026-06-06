@@ -13,4 +13,14 @@ describe("question prompt formatting", () => {
 
     expect(formatMultipartQuestionPrompt(prompt)).toBe(prompt);
   });
+
+  it("adds visible breaks around multiple-choice options", () => {
+    const formatted = formatMultipartQuestionPrompt(
+      "Which value is correct? Options: A. \\(1\\), B. \\(2\\), C. \\(3\\), D. \\(4\\)."
+    );
+
+    expect(formatted).toBe(
+      "Which value is correct?\n\nOptions:\nA. \\(1\\)\nB. \\(2\\)\nC. \\(3\\)\nD. \\(4\\)."
+    );
+  });
 });

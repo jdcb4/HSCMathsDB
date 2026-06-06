@@ -6,8 +6,13 @@ import { z } from "zod";
 import type { Question, WorkedSolution } from "../src/domain/hscSchemas";
 import { getLinkedSyllabusNodes } from "../src/domain/hscSelectors";
 import { database } from "../src/services/hscDatabase";
+import {
+  auditWorkedSolutionText,
+  formatMathIssues,
+  normalizeWorkedSolutionText
+} from "./worked-solution-math-format";
 
-export const WORKED_SOLUTION_PROMPT_VERSION = "hsc-explanation-v1";
+export const WORKED_SOLUTION_PROMPT_VERSION = "hsc-explanation-v2";
 
 export const PREFERRED_LLM_MODELS = [
   { id: "minimax/minimax-m2.5:nitro", label: "MiniMax M2.5 Nitro", role: "preferred generation model" },
@@ -193,6 +198,7 @@ export async function generateWorkedSolution({
 
   const parsedJson = normaliseParsedExplanation(parseModelJson(response.content));
   const content = LlmWorkedSolutionContentSchema.parse(parsedJson);
+  assertWorkedSolutionMathContract(content);
 
   return { content, generatedAt, latencyMs: Date.now() - startedAt };
 }
@@ -273,7 +279,7 @@ Style rules:
 - Use Australian English.
 - Be direct and calm.
 - Explain the decision points: why this method is appropriate, what to notice first, and how each algebraic/probability/calculus step follows.
-- Use TeX for all mathematical notation.
+- Use the mathematical syntax contract below for every field ending in "Latex".
 - Keep each step focused. Do not write a textbook chapter.
 - Use exactly 4 worked steps unless the question genuinely needs more.
 - Keep each step body under 80 words.
@@ -281,6 +287,16 @@ Style rules:
 - Do not invent alternative answers.
 - If a diagram is referenced, use only the supplied diagram description.
 - If the supplied answer appears mathematically wrong or incomplete, set "needsReview" to true and explain the concern in "reviewNote".
+
+Mathematical syntax contract:
+- Use MathJax-ready TeX for every mathematical expression, variable, equation, coordinate, interval, inequality, approximation, probability statement, derivative, integral, function name with input, and unit calculation.
+- Inline maths MUST be delimited with \\( ... \\). Display maths MUST be delimited with \\[ ... \\].
+- Never use dollar delimiters. Do not use $...$ or $$...$$.
+- Never output raw TeX commands outside delimiters. For example, write \\(\\left(2,\\frac{4}{e^2}\\right)\\), not \\left(2, \\frac{4}{e^2}\\right).
+- Do not write mathematical notation as plain ASCII prose. Write \\(x=2\\), \\(y\\approx0.54\\), \\(P(X>c)\\), \\(A_n\\), \\(\\frac{5}{12}\\), and \\(\\sin x\\), not plain text forms such as x = 2, y approximately 0.54, P(X>c), A_n, 5/12, or sin x.
+- Currency should use escaped dollar signs inside TeX when it is part of a calculation, for example \\(\\$1381.16\\). In prose-only currency, write "1381.16 dollars".
+- Use TeX commands for operators and symbols: \\(\\approx\\), \\(\\le\\), \\(\\ge\\), \\(\\times\\), \\(\\to\\), \\(\\infty\\), \\(\\pi\\), \\(\\theta\\). Do not use unicode mathematical symbols outside MathJax delimiters.
+- If an answer has multiple parts, label them in prose but keep the mathematics delimited, for example "(a) The stationary points are \\((0,0)\\) and \\(\\left(2,\\frac{4}{e^2}\\right)\\)."
 
 Return valid JSON only, matching this shape:
 {
@@ -308,7 +324,7 @@ function parseModelJson(value: string): unknown {
   const unfenced = fenced?.[1] ?? trimmed.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "");
   const withoutJsonLabel = unfenced.replace(/^json\s*/i, "").trim();
   const withOpeningBrace = addMissingOpeningBrace(withoutJsonLabel);
-  const objectText = extractFirstJsonObject(withOpeningBrace);
+  const objectText = repairTexJsonEscapes(extractFirstJsonObject(withOpeningBrace));
 
   try {
     return JSON.parse(objectText);
@@ -341,7 +357,7 @@ function addMissingOpeningBrace(value: string): string {
   }
 
   if (value.startsWith('Review"')) {
-    return `{"needsReview"${value.slice("Review".length)}`;
+    return `{"needsReview${value.slice("Review".length)}`;
   }
 
   return value;
@@ -398,6 +414,13 @@ function repairJsonEscapes(value: string): string {
   return value.replace(/(?<!\\)\\(?!["\\/bfnrtu])/g, "\\\\");
 }
 
+function repairTexJsonEscapes(value: string): string {
+  return value.replace(
+    /(?<!\\)\\(?=(?:alpha|beta|theta|pi|sin|cos|tan|ln|log|frac|dfrac|sqrt|left|right|text|times|cdot|to|approx|leq|geq|neq|infty|cosec|sec|operatorname)\b)/g,
+    "\\\\"
+  );
+}
+
 function removeExtraTerminalArrayBracket(value: string): string {
   return value.replace(/\]\s*}\s*$/, "}");
 }
@@ -439,8 +462,67 @@ function normaliseParsedExplanation(value: unknown): unknown {
     record.commonMistakesLatex = [record.commonMistakeLatex];
   }
 
+  if (!record.commonMistakesLatex && Array.isArray(record.commonMistakeS)) {
+    record.commonMistakesLatex = record.commonMistakeS;
+  }
+
+  if (!record.checkLatex && typeof record.check === "string") {
+    record.checkLatex = record.check;
+  }
+
   delete record.commonMistake;
   delete record.commonMistakeLatex;
+  delete record.commonMistakeS;
+  delete record.check;
 
-  return record;
+  return normalizeWorkedSolutionContent(record);
+}
+
+function normalizeWorkedSolutionContent(value: Record<string, unknown>): Record<string, unknown> {
+  const normalized = { ...value };
+
+  ["summaryLatex", "approachLatex", "finalAnswerLatex", "checkLatex"].forEach((key) => {
+    if (typeof normalized[key] === "string") {
+      normalized[key] = normalizeWorkedSolutionText(normalized[key]);
+    }
+  });
+
+  if (Array.isArray(normalized.commonMistakesLatex)) {
+    normalized.commonMistakesLatex = normalized.commonMistakesLatex.map((item) =>
+      typeof item === "string" ? normalizeWorkedSolutionText(item) : item
+    );
+  }
+
+  if (Array.isArray(normalized.steps)) {
+    normalized.steps = normalized.steps.map((step) => {
+      if (!step || typeof step !== "object" || Array.isArray(step)) {
+        return step;
+      }
+
+      const normalizedStep = { ...(step as Record<string, unknown>) };
+
+      if (typeof normalizedStep.bodyLatex === "string") {
+        normalizedStep.bodyLatex = normalizeWorkedSolutionText(normalizedStep.bodyLatex);
+      }
+
+      return normalizedStep;
+    });
+  }
+
+  return normalized;
+}
+
+function assertWorkedSolutionMathContract(content: LlmWorkedSolutionContent) {
+  const issues = [
+    ...auditWorkedSolutionText(content.summaryLatex),
+    ...auditWorkedSolutionText(content.approachLatex),
+    ...auditWorkedSolutionText(content.finalAnswerLatex),
+    ...content.steps.flatMap((step) => auditWorkedSolutionText(step.bodyLatex)),
+    ...content.commonMistakesLatex.flatMap((mistake) => auditWorkedSolutionText(mistake)),
+    ...(content.checkLatex ? auditWorkedSolutionText(content.checkLatex) : [])
+  ];
+
+  if (issues.length > 0) {
+    throw new Error(`Worked solution failed mathematical syntax contract: ${formatMathIssues(issues)}`);
+  }
 }

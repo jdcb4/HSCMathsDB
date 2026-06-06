@@ -68,7 +68,7 @@ Do not send secrets, local file paths, raw PDF caches, or unreviewed candidate t
 
 ## Prompt
 
-Use a pinned prompt version such as `hsc-explanation-v1`. Keep temperature low and require JSON only.
+Use a pinned prompt version such as `hsc-explanation-v2`. Keep temperature low and require JSON only.
 
 ```text
 You are writing a worked explanation for a NSW HSC Mathematics Advanced student aged 17-18.
@@ -83,7 +83,7 @@ Style rules:
 - Use Australian English.
 - Be direct and calm.
 - Explain the decision points: why this method is appropriate, what to notice first, and how each algebraic/probability/calculus step follows.
-- Use TeX for all mathematical notation.
+- Use the mathematical syntax contract below for every field ending in `Latex`.
 - Keep each step focused. Do not write a textbook chapter.
 - Do not mention the marking guide, NESA, the prompt, JSON, or that you are an AI.
 - Do not invent alternative answers.
@@ -112,6 +112,31 @@ Return valid JSON only, matching this shape:
 Question input:
 <QUESTION_JSON>
 ```
+
+## Mathematical Syntax Contract
+
+Every generated string field ending in `Latex` must be ready for `MathText`/MathJax rendering.
+
+- Inline maths must use `\\( ... \\)`.
+- Display maths must use `\\[ ... \\]`.
+- Never use `$...$` or `$$...$$`.
+- Never emit raw TeX commands outside delimiters.
+- Do not write equations, coordinates, intervals, probabilities, derivatives, integrals, approximations, or variables as plain ASCII prose.
+- Use TeX commands for operators and symbols, for example `\\approx`, `\\le`, `\\ge`, `\\times`, `\\to`, `\\infty`, `\\pi`, and `\\theta`.
+- Currency inside calculations should use escaped dollar signs, for example `\\(\\$1381.16\\)`, or prose such as `1381.16 dollars`.
+- Multipart labels such as `(a)` and `(b)` remain prose, but all mathematics inside the answer must still be delimited.
+
+Examples:
+
+| Bad                                | Good                                    |
+| ---------------------------------- | --------------------------------------- |
+| `x = 2`                            | `\\(x=2\\)`                             |
+| `y ≈ 0.54`                         | `\\(y\\approx0.54\\)`                   |
+| `\\left(2, \\frac{4}{e^2}\\right)` | `\\(\\left(2,\\frac{4}{e^2}\\right)\\)` |
+| `$\\frac{5}{12}$`                  | `\\(\\frac{5}{12}\\)`                   |
+| `P(X>c)`                           | `\\(P(X>c)\\)`                          |
+
+The parser repairs recoverable JSON escape mistakes before parsing so unescaped TeX such as `\theta`, `\times`, and `\text{...}` is not accidentally converted into tab/backspace artefacts. The post-generation gate still rejects records with raw TeX, dollar delimiters, plain ASCII maths, nested delimiters, or known corrupt fragments.
 
 The script should replace `<QUESTION_JSON>` with compact JSON:
 
@@ -160,6 +185,7 @@ Minimum validation rules:
 - No unexpected top-level fields unless the schema deliberately allows them.
 - `finalAnswerLatex` is consistent with `answerLatex` by human review or a later deterministic check where practical.
 - `needsReview: true` responses are stored for review but not promoted to the public sidecar.
+- `pnpm run data:audit-worked-solution-math` reports zero issues before committing generated data.
 
 Keep raw model responses in ignored local output:
 
@@ -248,6 +274,7 @@ The current command is:
 
 ```powershell
 pnpm run data:report-worked-solutions
+pnpm run data:audit-worked-solution-math
 ```
 
 The report should show:
