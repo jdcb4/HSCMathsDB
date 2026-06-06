@@ -2,6 +2,11 @@
 
 Newest entries go at the top.
 
+## 0.10.0 - 2026-06-06
+
+- Added a deterministic ingestion-quality audit for promoted exam records, covering flattened multiple-choice options, missing visual assets, mojibake, raw membership notation, stray section instructions, and collapsed multipart marking-guide excerpts.
+- Documented the audit as a required gate before Standard and Extension reingestion records are considered acceptable.
+
 ## 0.9.0 - 2026-06-06
 
 - Promoted 2025 Mathematics Standard 1, Mathematics Standard 2, Mathematics Extension 1, and Mathematics Extension 2 draft question records from official exam and marking-guide PDFs.

@@ -46,6 +46,7 @@ GoalCheck HSC is a Vite React TypeScript web app for browsing NSW HSC mathematic
 | `pnpm run data:extract-candidates`            | Create ignored raw candidate records from extracted source text.                 |
 | `pnpm run data:validate-candidates`           | Validate ignored raw candidate records before review.                            |
 | `pnpm run data:report-candidates`             | Summarize ignored candidate extraction output.                                   |
+| `pnpm run data:audit-ingested-exams`          | Audit promoted question records for ingestion-quality regressions.               |
 | `pnpm run data:extract-images`                | Extract embedded PDF images into ignored local output.                           |
 | `pnpm run data:render-pages`                  | Render cached PDF pages into ignored PNG page images.                            |
 | `pnpm run data:generate-explanation-samples`  | Generate ignored LLM explanation comparison samples for manual review.           |

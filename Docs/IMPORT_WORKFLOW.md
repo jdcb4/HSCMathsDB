@@ -96,6 +96,22 @@ For each question:
 - Set `source.transcriptionStatus` to `draft` until the prompt wording, answer steps, marks, source references, syllabus mapping, feedback, and assets are checked against the PDFs.
 - Set `source.transcriptionStatus` to `verified` only after review.
 
+After each paper is promoted or regenerated, run the ingestion-quality audit before treating the
+records as acceptable:
+
+```powershell
+pnpm run data:audit-ingested-exams -- std1-2025
+pnpm run data:audit-ingested-exams -- std2-2025
+pnpm run data:audit-ingested-exams -- ext1-2025
+pnpm run data:audit-ingested-exams -- ext2-2025
+```
+
+This audit is a deterministic guardrail for issues seen in the Standard and Extension import pass:
+flattened multiple-choice options, stray section instructions inside a question, missing assets for
+graph/table/diagram prompts, mojibake, raw membership notation such as `t ! R`, and multipart
+marking-guide excerpts collapsed into one paragraph. It is not a substitute for source-PDF review,
+but a promoted paper should have zero audit errors before it is considered high quality.
+
 ## 7. Ingest marking feedback
 
 Each source pack should include marking feedback as well as the exam paper and marking guide.
