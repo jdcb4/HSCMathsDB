@@ -1,6 +1,6 @@
 # GoalCheck HSC
 
-GoalCheck HSC is a browseable question map for NSW HSC Mathematics Advanced and the archived Mathematics 2 Unit course. It stores question records, answers, syllabus links, source URLs, and supporting diagram references in a validated local JSON corpus rendered in a React web interface with MathJax.
+GoalCheck HSC is a browseable question map for NSW HSC mathematics courses. It stores question records, answers, syllabus links, source URLs, and supporting diagram references in a validated local JSON corpus rendered in a React web interface with MathJax.
 
 The current corpus is not a complete transcription of all NESA papers. Entries marked `transcriptionStatus: "demo"` are placeholders for validating the schema and UI; entries marked `draft` have been promoted from official source material but still need final review before they are treated as verified.
 
@@ -33,7 +33,7 @@ pnpm run data:audit-sources
 
 ## Data
 
-The local corpus lives at `src/data/hsc-math-advanced.json` and is validated on import by Zod schemas in `src/domain/hscSchemas.ts`. It contains both question records and a separate `sourcePacks` catalog for official NSW exam-pack sources that still need transcription. Supporting images and diagrams live under `public/assets/diagrams/`.
+The local corpus lives at `src/data/hsc-math-advanced.json` and is validated on import by Zod schemas in `src/domain/hscSchemas.ts`. It contains course metadata, question records, and a separate `sourcePacks` catalog for official NSW exam-pack sources that still need transcription. The current browseable question corpus is Mathematics Advanced plus a Mathematics 2 Unit archive seed; 2025 Standard, Extension 1, and Extension 2 source packs are cataloged for future import. Supporting images and diagrams live under `public/assets/diagrams/`.
 
 ## License
 

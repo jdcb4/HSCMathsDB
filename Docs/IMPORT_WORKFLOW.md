@@ -5,10 +5,13 @@ This workflow turns official NSW source packs into verified question records, ma
 ## Current Import Handoff - 2026-06-06
 
 - 2025 Mathematics Advanced: 31/31 official draft records promoted; source-pack asset status is complete.
+- 2025 Mathematics Standard: source pack and separate Standard 1/Standard 2 paper records are cataloged with exam, marking-guide, and Section II feedback PDF links. Question transcription has not started.
+- 2025 Mathematics Extension 1: source pack and paper record are cataloged with exam, marking-guide, and Section II feedback PDF links. Question transcription has not started.
+- 2025 Mathematics Extension 2: source pack and paper record are cataloged with exam, marking-guide, and Section II feedback PDF links. Question transcription has not started.
 - 2024 Mathematics Advanced: 31/31 official draft records promoted; source-pack asset status is complete.
 - 2023 Mathematics Advanced: source PDFs cached, text/candidates extracted, and 44 exam/guide pages rendered under `var/rendered-pages/source-adv-2023/`; Q1-Q32 are promoted as official draft records. Q1, Q2, Q4, Q5, Q6, Q10, Q16, Q18, Q19, Q22, Q23, Q24, Q27, Q28, Q30, and Q32 public diagram assets are already in `public/assets/diagrams/`.
 - 2022 Mathematics Advanced: 32/32 official draft records promoted; source-pack asset status is complete. Source PDFs are cached, text/candidates extracted, embedded-image metadata extracted, and 40 exam pages rendered under `var/rendered-pages/source-adv-2022/`. Q1, Q3, Q7, Q8, Q10, Q11, Q12, Q14, Q16, Q17, Q21, Q24, Q28, Q29, and Q31 public diagram assets are already in `public/assets/diagrams/`.
-- Next import work should start the 2021 Mathematics Advanced source pack. Start with `pnpm run data:download-sources -- source-adv-2021`, then text/candidate extraction, page rendering, and Section II promotion. Keep using `pnpm run data:report-coverage -- <source-pack-id>` as the compact progress check before opening large extracted files.
+- Next import work can start either the 2021 Mathematics Advanced source pack or one of the new 2025 non-Advanced packs. For example, start with `pnpm run data:download-sources -- source-std-2025`, `pnpm run data:download-sources -- source-ext1-2025`, or `pnpm run data:download-sources -- source-ext2-2025`, then text/candidate extraction, page rendering, and Section II promotion. Keep using `pnpm run data:report-coverage -- <source-pack-id>` as the compact progress check before opening large extracted files.
 - Keep promoted source records at `source.transcriptionStatus: "draft"` until an independent review checks prompt text, answers, marks, page refs, syllabus mappings, and assets against the official PDFs.
 
 ## 1. Validate local data
@@ -76,13 +79,33 @@ Candidate JSON is written to `var/question-candidates/`, which is ignored by git
 For each question:
 
 - Add a `questions[]` record in `src/data/hsc-math-advanced.json`.
+- Make `promptLatex` a near-verbatim replication of the exam question. Only change wording when required to repair PDF extraction artefacts, express mathematical notation in TeX, or replace a visual-only reference with an explicit asset reference such as "Options A-D are shown in the diagram."
+- Make `answerLatex` and `workingLatex` follow the official marking guide/sample answer as closely as possible. Do not compress marking-guide steps into a shorter LLM explanation; the LLM-built explanation belongs in the separate worked-solution sidecar.
 - Store reconstructable maths as TeX in `promptLatex`, `answerLatex`, and `workingLatex`.
 - Link the record to the source paper through `paperId`.
 - Link the record to one or more syllabus nodes through `syllabusNodeIds`.
-- Set `source.transcriptionStatus` to `draft` until the prompt, answer, marks, and source references are checked against the PDFs.
+- For multipart questions, make part boundaries visible in `workingLatex` and imported feedback by prefixing part-specific items with `(a)`, `(b)`, etc. The app groups these under part headings.
+- Set `source.transcriptionStatus` to `draft` until the prompt wording, answer steps, marks, source references, syllabus mapping, feedback, and assets are checked against the PDFs.
 - Set `source.transcriptionStatus` to `verified` only after review.
 
-## 7. Extract diagrams and images
+## 7. Ingest marking feedback
+
+Each source pack should include marking feedback as well as the exam paper and marking guide.
+
+```powershell
+pnpm run data:ingest-marking-feedback -- 2025 --write
+pnpm run data:ingest-marking-feedback -- --write
+```
+
+`data:ingest-marking-feedback` reads the extracted marking-feedback text in `var/extracted-text/`, groups part-level blocks back onto the parent question, and writes each question's `markingFeedback` card with:
+
+- `betterResponses` for the "In better responses, students were able to" bullets.
+- `improvementAreas` for the "Areas for students to improve include" bullets.
+- `sourceRef` for the originating feedback document.
+
+Marking feedback is usually available only for Section II, so Section I multiple-choice questions may legitimately have no feedback card. Treat extracted feedback as official feedback context, but review formula-heavy bullets against the rendered/source PDF before marking a question as `verified`.
+
+## 8. Extract diagrams and images
 
 Scan cached PDFs for embedded raster images:
 
@@ -125,7 +148,7 @@ Important source diagrams should be copied or recreated as static assets under `
 
 Do not mark a question as `verified` while required diagrams are still missing.
 
-## 8. 2025 import retrospective
+## 9. 2025 import retrospective
 
 The 2025 import worked best when the workflow used official PDF caches, raw candidate extraction for question and marking-guide text, rendered pages for vector diagrams, and a browser check after each batch. Whole visual blocks were more reliable than attempting to OCR or recreate graph-choice options.
 
@@ -138,10 +161,19 @@ For future years, parallelise in two lanes after PDFs are cached and candidates 
 
 These lanes can be assigned to sub-agents by year or by page range. A cheaper model is suitable for first-pass candidate summarisation, page/crop inventory, alt-text drafting, and syllabus-code lookup from the marking grid. Keep final question promotion, mathematical answer checking, and browser verification on the stronger model.
 
-## 9. Generate student explanations
+## 10. Generate student explanations
 
 After question extraction and review, generate draft worked explanations from the normalized corpus rather than from raw PDFs or candidate text.
 
-See `Docs/LLM_EXPLANATIONS.md` for the prompt, response schema, OpenRouter script shape, caching approach, review workflow, and end-user display plan.
+See `Docs/LLM_EXPLANATIONS.md` for the prompt, mathematical syntax contract, response schema, OpenRouter script shape, caching approach, review workflow, and end-user display plan.
 
-Draft explanations should be written to ignored `var/llm-explanations/` output first. Promote only reviewed explanations to the public sidecar data file, then run the standard validation and build checks.
+All worked-solution fields ending in `Latex` must use MathJax delimiters: inline maths as `\\( ... \\)`, display maths as `\\[ ... \\]`, no dollar delimiters, no raw TeX commands outside delimiters, and no plain ASCII equations such as `x = 2` or `P(X>c)`.
+
+Run the notation audit after generation and before treating the sidecar as usable:
+
+```powershell
+pnpm run data:audit-worked-solution-math
+pnpm run data:report-worked-solutions
+```
+
+The audit must report zero issues. If it flags raw TeX, dollar delimiters, corrupt TeX fragments, nested MathJax delimiters, or plain ASCII maths, regenerate or repair the affected records before running the standard validation and build checks.

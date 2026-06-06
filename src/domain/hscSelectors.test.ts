@@ -2,12 +2,16 @@ import { describe, expect, it } from "vitest";
 import { database, syllabusConversion } from "../services/hscDatabase";
 import {
   compareQuestionNumbers,
+  getCourseOptions,
   getDatasetSummary,
   getDisplaySyllabusNodesForQuestion,
+  getFilterOptionsForCourse,
   getLinkedSyllabusNodes,
+  getMarkingFeedbackCoverage,
   getQuestionCountsBySyllabusNode,
   getQuestionsForSyllabusNode,
   getSourcePackCoverage,
+  getSourcePackCoverageForCourse,
   getSyllabusNodesForView,
   getWorkedSolutionCoverage,
   queryQuestions
@@ -262,6 +266,41 @@ describe("HSC selectors", () => {
     ).toBeGreaterThan(0);
   });
 
+  it("loads first-class course structure for supported mathematics courses", () => {
+    expect(getCourseOptions(database).map((course) => course.id)).toEqual([
+      "advanced",
+      "standard",
+      "extension-1",
+      "extension-2",
+      "mathematics-archive"
+    ]);
+    expect(database.papers.find((paper) => paper.id === "ext1-2025")?.courseId).toBe("extension-1");
+    expect(database.sourcePacks.find((pack) => pack.id === "source-std-2025")?.paperIds).toEqual([
+      "std1-2025",
+      "std2-2025"
+    ]);
+  });
+
+  it("tracks the 2025 Standard and Extension source editions", () => {
+    const sourcePacks = getSourcePackCoverage(database);
+
+    expect(sourcePacks.map((pack) => pack.id)).toEqual(
+      expect.arrayContaining(["source-std-2025", "source-ext1-2025", "source-ext2-2025"])
+    );
+    expect(sourcePacks.find((pack) => pack.id === "source-std-2025")?.assets).toHaveLength(6);
+    expect(sourcePacks.find((pack) => pack.id === "source-ext1-2025")?.assets).toHaveLength(3);
+    expect(sourcePacks.find((pack) => pack.id === "source-ext2-2025")?.assets).toHaveLength(3);
+  });
+
+  it("filters question options and source packs by course", () => {
+    expect(getFilterOptionsForCourse(database, "standard").years).toEqual([]);
+    expect(getSourcePackCoverageForCourse(database, "standard").map((pack) => pack.id)).toEqual([
+      "source-std-2025"
+    ]);
+    expect(queryQuestions(database, { courseId: "standard" })).toEqual([]);
+    expect(queryQuestions(database, { courseId: "advanced", year: 2025 })).toHaveLength(31);
+  });
+
   it("maps existing 2017-tagged questions into the 2024 syllabus view", () => {
     const question = database.questions.find((candidate) => candidate.id === "adv-2025-q14-bivariate-data");
 
@@ -332,6 +371,17 @@ describe("HSC selectors", () => {
     expect(coverage.totalQuestions).toBe(database.questions.length);
     expect(coverage.workedSolutionCount).toBe(0);
     expect(coverage.missingCount).toBe(database.questions.length);
+  });
+
+  it("summarises marking feedback coverage", () => {
+    const coverage = getMarkingFeedbackCoverage(database);
+
+    expect(coverage.totalQuestions).toBe(database.questions.length);
+    expect(coverage.feedbackQuestionCount).toBe(86);
+    expect(coverage.byYear[2025]).toBe(21);
+    expect(coverage.byYear[2024]).toBe(21);
+    expect(coverage.byYear[2023]).toBe(22);
+    expect(coverage.byYear[2022]).toBe(22);
   });
 
   it("tracks source packs separately from imported question records", () => {

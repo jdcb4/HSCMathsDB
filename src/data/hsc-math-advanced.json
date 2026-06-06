@@ -1,9 +1,9 @@
 {
   "meta": {
-    "version": "0.3.0",
-    "title": "GoalCheck HSC Mathematics Advanced corpus",
+    "version": "0.7.0",
+    "title": "GoalCheck HSC mathematics corpus",
     "updatedAt": "2026-06-06",
-    "sourceSummary": "Validated corpus linking NSW Mathematics Advanced exam-pack sources, the Mathematics archive, 2017 syllabus nodes, and 2024 syllabus conversion nodes. Questions may be tagged under either syllabus era and resolved through the syllabus conversion map for display under the preferred syllabus view."
+    "sourceSummary": "Validated corpus linking NSW mathematics exam-pack sources, the Mathematics archive, 2017 syllabus nodes, and 2024 syllabus conversion nodes. Questions may be tagged under either syllabus era and resolved through the syllabus conversion map for display under the preferred syllabus view."
   },
   "sourceCollections": [
     {
@@ -21,6 +21,27 @@
       "scope": "Archived Mathematics 2 Unit era exam packs and related marking materials."
     },
     {
+      "id": "nesa-math-standard-papers",
+      "title": "Mathematics Standard HSC exam papers",
+      "url": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard",
+      "publisher": "NSW Education Standards Authority",
+      "scope": "Current Mathematics Standard exam packs, marking guidelines, and marker feedback."
+    },
+    {
+      "id": "nesa-math-extension-1-papers",
+      "title": "Mathematics Extension 1 HSC exam papers",
+      "url": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1",
+      "publisher": "NSW Education Standards Authority",
+      "scope": "Current Mathematics Extension 1 exam packs, marking guidelines, and marker feedback."
+    },
+    {
+      "id": "nesa-math-extension-2-papers",
+      "title": "Mathematics Extension 2 HSC exam papers",
+      "url": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-2",
+      "publisher": "NSW Education Standards Authority",
+      "scope": "Current Mathematics Extension 2 exam packs, marking guidelines, and marker feedback."
+    },
+    {
       "id": "nesa-math-advanced-syllabus",
       "title": "Mathematics Advanced Stage 6 syllabus",
       "url": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/mathematics/mathematics-advanced-stage-6-2017",
@@ -35,9 +56,92 @@
       "scope": "New syllabus content used for cross-syllabus question mapping."
     }
   ],
+  "courses": [
+    {
+      "id": "advanced",
+      "title": "Mathematics Advanced",
+      "shortTitle": "Advanced",
+      "syllabusEras": [
+        {
+          "id": "advanced-2017",
+          "label": "2017 syllabus"
+        },
+        {
+          "id": "advanced-2024",
+          "label": "2024 syllabus"
+        }
+      ],
+      "sourceCollectionIds": [
+        "nesa-math-advanced-papers",
+        "nesa-math-advanced-syllabus",
+        "nesa-math-advanced-2024-syllabus"
+      ]
+    },
+    {
+      "id": "standard",
+      "title": "Mathematics Standard",
+      "shortTitle": "Standard",
+      "syllabusEras": [
+        {
+          "id": "standard-2017",
+          "label": "2017 syllabus"
+        },
+        {
+          "id": "standard-2024",
+          "label": "2024 syllabus"
+        }
+      ],
+      "sourceCollectionIds": ["nesa-math-standard-papers"]
+    },
+    {
+      "id": "extension-1",
+      "title": "Mathematics Extension 1",
+      "shortTitle": "Extension 1",
+      "syllabusEras": [
+        {
+          "id": "extension-1-2017",
+          "label": "2017 syllabus"
+        },
+        {
+          "id": "extension-1-2024",
+          "label": "2024 syllabus"
+        }
+      ],
+      "sourceCollectionIds": ["nesa-math-extension-1-papers"]
+    },
+    {
+      "id": "extension-2",
+      "title": "Mathematics Extension 2",
+      "shortTitle": "Extension 2",
+      "syllabusEras": [
+        {
+          "id": "extension-2-2017",
+          "label": "2017 syllabus"
+        },
+        {
+          "id": "extension-2-2024",
+          "label": "2024 syllabus"
+        }
+      ],
+      "sourceCollectionIds": ["nesa-math-extension-2-papers"]
+    },
+    {
+      "id": "mathematics-archive",
+      "title": "Mathematics 2 Unit archive",
+      "shortTitle": "2 Unit archive",
+      "syllabusEras": [
+        {
+          "id": "mathematics-2-unit-archive",
+          "label": "Archive syllabus"
+        }
+      ],
+      "sourceCollectionIds": ["nesa-mathematics-archive"]
+    }
+  ],
   "sourcePacks": [
     {
       "id": "source-adv-2025",
+      "courseId": "advanced",
       "paperId": "adv-2025",
       "collectionId": "nesa-math-advanced-papers",
       "year": 2025,
@@ -76,7 +180,146 @@
       ]
     },
     {
+      "id": "source-std-2025",
+      "courseId": "standard",
+      "paperIds": ["std1-2025", "std2-2025"],
+      "collectionId": "nesa-math-standard-papers",
+      "year": 2025,
+      "courseName": "Mathematics Standard",
+      "title": "Mathematics Standard 2025 HSC exam pack",
+      "packPageUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2025",
+      "syllabusEra": "standard-2017",
+      "officialListStatus": "listed",
+      "importStatus": "not-started",
+      "importedQuestionCount": 0,
+      "assetStatus": "complete",
+      "notes": "Visible on the current Mathematics Standard exam-papers listing. The pack contains separate Standard 1 and Standard 2 exam papers, marking guidelines, and Section II marking feedback PDFs.",
+      "assets": [
+        {
+          "id": "source-std1-2025-paper",
+          "role": "exam-paper",
+          "label": "2025 Standard 1 exam paper",
+          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-10/2025-hsc-maths-standard-1.pdf",
+          "status": "linked"
+        },
+        {
+          "id": "source-std2-2025-paper",
+          "role": "exam-paper",
+          "label": "2025 Standard 2 exam paper",
+          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-10/2025-hsc-maths-standard-2.pdf",
+          "status": "linked"
+        },
+        {
+          "id": "source-std1-2025-marking-guide",
+          "role": "marking-guide",
+          "label": "2025 Standard 1 marking guidelines",
+          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-11/2025-hsc-maths-standard-1-mg.pdf",
+          "status": "linked"
+        },
+        {
+          "id": "source-std2-2025-marking-guide",
+          "role": "marking-guide",
+          "label": "2025 Standard 2 marking guidelines",
+          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-11/2025-hsc-maths-standard-2-mg.pdf",
+          "status": "linked"
+        },
+        {
+          "id": "source-std1-2025-feedback",
+          "role": "marking-feedback",
+          "label": "2025 Standard 1 marking feedback",
+          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-12/2025-hsc-maths-std-1-marking-feedback-section-ii.pdf",
+          "status": "linked"
+        },
+        {
+          "id": "source-std2-2025-feedback",
+          "role": "marking-feedback",
+          "label": "2025 Standard 2 marking feedback",
+          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-12/2025-hsc-maths-std-2-marking-feedback-section-ii.pdf",
+          "status": "linked"
+        }
+      ]
+    },
+    {
+      "id": "source-ext1-2025",
+      "courseId": "extension-1",
+      "paperId": "ext1-2025",
+      "collectionId": "nesa-math-extension-1-papers",
+      "year": 2025,
+      "courseName": "Mathematics Extension 1",
+      "title": "Mathematics Extension 1 2025 HSC exam pack",
+      "packPageUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2025",
+      "syllabusEra": "extension-1-2017",
+      "officialListStatus": "listed",
+      "importStatus": "not-started",
+      "importedQuestionCount": 0,
+      "assetStatus": "complete",
+      "notes": "Visible on the current Mathematics Extension 1 exam-papers listing. PDF assets are linked for future transcription.",
+      "assets": [
+        {
+          "id": "source-ext1-2025-paper",
+          "role": "exam-paper",
+          "label": "2025 exam paper",
+          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-10/2025-hsc-maths-extension-1.pdf",
+          "status": "linked"
+        },
+        {
+          "id": "source-ext1-2025-marking-guide",
+          "role": "marking-guide",
+          "label": "2025 marking guidelines",
+          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-11/2025-hsc-maths-extension-1-mg.pdf",
+          "status": "linked"
+        },
+        {
+          "id": "source-ext1-2025-feedback",
+          "role": "marking-feedback",
+          "label": "2025 marking feedback",
+          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-12/2025-hsc-maths-ext-1-marking-feedback-section-ii.pdf",
+          "status": "linked"
+        }
+      ]
+    },
+    {
+      "id": "source-ext2-2025",
+      "courseId": "extension-2",
+      "paperId": "ext2-2025",
+      "collectionId": "nesa-math-extension-2-papers",
+      "year": 2025,
+      "courseName": "Mathematics Extension 2",
+      "title": "Mathematics Extension 2 2025 HSC exam pack",
+      "packPageUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-2/2025",
+      "syllabusEra": "extension-2-2017",
+      "officialListStatus": "listed",
+      "importStatus": "not-started",
+      "importedQuestionCount": 0,
+      "assetStatus": "complete",
+      "notes": "Visible on the current Mathematics Extension 2 exam-papers listing. PDF assets are linked for future transcription.",
+      "assets": [
+        {
+          "id": "source-ext2-2025-paper",
+          "role": "exam-paper",
+          "label": "2025 exam paper",
+          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-10/2025-hsc-maths-extension-2.pdf",
+          "status": "linked"
+        },
+        {
+          "id": "source-ext2-2025-marking-guide",
+          "role": "marking-guide",
+          "label": "2025 marking guidelines",
+          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-11/2025-hsc-maths-extension-2-mg.pdf",
+          "status": "linked"
+        },
+        {
+          "id": "source-ext2-2025-feedback",
+          "role": "marking-feedback",
+          "label": "2025 marking feedback",
+          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-12/2025-hsc-maths-ext-2-marking-feedback-section-ii.pdf",
+          "status": "linked"
+        }
+      ]
+    },
+    {
       "id": "source-adv-2024",
+      "courseId": "advanced",
       "paperId": "adv-2024",
       "collectionId": "nesa-math-advanced-papers",
       "year": 2024,
@@ -94,6 +337,7 @@
     },
     {
       "id": "source-adv-2023",
+      "courseId": "advanced",
       "paperId": "adv-2023",
       "collectionId": "nesa-math-advanced-papers",
       "year": 2023,
@@ -111,6 +355,7 @@
     },
     {
       "id": "source-adv-2022",
+      "courseId": "advanced",
       "paperId": "adv-2022",
       "collectionId": "nesa-math-advanced-papers",
       "year": 2022,
@@ -128,6 +373,7 @@
     },
     {
       "id": "source-adv-2021",
+      "courseId": "advanced",
       "collectionId": "nesa-math-advanced-papers",
       "year": 2021,
       "courseName": "Mathematics Advanced",
@@ -143,6 +389,7 @@
     },
     {
       "id": "source-adv-2020",
+      "courseId": "advanced",
       "collectionId": "nesa-math-advanced-papers",
       "year": 2020,
       "courseName": "Mathematics Advanced",
@@ -158,6 +405,7 @@
     },
     {
       "id": "source-math-2019-archive",
+      "courseId": "mathematics-archive",
       "paperId": "math-2019-archive",
       "collectionId": "nesa-mathematics-archive",
       "year": 2019,
@@ -174,6 +422,7 @@
     },
     {
       "id": "source-math-2018-archive",
+      "courseId": "mathematics-archive",
       "collectionId": "nesa-mathematics-archive",
       "year": 2018,
       "courseName": "Mathematics",
@@ -189,6 +438,7 @@
     },
     {
       "id": "source-math-2017-archive",
+      "courseId": "mathematics-archive",
       "collectionId": "nesa-mathematics-archive",
       "year": 2017,
       "courseName": "Mathematics",
@@ -204,6 +454,7 @@
     },
     {
       "id": "source-math-2016-archive",
+      "courseId": "mathematics-archive",
       "collectionId": "nesa-mathematics-archive",
       "year": 2016,
       "courseName": "Mathematics",
@@ -219,6 +470,7 @@
     },
     {
       "id": "source-math-2015-archive",
+      "courseId": "mathematics-archive",
       "collectionId": "nesa-mathematics-archive",
       "year": 2015,
       "courseName": "Mathematics",
@@ -528,6 +780,7 @@
   "papers": [
     {
       "id": "adv-2025",
+      "courseId": "advanced",
       "year": 2025,
       "courseName": "Mathematics Advanced",
       "syllabusEra": "advanced-2017",
@@ -537,7 +790,52 @@
       "sourceStatus": "partially-transcribed"
     },
     {
+      "id": "std1-2025",
+      "courseId": "standard",
+      "year": 2025,
+      "courseName": "Mathematics Standard 1",
+      "syllabusEra": "standard-2017",
+      "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2025",
+      "paperUrl": "https://www.nsw.gov.au/sites/default/files/noindex/2025-10/2025-hsc-maths-standard-1.pdf",
+      "markingGuideUrl": "https://www.nsw.gov.au/sites/default/files/noindex/2025-11/2025-hsc-maths-standard-1-mg.pdf",
+      "sourceStatus": "source-linked"
+    },
+    {
+      "id": "std2-2025",
+      "courseId": "standard",
+      "year": 2025,
+      "courseName": "Mathematics Standard 2",
+      "syllabusEra": "standard-2017",
+      "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2025",
+      "paperUrl": "https://www.nsw.gov.au/sites/default/files/noindex/2025-10/2025-hsc-maths-standard-2.pdf",
+      "markingGuideUrl": "https://www.nsw.gov.au/sites/default/files/noindex/2025-11/2025-hsc-maths-standard-2-mg.pdf",
+      "sourceStatus": "source-linked"
+    },
+    {
+      "id": "ext1-2025",
+      "courseId": "extension-1",
+      "year": 2025,
+      "courseName": "Mathematics Extension 1",
+      "syllabusEra": "extension-1-2017",
+      "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2025",
+      "paperUrl": "https://www.nsw.gov.au/sites/default/files/noindex/2025-10/2025-hsc-maths-extension-1.pdf",
+      "markingGuideUrl": "https://www.nsw.gov.au/sites/default/files/noindex/2025-11/2025-hsc-maths-extension-1-mg.pdf",
+      "sourceStatus": "source-linked"
+    },
+    {
+      "id": "ext2-2025",
+      "courseId": "extension-2",
+      "year": 2025,
+      "courseName": "Mathematics Extension 2",
+      "syllabusEra": "extension-2-2017",
+      "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-2/2025",
+      "paperUrl": "https://www.nsw.gov.au/sites/default/files/noindex/2025-10/2025-hsc-maths-extension-2.pdf",
+      "markingGuideUrl": "https://www.nsw.gov.au/sites/default/files/noindex/2025-11/2025-hsc-maths-extension-2-mg.pdf",
+      "sourceStatus": "source-linked"
+    },
+    {
       "id": "adv-2024",
+      "courseId": "advanced",
       "year": 2024,
       "courseName": "Mathematics Advanced",
       "syllabusEra": "advanced-2017",
@@ -546,6 +844,7 @@
     },
     {
       "id": "adv-2023",
+      "courseId": "advanced",
       "year": 2023,
       "courseName": "Mathematics Advanced",
       "syllabusEra": "advanced-2017",
@@ -554,6 +853,7 @@
     },
     {
       "id": "adv-2022",
+      "courseId": "advanced",
       "year": 2022,
       "courseName": "Mathematics Advanced",
       "syllabusEra": "advanced-2017",
@@ -562,6 +862,7 @@
     },
     {
       "id": "math-2019-archive",
+      "courseId": "mathematics-archive",
       "year": 2019,
       "courseName": "Mathematics",
       "syllabusEra": "mathematics-2-unit-archive",
@@ -1217,6 +1518,20 @@
         "\\(h=t^2-8t+12=(t-4)^2-4\\), so at the turning point \\(t=4\\) and \\(h=-4\\).",
         "The axis of symmetry is \\(t=4\\). Since \\(t=0\\) gives \\(h=12\\), the matching point on the other side is \\(t=8\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2025 HSC marking feedback",
+        "betterResponses": [
+          "(a) find 𝑡 using the axis of symmetry",
+          "(a) substitute the value of 𝑡 into the equation of the quadratic to find ℎ.",
+          "(b) use symmetry to find the value of 𝑡",
+          "(b) substitute ℎ = 12 and correctly solve for 𝑡."
+        ],
+        "improvementAreas": [
+          "(a) recognising the difference between intercepts and the vertex.",
+          "(b) recognising the symmetrical shape of a quadratic",
+          "(b) solving a quadratic by factorising."
+        ]
+      },
       "tags": ["official-draft", "quadratic", "turning point", "axis of symmetry", "graph"],
       "assets": [
         {
@@ -1254,6 +1569,32 @@
         "\\(y=64.3-0.7(42)=34.9\\) minutes.",
         "The value \\(x=120\\) is outside the plotted data range, so the prediction would be an extrapolation."
       ],
+      "markingFeedback": {
+        "sourceRef": "2025 HSC marking feedback",
+        "betterResponses": [
+          "(a) demonstrate a strong understanding through accurately selecting the correct terminology to describe both form and direction",
+          "(a) identify that the form is linear and the distribution has a negative direction.",
+          "(b) identify the slope and 𝒚-intercept for the equation of the least-squares regression line",
+          "(b) clearly interpret the meaning of the slope and 𝒚-intercept within the context of the scenario, rather than simply explaining what slope and 𝒚-intercepts represent in general terms.",
+          "(c) correctly substitute 𝑥 = 42 into the equation to calculate the answer.",
+          "(d) convert 2 hours to minutes and substitute 𝑥 = 120 minutes into the formula",
+          "(d) identify that the graph goes below zero and cannot have a negative number of minutes of exercise",
+          "(d) recognise 2 hours is outside the dataset",
+          "(d) understand the meaning of the key word ‘extrapolate’."
+        ],
+        "improvementAreas": [
+          "(a) using the correct language for form and/or direction",
+          "(a) refining their knowledge of statistical terms and key words used in the syllabus for bivariate data analysis.",
+          "(b) interpreting the slope and 𝑦-intercept in context of the question with values shown",
+          "(b) interpreting the slope and 𝑦-intercept correctly, not just identifying the values",
+          "(b) understanding that the slope is not the same as the correlation coefficient.",
+          "(c) showing correct substitution into the formula",
+          "(c) understanding what each variable in an equation represents.",
+          "(d) understanding that the values outside the dataset are not reliable",
+          "(d) knowing extending the line of regression gives the negative answer for time",
+          "(d) knowing the meaning of the key word extrapolate."
+        ]
+      },
       "tags": [
         "official-draft",
         "bivariate data",
@@ -1297,6 +1638,33 @@
         "\\(P_1\\) is decreasing on \\((1.25,3.75)\\) and \\((6.25,8.75)\\).",
         "\\(P_2(t)=4\\sin\\left(\\frac{\\pi t}{10}\\right)\\) is decreasing for \\(5<t<10\\), so the common interval is \\(6.25<t<8.75\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2025 HSC marking feedback",
+        "betterResponses": [
+          "(a) find the value of 𝑘 correctly and relate it to the amplitude",
+          "(a) find the value of 𝑎 by correctly using knowledge of periodicity",
+          "(a) substitute the values of 𝑘 and 𝑎 into the sine function in terms of 𝑡.",
+          "(b) draw a correct sine graph with period 20 and amplitude 4",
+          "(b) draw half the sine graph in the domain 0 ≤ 𝑡 ≤ 10.",
+          "(c) recognise that solutions can be obtained by inspection rather than calculations",
+          "(c) indicate the solution on their graph and transfer this to mathematical notation",
+          "(c) read the scale on the number plane correctly to identify the correct end points of the domain",
+          "(c) identify the correct domain on the graph by excluding the stationary points."
+        ],
+        "improvementAreas": [
+          "(a) understanding the amplitude is the coefficient of the sine equation",
+          "(a) understanding that the value of constant 𝑎 can be calculated knowing that period = 2𝜋 𝑎 .",
+          "(b) calculating the period of the sine graph",
+          "(b) understanding that only part of the sine graph is drawn as the period is double the given domain",
+          "(b) drawing trigonometric graphs where the horizontal axis is in terms of integers, instead of radians or degrees",
+          "(b) understanding the coefficient of the sine equation is the amplitude of the graph.",
+          "(c) calculating the value of each subdivision on the grid",
+          "(c) understanding a stationary point is not part of the domain where the graph is decreasing",
+          "(c) using the correct words, such as ‘between’, to express that the end points are not included in the domain",
+          "(c) using the correct notation, including inequality symbols and interval notation, to express the correct domain where both graphs are decreasing",
+          "(c) ensuring the correct domain is stated where both graphs are decreasing."
+        ]
+      },
       "tags": ["official-draft", "sine model", "period", "amplitude", "decreasing intervals"],
       "assets": [
         {
@@ -1335,6 +1703,24 @@
         "\\(f(0)=0\\) and \\(f(2)=\\frac4{e^2}\\approx0.541\\).",
         "The sign of \\(f'(x)\\) is negative, then positive, then negative across \\(x=0\\) and \\(x=2\\), so there is a minimum at \\((0,0)\\) and a maximum at \\(\\left(2,\\frac4{e^2}\\right)\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2025 HSC marking feedback",
+        "betterResponses": [
+          "(a) differentiate the function correctly",
+          "(a) find both the 𝑥 and 𝑓(𝑥) values",
+          "(a) determine the nature of the stationary points using either the first derivative and a table of values, or via the second derivative.",
+          "(b) draw a smooth curve",
+          "(b) show the stationary points at (0,0) and (2, 0.54)",
+          "(b) apply the work done in Q16a into Q16b, in order to complete the correct graph."
+        ],
+        "improvementAreas": [
+          "(a) using the product or quotient rule correctly",
+          "(a) using a table to determine the nature of the stationary points or substituting the 𝑥-values into the second derivative and finding the answer to determine the nature",
+          "(a) factorising out the common factor of 𝑒𝑥 in the numerator and dividing through by 𝑒𝑥 in the denominator correctly, to obtain the correct derivative.",
+          "(b) understanding the given scale, drawing a smooth curve, labelling their stationary points",
+          "(b) finding the value of 𝑦 for each stationary point, following on from finding the value of 𝑥."
+        ]
+      },
       "tags": [
         "official-draft",
         "stationary points",
@@ -1377,6 +1763,20 @@
         "\\(y'=15x^2+4x^{-3}\\), so \\(y'(1)=15+4=19\\).",
         "\\(y-y_1=m(x-x_1)\\Rightarrow y+6=19(x-1)\\Rightarrow y=19x-25\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2025 HSC marking feedback",
+        "betterResponses": [
+          "differentiate correctly, particularly the term with the negative index",
+          "find the equation of the tangent by collecting the like terms of the equation correctly",
+          "substitute the point and gradient into the equation of a straight line to find 𝑦 = 19𝑥 − 25 using either form of the equation of a line."
+        ],
+        "improvementAreas": [
+          "identifying the most appropriate method of differentiation – working with negative indices",
+          "recognising the difference between finding the gradient of a tangent and locating a maximum or minimum point",
+          "knowing the difference between finding the derivative at a point (𝑓’(𝑎) = 𝑚) and solving to find value of 𝑥 that produces a particular derivative, 𝑓′(𝑥) = 𝑎",
+          "correctly substituting values into 𝑦 − 𝑦1 = 𝑚(𝑥 − 𝑥1)."
+        ]
+      },
       "tags": ["official-draft", "tangent", "derivative", "point-gradient form"],
       "assets": [],
       "source": {
@@ -1404,6 +1804,19 @@
         "\\(75r^3=2025\\Rightarrow r^3=27\\Rightarrow r=3\\).",
         "\\(p=75r=225\\) and \\(q=75r^2=675\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2025 HSC marking feedback",
+        "betterResponses": [
+          "form three equations connecting the terms of the geometric sequence, or form two equations connecting the terms 𝑝 and 𝑞 to solve for the required pronumerals",
+          "use the formula for the 𝑛𝑡ℎ term of a geometric sequence to establish the common ratio 𝑟 and the values of 𝑝 and 𝑞",
+          "use the formula for geometric sequence."
+        ],
+        "improvementAreas": [
+          "recognising a sequence as an arithmetic or geometric sequence",
+          "writing a pattern with the information given to try to establish a common ratio",
+          "using the Reference Sheet to determine the 𝑛𝑡ℎ term of a geometric sequence."
+        ]
+      },
       "tags": ["official-draft", "geometric sequence", "common ratio"],
       "assets": [],
       "source": {
@@ -1430,6 +1843,20 @@
         "Compose the functions: \\(g(f(x))=f(x)+5=\\frac{3}{x-1}+5\\).",
         "Because \\(\\frac{3}{x-1}\\ne0\\), the output cannot be \\(5\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2025 HSC marking feedback",
+        "betterResponses": [
+          "substitute correctly into the given expressions to find the composite function",
+          "sketch accurately the hyperbola 3 51x +− with labelled asymptotes 1x = and 5y =",
+          "recognise the vertical translation (5 units up) of the hyperbola 3 51x +−",
+          "use accurate notation ( ,5) (5, )−   or all real y, 5y  to state the range."
+        ],
+        "improvementAreas": [
+          "sketching the hyperbola 3 51x +−",
+          "considering the translations 3( ( )) 5 1g f x x=+ − and identifying and applying translations correctly)",
+          "using accurate mathematical notation to correctly express the range."
+        ]
+      },
       "tags": ["official-draft", "composite function", "range", "rational function"],
       "assets": [],
       "source": {
@@ -1457,6 +1884,19 @@
         "\\(21000(1.005)^{84}\\approx31927.76\\).",
         "Monthly deposit \\(=31927.76\\div104.07393\\approx306.78\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2025 HSC marking feedback",
+        "betterResponses": [
+          "calculate 𝑛 = 84 , 𝑟 = 6 12 % = 0.005 and identify from the future value table, the interest factor of 104.07393",
+          "use the future value formula correctly: 𝐴 = 21000(1 + 6 12 %) 84",
+          "calculate the monthly deposit correctly: 𝐴 ÷ 104.07393 = \\$306.78."
+        ],
+        "improvementAreas": [
+          "converting the interest rate (𝑟) and number of periods (𝑛) to the compounding period",
+          "recognising when to use the future value formula and when to use the provided future value interest factors tables",
+          "understanding when to divide by the interest factor and when to multiply."
+        ]
+      },
       "tags": ["official-draft", "annuity", "future value", "interest factor"],
       "assets": [],
       "source": {
@@ -1484,6 +1924,23 @@
         "Since \\(\\sin^2\\theta+\\cos^2\\theta=1\\), the fraction becomes \\(\\frac{1}{\\sin^2\\theta\\cos^2\\theta}\\).",
         "\\(\\frac{1}{\\sin^2\\theta\\cos^2\\theta}=\\frac{1}{\\sin^2\\theta}\\frac{1}{\\cos^2\\theta}=\\cosec^2\\theta\\sec^2\\theta\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2025 HSC marking feedback",
+        "betterResponses": [
+          "use the LHS to work through the proof",
+          "use a common denominator to connect the LHS",
+          "recognise (𝑠𝑖𝑛2𝜃 + 𝑐𝑜𝑠2𝜃)2 = 𝑠𝑖𝑛4𝜃 + 𝑐𝑜𝑠4𝜃 + 2𝑠𝑖𝑛2𝜃𝑐𝑜𝑠2𝜃",
+          "use 𝑠𝑖𝑛2𝜃 + 𝑐𝑜𝑠2𝜃 = 1",
+          "accurately apply trigonometric Pythagorean identities",
+          "provide a solution with a legible and clear sequence."
+        ],
+        "improvementAreas": [
+          "working with just one side of the proof",
+          "recognising that 𝑠𝑖𝑛 4 𝜃 + 𝑐𝑜𝑠 4 𝜃 ≠ (𝑠𝑖𝑛 2 𝜃 ⋅ 𝑐𝑜𝑠 2 𝜃)2",
+          "manipulating fractions and common denominators",
+          "showing each step when rearranging trigonometric functions."
+        ]
+      },
       "tags": ["official-draft", "trigonometric identity", "proof"],
       "assets": [],
       "source": {
@@ -1511,6 +1968,23 @@
         "At \\((6,11)\\), \\(11-k=(5-k)(1-k)=5-6k+k^2\\).",
         "\\(k^2-5k-6=0\\Rightarrow(k-6)(k+1)=0\\), so \\(k=6\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2025 HSC marking feedback",
+        "betterResponses": [
+          "establish an algebraical expression with a horizontal translation of 𝑘 and vertical translation of 𝑘",
+          "substitute the coordinates (6, 11) into their established equation and write the equation as a quadratic equation in terms of 𝑘",
+          "solve a quadratic equation correctly by factorisation or using the quadratic formula",
+          "recognise that 𝑘 is positive and conclude 𝑘 can only take positive value, and reject any negative value of 𝑘."
+        ],
+        "improvementAreas": [
+          "reading the question carefully and translating the function both horizontally and vertically by 𝑘 units",
+          "understanding that translated horizontally by 𝑘 units means substituting every 𝑥 term by 𝑥 − 𝑘",
+          "understanding that translated vertically by 𝑘 units means substituting 𝑦 by 𝑦 − 𝑘 or adding 𝑘 to the function",
+          "applying appropriate algebraic techniques to correctly expand brackets and collect like terms",
+          "substituting in the coordinates early to minimise errors in an algebraic expansion",
+          "understanding that translating a coordinate instead of a curve is not a thorough solution."
+        ]
+      },
       "tags": ["official-draft", "parabola", "translation", "graphing techniques"],
       "assets": [],
       "source": {
@@ -1539,6 +2013,33 @@
         "\\(A_n=800000(1.005)^n-5740\\frac{(1.005)^n-1}{0.005}=1148000-348000(1.005)^n\\).",
         "\\(400000=1148000-348000(1.005)^n\\Rightarrow n=\\frac{\\ln(748/348)}{\\ln(1.005)}\\approx153.4\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2025 HSC marking feedback",
+        "betterResponses": [
+          "(a) write the correct numerical expression for 𝐴1 in terms of the borrowed amount, interest applied at 1.005 and the repayment amount",
+          "(a) write 𝐴2 correctly in terms of 𝐴1 before expanding the factor 1.005.",
+          "(b) express 𝐴3 or 𝐴𝑛 as a series correctly",
+          "(b) apply the sum of the geometric sequence formula correctly to sum the geometric series in 𝐴𝑛",
+          "(b) use applicable algebraic techniques to expand the bracket and collect like terms.",
+          "(c) rearrange the formula correctly to make 1.005n the subject",
+          "(c) use logarithms correctly to solve an index equation",
+          "(c) establish the connection between parts (b) and (c) of the question, and apply the formula given in the previous part to answer the question."
+        ],
+        "improvementAreas": [
+          "(a) understanding the relationship between 𝐴1 and 𝐴2",
+          "(a) checking that large numbers have been repeatedly written with the correct number of zeros",
+          "(a) understanding how the amount remaining at the end of each month is calculated",
+          "(a) understanding the interest is charged on the principal for the whole month before the monthly repayment is subtracted.",
+          "(b) expressing 𝐴𝑛 as a series showing the correct first term and correct last term",
+          "(b) using the Reference Sheet to ensure the correct formula is applied to sum the geometric sequence",
+          "(b) using appropriate algebraic techniques to expand brackets and divide decimals.",
+          "(c) solving an index equation by making 1.005n the subject",
+          "(c) applying logarithms laws correctly to solve an index equation",
+          "(c) recognising they need to use the previous solution (from part (b))",
+          "(c) understanding how to use their calculator for logarithms",
+          "(c) rounding numerical solutions only at the final step of the solution."
+        ]
+      },
       "tags": ["official-draft", "reducing-balance loan", "geometric sequence", "logarithms"],
       "assets": [],
       "source": {
@@ -1566,6 +2067,22 @@
         "\\(P(W)=\\frac16(0.5)+\\frac13(0.4)+\\frac12(0.2)=\\frac{19}{60}\\).",
         "\\(P(A\\mid W)=\\frac{P(A\\cap W)}{P(W)}=\\frac{1/12}{19/60}=\\frac5{19}\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2025 HSC marking feedback",
+        "betterResponses": [
+          "convert the ratio 1: 2: 3 into accurate probability values for 𝑃(𝐴), 𝑃(𝐵) and 𝑃(𝐶)",
+          "construct a two-stage tree diagram with all correct values",
+          "multiply along the correct branches of the tree diagram to calculate 1( ) 0.5 6P A W = ",
+          "calculate 1 1 1 19( ) 0.5 0.4 0.26 3 2 60P Win =  +  +  =",
+          "interpret that the question requires the application of conditional probability."
+        ],
+        "improvementAreas": [
+          "converting ratios into accurate probability values",
+          "using a visual solution like a tree diagram to demonstrate their understanding",
+          "recognising key words in the question, such as ‘given’, which implies conditional probability",
+          "understanding that the word ‘respectively’ means ‘in the same order’."
+        ]
+      },
       "tags": ["official-draft", "conditional probability", "tree diagram", "selection ratio"],
       "assets": [],
       "source": {
@@ -1593,6 +2110,25 @@
         "\\(P(X\\le Q_1)=0.25\\Rightarrow\\int_1^{Q_1}\\frac1x\\,dx=0.25\\).",
         "\\(\\ln Q_1-\\ln1=0.25\\Rightarrow Q_1=e^{0.25}\\approx1.284\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2025 HSC marking feedback",
+        "betterResponses": [
+          "(a) use alternative methods to find the mode after the maximum turning point of the probability density function couldn’t be found using 2 1()fx x − =",
+          "(a) provide a sketch of 1()fx x= for 1 xe",
+          "(a) explain that 1()fx x= for 1 xe is decreasing for the given domain",
+          "(a) evaluate the end points 1(1) 11f == and 1( ) 0.37fe e= to determine the maximum value.",
+          "(b) apply the concept of ‘area under the probability density function’ to determine the 25th percentile",
+          "(b) integrate accurately and substitute limits appropriately",
+          "(b) rewrite logarithmic expressions in exponential form to solve for 𝑥."
+        ],
+        "improvementAreas": [
+          "(a) demonstrating understanding of how the shape of a probability density function relates to the mode",
+          "(a) using precise mathematical language, such as ‘decreasing’, ‘endpoint’, and ‘maximum value’, in justifications.",
+          "(b) understanding that definite integration determines percentiles of a probability density function",
+          "(b) selecting and justifying appropriate bounds of integration",
+          "(b) integrating accurately, showing clear use of limits."
+        ]
+      },
       "tags": ["official-draft", "continuous random variable", "pdf", "percentile", "logarithms"],
       "assets": [],
       "source": {
@@ -1621,6 +2157,28 @@
         "\\(x=76.2+2(6.8)=89.8\\text{ kg}\\).",
         "For females, \\(z=\\frac{x-\\mu}{\\sigma}\\) is larger because both \\(\\mu\\) and \\(\\sigma\\) are smaller, so the upper-tail percentage is less than \\(2.5\\%\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2025 HSC marking feedback",
+        "betterResponses": [
+          "(a) find the number of male sheep correctly using the given information: 12600 21 = 600",
+          "(a) express 15 male sheep as a percentage of 600 male sheep: 15 600 = 0.025 = 2.5%",
+          "(a) use the percentage to equate to a 𝑧-score of 2",
+          "(a) calculate 𝑥 kg using the normal distribution curve or the 𝑧-score formula.",
+          "(b) express 300 female sheep as a percentage of the 12 000 female sheep correctly",
+          "(b) recognise the female percentage (or 𝑧-score) is the same as the male percentage from part",
+          "(b) (a) of the question",
+          "(b) recognise and state that with a smaller mean and standard deviation, the percentage of female sheep greater than 𝑥 would be less than 2.5%, or that the 𝑧-score of 𝑥 would be greater than 2."
+        ],
+        "improvementAreas": [
+          "(a) calculating the number of male sheep correctly according to the given ratio",
+          "(a) identifying the difference between a 𝑧-score and a percentage",
+          "(a) using and labelling a diagram to help to understand where the values are placed within the normal distribution",
+          "(a) using the Reference Sheet to match the percentage break-up to a 𝑧-score.",
+          "(b) calculating the correct number and percentage of female sheep",
+          "(b) understanding the concepts, 𝑧-score, mean, standard deviation in more detail, and how these concepts affect each other",
+          "(b) providing an accurate explanation, justified with mathematical reasoning and calculations."
+        ]
+      },
       "tags": ["official-draft", "normal distribution", "z-score", "percentile"],
       "assets": [],
       "source": {
@@ -1650,6 +2208,21 @@
         "For \\(y=ax^2+c\\), \\(\\frac{dy}{dx}=2ax\\), so \\(2ae=1\\Rightarrow a=\\frac{1}{2e}\\).",
         "\\(e=a e^2+c=\\frac{1}{2e}e^2+c=\\frac{e}{2}+c\\Rightarrow c=\\frac{e}{2}\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2025 HSC marking feedback",
+        "betterResponses": [
+          "recognise that the tangent will have the same gradient as each function at the point of intersection",
+          "differentiate both functions and equate them to 1",
+          "use the point of intersection and the derivative of quadratic to solve for 𝑎",
+          "use the point of intersection, 𝑎 and the quadratic to solve for 𝑐."
+        ],
+        "improvementAreas": [
+          "differentiating logarithmic functions",
+          "recognising that they cannot equate a derivative to a function",
+          "solving equations correctly with fractions",
+          "recognising that 𝑒 is a number, not a variable."
+        ]
+      },
       "tags": ["official-draft", "tangent", "logarithm", "parabola", "derivative"],
       "assets": [
         {
@@ -1688,6 +2261,27 @@
         "The total area is \\(\\sum_{n=1}^{2025}|A_n|=\\pi(1+3+5+\\cdots+4049)\\).",
         "The sum of the first \\(2025\\) odd numbers is \\(2025^2\\), so the total area is \\(2025^2\\pi\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2025 HSC marking feedback",
+        "betterResponses": [
+          "(a) apply correctly the product rule ( )cos ( sin cos )d x x x x xdx = − + or ( )cos ( sin cos )d x x x x xdx − = −",
+          "(a) simplify expressions involving positive and negative terms correctly.",
+          "(b) recognise and use the result from part (a) of the question 2025 2025 00 sin [sin cos ]x x dx x x x  =−",
+          "(b) substitute correctly into the given function 2025x = and 0x = into 2025 0[sin cos ]x x x −",
+          "(c) use (2 1)nAn =− to determine the terms , 3 , 5 ,...(2 2025 1)    −",
+          "(c) recognise that the total area is given by the sum of an arithmetic sequence.",
+          "(c) correctly apply the sum of an arithmetic sequence formula 2025 ( 4049 )2 nS =+ or 2025[2 (2025 1) 2 ]2 nS =  + − "
+        ],
+        "improvementAreas": [
+          "(a) differentiating trigonometric functions correctly.",
+          "(b) recognising that ‘hence’ implies the use of a previous result",
+          "(b) recording of the function 2025 0[sin cos ]x x x =− and appropriate substitution accurately",
+          "(b) checking calculator mode (radians) when performing calculus operations.",
+          "(c) engaging with the formula provided as a guide in the question (2 1)nAn =−",
+          "(c) considering absolute value notation negates concerns about areas below the 𝑥-axis (2 1)nAn =−",
+          "(c) identifying the values of 𝑎, 𝑑, 𝑛 and/or 𝑙 clearly before substituting into the arithmetic sequence formula."
+        ]
+      },
       "tags": ["official-draft", "product rule", "definite integral", "area", "arithmetic series"],
       "assets": [
         {
@@ -1725,6 +2319,34 @@
         "The coefficient of \\(x^2\\) is positive, so the quadratic has a minimum turning point and the maximum on the domain is at an endpoint.",
         "\\(A(0)=\\frac{2500}{\\pi}\\approx796\\), while \\(A(100/3)=\\frac{\\sqrt3}{4}\\left(\\frac{100}{3}\\right)^2\\approx481\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2025 HSC marking feedback",
+        "betterResponses": [
+          "(a) manipulate the equation for circumference and perimeter to show 𝑟 = 100−3𝑥 2𝜋",
+          "(a) formulate the area of the equilateral triangle in terms of 𝑥",
+          "(a) combine the area of the circle and triangle",
+          "(a) manipulate surds and algebraic fractions.",
+          "(b) recognise that calculus is not required",
+          "(b) state the concavity of the quadratic referencing the coefficient of 𝑥2",
+          "(b) find the area at the extremities of the domain",
+          "(b) correctly find and determine the nature of the stationary point",
+          "(b) recognise the maximum area will occur at the extremities of the domain",
+          "(b) justify that 𝑥 can only exist in the domain 0 ≤ 𝑥 ≤ 100 3",
+          "(b) find the value of both endpoints 𝑥 = 0 and 𝑥 = 100 3 to show that the maximum area occurs when 𝑥 = 0."
+        ],
+        "improvementAreas": [
+          "(a) using a diagram",
+          "(a) manipulating algebra to change the subject of an equation",
+          "(a) using the sine rule or Pythagoras to find the area of the equilateral triangle",
+          "(a) ensuring the solution follows a clear sequence",
+          "(a) making sure that every step is neatly written in the solution to a question using the key word ‘show’.",
+          "(b) showing when a quadratic has a minimum or maximum turning point, from the value of the coefficient of 𝑥2",
+          "(b) differentiating functions with constant denominators",
+          "(b) checking stationary points",
+          "(b) recognising minimum stationary points mean domain extremities will be possible maximum values of the function",
+          "(b) recognising that calculus is not always required when the term maximum or minimum is used."
+        ]
+      },
       "tags": ["official-draft", "optimisation", "quadratic", "area", "modelling"],
       "assets": [],
       "source": {
@@ -1755,6 +2377,34 @@
         "\\(\\frac{3}{4\\ln2}<\\frac98\\Rightarrow24<36\\ln2\\Rightarrow2<3\\ln2=\\ln8\\).",
         "\\(e^2<8\\Rightarrow e<\\sqrt8=2\\sqrt2\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2025 HSC marking feedback",
+        "betterResponses": [
+          "(a) apply the formula for the trapezoidal rule correctly with two applications from the Reference Sheet",
+          "(a) find the value of 𝑏 − 𝑎, and the function values",
+          "(a) write correct numerical expressions to represent the required area.",
+          "(b) integrate the function correctly",
+          "(b) demonstrate an understanding of and the process to show that ln 1 2 = − ln 2",
+          "(b) substitute correctly into the integrand",
+          "(b) show all lines of working in putting together their solution.",
+          "(c) write the inequality the correct way, demonstrating an understanding of what the trapezoidal rule does in ‘overestimating’ the area (on this occasion)",
+          "(c) understand inequalities in this particular context",
+          "(c) use the earlier parts of Question 27 to manipulate the inequality."
+        ],
+        "improvementAreas": [
+          "(a) understanding the concept of 2 applications",
+          "(a) understanding how to find 𝑏 − 𝑎 for a trapezoidal rule problem",
+          "(a) using a table of values to help them correctly apply the process",
+          "(a) understanding the difference between function values and applications.",
+          "(b) showing their steps to submit a full solution to the problem",
+          "(b) applying correct integration steps in getting to their solution",
+          "(b) using the Reference Sheet to help them integrate exponential functions",
+          "(b) changing between equivalent logarithms.",
+          "(c) understanding that the area calculated using the trapezoidal rule is greater than the exact area",
+          "(c) understanding how the inequality changes",
+          "(c) showing their working sequentially and carefully, including each step of the process."
+        ]
+      },
       "tags": ["official-draft", "trapezoidal rule", "definite integral", "exponential", "inequality"],
       "assets": [
         {
@@ -1793,6 +2443,25 @@
         "Use the graph to estimate where \\(y=\theta\\) intersects \\(y=\\sin\\theta+\\frac{\\pi}{2}\\), giving \\(\\theta\\approx2.3\\).",
         "Arc length \\(=r\\theta\\approx10(2.3)=23\\) metres."
       ],
+      "markingFeedback": {
+        "sourceRef": "2025 HSC marking feedback",
+        "betterResponses": [
+          "(a) find the equation correctly, linking the different areas involved in finding the shaded area",
+          "(a) obtain the 3 relevant areas using correct formulae from the Reference Sheet (using radian measure)",
+          "(a) understand and calculate the area of ¼ of a circle to complete their solution.",
+          "(b) draw the line 𝑦 = 𝜃",
+          "(b) find 𝜃 = 2.3",
+          "(b) substitute 𝜃 = 2.3 into the formula 𝑙 = 𝑟𝜃 to find the arc length."
+        ],
+        "improvementAreas": [
+          "(a) substituting the radius into the formulae for each area",
+          "(a) knowing the formulae of the 3 areas and how to connect them",
+          "(a) manipulating the equation to find the desired solution.",
+          "(b) using part (a) of the question for part (b) and seeing the connection",
+          "(b) understanding they are looking for 𝜃, not 𝑦",
+          "(b) drawing a line onto the graph."
+        ]
+      },
       "tags": [
         "official-draft",
         "sector area",
@@ -1847,6 +2516,36 @@
         "For \\(\\theta=\\angle OFY\\), \\(\\frac{\\sin\\theta}{h/\\sqrt3}=\\frac{\\sin45^\\circ}{h}\\), so \\(\\theta\\approx24^\\circ\\).",
         "Bearing of \\(O\\) from \\(F\\) \\(=45^\\circ-24^\\circ\\approx021^\\circ\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2025 HSC marking feedback",
+        "betterResponses": [
+          "(a) recognise that ∆ 𝑇𝑂𝑌 is right angled and choose the appropriate trigonometric ratio to show the required statement",
+          "(a) know and use exact values",
+          "(a) establish the correct ratio for the tangent of the given angle",
+          "(a) state the tangent ratio tan 60 / h OY= with the angle and sides specifically mentioned.",
+          "(b) use the cosine rule correctly using ℎ and the angle 45° to find ℎ",
+          "(b) recognise that ∆ 𝑇𝑂𝐹 is an isosceles triangle and that ∠𝑂𝑌𝐹 was 45°, from the given bearing",
+          "(b) apply the cosine rule correctly in ∆ 𝐹𝑂𝑌 to find the value of ℎ",
+          "(b) select the correct formula from the Reference Sheet and obtain and solve the resulting quadratic equation, accepting the positive value and rejecting the negative value.",
+          "(c) find angle OFY using the sine rule",
+          "(c) recognise that angle OYF is 45°",
+          "(c) recognise the angle required to provide the most efficient method to find a bearing",
+          "(c) correctly apply the sine rule to find the required angle"
+        ],
+        "improvementAreas": [
+          "(a) showing all working out in answering a question with the key word ‘show’",
+          "(a) using right angled trigonometric ratios instead of the sine rule to find the required result.",
+          "(b) using the quadratic formula correctly to evaluate the required height",
+          "(b) moving between surds with irrational and rational denominators without error",
+          "(b) manipulating algebraic expressions and equations, which include fractions and surds",
+          "(b) unless it is stated in the question or can be proved, not assuming the existence of right angles.",
+          "(c) recognising that an angle may not be 90°",
+          "(c) applying simple trigonometric ratios accurately",
+          "(c) creating well‑annotated triangles or labelling existing diagrams to support calculations",
+          "(c) demonstrating how angles and bearings relate to each other",
+          "(c) copying the formula to be used accurately from the Reference Sheet and ensuring values are substituted correctly."
+        ]
+      },
       "tags": ["official-draft", "angle of elevation", "cosine rule", "sine rule", "bearing"],
       "assets": [
         {
@@ -1883,6 +2582,23 @@
         "The first positive solutions of \\(\\cos u=\\frac12\\) are \\(\\frac{\\pi}{3}\\), \\(\\frac{5\\pi}{3}\\), and \\(\\frac{7\\pi}{3}\\).",
         "For exactly two solutions, include \\(\\frac{5\\pi}{3}\\) but exclude \\(\\frac{7\\pi}{3}\\): \\(\\frac{5\\pi}{3}\\le2\\pi p<\\frac{7\\pi}{3}\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2025 HSC marking feedback",
+        "betterResponses": [
+          "use exact values for cosine to find the related angle",
+          "recognise that 5𝜋 3 and 7𝜋 3 are the second and third solutions to cos 𝑥 = 1 2 respectively",
+          "calculate exact values in radians for the basic equation cos 𝑥 = 1 2",
+          "express answers in radians rather than degrees",
+          "demonstrate the knowledge of varying periods for trigonometric graphs",
+          "state two solutions within the standard domain of [0,2pi]."
+        ],
+        "improvementAreas": [
+          "finding solutions to simple trigonometric equations with specified domains",
+          "calculating the correct angles for cos 𝑥 = 1 2 in the correct quadrants",
+          "converting the required angles from degrees to radians",
+          "understanding the relationship between 𝑝, the scale factor for horizontal dilation and the period of a trigonometric function."
+        ]
+      },
       "tags": ["official-draft", "cosine equation", "parameter", "solution count"],
       "assets": [],
       "source": {
@@ -2222,6 +2938,21 @@
         "At \\(x=1\\), the graph has a horizontal point of inflection, so both the first and second derivative are zero.",
         "At \\(x=5\\), the graph is increasing and concave up."
       ],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC marking feedback",
+        "betterResponses": [
+          "relate the gradient of the curve to the first derivative and the concavity of the curve to the second derivative",
+          "recognise that if the curve is increasing, the first derivative is positive and if the curve is decreasing, the first derivative is negative",
+          "use the correct words from the given list to describe the sign of the first and the second derivative at each point",
+          "understand the concepts of concavity and points of inflection and their relationship with the second derivative."
+        ],
+        "improvementAreas": [
+          "recognising the relationships between the graph of the original function with the signs of the first and second derivative without having to sketch the first and second derivative functions",
+          "understanding the relationship between the signs of the first and second derivatives and the function’s gradient (slope of the tangent) and concavity",
+          "improving their understanding of the difference between gradient and concavity",
+          "understanding the second derivative at a point as concave up or concave down."
+        ]
+      },
       "tags": ["official-draft", "derivative sign", "concavity", "graph interpretation"],
       "assets": [
         {
@@ -2258,6 +2989,18 @@
         "\\(50+(n-1)7=2024\\Rightarrow7(n-1)=1974\\Rightarrow n=283\\).",
         "\\(S_n=\\frac{n}{2}(a+l)=\\frac{283}{2}(50+2024)=293471\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC marking feedback",
+        "betterResponses": [
+          "identify the series as an arithmetic series",
+          "correctly find the number for the last term",
+          "use an appropriate sum formula to evaluate the series."
+        ],
+        "improvementAreas": [
+          "using the reference sheet to apply the correct sum formula",
+          "refining their algebraic skills in solving simple equations."
+        ]
+      },
       "tags": ["official-draft", "arithmetic series", "sequence", "sum"],
       "assets": [],
       "source": {
@@ -2286,6 +3029,20 @@
         "The factor \\(0.97\\) represents a yearly change of \\(-3\\%\\), so population \\(K\\) decreases by \\(3\\%\\) each year.",
         "\\(34(1.055)^{50}\\approx494.426\\), so the predicted population \\(W\\) is approximately \\(494\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC marking feedback",
+        "betterResponses": [
+          "correctly read the initial value of population B from the graph",
+          "determine the population when 𝑥 = 50",
+          "understand that 1.055 meant a growth of 5.5% and 0.97 was a decrease of 3%",
+          "interpret the exponential growth, base > 1, relate to a standard annualised percentage increase as (1 + 𝑟) compound growth per time-period, and interpret the exponential decay, base < 1, relate to a standard annualised percentage decrease as (1 − 𝑟) compound growth per time-period."
+        ],
+        "improvementAreas": [
+          "distinguishing between the percentage change and the factor (1 ± 𝑟)",
+          "identifying which line in the diagram was W and which was K by interpreting the information given",
+          "understanding that 5.5% increase is not 105.5% and understanding that 3% decrease is not 97%."
+        ]
+      },
       "tags": ["official-draft", "exponential model", "percentage change", "initial value"],
       "assets": [
         {
@@ -2323,6 +3080,25 @@
         "The upper curve on the interval is \\(y=5-x^2\\), so the area is \\(\\int_{-1}^{2}\\left(5-x^2-(x-1)^2\\right)\\,dx\\).",
         "\\(\\int_{-1}^{2}(4+2x-2x^2)\\,dx=\\left[4x+x^2-\\frac{2x^3}{3}\\right]_{-1}^{2}=9\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC marking feedback",
+        "betterResponses": [
+          "(a) interpret the question and establish simultaneous equations",
+          "(a) find the 𝑥-coordinates by factorising the quadratic equation.",
+          "(b) write an integrand for the area between two curves",
+          "(b) integrate the resulting expression either as a simplified expression or two separate integrals",
+          "(b) substitute correct values into the integral and perform the necessary calculations accurately."
+        ],
+        "improvementAreas": [
+          "(a) simplifying algebraic equations",
+          "(a) correctly factorising a quadratic equation",
+          "(a) checking their solutions.",
+          "(b) identifying which function was the top curve and which was the bottom curve within the integral",
+          "(b) simplifying the algebraic expression before integrating",
+          "(b) explicitly showing substitutions into the anti-derivative with the use of brackets",
+          "(b) evaluating their working if their answer is negative."
+        ]
+      },
       "tags": ["official-draft", "intersection", "area between curves", "definite integral"],
       "assets": [
         {
@@ -2360,6 +3136,21 @@
         "\\(300-7.5t=0\\Rightarrow t=40\\).",
         "\\(V(40)=300(40)-3.75(40)^2+350=6350\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC marking feedback",
+        "betterResponses": [
+          "solve for time when the rate was zero",
+          "demonstrate their understanding by finding the anti-derivative function from the given derivative",
+          "substitute 𝑡 into the anti-derivative function to calculate the required volume",
+          "show clear logical working out to reflect their thinking process."
+        ],
+        "improvementAreas": [
+          "ensuring their solution follows a clear sequence",
+          "understanding they are integrating with respect to 𝑡 rather than 𝑥",
+          "evaluating the constant of integration",
+          "substituting values correctly into their volume expression."
+        ]
+      },
       "tags": ["official-draft", "rate of change", "integration", "initial value"],
       "assets": [],
       "source": {
@@ -2388,6 +3179,19 @@
         "The median for Garden A is higher than the median for Garden B.",
         "Garden A has both a wider box and a longer overall range than Garden B."
       ],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC marking feedback",
+        "betterResponses": [
+          "explicitly compare the skewness, central tendency, and spread of the data from each garden",
+          "interpret the boxplots to use specific values for median, range or inter-quartile range to support their comparisons",
+          "use specific language to describe the shape of a distribution, for example, ‘positively skewed’ or ‘negatively skewed’."
+        ],
+        "improvementAreas": [
+          "ensuring that the three areas of skewness, central tendency, and spread were addressed in their response",
+          "recognising that the median is the only measure of central tendency that can be deduced from a box-plot",
+          "identifying positive and negative skew in data and understanding the difference between the two."
+        ]
+      },
       "tags": ["official-draft", "box plot", "skewness", "median", "spread"],
       "assets": [
         {
@@ -2426,6 +3230,32 @@
         "\\(\\frac{dV}{dt}=6.5ke^{-kt}\\).",
         "\\(\\frac{dV}{dt}\\big|_{t=2}=6.5ke^{-2k}\\approx1.195\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC marking feedback",
+        "betterResponses": [
+          "(a) correctly draw an increasing, concave down curve starting from the origin and approaching the asymptote at 𝑉 = 6.5",
+          "(a) show an asymptote at 𝑉 = 6.5",
+          "(a) label the 𝑉 and 𝑡 axes.",
+          "(b) correctly substitute 𝑉 = 2.6 and 𝑡 = 1 into the given formula",
+          "(b) isolate 𝑒−𝑘 and then use logarithms to solve the resulting equation",
+          "(b) give the value of 𝑘 to the requested number of decimal places.",
+          "(c) expand the function before differentiating",
+          "(c) correctly differentiate the exponential function",
+          "(c) show the substitution of 𝑘 and 𝑡 = 2 before calculating the value of the derivative."
+        ],
+        "improvementAreas": [
+          "(a) recognising that an exponential curve is a smooth curve with no straight-line sections",
+          "(a) understanding that time is positive and should go on the horizontal axis",
+          "(a) understanding that an exponential function has an asymptote",
+          "(a) recognising the transformations that have taken place to the 𝑉 = 𝑒𝑡 curve.",
+          "(b) showing every step in their solution to making 𝑘 the subject",
+          "(b) applying logarithm rules to solve exponential equations, particularly with those involving negative indices.",
+          "(c) identifying that finding a rate at a given time means to differentiate",
+          "(c) using the reference sheet to help them differentiate exponential functions",
+          "(c) knowing the difference between instantaneous rate of change and average rate of change",
+          "(c) finding the derivative before any substitutions of variables takes place."
+        ]
+      },
       "tags": ["official-draft", "exponential model", "asymptote", "rate of change", "derivative"],
       "assets": [],
       "source": {
@@ -2454,6 +3284,25 @@
         "\\(1-(0.85)^n>0.8\\Rightarrow(0.85)^n<0.2\\).",
         "\\(n>\\frac{\\ln0.2}{\\ln0.85}\\approx9.90\\), so \\(n=10\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC marking feedback",
+        "betterResponses": [
+          "(a) use probability of complimentary events to answer the question",
+          "(a) demonstrate their understanding of product rule for multi-stage events.",
+          "(b) generate the correct inequality 1 − 0.85𝑛 > 0.8 from the question",
+          "(b) use algebra skills when solving inequalities",
+          "(b) use logarithms to solve the equation",
+          "(b) conclude the solution by answering the question after showing their inequality or by trial and error."
+        ],
+        "improvementAreas": [
+          "(a) using the concept of complimentary events",
+          "(a) using the product rule correctly",
+          "(a) recognising the difference between 1 − 0.152 and (1 − 0.15)2.",
+          "(b) understanding probability calculations for multistage events",
+          "(b) manipulating their inequality to make 𝑛 the subject by using logarithms",
+          "(b) concluding the solution through answering the question after showing their inequality."
+        ]
+      },
       "tags": ["official-draft", "probability", "complement", "logarithm", "inequality"],
       "assets": [],
       "source": {
@@ -2483,6 +3332,22 @@
         "At \\(x=\\frac32\\), \\(y=\\frac5{16}\\), and \\(y''=9>0\\), so this point is a local minimum.",
         "At \\(x=1\\), \\(y=1\\), giving the other point of inflection \\((1,1)\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC marking feedback",
+        "betterResponses": [
+          "find the first and second derivatives correctly",
+          "determine the nature of the stationary points using either the first or second derivative test",
+          "identify the difference between a horizontal point of inflection and a vertical point of inflection",
+          "justify a change in concavity",
+          "clearly provide a sketch of the function."
+        ],
+        "improvementAreas": [
+          "correctly solving equations using the null factor",
+          "justifying the nature of a stationary point",
+          "justifying a change in concavity",
+          "clearly sketching graphs using calculus."
+        ]
+      },
       "tags": ["official-draft", "quartic", "stationary point", "point of inflection", "sketch"],
       "assets": [],
       "source": {
@@ -2511,6 +3376,25 @@
         "Using \\(AB=100\\), \\(\\cos\\angle ACB=\\frac{AC^2+BC^2-AB^2}{2(AC)(BC)}\\).",
         "\\(\\angle ACB\\approx104^\\circ\\). Since \\(A\\) is due east of \\(C\\), the bearing of \\(B\\) from \\(C\\) is \\(090^\\circ+104^\\circ=194^\\circ\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC marking feedback",
+        "betterResponses": [
+          "(a) recognise that ∆𝑇𝐶𝐴 is a right-angled triangle and choose the appropriate trigonometric ratio to find the required side",
+          "(a) correctly apply the sine rule to find the required side.",
+          "(b) show all working out in answering the question",
+          "(b) identify that the length of BC needed to be calculated",
+          "(b) recognise that the cosine rule for angles needed to be used, showing all relevant substitutions",
+          "(b) add 90° to their calculated angle for ACB to find the required bearing."
+        ],
+        "improvementAreas": [
+          "(a) choosing the most appropriate trigonometric rule for a problem",
+          "(a) realising that if the unknown is in the denominator, then division is needed to complete the solution",
+          "(a) realising the most efficient way to answer right angle triangle questions is through using trigonometric ratios found on the reference sheet.",
+          "(b) accurately copying the formulae to be used from the reference sheet and ensuring values are substituted correctly",
+          "(b) ensuring the question is fully completed, including finding the required bearing",
+          "(b) using the number of marks allocated to the question as a guide for the number of separate steps involved in the solution."
+        ]
+      },
       "tags": ["official-draft", "angle of elevation", "bearing", "cosine rule", "right triangle"],
       "assets": [
         {
@@ -2547,6 +3431,20 @@
         "Points for both groups continue to show increasing length beyond about \\(4\\) years.",
         "For similar ages, the female points are generally above the male points, indicating greater length."
       ],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC marking feedback",
+        "betterResponses": [
+          "successfully list at least three unique observations about anacondas",
+          "interpret the scatterplot to make observations about lengths, growth rates, and trends before and after maturity",
+          "use clear mathematical language in their response – for example, increasing at a decreasing rate."
+        ],
+        "improvementAreas": [
+          "recognising that the data cannot be used to make predictions about the length of anacondas after 10 years",
+          "understanding that the data represents the lengths of many different anacondas, and not a single anaconda over time",
+          "ensuring that they provide observations that were unique from one another",
+          "understanding how to take an observation from a scatterplot about the subject of the data rather than the data itself."
+        ]
+      },
       "tags": ["official-draft", "scatterplot", "bivariate data", "association", "contextual interpretation"],
       "assets": [
         {
@@ -2586,6 +3484,29 @@
         "\\(2\\times\\frac{0.25}{2}\\left(0+0.6931+2(0.0606+0.2231+0.4463)\\right)=0.538275\\).",
         "Because \\(f\\) is concave up on the interval, the straight line segments used in the trapezoidal rule lie above the curve."
       ],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC marking feedback",
+        "betterResponses": [
+          "(a) correctly find the first and second derivative",
+          "(a) use the second derivative to prove the function was concave up",
+          "(a) solve the inequality using an appropriate graph or equivalent justification.",
+          "(b) use the trapezoidal rule correctly from the reference sheet",
+          "(b) realise that the final answer needed to be doubled",
+          "(b) show their substitution and carefully use the numbers from the given table.",
+          "(c) relate the concavity of a given function to the trapezoidal rule",
+          "(c) articulate their responses clearly with mathematical terms."
+        ],
+        "improvementAreas": [
+          "(a) using the reference sheet to correctly differentiate a logarithmic function or use the quotient rule",
+          "(a) recognising that the second derivative is needed to prove concavity",
+          "(a) correctly solving inequalities using a graph",
+          "(a) ensuring their solution is legible and follows a clear sequence.",
+          "(b) knowing how to use the formula on the reference sheet",
+          "(b) transcribing values from the table accurately.",
+          "(c) understanding how the trapezia are drawn on the curve to decide if is an under or over estimation of area",
+          "(c) writing clearly using correct mathematical terms."
+        ]
+      },
       "tags": ["official-draft", "concavity", "second derivative", "trapezoidal rule", "area estimate"],
       "assets": [
         {
@@ -2624,6 +3545,30 @@
         "For the top \\(10\\%\\), the cumulative probability is approximately \\(0.9\\). The table value closest to this is \\(0.9032\\) at \\(z=1.3\\).",
         "\\(x=58+1.3(15)=77.5\\), so the required score is approximately \\(78\\) if scores are whole numbers."
       ],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC marking feedback",
+        "betterResponses": [
+          "(a) calculate the correct 𝑧‑score using the formula provided",
+          "(a) use the table to obtain the correct probability",
+          "(a) recognise that 50% of the scores lie below the mean.",
+          "(b) compare data points in relation to the symmetry of a normal distribution",
+          "(b) use mathematical terminology, such as ‘symmetry’ or ‘even function’ in their response",
+          "(b) use diagrams to demonstrate their understanding.",
+          "(c) identify a 𝑧‑score with a cumulative probability of approximately 90%",
+          "(c) substitute into the 𝑧‑score formula to calculate a score."
+        ],
+        "improvementAreas": [
+          "(a) understanding that a 𝑧‑score does not represent a probability",
+          "(a) recognising the relevance of the score of 58 in relation to the score 70",
+          "(a) understanding that the empirical rule cannot be used to solve problems with non-integer 𝑧‑scores.",
+          "(b) incorporating appropriate calculations with worded responses",
+          "(b) understanding the meaning of a negative 𝑧‑score in relation to a normal distribution",
+          "(b) recognising the symmetrical nature of the normal distribution, and how it relates to the proportion of scores on either side of the mean",
+          "(b) understanding 𝑧‑score are not only integer values and probabilities are not just the empirical values.",
+          "(c) applying complementary probabilities",
+          "(c) understanding that a probability is not a 𝑧‑score, and vice versa."
+        ]
+      },
       "tags": ["official-draft", "normal distribution", "z-score", "symmetry", "percentile"],
       "assets": [
         {
@@ -2661,6 +3606,25 @@
         "\\(FV=80(1.005)\\frac{(1.005)^{24}-1}{1.005-1}\\approx2044.73\\).",
         "\\(A=2044.73\\div80\\approx25.559\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC marking feedback",
+        "betterResponses": [
+          "(a) demonstrate how to model the problem by establishing a series",
+          "(a) demonstrate three terms in the series to determine the common ratio",
+          "(a) establish a general series to model the situation",
+          "(a) apply their understanding of geometric progressions to find the sum of the series.",
+          "(b) establish the connection between Q24a and the future value table shown in Q24b",
+          "(b) divide the annuity by the principal amount."
+        ],
+        "improvementAreas": [
+          "(a) demonstrating understanding of how financial series are built term by term",
+          "(a) understanding the difference between money being deposited at the start and the end of a month",
+          "(a) displaying enough terms in the series to prove the existence of a geometric series",
+          "(a) correctly applying the sum of geometric series formula.",
+          "(b) understanding how the values in annuity tables are calculated",
+          "(b) understanding the connection between future value tables and the sum of geometric series."
+        ]
+      },
       "tags": ["official-draft", "annuity", "compound interest", "future value"],
       "assets": [],
       "source": {
@@ -2690,6 +3654,37 @@
         "For the median, \\(m-\\frac{m^2}{4}=\\frac12\\Rightarrow m^2-4m+2=0\\).",
         "Since \\(0<m<2\\), \\(m=2-\\sqrt2\\approx0.586\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC marking feedback",
+        "betterResponses": [
+          "(a) identify that the area enclosed by 𝑓(𝑥) = 1 − 𝑥 ℎ was equal to 1",
+          "(a) find an expression for the area by recognising that it represented a right-angled triangle or through integration",
+          "(a) solve their expression efficiently to find the value of ℎ",
+          "(a) recognise that the area under the probability density function represents the probability",
+          "(a) integrate a probability density function and equate it to 1 to determine the upper limit of a function.",
+          "(b) identify the cumulative distribution function as a piecewise function",
+          "(b) find the correct cumulative distribution function and correctly graph it across the whole domain of the function",
+          "(b) understand that for 𝑥 > ℎ, the graph continues as a straight line of 𝑦 = 1.",
+          "(c) solve a quadratic equation by using the quadratic formula or completing the square",
+          "(c) identify that the median occurs when the cumulative distribution function is equal to 0.5",
+          "(c) distinguish between the two answers obtained from solving the quadratic equation and reject the answer that did not fit into the given domain",
+          "(c) identify the need to make their quadratic equation from part (b) equal to 0.5 to solve this question."
+        ],
+        "improvementAreas": [
+          "(a) improving manipulation of algebraic equations and not making errors with pronumerals or multiplying by 2",
+          "(a) knowing that the area under the curve of a probability density function is 1𝑢2",
+          "(a) understanding that the probability as the area under the graph of the probability density function using the notation 𝑃(𝑋 ≤ ℎ) = ∫ 𝑓(𝑥)𝑑𝑥 ℎ 𝑎 = 1 to determine the upper limit ℎ",
+          "(a) recognising the probability density function given was a straight line and determine the upper limit by applying area of a triangle.",
+          "(b) recognising the limits of the integral (cumulative distribution function) needs to go from the lowest value of the domain to an arbitrary value of 𝑥",
+          "(b) sketching correctly all 3 parts of the cumulative distribution function",
+          "(b) substituting the value of ℎ found in part 1 into 𝑓(𝑥)",
+          "(b) identifying that the value of h in part (a) is used in this question to find a formula for the cumulative distribution function.",
+          "(c) using of the quadratic formula to solve the problem",
+          "(c) understanding that at the median, the value of the cumulative distribution function is equal to 0.5 and not the value of 𝑥",
+          "(c) not substituting 𝑥 = 0.5 into the cumulative distribution function to find the median",
+          "(c) checking the validity of their solution within the condition 0 ≤ 𝑥 ≤ 2"
+        ]
+      },
       "tags": [
         "official-draft",
         "probability density function",
@@ -2724,6 +3719,20 @@
         "From the table, the factor for \\(n=180\\), \\(r=0.002\\) is \\(151.036\\).",
         "\\(PV=1200(225.430)+800(151.036)=391344.80\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC marking feedback",
+        "betterResponses": [
+          "convert the time periods and interest rate to monthly values",
+          "identify the appropriate interest factors from the table",
+          "break down the calculations for the different withdrawals using values from the table",
+          "use geometric series to model the two different withdrawals."
+        ],
+        "improvementAreas": [
+          "understanding that the table was provided to assist with calculations",
+          "understanding the concept of present value",
+          "completing more practice in solving financial problems using tables."
+        ]
+      },
       "tags": ["official-draft", "present value", "annuity", "compound interest", "withdrawals"],
       "assets": [],
       "source": {
@@ -2752,6 +3761,26 @@
         "Use \\(\\tan^2x=\\sec^2x-1\\) to write the integrand as \\(x^2\\sec^2x+2x\\tan x-x^2+1\\).",
         "\\(\\int (x\\tan x+1)^2\\,dx=x^2\\tan x-\\frac{x^3}{3}+x+C\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC marking feedback",
+        "betterResponses": [
+          "(a) identify the use of product rule",
+          "(a) differentiate 𝑥2 and 𝑡𝑎𝑛2𝑥.",
+          "(b) use algebra to expand the integrand correctly",
+          "(b) substitute 𝑡𝑎𝑛2𝑥 = 𝑠𝑒𝑐2𝑥 − 1 correctly",
+          "(b) establish the common components between the differentiation of Q27a and the integration of Q27b",
+          "(b) integrate correctly, showing all relevant steps."
+        ],
+        "improvementAreas": [
+          "(a) making use of the reference sheet to correctly apply the product rule",
+          "(a) understanding the difference between the product rule and quotient rule",
+          "(a) using the correct notation for trigonometric functions, particularly the difference between sec2𝑥 and sec 𝑥2.",
+          "(b) employing binomial expansion techniques involving trigonometric terms",
+          "(b) learning the trigonometric identities not provided on the reference sheet",
+          "(b) understanding the difference between 𝑥2 tan2 𝑥 + 1 and 𝑥2(tan2 𝑥 + 1)",
+          "(b) recording their solution sequentially."
+        ]
+      },
       "tags": ["official-draft", "product rule", "trigonometric identity", "integration"],
       "assets": [],
       "source": {
@@ -2782,6 +3811,25 @@
         "Over one revolution, the relevant solutions are \\(t=3\\) and \\(t=27\\).",
         "\\(A(3)=21-18\\cos\\left(\\frac{3\\pi}{24}\\right)\\approx4.37\\) and \\(A(27)=21-18\\cos\\left(\\frac{27\\pi}{24}\\right)\\approx37.63\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC marking feedback",
+        "betterResponses": [
+          "(a) correctly find the amplitude of a cosine curve",
+          "(a) correctly find the vertical shift of a cosine curve",
+          "(b) use the appropriate method to find the period of a cosine curve",
+          "(c) apply their knowledge of transformations of trigonometric curves to solve practical problems",
+          "(c) apply their knowledge of angles of any magnitude in trigonometry to solve practical problems",
+          "(c) recognise the solutions for 𝑡 were in other quadrants",
+          "(c) provide accurate cosine curves to find the points of intersection for the times when the heights were equal."
+        ],
+        "improvementAreas": [
+          "(a) knowing the difference between a vertical shift and the amplitude of a cosine curve",
+          "(a) clearly defining the variables required in their solutions.",
+          "(b) recognising that time taken for one complete oscillation is equivalent to the period of the function.",
+          "(c) allowing for alternate quadrant solutions in practical trigonometric problems",
+          "(c) sketching trigonometric curves to solve practical trigonometric problems."
+        ]
+      },
       "tags": ["official-draft", "trigonometric model", "period", "cosine graph", "phase shift"],
       "assets": [
         {
@@ -2820,6 +3868,23 @@
         "At \\(x=-2\\), the tangent gradient is \\(2\\), so \\(-4a+b=2\\).",
         "\\(a=\\frac12\\), \\(b=4\\), and \\(\\frac12(-2)^2+4(-2)+c=-1\\Rightarrow c=5\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC marking feedback",
+        "betterResponses": [
+          "differentiate the equation of the curve to get an expression for the gradient of the tangent, identify the gradient of the tangent from its equation and link this to their expression",
+          "use the stationary points and the tangent/normal gradients to form 2 equations in terms of a and b and then solve them simultaneously",
+          "solve equation of the normal and tangent simultaneous to find the point of intersection as (−2,1)",
+          "use the gradient of the derived function at 𝑥 = −2 equals 2 to show that −4𝑎 + 𝑏 = 2",
+          "solve −8𝑎 + 𝑏 = 0 and −4𝑎 + 𝑏 = 2 simultaneously to find 𝑎 = 1 2 and 𝑏 = 4."
+        ],
+        "improvementAreas": [
+          "finding solutions of simultaneous equations",
+          "equating the derivative equal to zero after substituting in 𝑥 = −4",
+          "checking their solution after finding 𝑎, 𝑏 and 𝑐",
+          "understanding that at a minimum turning point, the first derivative is equal to zero",
+          "understanding that the tangent and normal intersect at the point where the tangent touches the curve."
+        ]
+      },
       "tags": ["official-draft", "quadratic", "tangent", "normal", "turning point"],
       "assets": [],
       "source": {
@@ -2848,6 +3913,20 @@
         "At \\(x=-1\\), the boundary value is \\(-\\frac12\\), and this endpoint is excluded.",
         "As \\(x\\to1^-\\), \\(S\\to\\infty\\), so \\(S>-\\frac12\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC marking feedback",
+        "betterResponses": [
+          "find the limiting sum and interpret the restriction on the common ratio",
+          "show the equivalence of equations involving fractions with different denominators",
+          "correctly translate and sketch a function, labelling the asymptotes",
+          "determine the correct solution by interpreting the link between the limiting sum and the function."
+        ],
+        "improvementAreas": [
+          "using the reference sheet to find the limiting sum and understand the restriction.",
+          "drawing neat sketches including labelled asymptotes",
+          "looking for prompts in the question to try an establish a link between the key parts of the question."
+        ]
+      },
       "tags": ["official-draft", "geometric series", "limiting sum", "range", "graphing"],
       "assets": [],
       "source": {
@@ -2878,6 +3957,31 @@
         "\\(P''(x)=\\frac{4A}{x^3}>0\\), confirming a minimum.",
         "\\(\\theta=\\frac{2A}{x(2+x)}=\\frac{2A}{\\sqrt A(2+\\sqrt A)}=\\frac{2\\sqrt A}{2+\\sqrt A}<2\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC marking feedback",
+        "betterResponses": [
+          "(a) find an equation for the perimeter in terms of 𝜃 and 𝑥, where 𝜃 is in radians",
+          "(a) find an equation for the area in terms of 𝜃 and 𝑥, where 𝜃 is in radians",
+          "(a) rearrange the area equation to make 𝜃 the subject",
+          "(a) substitute 𝜃 into the perimeter equation",
+          "(a) apply simple factorisation and simplification to show the required equation.",
+          "(b) differentiate the perimeter with respect to x",
+          "(b) find the value of 𝑥 = √𝐴 for the stationary point",
+          "(b) find and use the second derivative to show that a minimum occurs at 𝑥 = √𝐴",
+          "(b) write 𝜃 in terms of 𝐴 or 𝑥 and show why 𝜃 < 2."
+        ],
+        "improvementAreas": [
+          "(a) making sure that every step is neatly written in the solution to a show question",
+          "(a) using the arc length and area formulae in terms of radians (given on the reference sheet) to form equations for area and perimeter",
+          "(a) crossing out errors and starting again in the available working space at the end of the exam",
+          "(a) manipulating complex algebraic expressions, particularly those involving algebraic fractions.",
+          "(b) noting information given in the question, including 𝐴 as a constant and 𝐴 > 0",
+          "(b) differentiating expressions with respect to 𝑥 that involve other pronumerals",
+          "(b) using a second derivative test on a stationary point to test for a minimum",
+          "(b) recognising that the equation for area from part (a) needed to be used to write 𝜃 in terms of 𝐴 or 𝑥",
+          "(b) finding the limiting value of an algebraic fraction."
+        ]
+      },
       "tags": ["official-draft", "sector area", "perimeter", "optimisation", "derivative"],
       "assets": [
         {
@@ -2910,6 +4014,17 @@
       "promptLatex": "The first three terms of an arithmetic sequence are \\(3\\), \\(7\\) and \\(11\\). Find the \\(15\\)th term.",
       "answerLatex": "The common difference is \\(d=7-3=4\\). With first term \\(a=3\\), the \\(15\\)th term is \\(T_{15}=a+(15-1)d=3+14\\times4=59\\).",
       "workingLatex": ["\\(d=7-3=4\\).", "\\(T_n=a+(n-1)d\\).", "\\(T_{15}=3+14\\times4=59\\)."],
+      "markingFeedback": {
+        "sourceRef": "2023 HSC marking feedback",
+        "betterResponses": [
+          "accurately write down the formula for the term of an arithmetic sequence, or if listing the fifteen terms, ensure that each is correct and that all terms are listed",
+          "substitute the three variables accurately into the correct formula, and apply the correct operations of addition, subtraction and multiplication."
+        ],
+        "improvementAreas": [
+          "making use of the Reference Sheet to apply the correct formula: 𝑇𝑇𝑇𝑇= 𝑎𝑎+ (𝑇𝑇− 1)𝑑𝑑",
+          "knowing which formula on the Reference Sheet is for the term of an arithmetic sequence."
+        ]
+      },
       "tags": ["official-draft", "arithmetic sequence", "term", "common difference"],
       "assets": [],
       "source": {
@@ -2938,6 +4053,22 @@
         "\\(\\operatorname{Var}(X)=E(X^2)-\\mu^2=4.8-4=0.8\\).",
         "\\(\\sigma=\\sqrt{0.8}\\approx0.8944\\), so \\(\\sigma\\approx0.9\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2023 HSC marking feedback",
+        "betterResponses": [
+          "(a) clearly show the sum of the product of 𝑥𝑥 and 𝑃𝑃(𝑋𝑋= 𝑥𝑥).",
+          "(b) use the values in the table to calculate variance, and then find the standard deviation",
+          "(b) use a calculator to correctly to find the standard deviation."
+        ],
+        "improvementAreas": [
+          "(a) knowing how to multiply the values in the two rows of the table to generate 𝑥𝑥𝑃𝑃(𝑥𝑥), and then finding the sum to state the expected value",
+          "(a) understanding the difference between mode and mean or expected value",
+          "(a) understanding a ‘show that’ in the question requires working out to be shown.",
+          "(b) using the correct formulae for variance",
+          "(b) finding the standard deviation by taking the square root of the variance",
+          "(b) using a calculator to correctly to find the standard deviation."
+        ]
+      },
       "tags": ["official-draft", "discrete random variable", "expected value", "standard deviation"],
       "assets": [],
       "source": {
@@ -2965,6 +4096,19 @@
         "\\(P(0)=1500+C=4000\\), so \\(C=2500\\).",
         "\\(P(t)=1500e^{2t}+2500\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2023 HSC marking feedback",
+        "betterResponses": [
+          "demonstrate their understanding by finding the primitive function from the derivative of an exponential function",
+          "correctly substitute t = 0 and P = 4000 to evaluate the constant."
+        ],
+        "improvementAreas": [
+          "making use of the Reference Sheet to correctly find the integration of an exponential function",
+          "evaluating the constant of integration",
+          "using subtraction when solving 4000 = 1500𝑒𝑒2(0) + 𝑐𝑐, and not division",
+          "understanding that 𝑒𝑒0 = 1."
+        ]
+      },
       "tags": ["official-draft", "antiderivative", "initial value", "exponential function"],
       "assets": [],
       "source": {
@@ -2988,6 +4132,20 @@
       "promptLatex": "Find the equation of the tangent to the curve \\(y=(2x+1)^3\\) at the point \\((0,1)\\).",
       "answerLatex": "The derivative is \\(y'=3(2x+1)^2\\cdot2=6(2x+1)^2\\). At \\(x=0\\), the gradient is \\(6\\). The tangent through \\((0,1)\\) is \\(y-1=6(x-0)\\), so \\(y=6x+1\\).",
       "workingLatex": ["\\(y'=6(2x+1)^2\\).", "\\(y'(0)=6\\).", "\\(y-1=6(x-0)\\Rightarrow y=6x+1\\)."],
+      "markingFeedback": {
+        "sourceRef": "2023 HSC marking feedback",
+        "betterResponses": [
+          "were able to find the derivative using the Chain rule",
+          "find the gradient of tangent at 𝑥𝑥 = 0",
+          "substitute the coordinates of the point and the value of the gradient into a formula for the equation of a straight line."
+        ],
+        "improvementAreas": [
+          "using the Chain rule",
+          "not expanding the original function nor the first derivative",
+          "knowing that, when finding the equation of the tangent, a value is required for the gradient, and not an expression in terms of 𝑥𝑥",
+          "knowing that the tangent is a straight line."
+        ]
+      },
       "tags": ["official-draft", "tangent", "chain rule", "derivative"],
       "assets": [],
       "source": {
@@ -3016,6 +4174,27 @@
         "There are \\(10\\times4=40\\) quarterly periods.",
         "\\(8535\\times54.268=463177.38\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2023 HSC marking feedback",
+        "betterResponses": [
+          "(a) use the table provided to determine the factor 13.181 and then divide \\$450 000 by 13.181",
+          "(a) identify the interest factor from the table provided",
+          "(a) divide the FV by the interest factor.",
+          "(b) demonstrate the conversion of the rate and the periods to four times a year",
+          "(b) select the correct factor from the table and multiply it by \\$8535",
+          "(b) convert the period to 40 and interest rate to 1.5% or equivalent",
+          "(b) identify the interest factor from the table."
+        ],
+        "improvementAreas": [
+          "(a) recognising that identification of this factor is the use of the rate and periods so that these do not need to be used again in the calculation of the solution",
+          "(a) setting up an equation to help identify when there should be division or multiplication",
+          "(a) highlighting the interest factor in the table",
+          "(a) using compound interest formula or geometric series correctly.",
+          "(b) identifying that every three months is four times a year",
+          "(b) using the converted rate and period to identify the factor from the table",
+          "(b) making use of the table of factors provided, not making errors in creating/using a geometric series."
+        ]
+      },
       "tags": ["official-draft", "annuity", "future value", "interest factor", "compound interest"],
       "assets": [],
       "source": {
@@ -3044,6 +4223,24 @@
         "The straight top portions total \\(AB-PQ=8.0-3.4404\\).",
         "\\(P=2(3.6)+8.0+(8.0-3.4404)+4.0317\\approx23.8\\text{ m}\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2023 HSC marking feedback",
+        "betterResponses": [
+          "interpret the question correctly to identify the main parts and evaluate the length of arc PQ and the length of line segment PQ",
+          "set their working out clearly and identify the parts they were calculating, and show their rounded answers to at least three decimal places to assist the calculation for the perimeter",
+          "identify the arc length was 110/360 of a circle and not a semi-circle",
+          "correctly substitute values into the correct formulas (the sine or cosine rule for line segment PQ and arc length formula for arc PQ) and show full substitution",
+          "round the final solution to 1 decimal place."
+        ],
+        "improvementAreas": [
+          "selecting and demonstrating appropriate substitutions into the required formula from the Reference Sheet",
+          "understanding that the question requires the calculation of the perimeter of the shape, therefore no area formulas were needed",
+          "using the square root when using the cosine rule",
+          "realising the arc PQ has a radius of 2.1 m and is not a semi-circle with interval PQ as the diameter",
+          "writing the formula they are using before substituting",
+          "adding all sections when calculating the perimeter."
+        ]
+      },
       "tags": ["official-draft", "arc length", "cosine rule", "perimeter", "trigonometry"],
       "assets": [
         {
@@ -3080,6 +4277,17 @@
         "\\(\\int x\\sqrt{x^2+1}\\,dx=\\frac12\\int u^{1/2}\\,du\\).",
         "\\(\\frac12\\cdot\\frac{2}{3}u^{3/2}+C=\\frac13(x^2+1)^{3/2}+C\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2023 HSC marking feedback",
+        "betterResponses": [
+          "identify the correct method of integration required",
+          "correctly divide fractions to achieve the solution."
+        ],
+        "improvementAreas": [
+          "recognising the relationship between the derivative and integral",
+          "using the Reference Sheet to apply the correct integral formula."
+        ]
+      },
       "tags": ["official-draft", "substitution", "integral", "antiderivative"],
       "assets": [],
       "source": {
@@ -3110,6 +4318,30 @@
         "\\(y=236-10.4x\\).",
         "\\(x=23\\) is outside the observed temperature range and the equation predicts negative usage."
       ],
+      "markingFeedback": {
+        "sourceRef": "2023 HSC marking feedback",
+        "betterResponses": [
+          "(a) calculate both means showing all calculations",
+          "(a) accurately plot the coordinates of the means and y-intercept",
+          "(a) use correct mathematical notation.",
+          "(b) calculate the gradient using 𝑟𝑟𝑟𝑟𝑟𝑟𝑟𝑟 𝑟𝑟𝑟𝑟𝑟𝑟",
+          "(b) recognise the y-intercept",
+          "(b) correctly substitute into 𝑦𝑦 = 𝑚𝑚𝑥𝑥+ 𝑐𝑐.",
+          "(c) comment on the prediction of gas usage being negative, which is not possible",
+          "(c) recognise and explain that using extrapolation is inaccurate."
+        ],
+        "improvementAreas": [
+          "(a) reading the question carefully to determine the means for each quantity",
+          "(a) accurately plotting coordinates on the intersection of the grid lines",
+          "(a) recognising that the initial quantity is the y-intercept",
+          "(a) reading the grid scale correctly.",
+          "(b) writing an equation not an expression",
+          "(b) not interpreting the data as bivariate and attempting to use the calculator to find the equation of the regression line",
+          "(b) using the two coordinates from their graph to find the gradient of the line and not reading two inaccurate coordinates off their regression line.",
+          "(c) relating their answer to the context of the question, that is, gas usage and temperatures",
+          "(c) providing an accurate explanation relevant to the regression line."
+        ]
+      },
       "tags": ["official-draft", "least-squares regression", "bivariate data", "extrapolation", "mean point"],
       "assets": [
         {
@@ -3147,6 +4379,28 @@
         "The intersections are \\(x=1\\) and \\(x=-4\\).",
         "The parabola is above the line between the intersection points, so \\(-4<x<1\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2023 HSC marking feedback",
+        "betterResponses": [
+          "(a) choose an appropriate scale for the straight line and parabola",
+          "(a) sketch a parabolic shape and points of intersection with the line",
+          "(a) label the vertex of the parabola",
+          "(a) label the y-intercept of the parabola.",
+          "(b) understand the term ‘Hence’ meant to solve the equation by using the work completed in Q19(a)",
+          "(b) expand a binomial product and then solve the quadratic inequality 𝒙𝒙𝟐𝟐+ 𝟑𝟑𝒙𝒙− 𝟒𝟒< 𝟎𝟎",
+          "(b) express their solutions as a combined inequality or use bracket notation."
+        ],
+        "improvementAreas": [
+          "(a) using a ruler to draw straight lines",
+          "(a) demonstrating an understanding of the appropriate scale",
+          "(a) identifying key points to improve the care and accuracy of each sketch",
+          "(a) knowing the concavity of a parabola from its equation.",
+          "(b) correctly solving quadratic inequalities",
+          "(b) demonstrating the connection between algebra and graphs",
+          "(b) interpreting the inequality to be solved, that is, finding the solution for 𝑥𝑥 when the straight line is below the parabola",
+          "(b) understanding inequality symbols and express their solution using the correct notation."
+        ]
+      },
       "tags": ["official-draft", "sketch", "parabola", "linear function", "inequality"],
       "assets": [
         {
@@ -3184,6 +4438,19 @@
         "\\(\\sin u=-\\frac{\\sqrt3}{2}\\) at \\(u=-60^\\circ,240^\\circ,300^\\circ\\) in this interval.",
         "\\(\\theta=u+60^\\circ\\), so \\(\\theta=0^\\circ,300^\\circ,360^\\circ\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2023 HSC marking feedback",
+        "betterResponses": [
+          "adjust the domain to include all possible values of 𝜃𝜃.",
+          "recognise the solutions for 𝜃𝜃− 60° lie in the third and fourth quadrants",
+          "provide all three solutions in degrees."
+        ],
+        "improvementAreas": [
+          "demonstrating knowledge about changing the domain according to the function in the question",
+          "understanding that if the question is posed in degrees, the solution must be presented in degrees",
+          "recognising that 0°and 360° are the same angle on the unit circle."
+        ]
+      },
       "tags": ["official-draft", "sine equation", "exact values", "degrees"],
       "assets": [],
       "source": {
@@ -3212,6 +4479,19 @@
         "\\(r=\\frac14\\) or \\(r=-\\frac14\\).",
         "Substituting into \\(ar^3=48\\) gives \\(a=3072\\) or \\(a=-3072\\), respectively."
       ],
+      "markingFeedback": {
+        "sourceRef": "2023 HSC marking feedback",
+        "betterResponses": [
+          "use the Reference Sheet to identify and use the correct Geometric Progression formulas",
+          "solve simultaneous equations involving index notation",
+          "identify the positive and negative values for the common ratio and the respective first terms."
+        ],
+        "improvementAreas": [
+          "understanding the differences between an Arithmetic and Geometric sequence",
+          "understanding that when solving an equation with an ‘even power’, that there will be two possible answers",
+          "making ‘𝑟𝑟’ the subject complicates the simultaneous equation solution."
+        ]
+      },
       "tags": ["official-draft", "geometric sequence", "common ratio", "first term"],
       "assets": [],
       "source": {
@@ -3240,6 +4520,20 @@
         "\\(\\tan \\angle AEM=\\frac{AM}{AE}=\\frac{\\sqrt{58}}{8}\\).",
         "\\(\\angle AEM\\approx43.59^\\circ\\approx44^\\circ\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2023 HSC marking feedback",
+        "betterResponses": [
+          "efficiently find the angle AEM by only finding AM and then using tangent ratio",
+          "view the diagram in a 3-dimensional (3D) context",
+          "label the sides and angles they were finding in the diagram or in their solution."
+        ],
+        "improvementAreas": [
+          "understanding the properties of quadrilaterals and 3D shapes",
+          "using correct angle and triangle notation in their solution",
+          "using exact values throughout the calculations",
+          "not assuming scale in the diagram and making 45-degree angles appear in the working."
+        ]
+      },
       "tags": ["official-draft", "rectangular prism", "right triangle", "trigonometry", "3D geometry"],
       "assets": [
         {
@@ -3277,6 +4571,20 @@
         "\\(P(X>11.93)=1-0.9082=0.0918\\).",
         "\\(400\\times0.0918=36.72\\), so the expected number is approximately \\(37\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2023 HSC marking feedback",
+        "betterResponses": [
+          "calculate the correct 𝑧𝑧-score using the formula provided on the Reference Sheet",
+          "use the table to obtain the correct probability",
+          "correctly find the proportion of koalas greater than 11.93kg, recognising that the value from the table represents the probability of the weight being less than 11.93kg",
+          "find the number of koalas with weight greater than 11.93kg."
+        ],
+        "improvementAreas": [
+          "accessing the provided table to find the probability after calculating the 𝑧𝑧-score",
+          "knowing when to use the 𝑧𝑧-score formula and table given opposed to using the normal distribution (empirical rule) to calculate an area under a curve",
+          "completely answering the question by reading what was required, that is, the number of koalas greater than 11.93kg."
+        ]
+      },
       "tags": ["official-draft", "normal distribution", "z-score", "standardisation", "expected count"],
       "assets": [
         {
@@ -3315,6 +4623,34 @@
         "\\(A'=0\\Rightarrow (x-2)^2=100\\Rightarrow x=12\\), since \\(x>2\\).",
         "\\(A''=\\frac{200}{(x-2)^3}\\), so \\(A''(12)>0\\) and the stationary point is a minimum."
       ],
+      "markingFeedback": {
+        "sourceRef": "2023 HSC marking feedback",
+        "betterResponses": [
+          "(a) identify the side lengths of the garden in terms of 𝑥𝑥",
+          "(a) find an expression for the area of the garden in terms of 𝑥𝑥 and 𝑦𝑦",
+          "(a) equate the area in terms of 𝑥𝑥 and 𝑦𝑦 with the value given for the area of the garden",
+          "(a) rearrange their area equation to make 𝑦𝑦 the subject",
+          "(a) identify the dimensions of the garden as (𝑥𝑥 – 2) and (𝑦𝑦 – 1).",
+          "(b) establish an equation for the area of the path in terms of 𝑥𝑥",
+          "(b) differentiate the area of the path and solve their derivative to find the possible dimensions",
+          "(b) eliminate solutions to the derivative of the area of the path that did not fit the context",
+          "(b) verify that their solution gives the minimum area of the path",
+          "(b) use numerical values in the first derivative test to determine a minimum."
+        ],
+        "improvementAreas": [
+          "(a) using correct algebraic processes to change the subject of their equation",
+          "(a) recognising the importance of brackets to indicate the correct order of operations",
+          "(a) understanding they were not solving an equation as many students tried to find a numerical value for 𝑦𝑦 or 𝑥𝑥 from the equation provided.",
+          "(b) interpreting what is being optimised to develop an equation to represent it",
+          "(b) simplifying the algebraic expression for the area of the path",
+          "(b) using correct algebraic processes to simplify the derivative and solve for 𝐴𝐴’= 0",
+          "(b) identifying, from the context, which solution is relevant",
+          "(b) demonstrating that the solution gives a minimum area",
+          "(b) creating a formula from information provided",
+          "(b) using brackets, expanding brackets, operating with negative integers",
+          "(b) using appropriate notation such as A, A’, A’’ to help identify the steps."
+        ]
+      },
       "tags": ["official-draft", "optimisation", "area", "differentiation", "rectangular garden"],
       "assets": [
         {
@@ -3354,6 +4690,27 @@
         "\\(A_n=(10\\,000-250M)(1.004)^n+250M\\).",
         "\\(A_{100}>0\\Rightarrow M<121.527\\ldots\\), so \\(M=\\$121.52\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2023 HSC marking feedback",
+        "betterResponses": [
+          "(a) show the connection between 𝐴𝐴1 and 𝐴𝐴2 by writing either 𝐴𝐴2 = 𝐴𝐴1 × 1.004 − 𝑀𝑀 or 𝐴𝐴2 = (10000 × 1.004 − 𝑀𝑀) × 1.004 − 𝑀𝑀.",
+          "(b) write an explicit and complete expression for 𝐴𝐴𝑟𝑟 showing a geometric series",
+          "(b) use the sum of a Geometric Progression series correctly to show 𝐴𝐴𝑟𝑟= 10000(1.004)𝑟𝑟− 𝑀𝑀� 1.004𝑛𝑛−1 0.004 �",
+          "(b) use algebra to expand and simplify to show all relevant steps.",
+          "(c) identify the substitution of 𝑇𝑇= 100 and 𝐴𝐴𝑟𝑟= 0 into the expression from Q25(b)",
+          "(c) manipulate the expression to obtain the value for 𝑀𝑀."
+        ],
+        "improvementAreas": [
+          "(a) demonstrating understanding of how financial series are built term by term",
+          "(a) showing adequate steps in the working to reflect their reasoning.",
+          "(b) using the pattern from Q25(a) to show the expression of 𝐴𝐴𝑟𝑟",
+          "(b) carefully identifying the number of terms in the geometric series",
+          "(b) demonstrating skills in expanding, rearranging, and factorising to arrive at the final expression",
+          "(b) knowledge of fractions to show 1 0.004 = 250.",
+          "(c) using the appropriate values of 𝑇𝑇 and 𝐴𝐴𝑟𝑟 to substitute into the expression",
+          "(c) avoiding arithmetic errors when rearranging equations and inequations."
+        ]
+      },
       "tags": ["official-draft", "compound interest", "geometric series", "withdrawals", "recurrence"],
       "assets": [],
       "source": {
@@ -3383,6 +4740,28 @@
         "\\(T=\\frac{2\\pi}{5\\pi/4}=1.6\\).",
         "The closest point is reached at \\(t=0.8,2.4,4.0,5.6,7.2,8.8\\), so \\(6\\) times."
       ],
+      "markingFeedback": {
+        "sourceRef": "2023 HSC marking feedback",
+        "betterResponses": [
+          "(a) give the correct trigonometric primitive function",
+          "(a) find the constant using initial conditions",
+          "(a) write the required trigonometric equation.",
+          "(b) calculate the number of periods in the given time",
+          "(b) find the period of the trigonometric function",
+          "(b) sketch either the rate of change trigonometric function or the displacement expression in Q26a)",
+          "(b) solve trigonometric functions involving fractions over the required domain",
+          "(b) understand when the maximum and minimum distances from the camera occur."
+        ],
+        "improvementAreas": [
+          "(a) manipulating algebraic fractions correctly",
+          "(a) showing the substitution of the initial conditions",
+          "(a) solving simple equations",
+          "(a) using the information provided on the Reference Sheet more effectively when finding the expression for 𝑥𝑥(t).",
+          "(b) correctly calculating the period of a trigonometric function",
+          "(b) understanding the relevance of the period of a trigonometric function to a real-world situation",
+          "(b) providing the correct solution of a trigonometric equation, over an adjusted domain, with multiple solutions."
+        ]
+      },
       "tags": ["official-draft", "motion model", "antiderivative", "cosine", "period"],
       "assets": [],
       "source": {
@@ -3412,6 +4791,25 @@
         "The right branch has slope \\(-4\\).",
         "Therefore the line cuts the graph twice for \\(-4<m<\\frac76\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2023 HSC marking feedback",
+        "betterResponses": [
+          "(a) recognise the horizontal and vertical translations of the function and the relationship to b and c",
+          "(a) substitute b and c with a given coordinate into the function to find a",
+          "(a) use the gradient to calculate the dilation and recognise the sign of a as negative.",
+          "(b) recognise the need to calculate two distinct gradients from the origin",
+          "(b) calculate the gradients so that the line intersects the absolute value function twice",
+          "(b) write the correct inequality."
+        ],
+        "improvementAreas": [
+          "(a) understanding the vertical and horizontal transformation of the function",
+          "(a) recognising that the gradient of this function was the dilation represented by a",
+          "(a) avoiding the use of simultaneous equations to solve algebraically.",
+          "(b) understanding that the line 𝑦𝑦= 𝑚𝑚𝑥𝑥 will pass through (0,0)",
+          "(b) using the understanding of gradients to find the required values rather than simultaneous equations to find points of intersection",
+          "(b) using the correct inequality symbols."
+        ]
+      },
       "tags": ["official-draft", "absolute value", "graphing", "parameters", "slope"],
       "assets": [
         {
@@ -3451,6 +4849,19 @@
         "\\(6=-1-3+8+C\\Rightarrow C=2\\).",
         "\\(y(3)=27-27-24+2=-22\\), so \\(R=(3,-22)\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2023 HSC marking feedback",
+        "betterResponses": [
+          "recognise that the tangents at 𝑇𝑇 and 𝑅𝑅 have the same gradient",
+          "equate 𝑑𝑑𝑑𝑑 𝑑𝑑𝑑𝑑= 1 and solve the quadratic to find the 𝑥𝑥 coordinate of 𝑅𝑅",
+          "find the anti-derivation of 𝑑𝑑𝑑𝑑 𝑑𝑑𝑑𝑑 and calculate the correct value of 𝑐𝑐",
+          "correctly substitute the 𝑥𝑥-coordinate of 𝑅𝑅 into 𝑦𝑦= 𝑓𝑓(𝑥𝑥) to find the 𝑦𝑦 coordinate of 𝑅𝑅."
+        ],
+        "improvementAreas": [
+          "writing +𝑐𝑐 in their integration",
+          "recognising that if the tangent is not horizontal, then 𝑅𝑅 is not a stationary point."
+        ]
+      },
       "tags": ["official-draft", "tangent", "parallel lines", "gradient function", "antiderivative"],
       "assets": [
         {
@@ -3489,6 +4900,29 @@
         "\\(F\\left(\\frac23\\right)=\\frac{16}{27}\\approx0.593>0.5\\).",
         "More than half the probability lies below the mode, so the median is less than the mode."
       ],
+      "markingFeedback": {
+        "sourceRef": "2023 HSC marking feedback",
+        "betterResponses": [
+          "(a) expand the probability density function so that the derivative can be easily determined",
+          "(a) calculate the mode as the 𝒙𝒙-coordinate of the maximum turning point of the probability density function",
+          "(a) identify the mode by substituting the possible turning point of 𝒙𝒙 values into the probability density function and comparing the 𝒚𝒚 values, rather than first or second derivative testing.",
+          "(b) integrate the probability density function using limits of 0 to 𝒙𝒙 to obtain the cumulative distribution function",
+          "(b) expand the probability density function before integrating the expression.",
+          "(c) correctly substitute the mode into the cumulative distribution function",
+          "(c) understand that the median occurs at the point where the area under the probability density function is 0.5",
+          "(c) conclude the calculation of the cumulative distribution function for the mode is greater than the median value of the cumulative distribution function."
+        ],
+        "improvementAreas": [
+          "(a) distinguishing the difference between a probability density function and a cumulative distribution function",
+          "(a) applying correct differentiation techniques and simplifying functions before differentiating",
+          "(a) taking care with negative values when using the product rule for differentiation",
+          "(a) using an appropriate concavity test if there is more than one solution.",
+          "(b) recognising the relationship between a probability density function and a cumulative distribution function",
+          "(b) knowing what the cumulative distribution function represents.",
+          "(c) understanding the significance of the cumulative distribution function as a measure of the area under the probability density function",
+          "(c) remembering the total area under the probability density function is 1 square unit."
+        ]
+      },
       "tags": [
         "official-draft",
         "probability density function",
@@ -3525,6 +4959,30 @@
         "\\(f\\left(\\frac{5\\pi}{4}\\right)=-\\frac{e^{-5\\pi/4}}{\\sqrt2}\\).",
         "\\(f(x)=0\\) at \\(x=0,\\pi,2\\pi\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2023 HSC marking feedback",
+        "betterResponses": [
+          "(a) differentiate exponential and trigonometric functions",
+          "(a) use the product rule",
+          "(a) solve an equation containing exponentials and trigonometric functions",
+          "(a) calculate the 𝑦𝑦-values of the stationary points",
+          "(a) use exact values in their answer.",
+          "(b) sketch a single, smooth graph for the function in part (a), showing stationary points and 𝑥𝑥- intercepts",
+          "(b) correctly label their stationary points and 𝑥𝑥-intercepts."
+        ],
+        "improvementAreas": [
+          "(a) solving a trigonometric equation for all angles within a given domain",
+          "(a) recognising that 𝑒𝑒−𝑑𝑑= 0 has no solutions",
+          "(a) finding the corresponding 𝑦𝑦-values to the stationary point 𝑥𝑥-values",
+          "(a) converting between degrees and radians",
+          "(a) recognising that if the domain is in radians, then so should the 𝑥𝑥-values.",
+          "(b) calculating the correct 𝑥𝑥-intercepts",
+          "(b) sketching a smooth curve and carefully labelling the necessary features",
+          "(b) considering the scale when sketching a graph",
+          "(b) knowing what a stationary point should look like in a sketch",
+          "(b) reading the question carefully to make sure that all the required information is shown in the diagram."
+        ]
+      },
       "tags": ["official-draft", "product rule", "stationary points", "exponential", "sine curve"],
       "assets": [
         {
@@ -3563,6 +5021,26 @@
         "\\(P(S)=\\frac45\\).",
         "\\(P(\\text{at least one not available})=1-\\left(\\frac45\\right)^4=\\frac{369}{625}\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2023 HSC marking feedback",
+        "betterResponses": [
+          "(a) demonstrate the difference between an independent and dependent event",
+          "(a) know how one event impacts the other",
+          "(a) use ( )() |PF P F S≠ to show that Kim’s availability next Friday changes, given Kim is available on Saturday.",
+          "(b) set out a well-structured response with the aid of conditional probability rules",
+          "(b) calculate the probability intersection of Saturday and Friday.",
+          "(c) find the complement of all four students available."
+        ],
+        "improvementAreas": [
+          "(a) recognising the difference between an independent and dependent event",
+          "(a) understanding the meaning of conditional probability notation.",
+          "(b) understanding how to use conditional probability in the context of a show question",
+          "(b) identifying this dependent multi-event probability",
+          "(b) recognising that ()PS F∩ and ()PF S∩ are the same as they represent where the sets intersect.",
+          "(c) understanding the technique of complementary probability theory when the expression ‘at least one…’ is required it is equivalent to ‘1 – Probability (none)’",
+          "(c) finding the complement of four students and not just one."
+        ]
+      },
       "tags": ["official-draft", "conditional probability", "independence", "complement"],
       "assets": [],
       "source": {
@@ -3593,6 +5071,27 @@
         "\\(e^{-2x}=e^{-x}+k\\Rightarrow u^2-u-k=0\\).",
         "Two positive roots require \\(1+4k>0\\) and \\(\\sqrt{1+4k}<1\\), giving \\(-\\frac14<k<0\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2023 HSC marking feedback",
+        "betterResponses": [
+          "(a) write an integrand for the area between two curves",
+          "(a) integrate the resulting expression with the correct sign for each term in the expression",
+          "(a) substitute the correct limits to find the area that was given.",
+          "(b) equate the two equations and obtain a quadratic expression equation in 𝑒𝑒−𝑑𝑑",
+          "(b) apply the quadratic formula to determine the roots of the exponential function in terms of 𝑘𝑘",
+          "(b) for two solutions the discriminant, 1+ 4𝑘𝑘 > 0 and stated. 𝑘𝑘> − 1 4",
+          "(b) for 𝑒𝑒−𝑑𝑑> 0, 𝑢𝑢sed 1 − √1 + 4𝑘𝑘 > 0 and found 𝑘𝑘 < 0."
+        ],
+        "improvementAreas": [
+          "(a) reviewing the working when using positive and negative signs",
+          "(a) carefully subtracting functions in the correct order to find the area between to curves",
+          "(a) working with exponentials with logarithmic powers",
+          "(a) showing substitution of limits, and fully evaluating the resulting anti-derivative to show the area given.",
+          "(b) solving simultaneous equation using quadratic formula in a general form of a quadratic equation",
+          "(b) understanding that for two points of intersection, the discriminant is greater than zero",
+          "(b) recognising that 𝑒𝑒−𝑑𝑑 is positive is also a part of the solution."
+        ]
+      },
       "tags": [
         "official-draft",
         "exponential functions",
@@ -3946,6 +5445,22 @@
         "\\(B=\\frac{192}{200}\\times100=96\\).",
         "The cumulative percentage reaches \\(80\\%\\) after stock shortage and delivery fee."
       ],
+      "markingFeedback": {
+        "sourceRef": "2022 HSC marking feedback",
+        "betterResponses": [
+          "(a) correctly calculate the indicated values from the table",
+          "(a) find the values of 𝐴𝐴 and 𝐵𝐵 through correct calculations.",
+          "(b) identify the types of complaints that represented 80% of complaint types",
+          "(b) correctly state the complaints addressed."
+        ],
+        "improvementAreas": [
+          "(a) identifying the necessary values needed to establish correct calculations",
+          "(a) understanding how to calculate a percentage",
+          "(a) ensuring that their answer makes sense within the context of the question.",
+          "(b) understanding the difference between a Pareto chart and a cumulative frequency ogive",
+          "(b) understanding how to read a Pareto chart."
+        ]
+      },
       "tags": ["official-draft", "Pareto chart", "cumulative frequency", "cumulative percentage"],
       "assets": [
         {
@@ -3991,6 +5506,24 @@
         "\\(M=\\frac{180}{T}\\).",
         "\\(M(5)=36\\), \\(M(15)=12\\), and \\(M(30)=6\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2022 HSC marking feedback",
+        "betterResponses": [
+          "(a) relate 𝑀𝑀 and 𝑇𝑇 in a correct inverse equation",
+          "(a) calculate the value of the proportionality constant",
+          "(a) solve the equation for 𝑘𝑘 and rewrite in the form 𝑀𝑀= 180 𝑇𝑇.",
+          "(b) correctly complete a table of values",
+          "(b) plot their points from the table of values accurately on the given number plane and draw a smooth curve rather than 2 straight lines."
+        ],
+        "improvementAreas": [
+          "(a) associating inverse variation with reciprocal functions",
+          "(a) recognising the difference between inverse and direct variation",
+          "(a) substituting the correct values for the variables used in the question.",
+          "(b) plotting points from a table of values accurately",
+          "(b) checking the scale used on the grid provided, so that the points are plotted correctly",
+          "(b) drawing one smooth curve rather than a ruler to connect the points in a straight line."
+        ]
+      },
       "tags": ["official-draft", "inverse variation", "modelling", "table of values", "graphing"],
       "assets": [
         {
@@ -4036,6 +5569,19 @@
         "\\(T=\\frac{h}{2}\\left[f(0)+2f(1)+f(2)\\right]\\).",
         "\\(T=\\frac12(1+2\\sqrt2+\\sqrt5)\\approx3.03\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2022 HSC marking feedback",
+        "betterResponses": [
+          "recognise that 2 applications requires 3 function values",
+          "determine the exact function values at 𝑥𝑥= 0, 𝑥𝑥= 1 and 𝑥𝑥= 2",
+          "use the trapezoidal rule formula correctly."
+        ],
+        "improvementAreas": [
+          "understanding the relationship between the number of applications and the number of function values required",
+          "showing substitution into the trapezoidal formula",
+          "understanding that the trapezoidal rule finds the approximate value of the integral and therefore integration is not required."
+        ]
+      },
       "tags": ["official-draft", "trapezoidal rule", "definite integral", "approximation"],
       "assets": [],
       "source": {
@@ -4063,6 +5609,17 @@
         "\\(\\frac{2\\pi}{a}=6\\pi\\).",
         "\\(a=\\frac{1}{3}\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2022 HSC marking feedback",
+        "betterResponses": [
+          "understand that the vertical dilation equals the amplitude, which is a distance",
+          "understand the scale factor for the horizontal dilation and how it relates to 𝑎𝑎."
+        ],
+        "improvementAreas": [
+          "understanding that the period is 2𝜋𝜋 𝑎𝑎",
+          "understanding the relationship between 𝑎𝑎 and the scale factor for horizontal dilation."
+        ]
+      },
       "tags": ["official-draft", "sine graph", "amplitude", "period", "trigonometric functions"],
       "assets": [
         {
@@ -4100,6 +5657,21 @@
         "\\(P(\\text{special}\\cap5)=\\frac13\\cdot\\frac36=\\frac16\\).",
         "\\(P(\\text{special}\\mid5)=\\frac{1/6}{5/18}=\\frac35\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2022 HSC marking feedback",
+        "betterResponses": [
+          "(a) demonstrate their understanding of probability calculations",
+          "(a) correctly add and multiply fractions to reach the correct answer.",
+          "(b) apply the conditional probability formula, including finding the intersection on the numerator",
+          "(b) correctly substitute their answer found in part (a) as the denominator."
+        ],
+        "improvementAreas": [
+          "(a) reading the question carefully to obtain the correct sample space and favourable events",
+          "(a) using their calculator correctly when working with fractions.",
+          "(b) recognising conditional probability statements",
+          "(b) applying probability in a complex situation involving conditional probability."
+        ]
+      },
       "tags": ["official-draft", "conditional probability", "dice", "Bayes rule"],
       "assets": [],
       "source": {
@@ -4127,6 +5699,18 @@
         "\\(A=\\left[x^2+3x-\\frac{x^3}{3}\\right]_{-1}^{3}\\).",
         "\\(A=(9+9-9)-\\left(1-3+\\frac13\\right)=\\frac{32}{3}\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2022 HSC marking feedback",
+        "betterResponses": [
+          "write an integrand for the area between the two curves",
+          "integrate the resulting expression",
+          "substitute the correct limits to find the area."
+        ],
+        "improvementAreas": [
+          "subtracting functions in the correct order to find the area",
+          "showing substitution of limits, including using brackets for negative values."
+        ]
+      },
       "tags": ["official-draft", "area between curves", "parabola", "line", "definite integral"],
       "assets": [
         {
@@ -4165,6 +5749,27 @@
         "\\(3n(n+1)=1656\\Rightarrow n^2+n-552=0\\).",
         "\\((n-23)(n+24)=0\\), so \\(n=23\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2022 HSC marking feedback",
+        "betterResponses": [
+          "(a) identify that the situation involved an arithmetic series to be calculated",
+          "(a) apply the summation formula correctly to show the correct sum of 234 is achieved when 𝑛𝑛= 12, or compile a list of all 12 terms that when added showed that 𝑆𝑆= 234, or solve a quadratic equation (using the quadratic formula, by factorisation or completing the square",
+          "(a) demonstrate appropriate substitutions into the formula used from the Reference Sheet after correctly identifying 𝑎𝑎 and 𝑑𝑑.",
+          "(b) select the correct formula from the Reference Sheet and obtain and solve the resulting quadratic equation, accepting the positive value and rejecting the negative value",
+          "(b) compile a list of all 23 terms that were added to show 𝑆𝑆= 828",
+          "(b) use the summation formula using 𝑆𝑆= 828, 𝑎𝑎= 3 and 𝑑𝑑= 3 to guess and check values for 𝑛𝑛, correctly stating that 𝑛𝑛= 23."
+        ],
+        "improvementAreas": [
+          "(a) writing at least 3 terms to determine that an arithmetic series and not a geometric series was to be calculated",
+          "(a) making use of the Reference Sheet to apply the correct formula",
+          "(a) using brackets appropriately when substituting into the formula",
+          "(a) understanding that when the word ‘total’ is used it is referring to the sum and not the nth term.",
+          "(b) developing the algebraic skills to solve a quadratic equation after starting with 𝑆𝑆𝑛𝑛= 828",
+          "(b) showing a summation to verify that 𝑆𝑆𝑛𝑛= 828, if a list has been used",
+          "(b) checking their solution matches the required answer by substitution back into the original formula",
+          "(b) recognising that the number of rows needs to be a positive integer."
+        ]
+      },
       "tags": ["official-draft", "arithmetic series", "sequence", "modelling"],
       "assets": [
         {
@@ -4201,6 +5806,22 @@
         "\\(\\frac{dy}{dx}=8x(x^2+1)^3\\).",
         "\\(\\int x(x^2+1)^3\\,dx=\\frac18(x^2+1)^4+C\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2022 HSC marking feedback",
+        "betterResponses": [
+          "(a) use the chain rule to determine the derivative.",
+          "(b) recognise the link from the previous question",
+          "(b) demonstrate their understanding that the anti-derivative required the reverse chain rule",
+          "(b) manipulate the given expression into an appropriate form to integrate."
+        ],
+        "improvementAreas": [
+          "(a) recognising when to use the chain rule",
+          "(a) using algebraic skills in simplifying expressions.",
+          "(b) applying the reverse chain rule with the relevant working",
+          "(b) recognising the term “Hence” implies the need to use the previously obtained result",
+          "(b) adjusting the integral and relating it to the derivative from part (a)."
+        ]
+      },
       "tags": ["official-draft", "chain rule", "related integral", "antiderivative"],
       "assets": [],
       "source": {
@@ -4229,6 +5850,20 @@
         "\\(=3(x^2-4x+4)+7-12=3(x-2)^2-5\\).",
         "Therefore \\(m=2\\) and \\(k=3\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2022 HSC marking feedback",
+        "betterResponses": [
+          "express 𝑔𝑔(𝑥𝑥) in terms of 𝑚𝑚 and 𝑘𝑘",
+          "expand and equate coefficients",
+          "complete the square of a non-monic quadratic",
+          "identify 𝑚𝑚 by finding the vertex."
+        ],
+        "improvementAreas": [
+          "expanding perfect squares",
+          "completing the square of a non-monic quadratic",
+          "equating coefficients of a quadratic expression."
+        ]
+      },
       "tags": ["official-draft", "quadratic", "transformations", "completing the square", "graphing"],
       "assets": [],
       "source": {
@@ -4257,6 +5892,24 @@
         "\\(\\frac{dN}{dt}=200(0.013)e^{0.013t}\\).",
         "\\(\\frac{dN}{dt}\\big|_{t=24}=0.013N(24)\\approx3.55\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2022 HSC marking feedback",
+        "betterResponses": [
+          "(a) use their calculator to correctly evaluate the exponential expression.",
+          "(b) use their calculator to correctly evaluate the exponential expression.",
+          "(c) understand that the instantaneous rate of change is given by the derivative",
+          "(c) show the substitution 𝑡𝑡= 24 into the derivative."
+        ],
+        "improvementAreas": [
+          "(a) understanding that ‘initial’ means 𝑡𝑡= 0",
+          "(a) recognising that 𝑒𝑒0 = 1.",
+          "(b) showing the substitution 𝑡𝑡= 24 into the expression",
+          "(b) taking care with transcription of all numerals.",
+          "(c) finding the derivative of exponential functions with a coefficient",
+          "(c) using their calculator to correctly evaluate the exponential expression",
+          "(c) recognising the difference between instantaneous rate of change and average rate of change."
+        ]
+      },
       "tags": ["official-draft", "exponential growth", "derivative", "rate of change", "modelling"],
       "assets": [],
       "source": {
@@ -4285,6 +5938,28 @@
         "Using the table, \\(FV_2=1000\\times45.05630=45056.30\\).",
         "\\(45097.17-45056.30=40.87\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2022 HSC marking feedback",
+        "betterResponses": [
+          "(a) clearly demonstrate the correct use of the compound interest formula",
+          "(a) show their substitution clearly",
+          "(a) use a calculator to find the solution and round their answer correctly.",
+          "(b) identify the correct cell from the future value table and multiply by the regular deposit",
+          "(b) subtract the two future values to calculate the difference",
+          "(b) identify the correct value from the table and multiply it by 1000",
+          "(b) clearly show a numerical expression for the difference between Option 1 and Option 2."
+        ],
+        "improvementAreas": [
+          "(a) finding the interest rate and the number of compound periods",
+          "(a) distinguishing compound interest investments from other investment types",
+          "(a) applying the compound interest formula",
+          "(a) adjusting interest rates and time periods based on the compounding period.",
+          "(b) converting the interest rate and calculating the number of periods",
+          "(b) using the table to find the future value of an annuity",
+          "(b) expressing the difference as an expression before the final calculation",
+          "(b) ensuring they have answered the entire question."
+        ]
+      },
       "tags": ["official-draft", "future value", "compound interest", "annuity", "interest factor"],
       "assets": [
         {
@@ -4322,6 +5997,20 @@
         "\\(y(-1)=1\\), \\(y(0)=8\\), \\(y(4)=-24\\), \\(y(7)=57\\).",
         "Therefore the global minimum is \\(-24\\), and the global maximum is \\(57\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2022 HSC marking feedback",
+        "betterResponses": [
+          "find the first derivative, use this to find the stationary points, find the 𝑦𝑦 −values of the endpoints and identify the global maximum and minimum",
+          "set out their solution clearly, demonstrating each step of working",
+          "show the substitution as a numerical expression when finding the 𝑦𝑦 −values."
+        ],
+        "improvementAreas": [
+          "understanding the difference between a global and local maximum and minimum",
+          "recognising the need for calculus to be applied in order to find stationary points",
+          "deriving accurately and using algebra skills to factorise and solve 𝑑𝑑𝑑𝑑 𝑑𝑑𝑑𝑑= 0",
+          "substituting into the function to find the 𝑦𝑦 −values of relevant points."
+        ]
+      },
       "tags": ["official-draft", "global maximum", "global minimum", "cubic", "stationary points"],
       "assets": [],
       "source": {
@@ -4351,6 +6040,27 @@
         "\\(\\frac{4\\pi}{25}t=\\frac\\pi3,\\frac{5\\pi}{3}\\).",
         "\\(t=\\frac{25}{12},\\frac{125}{12}\\), so the interval is \\(\\frac{25}{3}\\) hours."
       ],
+      "markingFeedback": {
+        "sourceRef": "2022 HSC marking feedback",
+        "betterResponses": [
+          "(a) identify that the maximum and minimum values of a basic cosine function are ±1",
+          "(a) use the amplitude to find the maximum and minimum values of a wave function.",
+          "(b) use 2𝜋𝜋 𝑎𝑎 to find the period of a cosine curve",
+          "(b) perform a multiplication of fractions containing 𝜋𝜋.",
+          "(c) write a correct trigonometric equation",
+          "(c) solve the trigonometric equation to find all relevant solutions for 𝑡𝑡",
+          "(c) correctly subtract fractions to find the required time."
+        ],
+        "improvementAreas": [
+          "(a) identifying the amplitude of the given wave function",
+          "(a) showing the use of the amplitude to find the maximum and minimum values of the given wave function.",
+          "(b) using the period to find the time between successive low tides",
+          "(b) calculations involving 𝜋𝜋.",
+          "(c) showing all working to find relevant solutions for a trigonometric equation using radians",
+          "(c) simplifying calculations involving exact trigonometric ratios in radians",
+          "(c) identifying what is required to answer the given question."
+        ]
+      },
       "tags": ["official-draft", "trigonometric model", "period", "cosine", "tides"],
       "assets": [],
       "source": {
@@ -4379,6 +6089,20 @@
         "The fitted slope \\(1.85\\) means predicted actor age increases by about \\(1.85\\) years per additional year of character age.",
         "The context shows teenage characters can be played by actors substantially older than the characters."
       ],
+      "markingFeedback": {
+        "sourceRef": "2022 HSC marking feedback",
+        "betterResponses": [
+          "use the appropriate language for bivariate data and other statistical terms and notations",
+          "respond to the question with accurate, unique and contextual answers, keeping answers brief and to the point",
+          "describe the relationship between the variables in the given context using unique and accurate statements observed from the data",
+          "recognise the limitations of the line of best fit."
+        ],
+        "improvementAreas": [
+          "comparing bivariate data using the two dimensions given and not finding a statistical measure of one variable only",
+          "using their understanding of the strength, direction and type of correlation to interpret and report on the data in context",
+          "using all information given in formulating their answer (graph, equation, correlation coefficient)."
+        ]
+      },
       "tags": ["official-draft", "scatterplot", "correlation", "line of best fit", "bivariate data"],
       "assets": [
         {
@@ -4416,6 +6140,20 @@
         "\\(-4\\sin(2x)=2\\Rightarrow \\sin(2x)=-\\frac12\\Rightarrow 2x=\\frac{7\\pi}{6},\\frac{11\\pi}{6}\\).",
         "The common value is \\(2x=\\frac{7\\pi}{6}\\), hence \\(x=\\frac{7\\pi}{12}\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2022 HSC marking feedback",
+        "betterResponses": [
+          "differentiate 𝑓𝑓(𝑥𝑥) = sin 2𝑥𝑥 and solve for the correct values of 𝑥𝑥 in the given domain, then verify the two possible solutions with the second derivative",
+          "solve both first and second derivative equations correctly and find the common 𝑥𝑥 value",
+          "correctly differentiate the trigonometric function twice and solve the resulting equations."
+        ],
+        "improvementAreas": [
+          "providing a solution in radians rather than degrees",
+          "changing the domain to 0 ≤ 2𝑥𝑥 ≤2𝜋𝜋 to find the required 2𝑥𝑥 angles using an appropriate angles of any magnitude technique",
+          "using the Reference Sheet to correctly differentiate trigonometric equations",
+          "checking their final answer satisfies the initial conditions of the question."
+        ]
+      },
       "tags": ["official-draft", "trigonometric derivative", "sine", "exact values"],
       "assets": [],
       "source": {
@@ -4444,6 +6182,19 @@
         "About \\(68\\%\\) lie within one standard deviation, from \\(760\\) to \\(920\\), so about \\(34\\%\\) lie between \\(840\\) and \\(920\\).",
         "Therefore the required percentage is \\(10\\%+34\\%=44\\%\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2022 HSC marking feedback",
+        "betterResponses": [
+          "subtract 50% from 60% to find the percentage of batteries within the given lifespan below the mean and add this to the 34% of batteries within the given lifespan above the mean to find the approximate percentage of batteries within the given lifespan",
+          "represent the relevant information on the normal distribution curve",
+          "show their calculations clearly when writing their answer."
+        ],
+        "improvementAreas": [
+          "identifying that there are 68% of scores between the first standard deviations either side of the mean, dividing 68% by 2 to get 34% as the distribution is symmetrical",
+          "identifying the values of the mean and integer z-scores when using a scale to show normal distribution",
+          "distinguishing between the percentage and number of batteries to make relevant calculations, checking the reasonableness of their answer."
+        ]
+      },
       "tags": ["official-draft", "normal distribution", "empirical rule", "standard deviation"],
       "assets": [],
       "source": {
@@ -4472,6 +6223,32 @@
         "\\(f''\\left(\\frac12\\right)=4\\left(-\\frac12\\right)e^{-1}<0\\), so the stationary point is a local maximum.",
         "The point of inflection occurs when \\(f''(x)=0\\), so \\(x=1\\) and \\(y=e^{-2}\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2022 HSC marking feedback",
+        "betterResponses": [
+          "(a) understand that the product rule was necessary to solve the problem and determine the two functions required in the product rule",
+          "(a) correctly work with the negative terms throughout the solution",
+          "(a) factorise exponentials and negatives appropriately.",
+          "(b) recognise the first derivative had only one solution",
+          "(b) find the stationary point by setting the first derivative equal to 0 and solving the equation by realising that 𝑒𝑒−2𝑑𝑑≠ 0",
+          "(b) determine the nature of stationary points by using the second derivative test, classifying the stationary point as a maximum.",
+          "(c) show that the positive 𝑥𝑥 − axis is an asymptote",
+          "(c) sketch the curve and clearly label the stationary points, axes intercept and point of inflection",
+          "(c) find the point of inflection using 𝑓𝑓′′(𝑑𝑑) = 0, showing a change in concavity either side of the point."
+        ],
+        "improvementAreas": [
+          "(a) expanding grouping symbols involving a negative factor carefully and correctly",
+          "(a) recognising when to use the product rule as the best approach to differentiating",
+          "(a) differentiating exponentials correctly",
+          "(a) setting their work out clearly, showing all steps.",
+          "(b) understanding that the terms ‘maximum’ and ‘minimum’ should be used to classify stationary points",
+          "(b) using either the first or second derivative to determine the nature of the stationary points",
+          "(b) setting their work out clearly.",
+          "(c) using an appropriate scale on their graph",
+          "(c) understanding the difference between a point of inflection and a horizontal point of inflection",
+          "(c) sketching the graph as a smooth curve with clear labelling of all relevant features."
+        ]
+      },
       "tags": [
         "official-draft",
         "product rule",
@@ -4507,6 +6284,32 @@
         "The area under the hyperbola from \\(0\\) to \\(1\\) is \\(\\int_0^1\\left(\\frac{2}{2-x}-1\\right)dx=2\\ln2-1\\).",
         "Adding the circular segment gives \\(2\\ln2-1+\\frac{\\pi}{4}-\\frac12=2\\ln2+\\frac{\\pi}{4}-\\frac32\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2022 HSC marking feedback",
+        "betterResponses": [
+          "(a) work in radians rather than degrees",
+          "(a) use 𝐴𝐴= 1 2 𝑏𝑏ℎ rather than 𝐴𝐴= 1 2 𝑎𝑎𝑏𝑏sin 𝐶𝐶",
+          "(a) use trigonometry to find 𝜃𝜃= 𝜋𝜋 4",
+          "(a) leave answers in exact form.",
+          "(b) solve simultaneous equations",
+          "(b) clearly show all algebraic steps",
+          "(b) work with algebraic fractions.",
+          "(c) integrate 2 2−𝑑𝑑 and −1 to reach the correct primitive",
+          "(c) leave answers in exact form."
+        ],
+        "improvementAreas": [
+          "(a) working in radians",
+          "(a) understanding the Cartesian plane",
+          "(a) understanding that the formula 𝐴𝐴= 1 2 𝑟𝑟2𝜃𝜃 requires 𝜃𝜃 in radians.",
+          "(b) not using the given answer to solve a ‘show’ question",
+          "(b) manipulating algebraic fractions.",
+          "(c) finding primitives involving logs and another expression",
+          "(c) understanding the primitive of −1 is −𝑥𝑥",
+          "(c) reading the question for guidance",
+          "(c) understanding that ‘using part (a)’ means the result from part (a) can be used without recalculation",
+          "(c) understanding that some areas cannot be found using integration."
+        ]
+      },
       "tags": ["official-draft", "circle", "hyperbola", "area", "definite integral"],
       "assets": [
         {
@@ -4553,6 +6356,30 @@
         "The integral from \\(0\\) to \\(4\\) is less than the limiting rectangle sum, so \\(\\frac{15}{16\\ln2}<2\\).",
         "Thus \\(15<32\\ln2\\), and exponentiating gives \\(e^{15}<2^{32}\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2022 HSC marking feedback",
+        "betterResponses": [
+          "(a) identity the common ratio and first term.",
+          "(a) clearly show the substitution into the limiting sum formula.",
+          "(b) use the Reference Sheet to integrate the exponential function",
+          "(b) manage the negative index",
+          "(b) correctly substitute the limits into the integral to obtain the given result.",
+          "(c) demonstrate their understanding by comparing parts (a) and (b)",
+          "(c) use an efficient starting statement to form their solution",
+          "(c) correctly rearrange the inequality using the required logarithmic and index laws."
+        ],
+        "improvementAreas": [
+          "(a) stating the values for the common ratio and first term",
+          "(a) substitution and simplifying fractions.",
+          "(b) using the Reference Sheet to integrate exponential functions",
+          "(b) understanding and applying the laws for negative indices",
+          "(b) manipulating algebraic and arithmetic fractions",
+          "(b) substituting upper and lower limits.",
+          "(c) using algebraic skills when simplifying inequalities",
+          "(c) using logarithmic and index laws",
+          "(c) showing all steps in calculations."
+        ]
+      },
       "tags": [
         "official-draft",
         "geometric series",
@@ -4596,6 +6423,24 @@
         "The condition gives \\(F(c)=2(1-F(c))\\), hence \\(3F(c)=2\\) and \\(F(c)=\\frac23\\).",
         "\\(\\frac13\\ln c=\\frac23\\), so \\(\\ln c=2\\) and \\(c=e^2\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2022 HSC marking feedback",
+        "betterResponses": [
+          "(a) manipulate the given CDF expression into an appropriate form to evaluate the 𝑘𝑘 value",
+          "(a) use efficient algebraic strategies involving fractions and equations.",
+          "(b) identify 𝑃𝑃(𝑋𝑋< 𝑐𝑐) = 2 3",
+          "(b) simplify the expression before substituting the given equation",
+          "(b) solve the resulting logarithmic equation."
+        ],
+        "improvementAreas": [
+          "(a) understanding the difference between a probability density function (PDF) and a cumulative distribution function (CDF)",
+          "(a) recognising the CDF evaluated at its limits is equated to 1",
+          "(a) not substituting 𝑘𝑘= 3 into the CDF; rather finding the value of 𝑘𝑘.",
+          "(b) applying index and logarithmic laws",
+          "(b) understanding the meaning of the notation 𝑃𝑃(𝑋𝑋< 𝑐𝑐)",
+          "(b) recognising 𝑃𝑃(𝑋𝑋> 𝑐𝑐) = 1 − 𝑃𝑃(𝑋𝑋< 𝑐𝑐)."
+        ]
+      },
       "tags": [
         "official-draft",
         "continuous random variable",
@@ -4630,6 +6475,26 @@
         "\\(A'(x)=\\frac{x(x-2)}{(x-1)^2}\\), so for \\(x>1\\) the stationary point occurs at \\(x=2\\).",
         "This gives \\(y=4\\) and \\(A=\\frac12(2)(4)=4\\) square units."
       ],
+      "markingFeedback": {
+        "sourceRef": "2022 HSC marking feedback",
+        "betterResponses": [
+          "(a) equate two equivalent expressions for the gradient, equate the ratios of corresponding sides in similar triangles or form an equation using the ratio of the areas of similar triangles",
+          "(a) manipulate a simple equation to obtain the required result.",
+          "(b) use the information given in part (a) to write an equation for the area of the triangle",
+          "(b) correctly differentiate the resulting equation using the quotient rule or product rule",
+          "(b) find all stationary points and correctly test their nature",
+          "(b) use the minimum value to find the required area."
+        ],
+        "improvementAreas": [
+          "(a) recognising that a relationship between two equivalent expressions is required",
+          "(a) showing all working to obtain the required result.",
+          "(b) writing a simple equation for the area of the triangle",
+          "(b) using related information to write the area equation in 𝑥𝑥",
+          "(b) showing all working when using the derivative to obtain the stationary points",
+          "(b) showing derivative values (if using a table) and using suitable 𝑥𝑥 values close to the stationary point to test their nature",
+          "(b) showing all working to find the required area of the triangle."
+        ]
+      },
       "tags": ["official-draft", "intercepts", "optimisation", "minimum area", "differentiation"],
       "assets": [
         {
@@ -4669,6 +6534,35 @@
         "This gives \\(n\\approx83.67\\), so Jane makes \\(83\\) more full monthly repayments.",
         "The balance after \\(83\\) of these repayments is about \\(\\$928.29\\); after one further month of interest, the final repayment is \\(928.29(1.0035)\\approx\\$931.54\\)."
       ],
+      "markingFeedback": {
+        "sourceRef": "2022 HSC marking feedback",
+        "betterResponses": [
+          "(a) substitute 𝐴𝐴𝑛𝑛= 0, 𝑃𝑃= 200000, 𝑟𝑟= 1.0025 and 𝑛𝑛= 180 correctly into the given formula",
+          "(a) identify the connection to GPs and select a suitable formula from the Reference Sheet",
+          "(a) make 𝑀𝑀 the subject in the equation 2000000(1.0025)180 = 𝑀𝑀� (1.0025)180−1 1.0025−1 �, then check the calculation provides the given value for 𝑀𝑀.",
+          "(b) manage the complex logarithmic and exponential work required to solve the question",
+          "(b) collect the like terms involving (1.0035)𝑛𝑛, make this the subject, then take the logarithm of both sides or change from index form to logarithmic form to determine a decimal approximation for 𝑛𝑛.",
+          "(b) calculate both 𝐴𝐴83 and 𝐴𝐴84 to conclude that 83 full monthly payments are made.",
+          "(c) use their rounded answer from part (b) to ensure the final repayment is less than \\$1381.16",
+          "(c) demonstrate an understanding of the necessary additional interest calculation (𝐴𝐴83 × 1.0035)",
+          "(c) identify the two components of the question, rounding their part (b) answer for 𝑛𝑛 down to 83, then use the formula correctly where 𝑃𝑃 = 100032, 𝑟𝑟 = 1.0035 and 𝑀𝑀 = \\$1381.16 to find the amount owing, then multiply the final answer by 1.0035 to give 𝐴𝐴𝑛𝑛= \\$931.54",
+          "(c) understand the significance of getting a non-integer value of 𝑛𝑛, indicating there is less than the full payment amount in the last month."
+        ],
+        "improvementAreas": [
+          "(a) understanding a ‘show’ question requires demonstrated working out",
+          "(a) checking their final answer matches the given answer in a ‘show’ question",
+          "(a) not proving a result when instructed ‘Do NOT prove this’.",
+          "(b) not proving a result that has clearly been stated ‘Do NOT prove this’",
+          "(b) calculating both 𝐴𝐴83 and 𝐴𝐴84 to conclude that 83 full monthly payments are made",
+          "(b) not rounding their answer up to 𝑛𝑛= 84 as this would result in overpaying the loan",
+          "(b) more care when setting out solutions",
+          "(b) avoiding arithmetic errors when rearranging equations involving indices",
+          "(b) reading questions carefully, in this case not mistaking the value of 𝑃𝑃 for the value of 𝐴𝐴𝑛𝑛.",
+          "(c) considering if their final solution is reasonable within the context of the question; in this case the final payment should not be larger than the original payments for the loan",
+          "(c) remembering to multiply the final amount owing by 1.0035 as interest for that month needs to be added to obtain the final payment amount",
+          "(c) checking their solution answers the question."
+        ]
+      },
       "tags": [
         "official-draft",
         "reducing balance loan",

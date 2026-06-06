@@ -6,12 +6,14 @@ import { SourceCatalog } from "../features/sources/SourceCatalog";
 import { SyllabusBrowser } from "../features/syllabus/SyllabusBrowser";
 import {
   getDatasetSummary,
+  getCourseOptions,
+  getDefaultSyllabusEraForCourse,
   getDisplaySyllabusNodesForQuestion,
-  getFilterOptions,
+  getFilterOptionsForCourse,
   getQuestionCountsBySyllabusNode,
   getQuestionsForSyllabusNode,
   getSyllabusNodesForView,
-  getSourcePackCoverage,
+  getSourcePackCoverageForCourse,
   getWorkedSolutionCoverage,
   getWorkedSolutionForQuestion,
   queryQuestions,
@@ -24,6 +26,7 @@ type ViewMode = "questions" | "syllabus" | "sources";
 
 type Filters = {
   search: string;
+  courseId: string;
   year: string;
   topic: string;
   style: string;
@@ -32,15 +35,11 @@ type Filters = {
 
 const defaultFilters: Filters = {
   search: "",
+  courseId: "advanced",
   year: "all",
   topic: "all",
   style: "all",
   syllabusNodeId: "all"
-};
-
-const syllabusViewLabels: Record<SyllabusEraView, string> = {
-  "advanced-2017": "2017 syllabus",
-  "advanced-2024": "2024 syllabus"
 };
 
 export function App() {
@@ -50,7 +49,12 @@ export function App() {
   const [preferredSyllabusEra, setPreferredSyllabusEra] = useState<SyllabusEraView>("advanced-2017");
   const [viewMode, setViewMode] = useState<ViewMode>("questions");
 
-  const options = useMemo(() => getFilterOptions(database), []);
+  const courseOptions = useMemo(() => getCourseOptions(database), []);
+  const selectedCourse = courseOptions.find((course) => course.id === filters.courseId) ?? courseOptions[0];
+  const selectedSyllabusEra =
+    selectedCourse?.syllabusEras.find((era) => era.id === preferredSyllabusEra) ??
+    selectedCourse?.syllabusEras[0];
+  const options = useMemo(() => getFilterOptionsForCourse(database, selectedCourse?.id), [selectedCourse]);
   const summary = useMemo(() => getDatasetSummary(database), []);
   const visibleSyllabusNodes = useMemo(
     () => getSyllabusNodesForView(database, preferredSyllabusEra),
@@ -64,19 +68,23 @@ export function App() {
     () => getWorkedSolutionCoverage(database, workedSolutionsDatabase),
     []
   );
-  const sourcePacks = useMemo(() => getSourcePackCoverage(database), []);
+  const sourcePacks = useMemo(
+    () => getSourcePackCoverageForCourse(database, selectedCourse?.id),
+    [selectedCourse]
+  );
 
   const filteredQuestions = useMemo(
     () =>
       queryQuestions(database, {
         search: filters.search,
+        courseId: selectedCourse?.id,
         year: filters.year === "all" ? undefined : Number(filters.year),
         topic: filters.topic === "all" ? undefined : filters.topic,
         style: filters.style === "all" ? undefined : (filters.style as QuestionStyle),
         syllabusNodeId: filters.syllabusNodeId === "all" ? undefined : filters.syllabusNodeId,
         syllabusConversion
       }),
-    [filters]
+    [filters, selectedCourse]
   );
 
   const selectedQuestion = useMemo(
@@ -118,6 +126,28 @@ export function App() {
 
   const setFilter = (name: keyof Filters, value: string) => {
     setFilters((current) => ({ ...current, [name]: value }));
+  };
+
+  const setCourse = (courseId: string) => {
+    const nextCourse = courseOptions.find((course) => course.id === courseId);
+    const nextSyllabusEra = getDefaultSyllabusEraForCourse(nextCourse);
+    const nextNodes = getSyllabusNodesForView(database, nextSyllabusEra);
+
+    setFilters((currentFilters) => ({
+      ...currentFilters,
+      courseId,
+      year: "all",
+      topic: "all",
+      style: "all",
+      syllabusNodeId: "all"
+    }));
+    setPreferredSyllabusEra(nextSyllabusEra);
+    setSelectedSyllabusNodeId(nextNodes[0]?.id ?? "");
+    setSelectedQuestionId(
+      database.questions.find(
+        (question) => database.papers.find((paper) => paper.id === question.paperId)?.courseId === courseId
+      )?.id ?? ""
+    );
   };
 
   const setSyllabusEra = (syllabusEra: SyllabusEraView) => {
@@ -183,7 +213,14 @@ export function App() {
                 />
               </span>
             </label>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
+              <FilterSelect label="Course" value={selectedCourse?.id ?? ""} onChange={setCourse}>
+                {courseOptions.map((course) => (
+                  <option key={course.id} value={course.id}>
+                    {course.shortTitle}
+                  </option>
+                ))}
+              </FilterSelect>
               <FilterSelect label="Year" value={filters.year} onChange={(value) => setFilter("year", value)}>
                 <option value="all">All years</option>
                 {options.years.map((year) => (
@@ -231,7 +268,8 @@ export function App() {
               <SyllabusViewControl
                 value={preferredSyllabusEra}
                 onChange={setSyllabusEra}
-                label={syllabusViewLabels[preferredSyllabusEra]}
+                label={selectedSyllabusEra?.label ?? "No syllabus view"}
+                eras={selectedCourse?.syllabusEras ?? []}
               />
             </div>
           </div>
@@ -289,7 +327,7 @@ export function App() {
               paper={database.papers.find((paper) => paper.id === selectedQuestion.paperId)}
               workedSolution={selectedWorkedSolution}
               syllabusNodes={selectedQuestionSyllabus}
-              syllabusViewLabel={syllabusViewLabels[preferredSyllabusEra]}
+              syllabusViewLabel={selectedSyllabusEra?.label ?? "Selected syllabus"}
               onOpenSyllabusNode={openSyllabusNode}
             />
           ) : viewMode === "syllabus" && selectedSyllabusNode ? (
@@ -330,6 +368,19 @@ export function App() {
                     <p className="mt-1 text-body font-medium">{question.title}</p>
                   </button>
                 ))}
+              </div>
+            </div>
+          ) : viewMode === "syllabus" ? (
+            <div className="space-y-4 rounded-md border border-border-default bg-surface-raised p-5">
+              <div>
+                <p className="text-caption font-semibold uppercase text-accent-info">
+                  {selectedCourse?.shortTitle ?? "Course"}
+                </p>
+                <h2 className="text-h2 font-semibold">No displayable syllabus nodes yet</h2>
+                <p className="mt-2 max-w-3xl text-body text-text-secondary">
+                  This course has source-pack intake records, but its syllabus nodes have not been promoted
+                  into the browseable corpus yet.
+                </p>
               </div>
             </div>
           ) : (
@@ -412,11 +463,13 @@ function FilterSelect({
 function SyllabusViewControl({
   value,
   onChange,
-  label
+  label,
+  eras
 }: {
   value: SyllabusEraView;
   onChange: (value: SyllabusEraView) => void;
   label: string;
+  eras: Array<{ id: string; label: string }>;
 }) {
   return (
     <div className="flex min-w-0 flex-col gap-1 text-caption font-medium text-text-secondary">
@@ -425,12 +478,16 @@ function SyllabusViewControl({
         className="flex items-center gap-1 rounded-md border border-border-default bg-surface-sunken p-1 text-body-sm"
         aria-label={`Current syllabus view: ${label}`}
       >
-        <SyllabusViewButton active={value === "advanced-2017"} onClick={() => onChange("advanced-2017")}>
-          2017
-        </SyllabusViewButton>
-        <SyllabusViewButton active={value === "advanced-2024"} onClick={() => onChange("advanced-2024")}>
-          2024
-        </SyllabusViewButton>
+        {eras.map((era) => (
+          <SyllabusViewButton key={era.id} active={value === era.id} onClick={() => onChange(era.id)}>
+            {era.label.replace(" syllabus", "")}
+          </SyllabusViewButton>
+        ))}
+        {eras.length === 0 ? (
+          <span className="inline-flex min-h-9 flex-1 items-center justify-center rounded-sm px-3 text-body-sm text-text-secondary">
+            None
+          </span>
+        ) : null}
       </div>
     </div>
   );

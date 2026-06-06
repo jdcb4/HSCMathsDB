@@ -4,7 +4,7 @@ The first stop for navigating this project. Keep this file factual: it should de
 
 ## What this project is
 
-GoalCheck HSC is a Vite React TypeScript web app for browsing NSW HSC Mathematics Advanced and archived Mathematics 2 Unit question records by year, topic, style, and syllabus content. It supports question-to-syllabus and syllabus-to-question navigation using a validated JSON corpus, with toggleable 2017 and 2024 Mathematics Advanced syllabus views resolved through a multi-course conversion map.
+GoalCheck HSC is a Vite React TypeScript web app for browsing NSW HSC mathematics question records and source packs by course, year, topic, style, and syllabus content. It currently includes browseable Mathematics Advanced and archived Mathematics 2 Unit question records, plus 2025 source-pack intake records for Mathematics Standard, Mathematics Extension 1, and Mathematics Extension 2. It supports question-to-syllabus and syllabus-to-question navigation using a validated JSON corpus, with toggleable 2017 and 2024 Mathematics Advanced syllabus views resolved through a multi-course conversion map.
 
 ## Current setup state
 

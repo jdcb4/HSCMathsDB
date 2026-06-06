@@ -11,7 +11,8 @@ const requestedPackIds = process.argv.slice(2);
 const packs = selectPacks(requestedPackIds);
 
 for (const pack of packs) {
-  const questions = database.questions.filter((question) => question.paperId === pack.paperId);
+  const packPaperIds = pack.paperIds ?? (pack.paperId ? [pack.paperId] : []);
+  const questions = database.questions.filter((question) => packPaperIds.includes(question.paperId));
   const officialQuestions = questions.filter((question) => question.source.transcriptionStatus !== "demo");
   const candidateNumbers = await readCandidateNumbers(pack.id);
   const importedNumbers = new Set(

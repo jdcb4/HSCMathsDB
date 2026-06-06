@@ -13,7 +13,7 @@ The artifact currently contains course mappings for:
 
 ## Data Model
 
-- `src/data/hsc-math-advanced.json` contains displayable syllabus nodes for both `advanced-2017` and `advanced-2024`.
+- `src/data/hsc-math-advanced.json` contains course metadata and displayable syllabus nodes for both `advanced-2017` and `advanced-2024`.
 - Existing questions use `question.syllabusNodeIds` with 2017 node IDs such as `ma-f1`.
 - Future questions may use either 2017 IDs or 2024 IDs such as `new-fa-working-functions`.
 - `src/data/syllabus-conversion.json` stores `courses[]`, where each course has old syllabus nodes, new syllabus nodes, and mapping edges between them.
@@ -31,11 +31,11 @@ For future 2024-tagged questions, selectors reverse that path:
 question.syllabusNodeIds[] -> courses[].mappings[].newNodeId -> courses[].mappings[].oldNodeId -> courses[].oldSyllabus.nodes[].appNodeId
 ```
 
-The Extension 1, Extension 2, and Standard mappings are conversion-only for now because their exam corpora have not been imported. When those courses are added to the primary corpus, add displayable `syllabus` nodes whose IDs match the relevant conversion node IDs before importing questions.
+The Extension 1, Extension 2, and Standard mappings are conversion-only for now. Their 2025 source-pack and paper records are cataloged, but their browseable syllabus nodes and question corpora have not been promoted. Before importing questions for those courses, add displayable `syllabus` nodes whose IDs match the relevant conversion node IDs.
 
 ## UX Rule
 
-The current interface shows one Mathematics Advanced syllabus era at a time. The header toggle selects either the 2017 or 2024 Advanced syllabus view. Filters, the syllabus browser, question detail links, and syllabus reverse lookup all use the selected view.
+The current interface selects one mathematics course and one syllabus era at a time. Advanced shows displayable 2017 and 2024 syllabus views. Extension 1, Extension 2, and Standard expose course-level source intake first; their syllabus browser is intentionally empty until course nodes are promoted.
 
 The app does not duplicate question tags during display. It resolves the selected view programmatically through the conversion map.
 

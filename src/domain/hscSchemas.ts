@@ -29,8 +29,30 @@ export const SyllabusNodeSchema = z.object({
   sourceUrl: z.string().url()
 });
 
+export const MarkingFeedbackSchema = z.object({
+  sourceRef: z.string().min(1),
+  betterResponses: z.array(z.string().min(1)).default([]),
+  improvementAreas: z.array(z.string().min(1)).default([])
+});
+
+export const CourseSchema = z.object({
+  id: z.string().min(1),
+  title: z.string().min(1),
+  shortTitle: z.string().min(1),
+  syllabusEras: z
+    .array(
+      z.object({
+        id: z.string().min(1),
+        label: z.string().min(1)
+      })
+    )
+    .min(1),
+  sourceCollectionIds: z.array(z.string().min(1)).default([])
+});
+
 export const PaperSchema = z.object({
   id: z.string().min(1),
+  courseId: z.string().min(1),
   year: z.number().int().min(1900).max(2100),
   courseName: z.string().min(1),
   syllabusEra: z.string().min(1),
@@ -50,7 +72,9 @@ export const SourceAssetSchema = z.object({
 
 export const SourcePackSchema = z.object({
   id: z.string().min(1),
+  courseId: z.string().min(1),
   paperId: z.string().min(1).optional(),
+  paperIds: z.array(z.string().min(1)).optional(),
   collectionId: z.string().min(1),
   year: z.number().int().min(1900).max(2100),
   courseName: z.string().min(1),
@@ -80,6 +104,7 @@ export const QuestionSchema = z.object({
   promptLatex: z.string().min(1),
   answerLatex: z.string().min(1),
   workingLatex: z.array(z.string().min(1)).default([]),
+  markingFeedback: MarkingFeedbackSchema.optional(),
   tags: z.array(z.string().min(1)).default([]),
   assets: z.array(AssetSchema).default([]),
   source: z.object({
@@ -269,17 +294,49 @@ export const HscDatabaseSchema = z
         scope: z.string().min(1)
       })
     ),
+    courses: z.array(CourseSchema).min(1),
     sourcePacks: z.array(SourcePackSchema).min(1),
     syllabus: z.array(SyllabusNodeSchema).min(1),
     papers: z.array(PaperSchema).min(1),
     questions: z.array(QuestionSchema).min(1)
   })
   .superRefine((database, context) => {
+    const courseIds = new Set(database.courses.map((course) => course.id));
     const paperIds = new Set(database.papers.map((paper) => paper.id));
     const syllabusIds = new Set(database.syllabus.map((node) => node.id));
     const collectionIds = new Set(database.sourceCollections.map((collection) => collection.id));
 
+    database.courses.forEach((course, courseIndex) => {
+      course.sourceCollectionIds.forEach((collectionId, collectionIndex) => {
+        if (!collectionIds.has(collectionId)) {
+          context.addIssue({
+            code: "custom",
+            message: `Course ${course.id} references missing source collection ${collectionId}`,
+            path: ["courses", courseIndex, "sourceCollectionIds", collectionIndex]
+          });
+        }
+      });
+    });
+
+    database.papers.forEach((paper, paperIndex) => {
+      if (!courseIds.has(paper.courseId)) {
+        context.addIssue({
+          code: "custom",
+          message: `Paper ${paper.id} references missing course ${paper.courseId}`,
+          path: ["papers", paperIndex, "courseId"]
+        });
+      }
+    });
+
     database.sourcePacks.forEach((pack, packIndex) => {
+      if (!courseIds.has(pack.courseId)) {
+        context.addIssue({
+          code: "custom",
+          message: `Source pack ${pack.id} references missing course ${pack.courseId}`,
+          path: ["sourcePacks", packIndex, "courseId"]
+        });
+      }
+
       if (!collectionIds.has(pack.collectionId)) {
         context.addIssue({
           code: "custom",
@@ -295,6 +352,16 @@ export const HscDatabaseSchema = z
           path: ["sourcePacks", packIndex, "paperId"]
         });
       }
+
+      pack.paperIds?.forEach((paperId, paperIdIndex) => {
+        if (!paperIds.has(paperId)) {
+          context.addIssue({
+            code: "custom",
+            message: `Source pack ${pack.id} references missing paper ${paperId}`,
+            path: ["sourcePacks", packIndex, "paperIds", paperIdIndex]
+          });
+        }
+      });
     });
 
     database.questions.forEach((question, questionIndex) => {
@@ -319,6 +386,7 @@ export const HscDatabaseSchema = z
   });
 
 export type HscDatabase = z.infer<typeof HscDatabaseSchema>;
+export type Course = z.infer<typeof CourseSchema>;
 export type Question = z.infer<typeof QuestionSchema>;
 export type SyllabusNode = z.infer<typeof SyllabusNodeSchema>;
 export type Paper = z.infer<typeof PaperSchema>;

@@ -1,12 +1,13 @@
 {
   "name": "goalcheck-hsc",
-  "version": "0.5.0",
-  "description": "Browse NSW HSC Mathematics Advanced and Mathematics 2 Unit past-paper questions by year, topic, style, and syllabus content.",
+  "version": "0.7.0",
+  "description": "Browse NSW HSC mathematics past-paper questions and source packs by course, year, topic, style, and syllabus content.",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "data:audit-assets": "tsx scripts/audit-source-assets.ts",
     "data:audit-sources": "tsx scripts/audit-source-catalog.ts",
+    "data:audit-worked-solution-math": "tsx scripts/audit-worked-solution-math.ts",
     "data:download-sources": "tsx scripts/download-source-assets.ts",
     "data:extract-candidates": "python scripts/extract-question-candidates.py",
     "data:crop-render": "tsx scripts/crop-rendered-page.ts",
@@ -15,6 +16,7 @@
     "data:render-pages": "tsx scripts/render-source-pages.ts",
     "data:generate-explanation-samples": "tsx scripts/generate-llm-explanation-samples.ts",
     "data:generate-worked-solutions": "tsx scripts/generate-worked-solutions.ts",
+    "data:ingest-marking-feedback": "tsx scripts/ingest-marking-feedback.ts",
     "data:report-worked-solutions": "tsx scripts/report-worked-solutions.ts",
     "data:report-coverage": "tsx scripts/report-import-coverage.ts",
     "data:report-candidates": "python scripts/report-question-candidates.py",

@@ -35,12 +35,13 @@ JSON is the first database layer. It supports deterministic local validation, si
 
 The corpus has two related but distinct layers:
 
+- `courses` defines the supported course-level navigation structure and syllabus-era options.
 - `sourcePacks` tracks official NSW exam-pack pages, import status, and pending asset extraction.
 - `questions` stores actual browseable question records with TeX prompts, answers, syllabus mappings, and diagram references. Records may be demo seeds, official drafts, or verified transcriptions.
 
 Student-facing worked explanations are planned as a separate validated sidecar keyed by `questionId`, not embedded directly into each question record. See `Docs/LLM_EXPLANATIONS.md`.
 
-The 2017-to-2024 syllabus conversion is a separate validated multi-course artifact in `src/data/syllabus-conversion.json`. The current corpus contains displayable Mathematics Advanced nodes for both syllabus eras, but questions only need native `syllabusNodeIds`; selectors resolve alternate-era display through the conversion map. Future Extension 1, Extension 2, and Standard imports can use the prebuilt conversion-only course mappings once their displayable corpus nodes are added. See `Docs/SYLLABUS_CONVERSION.md`.
+The 2017-to-2024 syllabus conversion is a separate validated multi-course artifact in `src/data/syllabus-conversion.json`. The current corpus contains displayable Mathematics Advanced nodes for both syllabus eras, but questions only need native `syllabusNodeIds`; selectors resolve alternate-era display through the conversion map. Extension 1, Extension 2, and Standard now have course/source-pack structure and 2025 paper intake records, but their syllabus mappings remain conversion-only until displayable corpus nodes and question records are promoted. See `Docs/SYLLABUS_CONVERSION.md`.
 
 Move to SQLite, Postgres, or a search index only when the complete corpus, full-text search, collaborative editing, or ingestion workflow makes JSON unsuitable. Document that migration in `Docs/DECISIONS.md`.
 

@@ -1,4 +1,5 @@
 import type {
+  Course,
   HscDatabase,
   Question,
   QuestionStyle,
@@ -10,10 +11,11 @@ import type {
   WorkedSolutionsDatabase
 } from "./hscSchemas";
 
-export type SyllabusEraView = "advanced-2017" | "advanced-2024";
+export type SyllabusEraView = string;
 
 export type QuestionQuery = {
   search?: string;
+  courseId?: string;
   year?: number;
   topic?: string;
   style?: QuestionStyle;
@@ -28,8 +30,10 @@ const questionNumberCollator = new Intl.Collator(undefined, {
 
 export function queryQuestions(database: HscDatabase, query: QuestionQuery): Question[] {
   const search = query.search?.trim().toLowerCase();
+  const papersById = getPapersById(database);
 
   return database.questions
+    .filter((question) => (query.courseId ? papersById[question.paperId]?.courseId === query.courseId : true))
     .filter((question) => (query.year ? question.year === query.year : true))
     .filter((question) => (query.topic ? question.topic === query.topic : true))
     .filter((question) => (query.style ? question.style === query.style : true))
@@ -138,11 +142,28 @@ export function getQuestionCountsBySyllabusNode(
 }
 
 export function getFilterOptions(database: HscDatabase) {
+  return getFilterOptionsForCourse(database);
+}
+
+export function getFilterOptionsForCourse(database: HscDatabase, courseId?: string) {
+  const papersById = getPapersById(database);
+  const questions = courseId
+    ? database.questions.filter((question) => papersById[question.paperId]?.courseId === courseId)
+    : database.questions;
+
   return {
-    years: unique(database.questions.map((question) => question.year)).sort((left, right) => right - left),
-    topics: unique(database.questions.map((question) => question.topic)).sort(),
-    styles: unique(database.questions.map((question) => question.style)).sort()
+    years: unique(questions.map((question) => question.year)).sort((left, right) => right - left),
+    topics: unique(questions.map((question) => question.topic)).sort(),
+    styles: unique(questions.map((question) => question.style)).sort()
   };
+}
+
+export function getCourseOptions(database: HscDatabase): Course[] {
+  return database.courses;
+}
+
+export function getDefaultSyllabusEraForCourse(course?: Course): SyllabusEraView {
+  return course?.syllabusEras[0]?.id ?? "";
 }
 
 function questionMatchesSyllabusNode(
@@ -160,7 +181,7 @@ function questionMatchesSyllabusNode(
   }
 
   const targetNode = database.syllabus.find((node) => node.id === syllabusNodeId);
-  if (!targetNode || !isSyllabusEraView(targetNode.syllabusEra)) {
+  if (!targetNode) {
     return false;
   }
 
@@ -179,7 +200,7 @@ function getMappedSyllabusNodeIds(
     return [];
   }
 
-  if (targetSyllabusEra === "advanced-2024") {
+  if (targetSyllabusEra === course.newSyllabus.id) {
     const oldNode = course.oldSyllabus.nodes.find((node) => node.appNodeId === nativeNodeId);
     if (!oldNode) {
       return [];
@@ -205,10 +226,6 @@ function getConversionCourseForEra(
   );
 }
 
-function isSyllabusEraView(syllabusEra: string): syllabusEra is SyllabusEraView {
-  return syllabusEra === "advanced-2017" || syllabusEra === "advanced-2024";
-}
-
 export function getDatasetSummary(database: HscDatabase) {
   const questionCountsBySyllabusNode = Object.fromEntries(database.syllabus.map((node) => [node.id, 0]));
   const questionCountsByPaper = Object.fromEntries(database.papers.map((paper) => [paper.id, 0]));
@@ -230,6 +247,7 @@ export function getDatasetSummary(database: HscDatabase) {
   return {
     questionCount: database.questions.length,
     paperCount: database.papers.length,
+    courseCount: database.courses.length,
     syllabusNodeCount: database.syllabus.length,
     sourcePackCount: database.sourcePacks.length,
     verifiedQuestionCount: transcriptionCounts.verified,
@@ -241,6 +259,10 @@ export function getDatasetSummary(database: HscDatabase) {
 }
 
 export function getSourcePackCoverage(database: HscDatabase): SourcePack[] {
+  return getSourcePackCoverageForCourse(database);
+}
+
+export function getSourcePackCoverageForCourse(database: HscDatabase, courseId?: string): SourcePack[] {
   const officialQuestionCountsByPaper = database.questions.reduce<Record<string, number>>(
     (counts, question) => {
       if (question.source.transcriptionStatus !== "demo") {
@@ -252,11 +274,15 @@ export function getSourcePackCoverage(database: HscDatabase): SourcePack[] {
   );
 
   return database.sourcePacks
+    .filter((pack) => (courseId ? pack.courseId === courseId : true))
     .map((pack) => ({
       ...pack,
-      importedQuestionCount: pack.paperId
-        ? (officialQuestionCountsByPaper[pack.paperId] ?? 0)
-        : pack.importedQuestionCount
+      importedQuestionCount:
+        pack.paperIds && pack.paperIds.length > 0
+          ? pack.paperIds.reduce((count, paperId) => count + (officialQuestionCountsByPaper[paperId] ?? 0), 0)
+          : pack.paperId
+            ? (officialQuestionCountsByPaper[pack.paperId] ?? 0)
+            : pack.importedQuestionCount
     }))
     .sort((left, right) => right.year - left.year || left.title.localeCompare(right.title));
 }
@@ -300,6 +326,29 @@ export function getWorkedSolutionCoverage(
   };
 }
 
+export function getMarkingFeedbackCoverage(database: HscDatabase) {
+  const questionsWithFeedback = database.questions.filter(
+    (question) =>
+      question.markingFeedback &&
+      (question.markingFeedback.betterResponses.length > 0 ||
+        question.markingFeedback.improvementAreas.length > 0)
+  );
+
+  return {
+    totalQuestions: database.questions.length,
+    feedbackQuestionCount: questionsWithFeedback.length,
+    missingCount: Math.max(0, database.questions.length - questionsWithFeedback.length),
+    byYear: questionsWithFeedback.reduce<Record<number, number>>((counts, question) => {
+      counts[question.year] = (counts[question.year] ?? 0) + 1;
+      return counts;
+    }, {})
+  };
+}
+
 function unique<T>(values: T[]): T[] {
   return [...new Set(values)];
+}
+
+function getPapersById(database: HscDatabase): Record<string, HscDatabase["papers"][number]> {
+  return Object.fromEntries(database.papers.map((paper) => [paper.id, paper]));
 }

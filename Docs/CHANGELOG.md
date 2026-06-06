@@ -2,6 +2,28 @@
 
 Newest entries go at the top.
 
+## 0.7.0 - 2026-06-06
+
+- Added first-class course metadata and course-aware filtering/source coverage for Advanced, Standard, Extension 1, Extension 2, and the Mathematics 2 Unit archive.
+- Added 2025 Mathematics Standard, Mathematics Extension 1, and Mathematics Extension 2 source-pack and paper records with official exam, marking-guide, and marking-feedback PDF links.
+- Updated import coverage reporting to support multi-paper source packs such as Mathematics Standard.
+
+## 0.6.1 - 2026-06-06
+
+- Tightened the worked-solution LLM mathematical syntax contract to require MathJax `\\( ... \\)` / `\\[ ... \\]` delimiters and reject dollar delimiters, raw TeX, plain ASCII maths, nested delimiters, and corrupt TeX fragments.
+- Updated the worked-solution generator to prompt with `hsc-explanation-v2`, repair TeX JSON escapes before parsing, and gate generated records with the notation audit before writing.
+- Added `data:audit-worked-solution-math` and regenerated/repaired the worked-solution sidecar so all 127 records pass the notation audit.
+
+## 0.6.0 - 2026-06-06
+
+- Added HSC marking-feedback ingestion, validation coverage, and question-detail display cards for better-response and improvement feedback.
+- Added part-aware grouping in the question detail view for multipart official working and marking-feedback items.
+- Updated the import workflow to require near-verbatim exam prompt replication, marking-guide step preservation, and marking-feedback ingestion by default.
+
+## 0.5.1 - 2026-06-06
+
+- Made the official answer panel collapsible and collapsed by default in the question detail view.
+
 ## 0.5.0 - 2026-06-06
 
 - Generalised the syllabus conversion artifact to support multiple mathematics courses.
