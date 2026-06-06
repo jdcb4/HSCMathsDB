@@ -3,10 +3,13 @@ import type {
   Question,
   QuestionStyle,
   SourcePack,
+  SyllabusConversion,
   SyllabusNode,
   WorkedSolution,
   WorkedSolutionsDatabase
 } from "./hscSchemas";
+
+export type SyllabusEraView = "advanced-2017" | "advanced-2024";
 
 export type QuestionQuery = {
   search?: string;
@@ -14,6 +17,7 @@ export type QuestionQuery = {
   topic?: string;
   style?: QuestionStyle;
   syllabusNodeId?: string;
+  syllabusConversion?: SyllabusConversion;
 };
 
 export function queryQuestions(database: HscDatabase, query: QuestionQuery): Question[] {
@@ -24,7 +28,9 @@ export function queryQuestions(database: HscDatabase, query: QuestionQuery): Que
     .filter((question) => (query.topic ? question.topic === query.topic : true))
     .filter((question) => (query.style ? question.style === query.style : true))
     .filter((question) =>
-      query.syllabusNodeId ? question.syllabusNodeIds.includes(query.syllabusNodeId) : true
+      query.syllabusNodeId
+        ? questionMatchesSyllabusNode(database, question, query.syllabusNodeId, query.syllabusConversion)
+        : true
     )
     .filter((question) => {
       if (!search) {
@@ -56,8 +62,66 @@ export function getLinkedSyllabusNodes(database: HscDatabase, question: Question
     .filter((node): node is SyllabusNode => Boolean(node));
 }
 
-export function getQuestionsForSyllabusNode(database: HscDatabase, syllabusNodeId: string): Question[] {
-  return database.questions.filter((question) => question.syllabusNodeIds.includes(syllabusNodeId));
+export function getDisplaySyllabusNodesForQuestion(
+  database: HscDatabase,
+  question: Question,
+  syllabusEra: SyllabusEraView,
+  conversion?: SyllabusConversion
+): SyllabusNode[] {
+  if (!conversion) {
+    return getLinkedSyllabusNodes(database, question).filter((node) => node.syllabusEra === syllabusEra);
+  }
+
+  const displayNodeIds = new Set<string>();
+
+  question.syllabusNodeIds.forEach((nativeNodeId) => {
+    const nativeNode = database.syllabus.find((node) => node.id === nativeNodeId);
+    if (nativeNode?.syllabusEra === syllabusEra) {
+      displayNodeIds.add(nativeNode.id);
+      return;
+    }
+
+    getMappedSyllabusNodeIds(nativeNodeId, syllabusEra, conversion).forEach((nodeId) =>
+      displayNodeIds.add(nodeId)
+    );
+  });
+
+  return [...displayNodeIds]
+    .map((nodeId) => database.syllabus.find((node) => node.id === nodeId))
+    .filter((node): node is SyllabusNode => Boolean(node))
+    .filter((node) => node.syllabusEra === syllabusEra);
+}
+
+export function getQuestionsForSyllabusNode(
+  database: HscDatabase,
+  syllabusNodeId: string,
+  conversion?: SyllabusConversion
+): Question[] {
+  return database.questions.filter((question) =>
+    questionMatchesSyllabusNode(database, question, syllabusNodeId, conversion)
+  );
+}
+
+export function getSyllabusNodesForView(database: HscDatabase, syllabusEra: SyllabusEraView): SyllabusNode[] {
+  return database.syllabus.filter((node) => node.syllabusEra === syllabusEra);
+}
+
+export function getQuestionCountsBySyllabusNode(
+  database: HscDatabase,
+  syllabusEra: SyllabusEraView,
+  conversion?: SyllabusConversion
+): Record<string, number> {
+  const counts = Object.fromEntries(
+    getSyllabusNodesForView(database, syllabusEra).map((node) => [node.id, 0])
+  );
+
+  database.questions.forEach((question) => {
+    getDisplaySyllabusNodesForQuestion(database, question, syllabusEra, conversion).forEach((node) => {
+      counts[node.id] = (counts[node.id] ?? 0) + 1;
+    });
+  });
+
+  return counts;
 }
 
 export function getFilterOptions(database: HscDatabase) {
@@ -66,6 +130,56 @@ export function getFilterOptions(database: HscDatabase) {
     topics: unique(database.questions.map((question) => question.topic)).sort(),
     styles: unique(database.questions.map((question) => question.style)).sort()
   };
+}
+
+function questionMatchesSyllabusNode(
+  database: HscDatabase,
+  question: Question,
+  syllabusNodeId: string,
+  conversion?: SyllabusConversion
+): boolean {
+  if (question.syllabusNodeIds.includes(syllabusNodeId)) {
+    return true;
+  }
+
+  if (!conversion) {
+    return false;
+  }
+
+  const targetNode = database.syllabus.find((node) => node.id === syllabusNodeId);
+  if (!targetNode || !isSyllabusEraView(targetNode.syllabusEra)) {
+    return false;
+  }
+
+  return getDisplaySyllabusNodesForQuestion(database, question, targetNode.syllabusEra, conversion).some(
+    (node) => node.id === syllabusNodeId
+  );
+}
+
+function getMappedSyllabusNodeIds(
+  nativeNodeId: string,
+  targetSyllabusEra: SyllabusEraView,
+  conversion: SyllabusConversion
+): string[] {
+  if (targetSyllabusEra === "advanced-2024") {
+    const oldNode = conversion.oldSyllabus.nodes.find((node) => node.appNodeId === nativeNodeId);
+    if (!oldNode) {
+      return [];
+    }
+
+    return conversion.mappings
+      .filter((mapping) => mapping.oldNodeId === oldNode.id)
+      .map((mapping) => mapping.newNodeId);
+  }
+
+  return conversion.mappings
+    .filter((mapping) => mapping.newNodeId === nativeNodeId)
+    .map((mapping) => conversion.oldSyllabus.nodes.find((node) => node.id === mapping.oldNodeId)?.appNodeId)
+    .filter((nodeId): nodeId is string => Boolean(nodeId));
+}
+
+function isSyllabusEraView(syllabusEra: string): syllabusEra is SyllabusEraView {
+  return syllabusEra === "advanced-2017" || syllabusEra === "advanced-2024";
 }
 
 export function getDatasetSummary(database: HscDatabase) {
@@ -125,9 +239,7 @@ export function getWorkedSolutionForQuestion(
   questionId: string
 ): WorkedSolution | undefined {
   return workedSolutionsDatabase.workedSolutions.find(
-    (workedSolution) =>
-      workedSolution.questionId === questionId &&
-      workedSolution.reviewStatus !== "rejected"
+    (workedSolution) => workedSolution.questionId === questionId && workedSolution.reviewStatus !== "rejected"
   );
 }
 

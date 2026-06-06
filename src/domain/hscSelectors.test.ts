@@ -1,10 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { database } from "../services/hscDatabase";
+import { database, syllabusConversion } from "../services/hscDatabase";
 import {
   getDatasetSummary,
+  getDisplaySyllabusNodesForQuestion,
   getLinkedSyllabusNodes,
+  getQuestionCountsBySyllabusNode,
   getQuestionsForSyllabusNode,
   getSourcePackCoverage,
+  getSyllabusNodesForView,
   getWorkedSolutionCoverage,
   queryQuestions
 } from "./hscSelectors";
@@ -209,6 +212,59 @@ describe("HSC selectors", () => {
     const results = getQuestionsForSyllabusNode(database, "ma-f1");
 
     expect(results.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it("loads both 2017 and 2024 syllabus views from the corpus", () => {
+    expect(getSyllabusNodesForView(database, "advanced-2017")).toHaveLength(14);
+    expect(getSyllabusNodesForView(database, "advanced-2024")).toHaveLength(14);
+  });
+
+  it("maps existing 2017-tagged questions into the 2024 syllabus view", () => {
+    const question = database.questions.find((candidate) => candidate.id === "adv-2025-q14-bivariate-data");
+
+    expect(question).toBeDefined();
+    expect(
+      getDisplaySyllabusNodesForQuestion(database, question!, "advanced-2024", syllabusConversion).map(
+        (node) => node.id
+      )
+    ).toContain("new-fa-probability-data");
+  });
+
+  it("filters old-tagged questions through a selected 2024 syllabus node", () => {
+    const results = queryQuestions(database, {
+      syllabusNodeId: "new-fa-random-variables",
+      syllabusConversion
+    });
+
+    expect(results.map((question) => question.id)).toContain("adv-2025-q21-continuous-random-variable");
+  });
+
+  it("maps future 2024-tagged questions back into the 2017 syllabus view", () => {
+    const futureDatabase = {
+      ...database,
+      questions: [
+        {
+          ...database.questions[0],
+          id: "future-new-syllabus-question",
+          syllabusNodeIds: ["new-fa-random-variables"]
+        }
+      ]
+    };
+
+    const displayNodes = getDisplaySyllabusNodesForQuestion(
+      futureDatabase,
+      futureDatabase.questions[0],
+      "advanced-2017",
+      syllabusConversion
+    );
+
+    expect(displayNodes.map((node) => node.id)).toEqual(expect.arrayContaining(["ma-s1", "ma-s3"]));
+  });
+
+  it("summarises mapped question counts for a selected syllabus view", () => {
+    const counts = getQuestionCountsBySyllabusNode(database, "advanced-2024", syllabusConversion);
+
+    expect(counts["new-fa-random-variables"]).toBeGreaterThan(0);
   });
 
   it("summarises link counts from question mappings", () => {

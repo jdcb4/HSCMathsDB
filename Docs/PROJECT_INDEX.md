@@ -4,7 +4,7 @@ The first stop for navigating this project. Keep this file factual: it should de
 
 ## What this project is
 
-GoalCheck HSC is a Vite React TypeScript web app for browsing NSW HSC Mathematics Advanced and archived Mathematics 2 Unit question records by year, topic, style, and syllabus content. It supports question-to-syllabus and syllabus-to-question navigation using a validated JSON corpus.
+GoalCheck HSC is a Vite React TypeScript web app for browsing NSW HSC Mathematics Advanced and archived Mathematics 2 Unit question records by year, topic, style, and syllabus content. It supports question-to-syllabus and syllabus-to-question navigation using a validated JSON corpus, with toggleable 2017 and 2024 Mathematics Advanced syllabus views resolved through a conversion map.
 
 ## Current setup state
 
@@ -19,7 +19,7 @@ GoalCheck HSC is a Vite React TypeScript web app for browsing NSW HSC Mathematic
 - `src/features` - feature-specific UI for questions, syllabus, and math rendering.
 - `src/domain` - Zod schemas and framework-independent selectors.
 - `src/services` - validated local data loading.
-- `src/data` - local JSON corpus.
+- `src/data` - local JSON corpus, worked-solution sidecar, and syllabus conversion map.
 - `src/styles` - Tailwind entry CSS and design tokens.
 - `src/tests` - shared test setup.
 - `public/assets/diagrams` - static diagram and image assets referenced by the corpus.
@@ -48,7 +48,7 @@ GoalCheck HSC is a Vite React TypeScript web app for browsing NSW HSC Mathematic
 | `pnpm run data:render-pages`                 | Render cached PDF pages into ignored PNG page images.                             |
 | `pnpm run data:generate-explanation-samples` | Generate ignored LLM explanation comparison samples for the dev-only review view. |
 | `pnpm run data:generate-worked-solutions`    | Generate or refresh primary worked-solution sidecar records through OpenRouter.   |
-| `pnpm run data:report-worked-solutions`      | Report worked-solution sidecar coverage and model counts.                        |
+| `pnpm run data:report-worked-solutions`      | Report worked-solution sidecar coverage and model counts.                         |
 | `pnpm run data:report-renders`               | Summarize ignored page render metadata.                                           |
 | `pnpm run data:crop-render`                  | Crop a rendered PDF page into an ignored diagram candidate.                       |
 | `pnpm run typecheck`                         | TypeScript checking.                                                              |
@@ -74,4 +74,5 @@ GoalCheck HSC is a Vite React TypeScript web app for browsing NSW HSC Mathematic
 - [`DEPLOYMENT.md`](DEPLOYMENT.md) - deploy instructions once chosen.
 - [`IMPORT_WORKFLOW.md`](IMPORT_WORKFLOW.md) - source download, extraction, and transcription workflow.
 - [`LLM_EXPLANATIONS.md`](LLM_EXPLANATIONS.md) - planned LLM workflow for generating reviewed student explanations.
+- [`SYLLABUS_CONVERSION.md`](SYLLABUS_CONVERSION.md) - 2017-to-2024 syllabus conversion data and selector contract.
 - [`../SECURITY.md`](../SECURITY.md) - security rules.

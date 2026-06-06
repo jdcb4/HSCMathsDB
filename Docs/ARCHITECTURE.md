@@ -7,7 +7,7 @@ This document describes the project's runtime shape and module boundaries.
 - App type: static web app.
 - Framework/runtime: Vite, React, TypeScript, Tailwind CSS.
 - Deployment target: not chosen; any static host that can serve Vite's `dist/` output should work.
-- Persistence model: validated local JSON corpus in `src/data/hsc-math-advanced.json`.
+- Persistence model: validated local JSON corpus in `src/data/hsc-math-advanced.json`, with sidecar artifacts for worked solutions and syllabus conversion.
 - Rendering: TeX/LaTeX strings are rendered in-browser with MathJax through `better-react-mathjax`.
 - Source boundary: official NESA pages are linked in the corpus; promoted records start as draft transcriptions until reviewed against the PDFs.
 
@@ -17,7 +17,7 @@ This document describes the project's runtime shape and module boundaries.
 - `src/features` - question, syllabus, and math-rendering UI.
 - `src/domain` - Zod schemas, types, and selectors.
 - `src/services` - local corpus loading and validation.
-- `src/data` - local JSON corpus.
+- `src/data` - local JSON corpus, worked-solution sidecar, and syllabus conversion map.
 - `src/styles` - token CSS and Tailwind entrypoint.
 - `src/tests` - shared test setup.
 
@@ -40,13 +40,15 @@ The corpus has two related but distinct layers:
 
 Student-facing worked explanations are planned as a separate validated sidecar keyed by `questionId`, not embedded directly into each question record. See `Docs/LLM_EXPLANATIONS.md`.
 
+The 2017-to-2024 syllabus conversion is a separate validated artifact in `src/data/syllabus-conversion.json`. The corpus contains displayable nodes for both syllabus eras, but questions only need native `syllabusNodeIds`; selectors resolve alternate-era display through the conversion map. See `Docs/SYLLABUS_CONVERSION.md`.
+
 Move to SQLite, Postgres, or a search index only when the complete corpus, full-text search, collaborative editing, or ingestion workflow makes JSON unsuitable. Document that migration in `Docs/DECISIONS.md`.
 
 ## Validation
 
 Validate every external input: forms, URL params, request bodies, environment variables, JSON file loads, third-party API responses, and realtime events.
 
-The current local corpus is validated with Zod on import. Run `pnpm run data:validate` for a direct corpus check and `pnpm run data:audit-sources` to compare the catalog with the current official listing pages.
+The current local corpus, worked-solution sidecar, and syllabus conversion artifact are validated with Zod on import. Run `pnpm run data:validate` for a direct corpus check and `pnpm run data:audit-sources` to compare the catalog with the current official listing pages.
 
 ## Import pipeline
 

@@ -124,6 +124,126 @@ export const WorkedSolutionsDatabaseSchema = z.object({
   workedSolutions: z.array(WorkedSolutionSchema)
 });
 
+export const SyllabusConversionContentGroupSchema = z.object({
+  id: z.string().min(1),
+  code: z.string().min(1).optional(),
+  sourceContentGroupId: z.string().min(1).optional(),
+  title: z.string().min(1)
+});
+
+export const SyllabusConversionNodeSchema = z.object({
+  id: z.string().min(1),
+  appNodeId: z.string().min(1).optional(),
+  sourceFocusAreaId: z.string().min(1).optional(),
+  code: z.string().min(1),
+  year: z.number().int().min(11).max(12),
+  areaOfStudy: z.string().min(1),
+  title: z.string().min(1),
+  sourceUrl: z.string().url().optional(),
+  outcomes: z.array(z.string().min(1)).default([]),
+  contentGroups: z.array(SyllabusConversionContentGroupSchema).min(1)
+});
+
+export const SyllabusConversionMappingSchema = z.object({
+  id: z.string().min(1),
+  oldNodeId: z.string().min(1),
+  newNodeId: z.string().min(1),
+  relationship: z.enum([
+    "equivalent",
+    "renamed",
+    "split",
+    "merged",
+    "shifted",
+    "partial",
+    "reduced",
+    "newly-emphasised"
+  ]),
+  confidence: z.enum(["high", "medium", "low"]),
+  oldContentGroupIds: z.array(z.string().min(1)).default([]),
+  newContentGroupIds: z.array(z.string().min(1)).default([]),
+  notes: z.string().min(1)
+});
+
+export const SyllabusConversionSchema = z
+  .object({
+    schemaVersion: z.literal(1),
+    updatedAt: z.string().min(1),
+    purpose: z.string().min(1),
+    sourceSummary: z.string().min(1),
+    oldSyllabus: z.object({
+      id: z.literal("advanced-2017"),
+      title: z.string().min(1),
+      sourceUrl: z.string().url(),
+      sourceDocxUrl: z.string().url(),
+      implementation: z.object({
+        replacedBy: z.literal("advanced-2024"),
+        replacementNotes: z.string().min(1)
+      }),
+      nodes: z.array(SyllabusConversionNodeSchema).min(1)
+    }),
+    newSyllabus: z.object({
+      id: z.literal("advanced-2024"),
+      title: z.string().min(1),
+      overviewUrl: z.string().url(),
+      contentUrl: z.string().url(),
+      nodes: z.array(SyllabusConversionNodeSchema).min(1)
+    }),
+    mappings: z.array(SyllabusConversionMappingSchema).min(1),
+    questionCategorisationModel: z.object({
+      recommendedPrimaryKey: z.string().min(1),
+      recommendedSecondaryKey: z.string().min(1),
+      reviewStates: z.array(z.string().min(1)).min(1),
+      guidance: z.array(z.string().min(1)).min(1)
+    })
+  })
+  .superRefine((conversion, context) => {
+    const oldNodeIds = new Set(conversion.oldSyllabus.nodes.map((node) => node.id));
+    const newNodeIds = new Set(conversion.newSyllabus.nodes.map((node) => node.id));
+    const contentGroupIds = new Set(
+      [...conversion.oldSyllabus.nodes, ...conversion.newSyllabus.nodes].flatMap((node) =>
+        node.contentGroups.map((group) => group.id)
+      )
+    );
+
+    conversion.mappings.forEach((mapping, mappingIndex) => {
+      if (!oldNodeIds.has(mapping.oldNodeId)) {
+        context.addIssue({
+          code: "custom",
+          message: `Mapping ${mapping.id} references missing old node ${mapping.oldNodeId}`,
+          path: ["mappings", mappingIndex, "oldNodeId"]
+        });
+      }
+
+      if (!newNodeIds.has(mapping.newNodeId)) {
+        context.addIssue({
+          code: "custom",
+          message: `Mapping ${mapping.id} references missing new node ${mapping.newNodeId}`,
+          path: ["mappings", mappingIndex, "newNodeId"]
+        });
+      }
+
+      mapping.oldContentGroupIds.forEach((groupId, groupIndex) => {
+        if (!contentGroupIds.has(groupId)) {
+          context.addIssue({
+            code: "custom",
+            message: `Mapping ${mapping.id} references missing old content group ${groupId}`,
+            path: ["mappings", mappingIndex, "oldContentGroupIds", groupIndex]
+          });
+        }
+      });
+
+      mapping.newContentGroupIds.forEach((groupId, groupIndex) => {
+        if (!contentGroupIds.has(groupId)) {
+          context.addIssue({
+            code: "custom",
+            message: `Mapping ${mapping.id} references missing new content group ${groupId}`,
+            path: ["mappings", mappingIndex, "newContentGroupIds", groupIndex]
+          });
+        }
+      });
+    });
+  });
+
 export const HscDatabaseSchema = z
   .object({
     meta: z.object({
@@ -197,3 +317,6 @@ export type Paper = z.infer<typeof PaperSchema>;
 export type SourcePack = z.infer<typeof SourcePackSchema>;
 export type WorkedSolution = z.infer<typeof WorkedSolutionSchema>;
 export type WorkedSolutionsDatabase = z.infer<typeof WorkedSolutionsDatabaseSchema>;
+export type SyllabusConversion = z.infer<typeof SyllabusConversionSchema>;
+export type SyllabusConversionNode = z.infer<typeof SyllabusConversionNodeSchema>;
+export type SyllabusConversionMapping = z.infer<typeof SyllabusConversionMappingSchema>;

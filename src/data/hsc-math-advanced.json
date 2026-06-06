@@ -1,9 +1,9 @@
 {
   "meta": {
-    "version": "0.1.0",
+    "version": "0.3.0",
     "title": "GoalCheck HSC Mathematics Advanced corpus",
     "updatedAt": "2026-06-06",
-    "sourceSummary": "Seed database linking NSW Mathematics Advanced exam-pack sources, the Mathematics archive, and syllabus content. All thirty-one 2025 questions have been promoted as official drafts; question transcriptions marked demo remain placeholders for the future verified corpus import."
+    "sourceSummary": "Validated corpus linking NSW Mathematics Advanced exam-pack sources, the Mathematics archive, 2017 syllabus nodes, and 2024 syllabus conversion nodes. Questions may be tagged under either syllabus era and resolved through the syllabus conversion map for display under the preferred syllabus view."
   },
   "sourceCollections": [
     {
@@ -26,6 +26,13 @@
       "url": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/mathematics/mathematics-advanced-stage-6-2017",
       "publisher": "NSW Education Standards Authority",
       "scope": "Syllabus content used for question mapping."
+    },
+    {
+      "id": "nesa-math-advanced-2024-syllabus",
+      "title": "Mathematics Advanced 11-12 syllabus (2024)",
+      "url": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/overview",
+      "publisher": "NSW Education Standards Authority",
+      "scope": "New syllabus content used for cross-syllabus question mapping."
     }
   ],
   "sourcePacks": [
@@ -366,6 +373,146 @@
       "title": "Random variables",
       "content": "Use discrete and continuous random variables, probability density functions, normal models, percentiles, and expected-value reasoning.",
       "sourceUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/mathematics/mathematics-advanced-stage-6-2017"
+    },
+    {
+      "id": "new-fa-working-functions",
+      "course": "Mathematics Advanced 11-12",
+      "syllabusEra": "advanced-2024",
+      "code": "MAV-11-WWF",
+      "topic": "Functions",
+      "title": "Working with functions",
+      "content": "Working with functions: Algebraic techniques; Introduction to functions and relations; Linear functions; Quadratic and cubic functions; Reciprocal functions; Constructing and using functions; Direct and inverse variation; Circles and semicircles; Properties of functions, relations and graphs; Piecewise-defined functions; Absolute value functions.",
+      "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/content/year-11/fa3d488ed2"
+    },
+    {
+      "id": "new-fa-trig-measure-angles",
+      "course": "Mathematics Advanced 11-12",
+      "syllabusEra": "advanced-2024",
+      "code": "MAV-11-TMA",
+      "topic": "Trigonometric functions",
+      "title": "Trigonometry and measure of angles",
+      "content": "Trigonometry and measure of angles: Trigonometry with acute angles; Trigonometry with angles of any magnitude; Radians.",
+      "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/content/year-11/fa0b724fc5"
+    },
+    {
+      "id": "new-fa-trig-identities-equations",
+      "course": "Mathematics Advanced 11-12",
+      "syllabusEra": "advanced-2024",
+      "code": "MAV-11-TIE",
+      "topic": "Trigonometric functions",
+      "title": "Trigonometric identities and equations",
+      "content": "Trigonometric identities and equations: Reciprocal trigonometric functions, identities, expressions and equations.",
+      "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/content/year-11/faa07be39c"
+    },
+    {
+      "id": "new-fa-intro-differentiation",
+      "course": "Mathematics Advanced 11-12",
+      "syllabusEra": "advanced-2024",
+      "code": "MAV-11-ID",
+      "topic": "Calculus",
+      "title": "Introduction to differentiation",
+      "content": "Introduction to differentiation: Estimating change; The derivative; Calculations with the derivative; Graphical applications of the derivative; The derivative as a rate of change.",
+      "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/content/year-11/fa6bc41678"
+    },
+    {
+      "id": "new-fa-exp-log-functions",
+      "course": "Mathematics Advanced 11-12",
+      "syllabusEra": "advanced-2024",
+      "code": "MAV-11-ELF",
+      "topic": "Exponential and logarithmic functions",
+      "title": "Exponential and logarithmic functions",
+      "content": "Exponential and logarithmic functions: Exponential functions; Logarithmic functions.",
+      "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/content/year-11/fa576d8dce"
+    },
+    {
+      "id": "new-fa-graph-transformations",
+      "course": "Mathematics Advanced 11-12",
+      "syllabusEra": "advanced-2024",
+      "code": "MAV-11-GT",
+      "topic": "Functions",
+      "title": "Graph transformations",
+      "content": "Graph transformations: Function transformations, graphing circles, and order of transformations.",
+      "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/content/year-11/fae9d6fbd3"
+    },
+    {
+      "id": "new-fa-probability-data",
+      "course": "Mathematics Advanced 11-12",
+      "syllabusEra": "advanced-2024",
+      "code": "MAV-11-PD",
+      "topic": "Statistical analysis",
+      "title": "Probability and data",
+      "content": "Probability and data: Sets and set notation; Probability; Conditional probability; Data.",
+      "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/content/year-11/fa829162c5"
+    },
+    {
+      "id": "new-fa-further-graph-transformations-modelling",
+      "course": "Mathematics Advanced 11-12",
+      "syllabusEra": "advanced-2024",
+      "code": "MAV-12-FGTM",
+      "topic": "Functions",
+      "title": "Further graph transformations and modelling",
+      "content": "Further graph transformations and modelling: Transformations of trigonometric functions; Modelling with functions.",
+      "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/content/year-12/fa3b2bda67"
+    },
+    {
+      "id": "new-fa-sequences-series",
+      "course": "Mathematics Advanced 11-12",
+      "syllabusEra": "advanced-2024",
+      "code": "MAV-12-SS",
+      "topic": "Sequences and series",
+      "title": "Sequences and series",
+      "content": "Sequences and series: Sequences and series; Arithmetic sequences and series; Geometric sequences and series.",
+      "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/content/year-12/fa8db67617"
+    },
+    {
+      "id": "new-fa-differential-calculus",
+      "course": "Mathematics Advanced 11-12",
+      "syllabusEra": "advanced-2024",
+      "code": "MAV-12-DC",
+      "topic": "Calculus",
+      "title": "Differential calculus",
+      "content": "Differential calculus: Differentiation with exponential functions; Differentiation with logarithmic functions; Differentiation with trigonometric functions; Using derivatives.",
+      "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/content/year-12/fa4d003480"
+    },
+    {
+      "id": "new-fa-integral-calculus",
+      "course": "Mathematics Advanced 11-12",
+      "syllabusEra": "advanced-2024",
+      "code": "MAV-12-IC",
+      "topic": "Calculus",
+      "title": "Integral calculus",
+      "content": "Integral calculus: Primitive functions; The definite integral; The Fundamental Theorem of Calculus; Indefinite integrals; Integration with exponential functions; Integration with logarithmic functions; Integration with trigonometric functions; Areas and the definite integral.",
+      "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/content/year-12/fa41f9f88f"
+    },
+    {
+      "id": "new-fa-applications-calculus",
+      "course": "Mathematics Advanced 11-12",
+      "syllabusEra": "advanced-2024",
+      "code": "MAV-12-AC",
+      "topic": "Calculus",
+      "title": "Applications of calculus",
+      "content": "Applications of calculus: Turning points, inflections and graphing; Optimisation; Rates of change.",
+      "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/content/year-12/fa383c9104"
+    },
+    {
+      "id": "new-fa-random-variables",
+      "course": "Mathematics Advanced 11-12",
+      "syllabusEra": "advanced-2024",
+      "code": "MAV-12-RV",
+      "topic": "Statistical analysis",
+      "title": "Random variables",
+      "content": "Random variables: Discrete random variables; Continuous random variables; The normal distribution.",
+      "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/content/year-12/fa4579cc54"
+    },
+    {
+      "id": "new-fa-financial-mathematics",
+      "course": "Mathematics Advanced 11-12",
+      "syllabusEra": "advanced-2024",
+      "code": "MAV-12-FM",
+      "topic": "Financial mathematics",
+      "title": "Financial mathematics",
+      "content": "Financial mathematics: Reducing balance loans; Annuities.",
+      "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/content/year-12/fa4572a048"
     },
     {
       "id": "m2u-archive",

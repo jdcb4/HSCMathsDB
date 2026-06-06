@@ -2,6 +2,14 @@
 
 Newest entries go at the top.
 
+## 0.3.0 - 2026-06-06
+
+- Added a validated 2017-to-2024 Mathematics Advanced syllabus conversion artifact.
+- Added 2024 Mathematics Advanced syllabus nodes to the corpus for future direct question tagging.
+- Added selector support for displaying questions under either the native or mapped syllabus era.
+- Added a user-facing syllabus-view toggle that shows only one syllabus at a time across filters, syllabus browsing, and question detail links.
+- Documented the syllabus conversion architecture and future import contract.
+
 ## 0.2.0 - 2026-06-06
 
 - Added primary worked-solution sidecar support with generated/reviewed status metadata and question-detail rendering.

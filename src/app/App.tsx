@@ -7,15 +7,18 @@ import { SourceCatalog } from "../features/sources/SourceCatalog";
 import { SyllabusBrowser } from "../features/syllabus/SyllabusBrowser";
 import {
   getDatasetSummary,
+  getDisplaySyllabusNodesForQuestion,
   getFilterOptions,
-  getLinkedSyllabusNodes,
+  getQuestionCountsBySyllabusNode,
   getQuestionsForSyllabusNode,
+  getSyllabusNodesForView,
   getSourcePackCoverage,
   getWorkedSolutionCoverage,
   getWorkedSolutionForQuestion,
-  queryQuestions
+  queryQuestions,
+  type SyllabusEraView
 } from "../domain/hscSelectors";
-import { database, workedSolutionsDatabase } from "../services/hscDatabase";
+import { database, syllabusConversion, workedSolutionsDatabase } from "../services/hscDatabase";
 import type { QuestionStyle } from "../domain/hscSchemas";
 
 type ViewMode = "questions" | "syllabus" | "sources" | "llm-review";
@@ -38,14 +41,28 @@ const defaultFilters: Filters = {
 
 const showDevViews = import.meta.env.DEV;
 
+const syllabusViewLabels: Record<SyllabusEraView, string> = {
+  "advanced-2017": "2017 syllabus",
+  "advanced-2024": "2024 syllabus"
+};
+
 export function App() {
   const [filters, setFilters] = useState<Filters>(defaultFilters);
   const [selectedQuestionId, setSelectedQuestionId] = useState(database.questions[0]?.id ?? "");
   const [selectedSyllabusNodeId, setSelectedSyllabusNodeId] = useState(database.syllabus[0]?.id ?? "");
+  const [preferredSyllabusEra, setPreferredSyllabusEra] = useState<SyllabusEraView>("advanced-2017");
   const [viewMode, setViewMode] = useState<ViewMode>("questions");
 
   const options = useMemo(() => getFilterOptions(database), []);
   const summary = useMemo(() => getDatasetSummary(database), []);
+  const visibleSyllabusNodes = useMemo(
+    () => getSyllabusNodesForView(database, preferredSyllabusEra),
+    [preferredSyllabusEra]
+  );
+  const visibleQuestionCountsBySyllabusNode = useMemo(
+    () => getQuestionCountsBySyllabusNode(database, preferredSyllabusEra, syllabusConversion),
+    [preferredSyllabusEra]
+  );
   const workedSolutionCoverage = useMemo(
     () => getWorkedSolutionCoverage(database, workedSolutionsDatabase),
     []
@@ -59,7 +76,8 @@ export function App() {
         year: filters.year === "all" ? undefined : Number(filters.year),
         topic: filters.topic === "all" ? undefined : filters.topic,
         style: filters.style === "all" ? undefined : (filters.style as QuestionStyle),
-        syllabusNodeId: filters.syllabusNodeId === "all" ? undefined : filters.syllabusNodeId
+        syllabusNodeId: filters.syllabusNodeId === "all" ? undefined : filters.syllabusNodeId,
+        syllabusConversion
       }),
     [filters]
   );
@@ -69,18 +87,55 @@ export function App() {
     [filteredQuestions, selectedQuestionId]
   );
 
-  const selectedQuestionSyllabus = selectedQuestion ? getLinkedSyllabusNodes(database, selectedQuestion) : [];
+  const selectedQuestionSyllabus = selectedQuestion
+    ? getDisplaySyllabusNodesForQuestion(database, selectedQuestion, preferredSyllabusEra, syllabusConversion)
+    : [];
   const selectedWorkedSolution = selectedQuestion
     ? getWorkedSolutionForQuestion(workedSolutionsDatabase, selectedQuestion.id)
     : undefined;
   const selectedSyllabusNode =
-    database.syllabus.find((node) => node.id === selectedSyllabusNodeId) ?? database.syllabus[0];
+    visibleSyllabusNodes.find((node) => node.id === selectedSyllabusNodeId) ?? visibleSyllabusNodes[0];
   const syllabusQuestions = selectedSyllabusNode
-    ? getQuestionsForSyllabusNode(database, selectedSyllabusNode.id)
+    ? getQuestionsForSyllabusNode(database, selectedSyllabusNode.id, syllabusConversion)
     : [];
+  const syllabusSummariesByQuestionId = useMemo(
+    () =>
+      Object.fromEntries(
+        filteredQuestions.map((question) => {
+          const nodes = getDisplaySyllabusNodesForQuestion(
+            database,
+            question,
+            preferredSyllabusEra,
+            syllabusConversion
+          );
+          return [
+            question.id,
+            nodes.length > 0
+              ? nodes.map((node) => `${node.code} ${node.title}`).join(" / ")
+              : `${question.topic} / ${question.subtopic}`
+          ];
+        })
+      ),
+    [filteredQuestions, preferredSyllabusEra]
+  );
 
   const setFilter = (name: keyof Filters, value: string) => {
     setFilters((current) => ({ ...current, [name]: value }));
+  };
+
+  const setSyllabusEra = (syllabusEra: SyllabusEraView) => {
+    const nextNodes = getSyllabusNodesForView(database, syllabusEra);
+
+    setPreferredSyllabusEra(syllabusEra);
+    setSelectedSyllabusNodeId((currentNodeId) =>
+      nextNodes.some((node) => node.id === currentNodeId) ? currentNodeId : (nextNodes[0]?.id ?? "")
+    );
+    setFilters((currentFilters) =>
+      currentFilters.syllabusNodeId === "all" ||
+      nextNodes.some((node) => node.id === currentFilters.syllabusNodeId)
+        ? currentFilters
+        : { ...currentFilters, syllabusNodeId: "all" }
+    );
   };
 
   const openSyllabusNode = (nodeId: string) => {
@@ -104,7 +159,7 @@ export function App() {
             </div>
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
               <Metric icon={<FileText size={17} />} label="Questions" value={summary.questionCount} />
-              <Metric icon={<BookOpen size={17} />} label="Syllabus" value={summary.syllabusNodeCount} />
+              <Metric icon={<BookOpen size={17} />} label="Syllabus" value={visibleSyllabusNodes.length} />
               <Metric icon={<Database size={17} />} label="Sources" value={summary.sourcePackCount} />
               <Metric
                 icon={<LinkIcon size={17} />}
@@ -117,6 +172,26 @@ export function App() {
             Corpus status: {summary.transcriptionCounts.demo} demo, {summary.transcriptionCounts.draft} draft,{" "}
             {summary.transcriptionCounts.verified} verified questions. Full official-paper transcription and
             diagram extraction are tracked in the source catalog.
+          </div>
+          <div className="flex flex-col gap-2 rounded-md border border-border-default bg-surface-sunken px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="text-caption font-semibold uppercase text-accent-info">Syllabus view</p>
+              <p className="text-body-sm text-text-secondary">{syllabusViewLabels[preferredSyllabusEra]}</p>
+            </div>
+            <div className="flex rounded-md border border-border-default bg-surface-raised p-1">
+              <SyllabusViewButton
+                active={preferredSyllabusEra === "advanced-2017"}
+                onClick={() => setSyllabusEra("advanced-2017")}
+              >
+                2017
+              </SyllabusViewButton>
+              <SyllabusViewButton
+                active={preferredSyllabusEra === "advanced-2024"}
+                onClick={() => setSyllabusEra("advanced-2024")}
+              >
+                2024
+              </SyllabusViewButton>
+            </div>
           </div>
           <div className="flex flex-col gap-3 lg:flex-row lg:items-end">
             <label className="flex min-w-0 flex-1 flex-col gap-1 text-caption font-medium text-text-secondary">
@@ -161,7 +236,7 @@ export function App() {
               onChange={(value) => setFilter("syllabusNodeId", value)}
             >
               <option value="all">All content</option>
-              {database.syllabus.map((node) => (
+              {visibleSyllabusNodes.map((node) => (
                 <option key={node.id} value={node.id}>
                   {node.code} {node.title}
                 </option>
@@ -209,13 +284,14 @@ export function App() {
             <QuestionList
               questions={filteredQuestions}
               selectedQuestionId={selectedQuestion?.id ?? ""}
+              syllabusSummariesByQuestionId={syllabusSummariesByQuestionId}
               onSelectQuestion={setSelectedQuestionId}
             />
           ) : viewMode === "syllabus" ? (
             <SyllabusBrowser
-              nodes={database.syllabus}
+              nodes={visibleSyllabusNodes}
               selectedNodeId={selectedSyllabusNode?.id ?? ""}
-              questionCountsByNode={summary.questionCountsBySyllabusNode}
+              questionCountsByNode={visibleQuestionCountsBySyllabusNode}
               onSelectNode={setSelectedSyllabusNodeId}
             />
           ) : viewMode === "llm-review" && showDevViews ? (
@@ -240,6 +316,7 @@ export function App() {
               paper={database.papers.find((paper) => paper.id === selectedQuestion.paperId)}
               workedSolution={selectedWorkedSolution}
               syllabusNodes={selectedQuestionSyllabus}
+              syllabusViewLabel={syllabusViewLabels[preferredSyllabusEra]}
               onOpenSyllabusNode={openSyllabusNode}
             />
           ) : viewMode === "syllabus" && selectedSyllabusNode ? (
@@ -308,6 +385,30 @@ export function App() {
         </section>
       </main>
     </div>
+  );
+}
+
+function SyllabusViewButton({
+  active,
+  onClick,
+  children
+}: {
+  active: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`inline-flex min-h-9 min-w-20 items-center justify-center rounded-sm px-3 text-body-sm font-medium ${
+        active
+          ? "bg-accent-primary text-text-onAccent"
+          : "text-text-secondary hover:bg-surface-sunken hover:text-text-primary"
+      }`}
+    >
+      {children}
+    </button>
   );
 }
 

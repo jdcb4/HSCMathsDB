@@ -7,12 +7,14 @@ export function QuestionDetail({
   paper,
   workedSolution,
   syllabusNodes,
+  syllabusViewLabel,
   onOpenSyllabusNode
 }: {
   question: Question;
   paper?: Paper;
   workedSolution?: WorkedSolution;
   syllabusNodes: SyllabusNode[];
+  syllabusViewLabel: string;
   onOpenSyllabusNode: (nodeId: string) => void;
 }) {
   return (
@@ -67,9 +69,7 @@ export function QuestionDetail({
           <div className="flex flex-col gap-2 lg:flex-row lg:items-start lg:justify-between">
             <div>
               <h3 className="text-h4 font-semibold">Worked solution</h3>
-              <p className="mt-1 text-caption text-text-secondary">
-                Generated with {workedSolution.model}
-              </p>
+              <p className="mt-1 text-caption text-text-secondary">Generated with {workedSolution.model}</p>
             </div>
             <span className="inline-flex w-fit rounded-md border border-border-default px-2 py-1 text-caption font-medium text-text-secondary">
               {workedSolution.reviewStatus}
@@ -153,7 +153,7 @@ export function QuestionDetail({
         </div>
 
         <div className="rounded-md border border-border-subtle bg-surface-sunken p-4">
-          <h3 className="mb-3 text-h4 font-semibold">Syllabus links</h3>
+          <h3 className="mb-3 text-h4 font-semibold">{syllabusViewLabel} links</h3>
           <div className="space-y-2">
             {syllabusNodes.map((node) => (
               <button
@@ -167,6 +167,9 @@ export function QuestionDetail({
                 <p className="mt-1 text-caption text-text-secondary">{node.topic}</p>
               </button>
             ))}
+            {syllabusNodes.length === 0 ? (
+              <p className="text-body-sm text-text-secondary">No mapped syllabus link.</p>
+            ) : null}
           </div>
         </div>
       </section>

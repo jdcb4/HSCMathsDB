@@ -3,10 +3,12 @@ import type { Question } from "../../domain/hscSchemas";
 export function QuestionList({
   questions,
   selectedQuestionId,
+  syllabusSummariesByQuestionId,
   onSelectQuestion
 }: {
   questions: Question[];
   selectedQuestionId: string;
+  syllabusSummariesByQuestionId: Record<string, string>;
   onSelectQuestion: (questionId: string) => void;
 }) {
   return (
@@ -34,7 +36,7 @@ export function QuestionList({
               </div>
               <p className="mt-1 text-body-sm font-semibold text-text-primary">{question.title}</p>
               <p className="mt-1 text-caption text-text-secondary">
-                {question.topic} / {question.subtopic}
+                {syllabusSummariesByQuestionId[question.id] ?? `${question.topic} / ${question.subtopic}`}
               </p>
             </button>
           );
