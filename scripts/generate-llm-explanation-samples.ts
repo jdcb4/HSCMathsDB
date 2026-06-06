@@ -50,6 +50,16 @@ const LlmExplanationResponseSchema = z
   })
   .strict();
 
+const RawChatCompletionSchema = z.object({
+  choices: z
+    .array(
+      z.object({
+        message: z.record(z.string(), z.unknown())
+      })
+    )
+    .min(1)
+});
+
 type LlmExplanationResponse = z.infer<typeof LlmExplanationResponseSchema>;
 
 type QuestionInput = {
@@ -340,7 +350,7 @@ async function generateExplanation({
 
     await writeFile(rawPath, `${JSON.stringify(response.raw, null, 2)}\n`, "utf8");
 
-    const parsedJson = parseModelJson(response.content);
+    const parsedJson = normaliseParsedExplanation(parseModelJson(response.content));
     const content = LlmExplanationResponseSchema.parse(parsedJson);
 
     return {
@@ -381,7 +391,7 @@ async function callOpenRouter({
   const body: Record<string, unknown> = {
     model,
     temperature: 0.2,
-    max_tokens: 1800,
+    max_tokens: 3000,
     messages: [
       {
         role: "system",
@@ -415,19 +425,13 @@ async function callOpenRouter({
     throw new Error(`OpenRouter ${response.status}: ${JSON.stringify(raw)}`);
   }
 
-  const content = z
-    .object({
-      choices: z
-        .array(
-          z.object({
-            message: z.object({
-              content: z.string()
-            })
-          })
-        )
-        .min(1)
-    })
-    .parse(raw).choices[0].message.content;
+  const message = RawChatCompletionSchema.parse(raw).choices[0].message;
+  const content =
+    typeof message.content === "string"
+      ? message.content
+      : typeof message.reasoning === "string"
+        ? message.reasoning
+        : JSON.stringify(message);
 
   return { content, raw };
 }
@@ -447,6 +451,7 @@ Style rules:
 - Explain the decision points: why this method is appropriate, what to notice first, and how each algebraic/probability/calculus step follows.
 - Use TeX for all mathematical notation.
 - Keep each step focused. Do not write a textbook chapter.
+- Keep each step body under 120 words.
 - Do not mention the marking guide, NESA, the prompt, JSON, or that you are an AI.
 - Do not invent alternative answers.
 - If a diagram is referenced, use only the supplied diagram description.
@@ -475,8 +480,105 @@ Return valid JSON only, matching this shape:
 function parseModelJson(value: string): unknown {
   const trimmed = value.trim();
   const fenced = trimmed.match(/^```(?:json)?\s*([\s\S]*?)\s*```$/i);
-  const jsonText = fenced?.[1] ?? trimmed;
-  return JSON.parse(jsonText);
+  const unfenced = fenced?.[1] ?? trimmed.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "");
+  const withoutJsonLabel = unfenced.replace(/^json\s*/i, "").trim();
+  const withOpeningBrace = addMissingOpeningBrace(withoutJsonLabel);
+  const objectText = extractFirstJsonObject(withOpeningBrace);
+
+  try {
+    return JSON.parse(objectText);
+  } catch {
+    return JSON.parse(repairJsonEscapes(objectText));
+  }
+}
+
+function addMissingOpeningBrace(value: string): string {
+  if (value.startsWith("{")) {
+    return value;
+  }
+
+  if (value.startsWith('"needsReview"')) {
+    return `{${value}`;
+  }
+
+  if (value.startsWith("needsReview")) {
+    return `{"${value}`;
+  }
+
+  if (value.startsWith('Review"')) {
+    return `{"needsReview"${value.slice("Review".length)}`;
+  }
+
+  return value;
+}
+
+function extractFirstJsonObject(value: string): string {
+  const start = value.indexOf("{");
+
+  if (start === -1) {
+    return value;
+  }
+
+  let depth = 0;
+  let inString = false;
+  let escaped = false;
+
+  for (let index = start; index < value.length; index += 1) {
+    const character = value[index];
+
+    if (escaped) {
+      escaped = false;
+      continue;
+    }
+
+    if (character === "\\") {
+      escaped = true;
+      continue;
+    }
+
+    if (character === '"') {
+      inString = !inString;
+      continue;
+    }
+
+    if (inString) {
+      continue;
+    }
+
+    if (character === "{") {
+      depth += 1;
+    } else if (character === "}") {
+      depth -= 1;
+
+      if (depth === 0) {
+        return value.slice(start, index + 1);
+      }
+    }
+  }
+
+  return value.slice(start);
+}
+
+function repairJsonEscapes(value: string): string {
+  return value.replace(/\\(?!["\\/bfnrtu])/g, "\\\\");
+}
+
+function normaliseParsedExplanation(value: unknown): unknown {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    return value;
+  }
+
+  const record = { ...(value as Record<string, unknown>) };
+
+  delete record.type;
+
+  if (!record.commonMistakesLatex && typeof record.commonMistake === "string") {
+    record.commonMistakesLatex = [record.commonMistake];
+  }
+
+  delete record.commonMistake;
+
+  return record;
 }
 
 function hashQuestionInput(question: QuestionInput): string {
