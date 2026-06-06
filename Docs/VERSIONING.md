@@ -1,0 +1,38 @@
+# Versioning
+
+This project uses `MAJOR.MINOR.PATCH` once package manifests exist.
+
+Before manifests exist, versioning is not active. During initial setup, add version fields where appropriate and then keep all version sources aligned.
+
+## Version sources
+
+After setup, document every version source. Common examples:
+
+- `package.json` at the repository root
+- app-specific manifests such as `app.json`, `manifest.json`, `wrangler.toml`, or `electron-builder.yml`
+
+## Bump rules
+
+- **PATCH** — bug fixes, small UI polish, documentation corrections that affect usage, dependency compatibility fixes, refactors with no intended behaviour change.
+- **MINOR** — new features, meaningful UX changes, new settings, new screens, new integrations, new deployment capability, additive domain behaviour.
+- **MAJOR** — breaking persistence/schema changes, incompatible public API changes, removed capabilities, or production release line reset.
+
+Pre-1.0: use `MINOR` for meaningful feature milestones and `PATCH` for fixes.
+
+## Process
+
+Before every commit, decide whether the work changes:
+
+- app behaviour
+- user-visible UX
+- deployment behaviour
+- dependencies
+- persistence schema
+- public APIs
+- usage documentation
+
+If yes, bump the version and update `docs/CHANGELOG.md` in the same commit.
+
+If no, note in the commit message that the change is version-neutral.
+
+Do not commit feature or fix work without either a version bump or an explicit version-neutral note once versioning is active.

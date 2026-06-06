@@ -1,0 +1,6 @@
+node_modules/
+dist/
+coverage/
+pnpm-lock.yaml
+Docs/AGENT_REFERENCE.md
+Docs/DESIGN_TOKENS.md

@@ -1,0 +1,59 @@
+:root {
+  --surface-base: 210 33% 96%;
+  --surface-raised: 0 0% 100%;
+  --surface-overlay: 0 0% 100%;
+  --surface-sunken: 208 28% 92%;
+
+  --text-primary: 215 24% 12%;
+  --text-secondary: 214 13% 34%;
+  --text-subtle: 214 10% 50%;
+  --text-on-accent: 0 0% 100%;
+
+  --accent-primary: 168 76% 28%;
+  --accent-secondary: 35 84% 44%;
+  --accent-success: 145 58% 36%;
+  --accent-warning: 38 87% 44%;
+  --accent-danger: 355 66% 45%;
+  --accent-info: 204 73% 38%;
+
+  --border-default: 214 16% 78%;
+  --border-subtle: 214 20% 86%;
+  --border-strong: 214 18% 55%;
+
+  --font-size-display: 2.5rem;
+  --font-size-h1: 1.65rem;
+  --font-size-h2: 1.35rem;
+  --font-size-h3: 1.1rem;
+  --font-size-h4: 1rem;
+  --font-size-body: 0.95rem;
+  --font-size-body-sm: 0.85rem;
+  --font-size-caption: 0.75rem;
+
+  --line-height-display: 1.08;
+  --line-height-heading: 1.22;
+  --line-height-body: 1.55;
+  --line-height-caption: 1.35;
+}
+
+.dark {
+  --surface-base: 216 28% 8%;
+  --surface-raised: 214 25% 12%;
+  --surface-overlay: 214 23% 15%;
+  --surface-sunken: 215 28% 9%;
+
+  --text-primary: 210 33% 95%;
+  --text-secondary: 212 18% 76%;
+  --text-subtle: 214 13% 58%;
+  --text-on-accent: 0 0% 100%;
+
+  --accent-primary: 169 70% 34%;
+  --accent-secondary: 36 78% 49%;
+  --accent-success: 146 56% 41%;
+  --accent-warning: 40 85% 50%;
+  --accent-danger: 358 67% 55%;
+  --accent-info: 202 76% 56%;
+
+  --border-default: 216 18% 24%;
+  --border-subtle: 216 18% 18%;
+  --border-strong: 213 16% 40%;
+}
