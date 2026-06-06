@@ -2,6 +2,12 @@
 
 Newest entries go at the top.
 
+## 0.15.0 - 2026-06-06
+
+- Added source-reviewed prompt and answer overrides for 2024 Mathematics Extension 1 questions with damaged extracted notation.
+- Added reviewed source-derived diagram assets for 2024 Mathematics Extension 1 Questions 2, 11, 12, and 13.
+- Refined ingestion visual and pi/theta audits to reduce false positives while preserving checks for missing shown diagrams and raw extracted notation.
+
 ## 0.14.0 - 2026-06-06
 
 - Added source-reviewed prompt and answer overrides for 2024 Mathematics Extension 2 questions with damaged extracted notation.

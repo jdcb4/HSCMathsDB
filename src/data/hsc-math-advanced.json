@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "0.14.0",
+    "version": "0.15.0",
     "title": "GoalCheck HSC mathematics corpus",
     "updatedAt": "2026-06-06",
     "sourceSummary": "Validated corpus linking NSW mathematics exam-pack sources, Standard and Extension draft imports, the Mathematics archive, 2017 syllabus nodes, and 2024 syllabus conversion nodes."
@@ -10463,386 +10463,6 @@
       }
     },
     {
-      "id": "ext1-2024-q01-polynomials",
-      "paperId": "ext1-2024",
-      "year": 2024,
-      "questionNumber": "Q1",
-      "title": "1 The polynomial x 3 + 2 x 2 - 5 x - 6 has zeros - 1, - 3 and a What is the v...",
-      "marks": 1,
-      "style": "multiple-choice",
-      "topic": "Functions",
-      "subtopic": "Polynomials",
-      "syllabusNodeIds": ["old-me1-f2"],
-      "promptLatex": "1 The polynomial x 3 + 2 x 2 - 5 x - 6 has zeros - 1, - 3 and a What is the value of a?\nA. - 2\nB. 2\nC. 3\nD. 6",
-      "answerLatex": "Official answer: B.",
-      "workingLatex": [],
-      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 1"],
-      "assets": [],
-      "source": {
-        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
-        "pageRef": "Exam paper pages 2",
-        "markingGuideRef": "Marking guidelines page 1",
-        "transcriptionStatus": "draft"
-      }
-    },
-    {
-      "id": "ext1-2024-q02-further-calculus-skills",
-      "paperId": "ext1-2024",
-      "year": 2024,
-      "questionNumber": "Q2",
-      "title": "2 Consider the functions y = f ^ x h and y = g ^ x h, and the regions shaded...",
-      "marks": 1,
-      "style": "multiple-choice",
-      "topic": "Calculus",
-      "subtopic": "Further Calculus Skills",
-      "syllabusNodeIds": ["old-me1-c2"],
-      "promptLatex": "2 Consider the functions y = f ^ x h and y = g ^ x h, and the regions shaded in the diagram below. -1 -2 -3 -4 x y O 1 2 3 4 y = f ^ x h y = g ^ x h Which of the following gives the total area of the shaded regions? 4\nA. f ^ x h - g ^ x h dx - 4; 4\nB. f ^ x h - g ^ x h dx - 4; -3 -1 1 4\nC. f ^ x h - g ^ x h dx + f ^ x h - g ^ x h dx + f ^ x h - g ^ x h dx + f ^ x h - g ^ x h dx - 4 - 3 - 1 1 -3 -1 1 4\nD. - f ^ x h - g ^ x h dx + f ^ x h - g ^ x h dx - f ^ x h - g ^ x h dx + f ^ x h - g ^ x h dx - 4 - 3 - 1 1",
-      "answerLatex": "Official answer: D.",
-      "workingLatex": [],
-      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 1"],
-      "assets": [],
-      "source": {
-        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
-        "pageRef": "Exam paper pages 2-3",
-        "markingGuideRef": "Marking guidelines page 1",
-        "transcriptionStatus": "draft"
-      }
-    },
-    {
-      "id": "ext1-2024-q03-further-work-with-functions",
-      "paperId": "ext1-2024",
-      "year": 2024,
-      "questionNumber": "Q3",
-      "title": "3 Students from 4 different schools come together to form a choir",
-      "marks": 1,
-      "style": "multiple-choice",
-      "topic": "Functions",
-      "subtopic": "Further Work with Functions",
-      "syllabusNodeIds": ["old-me1-f1"],
-      "promptLatex": "3 Students from 4 different schools come together to form a choir. What is the minimum size of the choir to know that there must be at least 20 students in the choir from one of the schools?\nA. 76\nB. 77\nC. 80\nD. 81",
-      "answerLatex": "Official answer: B.",
-      "workingLatex": [],
-      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 1"],
-      "assets": [],
-      "source": {
-        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
-        "pageRef": "Exam paper pages 3",
-        "markingGuideRef": "Marking guidelines page 1",
-        "transcriptionStatus": "draft"
-      }
-    },
-    {
-      "id": "ext1-2024-q04-trigonometric-equations",
-      "paperId": "ext1-2024",
-      "year": 2024,
-      "questionNumber": "Q4",
-      "title": "4 What are the domain and range of the function y = 2 cos -1 ^ 2 x h + 2 sin...",
-      "marks": 1,
-      "style": "multiple-choice",
-      "topic": "Trigonometric Functions",
-      "subtopic": "Trigonometric Equations",
-      "syllabusNodeIds": ["old-me1-t3"],
-      "promptLatex": "4 What are the domain and range of the function y = 2 cos -1 ^ 2 x h + 2 sin -1 ^ 2 x h?\nA. Domain: 6 - 0.5, 0.5 @ and Range: \" p,\nB. Domain: 6 - 0.5, 0.5 @ and Range: 6 - p, 3 p @\nC. Domain: 6 - 2, 2 @ and Range: \" p,\nD. Domain: 6 - 2, 2 @ and Range: 6 - p, 3 p @",
-      "answerLatex": "Official answer: A.",
-      "workingLatex": [],
-      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 1"],
-      "assets": [],
-      "source": {
-        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
-        "pageRef": "Exam paper pages 3",
-        "markingGuideRef": "Marking guidelines page 1",
-        "transcriptionStatus": "draft"
-      }
-    },
-    {
-      "id": "ext1-2024-q05-trigonometric-equations",
-      "paperId": "ext1-2024",
-      "year": 2024,
-      "questionNumber": "Q5",
-      "title": "5 Consider the function g ^ x h = 2 sin -1 ^ 3 x h Which transformations have...",
-      "marks": 1,
-      "style": "multiple-choice",
-      "topic": "Trigonometric Functions",
-      "subtopic": "Trigonometric Equations",
-      "syllabusNodeIds": ["old-me1-t3"],
-      "promptLatex": "5 Consider the function g ^ x h = 2 sin -1 ^ 3 x h Which transformations have been applied to f ^ x h = sin -1 ^ x h to obtain g ^ x h? 1 1\nA. Vertical dilation by a factor of and a horizontal dilation by a factor of 2 3 1\nB. Vertical dilation by a factor of and a horizontal dilation by a factor of 3 2 1\nC. Vertical dilation by a factor of 2 and a horizontal dilation by a factor of 3\nD. Vertical dilation by a factor of 2 and a horizontal dilation by a factor of 3",
-      "answerLatex": "Official answer: C.",
-      "workingLatex": [],
-      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 1"],
-      "assets": [],
-      "source": {
-        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
-        "pageRef": "Exam paper pages 3-4",
-        "markingGuideRef": "Marking guidelines page 1",
-        "transcriptionStatus": "draft"
-      }
-    },
-    {
-      "id": "ext1-2024-q06-trigonometric-equations",
-      "paperId": "ext1-2024",
-      "year": 2024,
-      "questionNumber": "Q6",
-      "title": "6 How many real value(s) of x satisfy the equation; b; =; b sin ^ 4 x h;, whe...",
-      "marks": 1,
-      "style": "multiple-choice",
-      "topic": "Trigonometric Functions",
-      "subtopic": "Trigonometric Equations",
-      "syllabusNodeIds": ["old-me1-t3"],
-      "promptLatex": "6 How many real value(s) of x satisfy the equation; b; =; b sin ^ 4 x h;, where x! 6 0, 2 p @ and b is not zero?\nA. 1\nB. 2\nC. 4\nD. 8",
-      "answerLatex": "Official answer: D.",
-      "workingLatex": [],
-      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 1"],
-      "assets": [],
-      "source": {
-        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
-        "pageRef": "Exam paper pages 4",
-        "markingGuideRef": "Marking guidelines page 1",
-        "transcriptionStatus": "draft"
-      }
-    },
-    {
-      "id": "ext1-2024-q07-the-binomial-distribution",
-      "paperId": "ext1-2024",
-      "year": 2024,
-      "questionNumber": "Q7",
-      "title": "7 A driver’s knowledge test contains 30 multiple-choice questions, each with...",
-      "marks": 1,
-      "style": "multiple-choice",
-      "topic": "Statistical Analysis",
-      "subtopic": "The Binomial Distribution",
-      "syllabusNodeIds": ["old-me1-s1"],
-      "promptLatex": "7 A driver’s knowledge test contains 30 multiple-choice questions, each with 4 options. An applicant must get at least 29 correct to pass. If an applicant correctly answers the first 25 questions and randomly guesses the last 5 questions, what is the probability that the applicant will pass the test? 1\nA. 256 15\nB. 1024 1\nC. 64 21\nD. 256",
-      "answerLatex": "Official answer: C.",
-      "workingLatex": [],
-      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 1"],
-      "assets": [],
-      "source": {
-        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
-        "pageRef": "Exam paper pages 4",
-        "markingGuideRef": "Marking guidelines page 1",
-        "transcriptionStatus": "draft"
-      }
-    },
-    {
-      "id": "ext1-2024-q08-trigonometric-equations",
-      "paperId": "ext1-2024",
-      "year": 2024,
-      "questionNumber": "Q8",
-      "title": "8 A local council is proposing to ban dog-walking on the beach",
-      "marks": 1,
-      "style": "multiple-choice",
-      "topic": "Trigonometric Functions",
-      "subtopic": "Trigonometric Equations",
-      "syllabusNodeIds": ["old-me1-t3"],
-      "promptLatex": "8 A local council is proposing to ban dog-walking on the beach. It is known that the 7 proportion of households that have a dog is 12 The local council wishes to poll n households about this proposal. Let p ˆ be the random variable representing the proportion of households polled that have a dog. What is the smallest sample size, n, for which the standard deviation of p ˆ is less than 0.06?\nA. 67\nB. 68\nC. 94\nD. 95",
-      "answerLatex": "Official answer: B.",
-      "workingLatex": [],
-      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 1"],
-      "assets": [],
-      "source": {
-        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
-        "pageRef": "Exam paper pages 4-5",
-        "markingGuideRef": "Marking guidelines page 1",
-        "transcriptionStatus": "draft"
-      }
-    },
-    {
-      "id": "ext1-2024-q09-the-binomial-distribution",
-      "paperId": "ext1-2024",
-      "year": 2024,
-      "questionNumber": "Q9",
-      "title": "9 A bag contains n metal coins, n $ 3, that are made from either silver or br...",
-      "marks": 1,
-      "style": "multiple-choice",
-      "topic": "Statistical Analysis",
-      "subtopic": "The Binomial Distribution",
-      "syllabusNodeIds": ["old-me1-s1"],
-      "promptLatex": "9 A bag contains n metal coins, n $ 3, that are made from either silver or bronze. There are k silver coins in the bag and the rest are bronze. Two coins are to be drawn at random from the bag, with the first coin drawn not being replaced before the second coin is drawn. Which of the following expressions will give the probability that the two coins drawn are made of the same metal? k ^ k - 1 h + ^ n - k h ^ n - k - 1 h\nA. n ^ n - 1 h n - 2 n n k\nB. d n d n d 1 - n 2 k n k n - k d n + d n 2 2\nC. n ^ n - 1 h k 2 + ^ n - k h 2\nD. n 2",
-      "answerLatex": "Official answer: A.",
-      "workingLatex": [],
-      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 1"],
-      "assets": [],
-      "source": {
-        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
-        "pageRef": "Exam paper pages 5",
-        "markingGuideRef": "Marking guidelines page 1",
-        "transcriptionStatus": "draft"
-      }
-    },
-    {
-      "id": "ext1-2024-q10-trigonometric-equations",
-      "paperId": "ext1-2024",
-      "year": 2024,
-      "questionNumber": "Q10",
-      "title": "10 For real numbers a and b, where a! 0 and b! 0, we can find numbers a, b, g...",
-      "marks": 1,
-      "style": "multiple-choice",
-      "topic": "Trigonometric Functions",
-      "subtopic": "Trigonometric Equations",
-      "syllabusNodeIds": ["old-me1-t3"],
-      "promptLatex": "10 For real numbers a and b, where a! 0 and b! 0, we can find numbers a, b, g, d and R such that a cos x + b sin x can be written in the following 4 forms: R sin ^ x + a h R sin ^ x - b h R cos ^ x + g h R cos ^ x - d h where R > 0 and 0 < a, b, g, d < 2 p What is the value of a + b + g + d?\nA. 0\nB. p\nC. 2 p\nD. 4 p",
-      "answerLatex": "Official answer: D.",
-      "workingLatex": [],
-      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 1"],
-      "assets": [],
-      "source": {
-        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
-        "pageRef": "Exam paper pages 5-6",
-        "markingGuideRef": "Marking guidelines page 1",
-        "transcriptionStatus": "draft"
-      }
-    },
-    {
-      "id": "ext1-2024-q11-introduction-to-vectors",
-      "paperId": "ext1-2024",
-      "year": 2024,
-      "questionNumber": "Q11",
-      "title": "Use the Question 11 Writing Booklet\n(a)\nConsider the vectors a = 3 i + 2 j an...",
-      "marks": 15,
-      "style": "extended-response",
-      "topic": "Vectors",
-      "subtopic": "Introduction to Vectors",
-      "syllabusNodeIds": ["old-me1-v1"],
-      "promptLatex": "Question 11\n(15 marks) Use the Question 11 Writing Booklet\n(a)\nConsider the vectors a = 3 i + 2 j and b = - i + 4 j ̰̰̰̰̰̰\n(i)\nFind 2 a - b ̰̰ 1\n(ii)\nFind a $ b ̰̰ 1\n(b)\nSolve x 2 - 8 x - 9 # 0. 2\n(c)\nUsing the substitution u = x - 1, find x x - 1 dx 3 dy\n(d)\nSolve the differential equation = x y, given y > 0. Express your answer in dx f the form y = ^ e x h 2\n(e)\nDifferentiate the function f ^ x h = arcsin _ x 5 i 1\n(f)\nThe volume of a sphere of radius r cm, is given by V = p r 3, and the volume 3 of the sphere is increasing at a rate of 10 cm 3 s -1 dr 5 Show that the rate of increase of the radius is given by = cm s -1 dt 2 p r 2 4 2 p\n(g)\nThe region, R, is bounded by the curves y = sin x, y = x and the line x = 2 as shown in the diagram. 3 1 2 x O y 1 2 2 p y = x y = sin x R Find the area of the region R",
-      "answerLatex": "Official marking guide excerpt:\nQuestion 11 (b)\n- \nProvides correct solution 2\n- \nAttempts to factor the LHS, or equivalent merit 1 Mathematics Extension 1 x 2 - 8 x - 9 # 0 y = x 2 - 8 x - 9 = ^ x - 9 h ^ x + 1 h x y O 9 -1 y = x 2 - 8 x - 9 - 1 # x # 9\nQuestion 11 (c)\n- \nProvides correct solution 3\n- \nObtains correct integral in terms of u, or equivalent merit 2\n- \nCorrectly substitutes for one element of the integrand, or equivalent merit 1 u = x - 1 1 x x - 1 $ dx = ^ u + 1 h u 2 $ du du = 1 dx 3 1 = du = c dx u 2 + u 2 m du 5 3 2 u 2 2 u 2 = + + C 5 3 5 3 2 _ x - 1 i 2 _ x - 1 i = + + C 5 3 Mathematics Extension 1\nQuestion 11 (d)\n- \nProvides correct solution 2\n- \nSeparates the variables, or equivalent merit 1 dy = xy dx dy = x dx y x 2 log y = + C as y > 0 e 2 x 2 + C y = e 2 Answers could include: x 2 Ae 2\nQuestion 11 (e)\n- \nProvides correct derivative 1 y = arcsin _ x 5 i Let f ^ x h = x 5 ` f l ^ x h = 5 x 4 dy f l ^ x h = dx 7 f ^ h A 2 1 - x 5 x 4 = 1 - x 10 Mathematics Extension 1\nQuestion 11 (f)\n- \nProvides correct solution 2 dr\n- \nCorrectly applies the chain rule to find an expression for, or equivalent merit dt 1 4 dV V = p r 3, = 10 cm 3 s -1 3 dt dV = 4 p r 2 dr dr dr dV = $ dt dV dt 1 = $ 10 4 p r 2 5 = cm s -1 2 p r 2\nQuestion 11 (g)\n- \nProvides correct solution 3\n- \nFinds the primitive of x - sin x OR\n- \nFinds the two relevant areas, or equivalent merit 2\n- \nConsiders the function x - sin x OR\n- \nCalculates the area of the triangle OR\n- \nConsiders the difference of two areas, or equivalent merit 1 Mathematics Extension 1 p 2 Area = ^ x - sin x h dx 0 p = x 2 2 = + cos x G 2 0 p 2 = e + 0 o - ^ 0 + 1 h 8 p 2 = - 1 8",
-      "workingLatex": [],
-      "markingFeedback": {
-        "sourceRef": "2024 HSC Mathematics Extension 1 marking feedback",
-        "betterResponses": [
-          "factorise the quadratic and correctly test the regions to determine the solution",
-          "use acceptable notation to display their answer."
-        ],
-        "improvementAreas": [
-          "demonstrating awareness of the inequality sign in the question",
-          "using graphs to solve quadratic inequalities",
-          "demonstrating proper use of inequalities or brackets to specify intervals."
-        ]
-      },
-      "tags": ["official-draft", "2024", "section-ii", "Mathematics Extension 1"],
-      "assets": [],
-      "source": {
-        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
-        "pageRef": "Exam paper pages 6-8",
-        "markingGuideRef": "Marking guidelines pages 3-7",
-        "transcriptionStatus": "draft"
-      }
-    },
-    {
-      "id": "ext1-2024-q12-introduction-to-vectors",
-      "paperId": "ext1-2024",
-      "year": 2024,
-      "questionNumber": "Q12",
-      "title": "Use the Question 12 Writing Booklet a 2 a + 5\n(a)\nThe vectors f p and d n are...",
-      "marks": 15,
-      "style": "extended-response",
-      "topic": "Vectors",
-      "subtopic": "Introduction to Vectors",
-      "syllabusNodeIds": ["old-me1-v1"],
-      "promptLatex": "Question 12\n(15 marks) Use the Question 12 Writing Booklet a 2 a + 5\n(a)\nThe vectors f p and d n are perpendicular. 2 a - 4 Find the possible values of a 3\n(b)\nThe region, R, is bounded by the function, y = x 3, the x -axis and the lines x = 1 and x = 2. What is the volume of the solid of revolution obtained when the region R is rotated about the x -axis? 3\n(c)\nA charity employs a worker to collect donations. There is a 0.31 chance that when the charity worker talks to someone a donation is made to the charity. Each day the charity worker must talk to exactly 100 people. Use the standard normal distribution and the information on page 13 to approximate the probability that, on a particular day, at least 35% of the people talked to made a donation. 3\n(d)\nUse mathematical induction to prove that 2 3 n + 13 is divisible by 7 for all integers n $ 1. 3 1\n(e)\nThe diagram shows the graph of y =; x - 5; 3 x y 5 1 5 NOT TO SCALE O x 1 For what values of x is $? 6; x - 5;",
-      "answerLatex": "Official marking guide excerpt:\nQuestion 12 (a)\n- \nProvides correct solution 3\n- \nObtains the solution a = 1, or equivalent merit 2\n- \nObtains the equation a 2 ^ a + 5 h + 2 ^ a - 4 h = 0, or equivalent merit 1 Mathematics Extension 1 a 2 a + 5 f p $ d n = 0 as vectors are 9 2 a - 4 a 2 ^ a + 5 h + 2 ^ a - 4 h = 0 a 3 + 5 a 2 + 2 a - 8 = 0 Let a = 1 1 3 + 5 ^ 1 h 2 + 2 ^ 1 h - 8 = 1 + 5 + 2 - 8 = 0 ` a - 1 is a factor. Using sum and product of roots: a + b + g = - 5 1 + b + g = - 5 b + g = - 6 bg = 8 ` b = - 4, g = - 2 Hence, roots are 1, - 2, - 4 Answers could include: * Inspection and equating of coefficients * Division of polynomials * Other methods may also be used Mathematics Extension 1\nQuestion 12 (b)\n- \nProvides correct solution 3\n- \nObtains correct primitive, or equivalent merit 2\n- \nObtains a correct expression for the volume, or equivalent merit 1 2 2 V = p _ x 3 i dx 1 2 x 7 = p = G 7 1 p = ^ 128 - 1 h 7 127 p = 7\nQuestion 12 (c)\n- \nProvides correct solution 3\n- \nFinds the z -score, or equivalent merit 2\n- \nObtains relevant standard deviation, or equivalent merit 1 s = np ^ 1 - p h = 100 # 0.31 # 0.69 = 21.39 x - m z = s 35 - 31 = 21.39 Z 0.86 From normal distribution graph P ^ $ 35% make a donation h = 1 - 0.8051 = 0.1949 = 19.49%\nQuestion 12 (d)\n- \nProvides correct proof 3\n- \nEstablishes that p ^ n h & p ^ n + 1 h is true, or equivalent merit 2\n- \nEstablishes base case, or equivalent merit 1 Mathematics Extension 1 # Base case n = 1 2 3 1 + 13 = 2 3 + 13 = 8 + 13 = 21 (which is divisible by 7) Therefore true for n = 1 Assume true for n = k ie 2 3 k + 13 = 7 M where M is a positive integer Prove true for n = k + 1 ie 2 3 ] k +1 g + 13 = 7 N where N is a positive integer LHS = 2 3 k + 3 + 13 = 2 3 k $ 2 3 + 13 = ^ 7 M - 13 h 8 + 13 using assumption = 7 M ◊ 8 - 104 + 13 = 7 M ◊ 8 - 91 = 7 ^ 8 M - 13 h = 7 N where N = 8 M - 13 which is an integer 7 N is divisible by 7, as required. Hence, by mathematical induction, 2 3 n + 13 is divisible by 7, for all integers n $ 1.\nQuestion 12 (e)\n- \nProvides correct solution 3\n- \nObtains the three critical points 2, 3 and 6, or equivalent merit 2\n- \nRecognises the two cases OR\n- \nObserves that x = 6 is a critical point OR\n- \nGraphs the two curves on the same axis, or equivalent merit 1 Mathematics Extension 1 y 5 1 5 O x x 1 x > 5 = 6 x - 5 x 2 - 5 x = 6 x 2 - 5 x - 6 = 0 ^ x - 6 h ^ x + 1 h = 0 x = 6 since x > 5 ` 6 6, 3 h x - 1 x < 5 = 6 x - 5 x 2 - 5 x = - 6 x 2 - 5 x + 6 = 0 ^ x - 2 h ^ x - 3 h = 0 x = 2, 3 since x < 5 ` 6 2, 3 @ ` Solution is 6 2, 3 @, 6 6, 3 h Mathematics Extension 1 Question 13 (a) (i)\n- \nProvides correct explanation 1 All graphs passing through T must be decreasing to the left of T. So the y-intercept of such a curve, if any y-intercept, must be above T. The point S isn’t above T so S can’t be on any such curve. Question 13 (a) (ii)\n- \nProvides correct sketch 1 O P t S T (0, 2000) Question 13 (a) (iii)\n- \nProvides correct solution 2 d 2 P\n- \nObtains the equation = 0, or equivalent merit dt 2 1 Mathematics Extension 1 dP Rate of growth is a maximum when is a maximum. dt d 2 P ie when = 0 dt 2 0 = 1 # ^ 2000 - P h - P 2 P = 2000 P = 1000 From the direction field it can be seen that the slope at P = 1000 is the maximum slope. (Rather than a minimum slope or other type of stationary point.) Question 13 (b) (i)\n- \nProvides correct proof 2\n- \n2 Expands ` cos 2 x + sin 2 x j, or equivalent merit 1 Mathematics Extension 1 2 cos 4 x + sin 4 x = _ cos 2 x + sin 2 x i - 2 cos 2 x sin 2 x = 1 2 1 - ^ 2 cos x sin x h 2 2 1 = 1 - sin 2 2 x 2 1 = 1 - _ 1 - cos 2 2 x i 2 1 1 = 1 - + cos 2 2 x 2 2 1 1 = + cos 2 2 x 2 2 1 + cos 2 2 x = 2 Answers could include: * Use of double angle formula Question 13 (b) (ii)\n- \nProvides correct solution 3\n- \nObtains correct primitive, or equivalent merit 2\n- \nObtains correct integral involving cos 4 x, or equivalent merit 1 Mathematics Extension 1 p p 4 1 4 _ cos 4 x + sin 4 x i dx = _ 1 + cos 2 2 x i dx, using part (i) 0 2 0 p 1 4 1 = d 1 + ^ 1 + cos 4 x hn dx 2 0 2 p 1 4 3 1 = d + cos 4 x n dx 2 0 2 2 p 1 3 x 1 sin 4 x 4 = = + $ G 2 2 2 4 0 p 3 x 1 4 = = + sin 4 x G 4 16 0 3 p 1 = e d n + sin p o - ^ 0 + 0 h 4 4 16 3 p = + 0 16 3 p = 16",
-      "workingLatex": [],
-      "markingFeedback": {
-        "sourceRef": "2024 HSC Mathematics Extension 1 marking feedback",
-        "betterResponses": [
-          "apply the scalar (dot) product to vectors expressed in component form",
-          "demonstrate an understanding of the properties of perpendicular vectors",
-          "apply the Factor Theorem to solve a cubic polynomial equation",
-          "use division of polynomials to factorise a cubic polynomial equation."
-        ],
-        "improvementAreas": [
-          "applying the scalar (dot) product rule to arrive at the correct cubic polynomial equation",
-          "understanding and applying the division of polynomials",
-          "factorising a cubic equation to arrive at possible values of 𝑎. Mathematics Extension 1 - HSC marking feedback 2024 Page 5 of 11"
-        ]
-      },
-      "tags": ["official-draft", "2024", "section-ii", "Mathematics Extension 1"],
-      "assets": [],
-      "source": {
-        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
-        "pageRef": "Exam paper pages 8-10",
-        "markingGuideRef": "Marking guidelines pages 7-15",
-        "transcriptionStatus": "draft"
-      }
-    },
-    {
-      "id": "ext1-2024-q13-introduction-to-vectors",
-      "paperId": "ext1-2024",
-      "year": 2024,
-      "questionNumber": "Q13",
-      "title": "Use the Question 13 Writing Booklet\n(a)\nIn an experiment, the population of i...",
-      "marks": 16,
-      "style": "extended-response",
-      "topic": "Vectors",
-      "subtopic": "Introduction to Vectors",
-      "syllabusNodeIds": ["old-me1-v1"],
-      "promptLatex": "Question 13\n(16 marks) Use the Question 13 Writing Booklet\n(a)\nIn an experiment, the population of insects, P ^ t h, was modelled by the logistic differential equation dP = P ^ 2000 - P h dt where t is the time in days after the beginning of the experiment. The diagram shows a direction field for this differential equation, with the point S representing the initial population. O P t S T (0, 2000)\n(i)\nExplain why the graph of the solution that passes through the point S cannot also pass through the point T 1\n(ii)\nOn the diagram provided on page 1 of the Question 13 Writing Booklet, clearly sketch the graph of the solution that passes through the point S 1\n(iii)\nFind the predicted value of the population, P ^ t h, at which the rate of growth of the population is largest. 2 1 + cos 2 2 x\n(b)\n(i)\nShow that cos 4 x + sin 4 x = 2 2 p 4\n(ii)\nHence, or otherwise, evaluate _ cos 4 x + sin 4 x i dx 0 ̰ 3 1 2\n(c)\nThe vector a is d n and the vector b is d n 3 - 1 The projection of a vector x onto the vector a is k a, where k is a real number. The projection of the vector x onto the vector b is p b, where p is a real number. Find the vector x in terms of k and p ̰̰̰̰̰̰̰̰ 4\n(d)\nUsing the substitution u = e x + 2 e - x, and considering u 2, find e 3 x - 2 e x dx 4 + 8 e 2 x + e 4 x 3",
-      "answerLatex": "Official marking guide excerpt:\nQuestion 13 (c)\n- \nProvides correct solution 4\n- \nObtains both k and p in terms of the components of x merit, or equivalent 3\n- \nObtains k or p in terms of the components of x, or equivalent merit 2 a $ x b $ x\n- \nWrites a or b, or equivalent merit a $ a b $ b 1 Mathematics Extension 1 ̰̰̰̰̰̰̰̰̰̰̰̰ u Let x = d n v a $ x Then k a = a a $ a a $ x u + 3 v So k = = a $ a 10 u + 3 v = 10 k b $ x Also p b = b b $ b b $ x 2 u - v So p = = b $ b 5 2 u - v = 5 p Solving u + 3 v = 10 k ➀ 2 u - v = 5 p ➁ 3 # ➁ 6 u - 3 v = 15 p ➀ + 3 # ➁ 7 u = 10 k + 15 p 10 k + 15 p u = 7 v = - 5 p + 2 u 20 k + 30 p = - 5 p + 7 20 k - 5 p = 7 10 k + 15 p 7 5 2 k + 3 p x = = e o 20 k - 5 p 7 4 k - p 7 ̰̰̰̰̰̰̰̰̰̰̰̰̰̰̰̰̰̰̰̰̰̰\nQuestion 13 (d)\n- \nProvides correct solution 3\n- \nChanges the integrand into an appropriate form using algebra, or equivalent merit 2 du\n- \nObtains = e x - 2 e - x, or equivalent merit dx 1 Mathematics Extension 1 e 3 x - 2 e x dx 4 + 8 e 2 x + e 4 x Let u = e x + 2 e - x u 2 = e 2 x + 4 + 4 e -2 x du = e x - 2 e - x dx du = _ e x - 2 e - x i dx 4 + 8 e 2 x + e 4 x = e 2 x _ 4 e -2 x + 8 + e 2 x i = e 2 x _ 4 e -2 x + 4 + e 2 x i + 4 e 2 x e 3 x - 2 e x e 2 x _ e x - 2 e - x i dx = dx 4 + 8 e 2 x + e 4 x e 2 x _ 4 e -2 x + 4 + e 2 x i + 4 e 2 x _ e x - 2 e - x i dx = _ 4 e -2 x + 4 + e 2 x i + 4 du = u 2 + 4 1 u = tan -1 + C 2 2 1 e x + 2 e - x = tan -1 e o + C 2 2 Mathematics Extension 1",
-      "workingLatex": [],
-      "markingFeedback": {
-        "sourceRef": "2024 HSC Mathematics Extension 1 marking feedback",
-        "betterResponses": [
-          "understand and apply the projection formula correctly",
-          "obtain both 𝑘 and 𝑝 in terms of components of 𝑥̰",
-          "solve simultaneous equations",
-          "arrive at the correct factorised answer of the components."
-        ],
-        "improvementAreas": [
-          "using the projection formula",
-          "recognising the component must be written as different variables, for example, u x v   =    ",
-          "solving simultaneous equations with fractions",
-          "understanding the difference between components and vectors."
-        ]
-      },
-      "tags": ["official-draft", "2024", "section-ii", "Mathematics Extension 1"],
-      "assets": [],
-      "source": {
-        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
-        "pageRef": "Exam paper pages 10-12",
-        "markingGuideRef": "Marking guidelines pages 15-17",
-        "transcriptionStatus": "draft"
-      }
-    },
-    {
-      "id": "ext1-2024-q14-introduction-to-vectors",
-      "paperId": "ext1-2024",
-      "year": 2024,
-      "questionNumber": "Q14",
-      "title": "Use the Question 14 Writing Booklet\n(a)\nFind the domain and range of the func...",
-      "marks": 14,
-      "style": "extended-response",
-      "topic": "Vectors",
-      "subtopic": "Introduction to Vectors",
-      "syllabusNodeIds": ["old-me1-v1"],
-      "promptLatex": "Question 14\n(14 marks) Use the Question 14 Writing Booklet\n(a)\nFind the domain and range of the function that is the solution to the differential equation dy = + e x y dx and whose graph passes through the origin. 4 kx\n(b)\nFor what values of the constant k would the function f ^ x h = + arctan x 1 + x 2 have an inverse? 3\n(c)\n(i)\nExplain why the equation tan -1 ^ 3 x h + tan -1 ^ 10 x h = q, where - p < q < p, has exactly one solution. 1\n(ii)\nSolve tan -1 ^ 3 x h + tan -1 3 p ^ 10 x h = 4 2\n(d)\nA particle is projected from the origin, with initial speed V at an angle of q to the horizontal. The position vector of the particle, r ^ t h, where t is the time after projection and g is the acceleration due to gravity, is given by Vt cos q r ^ t h = gt 2 (Do NOT prove this.) Vt sin q - 2 Let D ^ t h be the distance of the particle from the origin at time t, so D ^ t h =; r ^ t h; 8 Show that for q < sin -1 e o the distance, D ^ t h, is increasing for all t > 0. 9 ̰̰̰ 4",
-      "answerLatex": "Official marking guide excerpt:\nQuestion 14 (a)\n- \nProvides correct solution 4\n- \nObtains correct domain or range, or equivalent merit 3\n- \nIntegrates to obtain relation with constant evaluated, or equivalent merit 2\n- \nSeparates the variables, or equivalent merit 1 dy = e x + y = e x e y dx e - y dy = e x dx - e - y = e x + k y = 0, x = 0 - 1 = 1 + k k = - 2 - e - y = e x - 2 e - y = 2 - e x - y = ln _ 2 - e x i y = - ln _ 2 - e x i e x < 2 x < ln 2 Domain is ] - 3, ln 2 g To find the range: x -- > - 3 e x -- > 0 y -- > - ln 2 x -- > ln 2 e x -- > 2 ln _ 2 - e x i -- > - 3 y -- > 3 dy and = e x + y > 0 so graph is increasing dx Range is ] - ln 2, 3 g Mathematics Extension 1\nQuestion 14 (b)\n- \nProvides correct solution 3\n- \nCorrectly completes one of two cases, or equivalent merit 2\n- \nRecognises that f ^ x h needs to be monotonically increasing or monotonically decreasing, or equivalent merit 1 As f ^ x h is defined and differentiable for all reals, it will have an inverse if f l ^ x h $ 0 always or f l ^ x h # 0 always. k _ 1 + x 2 i - k x ^ 2 x h 1 f l ^ x h = + _ 2 2 1 + x 2 i 1 + x ^ k + 1 h - k x 2 + x 2 = _ 2 1 + x 2 i ^ k + 1 h + ^ 1 - k h x 2 ` _ 2 = and 1 + x 2 i is positive j _ 2 1 + x 2 i Case 1: f l ^ x h $ 0 ^ k + 1 h + ^ 1 - k h x 2 will always be greater or equal to zero if and only if ^ 1 - k h $ 0 and ^ k + 1 h $ 0. ` k # 1 and k $ - 1 ie - 1 # k # 1 Case 2: f l ^ x h # 0 ^ k + 1 h + ^ 1 - k h x 2 will always be less than or equal to zero if and only if ^ 1 - k h # 0 and ^ k + 1 h # 0. ` k $ 1 and k # - 1 ie no solution Hence, if - 1 # k # 1, then f l ^ x h is increasing and so has an inverse. Mathematics Extension 1 Question 14 (c) (i)\n- \nProvides correct explanation 1 The graphs of tan -1 ] 3 x g and tan -1 ] 10 x g are y = tan -1 ] x g shrunk horizontally. p p Both are increasing functions with a range c -, m 2 2 Adding gives an increasing function, considering large values of x shows the range of tan -1 ] 3 x g + tan -1 ] 10 x g is ] - p, p g For - p < q < p the line y = q will cross the graph of y = tan -1 ] 3 x g + tan -1 ] 10 x g at exactly one point. So, tan -1 ] 3 x g + tan -1 ] 10 x g = q has exactly one solution. Answers could include: y y = tan -1 ^ 3 x h + tan -1 ^ 10 x h p p y = tan -1 ^ 10 x h 2 p - O y = tan -1 ^ 3 x h x 2 - p Mathematics Extension 1 Question 14 (c) (ii)\n- \nProvides correct solution 2\n- \nObtains correct quadratic equation for x, or equivalent merit 1 3 p tan -1 ] 3 x g + tan -1 ] 10 x g = 4 -1 -1 3 p tan _ tan ] 3 x g + tan ] 10 x gi = tan 4 tan _ tan -1 ] 3 x gi + tan _ tan -1 ] 10 x gi = - 1 1 - tan _ tan -1 ] 3 x gi tan _ tan -1 ] 10 x gi 3 x + 10 x = - 1 1 - ] 3 x g ] 10 x g 13 x = - 1 + 30 x 2 30 x 2 - 13 x - 1 = 0 ] 2 x - 1 g] 15 x + 1 g = 0 1 1 x =, - 2 15 1 3 When x =, tan -1 d n + tan -1 ] 5 g > 0 2 2 1 -1 3 10 When x = -, tan d - n + tan -1 d - n < 0 15 15 15 1 The only solution is x = 2\nQuestion 14 (d)\n- \nProvides correct proof 4\n- \nExplains why D < 0 for their correct quadratic, or equivalent merit 3\n- \nObtains correct derivative of 7 D ^ t h A 2 or D ^ t h, or equivalent merit 2\n- \nObtains; D ^ t h;; 2 or D ^ t h;, or equivalent merit 1 Mathematics Extension 1 g 2 t 4 D 2 = V 2 t 2 cos 2 q + V 2 t 2 sin 2 q - Vgt 3 sin q + 4 g 2 t 4 = V 2 t 2 - Vgt 3 sin q + 4 d _ D 2 i = 2 V 2 t - 3 Vgt 2 sin q + g 2 t 3 dt = t _ 2 V 2 - 3 Vgt sin q + g 2 t 2 j d _ D 2 i D ^ t h is increasing for all t > 0 when > 0. dt When D < 0 9 V 2 g 2 sin 2 q - 4 # g 2 # 2 V 2 < 0 9 V 2 g 2 sin 2 q - 8 V 2 g 2 < 0 As V 2, g 2! 0 9 sin 2 q - 8 < 0 2 8 sin q < 9 p 8 For 0 # q #, sin q > 0 ` sin q < 2 9 ` q < sin -1 8 f p 9 Mathematics Extension 1 2024 HSC Mathematics Extension 1",
-      "workingLatex": [],
-      "markingFeedback": {
-        "sourceRef": "2024 HSC Mathematics Extension 1 marking feedback",
-        "betterResponses": [
-          "separate the variables",
-          "integrate correctly and find the value of the constant",
-          "determine the domain and range for the function."
-        ],
-        "improvementAreas": [
-          "understanding how to integrate terms such as 𝑒 -𝑦",
-          "ensuring that they include a constant when completing an indefinite integral",
-          "taking care with their algebra, especially when calculating with minus signs",
-          "understanding when an absolute value sign may or may not be needed when using natural logarithms",
-          "understanding how to find the domain and range of a function such as 𝑦 = -𝑙𝑛(2 - 𝑒 𝑥 )",
-          "understanding the difference between the symbols ‘[’ and ‘(’ when using interval notation",
-          "leaving answers in exact form when they are simple terms such as 𝑙𝑛2."
-        ]
-      },
-      "tags": ["official-draft", "2024", "section-ii", "Mathematics Extension 1"],
-      "assets": [],
-      "source": {
-        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
-        "pageRef": "Exam paper pages 12",
-        "markingGuideRef": "Marking guidelines pages 17-22",
-        "transcriptionStatus": "draft"
-      }
-    },
-    {
       "id": "ext2-2024-q01-further-work-with-vectors",
       "paperId": "ext2-2024",
       "year": 2024,
@@ -11305,6 +10925,413 @@
         "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-2/2024",
         "pageRef": "Exam paper pages 13-14",
         "markingGuideRef": "Marking guidelines pages 30-36",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext1-2024-q01-polynomials",
+      "paperId": "ext1-2024",
+      "year": 2024,
+      "questionNumber": "Q1",
+      "title": "1 The polynomial x 3 + 2 x 2 - 5 x - 6 has zeros - 1, - 3 and a What is the v...",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Functions",
+      "subtopic": "Polynomials",
+      "syllabusNodeIds": ["old-me1-f2"],
+      "promptLatex": "1 The polynomial x 3 + 2 x 2 - 5 x - 6 has zeros - 1, - 3 and a What is the value of a?\nA. - 2\nB. 2\nC. 3\nD. 6",
+      "answerLatex": "Official answer: B.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+        "pageRef": "Exam paper pages 2",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext1-2024-q02-further-calculus-skills",
+      "paperId": "ext1-2024",
+      "year": 2024,
+      "questionNumber": "Q2",
+      "title": "2 Consider the functions y = f ^ x h and y = g ^ x h, and the regions shaded...",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Calculus",
+      "subtopic": "Further Calculus Skills",
+      "syllabusNodeIds": ["old-me1-c2"],
+      "promptLatex": "2 Consider the functions \\(y=f(x)\\) and \\(y=g(x)\\), and the regions shaded in the diagram below.\nWhich of the following gives the total area of the shaded regions?\nA. \\(\\int_{-4}^{4}(f(x)-g(x))\\,dx\\)\nB. \\(\\left|\\int_{-4}^{4}(f(x)-g(x))\\,dx\\right|\\)\nC. \\(\\int_{-4}^{-3}(f(x)-g(x))\\,dx+\\int_{-3}^{-1}(f(x)-g(x))\\,dx+\\int_{-1}^{1}(f(x)-g(x))\\,dx+\\int_{1}^{4}(f(x)-g(x))\\,dx\\)\nD. \\(-\\int_{-4}^{-3}(f(x)-g(x))\\,dx+\\int_{-3}^{-1}(f(x)-g(x))\\,dx-\\int_{-1}^{1}(f(x)-g(x))\\,dx+\\int_{1}^{4}(f(x)-g(x))\\,dx\\)",
+      "answerLatex": "Official answer: D.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 1"],
+      "assets": [
+        {
+          "id": "ext1-2024-q02-shaded-area-graph",
+          "type": "graph",
+          "label": "Shaded area between two functions",
+          "alt": "Graph of y equals f(x) and y equals g(x) with shaded regions between the curves on intervals from -4 to 4.",
+          "path": "/assets/diagrams/ext1-2024-q02-shaded-area-graph.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+        "pageRef": "Exam paper pages 2-3",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext1-2024-q03-further-work-with-functions",
+      "paperId": "ext1-2024",
+      "year": 2024,
+      "questionNumber": "Q3",
+      "title": "3 Students from 4 different schools come together to form a choir",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Functions",
+      "subtopic": "Further Work with Functions",
+      "syllabusNodeIds": ["old-me1-f1"],
+      "promptLatex": "3 Students from 4 different schools come together to form a choir. What is the minimum size of the choir to know that there must be at least 20 students in the choir from one of the schools?\nA. 76\nB. 77\nC. 80\nD. 81",
+      "answerLatex": "Official answer: B.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+        "pageRef": "Exam paper pages 3",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext1-2024-q04-trigonometric-equations",
+      "paperId": "ext1-2024",
+      "year": 2024,
+      "questionNumber": "Q4",
+      "title": "4 What are the domain and range of the function y = 2 cos -1 ^ 2 x h + 2 sin...",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Trigonometric Functions",
+      "subtopic": "Trigonometric Equations",
+      "syllabusNodeIds": ["old-me1-t3"],
+      "promptLatex": "4 What are the domain and range of the function \\(y=2\\cos^{-1}(2x)+2\\sin^{-1}(2x)\\)?\nA. Domain: \\([-0.5,0.5]\\) and Range: \\(\\{\\pi\\}\\)\nB. Domain: \\([-0.5,0.5]\\) and Range: \\([-\\pi,3\\pi]\\)\nC. Domain: \\([-2,2]\\) and Range: \\(\\{\\pi\\}\\)\nD. Domain: \\([-2,2]\\) and Range: \\([-\\pi,3\\pi]\\)",
+      "answerLatex": "Official answer: A.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+        "pageRef": "Exam paper pages 3",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext1-2024-q05-trigonometric-equations",
+      "paperId": "ext1-2024",
+      "year": 2024,
+      "questionNumber": "Q5",
+      "title": "5 Consider the function g ^ x h = 2 sin -1 ^ 3 x h Which transformations have...",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Trigonometric Functions",
+      "subtopic": "Trigonometric Equations",
+      "syllabusNodeIds": ["old-me1-t3"],
+      "promptLatex": "5 Consider the function g ^ x h = 2 sin -1 ^ 3 x h Which transformations have been applied to f ^ x h = sin -1 ^ x h to obtain g ^ x h? 1 1\nA. Vertical dilation by a factor of and a horizontal dilation by a factor of 2 3 1\nB. Vertical dilation by a factor of and a horizontal dilation by a factor of 3 2 1\nC. Vertical dilation by a factor of 2 and a horizontal dilation by a factor of 3\nD. Vertical dilation by a factor of 2 and a horizontal dilation by a factor of 3",
+      "answerLatex": "Official answer: C.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+        "pageRef": "Exam paper pages 3-4",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext1-2024-q06-trigonometric-equations",
+      "paperId": "ext1-2024",
+      "year": 2024,
+      "questionNumber": "Q6",
+      "title": "6 How many real value(s) of x satisfy the equation; b; =; b sin ^ 4 x h;, whe...",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Trigonometric Functions",
+      "subtopic": "Trigonometric Equations",
+      "syllabusNodeIds": ["old-me1-t3"],
+      "promptLatex": "6 How many real value(s) of \\(x\\) satisfy the equation \\(|b|=|b\\sin(4x)|\\), where \\(x\\in[0,2\\pi]\\) and \\(b\\) is not zero?\nA. 1\nB. 2\nC. 4\nD. 8",
+      "answerLatex": "Official answer: D.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+        "pageRef": "Exam paper pages 4",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext1-2024-q07-the-binomial-distribution",
+      "paperId": "ext1-2024",
+      "year": 2024,
+      "questionNumber": "Q7",
+      "title": "7 A driver’s knowledge test contains 30 multiple-choice questions, each with...",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Statistical Analysis",
+      "subtopic": "The Binomial Distribution",
+      "syllabusNodeIds": ["old-me1-s1"],
+      "promptLatex": "7 A driver’s knowledge test contains 30 multiple-choice questions, each with 4 options. An applicant must get at least 29 correct to pass. If an applicant correctly answers the first 25 questions and randomly guesses the last 5 questions, what is the probability that the applicant will pass the test? 1\nA. 256 15\nB. 1024 1\nC. 64 21\nD. 256",
+      "answerLatex": "Official answer: C.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+        "pageRef": "Exam paper pages 4",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext1-2024-q08-trigonometric-equations",
+      "paperId": "ext1-2024",
+      "year": 2024,
+      "questionNumber": "Q8",
+      "title": "8 A local council is proposing to ban dog-walking on the beach",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Trigonometric Functions",
+      "subtopic": "Trigonometric Equations",
+      "syllabusNodeIds": ["old-me1-t3"],
+      "promptLatex": "8 A local council is proposing to ban dog-walking on the beach. It is known that the 7 proportion of households that have a dog is 12 The local council wishes to poll n households about this proposal. Let p ˆ be the random variable representing the proportion of households polled that have a dog. What is the smallest sample size, n, for which the standard deviation of p ˆ is less than 0.06?\nA. 67\nB. 68\nC. 94\nD. 95",
+      "answerLatex": "Official answer: B.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+        "pageRef": "Exam paper pages 4-5",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext1-2024-q09-the-binomial-distribution",
+      "paperId": "ext1-2024",
+      "year": 2024,
+      "questionNumber": "Q9",
+      "title": "9 A bag contains n metal coins, n $ 3, that are made from either silver or br...",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Statistical Analysis",
+      "subtopic": "The Binomial Distribution",
+      "syllabusNodeIds": ["old-me1-s1"],
+      "promptLatex": "9 A bag contains n metal coins, n $ 3, that are made from either silver or bronze. There are k silver coins in the bag and the rest are bronze. Two coins are to be drawn at random from the bag, with the first coin drawn not being replaced before the second coin is drawn. Which of the following expressions will give the probability that the two coins drawn are made of the same metal? k ^ k - 1 h + ^ n - k h ^ n - k - 1 h\nA. n ^ n - 1 h n - 2 n n k\nB. d n d n d 1 - n 2 k n k n - k d n + d n 2 2\nC. n ^ n - 1 h k 2 + ^ n - k h 2\nD. n 2",
+      "answerLatex": "Official answer: A.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+        "pageRef": "Exam paper pages 5",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext1-2024-q10-trigonometric-equations",
+      "paperId": "ext1-2024",
+      "year": 2024,
+      "questionNumber": "Q10",
+      "title": "10 For real numbers a and b, where a! 0 and b! 0, we can find numbers a, b, g...",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Trigonometric Functions",
+      "subtopic": "Trigonometric Equations",
+      "syllabusNodeIds": ["old-me1-t3"],
+      "promptLatex": "10 For real numbers \\(a\\) and \\(b\\), where \\(a\\neq0\\) and \\(b\\neq0\\), we can find numbers \\(\\alpha,\\beta,\\gamma,\\delta\\) and \\(R\\) such that \\(a\\cos x+b\\sin x\\) can be written in the following 4 forms:\n\\(R\\sin(x+\\alpha)\\)\n\\(R\\sin(x-\\beta)\\)\n\\(R\\cos(x+\\gamma)\\)\n\\(R\\cos(x-\\delta)\\)\nwhere \\(R>0\\) and \\(0<\\alpha,\\beta,\\gamma,\\delta<2\\pi\\).\nWhat is the value of \\(\\alpha+\\beta+\\gamma+\\delta\\)?\nA. \\(0\\)\nB. \\(\\pi\\)\nC. \\(2\\pi\\)\nD. \\(4\\pi\\)",
+      "answerLatex": "Official answer: D.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Extension 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+        "pageRef": "Exam paper pages 5-6",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext1-2024-q11-introduction-to-vectors",
+      "paperId": "ext1-2024",
+      "year": 2024,
+      "questionNumber": "Q11",
+      "title": "Use the Question 11 Writing Booklet\n(a)\nConsider the vectors a = 3 i + 2 j an...",
+      "marks": 15,
+      "style": "extended-response",
+      "topic": "Vectors",
+      "subtopic": "Introduction to Vectors",
+      "syllabusNodeIds": ["old-me1-v1"],
+      "promptLatex": "Question 11 (15 marks) Use the Question 11 Writing Booklet\n(a) Consider the vectors \\(\\mathbf{a}=3\\mathbf{i}+2\\mathbf{j}\\) and \\(\\mathbf{b}=-\\mathbf{i}+4\\mathbf{j}\\).\n(i) Find \\(2\\mathbf{a}-\\mathbf{b}\\).\n(ii) Find \\(\\mathbf{a}\\cdot\\mathbf{b}\\).\n(b) Solve \\(x^2-8x-9\\leq0\\).\n(c) Using the substitution \\(u=x-1\\), find \\(\\int x\\sqrt{x-1}\\,dx\\).\n(d) Solve the differential equation \\(\\frac{dy}{dx}=xy\\), given \\(y>0\\). Express your answer in the form \\(y=e^{f(x)}\\).\n(e) Differentiate the function \\(f(x)=\\arcsin(x^5)\\).\n(f) The volume of a sphere of radius \\(r\\) cm is given by \\(V=\\frac43\\pi r^3\\), and the volume of the sphere is increasing at a rate of \\(10\\ \\mathrm{cm^3\\ s^{-1}}\\). Show that the rate of increase of the radius is given by \\(\\frac{dr}{dt}=\\frac{5}{2\\pi r^2}\\ \\mathrm{cm\\ s^{-1}}\\).\n(g) The region \\(R\\) is bounded by the curves \\(y=\\sin x\\), \\(y=x\\) and the line \\(x=\\frac{\\pi}{2}\\), as shown in the diagram. Find the area of the region \\(R\\).",
+      "answerLatex": "Official marking guide excerpt (source-reviewed):\n(a) (i) \\(2\\mathbf{a}-\\mathbf{b}=7\\mathbf{i}\\). (ii) \\(\\mathbf{a}\\cdot\\mathbf{b}=5\\).\n(b) \\((x-9)(x+1)\\leq0\\), so \\(-1\\leq x\\leq9\\).\n(c) With \\(u=x-1\\), \\(\\int x\\sqrt{x-1}\\,dx=\\int(u+1)u^{1/2}\\,du=\\frac25(x-1)^{5/2}+\\frac23(x-1)^{3/2}+C\\).\n(d) \\(\\ln y=\\frac{x^2}{2}+C\\), so \\(y=e^{x^2/2+C}\\).\n(e) \\(f'(x)=\\frac{5x^4}{\\sqrt{1-x^{10}}}\\).\n(f) \\(\\frac{dV}{dt}=4\\pi r^2\\frac{dr}{dt}=10\\), so \\(\\frac{dr}{dt}=\\frac{5}{2\\pi r^2}\\).\n(g) Area \\(=\\int_0^{\\pi/2}(x-\\sin x)\\,dx=\\frac{\\pi^2}{8}-1\\).",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Extension 1 marking feedback",
+        "betterResponses": ["correctly perform algebraic operations on vectors in component form."],
+        "improvementAreas": [
+          "solving vector problems involving multiplication by a scalar and vector subtraction",
+          "making proper use of vector notation. Mathematics Extension 1 - HSC marking feedback 2024 Page 2 of 11"
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Extension 1"],
+      "assets": [
+        {
+          "id": "ext1-2024-q11-sine-line-region-graph",
+          "type": "graph",
+          "label": "Region between y=x and y=sin(x)",
+          "alt": "Graph showing the region R bounded by y equals x, y equals sin x, and the vertical line x equals pi over 2.",
+          "path": "/assets/diagrams/ext1-2024-q11-sine-line-region-graph.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+        "pageRef": "Exam paper pages 6-8",
+        "markingGuideRef": "Marking guidelines pages 2-7",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext1-2024-q12-introduction-to-vectors",
+      "paperId": "ext1-2024",
+      "year": 2024,
+      "questionNumber": "Q12",
+      "title": "Use the Question 12 Writing Booklet a 2 a + 5\n(a)\nThe vectors f p and d n are...",
+      "marks": 15,
+      "style": "extended-response",
+      "topic": "Vectors",
+      "subtopic": "Introduction to Vectors",
+      "syllabusNodeIds": ["old-me1-v1"],
+      "promptLatex": "Question 12 (15 marks) Use the Question 12 Writing Booklet\n(a) The vectors \\(\\begin{pmatrix}a^2\\\\2\\end{pmatrix}\\) and \\(\\begin{pmatrix}a+5\\\\a-4\\end{pmatrix}\\) are perpendicular. Find the possible values of \\(a\\).\n(b) The region \\(R\\) is bounded by the function \\(y=x^3\\), the \\(x\\)-axis and the lines \\(x=1\\) and \\(x=2\\). What is the volume of the solid of revolution obtained when the region \\(R\\) is rotated about the \\(x\\)-axis?\n(c) A charity employs a worker to collect donations. There is a 0.31 chance that when the charity worker talks to someone a donation is made to the charity. Each day the charity worker must talk to exactly 100 people. Use the standard normal distribution and the information on page 13 to approximate the probability that, on a particular day, at least 35% of the people talked to made a donation.\n(d) Use mathematical induction to prove that \\(2^{3n}+13\\) is divisible by 7 for all integers \\(n\\geq1\\).\n(e) The diagram shows the graph of \\(y=\\frac{1}{|x-5|}\\). For what values of \\(x\\) is \\(\\frac{x}{6}\\geq\\frac{1}{|x-5|}\\)?",
+      "answerLatex": "Official marking guide excerpt (source-reviewed):\n(a) Perpendicular vectors give \\(a^2(a+5)+2(a-4)=0\\), so \\((a-1)(a+2)(a+4)=0\\). Thus \\(a=-4,-2,1\\).\n(b) \\(V=\\pi\\int_1^2 x^6\\,dx=\\frac{127\\pi}{7}\\).\n(c) If \\(X\\sim\\operatorname{Bin}(100,0.31)\\), use a normal approximation with mean 31 and standard deviation \\(\\sqrt{100(0.31)(0.69)}\\). With continuity correction, \\(P(X\\geq35)\\approx P\\left(Z\\geq\\frac{34.5-31}{\\sqrt{21.39}}\\right)\\approx0.22\\).\n(d) Base case: \\(2^3+13=21\\), divisible by 7. If \\(2^{3k}+13\\) is divisible by 7, then \\(2^{3(k+1)}+13=8(2^{3k}+13)-91\\), also divisible by 7.\n(e) Since the right side is positive, \\(x>0\\). For \\(0<x<5\\), \\(x(5-x)\\geq6\\), giving \\(2\\leq x\\leq3\\). For \\(x>5\\), \\(x(x-5)\\geq6\\), giving \\(x\\geq6\\). Hence \\(x\\in[2,3]\\cup[6,\\infty)\\).",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Extension 1 marking feedback",
+        "betterResponses": [
+          "apply the scalar (dot) product to vectors expressed in component form",
+          "demonstrate an understanding of the properties of perpendicular vectors",
+          "apply the Factor Theorem to solve a cubic polynomial equation",
+          "use division of polynomials to factorise a cubic polynomial equation."
+        ],
+        "improvementAreas": [
+          "applying the scalar (dot) product rule to arrive at the correct cubic polynomial equation",
+          "understanding and applying the division of polynomials",
+          "factorising a cubic equation to arrive at possible values of 𝑎. Mathematics Extension 1 - HSC marking feedback 2024 Page 5 of 11"
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Extension 1"],
+      "assets": [
+        {
+          "id": "ext1-2024-q12-reciprocal-absolute-graph",
+          "type": "graph",
+          "label": "Graph of y=1/|x-5|",
+          "alt": "Graph of y equals one over absolute value of x minus five with a vertical asymptote at x equals five and y-intercept one fifth.",
+          "path": "/assets/diagrams/ext1-2024-q12-reciprocal-absolute-graph.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+        "pageRef": "Exam paper pages 8-10",
+        "markingGuideRef": "Marking guidelines pages 7-11",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext1-2024-q13-introduction-to-vectors",
+      "paperId": "ext1-2024",
+      "year": 2024,
+      "questionNumber": "Q13",
+      "title": "Use the Question 13 Writing Booklet\n(a)\nIn an experiment, the population of i...",
+      "marks": 16,
+      "style": "extended-response",
+      "topic": "Vectors",
+      "subtopic": "Introduction to Vectors",
+      "syllabusNodeIds": ["old-me1-v1"],
+      "promptLatex": "Question 13 (16 marks) Use the Question 13 Writing Booklet\n(a) In an experiment, the population of insects, \\(P(t)\\), was modelled by the logistic differential equation \\(\\frac{dP}{dt}=P(2000-P)\\), where \\(t\\) is the time in days after the beginning of the experiment. The diagram shows a direction field for this differential equation, with the point \\(S\\) representing the initial population.\n(i) Explain why the graph of the solution that passes through the point \\(S\\) cannot also pass through the point \\(T\\).\n(ii) On the diagram provided on page 1 of the Question 13 Writing Booklet, clearly sketch the graph of the solution that passes through the point \\(S\\).\n(iii) Find the predicted value of the population, \\(P(t)\\), at which the rate of growth of the population is largest.\n(b) (i) Show that \\(\\cos^4x+\\sin^4x=\\frac{1+\\cos^2 2x}{2}\\).\n(ii) Hence, or otherwise, evaluate \\(\\int_0^{\\pi/4}(\\cos^4x+\\sin^4x)\\,dx\\).\n(c) The vector \\(\\mathbf{a}\\) is \\(\\begin{pmatrix}1\\\\3\\end{pmatrix}\\) and the vector \\(\\mathbf{b}\\) is \\(\\begin{pmatrix}2\\\\-1\\end{pmatrix}\\). The projection of a vector \\(\\mathbf{x}\\) onto \\(\\mathbf{a}\\) is \\(k\\mathbf{a}\\), where \\(k\\) is a real number. The projection of \\(\\mathbf{x}\\) onto \\(\\mathbf{b}\\) is \\(p\\mathbf{b}\\), where \\(p\\) is a real number. Find the vector \\(\\mathbf{x}\\) in terms of \\(k\\) and \\(p\\).\n(d) Using the substitution \\(u=e^x+2e^{-x}\\), and considering \\(u^2\\), find \\(\\int\\frac{e^{3x}-2e^x}{4+8e^{2x}+e^{4x}}\\,dx\\).",
+      "answerLatex": "Official marking guide excerpt (source-reviewed):\n(a) The solution through \\(S\\) cannot also pass through \\(T\\) because solutions of the differential equation do not cross and the equilibrium \\(P=2000\\) separates the fields. The growth rate \\(P(2000-P)\\) is maximised at \\(P=1000\\).\n(b) \\(\\cos^4x+\\sin^4x=(\\cos^2x+\\sin^2x)^2-2\\sin^2x\\cos^2x=\\frac{1+\\cos^2 2x}{2}\\). Hence the integral is \\(\\int_0^{\\pi/4}\\left(\\frac34+\\frac14\\cos4x\\right)dx=\\frac{3\\pi}{16}\\).\n(c) Let \\(\\mathbf{x}=\\begin{pmatrix}X\\\\Y\\end{pmatrix}\\). The projection conditions give \\(X+3Y=10k\\) and \\(2X-Y=5p\\), so \\(\\mathbf{x}=\\begin{pmatrix}(10k+15p)/7\\\\(20k-5p)/7\\end{pmatrix}\\).\n(d) Since \\(u=e^x+2e^{-x}\\), \\(du=(e^x-2e^{-x})dx\\) and the integral becomes \\(\\int\\frac{du}{u^2+4}=\\frac12\\tan^{-1}\\left(\\frac{u}{2}\\right)+C\\).",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Extension 1 marking feedback",
+        "betterResponses": [
+          "explain explicitly that there exists a horizontal asymptote with 𝑆 and 𝑇 opposite it, hence 𝑆 cannot reach 𝑇."
+        ],
+        "improvementAreas": [
+          "stating that there is a horizontal asymptote at 𝑦 = 2000",
+          "clearly identifying that 𝑆 and 𝑇 are opposite sides of the asymptote."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Extension 1"],
+      "assets": [
+        {
+          "id": "ext1-2024-q13-direction-field",
+          "type": "diagram",
+          "label": "Direction field for logistic differential equation",
+          "alt": "Direction field for dP over dt equals P times 2000 minus P, with labelled points S and T and equilibrium P equals 2000.",
+          "path": "/assets/diagrams/ext1-2024-q13-direction-field.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+        "pageRef": "Exam paper pages 10-12",
+        "markingGuideRef": "Marking guidelines pages 11-17",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext1-2024-q14-introduction-to-vectors",
+      "paperId": "ext1-2024",
+      "year": 2024,
+      "questionNumber": "Q14",
+      "title": "Use the Question 14 Writing Booklet\n(a)\nFind the domain and range of the func...",
+      "marks": 14,
+      "style": "extended-response",
+      "topic": "Vectors",
+      "subtopic": "Introduction to Vectors",
+      "syllabusNodeIds": ["old-me1-v1"],
+      "promptLatex": "Question 14 (14 marks) Use the Question 14 Writing Booklet\n(a) Find the domain and range of the function that is the solution to the differential equation \\(\\frac{dy}{dx}=e^{x+y}\\) and whose graph passes through the origin.\n(b) For what values of the constant \\(k\\) would the function \\(f(x)=\\frac{kx}{1+x^2}+\\arctan x\\) have an inverse?\n(c) (i) Explain why the equation \\(\\tan^{-1}(3x)+\\tan^{-1}(10x)=\\theta\\), where \\(-\\pi<\\theta<\\pi\\), has exactly one solution.\n(ii) Solve \\(\\tan^{-1}(3x)+\\tan^{-1}(10x)=\\frac{3\\pi}{4}\\).\n(d) A particle is projected from the origin, with initial speed \\(V\\) at an angle of \\(\\theta\\) to the horizontal. The position vector of the particle, \\(\\mathbf{r}(t)\\), where \\(t\\) is the time after projection and \\(g\\) is the acceleration due to gravity, is given by \\(\\mathbf{r}(t)=\\begin{pmatrix}Vt\\cos\\theta\\\\Vt\\sin\\theta-\\frac{gt^2}{2}\\end{pmatrix}\\). Do NOT prove this. Let \\(D(t)\\) be the distance of the particle from the origin at time \\(t\\), so \\(D(t)=|\\mathbf{r}(t)|\\). Show that for \\(\\theta<\\sin^{-1}\\left(\\sqrt{\\frac89}\\right)\\), the distance \\(D(t)\\) is increasing for all \\(t>0\\).",
+      "answerLatex": "Official marking guide excerpt (source-reviewed):\n(a) Solving \\(\\frac{dy}{dx}=e^{x+y}\\) gives \\(e^{-y}=2-e^x\\), so \\(y=-\\ln(2-e^x)\\). The domain is \\((-\\infty,\\ln2)\\) and the range is \\((-\\ln2,\\infty)\\).\n(b) \\(f'(x)=\\frac{(k+1)+(1-k)x^2}{(1+x^2)^2}\\). For \\(f\\) to be one-to-one on its domain, require \\(-1\\leq k\\leq1\\).\n(c) The left side is strictly increasing, so there is exactly one solution for each \\(\\theta\\in(-\\pi,\\pi)\\). Solving \\(\\tan^{-1}(3x)+\\tan^{-1}(10x)=\\frac{3\\pi}{4}\\) gives \\(x=\\frac12\\).\n(d) \\(D(t)^2=V^2t^2-Vg\\sin\\theta\\,t^3+\\frac{g^2t^4}{4}\\). Its derivative is positive for \\(t>0\\) when \\(g^2t^2-3Vg\\sin\\theta\\,t+2V^2>0\\), which follows from \\(\\sin^2\\theta<\\frac89\\).",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Extension 1 marking feedback",
+        "betterResponses": [
+          "separate the variables",
+          "integrate correctly and find the value of the constant",
+          "determine the domain and range for the function."
+        ],
+        "improvementAreas": [
+          "understanding how to integrate terms such as 𝑒 -𝑦",
+          "ensuring that they include a constant when completing an indefinite integral",
+          "taking care with their algebra, especially when calculating with minus signs",
+          "understanding when an absolute value sign may or may not be needed when using natural logarithms",
+          "understanding how to find the domain and range of a function such as 𝑦 = -𝑙𝑛(2 - 𝑒 𝑥 )",
+          "understanding the difference between the symbols ‘[’ and ‘(’ when using interval notation",
+          "leaving answers in exact form when they are simple terms such as 𝑙𝑛2."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Extension 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
+        "pageRef": "Exam paper pages 12",
+        "markingGuideRef": "Marking guidelines pages 17-22",
         "transcriptionStatus": "draft"
       }
     }

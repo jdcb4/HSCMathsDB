@@ -145,7 +145,171 @@ export const additionalMathsProfiles: ExamIngestionProfile[] = [
       [1073, 1385, 1569, 1871],
       2124,
       1063
-    )
+    ),
+    questionOverrides: {
+      2: {
+        promptLatex: [
+          "2 Consider the functions \\(y=f(x)\\) and \\(y=g(x)\\), and the regions shaded in the diagram below.",
+          "Which of the following gives the total area of the shaded regions?",
+          "A. \\(\\int_{-4}^{4}(f(x)-g(x))\\,dx\\)",
+          "B. \\(\\left|\\int_{-4}^{4}(f(x)-g(x))\\,dx\\right|\\)",
+          "C. \\(\\int_{-4}^{-3}(f(x)-g(x))\\,dx+\\int_{-3}^{-1}(f(x)-g(x))\\,dx+\\int_{-1}^{1}(f(x)-g(x))\\,dx+\\int_{1}^{4}(f(x)-g(x))\\,dx\\)",
+          "D. \\(-\\int_{-4}^{-3}(f(x)-g(x))\\,dx+\\int_{-3}^{-1}(f(x)-g(x))\\,dx-\\int_{-1}^{1}(f(x)-g(x))\\,dx+\\int_{1}^{4}(f(x)-g(x))\\,dx\\)"
+        ].join("\n"),
+        assets: [
+          {
+            id: "ext1-2024-q02-shaded-area-graph",
+            type: "graph",
+            label: "Shaded area between two functions",
+            alt: "Graph of y equals f(x) and y equals g(x) with shaded regions between the curves on intervals from -4 to 4.",
+            path: "/assets/diagrams/ext1-2024-q02-shaded-area-graph.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      4: {
+        promptLatex: [
+          "4 What are the domain and range of the function \\(y=2\\cos^{-1}(2x)+2\\sin^{-1}(2x)\\)?",
+          "A. Domain: \\([-0.5,0.5]\\) and Range: \\(\\{\\pi\\}\\)",
+          "B. Domain: \\([-0.5,0.5]\\) and Range: \\([-\\pi,3\\pi]\\)",
+          "C. Domain: \\([-2,2]\\) and Range: \\(\\{\\pi\\}\\)",
+          "D. Domain: \\([-2,2]\\) and Range: \\([-\\pi,3\\pi]\\)"
+        ].join("\n")
+      },
+      6: {
+        promptLatex: [
+          "6 How many real value(s) of \\(x\\) satisfy the equation \\(|b|=|b\\sin(4x)|\\), where \\(x\\in[0,2\\pi]\\) and \\(b\\) is not zero?",
+          "A. 1",
+          "B. 2",
+          "C. 4",
+          "D. 8"
+        ].join("\n")
+      },
+      10: {
+        promptLatex: [
+          "10 For real numbers \\(a\\) and \\(b\\), where \\(a\\neq0\\) and \\(b\\neq0\\), we can find numbers \\(\\alpha,\\beta,\\gamma,\\delta\\) and \\(R\\) such that \\(a\\cos x+b\\sin x\\) can be written in the following 4 forms:",
+          "\\(R\\sin(x+\\alpha)\\)",
+          "\\(R\\sin(x-\\beta)\\)",
+          "\\(R\\cos(x+\\gamma)\\)",
+          "\\(R\\cos(x-\\delta)\\)",
+          "where \\(R>0\\) and \\(0<\\alpha,\\beta,\\gamma,\\delta<2\\pi\\).",
+          "What is the value of \\(\\alpha+\\beta+\\gamma+\\delta\\)?",
+          "A. \\(0\\)",
+          "B. \\(\\pi\\)",
+          "C. \\(2\\pi\\)",
+          "D. \\(4\\pi\\)"
+        ].join("\n")
+      },
+      11: {
+        promptLatex: [
+          "Question 11 (15 marks) Use the Question 11 Writing Booklet",
+          "(a) Consider the vectors \\(\\mathbf{a}=3\\mathbf{i}+2\\mathbf{j}\\) and \\(\\mathbf{b}=-\\mathbf{i}+4\\mathbf{j}\\).",
+          "(i) Find \\(2\\mathbf{a}-\\mathbf{b}\\).",
+          "(ii) Find \\(\\mathbf{a}\\cdot\\mathbf{b}\\).",
+          "(b) Solve \\(x^2-8x-9\\leq0\\).",
+          "(c) Using the substitution \\(u=x-1\\), find \\(\\int x\\sqrt{x-1}\\,dx\\).",
+          "(d) Solve the differential equation \\(\\frac{dy}{dx}=xy\\), given \\(y>0\\). Express your answer in the form \\(y=e^{f(x)}\\).",
+          "(e) Differentiate the function \\(f(x)=\\arcsin(x^5)\\).",
+          "(f) The volume of a sphere of radius \\(r\\) cm is given by \\(V=\\frac43\\pi r^3\\), and the volume of the sphere is increasing at a rate of \\(10\\ \\mathrm{cm^3\\ s^{-1}}\\). Show that the rate of increase of the radius is given by \\(\\frac{dr}{dt}=\\frac{5}{2\\pi r^2}\\ \\mathrm{cm\\ s^{-1}}\\).",
+          "(g) The region \\(R\\) is bounded by the curves \\(y=\\sin x\\), \\(y=x\\) and the line \\(x=\\frac{\\pi}{2}\\), as shown in the diagram. Find the area of the region \\(R\\)."
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "(a) (i) \\(2\\mathbf{a}-\\mathbf{b}=7\\mathbf{i}\\). (ii) \\(\\mathbf{a}\\cdot\\mathbf{b}=5\\).",
+          "(b) \\((x-9)(x+1)\\leq0\\), so \\(-1\\leq x\\leq9\\).",
+          "(c) With \\(u=x-1\\), \\(\\int x\\sqrt{x-1}\\,dx=\\int(u+1)u^{1/2}\\,du=\\frac25(x-1)^{5/2}+\\frac23(x-1)^{3/2}+C\\).",
+          "(d) \\(\\ln y=\\frac{x^2}{2}+C\\), so \\(y=e^{x^2/2+C}\\).",
+          "(e) \\(f'(x)=\\frac{5x^4}{\\sqrt{1-x^{10}}}\\).",
+          "(f) \\(\\frac{dV}{dt}=4\\pi r^2\\frac{dr}{dt}=10\\), so \\(\\frac{dr}{dt}=\\frac{5}{2\\pi r^2}\\).",
+          "(g) Area \\(=\\int_0^{\\pi/2}(x-\\sin x)\\,dx=\\frac{\\pi^2}{8}-1\\)."
+        ].join("\n"),
+        assets: [
+          {
+            id: "ext1-2024-q11-sine-line-region-graph",
+            type: "graph",
+            label: "Region between y=x and y=sin(x)",
+            alt: "Graph showing the region R bounded by y equals x, y equals sin x, and the vertical line x equals pi over 2.",
+            path: "/assets/diagrams/ext1-2024-q11-sine-line-region-graph.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      12: {
+        promptLatex: [
+          "Question 12 (15 marks) Use the Question 12 Writing Booklet",
+          "(a) The vectors \\(\\begin{pmatrix}a^2\\\\2\\end{pmatrix}\\) and \\(\\begin{pmatrix}a+5\\\\a-4\\end{pmatrix}\\) are perpendicular. Find the possible values of \\(a\\).",
+          "(b) The region \\(R\\) is bounded by the function \\(y=x^3\\), the \\(x\\)-axis and the lines \\(x=1\\) and \\(x=2\\). What is the volume of the solid of revolution obtained when the region \\(R\\) is rotated about the \\(x\\)-axis?",
+          "(c) A charity employs a worker to collect donations. There is a 0.31 chance that when the charity worker talks to someone a donation is made to the charity. Each day the charity worker must talk to exactly 100 people. Use the standard normal distribution and the information on page 13 to approximate the probability that, on a particular day, at least 35% of the people talked to made a donation.",
+          "(d) Use mathematical induction to prove that \\(2^{3n}+13\\) is divisible by 7 for all integers \\(n\\geq1\\).",
+          "(e) The diagram shows the graph of \\(y=\\frac{1}{|x-5|}\\). For what values of \\(x\\) is \\(\\frac{x}{6}\\geq\\frac{1}{|x-5|}\\)?"
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "(a) Perpendicular vectors give \\(a^2(a+5)+2(a-4)=0\\), so \\((a-1)(a+2)(a+4)=0\\). Thus \\(a=-4,-2,1\\).",
+          "(b) \\(V=\\pi\\int_1^2 x^6\\,dx=\\frac{127\\pi}{7}\\).",
+          "(c) If \\(X\\sim\\operatorname{Bin}(100,0.31)\\), use a normal approximation with mean 31 and standard deviation \\(\\sqrt{100(0.31)(0.69)}\\). With continuity correction, \\(P(X\\geq35)\\approx P\\left(Z\\geq\\frac{34.5-31}{\\sqrt{21.39}}\\right)\\approx0.22\\).",
+          "(d) Base case: \\(2^3+13=21\\), divisible by 7. If \\(2^{3k}+13\\) is divisible by 7, then \\(2^{3(k+1)}+13=8(2^{3k}+13)-91\\), also divisible by 7.",
+          "(e) Since the right side is positive, \\(x>0\\). For \\(0<x<5\\), \\(x(5-x)\\geq6\\), giving \\(2\\leq x\\leq3\\). For \\(x>5\\), \\(x(x-5)\\geq6\\), giving \\(x\\geq6\\). Hence \\(x\\in[2,3]\\cup[6,\\infty)\\)."
+        ].join("\n"),
+        assets: [
+          {
+            id: "ext1-2024-q12-reciprocal-absolute-graph",
+            type: "graph",
+            label: "Graph of y=1/|x-5|",
+            alt: "Graph of y equals one over absolute value of x minus five with a vertical asymptote at x equals five and y-intercept one fifth.",
+            path: "/assets/diagrams/ext1-2024-q12-reciprocal-absolute-graph.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      13: {
+        promptLatex: [
+          "Question 13 (16 marks) Use the Question 13 Writing Booklet",
+          "(a) In an experiment, the population of insects, \\(P(t)\\), was modelled by the logistic differential equation \\(\\frac{dP}{dt}=P(2000-P)\\), where \\(t\\) is the time in days after the beginning of the experiment. The diagram shows a direction field for this differential equation, with the point \\(S\\) representing the initial population.",
+          "(i) Explain why the graph of the solution that passes through the point \\(S\\) cannot also pass through the point \\(T\\).",
+          "(ii) On the diagram provided on page 1 of the Question 13 Writing Booklet, clearly sketch the graph of the solution that passes through the point \\(S\\).",
+          "(iii) Find the predicted value of the population, \\(P(t)\\), at which the rate of growth of the population is largest.",
+          "(b) (i) Show that \\(\\cos^4x+\\sin^4x=\\frac{1+\\cos^2 2x}{2}\\).",
+          "(ii) Hence, or otherwise, evaluate \\(\\int_0^{\\pi/4}(\\cos^4x+\\sin^4x)\\,dx\\).",
+          "(c) The vector \\(\\mathbf{a}\\) is \\(\\begin{pmatrix}1\\\\3\\end{pmatrix}\\) and the vector \\(\\mathbf{b}\\) is \\(\\begin{pmatrix}2\\\\-1\\end{pmatrix}\\). The projection of a vector \\(\\mathbf{x}\\) onto \\(\\mathbf{a}\\) is \\(k\\mathbf{a}\\), where \\(k\\) is a real number. The projection of \\(\\mathbf{x}\\) onto \\(\\mathbf{b}\\) is \\(p\\mathbf{b}\\), where \\(p\\) is a real number. Find the vector \\(\\mathbf{x}\\) in terms of \\(k\\) and \\(p\\).",
+          "(d) Using the substitution \\(u=e^x+2e^{-x}\\), and considering \\(u^2\\), find \\(\\int\\frac{e^{3x}-2e^x}{4+8e^{2x}+e^{4x}}\\,dx\\)."
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "(a) The solution through \\(S\\) cannot also pass through \\(T\\) because solutions of the differential equation do not cross and the equilibrium \\(P=2000\\) separates the fields. The growth rate \\(P(2000-P)\\) is maximised at \\(P=1000\\).",
+          "(b) \\(\\cos^4x+\\sin^4x=(\\cos^2x+\\sin^2x)^2-2\\sin^2x\\cos^2x=\\frac{1+\\cos^2 2x}{2}\\). Hence the integral is \\(\\int_0^{\\pi/4}\\left(\\frac34+\\frac14\\cos4x\\right)dx=\\frac{3\\pi}{16}\\).",
+          "(c) Let \\(\\mathbf{x}=\\begin{pmatrix}X\\\\Y\\end{pmatrix}\\). The projection conditions give \\(X+3Y=10k\\) and \\(2X-Y=5p\\), so \\(\\mathbf{x}=\\begin{pmatrix}(10k+15p)/7\\\\(20k-5p)/7\\end{pmatrix}\\).",
+          "(d) Since \\(u=e^x+2e^{-x}\\), \\(du=(e^x-2e^{-x})dx\\) and the integral becomes \\(\\int\\frac{du}{u^2+4}=\\frac12\\tan^{-1}\\left(\\frac{u}{2}\\right)+C\\)."
+        ].join("\n"),
+        assets: [
+          {
+            id: "ext1-2024-q13-direction-field",
+            type: "diagram",
+            label: "Direction field for logistic differential equation",
+            alt: "Direction field for dP over dt equals P times 2000 minus P, with labelled points S and T and equilibrium P equals 2000.",
+            path: "/assets/diagrams/ext1-2024-q13-direction-field.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      14: {
+        promptLatex: [
+          "Question 14 (14 marks) Use the Question 14 Writing Booklet",
+          "(a) Find the domain and range of the function that is the solution to the differential equation \\(\\frac{dy}{dx}=e^{x+y}\\) and whose graph passes through the origin.",
+          "(b) For what values of the constant \\(k\\) would the function \\(f(x)=\\frac{kx}{1+x^2}+\\arctan x\\) have an inverse?",
+          "(c) (i) Explain why the equation \\(\\tan^{-1}(3x)+\\tan^{-1}(10x)=\\theta\\), where \\(-\\pi<\\theta<\\pi\\), has exactly one solution.",
+          "(ii) Solve \\(\\tan^{-1}(3x)+\\tan^{-1}(10x)=\\frac{3\\pi}{4}\\).",
+          "(d) A particle is projected from the origin, with initial speed \\(V\\) at an angle of \\(\\theta\\) to the horizontal. The position vector of the particle, \\(\\mathbf{r}(t)\\), where \\(t\\) is the time after projection and \\(g\\) is the acceleration due to gravity, is given by \\(\\mathbf{r}(t)=\\begin{pmatrix}Vt\\cos\\theta\\\\Vt\\sin\\theta-\\frac{gt^2}{2}\\end{pmatrix}\\). Do NOT prove this. Let \\(D(t)\\) be the distance of the particle from the origin at time \\(t\\), so \\(D(t)=|\\mathbf{r}(t)|\\). Show that for \\(\\theta<\\sin^{-1}\\left(\\sqrt{\\frac89}\\right)\\), the distance \\(D(t)\\) is increasing for all \\(t>0\\)."
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "(a) Solving \\(\\frac{dy}{dx}=e^{x+y}\\) gives \\(e^{-y}=2-e^x\\), so \\(y=-\\ln(2-e^x)\\). The domain is \\((-\\infty,\\ln2)\\) and the range is \\((-\\ln2,\\infty)\\).",
+          "(b) \\(f'(x)=\\frac{(k+1)+(1-k)x^2}{(1+x^2)^2}\\). For \\(f\\) to be one-to-one on its domain, require \\(-1\\leq k\\leq1\\).",
+          "(c) The left side is strictly increasing, so there is exactly one solution for each \\(\\theta\\in(-\\pi,\\pi)\\). Solving \\(\\tan^{-1}(3x)+\\tan^{-1}(10x)=\\frac{3\\pi}{4}\\) gives \\(x=\\frac12\\).",
+          "(d) \\(D(t)^2=V^2t^2-Vg\\sin\\theta\\,t^3+\\frac{g^2t^4}{4}\\). Its derivative is positive for \\(t>0\\) when \\(g^2t^2-3Vg\\sin\\theta\\,t+2V^2>0\\), which follows from \\(\\sin^2\\theta<\\frac89\\)."
+        ].join("\n")
+      }
+    }
   },
   {
     id: "ext2-2024",

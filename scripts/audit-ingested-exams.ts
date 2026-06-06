@@ -120,7 +120,11 @@ function auditMultipleChoice(question: Question, collectedIssues: AuditIssue[]) 
 function auditVisualReferences(question: Question, collectedIssues: AuditIssue[]) {
   const text = question.promptLatex.toLowerCase();
   const visualCue =
-    /\b(graph|diagram|figure|table|scatterplot|scatter plot|box plot|network|tree diagram)\b/.test(text) ||
+    /\b(diagram|figure|table|scatterplot|scatter plot|box plot|network|tree diagram|direction field)\b/.test(
+      text
+    ) ||
+    /\bgraph\b.{0,80}\b(shown|below|provided|sketch|drawn)\b/.test(text) ||
+    /\b(shown|below|provided|sketch|drawn)\b.{0,80}\bgraph\b/.test(text) ||
     /from the graph|shown below|following graphs|following diagram/.test(text);
 
   if (visualCue && question.assets.length === 0) {
@@ -164,6 +168,8 @@ function auditMathNotation(question: Question, collectedIssues: AuditIssue[]) {
   ] as Array<[string, string]>;
 
   for (const [field, value] of fields) {
+    const textOutsideTex = value.replace(/\\\([\s\S]*?\\\)/g, " ").replace(/\\\[[\s\S]*?\\\]/g, " ");
+
     if (/[A-Za-z0-9)]\s*!\s*[RZC]\b/.test(value)) {
       collectedIssues.push({
         severity: "error",
@@ -174,8 +180,8 @@ function auditMathNotation(question: Question, collectedIssues: AuditIssue[]) {
     }
 
     if (
-      /\b(p|q)\b/.test(value) &&
-      /(?:\b(?:sin|cos|tan|arg|modulus|complex|circle)\b|\\(?:sin|cos|tan|arg)\b)/i.test(value)
+      /\b(p|q)\b/.test(textOutsideTex) &&
+      /\b(?:sin|cos|tan|arg|modulus|complex|circle)\b/i.test(textOutsideTex)
     ) {
       collectedIssues.push({
         severity: "warning",
