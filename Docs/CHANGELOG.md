@@ -2,6 +2,10 @@
 
 Newest entries go at the top.
 
+## 0.3.1 - 2026-06-06
+
+- Fixed Vite development styling by wiring Tailwind/PostCSS directly into the Vite CSS pipeline.
+
 ## 0.3.0 - 2026-06-06
 
 - Added a validated 2017-to-2024 Mathematics Advanced syllabus conversion artifact.
