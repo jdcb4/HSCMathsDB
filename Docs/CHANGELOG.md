@@ -2,6 +2,12 @@
 
 Newest entries go at the top.
 
+## 0.18.0 - 2026-06-06
+
+- Reingested the 2025 Mathematics Standard 1, Standard 2, Extension 1, and Extension 2 draft records through the reusable profile importer after removing the previous generated records for those papers.
+- Generated local layout inventories, rendered pages, and crop proposals for the 2025 Standard and Extension source packs to prepare the next reviewed asset/notation pass.
+- Known remaining work: the 2025 ingestion audit still flags missing visual assets and formula-review warnings, so this intermediate checkpoint is not a quality-complete 2025 milestone.
+
 ## 0.17.0 - 2026-06-06
 
 - Promoted the 2024 Mathematics Standard 1 and Standard 2 papers through the reusable Standard/Extension profile importer.
