@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "updatedAt": "2026-06-06",
   "purpose": "Map NSW Stage 6 mathematics syllabus nodes from the 2017 syllabuses to the 2024 11-12 syllabuses for future question categorisation and cross-syllabus lookup.",
-  "sourceSummary": "Built from official NSW Government 2017 syllabus pages and DOCX downloads, and official NSW Curriculum 2024 overview/content pages. Courses without imported exams are stored as conversion-only course mappings until their corpora are added.",
+  "sourceSummary": "Built from official NSW Government 2017 syllabus pages and DOCX downloads, and official NSW Curriculum 2024 overview/content pages. The app corpus includes displayable Advanced, Standard, Extension 1, and Extension 2 syllabus nodes; future courses can still be staged as conversion-only mappings until their corpora are added.",
   "courses": [
     {
       "id": "advanced",

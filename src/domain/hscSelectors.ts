@@ -201,7 +201,7 @@ function getMappedSyllabusNodeIds(
   }
 
   if (targetSyllabusEra === course.newSyllabus.id) {
-    const oldNode = course.oldSyllabus.nodes.find((node) => node.appNodeId === nativeNodeId);
+    const oldNode = course.oldSyllabus.nodes.find((node) => getOldCorpusNodeId(node) === nativeNodeId);
     if (!oldNode) {
       return [];
     }
@@ -213,8 +213,15 @@ function getMappedSyllabusNodeIds(
 
   return course.mappings
     .filter((mapping) => mapping.newNodeId === nativeNodeId)
-    .map((mapping) => course.oldSyllabus.nodes.find((node) => node.id === mapping.oldNodeId)?.appNodeId)
+    .map((mapping) => {
+      const oldNode = course.oldSyllabus.nodes.find((node) => node.id === mapping.oldNodeId);
+      return oldNode ? getOldCorpusNodeId(oldNode) : undefined;
+    })
     .filter((nodeId): nodeId is string => Boolean(nodeId));
+}
+
+function getOldCorpusNodeId(node: SyllabusConversionCourse["oldSyllabus"]["nodes"][number]): string {
+  return node.appNodeId ?? node.id;
 }
 
 function getConversionCourseForEra(

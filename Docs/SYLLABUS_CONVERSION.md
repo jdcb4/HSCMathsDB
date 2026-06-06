@@ -13,7 +13,7 @@ The artifact currently contains course mappings for:
 
 ## Data Model
 
-- `src/data/hsc-math-advanced.json` contains course metadata and displayable syllabus nodes for both `advanced-2017` and `advanced-2024`.
+- `src/data/hsc-math-advanced.json` contains course metadata and displayable syllabus nodes for 2017 and 2024 syllabus eras across Mathematics Advanced, Extension 1, Extension 2, and Standard.
 - Existing questions use `question.syllabusNodeIds` with 2017 node IDs such as `ma-f1`.
 - Future questions may use either 2017 IDs or 2024 IDs such as `new-fa-working-functions`.
 - `src/data/syllabus-conversion.json` stores `courses[]`, where each course has old syllabus nodes, new syllabus nodes, and mapping edges between them.
@@ -31,11 +31,11 @@ For future 2024-tagged questions, selectors reverse that path:
 question.syllabusNodeIds[] -> courses[].mappings[].newNodeId -> courses[].mappings[].oldNodeId -> courses[].oldSyllabus.nodes[].appNodeId
 ```
 
-The Extension 1, Extension 2, and Standard mappings are conversion-only for now. Their 2025 source-pack and paper records are cataloged, but their browseable syllabus nodes and question corpora have not been promoted. Before importing questions for those courses, add displayable `syllabus` nodes whose IDs match the relevant conversion node IDs.
+The Extension 1, Extension 2, and Standard mappings now have corresponding displayable corpus syllabus nodes and 2025 draft question records. Older questions are tagged to their 2017 source-paper era nodes, and selectors use the conversion artifact to display those records under the 2024 syllabus view.
 
 ## UX Rule
 
-The current interface selects one mathematics course and one syllabus era at a time. Advanced shows displayable 2017 and 2024 syllabus views. Extension 1, Extension 2, and Standard expose course-level source intake first; their syllabus browser is intentionally empty until course nodes are promoted.
+The current interface selects one mathematics course and one syllabus era at a time. Advanced, Standard, Extension 1, and Extension 2 show displayable 2017 and 2024 syllabus views.
 
 The app does not duplicate question tags during display. It resolves the selected view programmatically through the conversion map.
 
@@ -54,15 +54,15 @@ Use these domain selectors when working with syllabus-aware UI or imports:
 When adding new questions:
 
 1. Tag the question using the syllabus era of the source paper where possible.
-2. Use 2017 IDs for 2020-2026 HSC Mathematics Advanced papers and 2024 IDs for papers examined under the 2024 syllabus.
+2. Use 2017 IDs for 2020-2026 HSC mathematics papers and 2024 IDs for papers examined under the 2024 syllabus.
 3. Do not manually add duplicate old/new syllabus IDs for the same concept.
 4. Rely on the conversion map for display under the alternate view.
 5. If a question spans topics, store multiple `syllabusNodeIds`; mapped display will deduplicate related nodes.
-6. For Extension 1, Extension 2, and Standard future imports, first add the relevant course's displayable corpus syllabus nodes using conversion node IDs, then tag questions against those IDs.
+6. For future course imports, first add the relevant course's displayable corpus syllabus nodes using conversion node IDs if they are not already present, then tag questions against those IDs.
 
 ## Validation
 
-`src/services/hscDatabase.ts` parses the conversion artifact with Zod. Courses already represented in the loaded corpus are checked strictly against corpus syllabus node IDs. Conversion-only future courses are internally validated but do not need corpus nodes until their exam data is imported.
+`src/services/hscDatabase.ts` parses the conversion artifact with Zod. Courses represented in the loaded corpus are checked strictly against corpus syllabus node IDs. Conversion-only future courses can still be internally validated before their exam data is imported.
 
 Run:
 

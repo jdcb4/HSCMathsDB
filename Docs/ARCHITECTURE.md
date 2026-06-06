@@ -41,7 +41,7 @@ The corpus has two related but distinct layers:
 
 Student-facing worked explanations are planned as a separate validated sidecar keyed by `questionId`, not embedded directly into each question record. See `Docs/LLM_EXPLANATIONS.md`.
 
-The 2017-to-2024 syllabus conversion is a separate validated multi-course artifact in `src/data/syllabus-conversion.json`. The current corpus contains displayable Mathematics Advanced nodes for both syllabus eras, but questions only need native `syllabusNodeIds`; selectors resolve alternate-era display through the conversion map. Extension 1, Extension 2, and Standard now have course/source-pack structure and 2025 paper intake records, but their syllabus mappings remain conversion-only until displayable corpus nodes and question records are promoted. See `Docs/SYLLABUS_CONVERSION.md`.
+The 2017-to-2024 syllabus conversion is a separate validated multi-course artifact in `src/data/syllabus-conversion.json`. The current corpus contains displayable nodes for both syllabus eras across Mathematics Advanced, Standard, Extension 1, and Extension 2, but questions only need native `syllabusNodeIds`; selectors resolve alternate-era display through the conversion map. See `Docs/SYLLABUS_CONVERSION.md`.
 
 Move to SQLite, Postgres, or a search index only when the complete corpus, full-text search, collaborative editing, or ingestion workflow makes JSON unsuitable. Document that migration in `Docs/DECISIONS.md`.
 
@@ -61,6 +61,7 @@ The current import pipeline can:
 - download PDFs into ignored `var/source-assets/`
 - extract raw text into ignored `var/extracted-text/`
 - segment raw text into ignored `var/question-candidates/` review candidates
+- promote 2025 Standard and Extension source text into draft question records through `data:promote-2025-additional-maths`
 - extract embedded PDF raster images into ignored `var/extracted-images/` metadata and files
 - render PDF pages into ignored `var/rendered-pages/`
 - crop rendered pages into ignored `var/diagram-crops/` candidates for diagram review

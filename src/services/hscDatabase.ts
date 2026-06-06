@@ -25,9 +25,7 @@ function validateSyllabusConversionAgainstDatabase(
   const missingNewNodeIds: string[] = [];
 
   conversion.courses.forEach((course) => {
-    const oldAppNodeIds = course.oldSyllabus.nodes
-      .map((node) => node.appNodeId)
-      .filter((nodeId): nodeId is string => Boolean(nodeId));
+    const oldAppNodeIds = course.oldSyllabus.nodes.map((node) => node.appNodeId ?? node.id);
     const newNodeIds = course.newSyllabus.nodes.map((node) => node.id);
     const courseHasCorpusNodes =
       oldAppNodeIds.some((nodeId) => syllabusNodeIds.has(nodeId)) ||

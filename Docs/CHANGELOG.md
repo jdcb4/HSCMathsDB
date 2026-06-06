@@ -2,6 +2,13 @@
 
 Newest entries go at the top.
 
+## 0.9.0 - 2026-06-06
+
+- Promoted 2025 Mathematics Standard 1, Mathematics Standard 2, Mathematics Extension 1, and Mathematics Extension 2 draft question records from official exam and marking-guide PDFs.
+- Added displayable 2017 and 2024 syllabus nodes for Mathematics Standard, Extension 1, and Extension 2 so those courses can be browsed and filtered in the app.
+- Added PDF text extraction and 2025 additional-mathematics promotion scripts for repeatable source processing.
+- Added marking-feedback coverage for the imported 2025 Standard and Extension Section II records.
+
 ## 0.8.0 - 2026-06-06
 
 - Added a GitHub Actions workflow that validates, tests, builds, uploads, and deploys the static Vite app to GitHub Pages.

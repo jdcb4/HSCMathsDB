@@ -248,7 +248,7 @@ describe("HSC selectors", () => {
     expect(getSyllabusNodesForView(database, "advanced-2024")).toHaveLength(14);
   });
 
-  it("loads conversion-only mappings for future mathematics courses", () => {
+  it("loads conversion mappings for supported mathematics courses", () => {
     expect(syllabusConversion.courses.map((course) => course.id)).toEqual([
       "advanced",
       "extension-1",
@@ -290,14 +290,35 @@ describe("HSC selectors", () => {
     expect(sourcePacks.find((pack) => pack.id === "source-std-2025")?.assets).toHaveLength(6);
     expect(sourcePacks.find((pack) => pack.id === "source-ext1-2025")?.assets).toHaveLength(3);
     expect(sourcePacks.find((pack) => pack.id === "source-ext2-2025")?.assets).toHaveLength(3);
+    expect(sourcePacks.find((pack) => pack.id === "source-std-2025")?.importedQuestionCount).toBe(68);
+    expect(sourcePacks.find((pack) => pack.id === "source-ext1-2025")?.importedQuestionCount).toBe(14);
+    expect(sourcePacks.find((pack) => pack.id === "source-ext2-2025")?.importedQuestionCount).toBe(16);
+  });
+
+  it("tracks the promoted 2025 Standard and Extension draft records", () => {
+    expect(database.questions.filter((question) => question.paperId === "std1-2025")).toHaveLength(28);
+    expect(database.questions.filter((question) => question.paperId === "std2-2025")).toHaveLength(40);
+    expect(database.questions.filter((question) => question.paperId === "ext1-2025")).toHaveLength(14);
+    expect(database.questions.filter((question) => question.paperId === "ext2-2025")).toHaveLength(16);
+
+    expect(getSyllabusNodesForView(database, "standard-2017")).toHaveLength(24);
+    expect(getSyllabusNodesForView(database, "standard-2024")).toHaveLength(25);
+    expect(getSyllabusNodesForView(database, "extension-1-2017")).toHaveLength(12);
+    expect(getSyllabusNodesForView(database, "extension-1-2024")).toHaveLength(11);
+    expect(getSyllabusNodesForView(database, "extension-2-2017")).toHaveLength(7);
+    expect(getSyllabusNodesForView(database, "extension-2-2024")).toHaveLength(5);
   });
 
   it("filters question options and source packs by course", () => {
-    expect(getFilterOptionsForCourse(database, "standard").years).toEqual([]);
+    expect(getFilterOptionsForCourse(database, "standard").years).toEqual([2025]);
+    expect(getFilterOptionsForCourse(database, "extension-1").years).toEqual([2025]);
+    expect(getFilterOptionsForCourse(database, "extension-2").years).toEqual([2025]);
     expect(getSourcePackCoverageForCourse(database, "standard").map((pack) => pack.id)).toEqual([
       "source-std-2025"
     ]);
-    expect(queryQuestions(database, { courseId: "standard" })).toEqual([]);
+    expect(queryQuestions(database, { courseId: "standard" })).toHaveLength(68);
+    expect(queryQuestions(database, { courseId: "extension-1" })).toHaveLength(14);
+    expect(queryQuestions(database, { courseId: "extension-2" })).toHaveLength(16);
     expect(queryQuestions(database, { courseId: "advanced", year: 2025 })).toHaveLength(31);
   });
 
@@ -377,8 +398,8 @@ describe("HSC selectors", () => {
     const coverage = getMarkingFeedbackCoverage(database);
 
     expect(coverage.totalQuestions).toBe(database.questions.length);
-    expect(coverage.feedbackQuestionCount).toBe(86);
-    expect(coverage.byYear[2025]).toBe(21);
+    expect(coverage.feedbackQuestionCount).toBe(139);
+    expect(coverage.byYear[2025]).toBe(74);
     expect(coverage.byYear[2024]).toBe(21);
     expect(coverage.byYear[2023]).toBe(22);
     expect(coverage.byYear[2022]).toBe(22);
@@ -402,5 +423,8 @@ describe("HSC selectors", () => {
     expect(preparedPack?.importedQuestionCount).toBe(32);
     expect(startedPack?.expectedQuestionCount).toBe(32);
     expect(startedPack?.importedQuestionCount).toBe(32);
+    expect(sourcePacks.find((pack) => pack.id === "source-std-2025")?.importedQuestionCount).toBe(68);
+    expect(sourcePacks.find((pack) => pack.id === "source-ext1-2025")?.importedQuestionCount).toBe(14);
+    expect(sourcePacks.find((pack) => pack.id === "source-ext2-2025")?.importedQuestionCount).toBe(16);
   });
 });

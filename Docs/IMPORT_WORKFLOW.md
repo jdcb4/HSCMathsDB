@@ -5,13 +5,13 @@ This workflow turns official NSW source packs into verified question records, ma
 ## Current Import Handoff - 2026-06-06
 
 - 2025 Mathematics Advanced: 31/31 official draft records promoted; source-pack asset status is complete.
-- 2025 Mathematics Standard: source pack and separate Standard 1/Standard 2 paper records are cataloged with exam, marking-guide, and Section II feedback PDF links. Question transcription has not started.
-- 2025 Mathematics Extension 1: source pack and paper record are cataloged with exam, marking-guide, and Section II feedback PDF links. Question transcription has not started.
-- 2025 Mathematics Extension 2: source pack and paper record are cataloged with exam, marking-guide, and Section II feedback PDF links. Question transcription has not started.
+- 2025 Mathematics Standard: 68/68 official draft records promoted across Standard 1 and Standard 2 with marking-guide excerpts and Section II marking feedback where extractable. Source text was generated from the official PDFs and promoted through `pnpm run data:promote-2025-additional-maths`.
+- 2025 Mathematics Extension 1: 14/14 official draft records promoted with marking-guide excerpts and Section II marking feedback where extractable. Source text was generated from the official PDFs and promoted through `pnpm run data:promote-2025-additional-maths`.
+- 2025 Mathematics Extension 2: 16/16 official draft records promoted with marking-guide excerpts and Section II marking feedback where extractable. Source text was generated from the official PDFs and promoted through `pnpm run data:promote-2025-additional-maths`.
 - 2024 Mathematics Advanced: 31/31 official draft records promoted; source-pack asset status is complete.
 - 2023 Mathematics Advanced: source PDFs cached, text/candidates extracted, and 44 exam/guide pages rendered under `var/rendered-pages/source-adv-2023/`; Q1-Q32 are promoted as official draft records. Q1, Q2, Q4, Q5, Q6, Q10, Q16, Q18, Q19, Q22, Q23, Q24, Q27, Q28, Q30, and Q32 public diagram assets are already in `public/assets/diagrams/`.
 - 2022 Mathematics Advanced: 32/32 official draft records promoted; source-pack asset status is complete. Source PDFs are cached, text/candidates extracted, embedded-image metadata extracted, and 40 exam pages rendered under `var/rendered-pages/source-adv-2022/`. Q1, Q3, Q7, Q8, Q10, Q11, Q12, Q14, Q16, Q17, Q21, Q24, Q28, Q29, and Q31 public diagram assets are already in `public/assets/diagrams/`.
-- Next import work can start either the 2021 Mathematics Advanced source pack or one of the new 2025 non-Advanced packs. For example, start with `pnpm run data:download-sources -- source-std-2025`, `pnpm run data:download-sources -- source-ext1-2025`, or `pnpm run data:download-sources -- source-ext2-2025`, then text/candidate extraction, page rendering, and Section II promotion. Keep using `pnpm run data:report-coverage -- <source-pack-id>` as the compact progress check before opening large extracted files.
+- Next import work can start with the 2021 Mathematics Advanced source pack or with review/crop passes for the 2025 Standard and Extension draft records. Keep using `pnpm run data:report-coverage -- <source-pack-id>` as the compact progress check before opening large extracted files.
 - Keep promoted source records at `source.transcriptionStatus: "draft"` until an independent review checks prompt text, answers, marks, page refs, syllabus mappings, and assets against the official PDFs.
 
 ## 1. Validate local data
@@ -58,6 +58,14 @@ pnpm run data:extract-text -- source-adv-2025
 ```
 
 Extracted text is written to `var/extracted-text/`, which is ignored by git. This text is raw source material for manual or assisted transcription. It may contain OCR/PDF extraction artefacts and must be reviewed before any question is marked as `verified`.
+
+For the 2025 Mathematics Standard, Extension 1, and Extension 2 source packs, promote the extracted official text into draft app records with:
+
+```powershell
+pnpm run data:promote-2025-additional-maths
+```
+
+This script rewrites the relevant draft records in `src/data/hsc-math-advanced.json`, promotes the required Standard/Extension syllabus nodes, attaches marking-guide excerpts, and imports Section II marking feedback where the official feedback PDFs expose parseable bullet sections.
 
 ## 5. Create question candidates
 

@@ -376,10 +376,9 @@ export function App() {
                 <p className="text-caption font-semibold uppercase text-accent-info">
                   {selectedCourse?.shortTitle ?? "Course"}
                 </p>
-                <h2 className="text-h2 font-semibold">No displayable syllabus nodes yet</h2>
+                <h2 className="text-h2 font-semibold">No displayable syllabus nodes</h2>
                 <p className="mt-2 max-w-3xl text-body text-text-secondary">
-                  This course has source-pack intake records, but its syllabus nodes have not been promoted
-                  into the browseable corpus yet.
+                  No syllabus nodes are available for the selected course and syllabus view.
                 </p>
               </div>
             </div>

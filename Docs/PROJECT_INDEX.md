@@ -4,7 +4,7 @@ The first stop for navigating this project. Keep this file factual: it should de
 
 ## What this project is
 
-GoalCheck HSC is a Vite React TypeScript web app for browsing NSW HSC mathematics question records and source packs by course, year, topic, style, and syllabus content. It currently includes browseable Mathematics Advanced and archived Mathematics 2 Unit question records, plus 2025 source-pack intake records for Mathematics Standard, Mathematics Extension 1, and Mathematics Extension 2. It supports question-to-syllabus and syllabus-to-question navigation using a validated JSON corpus, with toggleable 2017 and 2024 Mathematics Advanced syllabus views resolved through a multi-course conversion map.
+GoalCheck HSC is a Vite React TypeScript web app for browsing NSW HSC mathematics question records and source packs by course, year, topic, style, and syllabus content. It currently includes browseable Mathematics Advanced, Mathematics Standard, Mathematics Extension 1, Mathematics Extension 2, and archived Mathematics 2 Unit question records. It supports question-to-syllabus and syllabus-to-question navigation using a validated JSON corpus, with toggleable 2017 and 2024 syllabus views resolved through a multi-course conversion map.
 
 ## Current setup state
 
@@ -34,32 +34,33 @@ GoalCheck HSC is a Vite React TypeScript web app for browsing NSW HSC mathematic
 
 ## Commands
 
-| Command                                      | Purpose                                                                         |
-| -------------------------------------------- | ------------------------------------------------------------------------------- |
-| `pnpm run dev`                               | Start the development server.                                                   |
-| `pnpm run data:validate`                     | Validate the JSON corpus through the TypeScript Zod schema.                     |
-| `pnpm run data:audit-sources`                | Compare the source catalog with visible official NSW pack titles.               |
-| `pnpm run data:audit-assets`                 | Confirm each cataloged pack exposes exam, marking, and feedback PDFs.           |
-| `pnpm run data:download-sources`             | Download official PDFs into ignored local cache.                                |
-| `pnpm run data:extract-text`                 | Extract raw text from cached PDFs into ignored local output.                    |
-| `pnpm run data:extract-candidates`           | Create ignored raw candidate records from extracted source text.                |
-| `pnpm run data:validate-candidates`          | Validate ignored raw candidate records before review.                           |
-| `pnpm run data:report-candidates`            | Summarize ignored candidate extraction output.                                  |
-| `pnpm run data:extract-images`               | Extract embedded PDF images into ignored local output.                          |
-| `pnpm run data:render-pages`                 | Render cached PDF pages into ignored PNG page images.                           |
-| `pnpm run data:generate-explanation-samples` | Generate ignored LLM explanation comparison samples for manual review.          |
-| `pnpm run data:generate-worked-solutions`    | Generate or refresh primary worked-solution sidecar records through OpenRouter. |
-| `pnpm run data:report-worked-solutions`      | Report worked-solution sidecar coverage and model counts.                       |
-| `pnpm run data:report-renders`               | Summarize ignored page render metadata.                                         |
-| `pnpm run data:crop-render`                  | Crop a rendered PDF page into an ignored diagram candidate.                     |
-| `pnpm run typecheck`                         | TypeScript checking.                                                            |
-| `pnpm run lint`                              | ESLint.                                                                         |
-| `pnpm run format`                            | Prettier check.                                                                 |
-| `pnpm test`                                  | Vitest once.                                                                    |
-| `pnpm run test:watch`                        | Vitest in watch mode.                                                           |
-| `pnpm run build`                             | Production build.                                                               |
-| `pnpm run build:github-pages`                | Production build with the `/HSCMathsDB/` base path required by GitHub Pages.    |
-| `pnpm run verify`                            | Data validation + typecheck + lint + test + build.                              |
+| Command                                       | Purpose                                                                          |
+| --------------------------------------------- | -------------------------------------------------------------------------------- |
+| `pnpm run dev`                                | Start the development server.                                                    |
+| `pnpm run data:validate`                      | Validate the JSON corpus through the TypeScript Zod schema.                      |
+| `pnpm run data:audit-sources`                 | Compare the source catalog with visible official NSW pack titles.                |
+| `pnpm run data:audit-assets`                  | Confirm each cataloged pack exposes exam, marking, and feedback PDFs.            |
+| `pnpm run data:download-sources`              | Download official PDFs into ignored local cache.                                 |
+| `pnpm run data:extract-text`                  | Extract raw text from cached PDFs into ignored local output.                     |
+| `pnpm run data:promote-2025-additional-maths` | Promote the 2025 Standard and Extension source text into draft question records. |
+| `pnpm run data:extract-candidates`            | Create ignored raw candidate records from extracted source text.                 |
+| `pnpm run data:validate-candidates`           | Validate ignored raw candidate records before review.                            |
+| `pnpm run data:report-candidates`             | Summarize ignored candidate extraction output.                                   |
+| `pnpm run data:extract-images`                | Extract embedded PDF images into ignored local output.                           |
+| `pnpm run data:render-pages`                  | Render cached PDF pages into ignored PNG page images.                            |
+| `pnpm run data:generate-explanation-samples`  | Generate ignored LLM explanation comparison samples for manual review.           |
+| `pnpm run data:generate-worked-solutions`     | Generate or refresh primary worked-solution sidecar records through OpenRouter.  |
+| `pnpm run data:report-worked-solutions`       | Report worked-solution sidecar coverage and model counts.                        |
+| `pnpm run data:report-renders`                | Summarize ignored page render metadata.                                          |
+| `pnpm run data:crop-render`                   | Crop a rendered PDF page into an ignored diagram candidate.                      |
+| `pnpm run typecheck`                          | TypeScript checking.                                                             |
+| `pnpm run lint`                               | ESLint.                                                                          |
+| `pnpm run format`                             | Prettier check.                                                                  |
+| `pnpm test`                                   | Vitest once.                                                                     |
+| `pnpm run test:watch`                         | Vitest in watch mode.                                                            |
+| `pnpm run build`                              | Production build.                                                                |
+| `pnpm run build:github-pages`                 | Production build with the `/HSCMathsDB/` base path required by GitHub Pages.     |
+| `pnpm run verify`                             | Data validation + typecheck + lint + test + build.                               |
 
 ## Key docs
 
