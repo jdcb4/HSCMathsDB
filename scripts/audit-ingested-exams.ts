@@ -120,11 +120,13 @@ function auditMultipleChoice(question: Question, collectedIssues: AuditIssue[]) 
 function auditVisualReferences(question: Question, collectedIssues: AuditIssue[]) {
   const text = question.promptLatex.toLowerCase();
   const visualCue =
-    /\b(diagram|figure|table|scatterplot|scatter plot|box plot|network|tree diagram|direction field)\b/.test(
+    /\b(diagram|figure|scatterplot|scatter plot|box plot|network|tree diagram|direction field)\b/.test(
       text
     ) ||
-    /\bgraph\b.{0,80}\b(shown|below|provided|sketch|drawn)\b/.test(text) ||
-    /\b(shown|below|provided|sketch|drawn)\b.{0,80}\bgraph\b/.test(text) ||
+    /\b(?:following|given|provided|standard normal|normal distribution)?\s*table\b/.test(text) ||
+    /\btable\b.{0,80}\b(?:shown|below|provided|values|normal)\b/.test(text) ||
+    /\bgraph\b.{0,80}\b(shown|below|provided|drawn)\b/.test(text) ||
+    /\b(shown|below|provided|drawn)\b.{0,80}\bgraph\b/.test(text) ||
     /from the graph|shown below|following graphs|following diagram/.test(text);
 
   if (visualCue && question.assets.length === 0) {

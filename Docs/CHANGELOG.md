@@ -2,6 +2,13 @@
 
 Newest entries go at the top.
 
+## 0.21.0 - 2026-06-06
+
+- Added source-reviewed prompt and answer overrides for 2025 Mathematics Extension 1 and Extension 2 Section I and audit-flagged Section II questions.
+- Added reviewed exam-derived Extension assets for the Q7 slope field, Q9 vector diagram, Q12 sector, Q13 normal table, Q14 projectile diagram, Q7 unit-circle graph, Q8 velocity/acceleration graph options, Q11 writing-booklet complex plane, and Q16 projectile diagram.
+- Refined the ingestion visual-reference audit to avoid false positives for requested sketches and non-visual round-table wording while preserving checks for shown/provided diagrams and data tables.
+- Brought the combined 2025 Standard and Extension ingestion audit to zero errors and zero warnings across all 98 Standard/Extension questions.
+
 ## 0.20.0 - 2026-06-06
 
 - Added source-reviewed prompt and answer overrides for 2025 Mathematics Standard 2 visual and formula-heavy questions.

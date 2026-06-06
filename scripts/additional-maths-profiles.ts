@@ -1219,7 +1219,227 @@ export const additionalMathsProfiles: ExamIngestionProfile[] = [
       [1018, 1233, 1478, 1769],
       2080,
       1009
-    )
+    ),
+    questionOverrides: {
+      1: {
+        promptLatex: [
+          "1 What is the solution to \\(|2x+3|<5\\)?",
+          "A. \\(-4<x<1\\)",
+          "B. \\(x<-4\\) or \\(x>1\\)",
+          "C. \\(-1<x<4\\)",
+          "D. \\(x<-1\\) or \\(x>4\\)"
+        ].join("\n")
+      },
+      2: {
+        promptLatex: [
+          "2 The projection of \\(\\mathbf{u}\\) onto \\(\\mathbf{v}\\) is given by \\(\\left(\\frac{\\mathbf{u}\\cdot\\mathbf{v}}{|\\mathbf{v}|^2}\\right)\\mathbf{v}\\).",
+          "What is the projection of \\(\\mathbf{u}=\\mathbf{i}+2\\mathbf{j}\\) onto \\(\\mathbf{v}=2\\mathbf{i}-3\\mathbf{j}\\)?",
+          "A. \\(-\\frac45(\\mathbf{i}+2\\mathbf{j})\\)",
+          "B. \\(-\\frac4{13}(2\\mathbf{i}-3\\mathbf{j})\\)",
+          "C. \\(-\\frac4{\\sqrt5}(\\mathbf{i}+2\\mathbf{j})\\)",
+          "D. \\(-\\frac4{\\sqrt{13}}(2\\mathbf{i}-3\\mathbf{j})\\)"
+        ].join("\n")
+      },
+      3: {
+        promptLatex: [
+          "3 Consider the integral \\(\\int_{-5/2}^{5/2}\\left(\\frac{1}{25-x^2}\\right)\\,dx\\).",
+          "The substitution \\(x=5\\sin\\theta\\) is applied.",
+          "Which of the following is obtained?",
+          "A. \\(\\frac15\\int_{-\\pi/6}^{\\pi/6}\\cosec\\theta\\,d\\theta\\)",
+          "B. \\(\\frac15\\int_{-\\pi/6}^{\\pi/6}\\sec\\theta\\,d\\theta\\)",
+          "C. \\(\\frac1{25}\\int_{-\\pi/6}^{\\pi/6}\\cosec^2\\theta\\,d\\theta\\)",
+          "D. \\(\\frac1{25}\\int_{-\\pi/6}^{\\pi/6}\\sec^2\\theta\\,d\\theta\\)"
+        ].join("\n")
+      },
+      4: {
+        promptLatex: [
+          "4 A Bernoulli random variable \\(X\\) has probability distribution \\(P(x)=\\frac{x+1}{3}\\) for \\(x=0,1\\).",
+          "What are the mean and variance of \\(X\\)?",
+          "A. \\(E(X)=\\frac13,\\ \\operatorname{Var}(X)=\\frac29\\)",
+          "B. \\(E(X)=\\frac13,\\ \\operatorname{Var}(X)=\\frac23\\)",
+          "C. \\(E(X)=\\frac23,\\ \\operatorname{Var}(X)=\\frac29\\)",
+          "D. \\(E(X)=\\frac23,\\ \\operatorname{Var}(X)=\\frac23\\)"
+        ].join("\n")
+      },
+      5: {
+        promptLatex: [
+          "5 How many distinct solutions are there to the equation \\(\\cos5x+\\sin x=0\\) for \\(0\\leq x\\leq2\\pi\\)?",
+          "A. 5",
+          "B. 6",
+          "C. 9",
+          "D. 10"
+        ].join("\n")
+      },
+      6: {
+        promptLatex: [
+          "6 Given that \\(a\\) is a non-zero constant, which of the following integrals is equal to zero?",
+          "A. \\(\\int_{-a}^{a}x\\cos^{-1}(x)\\,dx\\)",
+          "B. \\(\\int_{-a}^{a}x^2\\cos^{-1}(x)\\,dx\\)",
+          "C. \\(\\int_{-a}^{a}x\\tan^{-1}(x)\\,dx\\)",
+          "D. \\(\\int_{-a}^{a}x^2\\tan^{-1}(x)\\,dx\\)"
+        ].join("\n")
+      },
+      7: {
+        promptLatex: [
+          "7 A slope field is shown.",
+          "Which of the following could be the differential equation represented by the slope field?",
+          "A. \\(\\frac{dy}{dx}=x^2\\)",
+          "B. \\(\\frac{dy}{dx}=x^2+C,\\ C\\neq0\\)",
+          "C. \\(\\frac{dy}{dx}=x^3\\)",
+          "D. \\(\\frac{dy}{dx}=x^3+C,\\ C\\neq0\\)"
+        ].join("\n"),
+        assets: [
+          examDerivedAsset(
+            "ext1-2025-q07-slope-field",
+            "graph",
+            "Slope field",
+            "Slope field with non-negative slopes that flatten near the y-axis and steepen as absolute x increases."
+          )
+        ]
+      },
+      8: {
+        promptLatex: [
+          "8 Points \\(A\\) and \\(B\\) have non-zero, non-parallel position vectors \\(\\mathbf{a}\\) and \\(\\mathbf{b}\\) respectively.",
+          "Point \\(C\\) has position vector \\(\\mathbf{c}=3\\mathbf{a}-2\\mathbf{b}\\).",
+          "The points \\(A\\), \\(B\\) and \\(C\\) lie on the same line. Which of the following must be true?",
+          "A. Point \\(A\\) always lies between Points \\(B\\) and \\(C\\)",
+          "B. Point \\(B\\) always lies between Points \\(A\\) and \\(C\\)",
+          "C. Point \\(C\\) always lies between Points \\(A\\) and \\(B\\)",
+          "D. The order of the points cannot be determined."
+        ].join("\n")
+      },
+      9: {
+        promptLatex: [
+          "9 The vectors \\(\\mathbf{a}\\), \\(\\mathbf{b}\\) and \\(\\mathbf{c}\\) have magnitudes 3, 5 and 7 respectively.",
+          "Given that \\(\\mathbf{a}+\\mathbf{b}+\\mathbf{c}=\\mathbf{0}\\), what is the size of angle \\(\\theta\\) between \\(\\mathbf{a}\\) and \\(\\mathbf{b}\\)?",
+          "A. \\(\\frac{\\pi}{6}\\)",
+          "B. \\(\\frac{\\pi}{3}\\)",
+          "C. \\(\\frac{2\\pi}{3}\\)",
+          "D. \\(\\frac{5\\pi}{6}\\)"
+        ].join("\n"),
+        assets: [
+          examDerivedAsset(
+            "ext1-2025-q09-vector-angle-diagram",
+            "diagram",
+            "Vector angle diagram",
+            "Diagram of three vectors a, b and c meeting at a point, with angle theta between vectors a and b, marked not to scale."
+          )
+        ]
+      },
+      10: {
+        promptLatex: [
+          "10 For the function \\(f(x)\\), it is known that \\(f(3)=1\\), \\(f'(3)=2\\) and \\(f''(3)=4\\).",
+          "Let \\(g(x)=f^{-1}(x)\\).",
+          "What is the value of \\(g''(1)\\)?",
+          "A. \\(\\frac14\\)",
+          "B. \\(-\\frac14\\)",
+          "C. \\(-\\frac12\\)",
+          "D. \\(-1\\)"
+        ].join("\n")
+      },
+      11: {
+        promptLatex: [
+          "Question 11 (15 marks) Use the Question 11 Writing Booklet",
+          "(a) Find the inverse function, \\(f^{-1}(x)\\), of the function \\(f(x)=1-\\frac{1}{x-2}\\).",
+          "(b) Solve \\(\\sin2\\theta-\\sin\\theta=0\\) for \\(0\\leq\\theta\\leq\\pi\\).",
+          "(c) Find \\(\\int\\sin3x\\cos x\\,dx\\).",
+          "(d) Sketch the graph of \\(y=\\frac13\\cos^{-1}(2x)\\).",
+          "(e) For what value of \\(m\\) is the vector \\(\\begin{pmatrix}1\\\\m\\end{pmatrix}\\) parallel to the vector \\(\\begin{pmatrix}2\\\\6\\end{pmatrix}\\)?",
+          "(f) The roots of \\(2x^3+6x^2+x-1=0\\) are \\(\\alpha\\), \\(\\beta\\) and \\(\\gamma\\). What is the value of \\(\\frac{1}{\\alpha\\beta}+\\frac{1}{\\alpha\\gamma}+\\frac{1}{\\beta\\gamma}\\)?",
+          "(g) Evaluate \\(\\int_{\\pi/6}^{\\pi/3}\\cos^2(3x)\\,dx\\)."
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "(a) \\(f^{-1}(x)=2-\\frac{1}{x-1}\\).",
+          "(b) \\(\\sin\\theta(2\\cos\\theta-1)=0\\), so \\(\\theta=0,\\frac{\\pi}{3},\\pi\\).",
+          "(c) \\(\\int\\sin3x\\cos x\\,dx=-\\frac18\\cos4x-\\frac14\\cos2x+C\\).",
+          "(d) Correct graph with domain \\([-\\frac12,\\frac12]\\) and range \\([0,\\frac{\\pi}{3}]\\).",
+          "(e) \\(m=3\\).",
+          "(f) \\(\\frac{1}{\\alpha\\beta}+\\frac{1}{\\alpha\\gamma}+\\frac{1}{\\beta\\gamma}=\\frac{\\alpha+\\beta+\\gamma}{\\alpha\\beta\\gamma}=-6\\).",
+          "(g) \\(\\int_{\\pi/6}^{\\pi/3}\\cos^2(3x)\\,dx=\\frac{\\pi}{12}\\)."
+        ].join("\n")
+      },
+      12: {
+        promptLatex: [
+          "Question 12 (14 marks) Use the Question 12 Writing Booklet",
+          "(a) The radius, \\(r\\) cm, and angle, \\(\\theta\\) radians, of a sector vary in such a way that its area remains a constant \\(10\\ \\mathrm{cm^2}\\). The angle \\(\\theta\\) is increasing at a constant rate of 2 radians per second. Find the rate at which the radius is changing when the radius is 4 cm.",
+          "(b) Consider the region bounded by the hyperbola \\(y=\\frac1x\\), the \\(y\\)-axis and the lines \\(y=1\\) and \\(y=a\\) for \\(a>1\\). Find the volume of the solid of revolution formed when the region is rotated about the \\(y\\)-axis.",
+          "(c) Prove by mathematical induction that \\(1\\times(1!)+2\\times(2!)+\\cdots+n\\times(n!)=(n+1)!-1\\) for integers \\(n\\geq1\\).",
+          "(d) Find the solution of \\(\\frac{dy}{dx}=\\sqrt{(2-y)(2+y)}\\), given that \\(y=1\\) when \\(x=0\\).",
+          "(e) (i) Express \\(\\sqrt3\\sin x-\\cos x\\) in the form \\(2\\sin(x-\\alpha)\\), where \\(0<\\alpha<\\frac{\\pi}{2}\\).",
+          "(ii) Hence, or otherwise, solve \\(\\sqrt3\\sin x=\\cos x+1\\), where \\(0\\leq x\\leq2\\pi\\)."
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "(a) Since \\(\\frac12r^2\\theta=10\\), \\(\\frac{dr}{dt}=-\\frac{r^3}{20}\\). When \\(r=4\\), \\(\\frac{dr}{dt}=-\\frac{16}{5}\\ \\mathrm{cm\\ s^{-1}}\\).",
+          "(b) \\(V=\\pi\\int_1^a\\frac{1}{y^2}\\,dy=\\pi\\left(1-\\frac1a\\right)\\).",
+          "(c) The base case \\(n=1\\) is true. Assuming the result for \\(n=k\\), adding \\((k+1)(k+1)!\\) gives \\((k+2)!-1\\), so the result holds by induction.",
+          "(d) \\(x=\\sin^{-1}\\left(\\frac{y}{2}\\right)-\\frac{\\pi}{6}\\), equivalently \\(y=2\\sin\\left(x+\\frac{\\pi}{6}\\right)\\).",
+          "(e) (i) \\(\\sqrt3\\sin x-\\cos x=2\\sin\\left(x-\\frac{\\pi}{6}\\right)\\). (ii) \\(x=\\frac{\\pi}{3}\\) or \\(x=\\pi\\)."
+        ].join("\n"),
+        assets: [
+          examDerivedAsset(
+            "ext1-2025-q12-sector-area",
+            "diagram",
+            "Sector with fixed area",
+            "Circular sector labelled with radius r, angle theta, and area equal to 10 square centimetres."
+          )
+        ]
+      },
+      13: {
+        promptLatex: [
+          "Question 13 (16 marks) Use the Question 13 Writing Booklet",
+          "(a) It is given that \\(\\frac{dy}{dx}=\\frac5y\\) and \\(y=-4\\) when \\(x=0\\). Find \\(y\\) as a function of \\(x\\).",
+          "(b) Eight guests are to be seated at a round table. If two of these guests refuse to sit next to each other, how many seating arrangements are possible?",
+          "(c) At time \\(t\\), a particle has position vector \\(\\mathbf{r}(t)=t\\mathbf{i}+\\frac{t^2}{9}\\mathbf{j}\\), velocity vector \\(\\mathbf{v}(t)\\) and acceleration vector \\(\\mathbf{a}(t)\\). Find the time when the angle between \\(\\mathbf{v}(t)\\) and \\(\\mathbf{a}(t)\\) is \\(\\frac{\\pi}{4}\\).",
+          "(d) A bag contains counters, some of which are green. One hundred trials of an experiment are run. In each trial, one counter is selected from the bag at random and its colour noted. The counter is returned to the bag after each trial. Let \\(X\\) be the random variable representing the number of times that a green counter is selected. Given that \\(E(X)=20\\) and \\(P(X\\geq k)=0.0668\\), find the value of \\(k\\). You may use the standard normal approximation and the information on page 13.",
+          "(e) (i) The Pascal's triangle relation can be expressed as \\(\\binom{n}{r}=\\binom{n-1}{r-1}+\\binom{n-1}{r}\\). Do NOT prove this. Show that \\(\\binom{m}{R}=\\binom{m+1}{R+1}-\\binom{m}{R+1}\\).",
+          "(ii) Hence, or otherwise, prove that \\(\\binom{2000}{2000}+\\binom{2001}{2000}+\\binom{2002}{2000}+\\cdots+\\binom{2050}{2000}=\\binom{2051}{2001}\\)."
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "(a) \\(y=-\\sqrt{10x+16}\\).",
+          "(b) Unrestricted arrangements: \\(7!\\). Arrangements with the two guests together: \\(6!\\times2\\). Hence the answer is \\(3600\\).",
+          "(c) \\(\\mathbf{v}(t)=\\mathbf{i}+\\frac{2t}{9}\\mathbf{j}\\) and \\(\\mathbf{a}(t)=\\frac29\\mathbf{j}\\). Equating scalar-product expressions gives \\(t=\\frac92\\).",
+          "(d) With \\(X\\sim\\operatorname{Bin}(100,0.2)\\), use \\(Z=\\frac{X-20}{4}\\). Since \\(P(X\\geq k)=0.0668\\), \\(k=26\\).",
+          "(e) (i) Rearranging Pascal's relation with \\(r=R+1\\) and \\(n=m+1\\) gives the result. (ii) Applying the identity telescopes the sum to \\(\\binom{2051}{2001}\\)."
+        ].join("\n"),
+        assets: [
+          examDerivedAsset(
+            "ext1-2025-q13-normal-table",
+            "table",
+            "Standard normal distribution table",
+            "Table of values for P(Z less than or equal to z) for the standard normal distribution, with z values from 0.0 to 3.2."
+          )
+        ]
+      },
+      14: {
+        promptLatex: [
+          "Question 14 (15 marks) Use the Question 14 Writing Booklet",
+          "(a) Prove that the product of any seven distinct factors of 60 must be a multiple of 60.",
+          "(b) Points \\(A\\) and \\(B\\) lie vertically above the origin. Point \\(A\\) is higher than point \\(B\\) such that \\(\\frac{OA}{OB}=k\\), where \\(k>1\\). A particle is projected horizontally from point \\(A\\) with velocity \\(U\\ \\mathrm{m\\ s^{-1}}\\). After \\(T\\) seconds, another particle is projected horizontally from point \\(B\\) with velocity \\(V\\ \\mathrm{m\\ s^{-1}}\\). The two particles land on the ground in the same place. Show that the ratio \\(\\frac{V}{U}\\) depends only on \\(k\\).",
+          "(c) The hands of an analogue clock are \\(OA\\) and \\(OB\\), where \\(A\\) is \\(\\left(\\sin\\frac{\\pi t}{360},\\cos\\frac{\\pi t}{360}\\right)\\), \\(B\\) is \\(\\left(2\\sin\\frac{\\pi t}{30},2\\cos\\frac{\\pi t}{30}\\right)\\), \\(O\\) is the origin, and \\(t\\geq0\\) is the number of minutes past midnight. Find the values of \\(t\\) when the hands are perpendicular for the first and second time after midnight. Give your answers to 3 decimal places.",
+          "(d) The function \\(f(x)\\) is defined by \\(f(x)=\\cos^{-1}(\\sin x)\\) in the domain \\((0,\\pi)\\). Find \\(f'(x)\\) for those values of \\(x\\) where it is defined.",
+          "(e) It is given that \\(\\tan\\alpha\\), \\(\\tan\\beta\\) and \\(\\tan\\gamma\\) are the three real roots of the polynomial equation \\(x^3+bx^2+cx-1+b+c=0\\), where \\(b\\) and \\(c\\) are real numbers and \\(c\\neq1\\). Find the smallest positive value of \\(\\alpha+\\beta+\\gamma\\)."
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "(a) Pair the factors into six buckets whose products are 60; choosing seven distinct factors forces two from one bucket, so the product is a multiple of 60.",
+          "(b) Let \\(OB=h\\) and \\(OA=kh\\). If the first particle has flight time \\(t\\), then \\(t^2=k(t-T)^2\\), and \\(Ut=V(t-T)\\). Hence \\(\\frac{V}{U}=\\sqrt{k}\\).",
+          "(c) The perpendicular condition reduces to \\(\\cos\\left(\\frac{11\\pi t}{360}\\right)=0\\). The first two times are \\(t\\approx16.364\\) and \\(t\\approx49.091\\) minutes.",
+          "(d) \\(f'(x)=-1\\) for \\(0<x<\\frac{\\pi}{2}\\), \\(f'(x)=1\\) for \\(\\frac{\\pi}{2}<x<\\pi\\), and \\(f'(x)\\) is undefined at \\(x=\\frac{\\pi}{2}\\).",
+          "(e) Using the tangent addition formula and the root relations gives \\(\\tan(\\alpha+\\beta+\\gamma)=-1\\). The smallest positive value is \\(\\frac{3\\pi}{4}\\)."
+        ].join("\n"),
+        assets: [
+          examDerivedAsset(
+            "ext1-2025-q14-projectile-diagram",
+            "diagram",
+            "Two horizontal projectiles",
+            "Coordinate diagram with points A and B on the y-axis, horizontal launch velocities U and V, and dashed projectile paths landing at the same point on the x-axis."
+          )
+        ]
+      }
+    }
   },
   {
     id: "ext2-2025",
@@ -1248,6 +1468,109 @@ export const additionalMathsProfiles: ExamIngestionProfile[] = [
       999
     ),
     questionOverrides: {
+      1: {
+        promptLatex: [
+          "1 Points \\(A\\) and \\(B\\) are \\((-3,1)\\) and \\((1,4)\\) respectively.",
+          "Which of the following is a vector equation of the line \\(AB\\) with parameter \\(\\lambda\\)?",
+          "A. \\(\\begin{pmatrix}x\\\\y\\end{pmatrix}=\\begin{pmatrix}1\\\\4\\end{pmatrix}+\\lambda\\begin{pmatrix}3\\\\4\\end{pmatrix}\\)",
+          "B. \\(\\begin{pmatrix}x\\\\y\\end{pmatrix}=\\begin{pmatrix}3\\\\4\\end{pmatrix}+\\lambda\\begin{pmatrix}1\\\\4\\end{pmatrix}\\)",
+          "C. \\(\\begin{pmatrix}x\\\\y\\end{pmatrix}=\\begin{pmatrix}4\\\\3\\end{pmatrix}+\\lambda\\begin{pmatrix}-3\\\\1\\end{pmatrix}\\)",
+          "D. \\(\\begin{pmatrix}x\\\\y\\end{pmatrix}=\\begin{pmatrix}-3\\\\1\\end{pmatrix}+\\lambda\\begin{pmatrix}4\\\\3\\end{pmatrix}\\)"
+        ].join("\n")
+      },
+      2: {
+        promptLatex: [
+          "2 Consider the statement: \\(\\exists x\\in\\mathbb{Z}\\), such that \\(x^2\\) is odd.",
+          "Which of the following is the negation of the statement?",
+          "A. \\(\\forall x\\in\\mathbb{Z}\\), \\(x^2\\) is odd",
+          "B. \\(\\forall x\\in\\mathbb{Z}\\), \\(x^2\\) is even",
+          "C. \\(x^2\\) is even \\(\\Rightarrow x\\in\\mathbb{Z}\\)",
+          "D. \\(\\exists x\\in\\mathbb{Z}\\), such that \\(x^2\\) is even"
+        ].join("\n")
+      },
+      3: {
+        promptLatex: [
+          "3 What are the square roots of \\(3-4i\\)?",
+          "A. \\(1-2i\\) and \\(-1+2i\\)",
+          "B. \\(1+2i\\) and \\(-1-2i\\)",
+          "C. \\(2-i\\) and \\(-2+i\\)",
+          "D. \\(-2-i\\) and \\(2+i\\)"
+        ].join("\n")
+      },
+      4: {
+        promptLatex: [
+          "4 A particle in simple harmonic motion has speed \\(v\\ \\mathrm{m\\ s^{-1}}\\), given by \\(v^2=-x^2+2x+8\\), where \\(x\\) is the displacement from the origin in metres.",
+          "What is the amplitude of the motion?",
+          "A. 1 m",
+          "B. 3 m",
+          "C. 6 m",
+          "D. 9 m"
+        ].join("\n")
+      },
+      5: {
+        promptLatex: [
+          "5 Consider the statement: If \\(x^2-2x\\geq0\\), then \\(x\\leq0\\).",
+          "Which of the following is the contrapositive of the statement?",
+          "A. If \\(x>0\\), then \\(x^2-2x<0\\).",
+          "B. If \\(x\\leq0\\), then \\(x^2-2x\\geq0\\).",
+          "C. If \\(x^2-2x<0\\), then \\(x<0\\).",
+          "D. If \\(x^2-2x\\leq0\\), then \\(x>0\\)."
+        ].join("\n")
+      },
+      6: {
+        promptLatex: [
+          "6 The complex numbers \\(z\\) and \\(w\\) lie on the unit circle. The modulus of \\(z+w\\) is \\(\\frac32\\).",
+          "What is the modulus of \\(z-w\\)?",
+          "A. \\(\\frac18\\)",
+          "B. \\(\\frac{\\sqrt7}{2}\\)",
+          "C. \\(\\frac32\\)",
+          "D. \\(\\frac74\\)"
+        ].join("\n")
+      },
+      7: {
+        promptLatex: [
+          "7 The complex number \\(z\\) lies on the unit circle.",
+          "What is the range of \\(\\operatorname{Arg}(z-2i)\\)?",
+          "A. \\(\\frac{\\pi}{6}\\leq\\operatorname{Arg}(z-2i)\\leq\\frac{5\\pi}{6}\\)",
+          "B. \\(\\frac{\\pi}{3}\\leq\\operatorname{Arg}(z-2i)\\leq\\frac{2\\pi}{3}\\)",
+          "C. \\(-\\frac{5\\pi}{6}\\leq\\operatorname{Arg}(z-2i)\\leq-\\frac{\\pi}{6}\\)",
+          "D. \\(-\\frac{2\\pi}{3}\\leq\\operatorname{Arg}(z-2i)\\leq-\\frac{\\pi}{3}\\)"
+        ].join("\n"),
+        assets: [
+          examDerivedAsset(
+            "ext2-2025-q07-unit-circle-arg",
+            "graph",
+            "Unit circle on the complex plane",
+            "Complex-plane graph showing the unit circle centred at the origin with x- and y-axes marked from -3 to 3."
+          )
+        ]
+      },
+      8: {
+        promptLatex: [
+          "8 The graph shows the velocity of a particle as a function of its displacement.",
+          "Which of the following graphs best shows the acceleration of the particle as a function of its displacement?",
+          "The four candidate acceleration graphs are shown in the asset."
+        ].join("\n"),
+        assets: [
+          examDerivedAsset(
+            "ext2-2025-q08-velocity-acceleration-graphs",
+            "graph",
+            "Velocity graph and acceleration graph options",
+            "The given velocity-displacement graph and four candidate acceleration-displacement graphs labelled A to D."
+          )
+        ]
+      },
+      9: {
+        promptLatex: [
+          "9 The points \\(U\\), \\(V\\), \\(W\\) and \\(Z\\) represent the complex numbers \\(u\\), \\(v\\), \\(w\\) and \\(z\\) respectively.",
+          "It is given that \\(v+z=u+w\\) and \\(u+kiz=w+kiv\\), where \\(k\\in\\mathbb{R}\\) and \\(k>1\\).",
+          "Which quadrilateral best describes \\(UVWZ\\)?",
+          "A. Parallelogram",
+          "B. Rectangle",
+          "C. Rhombus",
+          "D. Square"
+        ].join("\n")
+      },
       10: {
         promptLatex: [
           "10 Which of the following gives the same curve as \\(\\begin{pmatrix}\\cos(t)\\\\-t\\\\\\sin(t)\\end{pmatrix}\\) for \\(t \\in \\mathbb{R}\\)?",
@@ -1256,6 +1579,127 @@ export const additionalMathsProfiles: ExamIngestionProfile[] = [
           "C. \\(\\begin{pmatrix}\\cos(t^2)\\\\-t^2\\\\\\sin(t^2)\\end{pmatrix}\\)",
           "D. \\(\\begin{pmatrix}\\cos\\left(2t+\\frac{\\pi}{2}\\right)\\\\2t+\\frac{\\pi}{2}\\\\-\\sin\\left(2t+\\frac{\\pi}{2}\\right)\\end{pmatrix}\\)"
         ].join("\n")
+      },
+      11: {
+        promptLatex: [
+          "Question 11 (14 marks) Use the Question 11 Writing Booklet",
+          "(a) The location of the complex number \\(z\\) is shown on the diagram on page 1 of the Question 11 Writing Booklet. On the diagram provided in the writing booklet, indicate the locations of \\(\\overline{z}\\) and \\(i\\overline{z}\\).",
+          "(b) The complex numbers \\(w\\) and \\(z\\) are given by \\(w=2e^{i\\pi/6}\\) and \\(z=3e^{i\\pi/6}\\). Find the modulus and argument of \\(wz\\).",
+          "(c) The complex number \\(z\\) is given by \\(x+iy\\). Find, in Cartesian form: (i) \\(z^2\\); (ii) \\(\\frac1z\\).",
+          "(d) (i) Force \\(\\mathbf{F}_1\\) has magnitude 12 newtons in the direction of vector \\(2\\mathbf{i}-2\\mathbf{j}+\\mathbf{k}\\). Show that \\(\\mathbf{F}_1=8\\mathbf{i}-8\\mathbf{j}+4\\mathbf{k}\\).",
+          "(ii) Force \\(\\mathbf{F}_1\\) from part (i) and a second force, \\(\\mathbf{F}_2=-6\\mathbf{i}+12\\mathbf{j}+4\\mathbf{k}\\), both act upon a particle. Show that the resultant force acting on the particle is given by \\(\\mathbf{F}_3=2\\mathbf{i}+4\\mathbf{j}+8\\mathbf{k}\\).",
+          "(iii) Calculate \\(\\mathbf{F}_3\\cdot\\mathbf{d}\\), where \\(\\mathbf{F}_3\\) is the resultant force from part (ii) and \\(\\mathbf{d}=\\mathbf{i}+\\mathbf{j}+2\\mathbf{k}\\).",
+          "(e) Prove by contradiction that \\(\\sqrt3+\\sqrt5>\\sqrt{11}\\).",
+          "(f) Find \\(\\int\\frac{5}{7-x^2-6x}\\,dx\\)."
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "(a) \\(\\overline{z}\\) is reflected in the real axis, and \\(i\\overline{z}\\) is obtained by rotating \\(\\overline{z}\\) through \\(\\frac{\\pi}{2}\\).",
+          "(b) \\(wz=6e^{i\\pi/3}\\), so the modulus is 6 and the argument is \\(\\frac{\\pi}{3}\\).",
+          "(c) (i) \\(z^2=(x^2-y^2)+2xyi\\). (ii) \\(\\frac1z=\\frac{x}{x^2+y^2}-\\frac{y}{x^2+y^2}i\\).",
+          "(d) (i) \\(|2\\mathbf{i}-2\\mathbf{j}+\\mathbf{k}|=3\\), so \\(\\mathbf{F}_1=4(2\\mathbf{i}-2\\mathbf{j}+\\mathbf{k})\\). (ii) \\(\\mathbf{F}_3=\\mathbf{F}_1+\\mathbf{F}_2=2\\mathbf{i}+4\\mathbf{j}+8\\mathbf{k}\\). (iii) \\(\\mathbf{F}_3\\cdot\\mathbf{d}=22\\).",
+          "(e) Assuming \\(\\sqrt3+\\sqrt5\\leq\\sqrt{11}\\) leads after squaring to \\(60\\leq9\\), a contradiction.",
+          "(f) \\(\\int\\frac{5}{7-x^2-6x}\\,dx=5\\sin^{-1}\\left(\\frac{x+3}{4}\\right)+C\\)."
+        ].join("\n"),
+        assets: [
+          examDerivedAsset(
+            "ext2-2025-q11-writing-booklet-complex-plane",
+            "graph",
+            "Writing booklet complex-plane diagram",
+            "Complex-plane axes with the point z in the first quadrant, used for plotting the conjugate of z and i times the conjugate of z."
+          )
+        ]
+      },
+      12: {
+        promptLatex: [
+          "Question 12 (16 marks) Use the Question 12 Writing Booklet",
+          "(a) Using integration by parts, evaluate \\(\\int_0^{\\pi/2}x\\sin x\\,dx\\).",
+          "(b) Given the function \\(y=xe^{2x}\\), use mathematical induction to prove that \\(\\frac{d^ny}{dx^n}=\\left(2^nx+n2^{n-1}\\right)e^{2x}\\) for all positive integers \\(n\\), where \\(\\frac{d^ny}{dx^n}\\) is the \\(n\\)th derivative of \\(y\\) and \\(\\frac{d}{dx}\\left(\\frac{d^ny}{dx^n}\\right)=\\frac{d^{n+1}y}{dx^{n+1}}\\).",
+          "(c) Sketch the region of the complex plane defined by \\(|z+5-i|>|z-3+3i|\\).",
+          "(d) Find \\(\\int\\frac{x^2-2x+9}{(4-x)(x^2+1)}\\,dx\\).",
+          "(e) A particle of mass \\(m\\) kg moves along a horizontal line with an initial velocity of \\(V_0\\ \\mathrm{m\\ s^{-1}}\\). The motion of the particle is resisted by a constant force of \\(mk\\) newtons and a variable force of \\(mv^2\\) newtons, where \\(k\\) is a positive constant and \\(v\\ \\mathrm{m\\ s^{-1}}\\) is the velocity of the particle at \\(t\\) seconds. Show that the distance travelled when the particle is brought to rest is \\(\\frac12\\ln\\left(\\frac{k+V_0^2}{k}\\right)\\) metres."
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "(a) \\(\\int_0^{\\pi/2}x\\sin x\\,dx=1\\).",
+          "(b) The base case \\(n=1\\) is true. Differentiating the assumed \\(n=k\\) form gives \\(\\frac{d^{k+1}y}{dx^{k+1}}=(2^{k+1}x+(k+1)2^k)e^{2x}\\), completing induction.",
+          "(c) The locus is the half-plane closer to \\(3-3i\\) than to \\(-5+i\\).",
+          "(d) \\(-\\ln|4-x|+2\\tan^{-1}x+C\\).",
+          "(e) From \\(v\\frac{dv}{dx}=-(k+v^2)\\), integrate from \\(v=V_0\\) to \\(v=0\\) to obtain \\(x=\\frac12\\ln\\left(\\frac{k+V_0^2}{k}\\right)\\)."
+        ].join("\n")
+      },
+      13: {
+        promptLatex: [
+          "Question 13 (15 marks) Use the Question 13 Writing Booklet",
+          "(a) It is given that \\(A=\\int_2^4\\frac{e^x}{x-1}\\,dx\\). Show that \\(\\int_{m-4}^{m-2}\\frac{e^{-x}}{x-m+1}\\,dx=kA\\), where \\(k\\) and \\(m\\) are constants.",
+          "(b) Let \\(\\mathbf{c}=x\\mathbf{i}+y\\mathbf{j}+z\\mathbf{k}\\) be a unit vector that is perpendicular to both \\(\\mathbf{a}=2\\mathbf{i}+4\\mathbf{j}-3\\mathbf{k}\\) and \\(\\mathbf{b}=-4\\mathbf{i}-5\\mathbf{j}+3\\mathbf{k}\\). Find all possible vectors \\(\\mathbf{c}\\).",
+          "(c) (i) For positive real numbers \\(a\\) and \\(b\\), prove that \\(\\frac{a+b}{2}\\geq\\sqrt{ab}\\).",
+          "(ii) Hence, or otherwise, show that \\(\\frac{2n+1}{2n+2}<\\sqrt{\\frac{2n+1}{2n+3}}\\) for any integer \\(n\\geq0\\).",
+          "(d) Evaluate \\(\\int_0^{\\pi/2}\\frac{u}{1+\\sin u+\\cos u}\\,du\\), by first using the substitution \\(u=\\frac{\\pi}{2}-x\\)."
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "(a) With \\(u=m-x\\), the second integral becomes \\(-e^{-m}\\int_2^4\\frac{e^u}{u-1}\\,du\\), so \\(k=-e^{-m}\\).",
+          "(b) Solving \\(\\mathbf{a}\\cdot\\mathbf{c}=0\\), \\(\\mathbf{b}\\cdot\\mathbf{c}=0\\) and \\(|\\mathbf{c}|=1\\) gives \\(\\mathbf{c}=\\pm\\left(\\frac13\\mathbf{i}-\\frac23\\mathbf{j}-\\frac23\\mathbf{k}\\right)\\).",
+          "(c) (i) From \\((\\sqrt{a}-\\sqrt{b})^2\\geq0\\), \\(a+b\\geq2\\sqrt{ab}\\). (ii) Apply the result with \\(a=2n+1\\) and \\(b=2n+3\\).",
+          "(d) Using the given substitution and then \\(t=\\tan\\frac{x}{2}\\) gives \\(\\int_0^{\\pi/2}\\frac{u}{1+\\sin u+\\cos u}\\,du=\\frac{\\pi}{4}\\ln2\\)."
+        ].join("\n")
+      },
+      14: {
+        promptLatex: [
+          "Question 14 (15 marks) Use the Question 14 Writing Booklet",
+          "(a) Let \\(I_n=\\int_{\\pi/4}^{\\pi/2}\\cot^{2n}\\theta\\,d\\theta\\) for integers \\(n\\geq0\\).",
+          "(i) Show that \\(I_n=\\frac{1}{2n-1}-I_{n-1}\\) for \\(n>0\\), given that \\(\\frac{d}{d\\theta}\\cot\\theta=-\\cosec^2\\theta\\).",
+          "(ii) Hence, or otherwise, calculate \\(I_2\\).",
+          "(b) The acceleration of a particle is given by \\(\\ddot{x}=32x(x^2+3)\\), where \\(x\\) is the displacement of the particle from a fixed point \\(O\\) after \\(t\\) seconds, in metres. Initially the particle is at \\(O\\) and has a velocity of \\(12\\ \\mathrm{m\\ s^{-1}}\\) in the negative direction. (i) Show that the velocity of the particle is given by \\(v=-4(x^2+3)\\). (ii) Find the time taken for the particle to travel 3 metres from the origin.",
+          "(c) Let \\(w\\) be a complex number such that \\(1+w+w^2+\\cdots+w^6=0\\). (i) Show that \\(w\\) is a 7th root of unity. The complex number \\(\\alpha=w+w^2+w^4\\) is a root of the equation \\(x^2+bx+c=0\\), where \\(b\\) and \\(c\\) are real and \\(\\alpha\\) is not real. (ii) Find the other root of \\(x^2+bx+c=0\\) in terms of positive powers of \\(w\\). (iii) Find the numerical value of \\(c\\).",
+          "(d) Positive real numbers \\(a\\), \\(b\\), \\(c\\) and \\(d\\) are chosen such that \\(\\frac1a\\), \\(\\frac1b\\), \\(\\frac1c\\) and \\(\\frac1d\\) are consecutive terms in an arithmetic sequence with common difference \\(k\\), where \\(k\\in\\mathbb{R}\\) and \\(k>0\\). Show that \\(b+c<a+d\\)."
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "(a) (i) Writing \\(\\cot^{2n}\\theta=\\cot^{2n-2}\\theta(\\cosec^2\\theta-1)\\) gives \\(I_n=\\frac{1}{2n-1}-I_{n-1}\\). (ii) \\(I_2=\\frac{\\pi}{4}-\\frac23\\).",
+          "(b) (i) Integrating \\(v\\frac{dv}{dx}=32x(x^2+3)\\) and using \\(v(0)=-12\\) gives \\(v=-4(x^2+3)\\). (ii) The time is \\(\\frac{\\pi}{12\\sqrt3}\\) seconds.",
+          "(c) (i) Multiplying the finite series by \\(1-w\\) gives \\(w^7=1\\). (ii) The other root is \\(w^3+w^5+w^6\\). (iii) \\(c=2\\).",
+          "(d) Using \\(b=\\frac{a}{1+ak}\\), \\(c=\\frac{a}{1+2ak}\\), and \\(d=\\frac{a}{1+3ak}\\), compare \\(a+d\\) with \\(b+c\\) to obtain \\(b+c<a+d\\)."
+        ].join("\n")
+      },
+      15: {
+        promptLatex: [
+          "Question 15 (15 marks) Use the Question 15 Writing Booklet",
+          "(a) The adjacent sides of a parallelogram are represented by the vectors \\(\\mathbf{a}=4\\mathbf{i}+3\\mathbf{j}-\\mathbf{k}\\) and \\(\\mathbf{b}=2\\mathbf{i}-\\mathbf{j}+3\\mathbf{k}\\). Show that the area of the parallelogram is \\(6\\sqrt{10}\\) square units.",
+          "(b) A particle moves in simple harmonic motion about the origin with amplitude \\(A\\), and it completes two cycles per second. When it is \\(\\frac14\\) metres from the origin, its speed is half its maximum speed. Find the maximum positive acceleration of the particle during its motion.",
+          "(c) (i) Show that \\(\\frac{1+\\cos\\theta+i\\sin\\theta}{1-\\cos\\theta-i\\sin\\theta}=i\\cot\\frac{\\theta}{2}\\).",
+          "(ii) Use De Moivre's theorem to show that the sixth roots of \\(-1\\) are given by \\(\\cos\\frac{(2k+1)\\pi}{6}+i\\sin\\frac{(2k+1)\\pi}{6}\\) for \\(k=0,1,2,3,4,5\\).",
+          "(iii) Hence, or otherwise, show the solutions to \\(\\left(\\frac{z-6}{z+1}\\right)^6=-1\\) are \\(z=i\\cot\\frac{\\pi}{12}, i\\cot\\frac{3\\pi}{12}, i\\cot\\frac{5\\pi}{12}, i\\cot\\frac{7\\pi}{12}, i\\cot\\frac{9\\pi}{12}\\), and \\(i\\cot\\frac{11\\pi}{12}\\)."
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "(a) Using base \\(|\\mathbf{b}|=\\sqrt{14}\\) and perpendicular height \\(\\sqrt{\\frac{180}{7}}\\), the area is \\(6\\sqrt{10}\\).",
+          "(b) The period is \\(\\frac12\\), so angular speed is \\(4\\pi\\). The amplitude is \\(\\frac{1}{2\\sqrt3}\\), giving maximum positive acceleration \\(\\frac{8\\pi^2}{\\sqrt3}\\ \\mathrm{m\\ s^{-2}}\\).",
+          "(c) (i) Rationalising the denominator and using double-angle identities gives \\(i\\cot\\frac{\\theta}{2}\\). (ii) The sixth roots follow from \\(6\\theta=(2k+1)\\pi\\). (iii) Put \\(\\frac{z-6}{z+1}\\) equal to each sixth root and use part (i)."
+        ].join("\n")
+      },
+      16: {
+        promptLatex: [
+          "Question 16 (15 marks) Use the Question 16 Writing Booklet",
+          "(a) Consider the equation \\(z^n\\cos(n\\theta)+z^{n-1}\\cos((n-1)\\theta)+z^{n-2}\\cos((n-2)\\theta)+\\cdots+z\\cos\\theta=1\\), where \\(z\\in\\mathbb{C}\\), \\(\\theta\\in\\mathbb{R}\\), and \\(n\\) is a positive integer. Using a proof by contradiction and the triangle inequality, or otherwise, prove that all the solutions to the equation lie outside the circle \\(|z|=\\frac12\\) on the complex plane.",
+          "(b) A particle of mass 1 kg is projected from the origin with a speed of \\(50\\ \\mathrm{m\\ s^{-1}}\\), at an angle of \\(\\theta\\) below the horizontal into a resistive medium. The position of the particle \\(t\\) seconds after projection is \\((x,y)\\), and the velocity of the particle at that time is \\(\\mathbf{v}=\\begin{pmatrix}\\dot{x}\\\\\\dot{y}\\end{pmatrix}\\). The resistive force, \\(\\mathbf{R}\\), is proportional to the velocity of the particle, so that \\(\\mathbf{R}=-k\\mathbf{v}\\), where \\(k\\) is a positive constant. Taking the acceleration due to gravity to be \\(10\\ \\mathrm{m\\ s^{-2}}\\), and the upwards vertical direction to be positive, the acceleration of the particle at time \\(t\\) is given by \\(\\mathbf{a}=\\begin{pmatrix}-k\\dot{x}\\\\-k\\dot{y}-10\\end{pmatrix}\\). Do NOT prove this. Derive the Cartesian equation of the motion of the particle, given \\(\\sin\\theta=\\frac35\\).",
+          "(c) Consider the point \\(B\\) with three-dimensional position vector \\(\\mathbf{b}\\) and the line \\(C:\\mathbf{a}+\\lambda\\mathbf{d}\\), where \\(\\mathbf{a}\\) and \\(\\mathbf{d}\\) are three-dimensional vectors, \\(|\\mathbf{d}|=1\\) and \\(\\lambda\\) is a parameter. Let \\(f(\\lambda)\\) be the distance between a point on the line \\(C\\) and the point \\(B\\). (i) Find \\(\\lambda_0\\), the value of \\(\\lambda\\) that minimises \\(f\\), in terms of \\(\\mathbf{a}\\), \\(\\mathbf{b}\\) and \\(\\mathbf{d}\\). (ii) Let \\(P\\) be the point with position vector \\(\\mathbf{a}+\\lambda_0\\mathbf{d}\\). Show that \\(PB\\) is perpendicular to the direction of the line \\(C\\). (iii) Hence, or otherwise, find the shortest distance between the line \\(C\\) and the sphere of radius 1 unit, centred at the origin \\(O\\), in terms of \\(\\mathbf{d}\\) and \\(\\mathbf{a}\\). You may assume that if \\(B\\) is the point on the sphere closest to \\(C\\), then \\(O\\), \\(B\\) and \\(P\\) are a straight line."
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "(a) If \\(|w|\\leq\\frac12\\), then the triangle inequality gives \\(1\\leq |w|^n+|w|^{n-1}+\\cdots+|w|<1\\), a contradiction. Hence all solutions lie outside \\(|z|=\\frac12\\).",
+          "(b) Horizontal motion gives \\(x=\\frac{40}{k}(1-e^{-kt})\\). Vertical motion and \\(\\sin\\theta=\\frac35\\) give \\(y=\\frac{10(3k-1)}{k^2}(e^{-kt}-1)-\\frac{10t}{k}\\). Eliminating \\(t\\) gives \\(y=\\frac{10(1-3k)x}{40k}+\\frac{10}{k^2}\\ln\\left(\\frac{40}{40-kx}\\right)\\).",
+          "(c) (i) \\(\\lambda_0=(\\mathbf{b}-\\mathbf{a})\\cdot\\mathbf{d}\\). (ii) \\(\\overrightarrow{PB}\\cdot\\mathbf{d}=0\\). (iii) The shortest distance is \\(\\sqrt{|\\mathbf{a}|^2-(\\mathbf{a}\\cdot\\mathbf{d})^2}-1\\), or 0 if the line intersects the sphere."
+        ].join("\n"),
+        assets: [
+          examDerivedAsset(
+            "ext2-2025-q16-projectile-diagram",
+            "diagram",
+            "Projectile below horizontal",
+            "Coordinate diagram showing a particle projected from the origin at angle theta below the positive x-axis with speed 50 metres per second."
+          )
+        ]
       }
     }
   },
