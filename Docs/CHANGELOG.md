@@ -2,6 +2,12 @@
 
 Newest entries go at the top.
 
+## 0.17.0 - 2026-06-06
+
+- Promoted the 2024 Mathematics Standard 1 and Standard 2 papers through the reusable Standard/Extension profile importer.
+- Added reviewed exam-derived visual assets and source-reviewed overrides for the 2024 Standard questions flagged by the ingestion audit.
+- Brought the 2024 Standard ingestion audit to zero errors and zero warnings across all 73 questions.
+
 ## 0.16.0 - 2026-06-06
 
 - Added a PyMuPDF layout-inventory command that records exam-paper text blocks, embedded image blocks, vector drawing bounds, and drawing clusters into ignored review metadata.

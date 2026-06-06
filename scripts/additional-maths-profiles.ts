@@ -57,6 +57,435 @@ export const additionalMathsProfiles: ExamIngestionProfile[] = [
     )
   },
   {
+    id: "std1-2024",
+    paperId: "std1-2024",
+    sourcePackId: "source-std-2024",
+    courseId: "standard",
+    courseName: "Mathematics Standard 1",
+    year: 2024,
+    sourceRef: "2024 HSC Mathematics Standard 1 marking feedback",
+    examTextPath: "var/extracted-text/source-std-2024/source-std-2024-exam-paper-2024-hsc-maths-std-1.txt",
+    markingGuideTextPath:
+      "var/extracted-text/source-std-2024/source-std-2024-marking-guide-2024-hsc-maths-std-1-mg.txt",
+    markingFeedbackTextPath:
+      "var/extracted-text/source-std-2024/source-std-2024-marking-feedback-2024-hsc-mathematics-std1-marking-feedback.txt",
+    examPackUrl:
+      "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+    expectedQuestionCount: 32,
+    sectionIQuestionCount: 10,
+    boundaries: makeBoundaries(
+      10,
+      [53, 70, 113, 151, 171, 188, 218, 247, 268, 300],
+      range(11, 32),
+      [
+        425, 465, 525, 572, 635, 739, 774, 847, 891, 947, 1039, 1072, 1158, 1309, 1388, 1435, 1473, 1513,
+        1559, 1629, 1709, 1751
+      ],
+      1816,
+      343
+    ),
+    questionOverrides: {
+      6: {
+        promptLatex: [
+          "6 The map shows regions within a country.",
+          "A network diagram is to be drawn to represent this map. Vertices will be used to indicate each region and edges will be used to represent a border shared between two regions.",
+          "How many edges will there be in the network diagram?",
+          "A. 8",
+          "B. 7",
+          "C. 6",
+          "D. 5"
+        ].join("\n"),
+        assets: [
+          {
+            id: "std1-2024-q06-region-map",
+            type: "diagram",
+            label: "Country region map",
+            alt: "Map with six regions labelled Forest, Swamp, Mountains, Desert, Coast, and Woods, with shared borders between regions.",
+            path: "/assets/diagrams/std1-2024-q06-region-map.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      7: {
+        promptLatex: [
+          "7 Consider the diagram shown.",
+          "Which of the following is the correct expression for the length of \\(x\\)?",
+          "A. \\(20\\cos40^\\circ\\)",
+          "B. \\(20\\sin40^\\circ\\)",
+          "C. \\(\\frac{20}{\\cos40^\\circ}\\)",
+          "D. \\(\\frac{20}{\\sin40^\\circ}\\)"
+        ].join("\n"),
+        assets: [
+          {
+            id: "std1-2024-q07-right-triangle",
+            type: "diagram",
+            label: "Right triangle with side x",
+            alt: "Right triangle with hypotenuse 20, a 40 degree angle at the base, and side x opposite the right angle.",
+            path: "/assets/diagrams/std1-2024-q07-right-triangle.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      12: {
+        promptLatex:
+          "Question 12\n(2 marks) The scatterplot shows a bivariate dataset. Describe the bivariate dataset in terms of strength and direction.",
+        assets: [
+          {
+            id: "std1-2024-q12-scatterplot",
+            type: "graph",
+            label: "Bivariate scatterplot",
+            alt: "Scatterplot with a strong negative association between the two variables.",
+            path: "/assets/diagrams/std1-2024-q12-scatterplot.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      14: {
+        promptLatex: [
+          "Question 14\n(4 marks) A hotel is located 186 m north and 50 m west of a train station.",
+          "(a) What is the straight line distance from the hotel to the train station? Round your answer to the nearest metre.",
+          "(b) What is the bearing of the hotel from the train station? Round your answer to the nearest degree."
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "(a) By Pythagoras' theorem, \\(x^2=186^2+50^2\\), so \\(x=192.603\\ldots\\approx193\\) m.",
+          "(b) \\(\\tan\\theta=\\frac{50}{186}\\), so \\(\\theta\\approx15^\\circ03'\\). The bearing is \\(360^\\circ-15^\\circ03'=344^\\circ57'\\approx345^\\circ\\)."
+        ].join("\n"),
+        assets: [
+          {
+            id: "std1-2024-q14-hotel-bearing-diagram",
+            type: "diagram",
+            label: "Hotel and train station bearing diagram",
+            alt: "Right-angled diagram showing a hotel 186 metres north and 50 metres west of a train station.",
+            path: "/assets/diagrams/std1-2024-q14-hotel-bearing-diagram.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      15: {
+        promptLatex: [
+          "Question 15\n(4 marks) A network of towns and the distances between them in kilometres is shown.",
+          "(a) What is the shortest path from \\(T\\) to \\(H\\)?",
+          "(b) A truck driver needs to travel from \\(Y\\) to \\(G\\) but knows that the road from \\(C\\) to \\(G\\) is closed. What is the length of the shortest path the truck driver can take from \\(Y\\) to \\(G\\) after the road closure?"
+        ].join("\n"),
+        assets: [
+          {
+            id: "std1-2024-q15-town-network",
+            type: "diagram",
+            label: "Town network with distances",
+            alt: "Weighted network of towns J, T, Y, W, C, G, M, and H with distances labelled on each road.",
+            path: "/assets/diagrams/std1-2024-q15-town-network.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      18: {
+        promptLatex:
+          "Question 18\n(3 marks) A garden is made up of a right-angled triangle and a semicircle as shown. What is the area of the garden, correct to the nearest square metre?",
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "The triangle has base \\(6\\) m and height \\(7\\) m, so \\(A_{\\text{triangle}}=\\frac12\\times7\\times6=21\\).",
+          "The semicircle has radius \\(3\\) m, so \\(A_{\\text{semicircle}}=\\frac12\\pi(3)^2=14.137\\ldots\\).",
+          "The total area is \\(35.137\\ldots\\), so the area is \\(35\\text{ m}^2\\), correct to the nearest square metre."
+        ].join("\n"),
+        assets: [
+          {
+            id: "std1-2024-q18-garden-area-diagram",
+            type: "diagram",
+            label: "Garden triangle and semicircle",
+            alt: "Composite garden shape made from a right-angled triangle and a semicircle, with dimensions 7 metres and 3 metres shown.",
+            path: "/assets/diagrams/std1-2024-q18-garden-area-diagram.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      20: {
+        promptLatex: [
+          "Question 20\n(3 marks) The diagram shows a network with weighted edges.",
+          "(a) Draw a minimum spanning tree for this network and determine its weight.",
+          "(b) Is it possible to find another spanning tree with the same weight? Give a reason for your answer."
+        ].join("\n"),
+        assets: [
+          {
+            id: "std1-2024-q20-weighted-network",
+            type: "diagram",
+            label: "Weighted network",
+            alt: "Weighted network with vertices A to J and edges labelled with weights used for a minimum spanning tree question.",
+            path: "/assets/diagrams/std1-2024-q20-weighted-network.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      23: {
+        promptLatex: [
+          "Question 23\n(7 marks) Carrie is organising a fundraiser. The cost of hiring the venue and the band is $2500. The cost of providing meals is $50 per person.",
+          "(a) Complete the table of values to show the total cost of the fundraiser.",
+          "(b) Carrie decides that tickets should be sold at $70 per person. The graph shows the expected revenue at this ticket price. Using the information in part (a), plot the line that shows the cost of the fundraiser.",
+          "(c) How many tickets need to be sold for the fundraiser to break even?",
+          "(d) Carrie sold 300 tickets. How much profit did the fundraiser make?"
+        ].join("\n"),
+        assets: [
+          {
+            id: "std1-2024-q23-fundraiser-table-graph",
+            type: "graph",
+            label: "Fundraiser cost table and revenue graph",
+            alt: "Table of fundraiser costs for 0 to 150 people and a graph of expected fundraiser revenue at 70 dollars per ticket.",
+            path: "/assets/diagrams/std1-2024-q23-fundraiser-table-graph.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      32: {
+        promptLatex: [
+          "Question 32\n(5 marks) A scale diagram is shown with locations \\(A\\), \\(B\\) and \\(C\\) marked.",
+          "Jo takes 24 minutes to walk from \\(A\\) to \\(B\\) in a straight line when walking at 3 km per hour.",
+          "(a) What is the scale used in the diagram?",
+          "(b) What is the distance from \\(B\\) to \\(C\\), in kilometres?"
+        ].join("\n"),
+        assets: [
+          {
+            id: "std1-2024-q32-scale-grid-map",
+            type: "diagram",
+            label: "Scale grid with locations A, B and C",
+            alt: "Rectangular grid with points A, B and C marked for a scale diagram walking-distance question.",
+            path: "/assets/diagrams/std1-2024-q32-scale-grid-map.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      }
+    }
+  },
+  {
+    id: "std2-2024",
+    paperId: "std2-2024",
+    sourcePackId: "source-std-2024",
+    courseId: "standard",
+    courseName: "Mathematics Standard 2",
+    year: 2024,
+    sourceRef: "2024 HSC Mathematics Standard 2 marking feedback",
+    examTextPath: "var/extracted-text/source-std-2024/source-std-2024-exam-paper-2024-hsc-maths-std-2.txt",
+    markingGuideTextPath:
+      "var/extracted-text/source-std-2024/source-std-2024-marking-guide-2024-hsc-maths-std-2-mg.txt",
+    markingFeedbackTextPath:
+      "var/extracted-text/source-std-2024/source-std-2024-marking-feedback-2024-hsc-mathematics-std2-marking-feedback_0.txt",
+    examPackUrl:
+      "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+    expectedQuestionCount: 41,
+    sectionIQuestionCount: 15,
+    boundaries: makeBoundaries(
+      15,
+      [53, 83, 153, 170, 200, 259, 291, 309, 336, 355, 430, 455, 521, 543, 592],
+      range(16, 41),
+      [
+        704, 808, 843, 935, 1020, 1186, 1270, 1416, 1456, 1552, 1601, 1683, 1724, 1787, 1869, 1947, 1998,
+        2058, 2101, 2148, 2268, 2351, 2404, 2450, 2560, 2635
+      ],
+      2740,
+      632
+    ),
+    questionOverrides: {
+      4: {
+        assets: [
+          {
+            id: "std2-2024-q04-region-map",
+            type: "diagram",
+            label: "Country region map",
+            alt: "Map with six regions labelled Forest, Swamp, Mountains, Desert, Coast, and Woods, with shared borders between regions.",
+            path: "/assets/diagrams/std2-2024-q04-region-map.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      6: {
+        assets: [
+          {
+            id: "std2-2024-q06-right-triangle",
+            type: "diagram",
+            label: "Right triangle with side x",
+            alt: "Right triangle with hypotenuse 20, a 40 degree angle at the base, and side x opposite the right angle.",
+            path: "/assets/diagrams/std2-2024-q06-right-triangle.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      12: {
+        assets: [
+          {
+            id: "std2-2024-q12-two-way-table",
+            type: "table",
+            label: "Anime and age two-way table",
+            alt: "Two-way table showing counts of people who watch or do not watch Anime, split by 30 years old and under, and over 30 years old.",
+            path: "/assets/diagrams/std2-2024-q12-two-way-table.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      15: {
+        assets: [
+          {
+            id: "std2-2024-q15-boxplot-histograms",
+            type: "graph",
+            label: "Box plot and histogram options",
+            alt: "A box plot and four histogram options labelled A to D for determining which histogram is not possible.",
+            path: "/assets/diagrams/std2-2024-q15-boxplot-histograms.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      16: {
+        assets: [
+          {
+            id: "std2-2024-q16-town-network",
+            type: "diagram",
+            label: "Town network with distances",
+            alt: "Weighted network of towns J, T, Y, W, C, G, M, and H with distances labelled on each road.",
+            path: "/assets/diagrams/std2-2024-q16-town-network.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      18: {
+        assets: [
+          {
+            id: "std2-2024-q18-weighted-network",
+            type: "diagram",
+            label: "Weighted network",
+            alt: "Weighted network with vertices A to J and edges labelled with weights used for a minimum spanning tree question.",
+            path: "/assets/diagrams/std2-2024-q18-weighted-network.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      19: {
+        assets: [
+          {
+            id: "std2-2024-q19-regression-scatterplot",
+            type: "graph",
+            label: "Assignment and test regression scatterplot",
+            alt: "Scatterplot of assignment mark against test mark with a least-squares regression line through the data.",
+            path: "/assets/diagrams/std2-2024-q19-regression-scatterplot.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      20: {
+        assets: [
+          {
+            id: "std2-2024-q20-annuity-table",
+            type: "table",
+            label: "Future value annuity table",
+            alt: "Table of future value factors for an annuity of one dollar for periods 1 to 8 and rates from 1 percent to 5 percent.",
+            path: "/assets/diagrams/std2-2024-q20-annuity-table.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      22: {
+        assets: [
+          {
+            id: "std2-2024-q22-population-graph-table",
+            type: "graph",
+            label: "Animal population graph and table",
+            alt: "Graph of two animal populations over time and a table to complete for populations W and K.",
+            path: "/assets/diagrams/std2-2024-q22-population-graph-table.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      26: {
+        assets: [
+          {
+            id: "std2-2024-q26-gutter-graph",
+            type: "graph",
+            label: "Gutter cross-section and area graph",
+            alt: "Diagram of a folded metal gutter with width w and height h, and a quadratic area graph against w.",
+            path: "/assets/diagrams/std2-2024-q26-gutter-graph.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      30: {
+        assets: [
+          {
+            id: "std2-2024-q30-anaconda-scatterplot",
+            type: "graph",
+            label: "Anaconda age and length scatterplot",
+            alt: "Scatterplot of anaconda age and length with separate markers for female and male anacondas.",
+            path: "/assets/diagrams/std2-2024-q30-anaconda-scatterplot.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      32: {
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "\\(A_{\\text{circle}}=\\pi(30)^2=2827.433\\ldots\\).",
+          "The area of one central triangle is \\(\\frac12\\times30\\times30\\sin72^\\circ=427.975\\ldots\\).",
+          "The pentagon area is \\(5\\times427.975\\ldots=2139.877\\ldots\\).",
+          "The shaded area is \\(2827.433\\ldots-2139.877\\ldots=687.5\\ldots\\), which is \\(690\\text{ cm}^2\\) to 2 significant figures."
+        ].join("\n"),
+        assets: [
+          {
+            id: "std2-2024-q32-shaded-pentagon-circle",
+            type: "diagram",
+            label: "Shaded circle around regular pentagon",
+            alt: "Regular pentagon ABCDE inscribed in a circle with centre O and a central angle of 72 degrees, with the region outside the pentagon shaded.",
+            path: "/assets/diagrams/std2-2024-q32-shaded-pentagon-circle.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      35: {
+        assets: [
+          {
+            id: "std2-2024-q35-normal-table-diagram",
+            type: "table",
+            label: "Normal distribution probability table",
+            alt: "Probability table for standard normal z values from 0.6 to 1.4 and a diagram showing shaded area to the left of z.",
+            path: "/assets/diagrams/std2-2024-q35-normal-table-diagram.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      36: {
+        assets: [
+          {
+            id: "std2-2024-q36-flagpoles-diagram",
+            type: "diagram",
+            label: "Flagpoles on sloping ground",
+            alt: "Diagram showing two vertical flagpoles BE and CD on sloping ground, with lengths and angles marked.",
+            path: "/assets/diagrams/std2-2024-q36-flagpoles-diagram.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      39: {
+        assets: [
+          {
+            id: "std2-2024-q39-project-network-table",
+            type: "diagram",
+            label: "Project network and activity table",
+            alt: "Activity network diagram with activities A to I and a table of earliest and latest start times for activities A, C, and I.",
+            path: "/assets/diagrams/std2-2024-q39-project-network-table.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      },
+      41: {
+        assets: [
+          {
+            id: "std2-2024-q41-present-value-table",
+            type: "table",
+            label: "Present value annuity table",
+            alt: "Present value interest factor table for an annuity of one dollar at rates 0.001 to 0.004 for 60 to 300 periods.",
+            path: "/assets/diagrams/std2-2024-q41-present-value-table.png",
+            sourceStatus: "exam-derived"
+          }
+        ]
+      }
+    }
+  },
+  {
     id: "ext1-2025",
     paperId: "ext1-2025",
     sourcePackId: "source-ext1-2025",

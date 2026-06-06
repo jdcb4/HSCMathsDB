@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "0.16.0",
+    "version": "0.17.0",
     "title": "GoalCheck HSC mathematics corpus",
     "updatedAt": "2026-06-06",
     "sourceSummary": "Validated corpus linking NSW mathematics exam-pack sources, Standard and Extension draft imports, the Mathematics archive, 2017 syllabus nodes, and 2024 syllabus conversion nodes."
@@ -349,10 +349,10 @@
       "packPageUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
       "syllabusEra": "standard-2017",
       "officialListStatus": "listed",
-      "importStatus": "not-started",
+      "importStatus": "in-progress",
       "expectedQuestionCount": 73,
-      "importedQuestionCount": 0,
-      "assetStatus": "pending-extraction",
+      "importedQuestionCount": 73,
+      "assetStatus": "partial",
       "notes": "Visible on the current Mathematics Standard exam-papers listing. The pack contains separate Standard 1 and Standard 2 exam papers, marking guidelines, and Section II marking feedback PDFs.",
       "assets": []
     },
@@ -1746,7 +1746,7 @@
       "courseName": "Mathematics Standard 1",
       "syllabusEra": "standard-2017",
       "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
-      "sourceStatus": "source-linked"
+      "sourceStatus": "partially-transcribed"
     },
     {
       "id": "std2-2024",
@@ -1755,7 +1755,7 @@
       "courseName": "Mathematics Standard 2",
       "syllabusEra": "standard-2017",
       "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
-      "sourceStatus": "source-linked"
+      "sourceStatus": "partially-transcribed"
     },
     {
       "id": "ext1-2024",
@@ -11332,6 +11332,2524 @@
         "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2024",
         "pageRef": "Exam paper pages 12",
         "markingGuideRef": "Marking guidelines pages 17-22",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q01-further-statistical-analysis",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q1",
+      "title": "1 Mark buys one raffle ticket in a raffle with 1000 tickets",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Statistical Analysis",
+      "subtopic": "Further Statistical Analysis",
+      "syllabusNodeIds": ["old-ms-s3"],
+      "promptLatex": "1 Mark buys one raffle ticket in a raffle with 1000 tickets. Which of the following best describes the probability that Mark wins?\nA. Certain\nB. Even chance\nC. Unlikely\nD. Impossible",
+      "answerLatex": "Official answer: C.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Standard 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 2",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q02-rates-and-ratios",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q2",
+      "title": "2 Four people completed the same fitness activity",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Measurement",
+      "subtopic": "Rates and Ratios",
+      "syllabusNodeIds": ["old-ms-m7"],
+      "promptLatex": "2 Four people completed the same fitness activity. The graph shows the heart rate for each person before and after completing the activity. 0 Jo Kim Heart rate Lee Mal 20 60 100 40 80 120 140 160 After KEY Before Which person had the LEAST difference in heart rate?\nA. Jo\nB. Kim\nC. Lee\nD. Mal",
+      "answerLatex": "Official answer: B.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Standard 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 2-3",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q03-types-of-relationships",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q3",
+      "title": "3 The travel graph shows the distance of a runner from a town",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Algebra",
+      "subtopic": "Types of Relationships",
+      "syllabusNodeIds": ["old-ms-a4"],
+      "promptLatex": "3 The travel graph shows the distance of a runner from a town. 10 am 11 am 12 pm Time Distance from town (km) 1 pm 2 pm 3 pm 0 2 4 6 8 10 12 Between what times was the runner travelling at their greatest speed?\nA. 10 am and 11 am\nB. 11 am and 11:30 am\nC. 11:30 am and 1 pm\nD. 1 pm and 2:30 pm",
+      "answerLatex": "Official answer: A.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Standard 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 3",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q04-money-matters",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q4",
+      "title": "4 The cost of a plumbing job is $500 plus 10% GST",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Financial Mathematics",
+      "subtopic": "Money Matters",
+      "syllabusNodeIds": ["old-ms-f1"],
+      "promptLatex": "4 The cost of a plumbing job is $500 plus 10% GST. What is the total cost of the job, including GST?\nA. $45\nB. $50\nC. $545\nD. $550",
+      "answerLatex": "Official answer: D.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Standard 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 3-4",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q05-formulae-and-equations",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q5",
+      "title": "5 A car is valued at $25 000 when new",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Algebra",
+      "subtopic": "Formulae and Equations",
+      "syllabusNodeIds": ["old-ms-a1"],
+      "promptLatex": "5 A car is valued at $25 000 when new. Its value depreciates by 25% per annum. Which of the following best describes the change in value of the car after one year?\nA. Decrease of $1000\nB. Increase of $1000\nC. Decrease of $6250\nD. Increase of $6250",
+      "answerLatex": "Official answer: C.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Standard 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 4",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q06-network-concepts",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q6",
+      "title": "6 The map shows regions within a country",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Networks",
+      "subtopic": "Network Concepts",
+      "syllabusNodeIds": ["old-ms-n2"],
+      "promptLatex": "6 The map shows regions within a country.\nA network diagram is to be drawn to represent this map. Vertices will be used to indicate each region and edges will be used to represent a border shared between two regions.\nHow many edges will there be in the network diagram?\nA. 8\nB. 7\nC. 6\nD. 5",
+      "answerLatex": "Official answer: B.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Standard 1"],
+      "assets": [
+        {
+          "id": "std1-2024-q06-region-map",
+          "type": "diagram",
+          "label": "Country region map",
+          "alt": "Map with six regions labelled Forest, Swamp, Mountains, Desert, Coast, and Woods, with shared borders between regions.",
+          "path": "/assets/diagrams/std1-2024-q06-region-map.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 4-5",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q07-formulae-and-equations",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q7",
+      "title": "7 Consider the diagram shown",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Algebra",
+      "subtopic": "Formulae and Equations",
+      "syllabusNodeIds": ["old-ms-a1"],
+      "promptLatex": "7 Consider the diagram shown.\nWhich of the following is the correct expression for the length of \\(x\\)?\nA. \\(20\\cos40^\\circ\\)\nB. \\(20\\sin40^\\circ\\)\nC. \\(\\frac{20}{\\cos40^\\circ}\\)\nD. \\(\\frac{20}{\\sin40^\\circ}\\)",
+      "answerLatex": "Official answer: A.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Standard 1"],
+      "assets": [
+        {
+          "id": "std1-2024-q07-right-triangle",
+          "type": "diagram",
+          "label": "Right triangle with side x",
+          "alt": "Right triangle with hypotenuse 20, a 40 degree angle at the base, and side x opposite the right angle.",
+          "path": "/assets/diagrams/std1-2024-q07-right-triangle.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 5",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q08-formulae-and-equations",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q8",
+      "title": "8 Three years ago, the price of a uniform was $180",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Algebra",
+      "subtopic": "Formulae and Equations",
+      "syllabusNodeIds": ["old-ms-a1"],
+      "promptLatex": "8 Three years ago, the price of a uniform was $180. Due to inflation, the price increased annually by 2.5%. What is the price of this uniform now?\nA. $180.14\nB. $181.35\nC. $193.50\nD. $193.84",
+      "answerLatex": "Official answer: D.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Standard 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 5-6",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q09-applications-of-measurement",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q9",
+      "title": "9 An equilateral triangle and an isosceles triangle are shown",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Measurement",
+      "subtopic": "Applications of Measurement",
+      "syllabusNodeIds": ["old-ms-m1"],
+      "promptLatex": "9 An equilateral triangle and an isosceles triangle are shown. The triangles have the same perimeter. 11 m 9 m x m NOT TO SCALE What is the value of x?\nA. 8\nB. 9\nC. 11\nD. 12",
+      "answerLatex": "Official answer: D.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Standard 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 6",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q10-rates-and-ratios",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q10",
+      "title": "10 A cyclist rides a bicycle at a constant speed around a circular track",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Measurement",
+      "subtopic": "Rates and Ratios",
+      "syllabusNodeIds": ["old-ms-m7"],
+      "promptLatex": "10 A cyclist rides a bicycle at a constant speed around a circular track. Which of the graphs best illustrates the distance of the cyclist from the centre of the track as time varies?\nA. d t Distance Time\nB. d t Distance Time\nC. d t Distance Time\nD. d t Distance Time",
+      "answerLatex": "Official answer: A.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Standard 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 6",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q11-rates-and-ratios",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q11",
+      "title": "A scale drawing of a tree is shown",
+      "marks": 2,
+      "style": "short-answer",
+      "topic": "Measurement",
+      "subtopic": "Rates and Ratios",
+      "syllabusNodeIds": ["old-ms-m7"],
+      "promptLatex": "Question 11\n(2 marks) A scale drawing of a tree is shown. The scale is 1: 50. 2 8 cm 8 cm SCALE 1: 50 What is the actual height of the tree, in metres?",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 11\n-\nProvides correct answer with correct units 2\n-\nMakes appropriate use of scale, or equivalent merit 1 Scale 1: 50 8 cm & 8 # 50 cm = 400 cm Height in metres = 400 ' 100 = 4 m",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 1 marking feedback",
+        "betterResponses": [
+          "recognise 1:50 means that there is 1 unit for every 50 units in real life",
+          "correct multiplication (8 x 50)",
+          "correctly convert cm to m",
+          "recognise how to use a ratio",
+          "make appropriate use of the scale to calculate the actual height of the tree, in metres."
+        ],
+        "improvementAreas": [
+          "understanding how scale works to calculate the actual height of the tree, in metres",
+          "identifying the 8 cm related to the 1 in the scale",
+          "knowing what units to convert to when using a scale",
+          "understanding that scale is in the same units for the 1 and 50."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 10-11",
+        "markingGuideRef": "Marking guidelines pages 2",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q12-bivariate-data-analysis",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q12",
+      "title": "The scatterplot shows a bivariate dataset",
+      "marks": 2,
+      "style": "short-answer",
+      "topic": "Statistical Analysis",
+      "subtopic": "Bivariate Data Analysis",
+      "syllabusNodeIds": ["old-ms-s4"],
+      "promptLatex": "Question 12\n(2 marks) The scatterplot shows a bivariate dataset. Describe the bivariate dataset in terms of strength and direction.",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 12\n-\nProvides correct answer 2\n-\nProvides correct strength or direction, or equivalent merit 1 Strong and negative",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 1 marking feedback",
+        "betterResponses": [
+          "use two words to describe the bivariate dataset in terms of strength and direction - strong and negative",
+          "identify scatter plot points from left to right in a negative direction",
+          "interpret a strong correlation by the closeness of the points in forming a straight line."
+        ],
+        "improvementAreas": [
+          "using the word negative rather than decreasing or declining or going down to describe the bivariate dataset in terms of strength and direction."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 1"],
+      "assets": [
+        {
+          "id": "std1-2024-q12-scatterplot",
+          "type": "graph",
+          "label": "Bivariate scatterplot",
+          "alt": "Scatterplot with a strong negative association between the two variables.",
+          "path": "/assets/diagrams/std1-2024-q12-scatterplot.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 11-12",
+        "markingGuideRef": "Marking guidelines pages 2-3",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q13-types-of-relationships",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q13",
+      "title": "Consider the following dataset",
+      "marks": 3,
+      "style": "short-answer",
+      "topic": "Algebra",
+      "subtopic": "Types of Relationships",
+      "syllabusNodeIds": ["old-ms-a4"],
+      "promptLatex": "Question 13\n(3 marks) Consider the following dataset. 1, 1, 2, 3, 5, 7, 15\n(a)\nWhat is the interquartile range? 1\n(b)\nBy using the outlier formula, determine whether 15 is an outlier. 2",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 13 (a)\n-\nProvides correct answer 1 Lower quartile = 1 Upper quartile = 7 IQR = 7 - 1 = 6\nQuestion 13 (b)\n-\nProvides correct solution 2\n-\nMakes appropriate use of IQR, or equivalent merit 1 Q + 1.5 # IQR 3 = 7 + 1.5 # 6 = 16 16 > 15, so 15 is not an outlier.",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 1 marking feedback",
+        "betterResponses": [
+          "use the interquartile range (IQR) and outlier formula correctly and make an appropriate comparison",
+          "clearly label or identify the lower quartile (Q1) and the upper quartile (Q3)."
+        ],
+        "improvementAreas": [
+          "knowing the difference between median and mean",
+          "comparing their answer for what constitutes an outlier to their calculation. Mathematics Standard 1 - HSC marking feedback 2024 Page 3 of 9"
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 12-13",
+        "markingGuideRef": "Marking guidelines pages 3-4",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q14-non-right-angled-trigonometry",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q14",
+      "title": "A hotel is located 186 m north and 50 m west of a train station",
+      "marks": 4,
+      "style": "short-answer",
+      "topic": "Measurement",
+      "subtopic": "Non-right-angled Trigonometry",
+      "syllabusNodeIds": ["old-ms-m6"],
+      "promptLatex": "Question 14\n(4 marks) A hotel is located 186 m north and 50 m west of a train station.\n(a) What is the straight line distance from the hotel to the train station? Round your answer to the nearest metre.\n(b) What is the bearing of the hotel from the train station? Round your answer to the nearest degree.",
+      "answerLatex": "Official marking guide excerpt (source-reviewed):\n(a) By Pythagoras' theorem, \\(x^2=186^2+50^2\\), so \\(x=192.603\\ldots\\approx193\\) m.\n(b) \\(\\tan\\theta=\\frac{50}{186}\\), so \\(\\theta\\approx15^\\circ03'\\). The bearing is \\(360^\\circ-15^\\circ03'=344^\\circ57'\\approx345^\\circ\\).",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 1 marking feedback",
+        "betterResponses": [
+          "link the right-angled triangle with Pythagoras’ Theorem (a)",
+          "use trigonometric ratios (tan) to calculate an angle and use this angle to calculate the hypotenuse",
+          "draw a compass at the train station and then draw in the bearing to be calculated (b)",
+          "write the bearing as a compass bearing."
+        ],
+        "improvementAreas": [
+          "using right-angled triangles with Pythagoras’ Theorem, especially when two lengths are given",
+          "reading the question carefully and drawing a compass from the train station",
+          "using trigonometric ratios with calculating angles in right-angled triangles when given lengths."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 1"],
+      "assets": [
+        {
+          "id": "std1-2024-q14-hotel-bearing-diagram",
+          "type": "diagram",
+          "label": "Hotel and train station bearing diagram",
+          "alt": "Right-angled diagram showing a hotel 186 metres north and 50 metres west of a train station.",
+          "path": "/assets/diagrams/std1-2024-q14-hotel-bearing-diagram.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 13-14",
+        "markingGuideRef": "Marking guidelines pages 4-5",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q15-network-concepts",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q15",
+      "title": "A network of towns and the distances between them in kilometres is shown",
+      "marks": 4,
+      "style": "short-answer",
+      "topic": "Networks",
+      "subtopic": "Network Concepts",
+      "syllabusNodeIds": ["old-ms-n2"],
+      "promptLatex": "Question 15\n(4 marks) A network of towns and the distances between them in kilometres is shown.\n(a) What is the shortest path from \\(T\\) to \\(H\\)?\n(b) A truck driver needs to travel from \\(Y\\) to \\(G\\) but knows that the road from \\(C\\) to \\(G\\) is closed. What is the length of the shortest path the truck driver can take from \\(Y\\) to \\(G\\) after the road closure?",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 15 (a)\n-\nProvides the correct path 2\n-\nProvides a continuous path from T to H 1 TYWH\nQuestion 15 (b)\n-\nProvides correct solution 2\n-\nProvides a continuous path from Y to G, without C to G 1 YWHMG is 89 km",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 1 marking feedback",
+        "betterResponses": [
+          "identify the correct path and its weight",
+          "correctly label a path using letters",
+          "understand the difference between identifying a path and calculating its length",
+          "find the 2 paths and then clearly showed the vertices which related to the shortest path."
+        ],
+        "improvementAreas": [
+          "following the path they are trying to state and ensuring vertices are not missed",
+          "including the start and end points when labelling a path",
+          "understanding that diagrams are not to scale and a shorter path may appear longer on the network diagram."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 1"],
+      "assets": [
+        {
+          "id": "std1-2024-q15-town-network",
+          "type": "diagram",
+          "label": "Town network with distances",
+          "alt": "Weighted network of towns J, T, Y, W, C, G, M, and H with distances labelled on each road.",
+          "path": "/assets/diagrams/std1-2024-q15-town-network.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 14-15",
+        "markingGuideRef": "Marking guidelines pages 5",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q16-money-matters",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q16",
+      "title": "The cost of electricity is 30",
+      "marks": 2,
+      "style": "short-answer",
+      "topic": "Financial Mathematics",
+      "subtopic": "Money Matters",
+      "syllabusNodeIds": ["old-ms-f1"],
+      "promptLatex": "Question 16\n(2 marks) The cost of electricity is 30.13 cents per kWh. Calculate the cost of using a 650 W air conditioner for 6 hours. 2 Please turn over",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 16\n-\nProvides correct answer 2\n-\nPerforms an appropriate conversion, or equivalent merit 1 650 # 6 # $0.3013 1000 = $1.18",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 1 marking feedback",
+        "betterResponses": [
+          "correctly convert both the electricity usage and cents to dollars",
+          "round to 2 decimal places."
+        ],
+        "improvementAreas": [
+          "knowing the correct conversion, for example 1 kW = 1000 W",
+          "converting cents to dollars",
+          "understanding that this question involves two conversions. Mathematics Standard 1 - HSC marking feedback 2024 Page 4 of 9"
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 15-16",
+        "markingGuideRef": "Marking guidelines pages 5-6",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q17-further-statistical-analysis",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q17",
+      "title": "A wheel is shown with the numbers 0 to 19 marked",
+      "marks": 3,
+      "style": "short-answer",
+      "topic": "Statistical Analysis",
+      "subtopic": "Further Statistical Analysis",
+      "syllabusNodeIds": ["old-ms-s3"],
+      "promptLatex": "Question 17\n(3 marks) A wheel is shown with the numbers 0 to 19 marked. A game is played where the wheel is spun until it stops. When the wheel stops, a pointer points to the winning number. Each number is equally likely to win. Pointer 0 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1\n(a)\nList all the even numbers on the wheel that are greater than 7. 1\n(b)\nWhat is the probability that the winning number is NOT an even number greater than 7? 2",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 17 (a)\n-\nProvides correct answer 1 8, 10, 12, 14, 16, 18\nQuestion 17 (b)\n-\nProvides correct solution 2\n-\nProvides correct sample space, or equivalent merit 1 14 P (not even and > 7) = 20 7 = 10 Alternative: 6 P (even and > 7) = 20 3 = 10 3 P (NOT) = 1 - 10 7 = 10",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 1 marking feedback",
+        "betterResponses": [
+          "recognise even numbers greater than a given value",
+          "identify there are 20 numbers between 0 and 19, inclusive",
+          "use the complementary event to solve the question."
+        ],
+        "improvementAreas": [
+          "identifying odd and even numbers",
+          "understanding what the term ‘not’ means in probability",
+          "understanding how to calculate complementary events."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 16-17",
+        "markingGuideRef": "Marking guidelines pages 6-7",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q18-applications-of-measurement",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q18",
+      "title": "A garden is made up of a right-angled triangle and a semicircle as shown",
+      "marks": 3,
+      "style": "short-answer",
+      "topic": "Measurement",
+      "subtopic": "Applications of Measurement",
+      "syllabusNodeIds": ["old-ms-m1"],
+      "promptLatex": "Question 18\n(3 marks) A garden is made up of a right-angled triangle and a semicircle as shown. What is the area of the garden, correct to the nearest square metre?",
+      "answerLatex": "Official marking guide excerpt (source-reviewed):\nThe triangle has base \\(6\\) m and height \\(7\\) m, so \\(A_{\\text{triangle}}=\\frac12\\times7\\times6=21\\).\nThe semicircle has radius \\(3\\) m, so \\(A_{\\text{semicircle}}=\\frac12\\pi(3)^2=14.137\\ldots\\).\nThe total area is \\(35.137\\ldots\\), so the area is \\(35\\text{ m}^2\\), correct to the nearest square metre.",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 1 marking feedback",
+        "betterResponses": [
+          "correctly apply the formula for the area of a semicircle",
+          "correctly apply the formula for the area of a triangle",
+          "correctly adds areas for composite shapes."
+        ],
+        "improvementAreas": [
+          "understanding which sides of a triangle are important when finding area",
+          "calculating the area of the composite shapes separately",
+          "understanding the difference between perimeter, circumference and area."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 1"],
+      "assets": [
+        {
+          "id": "std1-2024-q18-garden-area-diagram",
+          "type": "diagram",
+          "label": "Garden triangle and semicircle",
+          "alt": "Composite garden shape made from a right-angled triangle and a semicircle, with dimensions 7 metres and 3 metres shown.",
+          "path": "/assets/diagrams/std1-2024-q18-garden-area-diagram.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 17-18",
+        "markingGuideRef": "Marking guidelines pages 7",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q19-types-of-relationships",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q19",
+      "title": "The length ( L ) of a shark, in centimetres, can be modelled by the formula L...",
+      "marks": 2,
+      "style": "short-answer",
+      "topic": "Algebra",
+      "subtopic": "Types of Relationships",
+      "syllabusNodeIds": ["old-ms-a4"],
+      "promptLatex": "Question 19\n(2 marks) The length ( L ) of a shark, in centimetres, can be modelled by the formula L = 7.3 a + 38, where a is the age of the shark, in years. At what age should the shark reach a length of 156 cm, correct to the nearest year? 2",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 19\n-\nProvides correct solution 2\n-\nCorrect substitution, or equivalent merit 1 L = 7.3 a + 38 156 = 7.3 a + 38 156 - 38 = 7.3 a 118 a = 7.3 = 16.164... = 16 years",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 1 marking feedback",
+        "betterResponses": [
+          "substitute into the given formula",
+          "show the opposite operation for each step when solving a 2-step equation."
+        ],
+        "improvementAreas": [
+          "solving 2 step equations",
+          "solving and showing the opposite operations for each step. Mathematics Standard 1 - HSC marking feedback 2024 Page 5 of 9"
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 18-19",
+        "markingGuideRef": "Marking guidelines pages 7-8",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q20-network-concepts",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q20",
+      "title": "The diagram shows a network with weighted edges",
+      "marks": 3,
+      "style": "short-answer",
+      "topic": "Networks",
+      "subtopic": "Network Concepts",
+      "syllabusNodeIds": ["old-ms-n2"],
+      "promptLatex": "Question 20\n(3 marks) The diagram shows a network with weighted edges.\n(a) Draw a minimum spanning tree for this network and determine its weight.\n(b) Is it possible to find another spanning tree with the same weight? Give a reason for your answer.",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 20 (a)\n-\nProvides correct solution 2\n-\nDraws a spanning tree, or equivalent merit 1 2 4 2 1 1 3 4 4 3 A B C E F G H I J D Weight = 24\nQuestion 20 (b)\n-\nProvides a correct reason for why it is possible to find another spanning tree with the same weight 1 Yes, use BC instead of FC as the weight of BC is the same as the weight of FC",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 1 marking feedback",
+        "betterResponses": [
+          "draw the correct minimum spanning tree (using a ruler) with weighted edges in their diagram",
+          "calculate the correct weight of their spanning tree",
+          "identify either 𝐹𝐶 and 𝐵𝐶 in the correct minimum spanning tree as having the same weight."
+        ],
+        "improvementAreas": [
+          "writing down the weighted edges, for example, weights on each edge of their tree",
+          "identify two edges with the same weight that could be swapped."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 1"],
+      "assets": [
+        {
+          "id": "std1-2024-q20-weighted-network",
+          "type": "diagram",
+          "label": "Weighted network",
+          "alt": "Weighted network with vertices A to J and edges labelled with weights used for a minimum spanning tree question.",
+          "path": "/assets/diagrams/std1-2024-q20-weighted-network.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 19-20",
+        "markingGuideRef": "Marking guidelines pages 8-9",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q21-investments-and-loans",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q21",
+      "title": "Jan borrowed $1500 at 6% per annum",
+      "marks": 2,
+      "style": "short-answer",
+      "topic": "Financial Mathematics",
+      "subtopic": "Investments and Loans",
+      "syllabusNodeIds": ["old-ms-f4"],
+      "promptLatex": "Question 21\n(2 marks) Jan borrowed $1500 at 6% per annum. Calculate the simple interest for the first three months. 2",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 21\n-\nProvides correct solution 2\n-\nUses the simple interest formula with 1 correct substitution, or equivalent merit 1 I = PRN 6 3 = 1500 # # 100 12 = $22.50",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 1 marking feedback",
+        "betterResponses": [
+          "elect and use the correct formula with all correct values for 𝑃, 𝑟 and 𝑛.",
+          "interpret that the period needed to be a fraction over 12."
+        ],
+        "improvementAreas": [
+          "identifying when simple interest or compound interest is required",
+          "being able to convert periods into the correct time frame."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 20-21",
+        "markingGuideRef": "Marking guidelines pages 9",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q22-formulae-and-equations",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q22",
+      "title": "The timetable shows an airline schedule in 24-hour time for a flight from Tow...",
+      "marks": 2,
+      "style": "short-answer",
+      "topic": "Algebra",
+      "subtopic": "Formulae and Equations",
+      "syllabusNodeIds": ["old-ms-a1"],
+      "promptLatex": "Question 22\n(2 marks) The timetable shows an airline schedule in 24-hour time for a flight from Town A to Town B 2 Flight Departure Arrival (local time Town A) (local time Town B) Town A to Town B 1159 1336 When it is 10 am in Town A, the time in Town B is 9 am on the same day. How long does the flight take to travel from Town A to Town B? Questions 11-22 are worth 32 marks in total Please turn over",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 22\n-\nProvides correct solution 2\n-\nCalculates time difference from table, or equivalent merit 1 Time difference from timetable = 1 hour 37 minutes Town B is 1 hour behind Town A 1 hour 37 minutes + 1 hour = 2 hours 37 minutes",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 1 marking feedback",
+        "betterResponses": [
+          "calculate the time difference between Towns A and B",
+          "calculate the length of the flight taking into consideration time differences",
+          "use time diagrams to set out their work."
+        ],
+        "improvementAreas": [
+          "converting 24-hour time to 12-hour time",
+          "understanding when to add or subtract time differences",
+          "using the degrees, minutes and seconds button on a calculator to calculate time difference. Mathematics Standard 1 - HSC marking feedback 2024 Page 6 of 9"
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 21-22",
+        "markingGuideRef": "Marking guidelines pages 9-10",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q23-money-matters",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q23",
+      "title": "Carrie is organising a fundraiser",
+      "marks": 7,
+      "style": "extended-response",
+      "topic": "Financial Mathematics",
+      "subtopic": "Money Matters",
+      "syllabusNodeIds": ["old-ms-f1"],
+      "promptLatex": "Question 23\n(7 marks) Carrie is organising a fundraiser. The cost of hiring the venue and the band is $2500. The cost of providing meals is $50 per person.\n(a) Complete the table of values to show the total cost of the fundraiser.\n(b) Carrie decides that tickets should be sold at $70 per person. The graph shows the expected revenue at this ticket price. Using the information in part (a), plot the line that shows the cost of the fundraiser.\n(c) How many tickets need to be sold for the fundraiser to break even?\n(d) Carrie sold 300 tickets. How much profit did the fundraiser make?",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 23 (a)\n-\nProvides correct answer 1 Number of people 0 25 50 75 100 125 150 Cost 2500 3750 5000 6250 7500 8750 10 000\nQuestion 23 (b)\n-\nProvides correct solution 2\n-\nPlots one point from the table, or equivalent merit 1 0 25 75 125 50 100 Fundraiser revenue and cost 150 0 2000 4000 6000 8000 10 000 1000 3000 5000 7000 9000 11 000 Revenue/Cost ($) Number of people\nQuestion 23 (c)\n-\nProvides correct answer 1 125 tickets\nQuestion 23 (d)\n-\nProvides correct solution 3\n-\nCalculates correct cost and revenue, or equivalent merit 2\n-\nCalculates correct revenue, or equivalent merit 1 Revenue = 300 tickets # $70 = $21 000 Cost = 2500 + 300 # $50 = $17 500 Profit = 21 000 - 17 500 = $3500",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 1 marking feedback",
+        "betterResponses": [
+          "use a table of values to plot points and draw a straight line with a ruler",
+          "identify the difference between cost and revenue and break-even",
+          "work out the revenue, the cost and show a subtraction of these values to find the profit made."
+        ],
+        "improvementAreas": [
+          "using a ruler to draw a straight-line graph",
+          "reading a graph for a point of intersection",
+          "knowing break-even point is the point of intersection."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 1"],
+      "assets": [
+        {
+          "id": "std1-2024-q23-fundraiser-table-graph",
+          "type": "graph",
+          "label": "Fundraiser cost table and revenue graph",
+          "alt": "Table of fundraiser costs for 0 to 150 people and a graph of expected fundraiser revenue at 70 dollars per ticket.",
+          "path": "/assets/diagrams/std1-2024-q23-fundraiser-table-graph.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 22-24",
+        "markingGuideRef": "Marking guidelines pages 10-11",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q24-formulae-and-equations",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q24",
+      "title": "Students in two classes, Class A and Class B, recorded the number of text mes...",
+      "marks": 3,
+      "style": "short-answer",
+      "topic": "Algebra",
+      "subtopic": "Formulae and Equations",
+      "syllabusNodeIds": ["old-ms-a1"],
+      "promptLatex": "Question 24\n(3 marks) Students in two classes, Class A and Class B, recorded the number of text messages they sent in a day. Each class has 18 students. The results are shown in the dot plots. 3 1 3 5 2 4 Class A Number of text messages 6 1 3 5 2 4 Class B Number of text messages 6 Compare the two datasets by examining the skewness, median and spread of the distributions.",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 24\n-\nCompares skewness, median and spread correctly 3\n-\nCompares spread and medians of two graphs, or equivalent merit 2\n-\nCompares spread of two graphs, or equivalent merit 1\n-\nClass A negatively skewed, Class B positively skewed.\n-\nIQR for A and B is equal.\n-\nClass A median is 4, Class B median is 3. Answer could include:\n-\nRange for A and B is equal.",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 1 marking feedback",
+        "betterResponses": [
+          "recognise that the Class A scores were negatively skewed and the scores from Class B were positively skewed",
+          "compare skewness, median and spread (range or IQR) correctly in Class A and Class B",
+          "display their answers in a table."
+        ],
+        "improvementAreas": [
+          "having a better understanding of the key terms used in data, especially skewness",
+          "identifying what is required for skewness, measures of location and spread."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 24-25",
+        "markingGuideRef": "Marking guidelines pages 11-12",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q25-rates-and-ratios",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q25",
+      "title": "In a national park, a straight path connects a lookout to a car park",
+      "marks": 2,
+      "style": "short-answer",
+      "topic": "Measurement",
+      "subtopic": "Rates and Ratios",
+      "syllabusNodeIds": ["old-ms-m7"],
+      "promptLatex": "Question 25\n(2 marks) In a national park, a straight path connects a lookout to a car park. The lookout is 35 m higher than the car park. The path is inclined at an angle of elevation of 4°, as shown. 2 35 m 4° Path Lookout Car park NOT TO SCALE What is the length of the path, correct to the nearest metre? Please turn over",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 25\n-\nProvides correct solution 2\n-\nAttempts to use trigonometry with an angle of 4°, or equivalent merit 1 35 sin 4° = path 35 Path = sin 4° = 501.74... = 502 m",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 1 marking feedback",
+        "betterResponses": [
+          "identify the correct trigonometric ratio",
+          "apply the ratio correctly to find the denominator."
+        ],
+        "improvementAreas": [
+          "recognising which trigonometric ratio to use",
+          "labelling the sides of the triangle based on the position of an angle. Mathematics Standard 1 - HSC marking feedback 2024 Page 7 of 9"
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 25-26",
+        "markingGuideRef": "Marking guidelines pages 12",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q26-investments-and-loans",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q26",
+      "title": "Bobby has a credit card that has no interest-free period",
+      "marks": 3,
+      "style": "short-answer",
+      "topic": "Financial Mathematics",
+      "subtopic": "Investments and Loans",
+      "syllabusNodeIds": ["old-ms-f4"],
+      "promptLatex": "Question 26\n(3 marks) Bobby has a credit card that has no interest-free period. Interest is charged at 0.07% per day, compounding daily, on the outstanding balance. How much interest is Bobby charged on an outstanding balance of $600 for 30 days? 3",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 26\n-\nProvides correct solution 3\n-\nUses the compound interest formula correctly, or equivalent merit 2\n-\nAttempts to use the compound interest formula, or equivalent merit 1 A = P ^ 1 + r h n = 600 ^ 1 + 0.07% h 30 = 612.728... A = $612.73 Interest = $612.73 - $600 = $12.73",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 1 marking feedback",
+        "betterResponses": [
+          "recognise that the question requires the student to find the future value using the compound interest formula and then subtracting the original $600 from the solution to calculate the interest charged."
+        ],
+        "improvementAreas": [
+          "understanding the difference between simple and compound interest",
+          "subtracting $600 to correctly calculate interest."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 26-27",
+        "markingGuideRef": "Marking guidelines pages 12-13",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q27-rates-and-ratios",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q27",
+      "title": "Zazu works a 38-hour week and is paid at an hourly rate of $45",
+      "marks": 3,
+      "style": "short-answer",
+      "topic": "Measurement",
+      "subtopic": "Rates and Ratios",
+      "syllabusNodeIds": ["old-ms-m7"],
+      "promptLatex": "Question 27\n(3 marks) Zazu works a 38-hour week and is paid at an hourly rate of $45. Any overtime hours worked are paid at time-and-a-half. In a particular week, Zazu worked the regular 38 hours and some overtime hours. In that week Zazu earned $2790. How many hours of overtime did Zazu work in that week? 3 Please turn over",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 27\n-\nProvides correct solution 3\n-\nFinds Zazu’s normal time earnings and overtime hourly rate, or equivalent merit 2\n-\nFinds Zazu’s normal time earnings, or equivalent merit 1 Normal time earnings = 38 # 45 = 1710 Overtime paid = 2790 - 1710 = 1080 $1080 Overtime hours = ^ 45 # 1.5 h = 16 hours Therefore 16 hours overtime.",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 1 marking feedback",
+        "betterResponses": [
+          "calculate the time-and-a-half rate of $67.50",
+          "understand that overtime hours are different to equivalent normal hours",
+          "calculate the amount paid for overtime",
+          "total earnings for the week."
+        ],
+        "improvementAreas": ["understanding the difference between overtime rates and normal hourly rates."]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 27-28",
+        "markingGuideRef": "Marking guidelines pages 13",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q28-investments-and-loans",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q28",
+      "title": "Alex and Jun each invest $1800 for 5 years",
+      "marks": 3,
+      "style": "short-answer",
+      "topic": "Financial Mathematics",
+      "subtopic": "Investments and Loans",
+      "syllabusNodeIds": ["old-ms-f4"],
+      "promptLatex": "Question 28\n(3 marks) Alex and Jun each invest $1800 for 5 years. * Alex’s investment earns simple interest at a rate of 7.5% per annum. * Jun’s investment earns interest at a rate of 6.0% per annum, compounding quarterly. By calculating the interest earned over the 5 years, determine who will have the greater amount. 3",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 28\n-\nProvides correct solution 3\n-\nCalculates Jun’s interest, or equivalent merit 2\n-\nCalculates Alex’s interest, or equivalent merit 1 Alex’s interest after 5 years = 1800 # 7.5% # 5 = $675 4 × 5 Jun’s investment at 5 years = 1800 # d 1 + 4 6 % n = 2424.339... Interest = 2424.34 - 1800 = $624.34 ` Alex earns more interest.",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 1 marking feedback",
+        "betterResponses": [
+          "know the difference between simple interest and compound interest",
+          "compare Alex and Jun’s future values or compare their interest values from the simple interest and compound interest calculations",
+          "write a concluding statement",
+          "recognise that they were calculating different values for each person and then make the appropriate adjustment."
+        ],
+        "improvementAreas": [
+          "converting the rate and periods into the compounding periods stated in the question, particularly for interest compounding quarterly",
+          "understanding that interest or future values should be compared to see the difference in interest earnt for questions with two different interest type questions",
+          "identifying the compound interest formula gives the future value, not the interest",
+          "identifying the simple interest formula gives the interest not the future value. Mathematics Standard 1 - HSC marking feedback 2024 Page 8 of 9"
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 28-29",
+        "markingGuideRef": "Marking guidelines pages 13-14",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q29-money-matters",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q29",
+      "title": "A floor plan for a living area is shown",
+      "marks": 5,
+      "style": "extended-response",
+      "topic": "Financial Mathematics",
+      "subtopic": "Money Matters",
+      "syllabusNodeIds": ["old-ms-f1"],
+      "promptLatex": "Question 29\n(5 marks) A floor plan for a living area is shown. All measurements are in millimetres. Cupboard 4000 Living area 3000 6000 500 NOT TO SCALE\n(a)\nWhat is the length and width of the cupboard, in metres? 1\n(b)\nThe floor of the living area is to be tiled. Tiles will NOT be placed under the cupboard. Each tile is 0.2 m × 0.5 m. The tiles are supplied in boxes of 15 at a cost of $100 per box. Only full boxes can be purchased. What is the cost of the tiles for the living area? 4",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 29 (a)\n-\nProvides correct answer 1 4000 mm # 500 mm = 4 m # 0.5 m\nQuestion 29 (b)\n-\nProvides correct solution 4\n-\nCalculates required number of tiles, or equivalent merit 3\n-\nProvides total floor area to be covered, or equivalent merit 2\n-\nProvides 1 correct area, or equivalent merit 1 6 m ➀ 2.5 m 3 m 4 m ➁ 0.5 m 2 m Section ➀ 30 across 5 down = 150 tiles Section ➁ 10 across 1 down = 10 tiles Total = 160 tiles needed 160 ' 15 = 10.67 boxes = b rounded to 11 boxes nearest full box l Cost = 11 # 100 = $1100 Alternative: A = 6 # 2.5 m 1 = 15 m 2 A = 2 # 0.5 m 2 = 1 m 2 A = 16 m 2 total A = 0.2 # 0.5 tile = 0.1 m 2 Total tiles needed = 16 m 2 ' 0.1 m 2 = 160 tiles 160 ' 15 = 10.67 boxes rounded to = 11 boxes b nearest full box l Cost = 11 # 100 = $1100",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 1 marking feedback",
+        "betterResponses": [
+          "convert between millimetres and metres rather than between units of area",
+          "find the area of the composite shape in square metres using either subtraction or addition",
+          "find the number of boxes by dividing area by 15 and then rounding this number before multiplying by 100 to find the total cost."
+        ],
+        "improvementAreas": [
+          "converting between units of length before calculating area",
+          "identifying simple shapes and calculate their areas",
+          "breaking down questions into smaller manageable steps."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 29-30",
+        "markingGuideRef": "Marking guidelines pages 14-15",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q30-investments-and-loans",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q30",
+      "title": "The graph shows the decreasing value of an asset",
+      "marks": 4,
+      "style": "short-answer",
+      "topic": "Financial Mathematics",
+      "subtopic": "Investments and Loans",
+      "syllabusNodeIds": ["old-ms-f4"],
+      "promptLatex": "Question 30\n(4 marks) The graph shows the decreasing value of an asset. 4 10 4 0 0 Value of asset ($) 50 000 Number of years NOT TO SCALE For the first 4 years, the value of the asset depreciated by $1500 per year, using a straight-line method of depreciation. After the end of the 4th year, the method of depreciation changed to the declining-balance method at the rate of 35% per annum. What is the total depreciation at the end of 10 years?",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 30\n-\nProvides correct solution 4\n-\nUses the declining-balance method with correct values for r, n and V 0, or equivalent merit 3\n-\nAttempts to use the declining-balance method with an initial value from the straight-line method, or equivalent merit 2\n-\nAttempts to use straight-line method, or equivalent merit 1 Value after 4 years: Using straight-line method = 50 000 - 1500 # 4 = 44 000 Value after the next 6 years: Using declining-balance method = 44 000 ^ 1 - 35% h 6 = 3318.43... Total depreciation = 50 000 - 3318.43 = $46 681.57",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 1 marking feedback",
+        "betterResponses": [
+          "calculate the salvage value for the straight-line depreciation component",
+          "substitute the salvage value from the straight-line method at the end of the 4 years into the declining-balance formula as the initial value",
+          "subtract the final salvage value from the original value to calculate the total depreciation."
+        ],
+        "improvementAreas": [
+          "knowing the difference between straight line and declining balance depreciation",
+          "selecting the correct formula from the reference sheet and using it correctly",
+          "understanding the salvage value at the end of the 4 years is the initial value of the next part of the calculation",
+          "understanding that ‘depreciation’ is the loss in value."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 30-31",
+        "markingGuideRef": "Marking guidelines pages 15",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q31-formulae-and-equations",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q31",
+      "title": "Wombats can run at a speed of 40 km/h over short distances",
+      "marks": 3,
+      "style": "short-answer",
+      "topic": "Algebra",
+      "subtopic": "Formulae and Equations",
+      "syllabusNodeIds": ["old-ms-a1"],
+      "promptLatex": "Question 31\n(3 marks) Wombats can run at a speed of 40 km/h over short distances. At this speed, how many seconds would it take a wombat to run 150 metres? 3 Please turn over",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 31\n-\nProvides correct solution 3\n-\nProvides correct calculations in hours, or equivalent merit 2\n-\nProvides correct distance conversion, or equivalent merit 1 Distance Speed = Time 0.15 km 40 km/h = T 0.15 T = 40 T = 0.00375 hours T = 0.00375 # 3600 seconds = 13.5 seconds",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 1 marking feedback",
+        "betterResponses": [
+          "convert between different units",
+          "recognise that units need to be the same to calculate time",
+          "apply the unitary method with correct conversions."
+        ],
+        "improvementAreas": [
+          "understanding the relationship between speed, distance and time and knowing the formula correctly",
+          "making sure that the units for distance, speed and time are connected, for example, distance in km, speed in km/h and time in h, or distance in m, speed in m/s and time in s. Mathematics Standard 1 - HSC marking feedback 2024 Page 9 of 9"
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 1"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 31-32",
+        "markingGuideRef": "Marking guidelines pages 15-16",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std1-2024-q32-rates-and-ratios",
+      "paperId": "std1-2024",
+      "year": 2024,
+      "questionNumber": "Q32",
+      "title": "A scale diagram is shown with locations A, B and C marked",
+      "marks": 5,
+      "style": "extended-response",
+      "topic": "Measurement",
+      "subtopic": "Rates and Ratios",
+      "syllabusNodeIds": ["old-ms-m7"],
+      "promptLatex": "Question 32\n(5 marks) A scale diagram is shown with locations \\(A\\), \\(B\\) and \\(C\\) marked.\nJo takes 24 minutes to walk from \\(A\\) to \\(B\\) in a straight line when walking at 3 km per hour.\n(a) What is the scale used in the diagram?\n(b) What is the distance from \\(B\\) to \\(C\\), in kilometres?",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 32 (a)\n-\nProvides correct solution 3\n-\nFinds distance travelled, or equivalent merit 2 D\n-\nAttempts to use S =, or equivalent merit T 1 D S = T D 3 = 24 ' 60 24 D = 3 # 60 = 1.2 km 6 cm: 1.2 km 1 cm: 0.2 km 0.2 km = 200 m = 20 000 cm 1: 20 000\nQuestion 32 (b)\n-\nProvides correct answer 2\n-\nAttempts to use scale from part (a), or equivalent merit 1 1: 20 000 7 cm: 7 # 20 000 = 140 000 cm = 1400 m = 1.4 km 2024 HSC",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 1 marking feedback",
+        "betterResponses": [
+          "apply the speed, distance, time formula to calculate the correct distance",
+          "correctly convert between units",
+          "write a scale in the form 1:a",
+          "apply their scale to find the real distance of another side."
+        ],
+        "improvementAreas": [
+          "correctly using the speed, distance, time formula converting from km to m to cm",
+          "converting from minutes to hours",
+          "knowing a scale must be in the same units."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 1"],
+      "assets": [
+        {
+          "id": "std1-2024-q32-scale-grid-map",
+          "type": "diagram",
+          "label": "Scale grid with locations A, B and C",
+          "alt": "Rectangular grid with points A, B and C marked for a scale diagram walking-distance question.",
+          "path": "/assets/diagrams/std1-2024-q32-scale-grid-map.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 32",
+        "markingGuideRef": "Marking guidelines pages 16-17",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q01-formulae-and-equations",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q1",
+      "title": "1 If x = - 2",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Algebra",
+      "subtopic": "Formulae and Equations",
+      "syllabusNodeIds": ["old-ms-a1"],
+      "promptLatex": "1 If x = - 2.531, what is the value of x 2 rounded to 2 decimal places?\nA. - 6.41\nB. - 6.40\nC. 6.40\nD. 6.41",
+      "answerLatex": "Official answer: D.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Standard 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 2",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q02-rates-and-ratios",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q2",
+      "title": "2 Consider the function shown",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Measurement",
+      "subtopic": "Rates and Ratios",
+      "syllabusNodeIds": ["old-ms-m7"],
+      "promptLatex": "2 Consider the function shown. x O y NOT TO SCALE Which of the following could be the equation of this function?\nA. y = 2 x + 3\nB. y = 2 x - 3\nC. y = - 2 x + 3\nD. y = - 2 x - 3",
+      "answerLatex": "Official answer: C.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Standard 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 2-3",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q03-further-statistical-analysis",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q3",
+      "title": "3 Shoppers are invited to complete an online survey",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Statistical Analysis",
+      "subtopic": "Further Statistical Analysis",
+      "syllabusNodeIds": ["old-ms-s3"],
+      "promptLatex": "3 Shoppers are invited to complete an online survey. What type of sampling is this?\nA. Self-selecting\nB. Simple random\nC. Stratified\nD. Systematic",
+      "answerLatex": "Official answer: A.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Standard 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 3",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q04-network-concepts",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q4",
+      "title": "4 The map shows regions within a country",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Networks",
+      "subtopic": "Network Concepts",
+      "syllabusNodeIds": ["old-ms-n2"],
+      "promptLatex": "4 The map shows regions within a country. Swamp Desert Woods Forest Coast Mountains A network diagram is to be drawn to represent this map. Vertices will be used to indicate each region and edges will be used to represent a border shared between two regions. How many edges will there be in the network diagram?\nA. 8\nB. 7\nC. 6\nD. 5",
+      "answerLatex": "Official answer: B.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Standard 2"],
+      "assets": [
+        {
+          "id": "std2-2024-q04-region-map",
+          "type": "diagram",
+          "label": "Country region map",
+          "alt": "Map with six regions labelled Forest, Swamp, Mountains, Desert, Coast, and Woods, with shared borders between regions.",
+          "path": "/assets/diagrams/std2-2024-q04-region-map.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 3-4",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q05-further-statistical-analysis",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q5",
+      "title": "5 Pia’s marks in Year 10 assessments are shown",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Statistical Analysis",
+      "subtopic": "Further Statistical Analysis",
+      "syllabusNodeIds": ["old-ms-s3"],
+      "promptLatex": "5 Pia’s marks in Year 10 assessments are shown. The scores for each subject were normally distributed. Pia’s mark Year 10 mean Year 10 standard deviation English 78 66 6 Mathematics 80 71 10 Science 77 70 15 History 85 72 9 In which subject did Pia perform best in comparison with the rest of Year 10?\nA. English\nB. Mathematics\nC. Science\nD. History",
+      "answerLatex": "Official answer: A.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Standard 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 4",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q06-formulae-and-equations",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q6",
+      "title": "6 Consider the diagram shown",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Algebra",
+      "subtopic": "Formulae and Equations",
+      "syllabusNodeIds": ["old-ms-a1"],
+      "promptLatex": "6 Consider the diagram shown. 20 40° x Which of the following is the correct expression for the length of x?\nA. 20 cos 40°\nB. 20 sin 40° 20\nC. cos 40° 20\nD. sin 40°",
+      "answerLatex": "Official answer: A.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Standard 2"],
+      "assets": [
+        {
+          "id": "std2-2024-q06-right-triangle",
+          "type": "diagram",
+          "label": "Right triangle with side x",
+          "alt": "Right triangle with hypotenuse 20, a 40 degree angle at the base, and side x opposite the right angle.",
+          "path": "/assets/diagrams/std2-2024-q06-right-triangle.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 4-5",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q07-formulae-and-equations",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q7",
+      "title": "7 Three years ago, the price of a uniform was $180",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Algebra",
+      "subtopic": "Formulae and Equations",
+      "syllabusNodeIds": ["old-ms-a1"],
+      "promptLatex": "7 Three years ago, the price of a uniform was $180. Due to inflation, the price increased annually by 2.5%. What is the price of this uniform now?\nA. $180.14\nB. $181.35\nC. $193.50\nD. $193.84",
+      "answerLatex": "Official answer: D.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Standard 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 5",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q08-money-matters",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q8",
+      "title": "8 A bill for servicing a car is made up of: * $242 for parts, which includes...",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Financial Mathematics",
+      "subtopic": "Money Matters",
+      "syllabusNodeIds": ["old-ms-f1"],
+      "promptLatex": "8 A bill for servicing a car is made up of: * $242 for parts, which includes 10% GST * $100 for labour, excluding GST. The mechanic needs to add 10% GST onto the labour charge. How much GST does the customer pay in total?\nA. $22.00\nB. $24.20\nC. $32.00\nD. $34.20",
+      "answerLatex": "Official answer: C.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Standard 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 5-6",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q09-types-of-relationships",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q9",
+      "title": "9 The time taken to paint a school varies inversely with the number of painte...",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Algebra",
+      "subtopic": "Types of Relationships",
+      "syllabusNodeIds": ["old-ms-a4"],
+      "promptLatex": "9 The time taken to paint a school varies inversely with the number of painters completing the task. It takes 6 painters a total of 20 days to paint a school. How many days would it take 15 painters to paint the same school?\nA. 4.5\nB. 8\nC. 15.5\nD. 50",
+      "answerLatex": "Official answer: B.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Standard 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 6",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q10-types-of-relationships",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q10",
+      "title": "10 p Consider the formula s = wt + 2 Which of the following correctly shows p...",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Algebra",
+      "subtopic": "Types of Relationships",
+      "syllabusNodeIds": ["old-ms-a4"],
+      "promptLatex": "10 p Consider the formula s = wt + 2 Which of the following correctly shows p as the subject of the formula?\nA. p = 2 wt - s\nB. p = 2 wt - 2 s\nC. p = 2 s - wt\nD. p = 2 s - 2 wt",
+      "answerLatex": "Official answer: D.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Standard 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 6",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q11-formulae-and-equations",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q11",
+      "title": "11 A train left Richmond at 6:42 am and arrived at Central Station at 8:04 am",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Algebra",
+      "subtopic": "Formulae and Equations",
+      "syllabusNodeIds": ["old-ms-a1"],
+      "promptLatex": "11 A train left Richmond at 6:42 am and arrived at Central Station at 8:04 am. The distance travelled by the train from Richmond to Central was 61 km. What was the average speed of this train, correct to the nearest km / h?\nA. 38\nB. 45\nC. 50\nD. 74",
+      "answerLatex": "Official answer: B.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Standard 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 6-7",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q12-formulae-and-equations",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q12",
+      "title": "12 A survey of 370 people was conducted to investigate the association betwee...",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Algebra",
+      "subtopic": "Formulae and Equations",
+      "syllabusNodeIds": ["old-ms-a1"],
+      "promptLatex": "12 A survey of 370 people was conducted to investigate the association between watching Anime and the age of the person. The two-way table shows the responses collected. Age Watching Watches Anime Does not watch Anime TOTAL 30 years old and under 152 61 213 Over 30 years old 34 123 157 TOTAL 186 184 370 Approximately what percentage of the over 30-year-olds watch Anime?\nA. 9%\nB. 18%\nC. 22%\nD. 42%",
+      "answerLatex": "Official answer: C.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Standard 2"],
+      "assets": [
+        {
+          "id": "std2-2024-q12-two-way-table",
+          "type": "table",
+          "label": "Anime and age two-way table",
+          "alt": "Two-way table showing counts of people who watch or do not watch Anime, split by 30 years old and under, and over 30 years old.",
+          "path": "/assets/diagrams/std2-2024-q12-two-way-table.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 7",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q13-investments-and-loans",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q13",
+      "title": "13 José takes out a loan of $9000",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Financial Mathematics",
+      "subtopic": "Investments and Loans",
+      "syllabusNodeIds": ["old-ms-f4"],
+      "promptLatex": "13 José takes out a loan of $9000. Simple interest is charged on the loan. The loan and the interest charged will be repaid by making monthly repayments of $300 over 4 years. What simple interest rate per annum, to the nearest percent, is charged on the loan?\nA. 15%\nB. 38%\nC. 40%\nD. 60%",
+      "answerLatex": "Official answer: A.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Standard 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 7-8",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q14-money-matters",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q14",
+      "title": "14 Year 11 is making pizzas to raise money for a charity",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Financial Mathematics",
+      "subtopic": "Money Matters",
+      "syllabusNodeIds": ["old-ms-f1"],
+      "promptLatex": "14 Year 11 is making pizzas to raise money for a charity. The cost ( C ) and revenue ( R ) in dollars, when x pizzas are sold are represented by the equations C = 2.5 x + 6 R = 8 x Enough pizzas are sold so that a profit is made. By how much does the profit increase for each additional pizza sold?\nA. $2.50\nB. $5.50\nC. $6.00\nD. $8.00",
+      "answerLatex": "Official answer: B.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Standard 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 8",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q15-formulae-and-equations",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q15",
+      "title": "15 Some data are used to create a box plot shown",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Algebra",
+      "subtopic": "Formulae and Equations",
+      "syllabusNodeIds": ["old-ms-a1"],
+      "promptLatex": "15 Some data are used to create a box plot shown. A histogram is created from the same set of data. Which of these histograms is NOT possible for the given box plot?\nA. 0 1 2 3 4\nB. 0 1 2 3 4\nC. 1 2 3 4 0\nD. 0 1 2 3 4",
+      "answerLatex": "Official answer: D.",
+      "workingLatex": [],
+      "tags": ["official-draft", "2024", "multiple-choice", "Mathematics Standard 2"],
+      "assets": [
+        {
+          "id": "std2-2024-q15-boxplot-histograms",
+          "type": "graph",
+          "label": "Box plot and histogram options",
+          "alt": "A box plot and four histogram options labelled A to D for determining which histogram is not possible.",
+          "path": "/assets/diagrams/std2-2024-q15-boxplot-histograms.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 8",
+        "markingGuideRef": "Marking guidelines page 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q16-network-concepts",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q16",
+      "title": "A network of towns and the distances between them in kilometres is shown",
+      "marks": 4,
+      "style": "short-answer",
+      "topic": "Networks",
+      "subtopic": "Network Concepts",
+      "syllabusNodeIds": ["old-ms-n2"],
+      "promptLatex": "Question 16\n(4 marks) A network of towns and the distances between them in kilometres is shown. J T 23 30 32 55 25 29 38 NOT TO SCALE 25 25 48 15 20 M C W G H Y\n(a)\nWhat is the shortest path from T to H? 2\n(b)\nA truck driver needs to travel from Y to G but knows that the road from C to G is closed. What is the length of the shortest path the truck driver can take from Y to G after the road closure? 2",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 16 (a)\n-\nProvides the correct path 2\n-\nProvides a continuous path from T to H 1 TYWH\nQuestion 16 (b)\n-\nProvides correct solution 2\n-\nProvides a continuous path from Y to G, without C to G 1 YWHMG is 89 km",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 2 marking feedback",
+        "betterResponses": [
+          "identify the correct path and its weight",
+          "correctly label a path using letters",
+          "understand the difference between identifying a path and calculating its length find the 2 paths and then clearly showed the vertices which related to the shortest path."
+        ],
+        "improvementAreas": [
+          "following the path they are trying to state and ensuring vertices are not missed",
+          "including the start and end points when labelling a path",
+          "understanding that diagrams are not to scale and a shorter path may appear longer on the network diagram. Mathematics Standard 2 - HSC marking feedback 2024 Page 2 of 12"
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 2"],
+      "assets": [
+        {
+          "id": "std2-2024-q16-town-network",
+          "type": "diagram",
+          "label": "Town network with distances",
+          "alt": "Weighted network of towns J, T, Y, W, C, G, M, and H with distances labelled on each road.",
+          "path": "/assets/diagrams/std2-2024-q16-town-network.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 10-11",
+        "markingGuideRef": "Marking guidelines pages 2",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q17-money-matters",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q17",
+      "title": "The cost of electricity is 30",
+      "marks": 2,
+      "style": "short-answer",
+      "topic": "Financial Mathematics",
+      "subtopic": "Money Matters",
+      "syllabusNodeIds": ["old-ms-f1"],
+      "promptLatex": "Question 17\n(2 marks) The cost of electricity is 30.13 cents per kWh. Calculate the cost of using a 650 W air conditioner for 6 hours. 2 Please turn over",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 17\n-\nProvides correct answer 2\n-\nPerforms an appropriate conversion, or equivalent merit 1 650 # 6 # $0.3013 1000 = $1.18",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 2 marking feedback",
+        "betterResponses": [
+          "correctly convert both the electricity usage and cents to dollars",
+          "round to 2 decimal places."
+        ],
+        "improvementAreas": [
+          "knowing the correct conversion, for example, 1 kW = 1000 W",
+          "converting cents to dollars",
+          "understanding that this question involves two conversions."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 11-12",
+        "markingGuideRef": "Marking guidelines pages 2-3",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q18-network-concepts",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q18",
+      "title": "The diagram shows a network with weighted edges",
+      "marks": 3,
+      "style": "short-answer",
+      "topic": "Networks",
+      "subtopic": "Network Concepts",
+      "syllabusNodeIds": ["old-ms-n2"],
+      "promptLatex": "Question 18\n(3 marks) The diagram shows a network with weighted edges. 2 4 6 2 2 1 1 3 5 4 4 3 5 4 A B C E F G H I J D\n(a)\nDraw a minimum spanning tree for this network and determine its weight. 2 A B C E F G H I J D Weight =\n(b)\nIs it possible to find another spanning tree with the same weight? Give a reason for your answer. 1",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 18 (a)\n-\nProvides correct solution 2\n-\nDraws a spanning tree, or equivalent merit 1 2 4 2 1 1 3 4 4 3 A B C E F G H I J D Weight = 24\nQuestion 18 (b)\n-\nProvides a correct reason for why it is possible to find another spanning tree with the same weight 1 Yes, use BC instead of FC as the weight of BC is the same as the weight of FC",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 2 marking feedback",
+        "betterResponses": [
+          "draw the correct minimum spanning tree (using a ruler) with weighted edges in their diagram",
+          "calculate the correct weight of their spanning tree",
+          "identify either 𝐹𝐶 and 𝐵𝐶 in the correct minimum spanning tree as having the same weight."
+        ],
+        "improvementAreas": [
+          "writing down the weighted edges, for example, weights on each edge of their tree",
+          "identify two edges with the same weight that could be swapped."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 2"],
+      "assets": [
+        {
+          "id": "std2-2024-q18-weighted-network",
+          "type": "diagram",
+          "label": "Weighted network",
+          "alt": "Weighted network with vertices A to J and edges labelled with weights used for a minimum spanning tree question.",
+          "path": "/assets/diagrams/std2-2024-q18-weighted-network.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 12-13",
+        "markingGuideRef": "Marking guidelines pages 3-4",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q19-types-of-relationships",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q19",
+      "title": "A teacher was exploring the relationship between students’ marks for an assig...",
+      "marks": 3,
+      "style": "short-answer",
+      "topic": "Algebra",
+      "subtopic": "Types of Relationships",
+      "syllabusNodeIds": ["old-ms-a4"],
+      "promptLatex": "Question 19\n(3 marks) A teacher was exploring the relationship between students’ marks for an assignment and their marks for a test. The data for five different students are shown on the graph. The least-squares regression line is also shown. 1 2 0 4 0 8 12 Test mark 16 24 y 20 3 4 Assignment mark 5 6 7 8 9 10 x\n(a)\nWhat is the equation of the least-squares regression line for this dataset? 2\n(b)\nAnother student, whose marks are not on the graph, scored 5 for the assignment and 12 on the test. Did this student do better or worse on the test than the regression line predicts? Provide a reason for your answer. 1",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 19 (a)\n-\nProvides correct solution 2\n-\nFinds the y-intercept or gradient, or equivalent merit 1 14 m = 10 = 1.4 y = 1.4 x + 6\nQuestion 19 (b)\n-\nProvides correct reason 1 Worse as the predicted test mark was 13 instead of 12.",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 2 marking feedback",
+        "betterResponses": [
+          "calculate the gradient and 𝑦-intercept from graph",
+          "express the equation in terms of 𝑥 and 𝑦",
+          "understand the least-squares regression line in the context of the question."
+        ],
+        "improvementAreas": [
+          "using the graph rather than calculator function to produce the equation of the line",
+          "finding two clear points to calculate gradient accurately",
+          "ensuring there is a subject to the equation of the least-squares regression line",
+          "if using the calculator in statistics mode, identify that B is the gradient and A is the 𝑦-intercept in their equation leading to 𝑦 = 𝐴 + 𝐵𝑥. Mathematics Standard 2 - HSC marking feedback 2024 Page 3 of 12"
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 2"],
+      "assets": [
+        {
+          "id": "std2-2024-q19-regression-scatterplot",
+          "type": "graph",
+          "label": "Assignment and test regression scatterplot",
+          "alt": "Scatterplot of assignment mark against test mark with a least-squares regression line through the data.",
+          "path": "/assets/diagrams/std2-2024-q19-regression-scatterplot.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 13-14",
+        "markingGuideRef": "Marking guidelines pages 4-5",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q20-investments-and-loans",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q20",
+      "title": "The table shows the future value for an annuity of $1 for varying interest ra...",
+      "marks": 3,
+      "style": "short-answer",
+      "topic": "Financial Mathematics",
+      "subtopic": "Investments and Loans",
+      "syllabusNodeIds": ["old-ms-f4"],
+      "promptLatex": "Question 20\n(3 marks) The table shows the future value for an annuity of $1 for varying interest rates and time periods. Period Rate 1% 2% 3% 4% 5% 1 1.0100 1.0200 1.0300 1.0400 1.0500 2 2.0301 2.0604 2.0909 2.1216 2.1525 3 3.0604 3.1216 3.1836 3.2465 3.3101 4 4.1010 4.2040 4.3091 4.4163 4.5256 5 5.1520 5.3081 5.4684 5.6330 5.8019 6 6.2135 6.4343 6.6625 6.8983 7.1420 7 7.2857 7.5830 7.8923 8.2142 8.5491 8 8.3685 8.7546 9.1591 9.5828 10.0266\n(a)\nKen invests $200 at the start of each year for eight years, at an interest rate of 5% per annum. Calculate the future value of Ken’s investment. 1\n(b)\nShay is planning to take a holiday in three years. She needs $4500 for this holiday and will make regular six-monthly payments into an account that earns interest at the rate of 4% per annum, compounded 6 monthly. What is the minimum amount Shay needs to pay into this account every 6 months? Give your answer to the nearest $10. Support your answer with calculations. 2",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 20 (a)\n-\nProvides correct answer 1 $200 # 10.0266 = $2005.32\nQuestion 20 (b)\n-\nProvides correct solution 2\n-\nFinds the correct rate, or equivalent merit 1 4 r = % 2 = 2% n = 3 # 2 = 6 4500 Investment per 6 months = 6.4343 = 699.37... = $700 rounded to nearest $10",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 2 marking feedback",
+        "betterResponses": [
+          "correctly identify the value of 10.0266 from the table and use it to calculate the future value of Ken’s investment",
+          "correctly identify the table value of 5% and 8 periods as 10.0266 and multiplied this decimal by the $200 annuity to calculate the correct future value",
+          "note the ‘compounded 6 monthly’ and adjusted interest rates and time periods accordingly (b)."
+        ],
+        "improvementAreas": [
+          "understanding when to divide by the interest factor and when to multiply",
+          "realising that if a question has a table provided, the solution requires the table to be used to calculate the solution and not a formula."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 2"],
+      "assets": [
+        {
+          "id": "std2-2024-q20-annuity-table",
+          "type": "table",
+          "label": "Future value annuity table",
+          "alt": "Table of future value factors for an annuity of one dollar for periods 1 to 8 and rates from 1 percent to 5 percent.",
+          "path": "/assets/diagrams/std2-2024-q20-annuity-table.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 14-15",
+        "markingGuideRef": "Marking guidelines pages 5-6",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q21-investments-and-loans",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q21",
+      "title": "William has a reducing balance loan on which he owes $5590",
+      "marks": 3,
+      "style": "short-answer",
+      "topic": "Financial Mathematics",
+      "subtopic": "Investments and Loans",
+      "syllabusNodeIds": ["old-ms-f4"],
+      "promptLatex": "Question 21\n(3 marks) William has a reducing balance loan on which he owes $5590. He makes monthly repayments of $110. The loan company charges interest at 24% per annum, compounded monthly. The spreadsheet shows some of the information for the next two months of the loan.\n(a)\nComplete the entries in the spreadsheet to show the balance owing on the loan at the end of two months. 2 1 A Month B C D Principal Interest charged Amount repaid Balance owing 2 3 1 2 $5590.00 $111.80 $110.00 $110.00 E\n(b)\nExplain why the loan will never be repaid if William continues to make repayments of $110 per month. 1",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 21 (a)\n-\nProvides correct solution 2\n-\nProvides one correct entry in the table 1 A B C D E 1 Month Principal Interest charged Amount repaid Balance owing 2 1 $5590.00 $111.80 $110.00 $5591.80 3 2 $5591.80 $111.84 $110.00 $5593.64 ` Balance owing = $5593.64\nQuestion 21 (b)\n-\nProvides a correct reason 1 Loan will never be repaid as the interest charged per month is more than the monthly repayment of $110. Answers could include: The balance owing on the loan is increasing.",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 2 marking feedback",
+        "betterResponses": [
+          "fill in the table correctly and ensuring correct rounding",
+          "link the higher interest charge to an increasing balance",
+          "calculate the monthly interest rate",
+          "explain the impact of a greater interest charge (or lower repayment) on the balance of a loan."
+        ],
+        "improvementAreas": [
+          "interpreting the first row of the table to determine when to add or subtract cells from each other",
+          "understanding what impact a repayment lower than the interest being charged will have on the balance of a loan. Mathematics Standard 2 - HSC marking feedback 2024 Page 4 of 12"
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 15-16",
+        "markingGuideRef": "Marking guidelines pages 6-7",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q22-types-of-relationships",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q22",
+      "title": "The graph shows the populations of two different animals, W and K, in a conse...",
+      "marks": 3,
+      "style": "short-answer",
+      "topic": "Algebra",
+      "subtopic": "Types of Relationships",
+      "syllabusNodeIds": ["old-ms-a4"],
+      "promptLatex": "Question 22\n(3 marks) The graph shows the populations of two different animals, W and K, in a conservation park over time. The y -axis is the size of the population and the x -axis is the number of years since 1985. Population W is modelled by the equation y = A # ^ 1.055 h x Population K is modelled by the equation y = B # ^ 0.97 h x 3 10 0 50 100 150 200 250 300 350 400 y 0 Population 20 Number of years since 1985 30 40 50 55 x 5 15 25 35 45 Complete the table using the information provided. Population W Population K Population in 1985 A = 34 B = Percentage yearly change in the population Predicted population when x = 50 61",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 22\n-\nCompletes the table correctly 3\n-\nProvides two correct entries 2\n-\nProvides one correct entry 1 Population W Population K Population in 1985 A = 34 B = 280 Percentage yearly change in the population 5.5% - 3% Population when x = 50 494 61 34 ^ 1.055 h 50 = 494.426... = 494",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 2 marking feedback",
+        "betterResponses": [
+          "correctly read the initial value of population B from the graph",
+          "determine the population when 𝑥 = 50",
+          "understand that 1.055 meant a growth of 5.5% and 0.97 was a decrease of 3%",
+          "interpret the exponential growth, base > 1, relate to a standard annualised percentage increase as (1 + 𝑟) compound growth per time-period, and interpret the exponential decay, base < 1, relate to a standard annualised percentage decrease as (1 - 𝑟) compound growth per time-period."
+        ],
+        "improvementAreas": [
+          "distinguishing between the percentage change and the factor (1 ± 𝑟)",
+          "identifying which line in the diagram was W and which was K by interpreting the information given",
+          "understanding that 5.5% increase is not 105.5% and understanding that 3% decrease is not 97%."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 2"],
+      "assets": [
+        {
+          "id": "std2-2024-q22-population-graph-table",
+          "type": "graph",
+          "label": "Animal population graph and table",
+          "alt": "Graph of two animal populations over time and a table to complete for populations W and K.",
+          "path": "/assets/diagrams/std2-2024-q22-population-graph-table.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 16-17",
+        "markingGuideRef": "Marking guidelines pages 7",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q23-rates-and-ratios",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q23",
+      "title": "Zazu works a 38-hour week and is paid at an hourly rate of $45",
+      "marks": 3,
+      "style": "short-answer",
+      "topic": "Measurement",
+      "subtopic": "Rates and Ratios",
+      "syllabusNodeIds": ["old-ms-m7"],
+      "promptLatex": "Question 23\n(3 marks) Zazu works a 38-hour week and is paid at an hourly rate of $45. Any overtime hours worked are paid at time-and-a-half. In a particular week, Zazu worked the regular 38 hours and some overtime hours. In that week Zazu earned $2790. How many hours of overtime did Zazu work in that week? 3 Please turn over",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 23\n-\nProvides correct solution 3\n-\nFinds Zazu’s normal time earnings and overtime hourly rate, or equivalent merit 2\n-\nFinds Zazu’s normal time earnings, or equivalent merit 1 Normal time earnings = 38 # 45 = 1710 Overtime paid = 2790 - 1710 = 1080 $1080 Overtime hours = ^ 45 # 1.5 h = 16 hours Therefore 16 hours overtime.",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 2 marking feedback",
+        "betterResponses": [
+          "calculate the time-and-a-half rate of $67.50",
+          "understand that overtime hours are different to equivalent normal hours",
+          "calculate the amount paid for overtime",
+          "total earnings for the week."
+        ],
+        "improvementAreas": [
+          "understanding the difference between overtime rates and normal hourly rates. Mathematics Standard 2 - HSC marking feedback 2024 Page 5 of 12"
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 17-18",
+        "markingGuideRef": "Marking guidelines pages 7-8",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q24-formulae-and-equations",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q24",
+      "title": "Sarah, a 60 kg female, consumes 3 glasses of wine at a family dinner over 2",
+      "marks": 4,
+      "style": "short-answer",
+      "topic": "Algebra",
+      "subtopic": "Formulae and Equations",
+      "syllabusNodeIds": ["old-ms-a1"],
+      "promptLatex": "Question 24\n(4 marks) Sarah, a 60 kg female, consumes 3 glasses of wine at a family dinner over 2.5 hours. Note: there are 1.2 standard drinks in one glass of wine. The blood alcohol content (BAC) for females can be estimated by 10 N - 7.5 H BAC =, female 5.5 M where N = number of standard drinks H = number of hours drinking M = mass in kilograms.\n(a)\nCalculate Sarah’s BAC at the end of the dinner, correct to 3 decimal places. 2\n(b)\nThe time it takes a person’s BAC to reach zero is given by BAC Time = 0.015 Calculate the time it takes for Sarah’s BAC to return to zero, assuming she stopped drinking after 2.5 hours. Give your answer to the nearest minute. 2",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 24 (a)\n-\nProvides correct answer 2\n-\nAttempts to use the BAC formula 1 10 ^ 1.2 # 3 h - 7.5 # 2.5 BAC = 5.5 # 60 = 0.0522... = 0.052 (to 3 decimal places)\nQuestion 24 (b)\n-\nProvides correct answer in hours and minutes 2\n-\nCorrect substitution of previous answer, or equivalent merit 1 0.052 Time = 0.015 = 3 hours 28 minutes",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 2 marking feedback",
+        "betterResponses": [
+          "convert 1.2 standard drinks in one glass of wine to (1.2 × 3) standard drinks in three glasses of wine",
+          "substitute the given values into the blood alcohol content (BAC) formula correctly",
+          "utilise the degree/minutes button on the calculator and correctly interpret the answer to the nearest minute."
+        ],
+        "improvementAreas": [
+          "converting a decimal to time in hours and minutes",
+          "using the calculator and the rounding to 3 decimal places",
+          "ensuring all values are correctly substituted into the formula, recognising there are some mathematical calculations required prior to substituting."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 18-19",
+        "markingGuideRef": "Marking guidelines pages 8-9",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q25-investments-and-loans",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q25",
+      "title": "Alex and Jun each invest $1800 for 5 years",
+      "marks": 3,
+      "style": "short-answer",
+      "topic": "Financial Mathematics",
+      "subtopic": "Investments and Loans",
+      "syllabusNodeIds": ["old-ms-f4"],
+      "promptLatex": "Question 25\n(3 marks) Alex and Jun each invest $1800 for 5 years. * Alex’s investment earns simple interest at a rate of 7.5% per annum. * Jun’s investment earns interest at a rate of 6.0% per annum, compounding quarterly. By calculating the interest earned over the 5 years, determine who will have the greater amount. 3 Please turn over",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 25\n-\nProvides correct solution 3\n-\nCalculates Jun’s interest, or equivalent merit 2\n-\nCalculates Alex’s interest, or equivalent merit 1 Alex’s interest after 5 years = 1800 # 7.5% # 5 = $675 4 × 5 6 Jun’s investment at 5 years = 1800 # d 1 + % n 4 = 2424.339... Interest = 2424.34 - 1800 = $624.34 ` Alex earns more interest.",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 2 marking feedback",
+        "betterResponses": [
+          "know the difference between simple interest and compound interest",
+          "compare Alex and Jun’s future values or compare their interest values from the simple interest and compound interest calculations",
+          "write a concluding statement",
+          "recognise that they were calculating different values for each person and then make the appropriate adjustment."
+        ],
+        "improvementAreas": [
+          "converting the rate and periods into the compounding periods stated in the question, particularly for interest compounding quarterly",
+          "understanding that interest or future values should be compared to see the difference in interest earnt for questions with two different interest type questions",
+          "identifying the compound interest formula gives the future value, not the interest",
+          "identifying the simple interest formula gives the interest not the future value. Mathematics Standard 2 - HSC marking feedback 2024 Page 6 of 12"
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 19-20",
+        "markingGuideRef": "Marking guidelines pages 9",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q26-applications-of-measurement",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q26",
+      "title": "A sheet of metal is folded to make a gutter, as shown",
+      "marks": 3,
+      "style": "short-answer",
+      "topic": "Measurement",
+      "subtopic": "Applications of Measurement",
+      "syllabusNodeIds": ["old-ms-m1"],
+      "promptLatex": "Question 26\n(3 marks) A sheet of metal is folded to make a gutter, as shown. The cross-section of the gutter is a rectangle of width w cm and height h cm. 3 h w The area, A cm 2, of the cross-section can be modelled by the quadratic formula A = - 0.5 w 2 + 20 w A graph of this model is shown. 40 O A w Find the width and height of the rectangle which will give the greatest possible area of the cross-section.",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 26\n-\nProvides correct solution 3\n-\nFinds correct maximum area, or equivalent merit 2\n-\nFinds the width corresponding to maximum area, or equivalent merit 1 A = - 0.5 w 2 + 20 w Maximum area when width = 20 A = - 0.5 ^ 20 h 2 + 20 ^ 20 h = 200 cm 2 A = h # w 200 = h # 20 h = 10 ` width = 20 cm, height = 10 cm",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 2 marking feedback",
+        "betterResponses": [
+          "view the parabola as symmetrical to find the value halfway between 0 and 40",
+          "substitute 𝑥 = 20 into the equation to find the maximum area",
+          "use the area formula for a rectangle to find the height."
+        ],
+        "improvementAreas": [
+          "making markings in the middle of the parabola on the horizontal axis",
+          "linking values on the horizontal axis (variable) to the formula and substituting values into the given quadratic equation",
+          "understanding the symmetry of a parabola."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 2"],
+      "assets": [
+        {
+          "id": "std2-2024-q26-gutter-graph",
+          "type": "graph",
+          "label": "Gutter cross-section and area graph",
+          "alt": "Diagram of a folded metal gutter with width w and height h, and a quadratic area graph against w.",
+          "path": "/assets/diagrams/std2-2024-q26-gutter-graph.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 20-21",
+        "markingGuideRef": "Marking guidelines pages 9-10",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q27-investments-and-loans",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q27",
+      "title": "A couple borrows $30 000 to be repaid in equal monthly repayments of $280 ove...",
+      "marks": 3,
+      "style": "short-answer",
+      "topic": "Financial Mathematics",
+      "subtopic": "Investments and Loans",
+      "syllabusNodeIds": ["old-ms-f4"],
+      "promptLatex": "Question 27\n(3 marks) A couple borrows $30 000 to be repaid in equal monthly repayments of $280 over 10 years. After following this repayment plan for 5 years, they decide to decrease their monthly repayment to $250. As a result, it will take them an additional two years to pay off their loan. How much more will they repay in total by making this change? 3 Please turn over",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 27\n-\nProvides correct answer 3\n-\nFinds two of the repayments required, or equivalent merit 2\n-\nFinds a relevant repayment amount, or equivalent merit 1 Repayments for 5 years at 280 = 280 # 12 # 5 = 16 800 Repayments for 7 years at 250 = 21 000 Total repayment = 16 800 + 21 000 = 37 800 Repayment for 10 years at 280 = 33 600 ` Difference = $37 800 - $33 600 = $4200",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 2 marking feedback",
+        "betterResponses": [
+          "calculate the 5, 7 and 10 year repayment totals showing all relevant working out",
+          "compare the 5 and 7 year total from the 10 year total",
+          "use the original loan with the 5 and 7 year total and then again with the 10 year total to calculate the interest accrued in each scenario and then finally compare the differences."
+        ],
+        "improvementAreas": [
+          "finding annual totals by multiplying by 12",
+          "calculating total repayments for different periods of time."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 21-22",
+        "markingGuideRef": "Marking guidelines pages 10",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q28-formulae-and-equations",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q28",
+      "title": "Flowers were planted in two gardens (Garden A and Garden B)",
+      "marks": 3,
+      "style": "short-answer",
+      "topic": "Algebra",
+      "subtopic": "Formulae and Equations",
+      "syllabusNodeIds": ["old-ms-a1"],
+      "promptLatex": "Question 28\n(3 marks) Flowers were planted in two gardens (Garden A and Garden B). On a particular day, 25 flowers were randomly selected from each garden and their heights measured in millimetres. The data are represented in parallel box-plots. 3 140 Garden A 145 150 155 160 165 170 175 180 185 Garden B Compare the two datasets by examining the skewness of the distributions, and the measures of central tendency and spread.",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 28\n-\nCompares the two datasets on skewness, central tendency and spread 3\n-\nCompares two of the measures of centre and spread and skewness for the two gardens, or equivalent merit 2\n-\nCompares skewness, measures of centre or spread for the two gardens, or equivalent merit 1 The dataset for Garden A is negatively skewed while the dataset for Garden B is positively skewed. The median for Garden A is higher than the median for Garden B. The IQR of Garden A is larger than the IQR of Garden B. Answers could include: The range of Garden A is larger than the range of Garden B.",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 2 marking feedback",
+        "betterResponses": [
+          "explicitly compare the skewness, central tendency, and spread of the data from each garden",
+          "interpret the boxplots to use specific values for median, range or inter-quartile range to support their comparisons",
+          "use specific language to describe the shape of a distribution, for example, ‘positively skewed’ or ‘negatively skewed’."
+        ],
+        "improvementAreas": [
+          "ensuring that the three areas of skewness, central tendency, and spread were addressed in their response",
+          "recognising that the median is the only measure of central tendency that can be deduced from a box-plot",
+          "identifying positive and negative skew in data and understanding the difference between the two. Mathematics Standard 2 - HSC marking feedback 2024 Page 7 of 12"
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 22-23",
+        "markingGuideRef": "Marking guidelines pages 10-11",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q29-investments-and-loans",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q29",
+      "title": "The graph shows the decreasing value of an asset",
+      "marks": 4,
+      "style": "short-answer",
+      "topic": "Financial Mathematics",
+      "subtopic": "Investments and Loans",
+      "syllabusNodeIds": ["old-ms-f4"],
+      "promptLatex": "Question 29\n(4 marks) The graph shows the decreasing value of an asset. 4 10 4 0 0 Value of asset ($) 50 000 Number of years NOT TO SCALE For the first 4 years, the value of the asset depreciated by $1500 per year, using a straight-line method of depreciation. After the end of the 4th year, the method of depreciation changed to the declining-balance method at the rate of 35% per annum. What is the total depreciation at the end of 10 years? Questions 16-29 are worth 44 marks in total",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 29\n-\nProvides correct solution 4\n-\nUses the declining-balance method with correct values for r, n and V 0, or equivalent merit 3\n-\nAttempts to use the declining-balance method with an initial value from the straight-line method, or equivalent merit 2\n-\nAttempts to use straight-line method, or equivalent merit 1 Value after 4 years: Using straight-line method = 50 000 - 1500 # 4 = 44 000 Value after the next 6 years: Using declining-balance method = 44 000 ^ 1 - 35% h 6 = 3318.43... Total depreciation = 50 000 - 3318.43 = $46 681.57",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 2 marking feedback",
+        "betterResponses": [
+          "calculate the salvage value for the straight-line depreciation component",
+          "substitute the salvage value from the straight-line method at the end of the 4 years into the declining-balance formula as the initial value",
+          "subtract the final salvage value from the original value to calculate the total depreciation."
+        ],
+        "improvementAreas": [
+          "knowing the difference between straight line and declining balance depreciation",
+          "selecting the correct formula from the reference sheet and using it correctly",
+          "understanding the salvage value at the end of the 4 years is the initial value of the next part of the calculation",
+          "understanding that ‘depreciation’ is the loss in value."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 23-24",
+        "markingGuideRef": "Marking guidelines pages 11",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q30-bivariate-data-analysis",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q30",
+      "title": "A researcher is studying anacondas (a type of snake)",
+      "marks": 3,
+      "style": "short-answer",
+      "topic": "Statistical Analysis",
+      "subtopic": "Bivariate Data Analysis",
+      "syllabusNodeIds": ["old-ms-s4"],
+      "promptLatex": "Question 30\n(3 marks) A researcher is studying anacondas (a type of snake). A dataset recording the age (in years) and length (in cm) of female and male anacondas is displayed on the graph. Anacondas reach maturity at about 4 years of age. 3 2 0 50 100 150 200 250 300 350 400 450 y 0 Length (cm) 4 Age (years) 6 8 10 x 1 3 5 7 9 Female KEY Male Write THREE observations about anacondas that may be made from the scatterplot. (Note: No calculations are required.)",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 30\n-\nProvides three correct observations 3\n-\nProvides two correct observations 2\n-\nProvides one correct observation 1\n-\nFemale anacondas grow at a faster rate than males.\n-\nBoth females and males continue to grow after 4 years.\n-\nFemales are longer than males.",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 2 marking feedback",
+        "betterResponses": [
+          "successfully list at least three unique observations about anacondas",
+          "interpret the scatterplot to make observations about lengths, growth rates, and trends before and after maturity",
+          "use clear mathematical language in their response - for example, increasing at a decreasing rate."
+        ],
+        "improvementAreas": [
+          "recognising that the data cannot be used to make predictions about the length of anacondas after 10 years",
+          "understanding that the data represents the lengths of many different anacondas, and not a single anaconda over time",
+          "ensuring that they provide observations that were unique from one another",
+          "understanding how to take an observation from a scatterplot about the subject of the data rather than the data itself. Mathematics Standard 2 - HSC marking feedback 2024 Page 8 of 12"
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 2"],
+      "assets": [
+        {
+          "id": "std2-2024-q30-anaconda-scatterplot",
+          "type": "graph",
+          "label": "Anaconda age and length scatterplot",
+          "alt": "Scatterplot of anaconda age and length with separate markers for female and male anacondas.",
+          "path": "/assets/diagrams/std2-2024-q30-anaconda-scatterplot.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 24-25",
+        "markingGuideRef": "Marking guidelines pages 11-12",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q31-further-statistical-analysis",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q31",
+      "title": "A coin is biased so that it is twice as likely to show a head than a tail",
+      "marks": 3,
+      "style": "short-answer",
+      "topic": "Statistical Analysis",
+      "subtopic": "Further Statistical Analysis",
+      "syllabusNodeIds": ["old-ms-s3"],
+      "promptLatex": "Question 31\n(3 marks) A coin is biased so that it is twice as likely to show a head than a tail.\n(a)\nWhat is the probability of obtaining a head with one throw of this coin? 1\n(b)\nIn two throws of this coin, what is the probability of obtaining at least one head? 2 Please turn over",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 31 (a)\n-\nProvides correct answer 1 2 3\nQuestion 31 (b)\n-\nProvides correct solution 2\n-\nFinds probability of no heads, or equivalent merit 1 1 1 P (no heads) = # 3 3 1 = 9 1 ` P (at least 1 head) = 1 - 9 8 = 9",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 2 marking feedback",
+        "betterResponses": [
+          "use the correct formula for complimentary events",
+          "understand that a biased coin changes the probability of obtaining a head",
+          "create tree diagrams to support their finding."
+        ],
+        "improvementAreas": [
+          "constructing a correct tree diagram",
+          "simplifying probability values",
+          "understanding the probability scale and that the range of probability is 0 <= 𝑝𝑟𝑜𝑏𝑎𝑏𝑖𝑙𝑖𝑡𝑦 <= 1",
+          "understanding the difference between ‘calculating’ and ‘describing’ probabilities and when to use them to represent a solution."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 25-26",
+        "markingGuideRef": "Marking guidelines pages 12-13",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q32-applications-of-measurement",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q32",
+      "title": "A regular pentagon ABCDE is drawn inside a circle with a radius of 30 cm",
+      "marks": 4,
+      "style": "short-answer",
+      "topic": "Measurement",
+      "subtopic": "Applications of Measurement",
+      "syllabusNodeIds": ["old-ms-m1"],
+      "promptLatex": "Question 32\n(4 marks) A regular pentagon ABCDE is drawn inside a circle with a radius of 30 cm. O is the centre of the circle. 4 72° O A B E C D What is the area of the shaded region of the circle? Answer correct to 2 significant figures.",
+      "answerLatex": "Official marking guide excerpt (source-reviewed):\n\\(A_{\\text{circle}}=\\pi(30)^2=2827.433\\ldots\\).\nThe area of one central triangle is \\(\\frac12\\times30\\times30\\sin72^\\circ=427.975\\ldots\\).\nThe pentagon area is \\(5\\times427.975\\ldots=2139.877\\ldots\\).\nThe shaded area is \\(2827.433\\ldots-2139.877\\ldots=687.5\\ldots\\), which is \\(690\\text{ cm}^2\\) to 2 significant figures.",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 2 marking feedback",
+        "betterResponses": [
+          "use correct formulas for circle and area of triangle",
+          "round correctly to 2 significant figures",
+          "use the area to find the shaded region of the circle."
+        ],
+        "improvementAreas": [
+          "creating a clear sequence of mathematical calculations",
+          "understanding the difference between rounding significant figures compared to decimal places."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 2"],
+      "assets": [
+        {
+          "id": "std2-2024-q32-shaded-pentagon-circle",
+          "type": "diagram",
+          "label": "Shaded circle around regular pentagon",
+          "alt": "Regular pentagon ABCDE inscribed in a circle with centre O and a central angle of 72 degrees, with the region outside the pentagon shaded.",
+          "path": "/assets/diagrams/std2-2024-q32-shaded-pentagon-circle.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 26-27",
+        "markingGuideRef": "Marking guidelines pages 13-14",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q33-formulae-and-equations",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q33",
+      "title": "Wombats can run at a speed of 40 km/h over short distances",
+      "marks": 3,
+      "style": "short-answer",
+      "topic": "Algebra",
+      "subtopic": "Formulae and Equations",
+      "syllabusNodeIds": ["old-ms-a1"],
+      "promptLatex": "Question 33\n(3 marks) Wombats can run at a speed of 40 km/h over short distances. At this speed, how many seconds would it take a wombat to run 150 metres? 3 Please turn over",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 33\n-\nProvides correct solution 3\n-\nProvides correct calculations in hours, or equivalent merit 2\n-\nProvides correct distance conversion, or equivalent merit 1 Distance Speed = Time 0.15 km 40 km/h = T 0.15 T = 40 T = 0.00375 hours T = 0.00375 # 3600 seconds = 13.5 seconds",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 2 marking feedback",
+        "betterResponses": [
+          "convert between different units",
+          "recognise that units need to be the same to calculate time",
+          "apply the unitary method with correct conversions."
+        ],
+        "improvementAreas": [
+          "understanding the relationship between speed, distance and time and knowing the formula correctly",
+          "making sure that the units for distance, speed and time are connected, for example, distance in 𝑘𝑚, speed in 𝑘𝑚/ℎ and time in ℎ, or distance in 𝑚, speed in 𝑚/𝑠 and time in 𝑠. Mathematics Standard 2 - HSC marking feedback 2024 Page 9 of 12"
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 27-28",
+        "markingGuideRef": "Marking guidelines pages 14-15",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q34-applications-of-measurement",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q34",
+      "title": "A container for soccer balls is made using two half spheres joined to each en...",
+      "marks": 4,
+      "style": "short-answer",
+      "topic": "Measurement",
+      "subtopic": "Applications of Measurement",
+      "syllabusNodeIds": ["old-ms-m1"],
+      "promptLatex": "Question 34\n(4 marks) A container for soccer balls is made using two half spheres joined to each end of a cylindrical body. 4 23 cm Three soccer balls fit exactly inside the container. Each ball has a diameter of 23 cm. The hemispherical ends of the container just touch the surface of the soccer balls. What is the total surface area of the container? Give your answer in square metres correct to 1 decimal place.",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 34\n-\nProvides correct solution in square metres 4\n-\nFinds the total surface area, or equivalent merit 3\n-\nFinds the surface area of the cylinder or sphere 2\n-\nAttempts to find surface area of sphere, or equivalent merit 1 2 23 Surface area of sphere = 4 # p # d n 2 23 Surface area curved cylindrical body = 2 # p # # ^ 23 # 2 h 2 2 23 23 ` Total surface area = f 4 # p # d n p + d 2 # p # # 46 n 2 2 = 4985.707... = 4985.7 cm 2 = 0.5 m 2 (correct to 1 decimal place)",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 2 marking feedback",
+        "betterResponses": [
+          "convert the original measurements into metres before calculating the surface area",
+          "convert measurements to metres prior to calculating their surface area",
+          "recognise the open cylinder, rather than closed and understand that two hemispheres are equal to a sphere."
+        ],
+        "improvementAreas": [
+          "converting 𝑐𝑚 2 to 𝑚 2",
+          "using the most efficient methods and calculations to communicate their responses."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 28-29",
+        "markingGuideRef": "Marking guidelines pages 15-16",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q35-further-statistical-analysis",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q35",
+      "title": "A random variable is normally distributed with mean 0 and standard deviation 1",
+      "marks": 5,
+      "style": "extended-response",
+      "topic": "Statistical Analysis",
+      "subtopic": "Further Statistical Analysis",
+      "syllabusNodeIds": ["old-ms-s3"],
+      "promptLatex": "Question 35\n(5 marks) A random variable is normally distributed with mean 0 and standard deviation 1. The table gives the probability that this random variable is less than z z 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 1.4 Probability 0.7257 0.7580 0.7881 0.8159 0.8413 0.8643 0.8849 0.9032 0.9192 The probability values given in the table for different values of z are represented by the shaded area in the following diagram. 0 z The scores in a university examination with a large number of candidates are normally distributed with mean 58 and standard deviation 15.\n(a)\nBy calculating a z -score, find the percentage of scores that are between 58 and 70. 2\n(b)\nExplain why the percentage of scores between 46 and 70 is twice your answer to part (a). 1\n(c)\nBy using the values in the table above, find an approximate minimum score that a candidate would need to be placed in the top 10% of the candidates. 2",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 35 (a)\n-\nProvides correct solution, including a correct z -score 2\n-\nFinds z -score corresponding to 70, or equivalent merit 1 70 - 58 z = 15 = 0.8 P from table = 0.7881 P required = 0.7881 - 0.5 = 0.2881 ` 28.81%\nQuestion 35 (b)\n-\nProvides correct answer 1 The z -score for 46 is - 0.8. By symmetry the area between 46 and 58 is equal to the area between 58 and 70. So, the percentage of scores between 46 and 70 is twice 28.81%.\nQuestion 35 (c)\n-\nProvides correct solution, with evidence of using the table 2\n-\nFinds the z -score corresponding to 90th percentile, or equivalent merit 1 x - 58 1.3 = 15 x = 77.5 ` Approximate minimum score = 77 Answers could include: 78",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 2 marking feedback",
+        "betterResponses": [
+          "calculate the correct 𝑧‑ score using the formula provided",
+          "use the table to obtain the correct probability",
+          "recognise that 50% of the scores lie below the mean."
+        ],
+        "improvementAreas": [
+          "understanding that a 𝑧‑ score does not represent a probability",
+          "recognising the relevance of the score of 58 in relation to the score 70",
+          "understanding that the empirical rule cannot be used to solve problems with non-integer 𝑧‑ scores."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 2"],
+      "assets": [
+        {
+          "id": "std2-2024-q35-normal-table-diagram",
+          "type": "table",
+          "label": "Normal distribution probability table",
+          "alt": "Probability table for standard normal z values from 0.6 to 1.4 and a diagram showing shaded area to the left of z.",
+          "path": "/assets/diagrams/std2-2024-q35-normal-table-diagram.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 29-30",
+        "markingGuideRef": "Marking guidelines pages 16-17",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q36-rates-and-ratios",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q36",
+      "title": "The diagram shows two vertical flagpoles, BE and CD, set on sloping ground",
+      "marks": 4,
+      "style": "short-answer",
+      "topic": "Measurement",
+      "subtopic": "Rates and Ratios",
+      "syllabusNodeIds": ["old-ms-m7"],
+      "promptLatex": "Question 36\n(4 marks) The diagram shows two vertical flagpoles, BE and CD, set on sloping ground. C 106° 27° A 20 m B E X D 53.8 m NOT TO SCALE\n(a)\nWhat is the height of the flagpole BE, correct to 1 decimal place? 2\n(b)\nWhat is the height of the flagpole CD, correct to 1 decimal place? 2",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 36 (a)\n-\nProvides correct answer 2\n-\nAttempts to use sine rule, or equivalent merit 1 BE 53.8 = sin 27° sin 106° 53.8 BE = # sin 27° sin 106° = 25.408... = 25.4 m\nQuestion 36 (b)\n-\nProvides correct solution 2\n-\nFinds the length of BX, or equivalent merit 1 E EBC = 180° - 106° = 74° 20 tan 74° = BX 20 BX = tan 74° = 5.73... ` CD = 25.4 - 5.73 = 19.7 m (1 decimal place)",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 2 marking feedback",
+        "betterResponses": [
+          "apply the sine rule to calculate the length of 𝐵𝐸 and round their answer to one decimal place",
+          "find the length of 𝐵𝑋 using trigonometric ratios and subtract this answer from their answer from (a) and correctly rounded their answer to one decimal place",
+          "substitute into the sine rule",
+          "label angles in triangle 𝐶𝐵𝑋 correctly",
+          "use geometrical properties to find angles in triangle 𝐵𝐶𝑋."
+        ],
+        "improvementAreas": [
+          "working with shapes with multiple triangles that require both right angled and non-right- angled trigonometry",
+          "understanding what values/lengths they have found",
+          "recognising that only the sine rule can be used to calculate the length 𝐸𝐵",
+          "recognising that to calculate the length in a right-angled triangle, when only given one side they will need to use trigonometric ratios."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 2"],
+      "assets": [
+        {
+          "id": "std2-2024-q36-flagpoles-diagram",
+          "type": "diagram",
+          "label": "Flagpoles on sloping ground",
+          "alt": "Diagram showing two vertical flagpoles BE and CD on sloping ground, with lengths and angles marked.",
+          "path": "/assets/diagrams/std2-2024-q36-flagpoles-diagram.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 30-31",
+        "markingGuideRef": "Marking guidelines pages 17-18",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q37-formulae-and-equations",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q37",
+      "title": "Sakura will travel from Sydney (UTC + 10) to Rio de Janeiro (UTC - 3)",
+      "marks": 2,
+      "style": "short-answer",
+      "topic": "Algebra",
+      "subtopic": "Formulae and Equations",
+      "syllabusNodeIds": ["old-ms-a1"],
+      "promptLatex": "Question 37\n(2 marks) Sakura will travel from Sydney (UTC + 10) to Rio de Janeiro (UTC - 3). The flight from Sydney to Rio de Janeiro will take 20 hours. The flight will arrive in Rio de Janeiro at 3 pm on Wednesday 20 July. On what day and at what time will Sakura leave Sydney? 2",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 37\n-\nProvides correct solution 2\n-\nProvides 7 pm Tuesday or 4 am Thursday, or equivalent merit 1 Rio - flight time = 3 pm - 20 hours = 7 pm Tuesday 19th July + time difference 13 hours = 8 am Wednesday 20th July Alternative: Rio + time difference = 3 pm + 13 hours = 4 am Thursday 21st July - flight time = 8 am Wednesday 20th July",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 2 marking feedback",
+        "betterResponses": [
+          "demonstrate a 20-hour flight time equates to a -20 or 13-hour time difference as +13",
+          "demonstrate that -3 [Coordinated Universal Time (UTC)] and +10 (UTC) result in a 13-hour difference",
+          "keep track of days when adding and subtracting time."
+        ],
+        "improvementAreas": [
+          "knowing how to calculate the time change",
+          "converting each time zone step-by-step breaking up the problem. Mathematics Standard 2 - HSC marking feedback 2024 Page 11 of 12"
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 31-32",
+        "markingGuideRef": "Marking guidelines pages 18-19",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q38-applications-of-measurement",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q38",
+      "title": "A cake is constructed using a cylinder and a cone-shaped top",
+      "marks": 3,
+      "style": "short-answer",
+      "topic": "Measurement",
+      "subtopic": "Applications of Measurement",
+      "syllabusNodeIds": ["old-ms-m1"],
+      "promptLatex": "Question 38\n(3 marks) A cake is constructed using a cylinder and a cone-shaped top. The cylinder has diameter 30 cm and height 6 cm. 3 The ratio of the volume of the cylinder to the volume of the cone-shaped top is 5: 1. The cake is to be cut into equal slices with volume 212 cm 3 How many equal slices can be cut from the cake?",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 38\n-\nProvides correct solution 3\n-\nCalculates the volume of the cake, or equivalent merit 2\n-\nCalculates the volume of the cylinder, or equivalent merit 1 Volume of cylinder: volume of top = 5: 1 Volume of cylinder = p # 15 2 # 6 = 4241.150... = 5 parts Volume of cake = 6 parts 6 = # 4241.150 5 = 5089.38... Volume of each slice is 212 cm 3 5089.38 ` Number of slices = 212 = 24.0065... = 24 slices (to the nearest whole slice)",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 2 marking feedback",
+        "betterResponses": [
+          "select and apply the correct formula for volume of cylinder",
+          "use the ratio correctly to obtain the total volume."
+        ],
+        "improvementAreas": [
+          "selecting and applying the correct formula for volume of cylinder and cone",
+          "applying unitary method for ratios",
+          "interpreting worded questions to perform the correct calculation."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 32-33",
+        "markingGuideRef": "Marking guidelines pages 19-20",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q39-network-concepts",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q39",
+      "title": "A project involving nine activities is shown in the network diagram",
+      "marks": 3,
+      "style": "short-answer",
+      "topic": "Networks",
+      "subtopic": "Network Concepts",
+      "syllabusNodeIds": ["old-ms-n2"],
+      "promptLatex": "Question 39\n(3 marks) A project involving nine activities is shown in the network diagram. The duration of each activity is not yet known. A C B E F H I G D The following table gives the earliest start time (EST) and latest start time (LST) for three of the activities. All times are in hours. Activity EST LST A 0 2 C 0 1 I 12 12\n(a)\nWhat is the critical path? 1\n(b)\nThe minimum time required for this project to be completed is 19 hours. What is the duration of activity I? 1\n(c)\nThe duration of activity C is 3 hours. What is the maximum amount of time that could occur between the start of activity F and the end of activity H? 1",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 39 (a)\n-\nProvides correct answer 1 As there are float-times for A and C, the critical path is BEGI\nQuestion 39 (b)\n-\nProvides correct answer 1 19 - 12 = 7 hours\nQuestion 39 (c)\n-\nProvides correct answer 1 12 - 3 = 9 hours 9 - 1 = 8 hours",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 2 marking feedback",
+        "betterResponses": [
+          "correctly identify the path either written or on the diagram",
+          "make the allowance for float times when working out a critical path",
+          "determine the earliest starting time (EST) and latest starting time (LST) for each activity and use boxes on the network to clearly show this."
+        ],
+        "improvementAreas": [
+          "writing their final response in the space provided, not just drawing on the diagram",
+          "taking into consideration EST and LST",
+          "knowing and understanding forward and backward scanning."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 2"],
+      "assets": [
+        {
+          "id": "std2-2024-q39-project-network-table",
+          "type": "diagram",
+          "label": "Project network and activity table",
+          "alt": "Activity network diagram with activities A to I and a table of earliest and latest start times for activities A, C, and I.",
+          "path": "/assets/diagrams/std2-2024-q39-project-network-table.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 33-34",
+        "markingGuideRef": "Marking guidelines pages 20-21",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q40-non-right-angled-trigonometry",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q40",
+      "title": "A compass radial survey is shown",
+      "marks": 3,
+      "style": "short-answer",
+      "topic": "Measurement",
+      "subtopic": "Non-right-angled Trigonometry",
+      "syllabusNodeIds": ["old-ms-m6"],
+      "promptLatex": "Question 40\n(3 marks) A compass radial survey is shown. 3 A B (110°) D (285°) C N O 38 m 42 m 40 m 67.5 m NOT TO SCALE Given that AC is a straight line, find the bearing of C from O, correct to the nearest degree.",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 40\n-\nProvides correct solution 3\n-\nAttempts to find bearing of C from O, or equivalent merit 2\n-\nUses cosine rule in U ODA to find an angle, or equivalent merit 1 In U ODA: 38 2 + 42 2 - 67.5 2 cos E AOD = 2 # 38 # 42 = - 0.42238... E AOD = 114.985... 115° Bearing of D from O is 285° ` E DON = 75° E AOD = E DON + E AON ie 115° = 75° + E AON ` E AON = 40° Bearing of C from O = 40° + 180° (as AC is a straight line) = 220° (nearest degree)",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 2 marking feedback",
+        "betterResponses": [
+          "recognise they need to use the cosine rule first to then work out the other angles",
+          "use radial survey bearings to find the remaining angles and how to calculate bearing",
+          "work towards a final answer with the little scaffold given in the question."
+        ],
+        "improvementAreas": [
+          "knowing how to read the bearings given on the radial survey",
+          "recognising they should use cosine rule to help find unknown angle first",
+          "knowing what angles on a straight-line amount to. Mathematics Standard 2 - HSC marking feedback 2024 Page 12 of 12"
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 2"],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 34-35",
+        "markingGuideRef": "Marking guidelines pages 21-22",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "std2-2024-q41-investments-and-loans",
+      "paperId": "std2-2024",
+      "year": 2024,
+      "questionNumber": "Q41",
+      "title": "Twenty-five years ago, Phoenix deposited a single sum of money into a new ban...",
+      "marks": 4,
+      "style": "short-answer",
+      "topic": "Financial Mathematics",
+      "subtopic": "Investments and Loans",
+      "syllabusNodeIds": ["old-ms-f4"],
+      "promptLatex": "Question 41\n(4 marks) Twenty-five years ago, Phoenix deposited a single sum of money into a new bank account, earning 2.4% interest per annum compounding monthly. Present value interest factors for an annuity of $1 for various interest rates ( r ) and numbers of periods ( n ) are given in the table. 4 Rate Period\n(r)\n0.001 0.002 0.003 0.004\n(n)\n60 58.207 56.487 54.835 53.249 120 113.026 106.592 100.649 95.156 180 164.655 151.036 138.927 128.137 240 213.278 190.460 170.908 154.093 300 259.071 225.430 197.627 174.521 Phoenix made the following withdrawals from this account. * $2000 at the end of each month for the first 15 years, starting at the end of the first month. * $1200 at the end of each month for the next 10 years, starting at the end of the 181st month after the account was opened. Calculate the minimum sum that Phoenix could have deposited in order to make these withdrawals.",
+      "answerLatex": "Official marking guide excerpt:\nQuestion 41\n-\nProvides correct solution 4\n-\nMakes substantial progress towards a solution 3\n-\nDemonstrates in calculations understanding of importance of 15 years and 25 years 2\n-\nIdentifies the required interest rate, or equivalent merit 1 2.4% r = = 0.002 12 0 15 25 For 25 years need 1200 # 225.430 = 270 516 For 15 years need extra 800 # 151.036 = 120 828.80 Total = $391 344.80 2024 HSC",
+      "workingLatex": [],
+      "markingFeedback": {
+        "sourceRef": "2024 HSC Mathematics Standard 2 marking feedback",
+        "betterResponses": [
+          "convert the time periods and interest rate to monthly values",
+          "identify the appropriate interest factors from the table",
+          "break down the calculations for the different withdrawals using values from the table",
+          "use geometric series to model the two different withdrawals."
+        ],
+        "improvementAreas": [
+          "understanding that the table was provided to assist with calculations",
+          "understanding the concept of present value",
+          "completing more practice in solving financial problems using tables."
+        ]
+      },
+      "tags": ["official-draft", "2024", "section-ii", "Mathematics Standard 2"],
+      "assets": [
+        {
+          "id": "std2-2024-q41-present-value-table",
+          "type": "table",
+          "label": "Present value annuity table",
+          "alt": "Present value interest factor table for an annuity of one dollar at rates 0.001 to 0.004 for 60 to 300 periods.",
+          "path": "/assets/diagrams/std2-2024-q41-present-value-table.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+        "pageRef": "Exam paper pages 35",
+        "markingGuideRef": "Marking guidelines pages 22-23",
         "transcriptionStatus": "draft"
       }
     }
