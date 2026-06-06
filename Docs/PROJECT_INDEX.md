@@ -42,6 +42,7 @@ GoalCheck HSC is a Vite React TypeScript web app for browsing NSW HSC mathematic
 | `pnpm run data:audit-assets`                  | Confirm each cataloged pack exposes exam, marking, and feedback PDFs.            |
 | `pnpm run data:download-sources`              | Download official PDFs into ignored local cache.                                 |
 | `pnpm run data:extract-text`                  | Extract raw text from cached PDFs into ignored local output.                     |
+| `pnpm run data:ingest-additional-maths`       | Ingest configured Standard/Extension paper profiles into draft question records. |
 | `pnpm run data:promote-2025-additional-maths` | Promote the 2025 Standard and Extension source text into draft question records. |
 | `pnpm run data:extract-candidates`            | Create ignored raw candidate records from extracted source text.                 |
 | `pnpm run data:validate-candidates`           | Validate ignored raw candidate records before review.                            |

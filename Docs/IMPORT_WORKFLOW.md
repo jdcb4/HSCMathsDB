@@ -59,13 +59,25 @@ pnpm run data:extract-text -- source-adv-2025
 
 Extracted text is written to `var/extracted-text/`, which is ignored by git. This text is raw source material for manual or assisted transcription. It may contain OCR/PDF extraction artefacts and must be reviewed before any question is marked as `verified`.
 
-For the 2025 Mathematics Standard, Extension 1, and Extension 2 source packs, promote the extracted official text into draft app records with:
+For configured Mathematics Standard, Extension 1, and Extension 2 source packs, promote the extracted
+official text into draft app records with:
 
 ```powershell
-pnpm run data:promote-2025-additional-maths
+pnpm run data:ingest-additional-maths -- std1-2025
+pnpm run data:ingest-additional-maths -- std2-2025
+pnpm run data:ingest-additional-maths -- ext1-2025
+pnpm run data:ingest-additional-maths -- ext2-2025
 ```
 
-This script rewrites the relevant draft records in `src/data/hsc-math-advanced.json`, promotes the required Standard/Extension syllabus nodes, attaches marking-guide excerpts, and imports Section II marking feedback where the official feedback PDFs expose parseable bullet sections.
+The importer uses reusable core logic in `scripts/exam-ingestion-core.ts` plus paper-specific
+profiles in `scripts/additional-maths-profiles.ts`. Add new years by adding profiles for their
+source file paths, expected counts, section structure, and any explicit boundaries needed for that
+paper. Keep core behaviour in the shared module unless a source-year quirk is genuinely isolated to
+one profile.
+
+This script rewrites the relevant draft records in `src/data/hsc-math-advanced.json`, promotes the
+required Standard/Extension syllabus nodes, attaches marking-guide excerpts, and imports Section II
+marking feedback where the official feedback PDFs expose parseable bullet sections.
 
 ## 5. Create question candidates
 

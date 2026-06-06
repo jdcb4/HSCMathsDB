@@ -2,6 +2,11 @@
 
 Newest entries go at the top.
 
+## 0.11.0 - 2026-06-06
+
+- Added a reusable Standard/Extension exam-ingestion core with paper-specific profiles for source files, expected counts, section structure, and explicit PDF text boundaries.
+- Replaced the 2025-only promotion command implementation with the reusable profile-driven importer while keeping the old command name as an alias.
+
 ## 0.10.0 - 2026-06-06
 
 - Added a deterministic ingestion-quality audit for promoted exam records, covering flattened multiple-choice options, missing visual assets, mojibake, raw membership notation, stray section instructions, and collapsed multipart marking-guide excerpts.
