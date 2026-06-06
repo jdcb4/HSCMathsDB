@@ -217,6 +217,20 @@ async function main() {
   console.log(`Wrote ${outputPath}`);
   console.log(`Successful explanations: ${okCount}`);
   console.log(`Failed explanations: ${errorCount}`);
+
+  args.models.forEach((model) => {
+    const generated = output.samples
+      .flatMap((sample) => sample.explanations)
+      .filter((explanation) => explanation.model === model && explanation.status === "ok");
+    const averageMs =
+      generated.length > 0
+        ? generated.reduce((total, explanation) => total + explanation.latencyMs, 0) / generated.length
+        : 0;
+
+    console.log(
+      `${model}: ${generated.length} successful, average ${Math.round(averageMs / 100) / 10}s per response`
+    );
+  });
 }
 
 function parseArgs(values: string[]): Args {

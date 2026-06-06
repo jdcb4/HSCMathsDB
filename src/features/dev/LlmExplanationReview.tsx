@@ -128,13 +128,16 @@ export function LlmExplanationReview() {
   );
 
   const modelCounts = useMemo(() => {
-    const counts = new Map<string, { ok: number; error: number }>();
+    const counts = new Map<string, { ok: number; error: number; totalLatencyMs: number }>();
 
-    data?.models.forEach((model) => counts.set(model, { ok: 0, error: 0 }));
+    data?.models.forEach((model) => counts.set(model, { ok: 0, error: 0, totalLatencyMs: 0 }));
     data?.samples.forEach((sample) => {
       sample.explanations.forEach((explanation) => {
-        const count = counts.get(explanation.model) ?? { ok: 0, error: 0 };
+        const count = counts.get(explanation.model) ?? { ok: 0, error: 0, totalLatencyMs: 0 };
         count[explanation.status] += 1;
+        if (explanation.status === "ok") {
+          count.totalLatencyMs += explanation.latencyMs;
+        }
         counts.set(explanation.model, count);
       });
     });
@@ -194,7 +197,9 @@ export function LlmExplanationReview() {
 
         <div className="mt-4 grid gap-3 sm:grid-cols-3">
           {data.models.map((model) => {
-            const counts = modelCounts.get(model) ?? { ok: 0, error: 0 };
+            const counts = modelCounts.get(model) ?? { ok: 0, error: 0, totalLatencyMs: 0 };
+            const averageSeconds =
+              counts.ok > 0 ? Math.round((counts.totalLatencyMs / counts.ok / 1000) * 10) / 10 : 0;
 
             return (
               <button
@@ -211,6 +216,7 @@ export function LlmExplanationReview() {
                 <p className="mt-1 text-caption text-text-secondary">
                   {counts.ok} generated, {counts.error} failed
                 </p>
+                <p className="mt-1 text-caption text-text-secondary">Avg {averageSeconds}s per response</p>
               </button>
             );
           })}

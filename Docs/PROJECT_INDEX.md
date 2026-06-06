@@ -33,29 +33,29 @@ GoalCheck HSC is a Vite React TypeScript web app for browsing NSW HSC Mathematic
 
 ## Commands
 
-| Command                             | Purpose                                                               |
-| ----------------------------------- | --------------------------------------------------------------------- |
-| `pnpm run dev`                      | Start the development server.                                         |
-| `pnpm run data:validate`            | Validate the JSON corpus through the TypeScript Zod schema.           |
-| `pnpm run data:audit-sources`       | Compare the source catalog with visible official NSW pack titles.     |
-| `pnpm run data:audit-assets`        | Confirm each cataloged pack exposes exam, marking, and feedback PDFs. |
-| `pnpm run data:download-sources`    | Download official PDFs into ignored local cache.                      |
-| `pnpm run data:extract-text`        | Extract raw text from cached PDFs into ignored local output.          |
-| `pnpm run data:extract-candidates`  | Create ignored raw candidate records from extracted source text.      |
-| `pnpm run data:validate-candidates` | Validate ignored raw candidate records before review.                 |
-| `pnpm run data:report-candidates`   | Summarize ignored candidate extraction output.                        |
-| `pnpm run data:extract-images`      | Extract embedded PDF images into ignored local output.                |
-| `pnpm run data:render-pages`        | Render cached PDF pages into ignored PNG page images.                 |
+| Command                                      | Purpose                                                                           |
+| -------------------------------------------- | --------------------------------------------------------------------------------- |
+| `pnpm run dev`                               | Start the development server.                                                     |
+| `pnpm run data:validate`                     | Validate the JSON corpus through the TypeScript Zod schema.                       |
+| `pnpm run data:audit-sources`                | Compare the source catalog with visible official NSW pack titles.                 |
+| `pnpm run data:audit-assets`                 | Confirm each cataloged pack exposes exam, marking, and feedback PDFs.             |
+| `pnpm run data:download-sources`             | Download official PDFs into ignored local cache.                                  |
+| `pnpm run data:extract-text`                 | Extract raw text from cached PDFs into ignored local output.                      |
+| `pnpm run data:extract-candidates`           | Create ignored raw candidate records from extracted source text.                  |
+| `pnpm run data:validate-candidates`          | Validate ignored raw candidate records before review.                             |
+| `pnpm run data:report-candidates`            | Summarize ignored candidate extraction output.                                    |
+| `pnpm run data:extract-images`               | Extract embedded PDF images into ignored local output.                            |
+| `pnpm run data:render-pages`                 | Render cached PDF pages into ignored PNG page images.                             |
 | `pnpm run data:generate-explanation-samples` | Generate ignored LLM explanation comparison samples for the dev-only review view. |
-| `pnpm run data:report-renders`      | Summarize ignored page render metadata.                               |
-| `pnpm run data:crop-render`         | Crop a rendered PDF page into an ignored diagram candidate.           |
-| `pnpm run typecheck`                | TypeScript checking.                                                  |
-| `pnpm run lint`                     | ESLint.                                                               |
-| `pnpm run format`                   | Prettier check.                                                       |
-| `pnpm test`                         | Vitest once.                                                          |
-| `pnpm run test:watch`               | Vitest in watch mode.                                                 |
-| `pnpm run build`                    | Production build.                                                     |
-| `pnpm run verify`                   | Data validation + typecheck + lint + test + build.                    |
+| `pnpm run data:report-renders`               | Summarize ignored page render metadata.                                           |
+| `pnpm run data:crop-render`                  | Crop a rendered PDF page into an ignored diagram candidate.                       |
+| `pnpm run typecheck`                         | TypeScript checking.                                                              |
+| `pnpm run lint`                              | ESLint.                                                                           |
+| `pnpm run format`                            | Prettier check.                                                                   |
+| `pnpm test`                                  | Vitest once.                                                                      |
+| `pnpm run test:watch`                        | Vitest in watch mode.                                                             |
+| `pnpm run build`                             | Production build.                                                                 |
+| `pnpm run verify`                            | Data validation + typecheck + lint + test + build.                                |
 
 ## Key docs
 
