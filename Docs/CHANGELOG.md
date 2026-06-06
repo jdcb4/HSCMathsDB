@@ -2,6 +2,12 @@
 
 Newest entries go at the top.
 
+## 0.20.0 - 2026-06-06
+
+- Added source-reviewed prompt and answer overrides for 2025 Mathematics Standard 2 visual and formula-heavy questions.
+- Added reviewed exam-derived visual assets for 2025 Mathematics Standard 2 Questions 1, 2, 3, 8, 17, 18, 19, 20, 22, 23, 26, 28, 31, 32, 34, 35, 36, 37, 38, and 39.
+- Brought the combined 2025 Mathematics Standard 1 and Standard 2 ingestion audit to zero errors and zero warnings across all 68 questions.
+
 ## 0.19.1 - 2026-06-06
 
 - Documented how current PDF math extraction works and why it produces glyph text rather than reusable TeX.

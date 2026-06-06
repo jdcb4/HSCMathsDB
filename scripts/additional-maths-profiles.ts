@@ -1,5 +1,25 @@
 import { makeBoundaries, range, type ExamIngestionProfile } from "./exam-ingestion-core";
 
+type QuestionAsset = NonNullable<
+  NonNullable<ExamIngestionProfile["questionOverrides"]>[number]["assets"]
+>[number];
+
+function examDerivedAsset(
+  id: string,
+  type: QuestionAsset["type"],
+  label: string,
+  alt: string
+): QuestionAsset {
+  return {
+    id,
+    type,
+    label,
+    alt,
+    path: `/assets/diagrams/${id}.png`,
+    sourceStatus: "exam-derived"
+  };
+}
+
 export const additionalMathsProfiles: ExamIngestionProfile[] = [
   {
     id: "std1-2025",
@@ -326,7 +346,424 @@ export const additionalMathsProfiles: ExamIngestionProfile[] = [
         2067, 2125, 2246, 2327, 2388, 2445, 2500, 2602
       ],
       2662
-    )
+    ),
+    questionOverrides: {
+      1: {
+        promptLatex: [
+          "1 Consider the network diagram.",
+          "Which vertex has degree 4?",
+          "A. \\(A\\)",
+          "B. \\(B\\)",
+          "C. \\(C\\)",
+          "D. \\(D\\)"
+        ].join("\n"),
+        assets: [
+          examDerivedAsset(
+            "std2-2025-q01-network-degree",
+            "diagram",
+            "Network diagram",
+            "Network with vertices A, B, C, D, E and F, used to identify the vertex with degree 4."
+          )
+        ]
+      },
+      2: {
+        promptLatex: [
+          "2 Which graph could represent \\(y=4^x\\)?",
+          "A. Graph A",
+          "B. Graph B",
+          "C. Graph C",
+          "D. Graph D"
+        ].join("\n"),
+        assets: [
+          examDerivedAsset(
+            "std2-2025-q02-exponential-graph-options",
+            "graph",
+            "Graph options for y equals 4 to the x",
+            "Four graph options labelled A to D, including an increasing exponential curve, decreasing curve, decreasing line, and increasing line."
+          )
+        ]
+      },
+      3: {
+        promptLatex: [
+          "3 The network shows the distances, in kilometres, along a series of roads that connect towns.",
+          "What is the value of the largest weighted edge included in the minimum spanning tree for this network?",
+          "A. 7",
+          "B. 8",
+          "C. 9",
+          "D. 10"
+        ].join("\n"),
+        assets: [
+          examDerivedAsset(
+            "std2-2025-q03-weighted-road-network",
+            "diagram",
+            "Weighted road network",
+            "Weighted network of towns with edge distances 4, 5, 5, 6, 7, 7, 8, 9 and 10 kilometres."
+          )
+        ]
+      },
+      8: {
+        promptLatex: [
+          "8 A spinner made up of 4 colours is spun 100 times. The frequency histogram shows the results.",
+          "Which of these spinners is most likely to give the results shown?",
+          "A. Spinner A",
+          "B. Spinner B",
+          "C. Spinner C",
+          "D. Spinner D"
+        ].join("\n"),
+        assets: [
+          examDerivedAsset(
+            "std2-2025-q08-spinner-histogram-options",
+            "graph",
+            "Spinner histogram and options",
+            "Frequency histogram for red, white, green and yellow outcomes with four spinner options labelled A to D."
+          )
+        ]
+      },
+      17: {
+        promptLatex: [
+          "Question 17\n(3 marks) The scatter plot shows a bivariate dataset, where \\(x\\) is the independent variable and \\(y\\) is the dependent variable.",
+          "The points \\((0,14)\\) and \\((5,4)\\) lie on the line of best fit.",
+          "Plot the points \\((0,14)\\) and \\((5,4)\\) on the graph and hence find the equation of the line of best fit."
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "The gradient is \\(m=\\frac{4-14}{5-0}=\\frac{-10}{5}=-2\\).",
+          "Using \\(y=mx+c\\), with \\(m=-2\\) and \\(c=14\\), the equation is \\(y=-2x+14\\)."
+        ].join("\n"),
+        assets: [
+          examDerivedAsset(
+            "std2-2025-q17-scatterplot-line-grid",
+            "graph",
+            "Bivariate scatter plot",
+            "Scatter plot of a bivariate dataset with x from 0 to 6 and y from 0 to 18, used to plot a line of best fit."
+          )
+        ]
+      },
+      18: {
+        promptLatex: [
+          "Question 18\n(2 marks) A table of future value interest factors for an annuity of \\($1\\) is shown.",
+          "The prize in a lottery is an annuity of \\($5000\\) a year for 10 years, invested at 4.5% per annum compounding annually.",
+          "What will be the value of the prize at the end of 10 years?"
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "Amount \\(=\\$5000\\times12.288=\\$61\\ 440\\)."
+        ].join("\n"),
+        assets: [
+          examDerivedAsset(
+            "std2-2025-q18-annuity-factor-table",
+            "table",
+            "Future value interest factor table",
+            "Table of future value interest factors for an annuity of one dollar, with rates 1.5%, 3%, 4.5% and 6%."
+          )
+        ]
+      },
+      19: {
+        promptLatex: [
+          "Question 19\n(5 marks) The activities and corresponding durations in days for a project are shown in the network diagram.",
+          "(a) Complete the table showing the immediate prerequisites for each activity. Indicate with an \\(\\times\\) any activities without any immediate prerequisites.",
+          "(b) Find the critical path for this project AND state the minimum duration for the project.",
+          "(c) The duration of activity \\(A\\) is increased by 2. Does this affect the critical path for the project? Give a reason for your answer."
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "(a) The immediate prerequisite for \\(B\\) is \\(\\times\\); for \\(E\\) it is \\(C,D\\); and for \\(F\\) it is \\(E\\).",
+          "(b) The critical path is \\(B\\)-\\(D\\)-\\(E\\)-\\(F\\)-\\(H\\). Minimum duration \\(=4+5+5+7+5=26\\) days.",
+          "(c) No, as the float time for activity \\(A\\) is 3 days."
+        ].join("\n"),
+        assets: [
+          examDerivedAsset(
+            "std2-2025-q19-project-network-prerequisites",
+            "diagram",
+            "Project network and prerequisite table",
+            "Project activity network with durations A to H, plus a table for immediate prerequisites for activities B, E and F."
+          )
+        ]
+      },
+      20: {
+        promptLatex: [
+          "Question 20\n(3 marks) The graph of a quadratic function represented by the equation \\(h=t^2-8t+12\\) is shown.",
+          "(a) Find the values of \\(t\\) and \\(h\\) at the turning point of the graph.",
+          "(b) The graph shows \\(h=12\\) when \\(t=0\\). What is the other value of \\(t\\) for which \\(h=12\\)?"
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "(a) \\(t=\\frac{2+6}{2}=4\\), and \\(h=4^2-8\\times4+12=-4\\).",
+          "(b) Using the axis of symmetry, \\(t=4+4=8\\)."
+        ].join("\n"),
+        assets: [
+          examDerivedAsset(
+            "std2-2025-q20-quadratic-graph",
+            "graph",
+            "Quadratic graph",
+            "Graph of h equals t squared minus 8t plus 12 with intercepts at t equals 2 and t equals 6 and h-intercept 12."
+          )
+        ]
+      },
+      22: {
+        promptLatex: [
+          "Question 22\n(5 marks) A network of pipes with one cut is shown. The number on each edge gives the capacity of that pipe in L/min.",
+          "(a) What is the capacity of the cut shown?",
+          "(b) The diagram shows a possible flow for this network of pipes.",
+          "(i) What is the value of \\(x\\)? Give a reason for your answer.",
+          "(ii) Which of the pipes in the flow are at full capacity?",
+          "(iii) The maximum flow for this network is 50 L/min. Which path of pipes could have an increase in flow of 2 L/min to achieve the maximum flow?"
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "(a) Capacity \\(=26+24+12=62\\text{ L/min}\\).",
+          "(b)(i) Outflow of \\(C=5+13+12=30\\). Inflow must equal outflow, so \\(x=30\\).",
+          "(b)(ii) \\(DE\\), \\(CF\\), \\(DG\\), and \\(FG\\).",
+          "(b)(iii) \\(A\\)-\\(C\\)-\\(E\\)-\\(G\\)."
+        ].join("\n"),
+        assets: [
+          examDerivedAsset(
+            "std2-2025-q22-pipe-network-cut",
+            "diagram",
+            "Pipe network with cut",
+            "Pipe network with capacities in litres per minute and a dashed cut through edges BD, EG and CF."
+          ),
+          examDerivedAsset(
+            "std2-2025-q22-pipe-flow-network",
+            "diagram",
+            "Pipe flow network",
+            "Pipe network showing a possible flow with values including x, 18, 23, 5, 13, 12, 11, 15, 22, 1 and 8."
+          )
+        ]
+      },
+      23: {
+        promptLatex: [
+          "Question 23\n(2 marks) Company A and Company B both issue an annual dividend per share as shown in the table.",
+          "Based on the dividend yield, which company would be better to invest in?"
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "Company A yield \\(=\\frac{4.92}{25.43}\\times100\\approx19\\%\\).",
+          "Company B yield \\(=\\frac{0.45}{2.13}\\times100\\approx21\\%\\).",
+          "Company B would be better to invest in."
+        ].join("\n"),
+        assets: [
+          examDerivedAsset(
+            "std2-2025-q23-dividend-table",
+            "table",
+            "Dividend yield table",
+            "Table showing Company A current share price 25 dollars 43 cents and annual dividend 4 dollars 92 cents, and Company B share price 2 dollars 13 cents and dividend 45 cents."
+          )
+        ]
+      },
+      26: {
+        promptLatex: [
+          "Question 26\n(6 marks) A toy has a curved surface on the top which has been shaded as shown. The toy has a uniform cross-section and a rectangular base.",
+          "(a) Use two applications of the trapezoidal rule to find an approximate area of the cross-section of the toy.",
+          "(b) The total surface area of the plastic toy is \\(1300\\text{ cm}^2\\). What is the approximate area of the curved surface?",
+          "(c) The measurements shown on the diagram are given to the nearest millimetre. What is the percentage error of the measurement of 10.2 cm? Give your answer correct to 3 significant figures."
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "(a) \\(A\\approx\\frac{5.1}{2}(6+3.8)+\\frac{5.1}{2}(3.8+0)\\approx34.68\\text{ cm}^2\\).",
+          "(b) \\(1300=(2\\times34.68)+(10.2\\times40)+(6\\times40)+\\text{curved surface}\\). Therefore the curved surface area is \\(1300-717.36=582.64\\text{ cm}^2\\).",
+          "(c) Absolute error \\(=\\frac12\\times0.1\\text{ cm}=0.05\\text{ cm}\\). Percentage error \\(=\\frac{0.05}{10.2}\\times100\\%=0.4901\\ldots\\%=0.490\\%\\), to 3 significant figures."
+        ].join("\n"),
+        assets: [
+          examDerivedAsset(
+            "std2-2025-q26-toy-curved-surface",
+            "diagram",
+            "Toy with curved surface",
+            "Diagram of a toy with shaded curved top surface, uniform cross-section and dimensions 10.2 cm, 40.0 cm, 6.0 cm and 3.8 cm."
+          )
+        ]
+      },
+      28: {
+        promptLatex: [
+          "Question 28\n(3 marks) The heights of students in a class were recorded.",
+          "The results for this class are displayed in the cumulative frequency graph shown.",
+          "The shortest student in this class is 130 cm and the tallest student is 180 cm.",
+          "Construct a box-plot for this class in the space below."
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "From the graph the five-number summary is: minimum 130, \\(Q_1=135\\), median 140, \\(Q_3=160\\), maximum 180."
+        ].join("\n"),
+        assets: [
+          examDerivedAsset(
+            "std2-2025-q28-cumulative-frequency-boxplot",
+            "graph",
+            "Cumulative frequency graph and box-plot axis",
+            "Cumulative frequency graph of student heights and a blank box-plot axis from 130 cm to 180 cm."
+          )
+        ]
+      },
+      31: {
+        promptLatex: [
+          "Question 31\n(3 marks) The table shows the income tax rate for Australian residents for the 2024-2025 financial year.",
+          "At the end of the 2024-2025 financial year, Alex's tax payable was \\(\\$47\\ 420\\), excluding the Medicare levy.",
+          "What was Alex's taxable income?"
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "\\(\\$47\\ 420=\\$31\\ 288+0.37(\\text{taxable income}-\\$135\\ 000)\\).",
+          "\\(\\$16\\ 132=0.37(\\text{taxable income}-\\$135\\ 000)\\), so \\(\\$43\\ 600=\\text{taxable income}-\\$135\\ 000\\).",
+          "Taxable income \\(=\\$43\\ 600+\\$135\\ 000=\\$178\\ 600\\)."
+        ].join("\n"),
+        assets: [
+          examDerivedAsset(
+            "std2-2025-q31-income-tax-table",
+            "table",
+            "Income tax rates table",
+            "Table of Australian resident income tax rates for taxable income ranges from zero dollars to over 190 thousand dollars."
+          )
+        ]
+      },
+      32: {
+        promptLatex: [
+          "Question 32\n(3 marks) Solid spheres are placed inside a square-based pyramid as shown.",
+          "The base of the pyramid has side lengths of 14 cm. The height of the pyramid is \\(h\\) cm. The radius of each sphere is 1.5 cm.",
+          "The amount of empty space remaining inside the pyramid after 30 spheres have been placed inside the pyramid is \\(634\\text{ cm}^3\\).",
+          "What is the height, \\(h\\), of the pyramid? Give your answer correct to the nearest centimetre."
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "Volume of 30 spheres \\(=\\frac43\\pi(1.5)^3\\times30=424.115\\ldots\\).",
+          "Volume of pyramid \\(=424.115\\ldots+634=1058.115\\ldots\\).",
+          "\\(1058.115\\ldots=\\frac13(14\\times14)h\\), so \\(h=\\frac{1058.115\\ldots\\times3}{14\\times14}\\approx16.2\\text{ cm}\\).",
+          "Therefore \\(h=16\\text{ cm}\\), to the nearest centimetre."
+        ].join("\n"),
+        assets: [
+          examDerivedAsset(
+            "std2-2025-q32-pyramid-spheres",
+            "diagram",
+            "Square-based pyramid with spheres",
+            "Square-based pyramid with four visible spheres, base dimensions 14 cm by 14 cm, and height h cm."
+          )
+        ]
+      },
+      34: {
+        promptLatex: [
+          "Question 34\n(3 marks) The table shows future value interest factors for an annuity of \\($1\\).",
+          "Lin invests a lump sum of \\(\\$21\\ 000\\) for 7 years at an interest rate of 6% per annum, compounding monthly.",
+          "Yemi wants to achieve the same future value as Lin by using an annuity. Yemi plans to deposit a fixed amount into an investment account at the end of each month for 7 years. The investment account pays 6% per annum, compounding monthly.",
+          "Using the table provided, determine how much Yemi needs to deposit each month."
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "\\(n=7\\times12=84\\) periods and \\(r=\\frac{6\\%}{12}\\).",
+          "Lin's future value is \\(21\\ 000\\left(1+\\frac{6\\%}{12}\\right)^{84}=\\$31\\ 927.76\\).",
+          "Monthly deposit \\(=\\$31\\ 927.76\\div104.07393=\\$306.78\\)."
+        ].join("\n"),
+        assets: [
+          examDerivedAsset(
+            "std2-2025-q34-future-value-table",
+            "table",
+            "Future value interest factor table",
+            "Table of future value interest factors for an annuity of one dollar, with periods 7, 28, 56 and 84 and rates from 0.005 to 0.06."
+          )
+        ]
+      },
+      35: {
+        promptLatex: [
+          "Question 35\n(3 marks) The triangle \\(PTA\\) is shown. The length of \\(PA\\) is 75 m and the length of \\(PT\\) is 51 m.",
+          "The angle of depression from \\(T\\) to \\(A\\) is \\(36^\\circ\\), and the angle \\(PTA\\) is obtuse.",
+          "Find the length of \\(TA\\). Give your answer correct to 2 decimal places."
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "\\(\\angle PTA=\\theta\\). Using the sine rule, \\(\\frac{\\sin\\theta}{75}=\\frac{\\sin36^\\circ}{51}\\), so \\(\\theta=59.81\\ldots^\\circ\\).",
+          "Since \\(\\angle PTA\\) is obtuse, \\(\\angle PTA=180^\\circ-60^\\circ=120^\\circ\\).",
+          "\\(\\angle TPA=180^\\circ-120^\\circ-36^\\circ=24^\\circ\\).",
+          "\\(\\frac{TA}{\\sin24^\\circ}=\\frac{51}{\\sin36^\\circ}\\), so \\(TA=\\frac{51\\sin24^\\circ}{\\sin36^\\circ}\\approx35.29\\text{ m}\\)."
+        ].join("\n"),
+        assets: [
+          examDerivedAsset(
+            "std2-2025-q35-triangle-pta",
+            "diagram",
+            "Triangle PTA",
+            "Triangle PTA with PA equal to 75 metres, PT equal to 51 metres, a vertical height from T, and not-to-scale label."
+          )
+        ]
+      },
+      36: {
+        promptLatex: [
+          "Question 36\n(4 marks) The graph shows the salvage value of a car over 5 years.",
+          "The salvage values are based on the declining-balance method.",
+          "By what amount will the car's value depreciate during the 10th year?"
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "\\(\\$44\\ 000=\\$55\\ 000(1-r)\\), so \\(1-r=\\frac{44\\ 000}{55\\ 000}=0.8\\) and \\(r=0.2=20\\%\\).",
+          "Value after 9 years \\(=55\\ 000(1-0.2)^9=\\$7381.98\\).",
+          "Value of depreciation during the 10th year \\(=7381.98\\times0.2=\\$1476.40\\)."
+        ].join("\n"),
+        assets: [
+          examDerivedAsset(
+            "std2-2025-q36-car-salvage-graph",
+            "graph",
+            "Car salvage value graph",
+            "Graph showing a car value declining from 55 thousand dollars at year 0 to about 18 thousand dollars at year 5."
+          )
+        ]
+      },
+      37: {
+        promptLatex: [
+          "Question 37\n(4 marks) The diagram shows a park consisting of two equilateral triangles. The shaded triangle is a grassed section. All measurements on the diagram are in metres.",
+          "How long will it take to mow the grassed section if it takes 5 minutes to mow \\(20\\text{ m}^2\\)? Give your answer to the nearest minute."
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "Using the cosine rule with included angle \\(60^\\circ\\), \\(c^2=9^2+3^2-2\\times9\\times3\\cos60^\\circ\\), so \\(c\\approx7.937\\).",
+          "Area of the grassed section \\(=\\frac12\\times7.937\\times7.937\\times\\sin60^\\circ=27.2798\\ldots\\text{ m}^2\\).",
+          "Time \\(=\\frac{5}{20}\\times27.2798\\ldots=6.81\\ldots\\) minutes, which is approximately 7 minutes."
+        ].join("\n"),
+        assets: [
+          examDerivedAsset(
+            "std2-2025-q37-park-triangles",
+            "diagram",
+            "Park with equilateral triangles",
+            "Diagram of two equilateral triangles with a shaded inner grassed triangle and side lengths 3 and 9 metres."
+          )
+        ]
+      },
+      38: {
+        promptLatex: [
+          "Question 38\n(3 marks) A car's fuel efficiency is 30 miles per US gallon.",
+          "Use the conversion information shown.",
+          "Calculate the car's fuel efficiency in litres per 100 km, correct to 1 decimal place."
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "1 US gallon \\(=3.8\\text{ L}\\) and 30 miles \\(=30\\times1.6=48\\text{ km}\\).",
+          "Fuel efficiency \\(=\\frac{3.8\\text{ L}}{48\\text{ km}}\\times100=7.916\\ldots\\text{ L}/100\\text{ km}\\), so \\(7.9\\text{ L}/100\\text{ km}\\), correct to 1 decimal place."
+        ].join("\n"),
+        assets: [
+          examDerivedAsset(
+            "std2-2025-q38-conversion-table",
+            "table",
+            "Fuel efficiency conversion information",
+            "Boxed conversion information stating one US gallon equals 3.8 litres and one mile equals 1.6 kilometres, both correct to 2 significant figures."
+          )
+        ]
+      },
+      39: {
+        promptLatex: [
+          "Question 39\n(3 marks) After a dose of a medication, the amount of the medication remaining in a person can be modelled by the equation \\(y=ka^x\\), where \\(x\\) is the number of hours after taking the dose, and \\(y\\) is the amount remaining in milligrams (mg).",
+          "The graph shows the amount of the medication remaining in a person after \\(x\\) hours. Two points are also shown on the graph.",
+          "Using the information provided, find the amount of medication that remains in a person when \\(x=4\\)."
+        ].join("\n"),
+        answerLatex: [
+          "Official marking guide excerpt (source-reviewed):",
+          "At \\(x=0\\), \\(y=15\\), so \\(k=15\\).",
+          "When \\(x=2\\), \\(y=9\\). Hence \\(9=15a^2\\), so \\(a^2=\\frac{9}{15}=0.6\\) and \\(a=0.7746\\ldots\\).",
+          "When \\(x=4\\), \\(y=15(0.7746\\ldots)^4=5.4\\text{ mg}\\)."
+        ].join("\n"),
+        assets: [
+          examDerivedAsset(
+            "std2-2025-q39-medication-graph",
+            "graph",
+            "Medication remaining graph",
+            "Exponential decay graph of medication remaining in a person, with points at 15 mg when x equals 0 and 9 mg when x equals 2."
+          )
+        ]
+      }
+    }
   },
   {
     id: "std1-2024",
