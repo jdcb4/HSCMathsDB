@@ -173,7 +173,10 @@ function auditMathNotation(question: Question, collectedIssues: AuditIssue[]) {
       });
     }
 
-    if (/\b(p|q)\b/.test(value) && /(sin|cos|tan|arg|modulus|complex|circle)/i.test(value)) {
+    if (
+      /\b(p|q)\b/.test(value) &&
+      /(?:\b(?:sin|cos|tan|arg|modulus|complex|circle)\b|\\(?:sin|cos|tan|arg)\b)/i.test(value)
+    ) {
       collectedIssues.push({
         severity: "warning",
         questionId: question.id,

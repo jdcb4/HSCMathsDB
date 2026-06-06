@@ -300,6 +300,8 @@ describe("HSC selectors", () => {
     expect(database.questions.filter((question) => question.paperId === "std2-2025")).toHaveLength(40);
     expect(database.questions.filter((question) => question.paperId === "ext1-2025")).toHaveLength(14);
     expect(database.questions.filter((question) => question.paperId === "ext2-2025")).toHaveLength(16);
+    expect(database.questions.filter((question) => question.paperId === "ext1-2024")).toHaveLength(14);
+    expect(database.questions.filter((question) => question.paperId === "ext2-2024")).toHaveLength(16);
 
     expect(getSyllabusNodesForView(database, "standard-2017")).toHaveLength(24);
     expect(getSyllabusNodesForView(database, "standard-2024")).toHaveLength(25);
@@ -311,14 +313,15 @@ describe("HSC selectors", () => {
 
   it("filters question options and source packs by course", () => {
     expect(getFilterOptionsForCourse(database, "standard").years).toEqual([2025]);
-    expect(getFilterOptionsForCourse(database, "extension-1").years).toEqual([2025]);
-    expect(getFilterOptionsForCourse(database, "extension-2").years).toEqual([2025]);
+    expect(getFilterOptionsForCourse(database, "extension-1").years).toEqual([2025, 2024]);
+    expect(getFilterOptionsForCourse(database, "extension-2").years).toEqual([2025, 2024]);
     expect(getSourcePackCoverageForCourse(database, "standard").map((pack) => pack.id)).toEqual([
-      "source-std-2025"
+      "source-std-2025",
+      "source-std-2024"
     ]);
     expect(queryQuestions(database, { courseId: "standard" })).toHaveLength(68);
-    expect(queryQuestions(database, { courseId: "extension-1" })).toHaveLength(14);
-    expect(queryQuestions(database, { courseId: "extension-2" })).toHaveLength(16);
+    expect(queryQuestions(database, { courseId: "extension-1" })).toHaveLength(28);
+    expect(queryQuestions(database, { courseId: "extension-2" })).toHaveLength(32);
     expect(queryQuestions(database, { courseId: "advanced", year: 2025 })).toHaveLength(31);
   });
 
@@ -398,9 +401,9 @@ describe("HSC selectors", () => {
     const coverage = getMarkingFeedbackCoverage(database);
 
     expect(coverage.totalQuestions).toBe(database.questions.length);
-    expect(coverage.feedbackQuestionCount).toBe(139);
+    expect(coverage.feedbackQuestionCount).toBe(149);
     expect(coverage.byYear[2025]).toBe(74);
-    expect(coverage.byYear[2024]).toBe(21);
+    expect(coverage.byYear[2024]).toBe(31);
     expect(coverage.byYear[2023]).toBe(22);
     expect(coverage.byYear[2022]).toBe(22);
   });

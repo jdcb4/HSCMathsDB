@@ -2,6 +2,13 @@
 
 Newest entries go at the top.
 
+## 0.14.0 - 2026-06-06
+
+- Added source-reviewed prompt and answer overrides for 2024 Mathematics Extension 2 questions with damaged extracted notation.
+- Added reviewed source-derived diagram assets for 2024 Mathematics Extension 2 Questions 14, 15, and 16.
+- Fixed multipart marking-guide heading parsing so sections such as `Question 13 (a) (i)` do not leak into neighbouring answers.
+- Tightened the ingestion audit's pi/theta warning rule to avoid false positives from ordinary words such as `distance`.
+
 ## 0.13.0 - 2026-06-06
 
 - Added 2024 Mathematics Extension 1 and Extension 2 ingestion profiles and promoted all 30 questions as draft records through the reusable importer.

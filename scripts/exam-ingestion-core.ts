@@ -364,7 +364,7 @@ function extractFeedbackItems(lines: string[], startMarker: string, endMarker: s
 
 function findQuestionStarts(lines: SourceLine[]): Array<{ index: number; questionNumber: string }> {
   return lines
-    .filter((line) => /^Question\s+\d{1,2}(?:\s+\([a-ziv]+\))?$/.test(line.text))
+    .filter((line) => /^Question\s+\d{1,2}(?:\s+\([a-ziv]+\))*$/.test(line.text))
     .map((line) => ({
       index: line.index,
       questionNumber: line.text.match(/\d{1,2}/)?.[0] ?? ""
@@ -384,9 +384,11 @@ function cleanPrompt(lines: string[]): string {
 }
 
 function cleanAnswer(lines: string[]): string {
-  const answer = cleanStructuredText(
-    lines.filter((line) => !isNoiseLine(line) && !isMarkingGuideHeader(line)),
-    "answer"
+  const answer = stripInlinePaperNoise(
+    cleanStructuredText(
+      lines.filter((line) => !isNoiseLine(line) && !isMarkingGuideHeader(line)),
+      "answer"
+    )
   );
   return answer
     ? `Official marking guide excerpt:\n${answer}`
@@ -459,6 +461,18 @@ function mathSetMembership(quantifier: string | undefined, variable: string, set
   return `\\(${prefix}${variable} \\in \\mathbb{${setName}}\\)`;
 }
 
+function stripInlinePaperNoise(value: string): string {
+  return value
+    .replace(
+      /\s+Mathematics\s+(?:Standard(?:\s+[12])?|Advanced|Extension\s+[12])(?:\s+-\s+HSC marking feedback\s+20\d{2}\s+Page\s+\d+\s+of\s+\d+)?/g,
+      ""
+    )
+    .replace(/\s+20\d{2}\s+HSC\s+Mathematics\s+(?:Standard(?:\s+[12])?|Advanced|Extension\s+[12])$/g, "")
+    .replace(/[ \t]+\n/g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
 function normaliseText(value: string): string {
   /* eslint-disable no-irregular-whitespace */
   return value
@@ -478,7 +492,7 @@ function normaliseText(value: string): string {
 
 function isStructuralBreak(line: string, mode: "prompt" | "answer"): boolean {
   if (/^\([a-ziv]+\)$/.test(line)) return true;
-  if (/^Question\s+\d{1,2}(?:\s+\([a-ziv]+\))?$/.test(line)) return true;
+  if (/^Question\s+\d{1,2}(?:\s+\([a-ziv]+\))*$/.test(line)) return true;
   if (mode === "answer" && line === "*") return true;
   return false;
 }
