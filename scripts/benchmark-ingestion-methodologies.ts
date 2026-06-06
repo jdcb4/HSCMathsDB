@@ -9,6 +9,7 @@ import { getOpenRouterApiKey, loadDotEnv, safeFileName } from "./llm-worked-solu
 
 type Args = {
   force: boolean;
+  renderOnly: boolean;
   skipLlm: boolean;
   models: string[];
 };
@@ -200,6 +201,13 @@ async function main() {
   const args = parseArgs(process.argv.slice(2));
   await mkdir(rawRoot, { recursive: true });
 
+  if (args.renderOnly) {
+    const report = JSON.parse(await readFile(reportJsonPath, "utf8")) as BenchmarkReport;
+    await writeFile(reportHtmlPath, buildReportHtml(report), "utf8");
+    console.log(`Rendered ${reportHtmlPath} from ${reportJsonPath}`);
+    return;
+  }
+
   const modelCatalog = await fetchModelCatalog(args.models);
   const trials: TrialResult[] = [];
 
@@ -267,9 +275,10 @@ async function main() {
     conclusions: buildConclusions(trials)
   };
 
+  const publishableReport = publicReport(report);
   await writeFile(path.join(outputRoot, "report.json"), `${JSON.stringify(report, null, 2)}\n`, "utf8");
-  await writeFile(reportJsonPath, `${JSON.stringify(publicReport(report), null, 2)}\n`, "utf8");
-  await writeFile(reportHtmlPath, buildReportHtml(), "utf8");
+  await writeFile(reportJsonPath, `${JSON.stringify(publishableReport, null, 2)}\n`, "utf8");
+  await writeFile(reportHtmlPath, buildReportHtml(publishableReport), "utf8");
 
   printSummary(report);
 }
@@ -277,6 +286,7 @@ async function main() {
 function parseArgs(values: string[]): Args {
   const args: Args = {
     force: false,
+    renderOnly: false,
     skipLlm: false,
     models: defaultModels
   };
@@ -285,6 +295,8 @@ function parseArgs(values: string[]): Args {
     const value = values[index];
     if (value === "--force") {
       args.force = true;
+    } else if (value === "--render-only") {
+      args.renderOnly = true;
     } else if (value === "--skip-llm") {
       args.skipLlm = true;
     } else if (value === "--models") {
@@ -1288,8 +1300,9 @@ function printSummary(report: BenchmarkReport) {
   }
 }
 
-function buildReportHtml(): string {
+function buildReportHtml(report: BenchmarkReport): string {
   const jsonPath = "ingestion-methodology-benchmark-results.json";
+  const embeddedReport = serialiseForInlineJson(report);
   return `<!doctype html>
 <html lang="en">
   <head>
@@ -1392,11 +1405,19 @@ function buildReportHtml(): string {
       <p class="muted">A review surface for deterministic and LLM-assisted exam ingestion experiments.</p>
     </header>
     <main id="app">Loading benchmark results...</main>
+    <script type="application/json" id="benchmark-data">${embeddedReport}</script>
     <script>
       const app = document.getElementById("app");
-      fetch("${jsonPath}").then((response) => response.json()).then(render).catch((error) => {
-        app.textContent = "Could not load benchmark results: " + error.message;
-      });
+      const embeddedData = document.getElementById("benchmark-data");
+
+      try {
+        render(JSON.parse(embeddedData.textContent));
+        if (location.protocol !== "file:") {
+          fetch("${jsonPath}").then((response) => response.json()).then(render).catch(() => {});
+        }
+      } catch (error) {
+        app.textContent = "Could not load embedded benchmark results: " + error.message;
+      }
 
       function render(data) {
         const ok = data.trials.filter((trial) => trial.status === "ok").length;
@@ -1496,4 +1517,11 @@ function buildReportHtml(): string {
   </body>
 </html>
 `;
+}
+
+function serialiseForInlineJson(value: unknown): string {
+  return JSON.stringify(value)
+    .replace(/</g, "\\u003c")
+    .replace(/\u2028/g, "\\u2028")
+    .replace(/\u2029/g, "\\u2029");
 }

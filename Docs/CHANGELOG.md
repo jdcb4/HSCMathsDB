@@ -2,6 +2,11 @@
 
 Newest entries go at the top.
 
+## 0.22.1 - 2026-06-07
+
+- Fixed the ingestion-methodology benchmark report so it can load when opened directly from `file://` by embedding the published benchmark data in the HTML.
+- Added a render-only benchmark report mode for regenerating the review HTML from existing published results without rerunning LLM experiments.
+
 ## 0.22.0 - 2026-06-07
 
 - Added a reusable ingestion-methodology benchmark harness that compares marking-guide-first splitting, PyMuPDF layout visual detection, whole-exam LLM extraction, page-image LLM transcription, and page-image visual detection.
