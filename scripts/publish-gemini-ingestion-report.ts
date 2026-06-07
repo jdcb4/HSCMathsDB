@@ -115,14 +115,15 @@ const args = parseArgs(process.argv.slice(2));
 const sourceRoot = path.join("var", "gemini-ingestion-proposals", args.paperId);
 const sourceHtmlPath = path.join(sourceRoot, "report.html");
 const outputRoot = path.join("public", "ingestion-reports");
-const outputAssetRoot = path.join(outputRoot, `${args.paperId}-assets`);
-const outputHtmlPath = path.join(outputRoot, `${args.paperId}.html`);
-const outputPreviewPath = path.join(outputRoot, `${args.paperId}-question-preview.html`);
+const outputId = args.outputId ?? args.paperId;
+const outputAssetRoot = path.join(outputRoot, `${outputId}-assets`);
+const outputHtmlPath = path.join(outputRoot, `${outputId}.html`);
+const outputPreviewPath = path.join(outputRoot, `${outputId}-question-preview.html`);
 
 const sourceHtml = await readFile(sourceHtmlPath, "utf8");
 const report = extractEmbeddedReport(sourceHtml);
 const cacheKey = safeFileName(report.generatedAt ?? new Date().toISOString());
-const assetMap = await copyReportAssets(report, outputAssetRoot, `${args.paperId}-assets`, cacheKey);
+const assetMap = await copyReportAssets(report, outputAssetRoot, `${outputId}-assets`, cacheKey);
 rewriteAssetUrls(report, assetMap);
 
 const publishedHtml = sourceHtml.replace(
@@ -133,18 +134,35 @@ const publishedHtml = sourceHtml.replace(
 
 await mkdir(outputRoot, { recursive: true });
 await writeFile(outputHtmlPath, publishedHtml, "utf8");
-await writeFile(outputPreviewPath, buildQuestionPreviewHtml(report), "utf8");
+await writeFile(outputPreviewPath, buildQuestionPreviewHtml(report, outputId), "utf8");
 
 console.log(`Published ${normalisePath(outputHtmlPath)}`);
 console.log(`Published ${normalisePath(outputPreviewPath)}`);
 console.log(`Copied ${assetMap.size} asset(s) to ${normalisePath(outputAssetRoot)}`);
 
-function parseArgs(values: string[]): { paperId: string } {
-  const paperId = values[0];
-  if (!paperId) {
-    throw new Error("Usage: pnpm run data:publish-gemini-ingestion-report -- <paperId>");
+function parseArgs(values: string[]): { paperId: string; outputId?: string } {
+  let paperId = "";
+  let outputId: string | undefined;
+
+  for (let index = 0; index < values.length; index += 1) {
+    const value = values[index];
+    if (value === "--output-id") {
+      outputId = values[index + 1] ?? "";
+      index += 1;
+    } else if (!paperId) {
+      paperId = value;
+    } else {
+      throw new Error(`Unexpected argument: ${value}`);
+    }
   }
-  return { paperId };
+
+  if (!paperId) {
+    throw new Error("Usage: pnpm run data:publish-gemini-ingestion-report -- <paperId> [--output-id <id>]");
+  }
+  if (outputId === "") {
+    throw new Error("--output-id must not be empty");
+  }
+  return { paperId, outputId };
 }
 
 function extractEmbeddedReport(html: string): ReportWithAssets {
@@ -214,7 +232,7 @@ function rewriteAssetUrls(report: ReportWithAssets, assetMap: Map<string, string
   }
 }
 
-function buildQuestionPreviewHtml(report: ReportWithAssets): string {
+function buildQuestionPreviewHtml(report: ReportWithAssets, outputIdValue: string): string {
   const questions = buildDraftQuestions(report);
   const title = `${report.paper?.courseName ?? "HSC Mathematics"} ${report.paper?.year ?? ""} draft preview`;
   const embedded = serialiseForInlineJson({ report, questions });
@@ -377,7 +395,7 @@ function buildQuestionPreviewHtml(report: ReportWithAssets): string {
           </section>
           <section class="nav-card">
             <h3>Report Links</h3>
-            <p><a href="${escapeHtml(report.paper?.id ?? "report")}.html">Diagnostics report</a></p>
+            <p><a href="${escapeHtml(outputIdValue)}.html">Diagnostics report</a></p>
           </section>
         </aside>
         <section class="question-list">

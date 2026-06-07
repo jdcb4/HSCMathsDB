@@ -19,6 +19,7 @@ pnpm run data:propose-gemini-ingestion -- std1-2023 --pages 2-6 --guide-pages 1-
 pnpm run data:propose-gemini-ingestion -- std1-2023 --force
 pnpm run data:propose-gemini-ingestion -- std1-2023 --judge-model <openrouter-model-id>
 pnpm run data:propose-gemini-ingestion -- std1-2023 --skip-llm
+pnpm run data:publish-gemini-ingestion-report -- std1-2023 --output-id std1-2023-crop-mistral-medium-3-5
 ```
 
 The default model is `google/gemini-3.1-flash-lite` through OpenRouter. The command requires
@@ -77,6 +78,17 @@ Then open these pages while `pnpm run dev` is running:
 The publisher copies referenced page/crop images into `public/ingestion-reports/<paperId>-assets/`
 and rewrites both pages to use relative image URLs. That generated folder is ignored by git.
 
+To compare crop QA/repair models while holding page transcription and marking-guide extraction steady,
+publish each variant with a distinct `--output-id`, then build a side-by-side crop comparison page:
+
+```powershell
+pnpm run data:publish-crop-model-comparison -- std1-2023-crop-model-comparison "Mistral Medium 3.5=std1-2023-crop-mistral-medium-3-5" "Nemotron 3.5 Safety=std1-2023-crop-nemotron-3-5-content-safety" "Step 3.7 Flash=std1-2023-crop-step-3-7-flash" "Kimi K2.6=std1-2023-crop-kimi-k2-6" "MiMo v2.5=std1-2023-crop-mimo-v2-5"
+```
+
+That writes `public/ingestion-reports/std1-2023-crop-model-comparison.html`. The comparison page reads
+the embedded draft-preview data from each published variant, so it can be regenerated without rerunning
+the LLM calls.
+
 ## Pipeline Shape
 
 1. Resolve the `paperId` to its source pack and rendered exam/marking-guide documents.
@@ -121,3 +133,22 @@ new Standard and Extension years, with deterministic repair and targeted AI repa
 visuals, the latest trial shows that crop QA must be stricter than sheet-level review: per-crop
 source-page comparison plus capped recropping is now the quality gate, and remaining crop flags
 should block corpus promotion until bbox generation or crop repair produces clean standalone assets.
+
+## 2023 Standard 1 Crop Model Comparison
+
+The 2023 Mathematics Standard 1 paper was rerun with `google/gemini-3.1-flash-lite` for page
+transcription, marking-guide extraction, and non-crop repair while varying only the crop QA/repair
+model. The comparison UX was published at
+`public/ingestion-reports/std1-2023-crop-model-comparison.html`.
+
+Observed crop-model results:
+
+- `mistralai/mistral-medium-3-5`: 15 final crop flags after cached replay; fresh variant runtime was about 132 seconds.
+- `nvidia/nemotron-3.5-content-safety:free`: 23 final crop flags; fast, but several crop judgements returned provider-side errors or unclear status.
+- `stepfun/step-3.7-flash`: 23 final crop flags after cached replay; fresh variant runtime was about 135 seconds.
+- `moonshotai/kimi-k2.6`: 23 final crop flags; fresh variant runtime was about 35 minutes, too slow for routine crop repair.
+- `xiaomi/mimo-v2.5`: 19 final crop flags; fresh variant runtime was about 6 minutes.
+
+Mistral Medium 3.5 produced the best result among the tested crop models, but the residual flags show
+that changing the crop model alone is not enough. The next improvement should target bbox proposal and
+repair instructions or a deterministic crop-expansion pass, not just stronger crop judgement.

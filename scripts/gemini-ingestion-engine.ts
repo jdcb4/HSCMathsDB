@@ -1409,7 +1409,8 @@ function clearResolvedSplitPageNotes(examPageProposals: ExamPageProposal[]): Rep
       question.notes = question.notes.filter(
         (note) =>
           !/implied by the text and graph provided.*(?:following|next) page/i.test(note) &&
-          !/this part.*implied by.*text.*graph provided/i.test(note)
+          !/this part.*implied by.*text.*graph provided/i.test(note) &&
+          !/prompt for part .*implied by.*context.*graph provided/i.test(note)
       );
 
       if (question.notes.length !== before.length) {

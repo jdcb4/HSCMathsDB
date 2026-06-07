@@ -2,6 +2,12 @@
 
 Newest entries go at the top.
 
+## 0.33.0 - 2026-06-07
+
+- Added distinct `--output-id` publishing for Gemini ingestion reports so multiple model variants for the same paper can be reviewed side by side.
+- Added a crop-model comparison publisher and local UX that reads published draft-preview data and compares crop images, crop QA statuses, issues, and repair recommendations across variants.
+- Re-ran the 2023 Mathematics Standard 1 crop workflow with Gemini 3.1 Flash Lite held constant for non-crop ingestion and five crop models compared: Mistral Medium 3.5, Nemotron 3.5 Safety, Step 3.7 Flash, Kimi K2.6, and MiMo v2.5. Mistral Medium 3.5 produced the fewest crop flags at 15, while the other variants ranged from 19 to 23 crop flags.
+
 ## 0.32.0 - 2026-06-07
 
 - Added 2023 Mathematics Extension 1 source-pack and paper records with official exam, marking-guide, and marking-feedback PDF links.
