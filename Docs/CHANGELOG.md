@@ -2,6 +2,10 @@
 
 Newest entries go at the top.
 
+## 0.29.0 - 2026-06-07
+
+- Added cache-busting query strings to published Gemini ingestion report asset URLs so regenerated crop images are not confused with browser-cached copies from earlier runs.
+
 ## 0.28.0 - 2026-06-07
 
 - Added a deterministic Gemini ingestion repair for inline TeX fragments embedded in prose, such as degree notation returned outside MathJax delimiters.

@@ -2,6 +2,7 @@ import { copyFile, mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 type ReportWithAssets = {
+  generatedAt?: string;
   paper?: { id?: string; year?: number; courseName?: string; examPackUrl?: string };
   totals?: {
     flaggedQuestions?: number;
@@ -120,7 +121,8 @@ const outputPreviewPath = path.join(outputRoot, `${args.paperId}-question-previe
 
 const sourceHtml = await readFile(sourceHtmlPath, "utf8");
 const report = extractEmbeddedReport(sourceHtml);
-const assetMap = await copyReportAssets(report, outputAssetRoot, `${args.paperId}-assets`);
+const cacheKey = safeFileName(report.generatedAt ?? new Date().toISOString());
+const assetMap = await copyReportAssets(report, outputAssetRoot, `${args.paperId}-assets`, cacheKey);
 rewriteAssetUrls(report, assetMap);
 
 const publishedHtml = sourceHtml.replace(
@@ -157,7 +159,8 @@ function extractEmbeddedReport(html: string): ReportWithAssets {
 async function copyReportAssets(
   report: ReportWithAssets,
   outputAssetRootValue: string,
-  publicAssetPrefix: string
+  publicAssetPrefix: string,
+  cacheKey: string
 ): Promise<Map<string, string>> {
   await mkdir(outputAssetRootValue, { recursive: true });
 
@@ -180,7 +183,10 @@ async function copyReportAssets(
     )}${extension}`;
     const outputPath = path.join(outputAssetRootValue, outputName);
     await copyFile(path.resolve(sourcePath), outputPath);
-    assetMap.set(normalisePath(sourcePath), `${publicAssetPrefix}/${outputName}`);
+    assetMap.set(
+      normalisePath(sourcePath),
+      `${publicAssetPrefix}/${outputName}?v=${encodeURIComponent(cacheKey)}`
+    );
   }
 
   return assetMap;
