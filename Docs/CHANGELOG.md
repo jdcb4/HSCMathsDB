@@ -2,6 +2,11 @@
 
 Newest entries go at the top.
 
+## 0.26.0 - 2026-06-07
+
+- Extended the Gemini ingestion report publisher to generate a draft corpus preview page for each paper, grouping the proposal into learner-facing question cards with prompts, options, extracted visual assets, official answers, marking-guide working, source refs, and unresolved flags.
+- Published the 2023 Mathematics Standard 1 draft preview at `public/ingestion-reports/std1-2023-question-preview.html` for local review through the dev server.
+
 ## 0.25.0 - 2026-06-07
 
 - Added a local Gemini ingestion report publisher that writes ignored browser-review copies under `public/ingestion-reports/` with copied relative image assets.

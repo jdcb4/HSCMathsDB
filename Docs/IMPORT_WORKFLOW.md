@@ -120,9 +120,12 @@ split-page, source-fidelity, and crop-boundary flags autonomously before final r
 any remaining unresolved question flags or crop QA flags as escalation cases before promoting
 records.
 
-The publish command writes an ignored browser-review copy to
-`public/ingestion-reports/<paperId>.html`. Open it through the dev server, for example
-`http://127.0.0.1:5173/ingestion-reports/std1-2023.html`.
+The publish command writes ignored browser-review copies under `public/ingestion-reports/`. Open
+them through the dev server:
+
+- `http://127.0.0.1:5173/ingestion-reports/std1-2023.html` for ingestion diagnostics.
+- `http://127.0.0.1:5173/ingestion-reports/std1-2023-question-preview.html` for a draft corpus
+  preview showing what each question would look like if promoted.
 
 For a stronger downstream judgement model without changing the first-pass page proposal model:
 

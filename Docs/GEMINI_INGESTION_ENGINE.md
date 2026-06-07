@@ -63,9 +63,13 @@ For local browser review, publish an ignored copy under `public/`:
 pnpm run data:publish-gemini-ingestion-report -- std1-2023
 ```
 
-Then open `http://127.0.0.1:5173/ingestion-reports/std1-2023.html` while `pnpm run dev` is running.
+Then open these pages while `pnpm run dev` is running:
+
+- `http://127.0.0.1:5173/ingestion-reports/std1-2023.html` for diagnostics, repair actions, crop QA, and source-page context.
+- `http://127.0.0.1:5173/ingestion-reports/std1-2023-question-preview.html` for a draft corpus preview that groups prompt, options, extracted assets, official answer, and marking-guide working by question.
+
 The publisher copies referenced page/crop images into `public/ingestion-reports/<paperId>-assets/`
-and rewrites the report to use relative image URLs. That generated folder is ignored by git.
+and rewrites both pages to use relative image URLs. That generated folder is ignored by git.
 
 ## Pipeline Shape
 
