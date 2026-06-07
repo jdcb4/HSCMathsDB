@@ -2,6 +2,13 @@
 
 Newest entries go at the top.
 
+## 0.30.0 - 2026-06-07
+
+- Reworked Gemini crop repair into an explicit four-cycle QA loop: initial crop QA, up to three recrops, then final flagging for any crop still failing after pass 4.
+- Required failed crop repairs to return materially changed source-page coordinates, blocked too-tight repairs that shrink the crop, and wrote pass-specific crop files so repair history is visible.
+- Added deterministic in-cycle recrop fallback when the repair model returns unchanged coordinates, plus additional deterministic cleanup for mixed prose/calculation answer lines and split-page notes.
+- Republished the 2023 Mathematics Standard 1 preview from the updated loop; Q15's table and network crops now pass QA, with 17 crop flags remaining elsewhere.
+
 ## 0.29.0 - 2026-06-07
 
 - Added cache-busting query strings to published Gemini ingestion report asset URLs so regenerated crop images are not confused with browser-cached copies from earlier runs.

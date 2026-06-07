@@ -414,7 +414,7 @@ type EngineReport = {
 const promptVersion = "gemini-page-ingestion-v2";
 const repairCacheVersion = "repair-v2";
 const cropQaCacheVersion = "crop-qa-v2-single";
-const cropRepairMaxPasses = 3;
+const cropQaMaxCycles = 4;
 
 main().catch((error: unknown) => {
   console.error(error instanceof Error ? (error.stack ?? error.message) : error);
@@ -1333,6 +1333,12 @@ function repairMathText(
     reasons.push("Wrapped inline raw TeX fragments in MathJax delimiters.");
   }
 
+  const mixedExpressionFixed = wrapMixedAnswerExpressions(repaired, context);
+  if (mixedExpressionFixed !== repaired) {
+    repaired = mixedExpressionFixed;
+    reasons.push("Wrapped mixed prose/calculation answer lines in MathJax delimiters.");
+  }
+
   const withoutMath = stripDelimitedMath(repaired);
   if (containsRawTex(withoutMath) && shouldWrapWholeValue(repaired, context)) {
     repaired = `\\(${repaired.trim()}\\)`;
@@ -1401,7 +1407,9 @@ function clearResolvedSplitPageNotes(examPageProposals: ExamPageProposal[]): Rep
 
       const before = [...question.notes];
       question.notes = question.notes.filter(
-        (note) => !/implied by the text and graph provided.*following page/i.test(note)
+        (note) =>
+          !/implied by the text and graph provided.*(?:following|next) page/i.test(note) &&
+          !/this part.*implied by.*text.*graph provided/i.test(note)
       );
 
       if (question.notes.length !== before.length) {
@@ -1444,6 +1452,42 @@ function wrapRawInlineTexFragments(value: string): string {
       (_match: string, prefix: string, expression: string) => `${prefix}\\(${expression.trim()}\\)`
     )
   );
+}
+
+function wrapMixedAnswerExpressions(
+  value: string,
+  context: "prompt" | "option" | "answer" | "criterion"
+): string {
+  if (context !== "answer") {
+    return value;
+  }
+
+  return value
+    .split(/(\s*\\\\\s*)/)
+    .map((segment) => {
+      if (/^(\s*\\\\\s*)$/.test(segment)) {
+        return segment;
+      }
+
+      const outsideMath = stripDelimitedMath(segment);
+      if (!containsRawTex(outsideMath) || !/\s=\s/.test(segment)) {
+        return segment;
+      }
+
+      const equalsIndex = segment.indexOf("=");
+      const label = segment.slice(0, equalsIndex).trim();
+      const expression = segment.slice(equalsIndex + 1).trim();
+      if (!label || /\\/.test(label) || label.length > 70) {
+        return segment;
+      }
+
+      return `${label} = \\(${unwrapInlineMath(expression)}\\)`;
+    })
+    .join("");
+}
+
+function unwrapInlineMath(value: string): string {
+  return value.replace(/\\\(([\s\S]*?)\\\)/g, (_match: string, expression: string) => expression.trim());
 }
 
 function shouldWrapWholeValue(value: string, context: "prompt" | "option" | "answer" | "criterion"): boolean {
@@ -1847,7 +1891,7 @@ async function runCropQa({
     paper,
     candidates,
     sheetRoot,
-    sheetPrefix: "crop-sheet-initial",
+    sheetPrefix: "crop-qa-pass-1",
     force,
     skip
   });
@@ -1863,11 +1907,7 @@ async function runCropQa({
       ...initialFlaggedResults.map((result) => skippedCropRepairAttempt(result, candidates))
     );
   } else {
-    for (
-      let repairPass = 1;
-      repairPass <= cropRepairMaxPasses && flaggedResults.length > 0;
-      repairPass += 1
-    ) {
+    for (let cycle = 1; cycle < cropQaMaxCycles && flaggedResults.length > 0; cycle += 1) {
       const passAttempts = await applyCropRepairs({
         apiKey,
         model,
@@ -1878,52 +1918,27 @@ async function runCropQa({
         cropRepairRoot,
         cropRoot,
         force,
-        repairPass
+        repairPass: cycle
       });
       repairAttempts.push(...passAttempts);
 
-      sheets = await evaluateCropCandidates({
-        apiKey,
-        model,
-        paper,
-        candidates,
-        sheetRoot,
-        sheetPrefix: `crop-sheet-repaired-pass-${repairPass}`,
-        force,
-        skip
-      });
-      flaggedResults = sheets.flatMap((sheet) => sheet.results).filter((result) => result.status !== "ok");
-
-      if (!passAttempts.some((attempt) => attempt.status === "ok" && attempt.action === "replace-bbox")) {
-        break;
-      }
-    }
-
-    for (let fallbackPass = 1; fallbackPass <= 2; fallbackPass += 1) {
+      const changedCropIds = new Set(
+        passAttempts
+          .filter((attempt) => attempt.status === "ok" && attempt.action === "replace-bbox")
+          .map((attempt) => attempt.cropId)
+      );
+      flaggedResults = flaggedResults.filter((result) => changedCropIds.has(result.cropId));
       if (flaggedResults.length === 0) {
         break;
       }
 
-      const fallbackAttempts = await applyDeterministicCropFallbacks({
-        paper,
-        candidates,
-        examPageProposals,
-        flaggedResults,
-        cropRoot
-      });
-      repairAttempts.push(...fallbackAttempts);
-
-      if (!fallbackAttempts.some((attempt) => attempt.status === "ok" && attempt.action === "replace-bbox")) {
-        break;
-      }
-
       sheets = await evaluateCropCandidates({
         apiKey,
         model,
         paper,
         candidates,
         sheetRoot,
-        sheetPrefix: `crop-sheet-deterministic-fallback-pass-${fallbackPass}`,
+        sheetPrefix: `crop-qa-pass-${cycle + 1}`,
         force,
         skip
       });
@@ -2199,26 +2214,88 @@ async function applyCropRepairs({
 
       const parsed = CropRepairSchema.parse(parseModelJson(completion.content));
       if (parsed.action !== "replace-bbox" || !parsed.newBbox) {
+        const fallbackAttempt = await tryDeterministicCropRepair({
+          paper,
+          candidate,
+          result,
+          examPageProposals,
+          cropRoot,
+          repairPass,
+          beforeBbox,
+          beforeCropPath,
+          rawPath,
+          reasonPrefix: `Repair model returned ${parsed.action}; applying deterministic recrop fallback within the QA cycle.`,
+          confidence: parsed.confidence
+        });
+        if (fallbackAttempt) {
+          attempts.push(fallbackAttempt);
+          continue;
+        }
+
         attempts.push({
           cropId: candidate.id,
-          status: "ok",
+          status: parsed.action === "manual-review" ? "skipped" : "error",
           action: parsed.action,
           beforeBbox,
           beforeCropPath,
           qaStatus: result.status,
           qaIssues: result.issues,
-          reason: parsed.reason,
+          reason:
+            parsed.action === "manual-review"
+              ? parsed.reason
+              : "Flagged crops must be recropped with a changed source-page bbox; keep is not accepted.",
           confidence: parsed.confidence,
-          rawPath: normalisePath(rawPath)
+          rawPath: normalisePath(rawPath),
+          error:
+            parsed.action === "keep" ? "Repair model returned keep for a crop that failed QA." : undefined
         });
         continue;
       }
 
       const sourceImage = await loadImage(await readFile(candidate.sourcePagePath));
       const repairedBbox = clampBbox(parsed.newBbox, sourceImage.width, sourceImage.height);
+      if (
+        bboxesEquivalent(beforeBbox, repairedBbox) ||
+        repairContradictsQaFinding(beforeBbox, repairedBbox, result)
+      ) {
+        const fallbackAttempt = await tryDeterministicCropRepair({
+          paper,
+          candidate,
+          result,
+          examPageProposals,
+          cropRoot,
+          repairPass,
+          beforeBbox,
+          beforeCropPath,
+          rawPath,
+          reasonPrefix:
+            "Repair model returned a bbox that does not materially fix the failed crop; applying deterministic recrop fallback within the QA cycle.",
+          confidence: parsed.confidence
+        });
+        if (fallbackAttempt) {
+          attempts.push(fallbackAttempt);
+          continue;
+        }
+
+        attempts.push({
+          cropId: candidate.id,
+          status: "skipped",
+          action: "replace-bbox",
+          beforeBbox,
+          afterBbox: repairedBbox,
+          beforeCropPath,
+          qaStatus: result.status,
+          qaIssues: result.issues,
+          reason: "Repair model returned a bbox that does not materially fix the failed crop.",
+          confidence: parsed.confidence,
+          rawPath: normalisePath(rawPath)
+        });
+        continue;
+      }
+
       const repairedCropPath = path.join(
         cropRoot,
-        `${safeFileName(paper.id)}__${candidate.id}__repaired.png`
+        `${safeFileName(paper.id)}__${candidate.id}__repaired-pass-${repairPass}.png`
       );
       await writeCropImage(candidate.sourcePagePath, repairedBbox, repairedCropPath);
 
@@ -2257,69 +2334,59 @@ async function applyCropRepairs({
   return attempts;
 }
 
-async function applyDeterministicCropFallbacks({
+async function tryDeterministicCropRepair({
   paper,
-  candidates,
+  candidate,
+  result,
   examPageProposals,
-  flaggedResults,
-  cropRoot
+  cropRoot,
+  repairPass,
+  beforeBbox,
+  beforeCropPath,
+  rawPath,
+  reasonPrefix,
+  confidence
 }: {
   paper: Paper;
-  candidates: CropCandidate[];
+  candidate: CropCandidate;
+  result: CropQaResult;
   examPageProposals: ExamPageProposal[];
-  flaggedResults: CropQaResult[];
   cropRoot: string;
-}): Promise<CropRepairAttempt[]> {
-  const attempts: CropRepairAttempt[] = [];
-
-  for (const result of flaggedResults) {
-    const candidate = candidates.find((item) => item.id === result.cropId);
-    if (!candidate) {
-      continue;
-    }
-
-    const expandedBbox = await deterministicCropExpansion(candidate, result);
-    if (!expandedBbox) {
-      attempts.push({
-        cropId: candidate.id,
-        status: "skipped",
-        action: "manual-review",
-        beforeBbox: candidate.bbox,
-        beforeCropPath: candidate.cropPath,
-        qaStatus: result.status,
-        qaIssues: result.issues,
-        reason: "No deterministic crop fallback available for this QA status."
-      });
-      continue;
-    }
-
-    const beforeBbox = { ...candidate.bbox };
-    const beforeCropPath = candidate.cropPath;
-    const fallbackPath = path.join(
-      cropRoot,
-      `${safeFileName(paper.id)}__${candidate.id}__deterministic-fallback.png`
-    );
-    await writeCropImage(candidate.sourcePagePath, expandedBbox, fallbackPath);
-    candidate.bbox = expandedBbox;
-    candidate.cropPath = normalisePath(fallbackPath);
-    updateProposalVisualBbox(examPageProposals, candidate, expandedBbox);
-
-    attempts.push({
-      cropId: candidate.id,
-      status: "ok",
-      action: "replace-bbox",
-      beforeBbox,
-      afterBbox: expandedBbox,
-      beforeCropPath,
-      afterCropPath: normalisePath(fallbackPath),
-      qaStatus: result.status,
-      qaIssues: result.issues,
-      reason: "Deterministically expanded a residual too-tight crop after AI repair.",
-      confidence: 1
-    });
+  repairPass: number;
+  beforeBbox: CropCandidate["bbox"];
+  beforeCropPath: string;
+  rawPath: string;
+  reasonPrefix: string;
+  confidence?: number;
+}): Promise<CropRepairAttempt | undefined> {
+  const fallbackBbox = await deterministicCropExpansion(candidate, result);
+  if (!fallbackBbox || bboxesEquivalent(beforeBbox, fallbackBbox)) {
+    return undefined;
   }
 
-  return attempts;
+  const fallbackPath = path.join(
+    cropRoot,
+    `${safeFileName(paper.id)}__${candidate.id}__repaired-pass-${repairPass}-deterministic.png`
+  );
+  await writeCropImage(candidate.sourcePagePath, fallbackBbox, fallbackPath);
+  candidate.bbox = fallbackBbox;
+  candidate.cropPath = normalisePath(fallbackPath);
+  updateProposalVisualBbox(examPageProposals, candidate, fallbackBbox);
+
+  return {
+    cropId: candidate.id,
+    status: "ok",
+    action: "replace-bbox",
+    beforeBbox,
+    afterBbox: fallbackBbox,
+    beforeCropPath,
+    afterCropPath: normalisePath(fallbackPath),
+    qaStatus: result.status,
+    qaIssues: result.issues,
+    reason: reasonPrefix,
+    confidence,
+    rawPath: normalisePath(rawPath)
+  };
 }
 
 async function deterministicCropExpansion(
@@ -2474,6 +2541,9 @@ async function findDenseVisualBandBelow(
 function buildCropRepairPrompt(candidate: CropCandidate, result: CropQaResult): string {
   return `Repair this proposed crop for an NSW HSC mathematics visual.
 
+The previous QA pass marked this crop as "${result.status}", so the current bbox is not acceptable.
+Return a corrected source-page bounding box whenever the correct visual is visible.
+
 Return JSON only:
 {
   "cropId": "${candidate.id}",
@@ -2485,11 +2555,12 @@ Return JSON only:
 
 Allowed actions:
 - replace-bbox: return a better bbox in source-page pixel coordinates.
-- keep: the QA finding appears wrong and the current bbox is acceptable.
 - manual-review: the full source page is insufficient to identify a reliable crop.
 
 Rules:
-- Prefer replace-bbox for too-tight, too-loose, and wrong-content findings when the correct visual is visible on the source page.
+- For too-tight, too-loose, and wrong-content findings, use replace-bbox when the correct visual is visible on the source page.
+- Do not return keep for a crop that failed QA.
+- The newBbox must be materially different from currentBbox and must fix the QA issues.
 - The bbox must include the complete required visual as a standalone public-site asset.
 - Include all axes, axis labels, tick labels, legends, graph labels, table headers, row/column labels, table borders, diagram endpoints, nodes, edge labels, option labels, scales, and geometry/text labels that are part of the visual.
 - Exclude unrelated question prose, answer-writing lines, page headers, footers, page numbers, marks, office-use text, other questions, other diagrams, and excessive blank margins.
@@ -2611,6 +2682,36 @@ function clampBbox(
     width: right - x,
     height: bottom - y
   };
+}
+
+function bboxesEquivalent(left: CropCandidate["bbox"], right: CropCandidate["bbox"]): boolean {
+  const tolerance = 2;
+  return (
+    Math.abs(left.x - right.x) <= tolerance &&
+    Math.abs(left.y - right.y) <= tolerance &&
+    Math.abs(left.width - right.width) <= tolerance &&
+    Math.abs(left.height - right.height) <= tolerance
+  );
+}
+
+function repairContradictsQaFinding(
+  before: CropCandidate["bbox"],
+  after: CropCandidate["bbox"],
+  result: CropQaResult
+): boolean {
+  if (result.status !== "too-tight") {
+    return false;
+  }
+
+  const tolerance = 3;
+  const containsPreviousCrop =
+    after.x <= before.x + tolerance &&
+    after.y <= before.y + tolerance &&
+    after.x + after.width >= before.x + before.width - tolerance &&
+    after.y + after.height >= before.y + before.height - tolerance;
+  const expandsArea = after.width * after.height >= before.width * before.height;
+
+  return !containsPreviousCrop || !expandsArea;
 }
 
 function clamp(value: number, min: number, max: number): number {

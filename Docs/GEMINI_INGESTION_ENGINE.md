@@ -86,7 +86,7 @@ and rewrites both pages to use relative image URLs. That generated folder is ign
 8. Re-run deterministic notation repair after AI edits and reconcile again.
 9. Generate visual crop candidates from Gemini bbox proposals and stitch them into 4x4 labelled contact sheets for overview.
 10. Ask the crop QA model to inspect each candidate one by one with the original rendered source page and the proposed crop, requiring the crop to include the whole standalone visual while excluding question prose, page furniture, unrelated diagrams, and excessive blank space.
-11. Feed flagged crop candidates back to the model for corrected bbox proposals, rerun per-crop QA after each repair pass, and apply deterministic expansion fallbacks for residual too-tight/blank crops.
+11. Feed flagged crop candidates back to the model for corrected source-page bbox proposals, rerun per-crop QA after each repair pass, and stop after four QA cycles total. A failed crop repair must produce materially changed coordinates; too-tight repairs cannot shrink the crop. If the model returns unchanged coordinates, deterministic expansion can be used inside the same cycle, but no extra hidden fallback passes run after the cap.
 12. Flag missing prompt/answer coverage, asset needs, low confidence, raw TeX outside MathJax
     delimiters, and risk-like page notes.
 13. Use any remaining unresolved report items as escalation cases before promoting records through the existing importer/corpus path.
@@ -107,10 +107,10 @@ Result after the autonomous repair and crop QA loop:
 - 0 page-level errors
 - 0 question-level reconciliation or notation flags after deterministic and AI repair
 - 23 crop candidates generated from visual bbox proposals
-- 15 final crop QA flags after stricter per-crop source-page comparison
+- 17 final crop QA flags after the capped four-cycle crop QA/recrop loop
 
 This is a strong enough signal to use Gemini page-image extraction as the default proposal path for
 new Standard and Extension years, with deterministic repair and targeted AI repair for text. For
 visuals, the latest trial shows that crop QA must be stricter than sheet-level review: per-crop
-source-page comparison is now the quality gate, and remaining crop flags should block corpus
-promotion until bbox generation or crop repair produces clean standalone assets.
+source-page comparison plus capped recropping is now the quality gate, and remaining crop flags
+should block corpus promotion until bbox generation or crop repair produces clean standalone assets.
