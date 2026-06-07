@@ -16,11 +16,20 @@ Useful scoped runs:
 ```powershell
 pnpm run data:propose-gemini-ingestion -- std1-2023 --pages 2-6 --guide-pages 1-4
 pnpm run data:propose-gemini-ingestion -- std1-2023 --force
+pnpm run data:propose-gemini-ingestion -- std1-2023 --judge-model <openrouter-model-id>
 pnpm run data:propose-gemini-ingestion -- std1-2023 --skip-llm
 ```
 
 The default model is `google/gemini-3.1-flash-lite` through OpenRouter. The command requires
 `OPENROUTER_API_KEY` unless `--skip-llm` is used.
+
+Additional model controls:
+
+- `--repair-model <model>` changes the model used for unresolved question repair.
+- `--crop-qa-model <model>` changes the model used for labelled crop-sheet QA.
+- `--judge-model <model>` sets both repair and crop QA to a stronger judgement model.
+- `--skip-repair` and `--skip-crop-qa` disable those downstream passes.
+- `--force-repair` and `--force-crop-qa` refresh cached downstream AI judgements without rerunning the page proposals.
 
 ## Prerequisites
 
@@ -38,8 +47,11 @@ For `std1-2023`, the engine writes:
 
 - `var/gemini-ingestion-proposals/std1-2023/raw/` - cached OpenRouter responses
 - `var/gemini-ingestion-proposals/std1-2023/parsed/` - parsed page proposals
+- `var/gemini-ingestion-proposals/std1-2023/repairs/` - cached targeted AI repair responses
+- `var/gemini-ingestion-proposals/std1-2023/visual-crops/` - crop candidates produced from Gemini visual bbox proposals
+- `var/gemini-ingestion-proposals/std1-2023/crop-contact-sheets/` - 4x4 labelled crop sheets and AI crop QA responses
 - `var/gemini-ingestion-proposals/std1-2023/report.json` - reconciled machine-readable report
-- `var/gemini-ingestion-proposals/std1-2023/report.html` - local review surface with rendered page images
+- `var/gemini-ingestion-proposals/std1-2023/report.html` - local report surface with rendered page images, repair results, and crop QA
 
 These outputs are intentionally ignored by git.
 
@@ -52,18 +64,21 @@ These outputs are intentionally ignored by git.
    extraction.
 4. Parse model JSON permissively enough to preserve useful proposals when Gemini uses nullable fields
    or non-standard visual labels.
-5. Reconcile question numbers across exam and marking-guide proposals.
-6. Flag missing prompt/answer coverage, asset needs, low confidence, raw TeX outside MathJax
-   delimiters, and risk-like page notes.
-7. Use the report as the review queue before promoting records through the existing importer/corpus
-   path.
+5. Apply deterministic notation repairs for common TeX and currency issues.
+6. Reconcile question numbers across exam and marking-guide proposals.
+7. Feed unresolved question flags back to the repair model with structured context plus the relevant and adjacent page images.
+8. Re-run deterministic notation repair after AI edits and reconcile again.
+9. Generate visual crop candidates from Gemini bbox proposals, stitch them into 4x4 labelled contact sheets, and ask the crop QA model to classify bad crops.
+10. Flag missing prompt/answer coverage, asset needs, low confidence, raw TeX outside MathJax
+    delimiters, and risk-like page notes.
+11. Use any remaining unresolved report items as escalation cases before promoting records through the existing importer/corpus path.
 
 ## 2023 Standard 1 Trial
 
 The first full new-year trial was run on 2023 Mathematics Standard 1 after adding
 `source-std-2023`, `std1-2023`, and `std2-2023` to the source catalog.
 
-Result after parser tightening:
+Result after the autonomous repair and crop QA loop:
 
 - 38 exam pages processed
 - 21 marking-guide pages processed
@@ -72,9 +87,10 @@ Result after parser tightening:
 - 31/31 questions with marking-guide answer proposals
 - 19 questions identified as needing source assets
 - 0 page-level errors
-- 10 questions left with review flags, mostly raw TeX outside MathJax delimiters in option or
-  marking-guide fields
+- 0 question-level reconciliation or notation flags after deterministic and AI repair
+- 23 crop candidates generated from visual bbox proposals
+- 5 crop candidates flagged by AI crop QA for likely tight crop boundaries or wrong crop content
 
 This is a strong enough signal to use Gemini page-image extraction as the default proposal path for
-new Standard and Extension years, with deterministic reconciliation and review gates before corpus
-promotion.
+new Standard and Extension years, with deterministic repair, targeted AI repair, and visual crop QA
+before corpus promotion.

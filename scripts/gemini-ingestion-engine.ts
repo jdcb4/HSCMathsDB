@@ -1,6 +1,7 @@
 import { existsSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { createCanvas, loadImage } from "@napi-rs/canvas";
 import { z } from "zod";
 
 import type { Paper, SourcePack } from "../src/domain/hscSchemas";
@@ -13,8 +14,14 @@ type Args = {
   pages?: string;
   guidePages?: string;
   model: string;
+  repairModel: string;
+  cropQaModel: string;
   force: boolean;
+  forceRepair: boolean;
+  forceCropQa: boolean;
   skipLlm: boolean;
+  skipRepair: boolean;
+  skipCropQa: boolean;
 };
 
 type RenderedPage = {
@@ -173,6 +180,65 @@ const MarkingGuidePageProposalSchema = z
   })
   .passthrough();
 
+const AiRepairSchema = z
+  .object({
+    examUpdates: z
+      .array(
+        z
+          .object({
+            page: z.number(),
+            questionNumber: z.union([z.number(), z.string()]),
+            promptLatex: z.string().optional(),
+            options: z
+              .array(
+                z.object({
+                  label: z.string(),
+                  textLatex: z.string()
+                })
+              )
+              .optional(),
+            notes: z.array(z.string()).optional()
+          })
+          .passthrough()
+      )
+      .default([]),
+    markingGuideUpdates: z
+      .array(
+        z
+          .object({
+            page: z.number(),
+            questionNumber: z.union([z.number(), z.string()]),
+            answerLatex: z.string().optional(),
+            sampleAnswerLatex: z.string().optional(),
+            markingCriteria: z.array(z.string()).optional(),
+            notes: z.array(z.string()).optional()
+          })
+          .passthrough()
+      )
+      .default([]),
+    judgement: z.string().default(""),
+    unresolvedFlags: z.array(z.string()).default([])
+  })
+  .passthrough();
+
+const CropQaSchema = z
+  .object({
+    crops: z
+      .array(
+        z
+          .object({
+            cropId: z.string(),
+            status: z.enum(["ok", "too-tight", "too-loose", "wrong-content", "unclear"]),
+            issues: z.array(z.string()).default([]),
+            recommendedAction: z.string().default(""),
+            confidence: z.number().optional()
+          })
+          .passthrough()
+      )
+      .default([])
+  })
+  .passthrough();
+
 type ExamPageProposal = z.infer<typeof ExamPageProposalSchema> & {
   page: number;
   imagePath: string;
@@ -204,6 +270,70 @@ type QuestionSummary = {
   marks?: number;
   averageConfidence?: number;
   flags: string[];
+};
+
+type RepairAction = {
+  questionNumber: number;
+  source: "exam" | "marking-guide";
+  page: number;
+  fieldPath: string;
+  before: string;
+  after: string;
+  method: "deterministic" | "ai";
+  reason: string;
+};
+
+type RepairPassReport = {
+  model?: string;
+  deterministicActions: RepairAction[];
+  aiActions: RepairAction[];
+  aiAttempts: Array<{
+    questionNumber: number;
+    status: "ok" | "skipped" | "error";
+    flagsBefore: string[];
+    flagsAfter: string[];
+    rawPath?: string;
+    error?: string;
+  }>;
+  unresolvedQuestionNumbers: number[];
+};
+
+type CropCandidate = {
+  id: string;
+  questionNumber: number;
+  page: number;
+  kind: string;
+  description: string;
+  sourcePagePath: string;
+  cropPath: string;
+  bbox: {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+  };
+};
+
+type CropQaResult = {
+  cropId: string;
+  status: "ok" | "too-tight" | "too-loose" | "wrong-content" | "unclear";
+  issues: string[];
+  recommendedAction: string;
+  confidence?: number;
+};
+
+type CropQaReport = {
+  model?: string;
+  candidates: CropCandidate[];
+  sheets: Array<{
+    id: string;
+    path: string;
+    rawPath?: string;
+    status: "ok" | "skipped" | "error";
+    results: CropQaResult[];
+    error?: string;
+  }>;
+  flaggedCropIds: string[];
 };
 
 type EngineReport = {
@@ -239,13 +369,22 @@ type EngineReport = {
     questionsNeedingAssets: number;
     flaggedQuestions: number;
     errors: number;
+    deterministicRepairs: number;
+    aiRepairs: number;
+    unresolvedQuestions: number;
+    cropCandidates: number;
+    flaggedCrops: number;
   };
   examPageProposals: ExamPageProposal[];
   markingGuidePageProposals: MarkingGuidePageProposal[];
   questionSummaries: QuestionSummary[];
+  repairs: RepairPassReport;
+  cropQa: CropQaReport;
 };
 
-const promptVersion = "gemini-page-ingestion-v1";
+const promptVersion = "gemini-page-ingestion-v2";
+const repairCacheVersion = "repair-v2";
+const cropQaCacheVersion = "crop-qa-v1";
 
 main().catch((error: unknown) => {
   console.error(error instanceof Error ? (error.stack ?? error.message) : error);
@@ -260,9 +399,15 @@ async function main() {
   const runRoot = path.join(outputRoot, paper.id);
   const rawRoot = path.join(runRoot, "raw");
   const parsedRoot = path.join(runRoot, "parsed");
+  const repairRoot = path.join(runRoot, "repairs");
+  const cropRoot = path.join(runRoot, "visual-crops");
+  const sheetRoot = path.join(runRoot, "crop-contact-sheets");
 
   await mkdir(rawRoot, { recursive: true });
   await mkdir(parsedRoot, { recursive: true });
+  await mkdir(repairRoot, { recursive: true });
+  await mkdir(cropRoot, { recursive: true });
+  await mkdir(sheetRoot, { recursive: true });
 
   const sourceAssets = await discoverAssets(pack);
   const renderMetadata = await readRenderMetadata(pack);
@@ -304,7 +449,47 @@ async function main() {
     );
   }
 
-  const questionSummaries = reconcileQuestions(examPageProposals, markingGuidePageProposals);
+  const deterministicActions = applyDeterministicRepairs(examPageProposals, markingGuidePageProposals);
+  let questionSummaries = reconcileQuestions(examPageProposals, markingGuidePageProposals);
+  const aiRepairReport =
+    args.skipRepair || args.skipLlm
+      ? emptyAiRepairReport(questionSummaries)
+      : await applyAiRepairs({
+          apiKey: requireApiKey(apiKey),
+          model: args.repairModel,
+          paper,
+          summaries: questionSummaries,
+          examPageProposals,
+          markingGuidePageProposals,
+          repairRoot,
+          force: args.forceRepair
+        });
+  const postAiDeterministicActions = applyDeterministicRepairs(examPageProposals, markingGuidePageProposals);
+  const repairActions = [...deterministicActions, ...postAiDeterministicActions];
+
+  questionSummaries = reconcileQuestions(examPageProposals, markingGuidePageProposals);
+
+  const cropQa = await runCropQa({
+    apiKey,
+    model: args.cropQaModel,
+    paper,
+    examPageProposals,
+    cropRoot,
+    sheetRoot,
+    force: args.forceCropQa,
+    skip: args.skipCropQa || args.skipLlm
+  });
+
+  const repairs: RepairPassReport = {
+    model: args.skipRepair || args.skipLlm ? undefined : args.repairModel,
+    deterministicActions: repairActions,
+    aiActions: aiRepairReport.aiActions,
+    aiAttempts: aiRepairReport.aiAttempts,
+    unresolvedQuestionNumbers: questionSummaries
+      .filter((summary) => summary.flags.length > 0)
+      .map((summary) => summary.questionNumber)
+  };
+
   const report: EngineReport = {
     generatedAt: new Date().toISOString(),
     promptVersion,
@@ -334,11 +519,18 @@ async function main() {
       flaggedQuestions: questionSummaries.filter((summary) => summary.flags.length > 0).length,
       errors: [...examPageProposals, ...markingGuidePageProposals].filter(
         (proposal) => proposal.status === "error"
-      ).length
+      ).length,
+      deterministicRepairs: repairActions.length,
+      aiRepairs: aiRepairReport.aiActions.length,
+      unresolvedQuestions: repairs.unresolvedQuestionNumbers.length,
+      cropCandidates: cropQa.candidates.length,
+      flaggedCrops: cropQa.flaggedCropIds.length
     },
     examPageProposals,
     markingGuidePageProposals,
-    questionSummaries
+    questionSummaries,
+    repairs,
+    cropQa
   };
 
   await writeFile(path.join(runRoot, "report.json"), `${JSON.stringify(report, null, 2)}\n`, "utf8");
@@ -351,8 +543,14 @@ function parseArgs(values: string[]): Args {
   const args: Args = {
     paperId: "",
     model: defaultModel,
+    repairModel: defaultModel,
+    cropQaModel: defaultModel,
     force: false,
-    skipLlm: false
+    forceRepair: false,
+    forceCropQa: false,
+    skipLlm: false,
+    skipRepair: false,
+    skipCropQa: false
   };
 
   for (let index = 0; index < values.length; index += 1) {
@@ -367,10 +565,28 @@ function parseArgs(values: string[]): Args {
     } else if (value === "--model") {
       args.model = values[index + 1] ?? "";
       index += 1;
+    } else if (value === "--repair-model") {
+      args.repairModel = values[index + 1] ?? "";
+      index += 1;
+    } else if (value === "--crop-qa-model") {
+      args.cropQaModel = values[index + 1] ?? "";
+      index += 1;
+    } else if (value === "--judge-model") {
+      args.repairModel = values[index + 1] ?? "";
+      args.cropQaModel = values[index + 1] ?? "";
+      index += 1;
     } else if (value === "--force") {
       args.force = true;
+    } else if (value === "--force-repair") {
+      args.forceRepair = true;
+    } else if (value === "--force-crop-qa") {
+      args.forceCropQa = true;
     } else if (value === "--skip-llm") {
       args.skipLlm = true;
+    } else if (value === "--skip-repair") {
+      args.skipRepair = true;
+    } else if (value === "--skip-crop-qa") {
+      args.skipCropQa = true;
     } else if (!args.paperId) {
       args.paperId = value;
     } else {
@@ -386,6 +602,14 @@ function parseArgs(values: string[]): Args {
 
   if (!args.model) {
     throw new Error("--model must not be empty");
+  }
+
+  if (!args.repairModel) {
+    throw new Error("--repair-model must not be empty");
+  }
+
+  if (!args.cropQaModel) {
+    throw new Error("--crop-qa-model must not be empty");
   }
 
   return args;
@@ -943,6 +1167,878 @@ async function imageDataUrl(imagePath: string): Promise<string> {
   return `data:image/png;base64,${base64}`;
 }
 
+function applyDeterministicRepairs(
+  examPageProposals: ExamPageProposal[],
+  markingGuidePageProposals: MarkingGuidePageProposal[]
+): RepairAction[] {
+  const actions: RepairAction[] = [];
+
+  for (const proposal of examPageProposals) {
+    proposal.questions.forEach((question, questionIndex) => {
+      const questionNumber = toQuestionNumber(question.questionNumber);
+      if (questionNumber === undefined) {
+        return;
+      }
+
+      const promptRepair = repairMathText(question.promptLatex, "prompt");
+      if (promptRepair.changed) {
+        actions.push({
+          questionNumber,
+          source: "exam",
+          page: proposal.page,
+          fieldPath: `questions[${questionIndex}].promptLatex`,
+          before: question.promptLatex,
+          after: promptRepair.value,
+          method: "deterministic",
+          reason: promptRepair.reason
+        });
+        question.promptLatex = promptRepair.value;
+      }
+
+      question.options.forEach((option) => {
+        const optionRepair = repairMathText(option.textLatex, "option");
+        if (optionRepair.changed) {
+          actions.push({
+            questionNumber,
+            source: "exam",
+            page: proposal.page,
+            fieldPath: `questions[${questionIndex}].options[${option.label}].textLatex`,
+            before: option.textLatex,
+            after: optionRepair.value,
+            method: "deterministic",
+            reason: optionRepair.reason
+          });
+          option.textLatex = optionRepair.value;
+        }
+      });
+    });
+  }
+
+  actions.push(...clearResolvedSplitPageNotes(examPageProposals));
+
+  for (const proposal of markingGuidePageProposals) {
+    proposal.questions.forEach((question, questionIndex) => {
+      const questionNumber = toQuestionNumber(question.questionNumber);
+      if (questionNumber === undefined) {
+        return;
+      }
+
+      const answerRepair = repairMathText(question.answerLatex, "answer");
+      if (answerRepair.changed) {
+        actions.push({
+          questionNumber,
+          source: "marking-guide",
+          page: proposal.page,
+          fieldPath: `questions[${questionIndex}].answerLatex`,
+          before: question.answerLatex,
+          after: answerRepair.value,
+          method: "deterministic",
+          reason: answerRepair.reason
+        });
+        question.answerLatex = answerRepair.value;
+      }
+
+      const sampleRepair = repairMathText(question.sampleAnswerLatex, "answer");
+      if (sampleRepair.changed) {
+        actions.push({
+          questionNumber,
+          source: "marking-guide",
+          page: proposal.page,
+          fieldPath: `questions[${questionIndex}].sampleAnswerLatex`,
+          before: question.sampleAnswerLatex,
+          after: sampleRepair.value,
+          method: "deterministic",
+          reason: sampleRepair.reason
+        });
+        question.sampleAnswerLatex = sampleRepair.value;
+      }
+
+      question.markingCriteria.forEach((criterion, criterionIndex) => {
+        const criterionRepair = repairMathText(criterion, "criterion");
+        if (criterionRepair.changed) {
+          actions.push({
+            questionNumber,
+            source: "marking-guide",
+            page: proposal.page,
+            fieldPath: `questions[${questionIndex}].markingCriteria[${criterionIndex}]`,
+            before: criterion,
+            after: criterionRepair.value,
+            method: "deterministic",
+            reason: criterionRepair.reason
+          });
+          question.markingCriteria[criterionIndex] = criterionRepair.value;
+        }
+      });
+    });
+  }
+
+  return actions;
+}
+
+function repairMathText(
+  value: string,
+  context: "prompt" | "option" | "answer" | "criterion"
+): { value: string; changed: boolean; reason: string } {
+  let repaired = value;
+  const reasons: string[] = [];
+
+  const delimiterFixed = repaired.replace(/\\\(\$/g, "\\(\\$");
+  if (delimiterFixed !== repaired) {
+    repaired = delimiterFixed;
+    reasons.push("Escaped currency notation inside inline MathJax delimiters.");
+  }
+
+  const environmentFixed = wrapRawTexEnvironments(repaired);
+  if (environmentFixed !== repaired) {
+    repaired = environmentFixed;
+    reasons.push("Wrapped raw TeX table/array environments in display MathJax delimiters.");
+  }
+
+  const withoutMath = stripDelimitedMath(repaired);
+  if (containsRawTex(withoutMath) && shouldWrapWholeValue(repaired, context)) {
+    repaired = `\\(${repaired.trim()}\\)`;
+    reasons.push("Wrapped raw TeX expression in inline MathJax delimiters.");
+  } else {
+    const currencyFixed = replaceOutsideDelimitedMath(repaired, (outsideMath) =>
+      outsideMath
+        .replace(/\(\s*\$\s*\)/g, "(dollars)")
+        .replace(/\\\$([0-9][0-9,]*(?:\\,[0-9]{3})*(?:\.\d+)?)/g, (_match, amount: string) => {
+          return `\\(\\$${amount}\\)`;
+        })
+        .replace(/(?<!\\)\$([0-9][0-9,]*(?:\\,[0-9]{3})*(?:\.\d+)?)/g, (_match, amount: string) => {
+          return `\\(\\$${amount}\\)`;
+        })
+    );
+
+    if (currencyFixed !== repaired) {
+      repaired = currencyFixed;
+      reasons.push("Escaped currency amounts in MathJax and normalised prose currency units.");
+    }
+  }
+
+  return {
+    value: repaired,
+    changed: repaired !== value,
+    reason: reasons.join(" ") || "No deterministic repair applied."
+  };
+}
+
+function replaceOutsideDelimitedMath(value: string, replacer: (outsideMath: string) => string): string {
+  const mathPattern = /\\\([\s\S]*?\\\)|\\\[[\s\S]*?\\\]/g;
+  let result = "";
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = mathPattern.exec(value)) !== null) {
+    result += replacer(value.slice(lastIndex, match.index));
+    result += match[0];
+    lastIndex = match.index + match[0].length;
+  }
+
+  result += replacer(value.slice(lastIndex));
+  return result;
+}
+
+function clearResolvedSplitPageNotes(examPageProposals: ExamPageProposal[]): RepairAction[] {
+  const actions: RepairAction[] = [];
+
+  for (const proposal of examPageProposals) {
+    proposal.questions.forEach((question, questionIndex) => {
+      const questionNumber = toQuestionNumber(question.questionNumber);
+      if (questionNumber === undefined || question.notes.length === 0) {
+        return;
+      }
+
+      const hasContinuation = examPageProposals.some(
+        (candidate) =>
+          candidate.page > proposal.page &&
+          candidate.questions.some(
+            (candidateQuestion) => toQuestionNumber(candidateQuestion.questionNumber) === questionNumber
+          )
+      );
+      if (!hasContinuation) {
+        return;
+      }
+
+      const before = [...question.notes];
+      question.notes = question.notes.filter(
+        (note) => !/implied by the text and graph provided.*following page/i.test(note)
+      );
+
+      if (question.notes.length !== before.length) {
+        actions.push({
+          questionNumber,
+          source: "exam",
+          page: proposal.page,
+          fieldPath: `questions[${questionIndex}].notes`,
+          before: JSON.stringify(before),
+          after: JSON.stringify(question.notes),
+          method: "deterministic",
+          reason: "Cleared split-page risk note after a continuation for the same question was found."
+        });
+      }
+    });
+  }
+
+  return actions;
+}
+
+function wrapRawTexEnvironments(value: string): string {
+  return value.replace(
+    /\\begin\{(tabular|array|aligned|matrix)\}(?:\{[^}]*\})?[\s\S]*?\\end\{\1\}/g,
+    (match: string, _environment: string, offset: number, fullValue: string) => {
+      const before = fullValue.slice(Math.max(0, offset - 2), offset);
+      const after = fullValue.slice(offset + match.length, offset + match.length + 2);
+      if (before === "\\[" && after === "\\]") {
+        return match;
+      }
+
+      return `\\[${match}\\]`;
+    }
+  );
+}
+
+function shouldWrapWholeValue(value: string, context: "prompt" | "option" | "answer" | "criterion"): boolean {
+  if (/\\\(|\\\[/.test(value)) {
+    return false;
+  }
+
+  if (context === "prompt" && value.length > 90) {
+    return false;
+  }
+
+  if (context === "criterion" && /\b[A-Za-z]{4,}\b.*\\/.test(value)) {
+    return false;
+  }
+
+  const plainWords = value
+    .replace(/\\text\{[^}]*\}/g, "")
+    .replace(/\\[A-Za-z]+/g, "")
+    .match(/\b[A-Za-z]{4,}\b/g);
+
+  return (plainWords?.length ?? 0) <= 2;
+}
+
+function stripDelimitedMath(value: string): string {
+  return value.replace(/\\\([\s\S]*?\\\)/g, "").replace(/\\\[[\s\S]*?\\\]/g, "");
+}
+
+function containsRawTex(value: string): boolean {
+  return /\\(?:frac|dfrac|sqrt|text|times|cdot|approx|leq|geq|neq|infty|operatorname|overline|bar|hat|vec|mathbf|mathrm|begin|end|,|\$)/.test(
+    value
+  );
+}
+
+function emptyAiRepairReport(
+  summaries: QuestionSummary[]
+): Pick<RepairPassReport, "aiActions" | "aiAttempts"> {
+  return {
+    aiActions: [],
+    aiAttempts: summaries
+      .filter((summary) => summary.flags.length > 0)
+      .map((summary) => ({
+        questionNumber: summary.questionNumber,
+        status: "skipped",
+        flagsBefore: summary.flags,
+        flagsAfter: summary.flags
+      }))
+  };
+}
+
+async function applyAiRepairs({
+  apiKey,
+  model,
+  paper,
+  summaries,
+  examPageProposals,
+  markingGuidePageProposals,
+  repairRoot,
+  force
+}: {
+  apiKey: string;
+  model: string;
+  paper: Paper;
+  summaries: QuestionSummary[];
+  examPageProposals: ExamPageProposal[];
+  markingGuidePageProposals: MarkingGuidePageProposal[];
+  repairRoot: string;
+  force: boolean;
+}): Promise<Pick<RepairPassReport, "aiActions" | "aiAttempts">> {
+  const aiActions: RepairAction[] = [];
+  const aiAttempts: RepairPassReport["aiAttempts"] = [];
+
+  for (const summary of summaries.filter((candidate) => candidate.flags.length > 0)) {
+    const stem = `${safeFileName(paper.id)}__${repairCacheVersion}-q${summary.questionNumber.toString().padStart(2, "0")}__${safeFileName(model)}`;
+    const rawPath = path.join(repairRoot, `${stem}.json`);
+
+    try {
+      const examContext = contextPagesForQuestion(examPageProposals, summary.examPages);
+      const guideContext = contextPagesForQuestion(markingGuidePageProposals, summary.markingGuidePages);
+      const response = !force ? await readCachedRaw(rawPath) : undefined;
+      const completion =
+        response ??
+        (await callOpenRouterJson({
+          apiKey,
+          model,
+          title: "GoalCheck HSC Gemini ingestion repair",
+          maxTokens: 5000,
+          messages: [
+            {
+              role: "system",
+              content:
+                "You repair structured NSW HSC mathematics ingestion proposals. Return JSON only and do not invent source content."
+            },
+            {
+              role: "user",
+              content: await buildRepairMessageContent({
+                paper,
+                summary,
+                examContext,
+                guideContext
+              })
+            }
+          ]
+        }));
+
+      if (!response) {
+        await writeFile(rawPath, `${JSON.stringify(completion.raw, null, 2)}\n`, "utf8");
+      }
+
+      const parsed = AiRepairSchema.parse(parseModelJson(completion.content));
+      aiActions.push(
+        ...applyAiRepairUpdates({
+          parsed,
+          summary,
+          examPageProposals,
+          markingGuidePageProposals
+        })
+      );
+
+      const flagsAfter =
+        reconcileQuestions(examPageProposals, markingGuidePageProposals).find(
+          (candidate) => candidate.questionNumber === summary.questionNumber
+        )?.flags ?? [];
+
+      aiAttempts.push({
+        questionNumber: summary.questionNumber,
+        status: "ok",
+        flagsBefore: summary.flags,
+        flagsAfter,
+        rawPath: normalisePath(rawPath)
+      });
+    } catch (error: unknown) {
+      aiAttempts.push({
+        questionNumber: summary.questionNumber,
+        status: "error",
+        flagsBefore: summary.flags,
+        flagsAfter: summary.flags,
+        rawPath: normalisePath(rawPath),
+        error: error instanceof Error ? error.message : String(error)
+      });
+    }
+  }
+
+  return { aiActions, aiAttempts };
+}
+
+async function buildRepairMessageContent({
+  paper,
+  summary,
+  examContext,
+  guideContext
+}: {
+  paper: Paper;
+  summary: QuestionSummary;
+  examContext: ExamPageProposal[];
+  guideContext: MarkingGuidePageProposal[];
+}): Promise<unknown[]> {
+  const context = {
+    paper: {
+      id: paper.id,
+      year: paper.year,
+      courseName: paper.courseName
+    },
+    question: summary,
+    examPages: examContext.map((page) => ({
+      page: page.page,
+      pageRisks: page.pageRisks,
+      questions: page.questions,
+      visuals: page.visuals
+    })),
+    markingGuidePages: guideContext.map((page) => ({
+      page: page.page,
+      pageRisks: page.pageRisks,
+      questions: page.questions
+    }))
+  };
+
+  const content: unknown[] = [
+    {
+      type: "text",
+      text: `Repair unresolved ingestion issues for question ${summary.questionNumber}.
+
+Return this JSON shape:
+{
+  "examUpdates": [
+    {
+      "page": 2,
+      "questionNumber": ${summary.questionNumber},
+      "promptLatex": "replacement prompt when needed",
+      "options": [{"label": "A", "textLatex": "replacement option text"}],
+      "notes": []
+    }
+  ],
+  "markingGuideUpdates": [
+    {
+      "page": 1,
+      "questionNumber": ${summary.questionNumber},
+      "answerLatex": "replacement answer when needed",
+      "sampleAnswerLatex": "replacement sample answer when needed",
+      "markingCriteria": ["replacement criteria when needed"],
+      "notes": []
+    }
+  ],
+  "judgement": "brief source-faithfulness judgement",
+  "unresolvedFlags": []
+}
+
+Rules:
+- Fix only fields needed to resolve the supplied flags or obvious source-fidelity problems.
+- Preserve official wording and numeric values. Do not shorten marking-guide answers into an explanation.
+- Use MathJax-ready TeX: \\( ... \\) inline, \\[ ... \\] display. Never use dollar delimiters.
+- Currency inside MathJax must escape the dollar sign, for example \\(\\$15\\,000\\).
+- Mixed text and mathematics must keep prose outside MathJax and wrap each mathematical expression separately; do not return raw \\times, \\div, \\$, \\begin, or \\bar outside MathJax.
+- If a question appears split across pages, use both supplied pages and return the combined field on the source question entry.
+- Check currency notation against the source page and the GoalCheck standard.
+- Leave fields absent when no change is needed.
+
+Context JSON:
+${JSON.stringify(context, null, 2)}`
+    }
+  ];
+
+  for (const page of [...examContext, ...guideContext]) {
+    content.push({ type: "text", text: `Rendered page ${page.page}:` });
+    content.push({ type: "image_url", image_url: { url: await imageDataUrl(page.imagePath) } });
+  }
+
+  return content;
+}
+
+function contextPagesForQuestion<T extends { page: number }>(proposals: T[], sourcePages: number[]): T[] {
+  const availablePages = new Set(proposals.map((proposal) => proposal.page));
+  const selectedPages = new Set<number>();
+
+  for (const page of sourcePages) {
+    [page - 1, page, page + 1].forEach((candidate) => {
+      if (availablePages.has(candidate)) {
+        selectedPages.add(candidate);
+      }
+    });
+  }
+
+  if (selectedPages.size === 0 && proposals.length > 0) {
+    selectedPages.add(proposals[0].page);
+  }
+
+  return proposals.filter((proposal) => selectedPages.has(proposal.page));
+}
+
+function applyAiRepairUpdates({
+  parsed,
+  summary,
+  examPageProposals,
+  markingGuidePageProposals
+}: {
+  parsed: z.infer<typeof AiRepairSchema>;
+  summary: QuestionSummary;
+  examPageProposals: ExamPageProposal[];
+  markingGuidePageProposals: MarkingGuidePageProposal[];
+}): RepairAction[] {
+  const actions: RepairAction[] = [];
+
+  for (const update of parsed.examUpdates) {
+    const proposal = examPageProposals.find((candidate) => candidate.page === update.page);
+    if (!proposal || toQuestionNumber(update.questionNumber) !== summary.questionNumber) {
+      continue;
+    }
+
+    const questionIndex = proposal.questions.findIndex(
+      (candidate) => toQuestionNumber(candidate.questionNumber) === summary.questionNumber
+    );
+    const question = proposal.questions[questionIndex];
+    if (!question) {
+      continue;
+    }
+
+    if (update.promptLatex !== undefined && update.promptLatex !== question.promptLatex) {
+      actions.push({
+        questionNumber: summary.questionNumber,
+        source: "exam",
+        page: proposal.page,
+        fieldPath: `questions[${questionIndex}].promptLatex`,
+        before: question.promptLatex,
+        after: update.promptLatex,
+        method: "ai",
+        reason: parsed.judgement || "AI repair update."
+      });
+      question.promptLatex = update.promptLatex;
+    }
+
+    for (const optionUpdate of update.options ?? []) {
+      const option = question.options.find((candidate) => candidate.label === optionUpdate.label);
+      if (option && option.textLatex !== optionUpdate.textLatex) {
+        actions.push({
+          questionNumber: summary.questionNumber,
+          source: "exam",
+          page: proposal.page,
+          fieldPath: `questions[${questionIndex}].options[${option.label}].textLatex`,
+          before: option.textLatex,
+          after: optionUpdate.textLatex,
+          method: "ai",
+          reason: parsed.judgement || "AI repair update."
+        });
+        option.textLatex = optionUpdate.textLatex;
+      }
+    }
+
+    question.notes = parsed.unresolvedFlags.length > 0 ? parsed.unresolvedFlags : [];
+  }
+
+  for (const update of parsed.markingGuideUpdates) {
+    const proposal = markingGuidePageProposals.find((candidate) => candidate.page === update.page);
+    if (!proposal || toQuestionNumber(update.questionNumber) !== summary.questionNumber) {
+      continue;
+    }
+
+    const questionIndex = proposal.questions.findIndex(
+      (candidate) => toQuestionNumber(candidate.questionNumber) === summary.questionNumber
+    );
+    const question = proposal.questions[questionIndex];
+    if (!question) {
+      continue;
+    }
+
+    if (update.answerLatex !== undefined && update.answerLatex !== question.answerLatex) {
+      actions.push({
+        questionNumber: summary.questionNumber,
+        source: "marking-guide",
+        page: proposal.page,
+        fieldPath: `questions[${questionIndex}].answerLatex`,
+        before: question.answerLatex,
+        after: update.answerLatex,
+        method: "ai",
+        reason: parsed.judgement || "AI repair update."
+      });
+      question.answerLatex = update.answerLatex;
+    }
+
+    if (update.sampleAnswerLatex !== undefined && update.sampleAnswerLatex !== question.sampleAnswerLatex) {
+      actions.push({
+        questionNumber: summary.questionNumber,
+        source: "marking-guide",
+        page: proposal.page,
+        fieldPath: `questions[${questionIndex}].sampleAnswerLatex`,
+        before: question.sampleAnswerLatex,
+        after: update.sampleAnswerLatex,
+        method: "ai",
+        reason: parsed.judgement || "AI repair update."
+      });
+      question.sampleAnswerLatex = update.sampleAnswerLatex;
+    }
+
+    if (update.markingCriteria !== undefined) {
+      const before = JSON.stringify(question.markingCriteria);
+      const after = JSON.stringify(update.markingCriteria);
+      if (before !== after) {
+        actions.push({
+          questionNumber: summary.questionNumber,
+          source: "marking-guide",
+          page: proposal.page,
+          fieldPath: `questions[${questionIndex}].markingCriteria`,
+          before,
+          after,
+          method: "ai",
+          reason: parsed.judgement || "AI repair update."
+        });
+        question.markingCriteria = update.markingCriteria;
+      }
+    }
+
+    question.notes = parsed.unresolvedFlags.length > 0 ? parsed.unresolvedFlags : [];
+  }
+
+  return actions;
+}
+
+async function runCropQa({
+  apiKey,
+  model,
+  paper,
+  examPageProposals,
+  cropRoot,
+  sheetRoot,
+  force,
+  skip
+}: {
+  apiKey?: string;
+  model: string;
+  paper: Paper;
+  examPageProposals: ExamPageProposal[];
+  cropRoot: string;
+  sheetRoot: string;
+  force: boolean;
+  skip: boolean;
+}): Promise<CropQaReport> {
+  const candidates = await createCropCandidates(paper, examPageProposals, cropRoot);
+  const batches = chunk(candidates, 16);
+  const sheets: CropQaReport["sheets"] = [];
+
+  for (let index = 0; index < batches.length; index += 1) {
+    const batch = batches[index];
+    const sheetId = `${safeFileName(paper.id)}__crop-sheet-${(index + 1).toString().padStart(2, "0")}`;
+    const sheetPath = path.join(sheetRoot, `${sheetId}.png`);
+    await createCropContactSheet(batch, sheetPath);
+
+    const rawPath = path.join(sheetRoot, `${sheetId}__${cropQaCacheVersion}__${safeFileName(model)}.json`);
+    if (skip || !apiKey) {
+      sheets.push({
+        id: sheetId,
+        path: normalisePath(sheetPath),
+        status: "skipped",
+        results: [],
+        rawPath: normalisePath(rawPath)
+      });
+      continue;
+    }
+
+    try {
+      const response = !force ? await readCachedRaw(rawPath) : undefined;
+      const completion =
+        response ??
+        (await callOpenRouterJson({
+          apiKey,
+          model,
+          title: "GoalCheck HSC crop QA",
+          maxTokens: 3000,
+          messages: [
+            {
+              role: "system",
+              content:
+                "You inspect labelled exam visual crops for source-fidelity quality control. Return JSON only."
+            },
+            {
+              role: "user",
+              content: [
+                {
+                  type: "text",
+                  text: buildCropQaPrompt(batch)
+                },
+                {
+                  type: "image_url",
+                  image_url: { url: await imageDataUrl(sheetPath) }
+                }
+              ]
+            }
+          ]
+        }));
+
+      if (!response) {
+        await writeFile(rawPath, `${JSON.stringify(completion.raw, null, 2)}\n`, "utf8");
+      }
+
+      const parsed = CropQaSchema.parse(parseModelJson(completion.content));
+      sheets.push({
+        id: sheetId,
+        path: normalisePath(sheetPath),
+        status: "ok",
+        results: parsed.crops.map((crop) => ({
+          cropId: crop.cropId,
+          status: crop.status,
+          issues: crop.issues,
+          recommendedAction: crop.recommendedAction,
+          confidence: crop.confidence
+        })),
+        rawPath: normalisePath(rawPath)
+      });
+    } catch (error: unknown) {
+      sheets.push({
+        id: sheetId,
+        path: normalisePath(sheetPath),
+        status: "error",
+        results: [],
+        rawPath: normalisePath(rawPath),
+        error: error instanceof Error ? error.message : String(error)
+      });
+    }
+  }
+
+  const flaggedCropIds = sheets
+    .flatMap((sheet) => sheet.results)
+    .filter((result) => result.status !== "ok")
+    .map((result) => result.cropId);
+
+  return {
+    model: skip ? undefined : model,
+    candidates,
+    sheets,
+    flaggedCropIds
+  };
+}
+
+async function createCropCandidates(
+  paper: Paper,
+  examPageProposals: ExamPageProposal[],
+  cropRoot: string
+): Promise<CropCandidate[]> {
+  const candidates: CropCandidate[] = [];
+
+  for (const proposal of examPageProposals) {
+    const sourceImage = await loadImage(await readFile(proposal.imagePath));
+    let visualIndex = 0;
+
+    for (const visual of proposal.visuals) {
+      const questionNumber = toQuestionNumber(visual.questionNumber ?? undefined);
+      if (!visual.shouldExtract || questionNumber === undefined || !visual.bbox) {
+        continue;
+      }
+
+      visualIndex += 1;
+      const bbox = clampBbox(visual.bbox, sourceImage.width, sourceImage.height);
+      if (bbox.width < 8 || bbox.height < 8) {
+        continue;
+      }
+
+      const id = `q${questionNumber}-p${proposal.page}-v${visualIndex}`;
+      const cropPath = path.join(cropRoot, `${safeFileName(paper.id)}__${id}.png`);
+      const canvas = createCanvas(bbox.width, bbox.height);
+      const context = canvas.getContext("2d");
+      context.drawImage(sourceImage, bbox.x, bbox.y, bbox.width, bbox.height, 0, 0, bbox.width, bbox.height);
+      await writeFile(cropPath, canvas.toBuffer("image/png"));
+
+      candidates.push({
+        id,
+        questionNumber,
+        page: proposal.page,
+        kind: visual.kind,
+        description: visual.description,
+        sourcePagePath: proposal.imagePath,
+        cropPath: normalisePath(cropPath),
+        bbox
+      });
+    }
+  }
+
+  return candidates;
+}
+
+function clampBbox(
+  bbox: { x: number; y: number; width: number; height: number },
+  imageWidth: number,
+  imageHeight: number
+): CropCandidate["bbox"] {
+  const x = clamp(Math.round(bbox.x), 0, imageWidth - 1);
+  const y = clamp(Math.round(bbox.y), 0, imageHeight - 1);
+  const right = clamp(Math.round(bbox.x + bbox.width), x + 1, imageWidth);
+  const bottom = clamp(Math.round(bbox.y + bbox.height), y + 1, imageHeight);
+
+  return {
+    x,
+    y,
+    width: right - x,
+    height: bottom - y
+  };
+}
+
+function clamp(value: number, min: number, max: number): number {
+  return Math.min(Math.max(value, min), max);
+}
+
+async function createCropContactSheet(candidates: CropCandidate[], outputPath: string): Promise<void> {
+  const columns = 4;
+  const tileWidth = 340;
+  const tileHeight = 280;
+  const labelHeight = 30;
+  const rows = Math.max(1, Math.ceil(candidates.length / columns));
+  const canvas = createCanvas(columns * tileWidth, rows * tileHeight);
+  const context = canvas.getContext("2d");
+
+  context.fillStyle = "#ffffff";
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  context.font = "16px system-ui, sans-serif";
+  context.textBaseline = "top";
+
+  for (let index = 0; index < candidates.length; index += 1) {
+    const candidate = candidates[index];
+    const column = index % columns;
+    const row = Math.floor(index / columns);
+    const left = column * tileWidth;
+    const top = row * tileHeight;
+    const image = await loadImage(await readFile(candidate.cropPath));
+    const maxWidth = tileWidth - 24;
+    const maxHeight = tileHeight - labelHeight - 24;
+    const scale = Math.min(maxWidth / image.width, maxHeight / image.height);
+    const drawWidth = Math.max(1, Math.round(image.width * scale));
+    const drawHeight = Math.max(1, Math.round(image.height * scale));
+    const drawX = left + Math.round((tileWidth - drawWidth) / 2);
+    const drawY = top + labelHeight + Math.round((tileHeight - labelHeight - drawHeight) / 2);
+
+    context.strokeStyle = "#d8d7ce";
+    context.strokeRect(left + 0.5, top + 0.5, tileWidth - 1, tileHeight - 1);
+    context.fillStyle = "#202124";
+    context.fillText(`${candidate.id} | Q${candidate.questionNumber} p${candidate.page}`, left + 10, top + 8);
+    context.drawImage(image, drawX, drawY, drawWidth, drawHeight);
+  }
+
+  await writeFile(outputPath, canvas.toBuffer("image/png"));
+}
+
+function buildCropQaPrompt(candidates: CropCandidate[]): string {
+  return `Inspect this 4x4 labelled crop contact sheet for NSW HSC mathematics exam visual extraction.
+
+Return JSON only:
+{
+  "crops": [
+    {
+      "cropId": "q1-p2-v1",
+      "status": "ok",
+      "issues": [],
+      "recommendedAction": "",
+      "confidence": 0.0
+    }
+  ]
+}
+
+Allowed statuses:
+- ok: the crop contains the whole required graph/table/diagram/image and no unrelated question/header/answer content.
+- too-tight: important labels, axes, table borders, legend, option labels, or geometry are clipped.
+- too-loose: unnecessary surrounding source content is included.
+- wrong-content: the crop is not the visual described for that question.
+- unclear: the sheet is insufficient to decide.
+
+Metadata:
+${JSON.stringify(
+  candidates.map((candidate) => ({
+    cropId: candidate.id,
+    questionNumber: candidate.questionNumber,
+    page: candidate.page,
+    kind: candidate.kind,
+    description: candidate.description,
+    bbox: candidate.bbox
+  })),
+  null,
+  2
+)}`;
+}
+
+function chunk<T>(values: T[], size: number): T[][] {
+  const chunks: T[][] = [];
+  for (let index = 0; index < values.length; index += size) {
+    chunks.push(values.slice(index, index + size));
+  }
+  return chunks;
+}
+
 function reconcileQuestions(
   examPageProposals: ExamPageProposal[],
   markingGuidePageProposals: MarkingGuidePageProposal[]
@@ -1198,6 +2294,23 @@ function buildReportHtml(report: EngineReport): string {
           <div class="card"><div class="metric">\${data.questionSummaries.length}</div><div class="muted">question skeletons</div></div>
           <div class="card"><div class="metric">\${data.totals.questionsNeedingAssets}</div><div class="muted">asset candidates</div></div>
           <div class="card"><div class="metric">\${data.totals.flaggedQuestions}</div><div class="muted">flagged questions</div></div>
+          <div class="card"><div class="metric">\${data.totals.deterministicRepairs}</div><div class="muted">deterministic repairs</div></div>
+          <div class="card"><div class="metric">\${data.totals.aiRepairs}</div><div class="muted">AI repairs</div></div>
+          <div class="card"><div class="metric">\${data.totals.flaggedCrops}</div><div class="muted">flagged crops</div></div>
+        </section>
+        <section class="card" style="margin-bottom:22px">
+          <h2>Autonomous Repair Pass</h2>
+          <p class="muted">Model: \${escapeHtml(data.repairs.model || "skipped")}. Unresolved questions: \${data.repairs.unresolvedQuestionNumbers.join(", ") || "none"}.</p>
+          <div class="grid summary">
+            <div><h3>Deterministic</h3>\${renderActions(data.repairs.deterministicActions)}</div>
+            <div><h3>AI</h3>\${renderActions(data.repairs.aiActions)}</div>
+          </div>
+          <details><summary>AI attempts</summary><pre>\${escapeHtml(JSON.stringify(data.repairs.aiAttempts, null, 2))}</pre></details>
+        </section>
+        <section class="card" style="margin-bottom:22px">
+          <h2>Crop QA</h2>
+          <p class="muted">Model: \${escapeHtml(data.cropQa.model || "skipped")}. \${data.cropQa.candidates.length} candidate crop(s), \${data.cropQa.flaggedCropIds.length} flagged.</p>
+          <div class="grid page-grid">\${data.cropQa.sheets.map(renderCropSheet).join("")}</div>
         </section>
         <section class="card">
           <h2>Question Reconciliation</h2>
@@ -1222,6 +2335,37 @@ function buildReportHtml(report: EngineReport): string {
             <td>\${escapeHtml(summary.answerPreview)}</td>
             <td>\${summary.flags.length ? summary.flags.map((flag) => '<span class="pill bad">' + escapeHtml(flag) + '</span>').join("<br>") : ""}</td>
           </tr>
+        \`;
+      }
+
+      function renderActions(actions) {
+        if (!actions.length) {
+          return '<p class="muted">No changes.</p>';
+        }
+
+        return \`
+          <table>
+            <thead><tr><th>Q</th><th>Source</th><th>Field</th><th>Reason</th></tr></thead>
+            <tbody>\${actions.map((action) => \`
+              <tr>
+                <td>\${action.questionNumber}</td>
+                <td>\${escapeHtml(action.source)} p\${action.page}</td>
+                <td>\${escapeHtml(action.fieldPath)}</td>
+                <td>\${escapeHtml(action.reason)}</td>
+              </tr>
+            \`).join("")}</tbody>
+          </table>
+        \`;
+      }
+
+      function renderCropSheet(sheet) {
+        return \`
+          <article class="card">
+            <h3>\${escapeHtml(sheet.id)} <span class="pill \${sheet.status === "error" ? "bad" : sheet.status === "skipped" ? "warn" : ""}">\${sheet.status}</span></h3>
+            <img src="\${sheet.imageUrl}" alt="Crop QA contact sheet \${escapeHtml(sheet.id)}" loading="lazy" />
+            <details><summary>Results</summary><pre>\${escapeHtml(JSON.stringify(sheet.results, null, 2))}</pre></details>
+            \${sheet.error ? '<p><span class="pill bad">' + escapeHtml(sheet.error) + '</span></p>' : ""}
+          </article>
         \`;
       }
 
@@ -1263,7 +2407,21 @@ function publicReport(report: EngineReport): EngineReport {
       ...proposal,
       imagePath: normalisePath(proposal.imagePath),
       imageUrl: localFileUrl(proposal.imagePath)
-    })) as unknown as MarkingGuidePageProposal[]
+    })) as unknown as MarkingGuidePageProposal[],
+    cropQa: {
+      ...report.cropQa,
+      candidates: report.cropQa.candidates.map((candidate) => ({
+        ...candidate,
+        sourcePagePath: normalisePath(candidate.sourcePagePath),
+        cropPath: normalisePath(candidate.cropPath),
+        cropUrl: localFileUrl(candidate.cropPath)
+      })),
+      sheets: report.cropQa.sheets.map((sheet) => ({
+        ...sheet,
+        path: normalisePath(sheet.path),
+        imageUrl: localFileUrl(sheet.path)
+      }))
+    } as unknown as CropQaReport
   };
 }
 
@@ -1289,6 +2447,12 @@ function printSummary(report: EngineReport, runRoot: string) {
   );
   console.log(
     `Questions with assets: ${report.totals.questionsNeedingAssets}; flagged questions: ${report.totals.flaggedQuestions}; page errors: ${report.totals.errors}.`
+  );
+  console.log(
+    `Repairs: ${report.totals.deterministicRepairs} deterministic, ${report.totals.aiRepairs} AI; unresolved questions: ${report.totals.unresolvedQuestions}.`
+  );
+  console.log(
+    `Crop QA: ${report.totals.cropCandidates} candidate crop(s), ${report.totals.flaggedCrops} flagged.`
   );
 }
 

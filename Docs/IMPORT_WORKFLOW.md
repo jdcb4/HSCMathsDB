@@ -110,12 +110,19 @@ pnpm run data:propose-gemini-ingestion -- std1-2023
 ```
 
 The command calls `google/gemini-3.1-flash-lite` through OpenRouter, unless `--model` is supplied.
-It writes raw responses, parsed page proposals, a reconciled JSON report, and a local HTML review
-surface under `var/gemini-ingestion-proposals/<paperId>/`.
+It writes raw responses, parsed page proposals, deterministic and AI repair artifacts, labelled crop
+QA sheets, a reconciled JSON report, and a local HTML report surface under
+`var/gemini-ingestion-proposals/<paperId>/`.
 
-The proposal report is a review queue, not a corpus write. Use it to identify prompt/answer coverage,
-asset candidates, raw TeX outside MathJax delimiters, missing source pages, and questions needing
-manual review before promoting records.
+The proposal report is not a corpus write. The default run attempts to resolve raw TeX, currency,
+split-page, and source-fidelity flags autonomously before final reconciliation. Use any remaining
+unresolved question flags or crop QA flags as escalation cases before promoting records.
+
+For a stronger downstream judgement model without changing the first-pass page proposal model:
+
+```powershell
+pnpm run data:propose-gemini-ingestion -- std1-2023 --judge-model <openrouter-model-id>
+```
 
 See `Docs/GEMINI_INGESTION_ENGINE.md` for the engine contract and the 2023 Standard 1 trial results.
 

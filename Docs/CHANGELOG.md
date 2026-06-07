@@ -2,6 +2,12 @@
 
 Newest entries go at the top.
 
+## 0.24.0 - 2026-06-07
+
+- Added an autonomous downstream repair loop to the Gemini ingestion engine: deterministic TeX/currency fixes, targeted AI repair with adjacent source-page context, and a final deterministic cleanup pass.
+- Added visual crop QA to the Gemini ingestion engine by generating crop candidates from model bbox proposals, stitching them into labelled 4x4 contact sheets, and asking the configured judgement model to flag tight, loose, or wrong-content crops.
+- Updated the 2023 Mathematics Standard 1 trial report: 31/31 question skeletons, prompt proposals, and answer proposals reconcile with zero question-level flags after repair; crop QA generated 23 crop candidates and flagged 5 for crop-boundary review.
+
 ## 0.23.0 - 2026-06-07
 
 - Added a Gemini 3.1 Flash Lite page-image ingestion proposal engine that transcribes rendered exam pages, extracts marking-guide answers, detects visual assets, reconciles question coverage, and writes ignored review artifacts under `var/gemini-ingestion-proposals/`.
