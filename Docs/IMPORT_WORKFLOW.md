@@ -12,6 +12,7 @@ This workflow turns official NSW source packs into verified question records, ma
 - 2024 Mathematics Standard: 73/73 official draft records promoted across Standard 1 and Standard 2 through the reusable profile importer. Reviewed exam-derived assets and source-reviewed overrides have been added for audit-flagged visual and notation issues; the ingestion audit reports zero issues for the pack.
 - 2024 Mathematics Extension 1: 14/14 official draft records promoted through the reusable profile importer. Source-reviewed prompt/answer overrides and diagram assets have been added; the ingestion audit reports zero issues for the paper.
 - 2024 Mathematics Extension 2: 16/16 official draft records promoted through the reusable profile importer. Source-reviewed prompt/answer overrides and diagram assets have been added; the ingestion audit reports zero issues for the paper.
+- 2023 Mathematics Standard: source-pack and paper records are seeded. PDFs have been cached locally and all documents rendered. The Gemini proposal engine has completed a full Standard 1 trial with 31/31 prompts and marking-guide answers reconciled into ignored review artifacts under `var/gemini-ingestion-proposals/std1-2023/`; no corpus records have been promoted yet.
 - 2023 Mathematics Advanced: source PDFs cached, text/candidates extracted, and 44 exam/guide pages rendered under `var/rendered-pages/source-adv-2023/`; Q1-Q32 are promoted as official draft records. Q1, Q2, Q4, Q5, Q6, Q10, Q16, Q18, Q19, Q22, Q23, Q24, Q27, Q28, Q30, and Q32 public diagram assets are already in `public/assets/diagrams/`.
 - 2022 Mathematics Advanced: 32/32 official draft records promoted; source-pack asset status is complete. Source PDFs are cached, text/candidates extracted, embedded-image metadata extracted, and 40 exam pages rendered under `var/rendered-pages/source-adv-2022/`. Q1, Q3, Q7, Q8, Q10, Q11, Q12, Q14, Q16, Q17, Q21, Q24, Q28, Q29, and Q31 public diagram assets are already in `public/assets/diagrams/`.
 - Next import work can continue with older Standard and Extension years using the 2024 and 2025 reviewed imports as quality benchmarks. Keep using `pnpm run data:report-coverage -- <source-pack-id>` as the compact progress check before opening large extracted files.
@@ -96,6 +97,27 @@ pnpm run data:report-coverage -- source-adv-2025
 Candidate JSON is written to `var/question-candidates/`, which is ignored by git. Candidates contain raw extracted question and marking-guide text, page references, and review status. They are intentionally not loaded by the app until reviewed and normalized.
 
 `data:report-coverage` prints a compact source-pack status line with imported counts, missing candidate question numbers, transcription counts, and missing public assets. Use it before opening large candidate or corpus files.
+
+## 5A. Generate Gemini page-image proposals
+
+For new Standard and Extension years, use the Gemini proposal engine after PDFs are cached and pages are
+rendered:
+
+```powershell
+pnpm run data:download-sources -- source-std-2023
+pnpm run data:render-pages -- source-std-2023 --all-documents --scale 1.5
+pnpm run data:propose-gemini-ingestion -- std1-2023
+```
+
+The command calls `google/gemini-3.1-flash-lite` through OpenRouter, unless `--model` is supplied.
+It writes raw responses, parsed page proposals, a reconciled JSON report, and a local HTML review
+surface under `var/gemini-ingestion-proposals/<paperId>/`.
+
+The proposal report is a review queue, not a corpus write. Use it to identify prompt/answer coverage,
+asset candidates, raw TeX outside MathJax delimiters, missing source pages, and questions needing
+manual review before promoting records.
+
+See `Docs/GEMINI_INGESTION_ENGINE.md` for the engine contract and the 2023 Standard 1 trial results.
 
 ## 6. Promote reviewed candidates
 

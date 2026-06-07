@@ -54,6 +54,7 @@ GoalCheck HSC is a Vite React TypeScript web app for browsing NSW HSC mathematic
 | `pnpm run data:inventory-layout`              | Inventory cached PDF text, image, and vector drawing layout into ignored JSON.   |
 | `pnpm run data:render-pages`                  | Render cached PDF pages into ignored PNG page images.                            |
 | `pnpm run data:propose-diagram-crops`         | Generate reviewable diagram crop proposals from inventory and rendered pages.    |
+| `pnpm run data:propose-gemini-ingestion`      | Generate Gemini page-image ingestion proposals and a local review report.        |
 | `pnpm run data:generate-explanation-samples`  | Generate ignored LLM explanation comparison samples for manual review.           |
 | `pnpm run data:generate-worked-solutions`     | Generate or refresh primary worked-solution sidecar records through OpenRouter.  |
 | `pnpm run data:report-worked-solutions`       | Report worked-solution sidecar coverage and model counts.                        |
@@ -82,6 +83,7 @@ GoalCheck HSC is a Vite React TypeScript web app for browsing NSW HSC mathematic
 - [`CHANGELOG.md`](CHANGELOG.md) - notable changes by version.
 - [`DEPLOYMENT.md`](DEPLOYMENT.md) - deploy instructions once chosen.
 - [`IMPORT_WORKFLOW.md`](IMPORT_WORKFLOW.md) - source download, extraction, and transcription workflow.
+- [`GEMINI_INGESTION_ENGINE.md`](GEMINI_INGESTION_ENGINE.md) - Gemini page-image proposal engine and review workflow.
 - [`LLM_EXPLANATIONS.md`](LLM_EXPLANATIONS.md) - planned LLM workflow for generating reviewed student explanations.
 - [`SYLLABUS_CONVERSION.md`](SYLLABUS_CONVERSION.md) - 2017-to-2024 syllabus conversion data and selector contract.
 - [`../SECURITY.md`](../SECURITY.md) - security rules.

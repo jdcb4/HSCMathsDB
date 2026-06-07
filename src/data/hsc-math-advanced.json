@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "0.22.1",
+    "version": "0.23.0",
     "title": "GoalCheck HSC mathematics corpus",
     "updatedAt": "2026-06-07",
     "sourceSummary": "Validated corpus linking NSW mathematics exam-pack sources, Standard and Extension draft imports, the Mathematics archive, 2017 syllabus nodes, and 2024 syllabus conversion nodes."
@@ -409,6 +409,67 @@
       "assetStatus": "complete",
       "notes": "Visible on the current Mathematics Advanced exam-papers listing. Source PDFs are cached, text and raw candidates have been extracted, rendered exam pages are available for diagram review, and all thirty-two official draft questions have been promoted.",
       "assets": []
+    },
+    {
+      "id": "source-std-2023",
+      "courseId": "standard",
+      "paperIds": ["std1-2023", "std2-2023"],
+      "collectionId": "nesa-math-standard-papers",
+      "year": 2023,
+      "courseName": "Mathematics Standard",
+      "title": "Mathematics Standard 2023 HSC exam pack",
+      "packPageUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2023",
+      "syllabusEra": "standard-2017",
+      "officialListStatus": "listed",
+      "importStatus": "seeded",
+      "expectedQuestionCount": 69,
+      "importedQuestionCount": 0,
+      "assetStatus": "pending-extraction",
+      "notes": "Visible on the current Mathematics Standard exam-papers listing. Seeded as the first new-year trial target for the Gemini page-image ingestion proposal engine.",
+      "assets": [
+        {
+          "id": "source-std1-2023-paper",
+          "role": "exam-paper",
+          "label": "2023 Standard 1 exam paper",
+          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-05/2023-hsc-maths-std-1.pdf",
+          "status": "linked"
+        },
+        {
+          "id": "source-std2-2023-paper",
+          "role": "exam-paper",
+          "label": "2023 Standard 2 exam paper",
+          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-05/2023-hsc-maths-std-2.pdf",
+          "status": "linked"
+        },
+        {
+          "id": "source-std1-2023-marking-guide",
+          "role": "marking-guide",
+          "label": "2023 Standard 1 marking guidelines",
+          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-05/2023-hsc-maths-std-1-mg.pdf",
+          "status": "linked"
+        },
+        {
+          "id": "source-std2-2023-marking-guide",
+          "role": "marking-guide",
+          "label": "2023 Standard 2 marking guidelines",
+          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-05/2023-hsc-maths-std-2-mg.pdf",
+          "status": "linked"
+        },
+        {
+          "id": "source-std1-2023-feedback",
+          "role": "marking-feedback",
+          "label": "2023 Standard 1 marking feedback",
+          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-05/2023-hsc-mathematics-std1-marking-feedback.pdf",
+          "status": "linked"
+        },
+        {
+          "id": "source-std2-2023-feedback",
+          "role": "marking-feedback",
+          "label": "2023 Standard 2 marking feedback",
+          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-05/2023-hsc-mathematics-std2-marking-feedback.pdf",
+          "status": "linked"
+        }
+      ]
     },
     {
       "id": "source-adv-2022",
@@ -1782,6 +1843,28 @@
       "courseName": "Mathematics Advanced",
       "syllabusEra": "advanced-2017",
       "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-advanced",
+      "sourceStatus": "source-linked"
+    },
+    {
+      "id": "std1-2023",
+      "courseId": "standard",
+      "year": 2023,
+      "courseName": "Mathematics Standard 1",
+      "syllabusEra": "standard-2017",
+      "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2023",
+      "paperUrl": "https://www.nsw.gov.au/sites/default/files/noindex/2025-05/2023-hsc-maths-std-1.pdf",
+      "markingGuideUrl": "https://www.nsw.gov.au/sites/default/files/noindex/2025-05/2023-hsc-maths-std-1-mg.pdf",
+      "sourceStatus": "source-linked"
+    },
+    {
+      "id": "std2-2023",
+      "courseId": "standard",
+      "year": 2023,
+      "courseName": "Mathematics Standard 2",
+      "syllabusEra": "standard-2017",
+      "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2023",
+      "paperUrl": "https://www.nsw.gov.au/sites/default/files/noindex/2025-05/2023-hsc-maths-std-2.pdf",
+      "markingGuideUrl": "https://www.nsw.gov.au/sites/default/files/noindex/2025-05/2023-hsc-maths-std-2-mg.pdf",
       "sourceStatus": "source-linked"
     },
     {

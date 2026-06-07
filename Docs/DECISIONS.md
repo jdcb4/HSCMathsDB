@@ -145,3 +145,13 @@ Record these during setup if they are known:
 **Rejected alternatives:** Continuing with only `pypdf` was rejected because it extracts embedded images and text but does not provide enough vector drawing/layout information for NESA exam diagrams. Jumping directly to paid OCR or LLM vision was rejected as the first step because deterministic layout inventory is cheaper, local, and auditable.
 
 **Supersedes:** Not applicable.
+
+## 2026-06-07: Use Gemini page-image proposals as the default new-year ingestion lane
+
+**Decision:** Use `google/gemini-3.1-flash-lite` through OpenRouter as the default proposal generator for rendered exam and marking-guide pages, with deterministic reconciliation before any corpus write.
+
+**Reasoning:** Benchmarks and the 2023 Mathematics Standard 1 trial showed page-image Gemini extraction is effective at recovering question text, marking-guide answers, and visual asset needs from rendered source pages at acceptable cost and runtime. Keeping it as a proposal layer preserves auditability and lets deterministic checks catch raw TeX, missing coverage, and schema drift.
+
+**Rejected alternatives:** Direct LLM-to-corpus writes were rejected because model output still needs source review and syntax gating. Keeping Gemini only as a deep fallback was rejected because the page-image results are strong enough to reduce the current profile-override burden materially.
+
+**Supersedes:** Not applicable.

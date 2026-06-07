@@ -2,6 +2,12 @@
 
 Newest entries go at the top.
 
+## 0.23.0 - 2026-06-07
+
+- Added a Gemini 3.1 Flash Lite page-image ingestion proposal engine that transcribes rendered exam pages, extracts marking-guide answers, detects visual assets, reconciles question coverage, and writes ignored review artifacts under `var/gemini-ingestion-proposals/`.
+- Added 2023 Mathematics Standard source-pack and paper records as the first new-year trial target for the Gemini-assisted ingestion flow.
+- Ran the engine on the full 2023 Mathematics Standard 1 paper and marking guide: 31/31 question skeletons, prompt proposals, and answer proposals reconciled with zero page errors after parser tightening.
+
 ## 0.22.1 - 2026-06-07
 
 - Fixed the ingestion-methodology benchmark report so it can load when opened directly from `file://` by embedding the published benchmark data in the HTML.

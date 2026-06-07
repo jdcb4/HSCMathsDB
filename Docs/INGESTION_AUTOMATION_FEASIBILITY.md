@@ -217,6 +217,29 @@ human review of proposal JSON/crops
 profile promotion and deterministic audit
 ```
 
+## Gemini Engine Prototype - 2026-06-07
+
+The integrated proposal path is now implemented as:
+
+```powershell
+pnpm run data:propose-gemini-ingestion -- <paperId>
+```
+
+The command uses `google/gemini-3.1-flash-lite` by default and writes ignored review artifacts under
+`var/gemini-ingestion-proposals/<paperId>/`. It processes rendered exam pages and marking-guide pages,
+normalises common schema deviations, reconciles question-level prompt and answer coverage, and flags raw
+TeX outside MathJax delimiters before any corpus promotion.
+
+The first full new-year trial used 2023 Mathematics Standard 1. After downloading and rendering the 2023
+Standard source pack, the engine processed all 38 exam pages and 21 marking-guide pages. It reconciled
+31/31 question skeletons with prompt proposals and answer proposals, identified 19 source-asset candidates,
+and finished with zero page-level errors after parser tightening. The remaining review queue was 10
+questions, mostly due to raw TeX delimiters in option or marking-guide fields.
+
+Updated implementation recommendation: make Gemini page-image proposals the default first-pass ingestion
+lane for new Standard and Extension years. Deterministic code should own source resolution, caching,
+schema normalisation, reconciliation, math-syntax flags, and final promotion gates.
+
 ## Expected Workflow
 
 ```text

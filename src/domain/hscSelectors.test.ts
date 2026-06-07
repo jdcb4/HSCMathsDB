@@ -319,7 +319,8 @@ describe("HSC selectors", () => {
     expect(getFilterOptionsForCourse(database, "extension-2").years).toEqual([2025, 2024]);
     expect(getSourcePackCoverageForCourse(database, "standard").map((pack) => pack.id)).toEqual([
       "source-std-2025",
-      "source-std-2024"
+      "source-std-2024",
+      "source-std-2023"
     ]);
     expect(queryQuestions(database, { courseId: "standard" })).toHaveLength(141);
     expect(queryQuestions(database, { courseId: "extension-1" })).toHaveLength(28);
