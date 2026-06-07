@@ -1190,7 +1190,7 @@ function repairJsonEscapes(value: string): string {
 
 function repairTexJsonEscapes(value: string): string {
   return value.replace(
-    /(?<!\\)\\(?=(?:alpha|beta|theta|pi|sin|cos|tan|ln|log|frac|dfrac|sqrt|left|right|text|times|cdot|to|approx|leq|geq|neq|infty|operatorname|overline|bar|hat|vec|mathbf|mathrm|begin|end)\b)/g,
+    /(?<!\\)\\(?=(?:alpha|beta|theta|pi|sin|cos|tan|ln|log|frac|dfrac|sqrt|left|right|text|times|cdot|to|approx|leq|geq|neq|infty|operatorname|overline|bar|hat|vec|mathbf|mathrm|underset|sim|begin|end)\b)/g,
     "\\\\"
   );
 }
@@ -3027,7 +3027,7 @@ function addUnique<T>(items: T[], item: T) {
 
 function toQuestionNumber(value: string | number | null | undefined): number | undefined {
   if (typeof value === "number" && Number.isFinite(value)) {
-    return value;
+    return value > 0 ? value : undefined;
   }
 
   if (typeof value !== "string") {
@@ -3039,7 +3039,8 @@ function toQuestionNumber(value: string | number | null | undefined): number | u
     return undefined;
   }
 
-  return Number(match[0]);
+  const questionNumber = Number(match[0]);
+  return questionNumber > 0 ? questionNumber : undefined;
 }
 
 function truncateText(value: string, maxLength: number): string {

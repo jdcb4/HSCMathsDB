@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "0.31.0",
+    "version": "0.32.0",
     "title": "GoalCheck HSC mathematics corpus",
     "updatedAt": "2026-06-07",
     "sourceSummary": "Validated corpus linking NSW mathematics exam-pack sources, Standard and Extension draft imports, the Mathematics archive, 2017 syllabus nodes, and 2024 syllabus conversion nodes."
@@ -391,6 +391,46 @@
       "assetStatus": "partial",
       "notes": "Visible on the current Mathematics Extension 2 exam-papers listing. Source PDFs need caching, extraction, and profile review before transcription.",
       "assets": []
+    },
+    {
+      "id": "source-ext1-2023",
+      "courseId": "extension-1",
+      "paperId": "ext1-2023",
+      "collectionId": "nesa-math-extension-1-papers",
+      "year": 2023,
+      "courseName": "Mathematics Extension 1",
+      "title": "Mathematics Extension 1 2023 HSC exam pack",
+      "packPageUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2023",
+      "syllabusEra": "extension-1-2017",
+      "officialListStatus": "listed",
+      "importStatus": "not-started",
+      "expectedQuestionCount": 14,
+      "importedQuestionCount": 0,
+      "assetStatus": "partial",
+      "notes": "Visible on the current Mathematics Extension 1 exam-papers listing. Added for Gemini page-image proposal testing.",
+      "assets": [
+        {
+          "id": "source-ext1-2023-paper",
+          "role": "exam-paper",
+          "label": "2023 exam paper",
+          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-05/2023-hsc-maths-ext-1.pdf",
+          "status": "linked"
+        },
+        {
+          "id": "source-ext1-2023-marking-guide",
+          "role": "marking-guide",
+          "label": "2023 marking guidelines",
+          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-05/2023-hsc-maths-ext-1-mg.pdf",
+          "status": "linked"
+        },
+        {
+          "id": "source-ext1-2023-feedback",
+          "role": "marking-feedback",
+          "label": "2023 marking feedback",
+          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-05/2023-hsc-mathematics-ext1-marking-feedback.pdf",
+          "status": "linked"
+        }
+      ]
     },
     {
       "id": "source-adv-2023",
@@ -1835,6 +1875,17 @@
       "syllabusEra": "extension-2-2017",
       "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-2/2024",
       "sourceStatus": "partially-transcribed"
+    },
+    {
+      "id": "ext1-2023",
+      "courseId": "extension-1",
+      "year": 2023,
+      "courseName": "Mathematics Extension 1",
+      "syllabusEra": "extension-1-2017",
+      "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2023",
+      "paperUrl": "https://www.nsw.gov.au/sites/default/files/noindex/2025-05/2023-hsc-maths-ext-1.pdf",
+      "markingGuideUrl": "https://www.nsw.gov.au/sites/default/files/noindex/2025-05/2023-hsc-maths-ext-1-mg.pdf",
+      "sourceStatus": "source-linked"
     },
     {
       "id": "adv-2023",

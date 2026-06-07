@@ -2,6 +2,12 @@
 
 Newest entries go at the top.
 
+## 0.32.0 - 2026-06-07
+
+- Added 2023 Mathematics Extension 1 source-pack and paper records with official exam, marking-guide, and marking-feedback PDF links.
+- Hardened Gemini JSON parsing for raw TeX commands such as `\\underset` and filtered non-positive model question numbers from reconciliation.
+- Downloaded, rendered, and ran the Gemini proposal engine on 2023 Mathematics Extension 1: 14/14 prompts, 14/14 answers, zero page errors, 2 question-level notation flags, and 5 final crop flags.
+
 ## 0.31.0 - 2026-06-07
 
 - Added bounded parallelism to the Gemini ingestion engine for independent page proposal, crop QA, and crop repair calls while preserving the capped crop QA cycle semantics.
