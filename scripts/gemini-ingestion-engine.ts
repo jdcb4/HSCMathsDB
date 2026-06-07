@@ -221,21 +221,13 @@ const AiRepairSchema = z
   })
   .passthrough();
 
-const CropQaSchema = z
+const SingleCropQaSchema = z
   .object({
-    crops: z
-      .array(
-        z
-          .object({
-            cropId: z.string(),
-            status: z.enum(["ok", "too-tight", "too-loose", "wrong-content", "unclear"]),
-            issues: z.array(z.string()).default([]),
-            recommendedAction: z.string().default(""),
-            confidence: z.number().optional()
-          })
-          .passthrough()
-      )
-      .default([])
+    cropId: z.string(),
+    status: z.enum(["ok", "too-tight", "too-loose", "wrong-content", "unclear"]),
+    issues: z.array(z.string()).default([]),
+    recommendedAction: z.string().default(""),
+    confidence: z.number().optional()
   })
   .passthrough();
 
@@ -347,6 +339,7 @@ type CropQaResult = {
   issues: string[];
   recommendedAction: string;
   confidence?: number;
+  rawPath?: string;
 };
 
 type CropQaReport = {
@@ -420,7 +413,7 @@ type EngineReport = {
 
 const promptVersion = "gemini-page-ingestion-v2";
 const repairCacheVersion = "repair-v2";
-const cropQaCacheVersion = "crop-qa-v1";
+const cropQaCacheVersion = "crop-qa-v2-single";
 const cropRepairMaxPasses = 3;
 
 main().catch((error: unknown) => {
@@ -1965,80 +1958,129 @@ async function evaluateCropCandidates({
     const sheetPath = path.join(sheetRoot, `${sheetId}.png`);
     await createCropContactSheet(batch, sheetPath);
 
-    const rawPath = path.join(sheetRoot, `${sheetId}__${cropQaCacheVersion}__${safeFileName(model)}.json`);
     if (skip || !apiKey) {
       sheets.push({
         id: sheetId,
         path: normalisePath(sheetPath),
         status: "skipped",
-        results: [],
-        rawPath: normalisePath(rawPath)
+        results: []
       });
       continue;
     }
 
-    try {
-      const response = !force ? await readCachedRaw(rawPath) : undefined;
-      const completion =
-        response ??
-        (await callOpenRouterJson({
+    const results: CropQaResult[] = [];
+    for (const candidate of batch) {
+      results.push(
+        await evaluateSingleCropCandidate({
           apiKey,
           model,
-          title: "GoalCheck HSC crop QA",
-          maxTokens: 3000,
-          messages: [
-            {
-              role: "system",
-              content:
-                "You inspect labelled exam visual crops for source-fidelity quality control. Return JSON only."
-            },
-            {
-              role: "user",
-              content: [
-                {
-                  type: "text",
-                  text: buildCropQaPrompt(batch)
-                },
-                {
-                  type: "image_url",
-                  image_url: { url: await imageDataUrl(sheetPath) }
-                }
-              ]
-            }
-          ]
-        }));
-
-      if (!response) {
-        await writeFile(rawPath, `${JSON.stringify(completion.raw, null, 2)}\n`, "utf8");
-      }
-
-      const parsed = CropQaSchema.parse(parseModelJson(completion.content));
-      sheets.push({
-        id: sheetId,
-        path: normalisePath(sheetPath),
-        status: "ok",
-        results: parsed.crops.map((crop) => ({
-          cropId: crop.cropId,
-          status: crop.status,
-          issues: crop.issues,
-          recommendedAction: crop.recommendedAction,
-          confidence: crop.confidence
-        })),
-        rawPath: normalisePath(rawPath)
-      });
-    } catch (error: unknown) {
-      sheets.push({
-        id: sheetId,
-        path: normalisePath(sheetPath),
-        status: "error",
-        results: [],
-        rawPath: normalisePath(rawPath),
-        error: error instanceof Error ? error.message : String(error)
-      });
+          paper,
+          candidate,
+          rawRoot: sheetRoot,
+          rawPrefix: sheetPrefix,
+          force
+        })
+      );
     }
+    const erroredResults = results.filter(
+      (result) =>
+        result.status === "unclear" && result.issues.some((issue) => issue.startsWith("Crop QA error:"))
+    );
+
+    sheets.push({
+      id: sheetId,
+      path: normalisePath(sheetPath),
+      status: erroredResults.length === results.length && results.length > 0 ? "error" : "ok",
+      results,
+      error:
+        erroredResults.length > 0
+          ? `${erroredResults.length} crop-level QA call(s) failed; see result issues.`
+          : undefined
+    });
   }
 
   return sheets;
+}
+
+async function evaluateSingleCropCandidate({
+  apiKey,
+  model,
+  paper,
+  candidate,
+  rawRoot,
+  rawPrefix,
+  force
+}: {
+  apiKey: string;
+  model: string;
+  paper: Paper;
+  candidate: CropCandidate;
+  rawRoot: string;
+  rawPrefix: string;
+  force: boolean;
+}): Promise<CropQaResult> {
+  const rawPath = path.join(
+    rawRoot,
+    `${safeFileName(paper.id)}__${safeFileName(rawPrefix)}__qa-${safeFileName(candidate.id)}__${cropQaCacheVersion}__${safeFileName(model)}.json`
+  );
+
+  try {
+    const response = !force ? await readCachedRaw(rawPath) : undefined;
+    const completion =
+      response ??
+      (await callOpenRouterJson({
+        apiKey,
+        model,
+        title: "GoalCheck HSC single crop QA",
+        maxTokens: 1500,
+        messages: [
+          {
+            role: "system",
+            content:
+              "You are a strict visual crop quality inspector for NSW HSC mathematics exam assets. Return JSON only."
+          },
+          {
+            role: "user",
+            content: [
+              {
+                type: "text",
+                text: buildSingleCropQaPrompt(candidate)
+              },
+              {
+                type: "image_url",
+                image_url: { url: await imageDataUrl(candidate.sourcePagePath) }
+              },
+              {
+                type: "image_url",
+                image_url: { url: await imageDataUrl(candidate.cropPath) }
+              }
+            ]
+          }
+        ]
+      }));
+
+    if (!response) {
+      await writeFile(rawPath, `${JSON.stringify(completion.raw, null, 2)}\n`, "utf8");
+    }
+
+    const parsed = SingleCropQaSchema.parse(parseModelJson(completion.content));
+    return {
+      cropId: candidate.id,
+      status: parsed.status,
+      issues: parsed.issues,
+      recommendedAction: parsed.recommendedAction,
+      confidence: parsed.confidence,
+      rawPath: normalisePath(rawPath)
+    };
+  } catch (error: unknown) {
+    return {
+      cropId: candidate.id,
+      status: "unclear",
+      issues: [`Crop QA error: ${error instanceof Error ? error.message : String(error)}`],
+      recommendedAction: "Retry crop QA or inspect manually.",
+      rawPath: normalisePath(rawPath)
+    };
+  }
 }
 
 function skippedCropRepairAttempt(result: CropQaResult, candidates: CropCandidate[]): CropRepairAttempt {
@@ -2433,8 +2475,10 @@ Allowed actions:
 
 Rules:
 - Prefer replace-bbox for too-tight, too-loose, and wrong-content findings when the correct visual is visible on the source page.
-- The bbox must include the complete required graph/table/diagram/image, including axes, labels, legends, table borders, option labels, and geometry.
-- Do not include unrelated page headers, footers, other questions, answer-writing lines, or surrounding prose unless needed to understand the visual.
+- The bbox must include the complete required visual as a standalone public-site asset.
+- Include all axes, axis labels, tick labels, legends, graph labels, table headers, row/column labels, table borders, diagram endpoints, nodes, edge labels, option labels, scales, and geometry/text labels that are part of the visual.
+- Exclude unrelated question prose, answer-writing lines, page headers, footers, page numbers, marks, office-use text, other questions, other diagrams, and excessive blank margins.
+- Include adjacent prose only if it is visually part of the table/diagram itself, not merely the question stem.
 - Coordinates must use the full source-page image coordinate system, not the small crop image coordinate system.
 
 Crop metadata:
@@ -2597,39 +2641,52 @@ async function createCropContactSheet(candidates: CropCandidate[], outputPath: s
   await writeFile(outputPath, canvas.toBuffer("image/png"));
 }
 
-function buildCropQaPrompt(candidates: CropCandidate[]): string {
-  return `Inspect this 4x4 labelled crop contact sheet for NSW HSC mathematics exam visual extraction.
+function buildSingleCropQaPrompt(candidate: CropCandidate): string {
+  return `Inspect one proposed crop for an NSW HSC mathematics question asset.
+
+You will receive two images:
+1. The full rendered source exam page.
+2. The proposed crop.
 
 Return JSON only:
 {
-  "crops": [
-    {
-      "cropId": "q1-p2-v1",
-      "status": "ok",
-      "issues": [],
-      "recommendedAction": "",
-      "confidence": 0.0
-    }
-  ]
+  "cropId": "${candidate.id}",
+  "status": "ok",
+  "issues": [],
+  "recommendedAction": "",
+  "confidence": 0.0
 }
 
+Be strict. Mark "ok" only when the crop is suitable to publish as the standalone public-site asset for this question.
+
+The crop should include:
+- The complete visual described in the metadata: graph, table, diagram, image, map, plan, network, spinner, option diagram set, or card layout.
+- Every required axis, axis label, tick label, legend, graph label, table header, row/column label, table border, diagram endpoint, node, edge label, option label, scale, and geometric/text label that is visually part of the asset.
+- Small visual captions or labels only when they are part of the visual itself.
+
+The crop should exclude:
+- Unrelated question prose before or after the visual.
+- Answer-writing lines, page headers, footers, page numbers, copyright notices, marks, or office-use text.
+- Other questions or unrelated nearby diagrams.
+- Large blank margins. A small margin around the visual is fine.
+
 Allowed statuses:
-- ok: the crop contains the whole required graph/table/diagram/image and no unrelated question/header/answer content.
-- too-tight: important labels, axes, table borders, legend, option labels, or geometry are clipped.
-- too-loose: unnecessary surrounding source content is included.
-- wrong-content: the crop is not the visual described for that question.
-- unclear: the sheet is insufficient to decide.
+- ok: the crop includes exactly the complete required visual with only reasonable margin.
+- too-tight: any part of the visual is clipped, including edges, borders, labels, axes, table rows/columns, or option labels.
+- too-loose: the crop includes unnecessary surrounding prose, other question content, answer lines, headers/footers, or excessive blank area.
+- wrong-content: the crop is blank, mostly text instead of the described visual, or captures a different visual.
+- unclear: you cannot determine quality from the supplied page and crop.
 
 Metadata:
 ${JSON.stringify(
-  candidates.map((candidate) => ({
+  {
     cropId: candidate.id,
     questionNumber: candidate.questionNumber,
     page: candidate.page,
     kind: candidate.kind,
     description: candidate.description,
     bbox: candidate.bbox
-  })),
+  },
   null,
   2
 )}`;

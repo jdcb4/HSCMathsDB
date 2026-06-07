@@ -2,6 +2,12 @@
 
 Newest entries go at the top.
 
+## 0.27.0 - 2026-06-07
+
+- Reworked Gemini crop QA to judge each crop one by one against the original rendered source page, with a stricter prompt for standalone public-site assets and cached per-crop QA responses.
+- Kept crop contact sheets as overview artifacts only, while final crop status now comes from individual full-page-plus-crop judgements.
+- Re-ran and republished the 2023 Mathematics Standard 1 preview; the stricter QA now surfaces 15 final crop-boundary issues inline on the draft question preview instead of incorrectly clearing poor crops.
+
 ## 0.26.0 - 2026-06-07
 
 - Extended the Gemini ingestion report publisher to generate a draft corpus preview page for each paper, grouping the proposal into learner-facing question cards with prompts, options, extracted visual assets, official answers, marking-guide working, source refs, and unresolved flags.

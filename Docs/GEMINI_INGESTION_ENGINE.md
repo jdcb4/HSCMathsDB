@@ -27,7 +27,7 @@ The default model is `google/gemini-3.1-flash-lite` through OpenRouter. The comm
 Additional model controls:
 
 - `--repair-model <model>` changes the model used for unresolved question repair.
-- `--crop-qa-model <model>` changes the model used for labelled crop-sheet QA.
+- `--crop-qa-model <model>` changes the model used for per-crop visual QA.
 - `--judge-model <model>` sets both repair and crop QA to a stronger judgement model.
 - `--skip-repair` and `--skip-crop-qa` disable those downstream passes.
 - `--force-repair` and `--force-crop-qa` refresh cached downstream AI judgements without rerunning the page proposals.
@@ -50,7 +50,7 @@ For `std1-2023`, the engine writes:
 - `var/gemini-ingestion-proposals/std1-2023/parsed/` - parsed page proposals
 - `var/gemini-ingestion-proposals/std1-2023/repairs/` - cached targeted AI repair responses
 - `var/gemini-ingestion-proposals/std1-2023/visual-crops/` - crop candidates produced from Gemini visual bbox proposals
-- `var/gemini-ingestion-proposals/std1-2023/crop-contact-sheets/` - 4x4 labelled crop sheets and AI crop QA responses
+- `var/gemini-ingestion-proposals/std1-2023/crop-contact-sheets/` - 4x4 labelled crop-sheet overviews and cached per-crop AI QA responses
 - `var/gemini-ingestion-proposals/std1-2023/crop-repairs/` - cached targeted AI crop-repair responses
 - `var/gemini-ingestion-proposals/std1-2023/report.json` - reconciled machine-readable report
 - `var/gemini-ingestion-proposals/std1-2023/report.html` - local report surface with rendered page images, repair results, and crop QA
@@ -84,11 +84,12 @@ and rewrites both pages to use relative image URLs. That generated folder is ign
 6. Reconcile question numbers across exam and marking-guide proposals.
 7. Feed unresolved question flags back to the repair model with structured context plus the relevant and adjacent page images.
 8. Re-run deterministic notation repair after AI edits and reconcile again.
-9. Generate visual crop candidates from Gemini bbox proposals, stitch them into 4x4 labelled contact sheets, and ask the crop QA model to classify bad crops.
-10. Feed flagged crop candidates back to the model for corrected bbox proposals, rerun crop QA after each repair pass, and apply deterministic expansion fallbacks for residual too-tight/blank crops.
-11. Flag missing prompt/answer coverage, asset needs, low confidence, raw TeX outside MathJax
+9. Generate visual crop candidates from Gemini bbox proposals and stitch them into 4x4 labelled contact sheets for overview.
+10. Ask the crop QA model to inspect each candidate one by one with the original rendered source page and the proposed crop, requiring the crop to include the whole standalone visual while excluding question prose, page furniture, unrelated diagrams, and excessive blank space.
+11. Feed flagged crop candidates back to the model for corrected bbox proposals, rerun per-crop QA after each repair pass, and apply deterministic expansion fallbacks for residual too-tight/blank crops.
+12. Flag missing prompt/answer coverage, asset needs, low confidence, raw TeX outside MathJax
     delimiters, and risk-like page notes.
-12. Use any remaining unresolved report items as escalation cases before promoting records through the existing importer/corpus path.
+13. Use any remaining unresolved report items as escalation cases before promoting records through the existing importer/corpus path.
 
 ## 2023 Standard 1 Trial
 
@@ -106,8 +107,10 @@ Result after the autonomous repair and crop QA loop:
 - 0 page-level errors
 - 0 question-level reconciliation or notation flags after deterministic and AI repair
 - 23 crop candidates generated from visual bbox proposals
-- 0 final crop QA flags after targeted AI crop repair and deterministic residual expansion
+- 15 final crop QA flags after stricter per-crop source-page comparison
 
 This is a strong enough signal to use Gemini page-image extraction as the default proposal path for
-new Standard and Extension years, with deterministic repair, targeted AI repair, visual crop QA, and
-crop auto-repair before corpus promotion.
+new Standard and Extension years, with deterministic repair and targeted AI repair for text. For
+visuals, the latest trial shows that crop QA must be stricter than sheet-level review: per-crop
+source-page comparison is now the quality gate, and remaining crop flags should block corpus
+promotion until bbox generation or crop repair produces clean standalone assets.

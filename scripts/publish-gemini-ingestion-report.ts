@@ -16,7 +16,7 @@ type ReportWithAssets = {
   cropQa?: {
     candidates?: CropCandidate[];
     initialSheets?: Array<{ path?: string; imageUrl?: string }>;
-    sheets?: Array<{ path?: string; imageUrl?: string }>;
+    sheets?: Array<{ path?: string; imageUrl?: string; results?: CropQaResult[] }>;
     flaggedCropIds?: string[];
   };
 };
@@ -71,6 +71,16 @@ type CropCandidate = {
   sourcePagePath?: string;
   cropPath?: string;
   cropUrl?: string;
+  qa?: CropQaResult;
+};
+
+type CropQaResult = {
+  cropId: string;
+  status: "ok" | "too-tight" | "too-loose" | "wrong-content" | "unclear";
+  issues: string[];
+  recommendedAction: string;
+  confidence?: number;
+  rawPath?: string;
 };
 
 type DraftQuestionPreview = {
@@ -376,6 +386,11 @@ function buildQuestionPreviewHtml(report: ReportWithAssets): string {
 
 function buildDraftQuestions(report: ReportWithAssets): DraftQuestionPreview[] {
   const questionNumbers = new Set<number>();
+  const cropQaById = new Map(
+    (report.cropQa?.sheets ?? [])
+      .flatMap((sheet) => sheet.results ?? [])
+      .map((result) => [result.cropId, result])
+  );
   for (const summary of report.questionSummaries ?? []) {
     questionNumbers.add(summary.questionNumber);
   }
@@ -420,9 +435,9 @@ function buildDraftQuestions(report: ReportWithAssets): DraftQuestionPreview[] {
         )
         .sort(compareAnswerParts);
       const summary = (report.questionSummaries ?? []).find((item) => item.questionNumber === questionNumber);
-      const assets = (report.cropQa?.candidates ?? []).filter(
-        (candidate) => candidate.questionNumber === questionNumber
-      );
+      const assets = (report.cropQa?.candidates ?? [])
+        .filter((candidate) => candidate.questionNumber === questionNumber)
+        .map((candidate) => ({ ...candidate, qa: cropQaById.get(candidate.id) }));
       const markValues = [
         ...promptParts
           .map(
@@ -529,7 +544,7 @@ function renderDraftQuestion(question: DraftQuestionPreview): string {
 function renderPromptPart(part: DraftQuestionPreview["promptParts"][number]): string {
   const partLabel = part.partLabels.length ? `Part ${part.partLabels.join(", ")}` : `Page ${part.page}`;
   return `<div class="prompt-part">
-    <p class="muted">${escapeHtml(partLabel)} · exam page ${part.page}</p>
+    <p class="muted">${escapeHtml(partLabel)} - exam page ${part.page}</p>
     <div class="math-text">${escapeHtml(formatPrompt(part.promptLatex))}</div>
     ${part.options.length ? `<div class="options">${part.options.map(renderOption).join("")}</div>` : ""}
     ${part.notes.length ? `<p>${part.notes.map((note) => `<span class="pill warn">${escapeHtml(note)}</span>`).join(" ")}</p>` : ""}
@@ -543,16 +558,26 @@ function renderOption(option: { label: string; textLatex: string }): string {
 }
 
 function renderAsset(asset: CropCandidate): string {
+  const qa = asset.qa;
+  const statusClass = qa?.status && qa.status !== "ok" ? "bad" : "";
   return `<figure>
     <img src="${escapeHtml(asset.cropUrl ?? "")}" alt="${escapeHtml(asset.description)}" loading="lazy" />
-    <figcaption>${escapeHtml(asset.kind)} · ${escapeHtml(asset.description)} · ${escapeHtml(asset.id)}</figcaption>
+    <figcaption>
+      <span class="pill ${statusClass}">${escapeHtml(qa?.status ?? "not checked")}</span>
+      ${escapeHtml(asset.kind)} - ${escapeHtml(asset.description)} - ${escapeHtml(asset.id)}
+      ${
+        qa && qa.status !== "ok"
+          ? `<ul>${qa.issues.map((issue) => `<li>${escapeHtml(issue)}</li>`).join("")}</ul><p class="muted">${escapeHtml(qa.recommendedAction)}</p>`
+          : ""
+      }
+    </figcaption>
   </figure>`;
 }
 
 function renderAnswerPart(part: DraftQuestionPreview["answerParts"][number]): string {
   const partLabel = part.partLabel ? `Part ${part.partLabel}` : `Guide page ${part.page}`;
   return `<div class="answer-part">
-    <p class="muted">${escapeHtml(partLabel)} · guide page ${part.page}${part.marks ? ` · ${part.marks} mark${part.marks === 1 ? "" : "s"}` : ""}</p>
+    <p class="muted">${escapeHtml(partLabel)} - guide page ${part.page}${part.marks ? ` - ${part.marks} mark${part.marks === 1 ? "" : "s"}` : ""}</p>
     ${part.answerLatex ? `<h4>Answer</h4><div class="math-text">${escapeHtml(part.answerLatex)}</div>` : ""}
     ${part.sampleAnswerLatex ? `<h4 style="margin-top: 10px">Working / sample answer</h4><div class="math-text">${escapeHtml(part.sampleAnswerLatex)}</div>` : ""}
     ${
