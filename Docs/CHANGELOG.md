@@ -2,6 +2,12 @@
 
 Newest entries go at the top.
 
+## 0.25.0 - 2026-06-07
+
+- Added a local Gemini ingestion report publisher that writes ignored browser-review copies under `public/ingestion-reports/` with copied relative image assets.
+- Added iterative crop auto-repair to the Gemini ingestion engine: flagged crop QA results are fed back for corrected bbox proposals, rechecked after each pass, and residual too-tight/blank crops receive deterministic expansion fallbacks.
+- Re-ran the 2023 Mathematics Standard 1 trial: 31/31 question skeletons, prompt proposals, and answer proposals reconcile with zero question-level flags; 23 visual crop candidates now finish with zero final crop QA flags after repair.
+
 ## 0.24.0 - 2026-06-07
 
 - Added an autonomous downstream repair loop to the Gemini ingestion engine: deterministic TeX/currency fixes, targeted AI repair with adjacent source-page context, and a final deterministic cleanup pass.

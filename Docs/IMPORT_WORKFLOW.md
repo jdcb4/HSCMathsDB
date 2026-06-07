@@ -12,7 +12,7 @@ This workflow turns official NSW source packs into verified question records, ma
 - 2024 Mathematics Standard: 73/73 official draft records promoted across Standard 1 and Standard 2 through the reusable profile importer. Reviewed exam-derived assets and source-reviewed overrides have been added for audit-flagged visual and notation issues; the ingestion audit reports zero issues for the pack.
 - 2024 Mathematics Extension 1: 14/14 official draft records promoted through the reusable profile importer. Source-reviewed prompt/answer overrides and diagram assets have been added; the ingestion audit reports zero issues for the paper.
 - 2024 Mathematics Extension 2: 16/16 official draft records promoted through the reusable profile importer. Source-reviewed prompt/answer overrides and diagram assets have been added; the ingestion audit reports zero issues for the paper.
-- 2023 Mathematics Standard: source-pack and paper records are seeded. PDFs have been cached locally and all documents rendered. The Gemini proposal engine has completed a full Standard 1 trial with 31/31 prompts and marking-guide answers reconciled into ignored review artifacts under `var/gemini-ingestion-proposals/std1-2023/`; no corpus records have been promoted yet.
+- 2023 Mathematics Standard: source-pack and paper records are seeded. PDFs have been cached locally and all documents rendered. The Gemini proposal engine has completed a full Standard 1 trial with 31/31 prompts, 31/31 marking-guide answers, zero question-level flags, and zero final crop QA flags after repair. Ignored review artifacts live under `var/gemini-ingestion-proposals/std1-2023/` and the published local review copy is generated under `public/ingestion-reports/`; no corpus records have been promoted yet.
 - 2023 Mathematics Advanced: source PDFs cached, text/candidates extracted, and 44 exam/guide pages rendered under `var/rendered-pages/source-adv-2023/`; Q1-Q32 are promoted as official draft records. Q1, Q2, Q4, Q5, Q6, Q10, Q16, Q18, Q19, Q22, Q23, Q24, Q27, Q28, Q30, and Q32 public diagram assets are already in `public/assets/diagrams/`.
 - 2022 Mathematics Advanced: 32/32 official draft records promoted; source-pack asset status is complete. Source PDFs are cached, text/candidates extracted, embedded-image metadata extracted, and 40 exam pages rendered under `var/rendered-pages/source-adv-2022/`. Q1, Q3, Q7, Q8, Q10, Q11, Q12, Q14, Q16, Q17, Q21, Q24, Q28, Q29, and Q31 public diagram assets are already in `public/assets/diagrams/`.
 - Next import work can continue with older Standard and Extension years using the 2024 and 2025 reviewed imports as quality benchmarks. Keep using `pnpm run data:report-coverage -- <source-pack-id>` as the compact progress check before opening large extracted files.
@@ -107,16 +107,22 @@ rendered:
 pnpm run data:download-sources -- source-std-2023
 pnpm run data:render-pages -- source-std-2023 --all-documents --scale 1.5
 pnpm run data:propose-gemini-ingestion -- std1-2023
+pnpm run data:publish-gemini-ingestion-report -- std1-2023
 ```
 
 The command calls `google/gemini-3.1-flash-lite` through OpenRouter, unless `--model` is supplied.
-It writes raw responses, parsed page proposals, deterministic and AI repair artifacts, labelled crop
-QA sheets, a reconciled JSON report, and a local HTML report surface under
+It writes raw responses, parsed page proposals, deterministic and AI repair artifacts, AI crop-repair
+artifacts, labelled crop QA sheets, a reconciled JSON report, and a local HTML report surface under
 `var/gemini-ingestion-proposals/<paperId>/`.
 
 The proposal report is not a corpus write. The default run attempts to resolve raw TeX, currency,
-split-page, and source-fidelity flags autonomously before final reconciliation. Use any remaining
-unresolved question flags or crop QA flags as escalation cases before promoting records.
+split-page, source-fidelity, and crop-boundary flags autonomously before final reconciliation. Use
+any remaining unresolved question flags or crop QA flags as escalation cases before promoting
+records.
+
+The publish command writes an ignored browser-review copy to
+`public/ingestion-reports/<paperId>.html`. Open it through the dev server, for example
+`http://127.0.0.1:5173/ingestion-reports/std1-2023.html`.
 
 For a stronger downstream judgement model without changing the first-pass page proposal model:
 

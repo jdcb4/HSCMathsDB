@@ -9,6 +9,7 @@ under ignored `var/` paths.
 
 ```powershell
 pnpm run data:propose-gemini-ingestion -- std1-2023
+pnpm run data:publish-gemini-ingestion-report -- std1-2023
 ```
 
 Useful scoped runs:
@@ -50,10 +51,21 @@ For `std1-2023`, the engine writes:
 - `var/gemini-ingestion-proposals/std1-2023/repairs/` - cached targeted AI repair responses
 - `var/gemini-ingestion-proposals/std1-2023/visual-crops/` - crop candidates produced from Gemini visual bbox proposals
 - `var/gemini-ingestion-proposals/std1-2023/crop-contact-sheets/` - 4x4 labelled crop sheets and AI crop QA responses
+- `var/gemini-ingestion-proposals/std1-2023/crop-repairs/` - cached targeted AI crop-repair responses
 - `var/gemini-ingestion-proposals/std1-2023/report.json` - reconciled machine-readable report
 - `var/gemini-ingestion-proposals/std1-2023/report.html` - local report surface with rendered page images, repair results, and crop QA
 
 These outputs are intentionally ignored by git.
+
+For local browser review, publish an ignored copy under `public/`:
+
+```powershell
+pnpm run data:publish-gemini-ingestion-report -- std1-2023
+```
+
+Then open `http://127.0.0.1:5173/ingestion-reports/std1-2023.html` while `pnpm run dev` is running.
+The publisher copies referenced page/crop images into `public/ingestion-reports/<paperId>-assets/`
+and rewrites the report to use relative image URLs. That generated folder is ignored by git.
 
 ## Pipeline Shape
 
@@ -69,9 +81,10 @@ These outputs are intentionally ignored by git.
 7. Feed unresolved question flags back to the repair model with structured context plus the relevant and adjacent page images.
 8. Re-run deterministic notation repair after AI edits and reconcile again.
 9. Generate visual crop candidates from Gemini bbox proposals, stitch them into 4x4 labelled contact sheets, and ask the crop QA model to classify bad crops.
-10. Flag missing prompt/answer coverage, asset needs, low confidence, raw TeX outside MathJax
+10. Feed flagged crop candidates back to the model for corrected bbox proposals, rerun crop QA after each repair pass, and apply deterministic expansion fallbacks for residual too-tight/blank crops.
+11. Flag missing prompt/answer coverage, asset needs, low confidence, raw TeX outside MathJax
     delimiters, and risk-like page notes.
-11. Use any remaining unresolved report items as escalation cases before promoting records through the existing importer/corpus path.
+12. Use any remaining unresolved report items as escalation cases before promoting records through the existing importer/corpus path.
 
 ## 2023 Standard 1 Trial
 
@@ -89,8 +102,8 @@ Result after the autonomous repair and crop QA loop:
 - 0 page-level errors
 - 0 question-level reconciliation or notation flags after deterministic and AI repair
 - 23 crop candidates generated from visual bbox proposals
-- 5 crop candidates flagged by AI crop QA for likely tight crop boundaries or wrong crop content
+- 0 final crop QA flags after targeted AI crop repair and deterministic residual expansion
 
 This is a strong enough signal to use Gemini page-image extraction as the default proposal path for
-new Standard and Extension years, with deterministic repair, targeted AI repair, and visual crop QA
-before corpus promotion.
+new Standard and Extension years, with deterministic repair, targeted AI repair, visual crop QA, and
+crop auto-repair before corpus promotion.

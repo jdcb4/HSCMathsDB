@@ -13,3 +13,4 @@ Thumbs.db
 *.log
 *.tsbuildinfo
 var/
+public/ingestion-reports/

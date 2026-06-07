@@ -239,6 +239,16 @@ const CropQaSchema = z
   })
   .passthrough();
 
+const CropRepairSchema = z
+  .object({
+    cropId: z.string(),
+    action: z.enum(["replace-bbox", "keep", "manual-review"]),
+    newBbox: BBoxSchema,
+    reason: z.string().default(""),
+    confidence: z.number().optional()
+  })
+  .passthrough();
+
 type ExamPageProposal = z.infer<typeof ExamPageProposalSchema> & {
   page: number;
   imagePath: string;
@@ -302,6 +312,7 @@ type CropCandidate = {
   id: string;
   questionNumber: number;
   page: number;
+  visualIndex: number;
   kind: string;
   description: string;
   sourcePagePath: string;
@@ -312,6 +323,22 @@ type CropCandidate = {
     width: number;
     height: number;
   };
+};
+
+type CropRepairAttempt = {
+  cropId: string;
+  status: "ok" | "skipped" | "error";
+  action?: "replace-bbox" | "keep" | "manual-review";
+  beforeBbox: CropCandidate["bbox"];
+  afterBbox?: CropCandidate["bbox"];
+  beforeCropPath: string;
+  afterCropPath?: string;
+  qaStatus: CropQaResult["status"];
+  qaIssues: string[];
+  reason?: string;
+  confidence?: number;
+  rawPath?: string;
+  error?: string;
 };
 
 type CropQaResult = {
@@ -325,6 +352,15 @@ type CropQaResult = {
 type CropQaReport = {
   model?: string;
   candidates: CropCandidate[];
+  initialSheets: Array<{
+    id: string;
+    path: string;
+    rawPath?: string;
+    status: "ok" | "skipped" | "error";
+    results: CropQaResult[];
+    error?: string;
+  }>;
+  repairAttempts: CropRepairAttempt[];
   sheets: Array<{
     id: string;
     path: string;
@@ -385,6 +421,7 @@ type EngineReport = {
 const promptVersion = "gemini-page-ingestion-v2";
 const repairCacheVersion = "repair-v2";
 const cropQaCacheVersion = "crop-qa-v1";
+const cropRepairMaxPasses = 3;
 
 main().catch((error: unknown) => {
   console.error(error instanceof Error ? (error.stack ?? error.message) : error);
@@ -402,12 +439,14 @@ async function main() {
   const repairRoot = path.join(runRoot, "repairs");
   const cropRoot = path.join(runRoot, "visual-crops");
   const sheetRoot = path.join(runRoot, "crop-contact-sheets");
+  const cropRepairRoot = path.join(runRoot, "crop-repairs");
 
   await mkdir(rawRoot, { recursive: true });
   await mkdir(parsedRoot, { recursive: true });
   await mkdir(repairRoot, { recursive: true });
   await mkdir(cropRoot, { recursive: true });
   await mkdir(sheetRoot, { recursive: true });
+  await mkdir(cropRepairRoot, { recursive: true });
 
   const sourceAssets = await discoverAssets(pack);
   const renderMetadata = await readRenderMetadata(pack);
@@ -476,6 +515,7 @@ async function main() {
     examPageProposals,
     cropRoot,
     sheetRoot,
+    cropRepairRoot,
     force: args.forceCropQa,
     skip: args.skipCropQa || args.skipLlm
   });
@@ -1778,6 +1818,7 @@ async function runCropQa({
   examPageProposals,
   cropRoot,
   sheetRoot,
+  cropRepairRoot,
   force,
   skip
 }: {
@@ -1787,16 +1828,140 @@ async function runCropQa({
   examPageProposals: ExamPageProposal[];
   cropRoot: string;
   sheetRoot: string;
+  cropRepairRoot: string;
   force: boolean;
   skip: boolean;
 }): Promise<CropQaReport> {
   const candidates = await createCropCandidates(paper, examPageProposals, cropRoot);
+  const initialSheets = await evaluateCropCandidates({
+    apiKey,
+    model,
+    paper,
+    candidates,
+    sheetRoot,
+    sheetPrefix: "crop-sheet-initial",
+    force,
+    skip
+  });
+  const initialFlaggedResults = initialSheets
+    .flatMap((sheet) => sheet.results)
+    .filter((result) => result.status !== "ok");
+  const repairAttempts: CropRepairAttempt[] = [];
+  let sheets = initialSheets;
+  let flaggedResults = initialFlaggedResults;
+
+  if (skip || !apiKey) {
+    repairAttempts.push(
+      ...initialFlaggedResults.map((result) => skippedCropRepairAttempt(result, candidates))
+    );
+  } else {
+    for (
+      let repairPass = 1;
+      repairPass <= cropRepairMaxPasses && flaggedResults.length > 0;
+      repairPass += 1
+    ) {
+      const passAttempts = await applyCropRepairs({
+        apiKey,
+        model,
+        paper,
+        candidates,
+        examPageProposals,
+        flaggedResults,
+        cropRepairRoot,
+        cropRoot,
+        force,
+        repairPass
+      });
+      repairAttempts.push(...passAttempts);
+
+      sheets = await evaluateCropCandidates({
+        apiKey,
+        model,
+        paper,
+        candidates,
+        sheetRoot,
+        sheetPrefix: `crop-sheet-repaired-pass-${repairPass}`,
+        force,
+        skip
+      });
+      flaggedResults = sheets.flatMap((sheet) => sheet.results).filter((result) => result.status !== "ok");
+
+      if (!passAttempts.some((attempt) => attempt.status === "ok" && attempt.action === "replace-bbox")) {
+        break;
+      }
+    }
+
+    for (let fallbackPass = 1; fallbackPass <= 2; fallbackPass += 1) {
+      if (flaggedResults.length === 0) {
+        break;
+      }
+
+      const fallbackAttempts = await applyDeterministicCropFallbacks({
+        paper,
+        candidates,
+        examPageProposals,
+        flaggedResults,
+        cropRoot
+      });
+      repairAttempts.push(...fallbackAttempts);
+
+      if (!fallbackAttempts.some((attempt) => attempt.status === "ok" && attempt.action === "replace-bbox")) {
+        break;
+      }
+
+      sheets = await evaluateCropCandidates({
+        apiKey,
+        model,
+        paper,
+        candidates,
+        sheetRoot,
+        sheetPrefix: `crop-sheet-deterministic-fallback-pass-${fallbackPass}`,
+        force,
+        skip
+      });
+      flaggedResults = sheets.flatMap((sheet) => sheet.results).filter((result) => result.status !== "ok");
+    }
+  }
+  const flaggedCropIds = sheets
+    .flatMap((sheet) => sheet.results)
+    .filter((result) => result.status !== "ok")
+    .map((result) => result.cropId);
+
+  return {
+    model: skip ? undefined : model,
+    candidates,
+    initialSheets,
+    repairAttempts,
+    sheets,
+    flaggedCropIds
+  };
+}
+
+async function evaluateCropCandidates({
+  apiKey,
+  model,
+  paper,
+  candidates,
+  sheetRoot,
+  sheetPrefix,
+  force,
+  skip
+}: {
+  apiKey?: string;
+  model: string;
+  paper: Paper;
+  candidates: CropCandidate[];
+  sheetRoot: string;
+  sheetPrefix: string;
+  force: boolean;
+  skip: boolean;
+}): Promise<CropQaReport["sheets"]> {
   const batches = chunk(candidates, 16);
   const sheets: CropQaReport["sheets"] = [];
 
   for (let index = 0; index < batches.length; index += 1) {
     const batch = batches[index];
-    const sheetId = `${safeFileName(paper.id)}__crop-sheet-${(index + 1).toString().padStart(2, "0")}`;
+    const sheetId = `${safeFileName(paper.id)}__${sheetPrefix}-${(index + 1).toString().padStart(2, "0")}`;
     const sheetPath = path.join(sheetRoot, `${sheetId}.png`);
     await createCropContactSheet(batch, sheetPath);
 
@@ -1873,17 +2038,446 @@ async function runCropQa({
     }
   }
 
-  const flaggedCropIds = sheets
-    .flatMap((sheet) => sheet.results)
-    .filter((result) => result.status !== "ok")
-    .map((result) => result.cropId);
+  return sheets;
+}
 
+function skippedCropRepairAttempt(result: CropQaResult, candidates: CropCandidate[]): CropRepairAttempt {
+  const candidate = candidates.find((item) => item.id === result.cropId);
   return {
-    model: skip ? undefined : model,
-    candidates,
-    sheets,
-    flaggedCropIds
+    cropId: result.cropId,
+    status: "skipped",
+    beforeBbox: candidate?.bbox ?? { x: 0, y: 0, width: 0, height: 0 },
+    beforeCropPath: candidate?.cropPath ?? "",
+    qaStatus: result.status,
+    qaIssues: result.issues,
+    reason: "Crop repair skipped."
   };
+}
+
+async function applyCropRepairs({
+  apiKey,
+  model,
+  paper,
+  candidates,
+  examPageProposals,
+  flaggedResults,
+  cropRepairRoot,
+  cropRoot,
+  force,
+  repairPass
+}: {
+  apiKey: string;
+  model: string;
+  paper: Paper;
+  candidates: CropCandidate[];
+  examPageProposals: ExamPageProposal[];
+  flaggedResults: CropQaResult[];
+  cropRepairRoot: string;
+  cropRoot: string;
+  force: boolean;
+  repairPass: number;
+}): Promise<CropRepairAttempt[]> {
+  const attempts: CropRepairAttempt[] = [];
+
+  for (const result of flaggedResults) {
+    const candidate = candidates.find((item) => item.id === result.cropId);
+    if (!candidate) {
+      attempts.push({
+        cropId: result.cropId,
+        status: "error",
+        beforeBbox: { x: 0, y: 0, width: 0, height: 0 },
+        beforeCropPath: "",
+        qaStatus: result.status,
+        qaIssues: result.issues,
+        error: "Crop candidate not found for flagged QA result."
+      });
+      continue;
+    }
+
+    const stem = `${safeFileName(paper.id)}__crop-repair-pass-${repairPass}-${safeFileName(
+      candidate.id
+    )}__${safeFileName(model)}`;
+    const rawPath = path.join(cropRepairRoot, `${stem}.json`);
+    const beforeBbox = { ...candidate.bbox };
+    const beforeCropPath = candidate.cropPath;
+
+    try {
+      const response = !force ? await readCachedRaw(rawPath) : undefined;
+      const completion =
+        response ??
+        (await callOpenRouterJson({
+          apiKey,
+          model,
+          title: "GoalCheck HSC crop repair",
+          maxTokens: 1500,
+          messages: [
+            {
+              role: "system",
+              content:
+                "You repair proposed visual crop bounding boxes for NSW HSC mathematics exam pages. Return JSON only."
+            },
+            {
+              role: "user",
+              content: [
+                {
+                  type: "text",
+                  text: buildCropRepairPrompt(candidate, result)
+                },
+                {
+                  type: "image_url",
+                  image_url: { url: await imageDataUrl(candidate.sourcePagePath) }
+                },
+                {
+                  type: "image_url",
+                  image_url: { url: await imageDataUrl(candidate.cropPath) }
+                }
+              ]
+            }
+          ]
+        }));
+
+      if (!response) {
+        await writeFile(rawPath, `${JSON.stringify(completion.raw, null, 2)}\n`, "utf8");
+      }
+
+      const parsed = CropRepairSchema.parse(parseModelJson(completion.content));
+      if (parsed.action !== "replace-bbox" || !parsed.newBbox) {
+        attempts.push({
+          cropId: candidate.id,
+          status: "ok",
+          action: parsed.action,
+          beforeBbox,
+          beforeCropPath,
+          qaStatus: result.status,
+          qaIssues: result.issues,
+          reason: parsed.reason,
+          confidence: parsed.confidence,
+          rawPath: normalisePath(rawPath)
+        });
+        continue;
+      }
+
+      const sourceImage = await loadImage(await readFile(candidate.sourcePagePath));
+      const repairedBbox = clampBbox(parsed.newBbox, sourceImage.width, sourceImage.height);
+      const repairedCropPath = path.join(
+        cropRoot,
+        `${safeFileName(paper.id)}__${candidate.id}__repaired.png`
+      );
+      await writeCropImage(candidate.sourcePagePath, repairedBbox, repairedCropPath);
+
+      candidate.bbox = repairedBbox;
+      candidate.cropPath = normalisePath(repairedCropPath);
+      updateProposalVisualBbox(examPageProposals, candidate, repairedBbox);
+
+      attempts.push({
+        cropId: candidate.id,
+        status: "ok",
+        action: parsed.action,
+        beforeBbox,
+        afterBbox: repairedBbox,
+        beforeCropPath,
+        afterCropPath: normalisePath(repairedCropPath),
+        qaStatus: result.status,
+        qaIssues: result.issues,
+        reason: parsed.reason,
+        confidence: parsed.confidence,
+        rawPath: normalisePath(rawPath)
+      });
+    } catch (error: unknown) {
+      attempts.push({
+        cropId: candidate.id,
+        status: "error",
+        beforeBbox,
+        beforeCropPath,
+        qaStatus: result.status,
+        qaIssues: result.issues,
+        rawPath: normalisePath(rawPath),
+        error: error instanceof Error ? error.message : String(error)
+      });
+    }
+  }
+
+  return attempts;
+}
+
+async function applyDeterministicCropFallbacks({
+  paper,
+  candidates,
+  examPageProposals,
+  flaggedResults,
+  cropRoot
+}: {
+  paper: Paper;
+  candidates: CropCandidate[];
+  examPageProposals: ExamPageProposal[];
+  flaggedResults: CropQaResult[];
+  cropRoot: string;
+}): Promise<CropRepairAttempt[]> {
+  const attempts: CropRepairAttempt[] = [];
+
+  for (const result of flaggedResults) {
+    const candidate = candidates.find((item) => item.id === result.cropId);
+    if (!candidate) {
+      continue;
+    }
+
+    const expandedBbox = await deterministicCropExpansion(candidate, result);
+    if (!expandedBbox) {
+      attempts.push({
+        cropId: candidate.id,
+        status: "skipped",
+        action: "manual-review",
+        beforeBbox: candidate.bbox,
+        beforeCropPath: candidate.cropPath,
+        qaStatus: result.status,
+        qaIssues: result.issues,
+        reason: "No deterministic crop fallback available for this QA status."
+      });
+      continue;
+    }
+
+    const beforeBbox = { ...candidate.bbox };
+    const beforeCropPath = candidate.cropPath;
+    const fallbackPath = path.join(
+      cropRoot,
+      `${safeFileName(paper.id)}__${candidate.id}__deterministic-fallback.png`
+    );
+    await writeCropImage(candidate.sourcePagePath, expandedBbox, fallbackPath);
+    candidate.bbox = expandedBbox;
+    candidate.cropPath = normalisePath(fallbackPath);
+    updateProposalVisualBbox(examPageProposals, candidate, expandedBbox);
+
+    attempts.push({
+      cropId: candidate.id,
+      status: "ok",
+      action: "replace-bbox",
+      beforeBbox,
+      afterBbox: expandedBbox,
+      beforeCropPath,
+      afterCropPath: normalisePath(fallbackPath),
+      qaStatus: result.status,
+      qaIssues: result.issues,
+      reason: "Deterministically expanded a residual too-tight crop after AI repair.",
+      confidence: 1
+    });
+  }
+
+  return attempts;
+}
+
+async function deterministicCropExpansion(
+  candidate: CropCandidate,
+  result: CropQaResult
+): Promise<CropCandidate["bbox"] | undefined> {
+  if (result.status !== "too-tight") {
+    return undefined;
+  }
+
+  const findingText = `${result.issues.join(" ")} ${result.recommendedAction}`.toLowerCase();
+  if (/blank|empty|wrong|re-extract|correct region/.test(findingText)) {
+    const visualBand = await findDenseVisualBandBelow(candidate);
+    if (visualBand) {
+      return visualBand;
+    }
+  }
+
+  const sourceImage = await loadImage(await readFile(candidate.sourcePagePath));
+  const text = findingText;
+  let { x, y, width, height } = candidate.bbox;
+  const pad = 60;
+
+  if (/top|header|above/.test(text)) {
+    y -= pad;
+    height += pad;
+  }
+  if (/bottom|below/.test(text)) {
+    height += pad;
+  }
+  if (/left/.test(text)) {
+    x -= pad;
+    width += pad;
+  }
+  if (/right/.test(text)) {
+    width += pad;
+  }
+  if (!/top|header|above|bottom|below|left|right/.test(text)) {
+    x -= pad;
+    y -= pad;
+    width += pad * 2;
+    height += pad * 2;
+  }
+
+  return clampBbox({ x, y, width, height }, sourceImage.width, sourceImage.height);
+}
+
+async function findDenseVisualBandBelow(
+  candidate: CropCandidate
+): Promise<CropCandidate["bbox"] | undefined> {
+  const sourceImage = await loadImage(await readFile(candidate.sourcePagePath));
+  const canvas = createCanvas(sourceImage.width, sourceImage.height);
+  const context = canvas.getContext("2d");
+  context.drawImage(sourceImage, 0, 0);
+  const pixels = context.getImageData(0, 0, sourceImage.width, sourceImage.height).data;
+  const xStart = clamp(candidate.bbox.x - 160, 0, sourceImage.width - 1);
+  const xEnd = clamp(candidate.bbox.x + candidate.bbox.width + 160, xStart + 1, sourceImage.width);
+  const yStart = clamp(candidate.bbox.y, 0, sourceImage.height - 1);
+  const yEnd = clamp(candidate.bbox.y + candidate.bbox.height + 520, yStart + 1, sourceImage.height);
+  const rowThreshold = Math.max(12, Math.round((xEnd - xStart) * 0.025));
+  const rows: Array<{ y: number; count: number; minX: number; maxX: number }> = [];
+
+  for (let y = yStart; y < yEnd; y += 1) {
+    let count = 0;
+    let minX = sourceImage.width;
+    let maxX = 0;
+
+    for (let x = xStart; x < xEnd; x += 1) {
+      const index = (y * sourceImage.width + x) * 4;
+      const red = pixels[index];
+      const green = pixels[index + 1];
+      const blue = pixels[index + 2];
+
+      if (red < 230 || green < 230 || blue < 230) {
+        count += 1;
+        minX = Math.min(minX, x);
+        maxX = Math.max(maxX, x);
+      }
+    }
+
+    if (count >= rowThreshold) {
+      rows.push({ y, count, minX, maxX });
+    }
+  }
+
+  const groups: Array<{
+    start: number;
+    end: number;
+    minX: number;
+    maxX: number;
+    total: number;
+    maxCount: number;
+  }> = [];
+  let current:
+    | {
+        start: number;
+        end: number;
+        minX: number;
+        maxX: number;
+        total: number;
+        maxCount: number;
+      }
+    | undefined;
+
+  for (const row of rows) {
+    if (!current || row.y > current.end + 2) {
+      if (current) {
+        groups.push(current);
+      }
+      current = {
+        start: row.y,
+        end: row.y,
+        minX: row.minX,
+        maxX: row.maxX,
+        total: row.count,
+        maxCount: row.count
+      };
+    } else {
+      current.end = row.y;
+      current.minX = Math.min(current.minX, row.minX);
+      current.maxX = Math.max(current.maxX, row.maxX);
+      current.total += row.count;
+      current.maxCount = Math.max(current.maxCount, row.count);
+    }
+  }
+
+  if (current) {
+    groups.push(current);
+  }
+
+  const best = groups
+    .filter((group) => group.end - group.start >= 20 && group.total >= 1000)
+    .sort((left, right) => right.total * (right.end - right.start) - left.total * (left.end - left.start))[0];
+
+  if (!best) {
+    return undefined;
+  }
+
+  const pad = 14;
+  return clampBbox(
+    {
+      x: best.minX - pad,
+      y: best.start - pad,
+      width: best.maxX - best.minX + pad * 2,
+      height: best.end - best.start + pad * 2
+    },
+    sourceImage.width,
+    sourceImage.height
+  );
+}
+
+function buildCropRepairPrompt(candidate: CropCandidate, result: CropQaResult): string {
+  return `Repair this proposed crop for an NSW HSC mathematics visual.
+
+Return JSON only:
+{
+  "cropId": "${candidate.id}",
+  "action": "replace-bbox",
+  "newBbox": {"x": 0, "y": 0, "width": 100, "height": 100},
+  "reason": "why this bbox fixes the crop",
+  "confidence": 0.0
+}
+
+Allowed actions:
+- replace-bbox: return a better bbox in source-page pixel coordinates.
+- keep: the QA finding appears wrong and the current bbox is acceptable.
+- manual-review: the full source page is insufficient to identify a reliable crop.
+
+Rules:
+- Prefer replace-bbox for too-tight, too-loose, and wrong-content findings when the correct visual is visible on the source page.
+- The bbox must include the complete required graph/table/diagram/image, including axes, labels, legends, table borders, option labels, and geometry.
+- Do not include unrelated page headers, footers, other questions, answer-writing lines, or surrounding prose unless needed to understand the visual.
+- Coordinates must use the full source-page image coordinate system, not the small crop image coordinate system.
+
+Crop metadata:
+${JSON.stringify(
+  {
+    cropId: candidate.id,
+    questionNumber: candidate.questionNumber,
+    page: candidate.page,
+    kind: candidate.kind,
+    description: candidate.description,
+    currentBbox: candidate.bbox,
+    qaStatus: result.status,
+    qaIssues: result.issues,
+    qaRecommendedAction: result.recommendedAction
+  },
+  null,
+  2
+)}`;
+}
+
+function updateProposalVisualBbox(
+  examPageProposals: ExamPageProposal[],
+  candidate: CropCandidate,
+  bbox: CropCandidate["bbox"]
+) {
+  const proposal = examPageProposals.find((item) => item.page === candidate.page);
+  if (!proposal) {
+    return;
+  }
+
+  let matchingVisualIndex = 0;
+  for (const visual of proposal.visuals) {
+    const questionNumber = toQuestionNumber(visual.questionNumber ?? undefined);
+    if (!visual.shouldExtract || questionNumber === undefined || !visual.bbox) {
+      continue;
+    }
+
+    matchingVisualIndex += 1;
+    if (matchingVisualIndex === candidate.visualIndex) {
+      visual.bbox = bbox;
+      return;
+    }
+  }
 }
 
 async function createCropCandidates(
@@ -1911,15 +2505,13 @@ async function createCropCandidates(
 
       const id = `q${questionNumber}-p${proposal.page}-v${visualIndex}`;
       const cropPath = path.join(cropRoot, `${safeFileName(paper.id)}__${id}.png`);
-      const canvas = createCanvas(bbox.width, bbox.height);
-      const context = canvas.getContext("2d");
-      context.drawImage(sourceImage, bbox.x, bbox.y, bbox.width, bbox.height, 0, 0, bbox.width, bbox.height);
-      await writeFile(cropPath, canvas.toBuffer("image/png"));
+      await writeCropImage(proposal.imagePath, bbox, cropPath);
 
       candidates.push({
         id,
         questionNumber,
         page: proposal.page,
+        visualIndex,
         kind: visual.kind,
         description: visual.description,
         sourcePagePath: proposal.imagePath,
@@ -1930,6 +2522,18 @@ async function createCropCandidates(
   }
 
   return candidates;
+}
+
+async function writeCropImage(
+  sourcePagePath: string,
+  bbox: CropCandidate["bbox"],
+  cropPath: string
+): Promise<void> {
+  const sourceImage = await loadImage(await readFile(sourcePagePath));
+  const canvas = createCanvas(bbox.width, bbox.height);
+  const context = canvas.getContext("2d");
+  context.drawImage(sourceImage, bbox.x, bbox.y, bbox.width, bbox.height, 0, 0, bbox.width, bbox.height);
+  await writeFile(cropPath, canvas.toBuffer("image/png"));
 }
 
 function clampBbox(
@@ -2309,8 +2913,12 @@ function buildReportHtml(report: EngineReport): string {
         </section>
         <section class="card" style="margin-bottom:22px">
           <h2>Crop QA</h2>
-          <p class="muted">Model: \${escapeHtml(data.cropQa.model || "skipped")}. \${data.cropQa.candidates.length} candidate crop(s), \${data.cropQa.flaggedCropIds.length} flagged.</p>
+          <p class="muted">Model: \${escapeHtml(data.cropQa.model || "skipped")}. \${data.cropQa.candidates.length} candidate crop(s), \${data.cropQa.flaggedCropIds.length} flagged after repair.</p>
+          <h3>Repair Attempts</h3>
+          \${renderCropRepairAttempts(data.cropQa.repairAttempts)}
+          <h3 style="margin-top:16px">Final Crop Sheets</h3>
           <div class="grid page-grid">\${data.cropQa.sheets.map(renderCropSheet).join("")}</div>
+          <details><summary>Initial crop QA sheets</summary><div class="grid page-grid">\${data.cropQa.initialSheets.map(renderCropSheet).join("")}</div></details>
         </section>
         <section class="card">
           <h2>Question Reconciliation</h2>
@@ -2369,6 +2977,28 @@ function buildReportHtml(report: EngineReport): string {
         \`;
       }
 
+      function renderCropRepairAttempts(attempts) {
+        if (!attempts.length) {
+          return '<p class="muted">No crop repair attempts.</p>';
+        }
+
+        return \`
+          <table>
+            <thead><tr><th>Crop</th><th>QA</th><th>Action</th><th>Before</th><th>After</th><th>Reason</th></tr></thead>
+            <tbody>\${attempts.map((attempt) => \`
+              <tr>
+                <td>\${escapeHtml(attempt.cropId)}</td>
+                <td><span class="pill warn">\${escapeHtml(attempt.qaStatus)}</span><br>\${attempt.qaIssues.map(escapeHtml).join("<br>")}</td>
+                <td><span class="pill \${attempt.status === "error" ? "bad" : ""}">\${escapeHtml(attempt.action || attempt.status)}</span></td>
+                <td>\${escapeHtml(JSON.stringify(attempt.beforeBbox))}</td>
+                <td>\${escapeHtml(JSON.stringify(attempt.afterBbox || null))}</td>
+                <td>\${escapeHtml(attempt.reason || attempt.error || "")}</td>
+              </tr>
+            \`).join("")}</tbody>
+          </table>
+        \`;
+      }
+
       function renderPage(page) {
         return \`
           <article class="card">
@@ -2415,6 +3045,11 @@ function publicReport(report: EngineReport): EngineReport {
         sourcePagePath: normalisePath(candidate.sourcePagePath),
         cropPath: normalisePath(candidate.cropPath),
         cropUrl: localFileUrl(candidate.cropPath)
+      })),
+      initialSheets: report.cropQa.initialSheets.map((sheet) => ({
+        ...sheet,
+        path: normalisePath(sheet.path),
+        imageUrl: localFileUrl(sheet.path)
       })),
       sheets: report.cropQa.sheets.map((sheet) => ({
         ...sheet,
