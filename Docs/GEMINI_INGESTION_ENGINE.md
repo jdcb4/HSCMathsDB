@@ -82,7 +82,7 @@ To compare crop QA/repair models while holding page transcription and marking-gu
 publish each variant with a distinct `--output-id`, then build a side-by-side crop comparison page:
 
 ```powershell
-pnpm run data:publish-crop-model-comparison -- std1-2023-crop-model-comparison "Mistral Medium 3.5=std1-2023-crop-mistral-medium-3-5" "Nemotron 3.5 Safety=std1-2023-crop-nemotron-3-5-content-safety" "Step 3.7 Flash=std1-2023-crop-step-3-7-flash" "Kimi K2.6=std1-2023-crop-kimi-k2-6" "MiMo v2.5=std1-2023-crop-mimo-v2-5"
+pnpm run data:publish-crop-model-comparison -- std1-2023-crop-model-comparison "Mistral Medium 3.5=std1-2023-crop-mistral-medium-3-5" "Nemotron 3.5 Safety=std1-2023-crop-nemotron-3-5-content-safety" "Step 3.7 Flash=std1-2023-crop-step-3-7-flash"
 ```
 
 That writes `public/ingestion-reports/std1-2023-crop-model-comparison.html`. The comparison page reads
@@ -149,6 +149,33 @@ Observed crop-model results:
 - `moonshotai/kimi-k2.6`: 23 final crop flags; fresh variant runtime was about 35 minutes, too slow for routine crop repair.
 - `xiaomi/mimo-v2.5`: 19 final crop flags; fresh variant runtime was about 6 minutes.
 
-Mistral Medium 3.5 produced the best result among the tested crop models, but the residual flags show
-that changing the crop model alone is not enough. The next improvement should target bbox proposal and
-repair instructions or a deterministic crop-expansion pass, not just stronger crop judgement.
+Kimi K2.6 and MiMo v2.5 were dropped from the active comparison because they were too slow for routine
+use. Mistral Medium 3.5 produced the best result among the tested crop models, but the residual flags
+show that changing the crop model alone is not enough. The next improvement should target bbox proposal
+and repair instructions or a deterministic crop-expansion pass, not just stronger crop judgement.
+
+## Crop Coordinate Diagnostics
+
+Use this harness when crop failures look suspiciously consistent across models:
+
+```powershell
+pnpm run data:diagnose-crop-coordinates
+```
+
+It creates synthetic rendered exam pages under `var/crop-coordinate-diagnostics/`, verifies that the
+local cropper maps `{x, y, width, height}` to exact rendered-page pixel crops, then asks Mistral Medium
+3.5, Nemotron 3.5 Safety, and Step 3.7 Flash to repair intentionally bad bboxes. The report is
+published at `public/ingestion-reports/crop-coordinate-diagnostics.html`.
+
+Latest diagnostic result:
+
+- Deterministic cropper: passed exact pixel-dimension check on an 893 x 1263 synthetic page.
+- Mistral Medium 3.5: returned valid pixel bboxes but still shrank inside the target visual, with IoU
+  0.7173 on the labelled-prism test and 0.8034 on the credit-table test.
+- Nemotron 3.5 Safety: failed both image-input tests with OpenRouter/Nvidia provider errors.
+- Step 3.7 Flash: failed the labelled-prism JSON contract and returned a poor credit-table bbox with
+  IoU 0.2106.
+
+This indicates the shared crop issues are not caused by a pixel-coordinate translation bug in the local
+crop process. The weak point is the model-produced repair bbox, plus deterministic fallback logic that
+can repeat the same expansion pattern when multiple models report similar crop QA issues.

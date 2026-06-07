@@ -2,6 +2,12 @@
 
 Newest entries go at the top.
 
+## 0.34.0 - 2026-06-07
+
+- Added a repeatable crop-coordinate diagnostic harness that generates synthetic exam pages with known target bboxes, verifies the deterministic cropper against exact pixel dimensions, and runs Mistral Medium 3.5, Nemotron 3.5 Safety, and Step 3.7 Flash through the same model-to-crop path.
+- Published a local crop-coordinate diagnostics UX at `public/ingestion-reports/crop-coordinate-diagnostics.html` with source-page overlays and measured model bbox errors.
+- Rebuilt the active 2023 Mathematics Standard 1 crop-model comparison with Kimi K2.6 and MiMo v2.5 removed because their crop runs were too slow for routine use.
+
 ## 0.33.0 - 2026-06-07
 
 - Added distinct `--output-id` publishing for Gemini ingestion reports so multiple model variants for the same paper can be reviewed side by side.
