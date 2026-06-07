@@ -415,6 +415,9 @@ const promptVersion = "gemini-page-ingestion-v2";
 const repairCacheVersion = "repair-v2";
 const cropQaCacheVersion = "crop-qa-v2-single";
 const cropQaMaxCycles = 4;
+const pageProposalConcurrency = 8;
+const cropQaConcurrency = 8;
+const cropRepairConcurrency = 6;
 
 main().catch((error: unknown) => {
   console.error(error instanceof Error ? (error.stack ?? error.message) : error);
@@ -449,26 +452,24 @@ async function main() {
   const guidePages = markingGuideDocument ? selectRenderedPages(markingGuideDocument, args.guidePages) : [];
   const apiKey = args.skipLlm ? undefined : getOpenRouterApiKey();
 
-  const examPageProposals: ExamPageProposal[] = [];
-  for (const page of examPages) {
-    examPageProposals.push(
-      await proposeExamPage({
-        apiKey,
-        model: args.model,
-        paper,
-        page,
-        rawRoot,
-        parsedRoot,
-        force: args.force,
-        skipLlm: args.skipLlm
-      })
-    );
-  }
+  const examPageProposals = await mapWithConcurrency(examPages, pageProposalConcurrency, async (page) =>
+    proposeExamPage({
+      apiKey,
+      model: args.model,
+      paper,
+      page,
+      rawRoot,
+      parsedRoot,
+      force: args.force,
+      skipLlm: args.skipLlm
+    })
+  );
 
-  const markingGuidePageProposals: MarkingGuidePageProposal[] = [];
-  for (const page of guidePages) {
-    markingGuidePageProposals.push(
-      await proposeMarkingGuidePage({
+  const markingGuidePageProposals = await mapWithConcurrency(
+    guidePages,
+    pageProposalConcurrency,
+    async (page) =>
+      proposeMarkingGuidePage({
         apiKey,
         model: args.model,
         paper,
@@ -478,8 +479,7 @@ async function main() {
         force: args.force,
         skipLlm: args.skipLlm
       })
-    );
-  }
+  );
 
   const deterministicActions = applyDeterministicRepairs(examPageProposals, markingGuidePageProposals);
   let questionSummaries = reconcileQuestions(examPageProposals, markingGuidePageProposals);
@@ -1998,20 +1998,17 @@ async function evaluateCropCandidates({
       continue;
     }
 
-    const results: CropQaResult[] = [];
-    for (const candidate of batch) {
-      results.push(
-        await evaluateSingleCropCandidate({
-          apiKey,
-          model,
-          paper,
-          candidate,
-          rawRoot: sheetRoot,
-          rawPrefix: sheetPrefix,
-          force
-        })
-      );
-    }
+    const results = await mapWithConcurrency(batch, cropQaConcurrency, async (candidate) =>
+      evaluateSingleCropCandidate({
+        apiKey,
+        model,
+        paper,
+        candidate,
+        rawRoot: sheetRoot,
+        rawPrefix: sheetPrefix,
+        force
+      })
+    );
     const erroredResults = results.filter(
       (result) =>
         result.status === "unclear" && result.issues.some((issue) => issue.startsWith("Crop QA error:"))
@@ -2149,189 +2146,216 @@ async function applyCropRepairs({
   force: boolean;
   repairPass: number;
 }): Promise<CropRepairAttempt[]> {
-  const attempts: CropRepairAttempt[] = [];
+  return mapWithConcurrency(flaggedResults, cropRepairConcurrency, async (result) =>
+    repairSingleCropCandidate({
+      apiKey,
+      model,
+      paper,
+      candidates,
+      examPageProposals,
+      result,
+      cropRepairRoot,
+      cropRoot,
+      force,
+      repairPass
+    })
+  );
+}
 
-  for (const result of flaggedResults) {
-    const candidate = candidates.find((item) => item.id === result.cropId);
-    if (!candidate) {
-      attempts.push({
-        cropId: result.cropId,
-        status: "error",
-        beforeBbox: { x: 0, y: 0, width: 0, height: 0 },
-        beforeCropPath: "",
-        qaStatus: result.status,
-        qaIssues: result.issues,
-        error: "Crop candidate not found for flagged QA result."
-      });
-      continue;
+async function repairSingleCropCandidate({
+  apiKey,
+  model,
+  paper,
+  candidates,
+  examPageProposals,
+  result,
+  cropRepairRoot,
+  cropRoot,
+  force,
+  repairPass
+}: {
+  apiKey: string;
+  model: string;
+  paper: Paper;
+  candidates: CropCandidate[];
+  examPageProposals: ExamPageProposal[];
+  result: CropQaResult;
+  cropRepairRoot: string;
+  cropRoot: string;
+  force: boolean;
+  repairPass: number;
+}): Promise<CropRepairAttempt> {
+  const candidate = candidates.find((item) => item.id === result.cropId);
+  if (!candidate) {
+    return {
+      cropId: result.cropId,
+      status: "error",
+      beforeBbox: { x: 0, y: 0, width: 0, height: 0 },
+      beforeCropPath: "",
+      qaStatus: result.status,
+      qaIssues: result.issues,
+      error: "Crop candidate not found for flagged QA result."
+    };
+  }
+
+  const stem = `${safeFileName(paper.id)}__crop-repair-pass-${repairPass}-${safeFileName(
+    candidate.id
+  )}__${safeFileName(model)}`;
+  const rawPath = path.join(cropRepairRoot, `${stem}.json`);
+  const beforeBbox = { ...candidate.bbox };
+  const beforeCropPath = candidate.cropPath;
+
+  try {
+    const response = !force ? await readCachedRaw(rawPath) : undefined;
+    const completion =
+      response ??
+      (await callOpenRouterJson({
+        apiKey,
+        model,
+        title: "GoalCheck HSC crop repair",
+        maxTokens: 1500,
+        messages: [
+          {
+            role: "system",
+            content:
+              "You repair proposed visual crop bounding boxes for NSW HSC mathematics exam pages. Return JSON only."
+          },
+          {
+            role: "user",
+            content: [
+              {
+                type: "text",
+                text: buildCropRepairPrompt(candidate, result)
+              },
+              {
+                type: "image_url",
+                image_url: { url: await imageDataUrl(candidate.sourcePagePath) }
+              },
+              {
+                type: "image_url",
+                image_url: { url: await imageDataUrl(candidate.cropPath) }
+              }
+            ]
+          }
+        ]
+      }));
+
+    if (!response) {
+      await writeFile(rawPath, `${JSON.stringify(completion.raw, null, 2)}\n`, "utf8");
     }
 
-    const stem = `${safeFileName(paper.id)}__crop-repair-pass-${repairPass}-${safeFileName(
-      candidate.id
-    )}__${safeFileName(model)}`;
-    const rawPath = path.join(cropRepairRoot, `${stem}.json`);
-    const beforeBbox = { ...candidate.bbox };
-    const beforeCropPath = candidate.cropPath;
-
-    try {
-      const response = !force ? await readCachedRaw(rawPath) : undefined;
-      const completion =
-        response ??
-        (await callOpenRouterJson({
-          apiKey,
-          model,
-          title: "GoalCheck HSC crop repair",
-          maxTokens: 1500,
-          messages: [
-            {
-              role: "system",
-              content:
-                "You repair proposed visual crop bounding boxes for NSW HSC mathematics exam pages. Return JSON only."
-            },
-            {
-              role: "user",
-              content: [
-                {
-                  type: "text",
-                  text: buildCropRepairPrompt(candidate, result)
-                },
-                {
-                  type: "image_url",
-                  image_url: { url: await imageDataUrl(candidate.sourcePagePath) }
-                },
-                {
-                  type: "image_url",
-                  image_url: { url: await imageDataUrl(candidate.cropPath) }
-                }
-              ]
-            }
-          ]
-        }));
-
-      if (!response) {
-        await writeFile(rawPath, `${JSON.stringify(completion.raw, null, 2)}\n`, "utf8");
-      }
-
-      const parsed = CropRepairSchema.parse(parseModelJson(completion.content));
-      if (parsed.action !== "replace-bbox" || !parsed.newBbox) {
-        const fallbackAttempt = await tryDeterministicCropRepair({
-          paper,
-          candidate,
-          result,
-          examPageProposals,
-          cropRoot,
-          repairPass,
-          beforeBbox,
-          beforeCropPath,
-          rawPath,
-          reasonPrefix: `Repair model returned ${parsed.action}; applying deterministic recrop fallback within the QA cycle.`,
-          confidence: parsed.confidence
-        });
-        if (fallbackAttempt) {
-          attempts.push(fallbackAttempt);
-          continue;
-        }
-
-        attempts.push({
-          cropId: candidate.id,
-          status: parsed.action === "manual-review" ? "skipped" : "error",
-          action: parsed.action,
-          beforeBbox,
-          beforeCropPath,
-          qaStatus: result.status,
-          qaIssues: result.issues,
-          reason:
-            parsed.action === "manual-review"
-              ? parsed.reason
-              : "Flagged crops must be recropped with a changed source-page bbox; keep is not accepted.",
-          confidence: parsed.confidence,
-          rawPath: normalisePath(rawPath),
-          error:
-            parsed.action === "keep" ? "Repair model returned keep for a crop that failed QA." : undefined
-        });
-        continue;
-      }
-
-      const sourceImage = await loadImage(await readFile(candidate.sourcePagePath));
-      const repairedBbox = clampBbox(parsed.newBbox, sourceImage.width, sourceImage.height);
-      if (
-        bboxesEquivalent(beforeBbox, repairedBbox) ||
-        repairContradictsQaFinding(beforeBbox, repairedBbox, result)
-      ) {
-        const fallbackAttempt = await tryDeterministicCropRepair({
-          paper,
-          candidate,
-          result,
-          examPageProposals,
-          cropRoot,
-          repairPass,
-          beforeBbox,
-          beforeCropPath,
-          rawPath,
-          reasonPrefix:
-            "Repair model returned a bbox that does not materially fix the failed crop; applying deterministic recrop fallback within the QA cycle.",
-          confidence: parsed.confidence
-        });
-        if (fallbackAttempt) {
-          attempts.push(fallbackAttempt);
-          continue;
-        }
-
-        attempts.push({
-          cropId: candidate.id,
-          status: "skipped",
-          action: "replace-bbox",
-          beforeBbox,
-          afterBbox: repairedBbox,
-          beforeCropPath,
-          qaStatus: result.status,
-          qaIssues: result.issues,
-          reason: "Repair model returned a bbox that does not materially fix the failed crop.",
-          confidence: parsed.confidence,
-          rawPath: normalisePath(rawPath)
-        });
-        continue;
-      }
-
-      const repairedCropPath = path.join(
+    const parsed = CropRepairSchema.parse(parseModelJson(completion.content));
+    if (parsed.action !== "replace-bbox" || !parsed.newBbox) {
+      const fallbackAttempt = await tryDeterministicCropRepair({
+        paper,
+        candidate,
+        result,
+        examPageProposals,
         cropRoot,
-        `${safeFileName(paper.id)}__${candidate.id}__repaired-pass-${repairPass}.png`
-      );
-      await writeCropImage(candidate.sourcePagePath, repairedBbox, repairedCropPath);
+        repairPass,
+        beforeBbox,
+        beforeCropPath,
+        rawPath,
+        reasonPrefix: `Repair model returned ${parsed.action}; applying deterministic recrop fallback within the QA cycle.`,
+        confidence: parsed.confidence
+      });
+      if (fallbackAttempt) {
+        return fallbackAttempt;
+      }
 
-      candidate.bbox = repairedBbox;
-      candidate.cropPath = normalisePath(repairedCropPath);
-      updateProposalVisualBbox(examPageProposals, candidate, repairedBbox);
-
-      attempts.push({
+      return {
         cropId: candidate.id,
-        status: "ok",
+        status: parsed.action === "manual-review" ? "skipped" : "error",
         action: parsed.action,
+        beforeBbox,
+        beforeCropPath,
+        qaStatus: result.status,
+        qaIssues: result.issues,
+        reason:
+          parsed.action === "manual-review"
+            ? parsed.reason
+            : "Flagged crops must be recropped with a changed source-page bbox; keep is not accepted.",
+        confidence: parsed.confidence,
+        rawPath: normalisePath(rawPath),
+        error: parsed.action === "keep" ? "Repair model returned keep for a crop that failed QA." : undefined
+      };
+    }
+
+    const sourceImage = await loadImage(await readFile(candidate.sourcePagePath));
+    const repairedBbox = clampBbox(parsed.newBbox, sourceImage.width, sourceImage.height);
+    if (
+      bboxesEquivalent(beforeBbox, repairedBbox) ||
+      repairContradictsQaFinding(beforeBbox, repairedBbox, result)
+    ) {
+      const fallbackAttempt = await tryDeterministicCropRepair({
+        paper,
+        candidate,
+        result,
+        examPageProposals,
+        cropRoot,
+        repairPass,
+        beforeBbox,
+        beforeCropPath,
+        rawPath,
+        reasonPrefix:
+          "Repair model returned a bbox that does not materially fix the failed crop; applying deterministic recrop fallback within the QA cycle.",
+        confidence: parsed.confidence
+      });
+      if (fallbackAttempt) {
+        return fallbackAttempt;
+      }
+
+      return {
+        cropId: candidate.id,
+        status: "skipped",
+        action: "replace-bbox",
         beforeBbox,
         afterBbox: repairedBbox,
         beforeCropPath,
-        afterCropPath: normalisePath(repairedCropPath),
         qaStatus: result.status,
         qaIssues: result.issues,
-        reason: parsed.reason,
+        reason: "Repair model returned a bbox that does not materially fix the failed crop.",
         confidence: parsed.confidence,
         rawPath: normalisePath(rawPath)
-      });
-    } catch (error: unknown) {
-      attempts.push({
-        cropId: candidate.id,
-        status: "error",
-        beforeBbox,
-        beforeCropPath,
-        qaStatus: result.status,
-        qaIssues: result.issues,
-        rawPath: normalisePath(rawPath),
-        error: error instanceof Error ? error.message : String(error)
-      });
+      };
     }
-  }
 
-  return attempts;
+    const repairedCropPath = path.join(
+      cropRoot,
+      `${safeFileName(paper.id)}__${candidate.id}__repaired-pass-${repairPass}.png`
+    );
+    await writeCropImage(candidate.sourcePagePath, repairedBbox, repairedCropPath);
+
+    candidate.bbox = repairedBbox;
+    candidate.cropPath = normalisePath(repairedCropPath);
+    updateProposalVisualBbox(examPageProposals, candidate, repairedBbox);
+
+    return {
+      cropId: candidate.id,
+      status: "ok",
+      action: parsed.action,
+      beforeBbox,
+      afterBbox: repairedBbox,
+      beforeCropPath,
+      afterCropPath: normalisePath(repairedCropPath),
+      qaStatus: result.status,
+      qaIssues: result.issues,
+      reason: parsed.reason,
+      confidence: parsed.confidence,
+      rawPath: normalisePath(rawPath)
+    };
+  } catch (error: unknown) {
+    return {
+      cropId: candidate.id,
+      status: "error",
+      beforeBbox,
+      beforeCropPath,
+      qaStatus: result.status,
+      qaIssues: result.issues,
+      rawPath: normalisePath(rawPath),
+      error: error instanceof Error ? error.message : String(error)
+    };
+  }
 }
 
 async function tryDeterministicCropRepair({
@@ -2814,6 +2838,28 @@ function chunk<T>(values: T[], size: number): T[][] {
     chunks.push(values.slice(index, index + size));
   }
   return chunks;
+}
+
+async function mapWithConcurrency<T, U>(
+  values: T[],
+  concurrency: number,
+  mapper: (value: T, index: number) => Promise<U>
+): Promise<U[]> {
+  const results = new Array<U>(values.length);
+  let nextIndex = 0;
+  const workerCount = Math.max(1, Math.min(concurrency, values.length));
+
+  await Promise.all(
+    Array.from({ length: workerCount }, async () => {
+      while (nextIndex < values.length) {
+        const currentIndex = nextIndex;
+        nextIndex += 1;
+        results[currentIndex] = await mapper(values[currentIndex], currentIndex);
+      }
+    })
+  );
+
+  return results;
 }
 
 function reconcileQuestions(

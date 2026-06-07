@@ -24,6 +24,12 @@ pnpm run data:propose-gemini-ingestion -- std1-2023 --skip-llm
 The default model is `google/gemini-3.1-flash-lite` through OpenRouter. The command requires
 `OPENROUTER_API_KEY` unless `--skip-llm` is used.
 
+The engine uses bounded parallelism for independent LLM calls:
+
+- Up to 8 rendered exam/marking-guide page proposal calls at once.
+- Up to 8 per-crop QA calls at once inside a crop QA pass.
+- Up to 6 crop-repair calls at once inside a repair cycle.
+
 Additional model controls:
 
 - `--repair-model <model>` changes the model used for unresolved question repair.
@@ -107,7 +113,8 @@ Result after the autonomous repair and crop QA loop:
 - 0 page-level errors
 - 0 question-level reconciliation or notation flags after deterministic and AI repair
 - 23 crop candidates generated from visual bbox proposals
-- 17 final crop QA flags after the capped four-cycle crop QA/recrop loop
+- 16 final crop QA flags after the capped four-cycle crop QA/recrop loop
+- Full fresh run time after bounded parallelism: 141 seconds
 
 This is a strong enough signal to use Gemini page-image extraction as the default proposal path for
 new Standard and Extension years, with deterministic repair and targeted AI repair for text. For

@@ -2,6 +2,11 @@
 
 Newest entries go at the top.
 
+## 0.31.0 - 2026-06-07
+
+- Added bounded parallelism to the Gemini ingestion engine for independent page proposal, crop QA, and crop repair calls while preserving the capped crop QA cycle semantics.
+- Reprocessed the 2023 Mathematics Standard 1 paper with the default `google/gemini-3.1-flash-lite` model after deleting generated artifacts; the full run completed in 141 seconds with 31/31 prompts, 31/31 answers, zero question flags, zero page errors, and 16 final crop flags.
+
 ## 0.30.0 - 2026-06-07
 
 - Reworked Gemini crop repair into an explicit four-cycle QA loop: initial crop QA, up to three recrops, then final flagging for any crop still failing after pass 4.
