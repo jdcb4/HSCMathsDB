@@ -2,6 +2,11 @@
 
 Newest entries go at the top.
 
+## 0.28.0 - 2026-06-07
+
+- Added a deterministic Gemini ingestion repair for inline TeX fragments embedded in prose, such as degree notation returned outside MathJax delimiters.
+- Reprocessed the full 2023 Mathematics Standard 1 paper from fresh Gemini page outputs with the stricter per-crop QA pipeline: 31/31 prompts, 31/31 answers, zero question-level flags, and 15 final crop flags.
+
 ## 0.27.0 - 2026-06-07
 
 - Reworked Gemini crop QA to judge each crop one by one against the original rendered source page, with a stricter prompt for standalone public-site assets and cached per-crop QA responses.

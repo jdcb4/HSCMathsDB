@@ -80,7 +80,7 @@ and rewrites both pages to use relative image URLs. That generated folder is ign
    extraction.
 4. Parse model JSON permissively enough to preserve useful proposals when Gemini uses nullable fields
    or non-standard visual labels.
-5. Apply deterministic notation repairs for common TeX and currency issues.
+5. Apply deterministic notation repairs for common TeX, inline TeX fragments embedded in prose, and currency issues.
 6. Reconcile question numbers across exam and marking-guide proposals.
 7. Feed unresolved question flags back to the repair model with structured context plus the relevant and adjacent page images.
 8. Re-run deterministic notation repair after AI edits and reconcile again.

@@ -1327,6 +1327,12 @@ function repairMathText(
     reasons.push("Wrapped raw TeX table/array environments in display MathJax delimiters.");
   }
 
+  const inlineFragmentFixed = wrapRawInlineTexFragments(repaired);
+  if (inlineFragmentFixed !== repaired) {
+    repaired = inlineFragmentFixed;
+    reasons.push("Wrapped inline raw TeX fragments in MathJax delimiters.");
+  }
+
   const withoutMath = stripDelimitedMath(repaired);
   if (containsRawTex(withoutMath) && shouldWrapWholeValue(repaired, context)) {
     repaired = `\\(${repaired.trim()}\\)`;
@@ -1428,6 +1434,15 @@ function wrapRawTexEnvironments(value: string): string {
 
       return `\\[${match}\\]`;
     }
+  );
+}
+
+function wrapRawInlineTexFragments(value: string): string {
+  return replaceOutsideDelimitedMath(value, (outsideMath) =>
+    outsideMath.replace(
+      /(^|[^\w\\])((?:\d+(?:\.\d+)?|[A-Za-z])(?:\s*\^\s*)?\\circ(?:\s*\\text\{[^}]+\})?)/g,
+      (_match: string, prefix: string, expression: string) => `${prefix}\\(${expression.trim()}\\)`
+    )
   );
 }
 
