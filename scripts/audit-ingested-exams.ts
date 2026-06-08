@@ -129,7 +129,9 @@ function auditVisualReferences(question: Question, collectedIssues: AuditIssue[]
     /\b(shown|below|provided|drawn)\b.{0,80}\bgraph\b/.test(text) ||
     /from the graph|shown below|following graphs|following diagram/.test(text);
 
-  if (visualCue && question.assets.length === 0) {
+  const methodOnlyDiagramReference = /\busing a Venn diagram,\s+or otherwise\b/i.test(question.promptLatex);
+
+  if (visualCue && !methodOnlyDiagramReference && question.assets.length === 0) {
     collectedIssues.push({
       severity: "error",
       questionId: question.id,

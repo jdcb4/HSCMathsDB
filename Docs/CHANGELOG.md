@@ -2,6 +2,13 @@
 
 Newest entries go at the top.
 
+## 0.47.0 - 2026-06-08
+
+- Ingested and promoted the full 2020 modern-course set: Mathematics Advanced, Mathematics Standard 1, Mathematics Standard 2, Mathematics Extension 1, and Mathematics Extension 2.
+- Added 128 official draft 2020 question records with 93 exam-derived public diagram assets, all passing `data:audit-ingested-exams -- adv-2020 std1-2020 std2-2020 ext1-2020 ext2-2020` with zero errors and zero warnings.
+- Generated worked-solution drafts for all 128 newly promoted 2020 records, using Gemini 3.1 Flash Lite with MiniMax, GLM, and Sonnet fallbacks for syntax-contract failures.
+- Tightened the ingestion audit so method-only references such as "using a Venn diagram, or otherwise" are not treated as missing public-site visual assets.
+
 ## 0.46.0 - 2026-06-08
 
 - Ingested and promoted the full 2021 modern-course set: Mathematics Advanced, Mathematics Standard 1, Mathematics Standard 2, Mathematics Extension 1, and Mathematics Extension 2.
