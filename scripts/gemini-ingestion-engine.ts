@@ -15,6 +15,7 @@ type Args = {
   guidePages?: string;
   model: string;
   repairModel: string;
+  visualModel: string;
   cropQaModel: string;
   force: boolean;
   forceRepair: boolean;
@@ -49,6 +50,7 @@ type OpenRouterResponse = {
 };
 
 const defaultModel = "google/gemini-3.1-flash-lite";
+const defaultVisualModel = "anthropic/claude-sonnet-4.6";
 const outputRoot = path.join("var", "gemini-ingestion-proposals");
 
 const OptionsSchema = z
@@ -111,6 +113,12 @@ const NullableStringSchema = z
   .optional()
   .transform((value) => value ?? "");
 
+const OptionalNumberSchema = z
+  .number()
+  .nullable()
+  .optional()
+  .transform((value) => value ?? undefined);
+
 const BBoxSchema = z
   .object({
     x: z.number(),
@@ -130,7 +138,7 @@ const ExamPageProposalSchema = z
             partLabels: PartLabelsSchema,
             promptLatex: z.string().default(""),
             options: OptionsSchema,
-            marks: z.number().optional(),
+            marks: OptionalNumberSchema,
             hasVisual: z.boolean().default(false),
             needsAsset: z.boolean().default(false),
             visualDescription: z.string().nullable().optional(),
@@ -158,6 +166,31 @@ const ExamPageProposalSchema = z
   })
   .passthrough();
 
+const VisualPageProposalSchema = z
+  .object({
+    imageSize: z
+      .object({
+        width: z.number(),
+        height: z.number()
+      })
+      .optional(),
+    visuals: z
+      .array(
+        z
+          .object({
+            questionNumber: z.union([z.number(), z.string()]).nullable().optional(),
+            kind: VisualKindSchema.default("other"),
+            description: z.string().default(""),
+            shouldExtract: z.boolean().default(true),
+            confidence: z.number().optional(),
+            bbox: BBoxSchema
+          })
+          .passthrough()
+      )
+      .default([])
+  })
+  .passthrough();
+
 const MarkingGuidePageProposalSchema = z
   .object({
     questions: z
@@ -166,7 +199,7 @@ const MarkingGuidePageProposalSchema = z
           .object({
             questionNumber: z.union([z.number(), z.string()]),
             partLabel: z.string().nullable().optional(),
-            marks: z.number().optional(),
+            marks: OptionalNumberSchema,
             answerLatex: NullableStringSchema,
             markingCriteria: z.array(z.string()).default([]),
             sampleAnswerLatex: NullableStringSchema,
@@ -223,21 +256,19 @@ const AiRepairSchema = z
 
 const SingleCropQaSchema = z
   .object({
-    cropId: z.string(),
-    status: z.enum(["ok", "too-tight", "too-loose", "wrong-content", "unclear"]),
-    issues: z.array(z.string()).default([]),
-    recommendedAction: z.string().default(""),
-    confidence: z.number().optional()
-  })
-  .passthrough();
-
-const CropRepairSchema = z
-  .object({
-    cropId: z.string(),
-    action: z.enum(["replace-bbox", "keep", "manual-review"]),
-    newBbox: BBoxSchema,
-    reason: z.string().default(""),
-    confidence: z.number().optional()
+    visuals: z
+      .array(
+        z
+          .object({
+            questionNumber: z.union([z.number(), z.string()]),
+            goodCrop: z.boolean(),
+            bbox: BBoxSchema.optional(),
+            reason: z.string().default(""),
+            confidence: z.number().optional()
+          })
+          .passthrough()
+      )
+      .default([])
   })
   .passthrough();
 
@@ -338,6 +369,7 @@ type CropQaResult = {
   status: "ok" | "too-tight" | "too-loose" | "wrong-content" | "unclear";
   issues: string[];
   recommendedAction: string;
+  proposedBbox?: CropCandidate["bbox"];
   confidence?: number;
   rawPath?: string;
 };
@@ -414,10 +446,8 @@ type EngineReport = {
 const promptVersion = "gemini-page-ingestion-v2";
 const repairCacheVersion = "repair-v2";
 const cropQaCacheVersion = "crop-qa-v2-single";
-const cropQaMaxCycles = 4;
 const pageProposalConcurrency = 8;
 const cropQaConcurrency = 8;
-const cropRepairConcurrency = 6;
 
 main().catch((error: unknown) => {
   console.error(error instanceof Error ? (error.stack ?? error.message) : error);
@@ -431,18 +461,18 @@ async function main() {
   const pack = findSourcePack(paper);
   const runRoot = path.join(outputRoot, paper.id);
   const rawRoot = path.join(runRoot, "raw");
+  const visualRawRoot = path.join(runRoot, "visual-bbox-raw");
   const parsedRoot = path.join(runRoot, "parsed");
   const repairRoot = path.join(runRoot, "repairs");
   const cropRoot = path.join(runRoot, "visual-crops");
   const sheetRoot = path.join(runRoot, "crop-contact-sheets");
-  const cropRepairRoot = path.join(runRoot, "crop-repairs");
 
   await mkdir(rawRoot, { recursive: true });
+  await mkdir(visualRawRoot, { recursive: true });
   await mkdir(parsedRoot, { recursive: true });
   await mkdir(repairRoot, { recursive: true });
   await mkdir(cropRoot, { recursive: true });
   await mkdir(sheetRoot, { recursive: true });
-  await mkdir(cropRepairRoot, { recursive: true });
 
   const sourceAssets = await discoverAssets(pack);
   const renderMetadata = await readRenderMetadata(pack);
@@ -464,6 +494,17 @@ async function main() {
       skipLlm: args.skipLlm
     })
   );
+
+  await applyVisualBboxProposals({
+    apiKey,
+    model: args.visualModel,
+    paper,
+    pages: examPages,
+    examPageProposals,
+    rawRoot: visualRawRoot,
+    force: args.force,
+    skipLlm: args.skipLlm
+  });
 
   const markingGuidePageProposals = await mapWithConcurrency(
     guidePages,
@@ -508,7 +549,6 @@ async function main() {
     examPageProposals,
     cropRoot,
     sheetRoot,
-    cropRepairRoot,
     force: args.forceCropQa,
     skip: args.skipCropQa || args.skipLlm
   });
@@ -577,13 +617,14 @@ function parseArgs(values: string[]): Args {
     paperId: "",
     model: defaultModel,
     repairModel: defaultModel,
-    cropQaModel: defaultModel,
+    visualModel: defaultVisualModel,
+    cropQaModel: defaultVisualModel,
     force: false,
     forceRepair: false,
     forceCropQa: false,
     skipLlm: false,
     skipRepair: false,
-    skipCropQa: false
+    skipCropQa: true
   };
 
   for (let index = 0; index < values.length; index += 1) {
@@ -600,6 +641,9 @@ function parseArgs(values: string[]): Args {
       index += 1;
     } else if (value === "--repair-model") {
       args.repairModel = values[index + 1] ?? "";
+      index += 1;
+    } else if (value === "--visual-model") {
+      args.visualModel = values[index + 1] ?? "";
       index += 1;
     } else if (value === "--crop-qa-model") {
       args.cropQaModel = values[index + 1] ?? "";
@@ -618,6 +662,8 @@ function parseArgs(values: string[]): Args {
       args.skipLlm = true;
     } else if (value === "--skip-repair") {
       args.skipRepair = true;
+    } else if (value === "--run-crop-qa") {
+      args.skipCropQa = false;
     } else if (value === "--skip-crop-qa") {
       args.skipCropQa = true;
     } else if (!args.paperId) {
@@ -639,6 +685,10 @@ function parseArgs(values: string[]): Args {
 
   if (!args.repairModel) {
     throw new Error("--repair-model must not be empty");
+  }
+
+  if (!args.visualModel) {
+    throw new Error("--visual-model must not be empty");
   }
 
   if (!args.cropQaModel) {
@@ -947,6 +997,121 @@ async function proposeMarkingGuidePage({
   }
 }
 
+async function applyVisualBboxProposals({
+  apiKey,
+  model,
+  paper,
+  pages,
+  examPageProposals,
+  rawRoot,
+  force,
+  skipLlm
+}: {
+  apiKey?: string;
+  model: string;
+  paper: Paper;
+  pages: RenderedPage[];
+  examPageProposals: ExamPageProposal[];
+  rawRoot: string;
+  force: boolean;
+  skipLlm: boolean;
+}): Promise<void> {
+  const pagesByNumber = new Map(pages.map((page) => [page.page, page]));
+
+  await mapWithConcurrency(examPageProposals, pageProposalConcurrency, async (proposal) => {
+    const page = pagesByNumber.get(proposal.page);
+    if (!page || proposal.status !== "ok") {
+      proposal.visuals = [];
+      return;
+    }
+
+    proposal.visuals = await proposeVisualBboxes({
+      apiKey,
+      model,
+      paper,
+      page,
+      rawRoot,
+      force,
+      skipLlm
+    });
+  });
+}
+
+async function proposeVisualBboxes({
+  apiKey,
+  model,
+  paper,
+  page,
+  rawRoot,
+  force,
+  skipLlm
+}: {
+  apiKey?: string;
+  model: string;
+  paper: Paper;
+  page: RenderedPage;
+  rawRoot: string;
+  force: boolean;
+  skipLlm: boolean;
+}): Promise<ExamPageProposal["visuals"]> {
+  const stem = `${safeFileName(paper.id)}__visual-bbox-page-${page.page.toString().padStart(3, "0")}__${safeFileName(model)}`;
+  const rawPath = path.join(rawRoot, `${stem}.json`);
+
+  if (skipLlm) {
+    return [];
+  }
+
+  try {
+    const response = !force ? await readCachedRaw(rawPath) : undefined;
+    const completion =
+      response ??
+      (await callOpenRouterJson({
+        apiKey: requireApiKey(apiKey),
+        model,
+        title: "GoalCheck HSC visual bbox discovery",
+        maxTokens: 2000,
+        messages: [
+          {
+            role: "system",
+            content:
+              "You identify discrete mathematics exam visuals and return strict JSON bounding boxes. Return JSON only."
+          },
+          {
+            role: "user",
+            content: [
+              { type: "text", text: buildVisualBboxPrompt(page) },
+              { type: "image_url", image_url: { url: await imageDataUrl(page.path) } }
+            ]
+          }
+        ]
+      }));
+
+    if (!response) {
+      await writeFile(rawPath, `${JSON.stringify(completion.raw, null, 2)}\n`, "utf8");
+    }
+
+    const parsed = VisualPageProposalSchema.parse(parseModelJson(completion.content));
+    return parsed.visuals
+      .filter((visual) => visual.bbox && toQuestionNumber(visual.questionNumber ?? undefined) !== undefined)
+      .map((visual) => ({
+        ...visual,
+        shouldExtract: true,
+        description: visual.description || `${visual.kind} for question ${visual.questionNumber}`
+      }));
+  } catch (error: unknown) {
+    return [
+      {
+        questionNumber: null,
+        kind: "other",
+        description: `Visual bbox proposal failed: ${error instanceof Error ? error.message : String(error)}`,
+        shouldExtract: false,
+        confidence: 0,
+        bbox: undefined
+      }
+    ];
+  }
+}
+
 function skippedExamPage(page: RenderedPage, rawPath: string, startedAt: number): ExamPageProposal {
   return {
     questions: [],
@@ -996,16 +1161,7 @@ Return this JSON shape:
       "notes": []
     }
   ],
-  "visuals": [
-    {
-      "questionNumber": 1,
-      "kind": "graph",
-      "description": "what the visual shows",
-      "shouldExtract": true,
-      "confidence": 0.0,
-      "bbox": {"x": 0, "y": 0, "width": 100, "height": 100}
-    }
-  ],
+  "visuals": [],
   "pageRisks": []
 }
 
@@ -1017,8 +1173,53 @@ Rules:
 - Keep multiple-choice options in the options array and do not flatten them into the prompt.
 - Ignore page headers, footers, copyright text, office-use text, blank-page notices, and answer-writing lines unless they are part of a question.
 - If a source graph, table, diagram, map, network, spinner, graph option set, or floor plan is shown and needed to answer, set hasVisual and needsAsset true.
-- Give approximate pixel bbox values for extractable visuals when possible.
+- Leave visuals empty. A separate visual-bbox pass will identify crop coordinates.
 - If the page has no question content, return empty arrays.`;
+}
+
+function buildVisualBboxPrompt(page: RenderedPage): string {
+  return `Job:
+- The attached file is a page from a Mathematics Exam.
+- Your job is to identify discrete images and diagrams from within the page to be cropped out separately.
+- For each discrete image you need to identify the boundary box ('bbox') that will allow me to safely and accurately crop it.
+- The visuals could be things like tables, graphs, and diagrams, or other images that support a mathematics question.
+
+Page context:
+- The full source-page image size is ${page.width} x ${page.height} pixels.
+
+Rules:
+- The bbox must include the complete required visual as a standalone public-site asset.
+- Include all axes, axis labels, tick labels, legends, graph labels, table headers, row/column labels, table borders, diagram endpoints, nodes, edge labels, option labels, scales, and geometry/text labels that are part of the visual.
+- Exclude unrelated question prose, answer-writing lines, page headers, footers, page numbers, copyright notices, marks, office-use text, other questions, other diagrams, and excessive blank margins.
+- Coordinates must use the full source-page image coordinate system, not the small crop image coordinate system.
+- Include any header, footer, or explanatory text that is directly linked to the visual, such as a heading describing the visual.
+- Include a small margin around the crop area, without intruding on other elements. I will crop exactly where you say and not add my own margin.
+- Where multiple images relate to the same question or question part crop them all together if doing so does not include extraneous material. E.g. a series of related graphs.
+
+Response format:
+- Provide your response strictly in the JSON format below.
+- Include one entry for each relevant image on the page.
+- imageSize: the width and height, in pixels, of the full source-page image you are reviewing.
+- questionNumber: Integer representing the question number the visual relates to, identified from the exam paper.
+- kind: one of "diagram", "graph", "table", "image", or "other".
+- description: short description of the visual.
+- x: the x coordinate of the top left of the proposed bbox.
+- y: the y coordinate of the top left of the proposed bbox.
+- width: the width in pixels of the proposed bbox.
+- height: the height in pixels of the proposed bbox.
+
+JSON format:
+{
+  "imageSize": {"width": ${page.width}, "height": ${page.height}},
+  "visuals": [
+    {
+      "questionNumber": 1,
+      "kind": "diagram",
+      "description": "what the visual shows",
+      "bbox": {"x": 0, "y": 0, "width": 100, "height": 100}
+    }
+  ]
+}`;
 }
 
 function buildGuidePagePrompt(paper: Paper, page: RenderedPage): string {
@@ -1321,6 +1522,12 @@ function repairMathText(
     reasons.push("Escaped currency notation inside inline MathJax delimiters.");
   }
 
+  const malformedDelimiterFixed = normaliseMalformedMathDelimiters(repaired);
+  if (malformedDelimiterFixed !== repaired) {
+    repaired = malformedDelimiterFixed;
+    reasons.push("Normalised malformed MathJax delimiters around marking-guide formulae.");
+  }
+
   const environmentFixed = wrapRawTexEnvironments(repaired);
   if (environmentFixed !== repaired) {
     repaired = environmentFixed;
@@ -1337,6 +1544,12 @@ function repairMathText(
   if (mixedExpressionFixed !== repaired) {
     repaired = mixedExpressionFixed;
     reasons.push("Wrapped mixed prose/calculation answer lines in MathJax delimiters.");
+  }
+
+  const calculationBlockFixed = wrapRawCalculationAnswerBlock(repaired, context);
+  if (calculationBlockFixed !== repaired) {
+    repaired = calculationBlockFixed;
+    reasons.push("Wrapped calculation-only answer block in display MathJax delimiters.");
   }
 
   const withoutMath = stripDelimitedMath(repaired);
@@ -1431,9 +1644,15 @@ function clearResolvedSplitPageNotes(examPageProposals: ExamPageProposal[]): Rep
   return actions;
 }
 
+function normaliseMalformedMathDelimiters(value: string): string {
+  return value
+    .replace(/\\\]\\\)/g, "\\]")
+    .replace(/= \\\(([^\\\n]*?&\s*\(\d+\))/g, (_match: string, expression: string) => `= ${expression}`);
+}
+
 function wrapRawTexEnvironments(value: string): string {
   return value.replace(
-    /\\begin\{(tabular|array|aligned|matrix)\}(?:\{[^}]*\})?[\s\S]*?\\end\{\1\}/g,
+    /\\begin\{(tabular|array|aligned|cases|matrix)\}(?:\{[^}]*\})?[\s\S]*?\\end\{\1\}/g,
     (match: string, _environment: string, offset: number, fullValue: string) => {
       const before = fullValue.slice(Math.max(0, offset - 2), offset);
       const after = fullValue.slice(offset + match.length, offset + match.length + 2);
@@ -1463,28 +1682,65 @@ function wrapMixedAnswerExpressions(
     return value;
   }
 
-  return value
-    .split(/(\s*\\\\\s*)/)
-    .map((segment) => {
-      if (/^(\s*\\\\\s*)$/.test(segment)) {
-        return segment;
-      }
+  return replaceOutsideDelimitedMath(value, (outsideMath) =>
+    outsideMath
+      .split(/(\s*\\\\\s*)/)
+      .map((segment) => {
+        if (/^(\s*\\\\\s*)$/.test(segment)) {
+          return segment;
+        }
 
-      const outsideMath = stripDelimitedMath(segment);
-      if (!containsRawTex(outsideMath) || !/\s=\s/.test(segment)) {
-        return segment;
-      }
+        if (!containsRawTex(segment) || !/\s=\s/.test(segment)) {
+          return segment;
+        }
 
-      const equalsIndex = segment.indexOf("=");
-      const label = segment.slice(0, equalsIndex).trim();
-      const expression = segment.slice(equalsIndex + 1).trim();
-      if (!label || /\\/.test(label) || label.length > 70) {
-        return segment;
-      }
+        const equalsIndex = segment.indexOf("=");
+        const label = segment.slice(0, equalsIndex).trim();
+        const expression = segment.slice(equalsIndex + 1).trim();
+        if (!label || /\\/.test(label) || label.length > 70) {
+          return segment;
+        }
 
-      return `${label} = \\(${unwrapInlineMath(expression)}\\)`;
-    })
-    .join("");
+        return `${label} = \\(${unwrapInlineMath(expression)}\\)`;
+      })
+      .join("")
+  );
+}
+
+function wrapRawCalculationAnswerBlock(
+  value: string,
+  context: "prompt" | "option" | "answer" | "criterion"
+): string {
+  if (context !== "answer") {
+    return value;
+  }
+
+  if (!containsRawTex(stripDelimitedMath(value))) {
+    return value;
+  }
+
+  const trimmed = value.trim();
+  if (trimmed.startsWith("\\[") && trimmed.endsWith("\\]")) {
+    return value;
+  }
+
+  const unwrapped = unwrapInlineMath(trimmed);
+  const proseWords =
+    unwrapped
+      .replace(/\\text\{[^}]*\}/g, "")
+      .replace(/\\[A-Za-z]+/g, "")
+      .replace(/\b[A-Za-z]\b/g, "")
+      .match(/\b[A-Za-z]{4,}\b/g) ?? [];
+
+  if (proseWords.length > 2) {
+    return value;
+  }
+
+  if (!/(?:\\\\|\\frac|\\therefore|\\left|\\right|=)/.test(unwrapped)) {
+    return value;
+  }
+
+  return `\\[${unwrapped}\\]`;
 }
 
 function unwrapInlineMath(value: string): string {
@@ -1871,7 +2127,6 @@ async function runCropQa({
   examPageProposals,
   cropRoot,
   sheetRoot,
-  cropRepairRoot,
   force,
   skip
 }: {
@@ -1881,7 +2136,6 @@ async function runCropQa({
   examPageProposals: ExamPageProposal[];
   cropRoot: string;
   sheetRoot: string;
-  cropRepairRoot: string;
   force: boolean;
   skip: boolean;
 }): Promise<CropQaReport> {
@@ -1899,64 +2153,14 @@ async function runCropQa({
   const initialFlaggedResults = initialSheets
     .flatMap((sheet) => sheet.results)
     .filter((result) => result.status !== "ok");
-  const repairAttempts: CropRepairAttempt[] = [];
-  let sheets = initialSheets;
-  let flaggedResults = initialFlaggedResults;
-
-  if (skip || !apiKey) {
-    repairAttempts.push(
-      ...initialFlaggedResults.map((result) => skippedCropRepairAttempt(result, candidates))
-    );
-  } else {
-    for (let cycle = 1; cycle < cropQaMaxCycles && flaggedResults.length > 0; cycle += 1) {
-      const passAttempts = await applyCropRepairs({
-        apiKey,
-        model,
-        paper,
-        candidates,
-        examPageProposals,
-        flaggedResults,
-        cropRepairRoot,
-        cropRoot,
-        force,
-        repairPass: cycle
-      });
-      repairAttempts.push(...passAttempts);
-
-      const changedCropIds = new Set(
-        passAttempts
-          .filter((attempt) => attempt.status === "ok" && attempt.action === "replace-bbox")
-          .map((attempt) => attempt.cropId)
-      );
-      flaggedResults = flaggedResults.filter((result) => changedCropIds.has(result.cropId));
-      if (flaggedResults.length === 0) {
-        break;
-      }
-
-      sheets = await evaluateCropCandidates({
-        apiKey,
-        model,
-        paper,
-        candidates,
-        sheetRoot,
-        sheetPrefix: `crop-qa-pass-${cycle + 1}`,
-        force,
-        skip
-      });
-      flaggedResults = sheets.flatMap((sheet) => sheet.results).filter((result) => result.status !== "ok");
-    }
-  }
-  const flaggedCropIds = sheets
-    .flatMap((sheet) => sheet.results)
-    .filter((result) => result.status !== "ok")
-    .map((result) => result.cropId);
+  const flaggedCropIds = initialFlaggedResults.map((result) => result.cropId);
 
   return {
     model: skip ? undefined : model,
     candidates,
     initialSheets,
-    repairAttempts,
-    sheets,
+    repairAttempts: [],
+    sheets: initialSheets,
     flaggedCropIds
   };
 }
@@ -2092,12 +2296,22 @@ async function evaluateSingleCropCandidate({
     }
 
     const parsed = SingleCropQaSchema.parse(parseModelJson(completion.content));
+    const visualResult = parsed.visuals[0];
+    const sourceImage = await loadImage(await readFile(candidate.sourcePagePath));
+    const proposedBbox = visualResult?.bbox
+      ? clampBbox(visualResult.bbox, sourceImage.width, sourceImage.height)
+      : undefined;
     return {
       cropId: candidate.id,
-      status: parsed.status,
-      issues: parsed.issues,
-      recommendedAction: parsed.recommendedAction,
-      confidence: parsed.confidence,
+      status: visualResult?.goodCrop ? "ok" : "unclear",
+      issues: visualResult?.goodCrop
+        ? []
+        : [visualResult?.reason || "Crop check proposed a replacement bbox."],
+      recommendedAction: visualResult?.goodCrop
+        ? "Existing crop accepted by crop check."
+        : "Use proposedBbox as the replacement crop if crop check/repair is enabled for promotion.",
+      proposedBbox,
+      confidence: visualResult?.confidence,
       rawPath: normalisePath(rawPath)
     };
   } catch (error: unknown) {
@@ -2108,530 +2322,6 @@ async function evaluateSingleCropCandidate({
       recommendedAction: "Retry crop QA or inspect manually.",
       rawPath: normalisePath(rawPath)
     };
-  }
-}
-
-function skippedCropRepairAttempt(result: CropQaResult, candidates: CropCandidate[]): CropRepairAttempt {
-  const candidate = candidates.find((item) => item.id === result.cropId);
-  return {
-    cropId: result.cropId,
-    status: "skipped",
-    beforeBbox: candidate?.bbox ?? { x: 0, y: 0, width: 0, height: 0 },
-    beforeCropPath: candidate?.cropPath ?? "",
-    qaStatus: result.status,
-    qaIssues: result.issues,
-    reason: "Crop repair skipped."
-  };
-}
-
-async function applyCropRepairs({
-  apiKey,
-  model,
-  paper,
-  candidates,
-  examPageProposals,
-  flaggedResults,
-  cropRepairRoot,
-  cropRoot,
-  force,
-  repairPass
-}: {
-  apiKey: string;
-  model: string;
-  paper: Paper;
-  candidates: CropCandidate[];
-  examPageProposals: ExamPageProposal[];
-  flaggedResults: CropQaResult[];
-  cropRepairRoot: string;
-  cropRoot: string;
-  force: boolean;
-  repairPass: number;
-}): Promise<CropRepairAttempt[]> {
-  return mapWithConcurrency(flaggedResults, cropRepairConcurrency, async (result) =>
-    repairSingleCropCandidate({
-      apiKey,
-      model,
-      paper,
-      candidates,
-      examPageProposals,
-      result,
-      cropRepairRoot,
-      cropRoot,
-      force,
-      repairPass
-    })
-  );
-}
-
-async function repairSingleCropCandidate({
-  apiKey,
-  model,
-  paper,
-  candidates,
-  examPageProposals,
-  result,
-  cropRepairRoot,
-  cropRoot,
-  force,
-  repairPass
-}: {
-  apiKey: string;
-  model: string;
-  paper: Paper;
-  candidates: CropCandidate[];
-  examPageProposals: ExamPageProposal[];
-  result: CropQaResult;
-  cropRepairRoot: string;
-  cropRoot: string;
-  force: boolean;
-  repairPass: number;
-}): Promise<CropRepairAttempt> {
-  const candidate = candidates.find((item) => item.id === result.cropId);
-  if (!candidate) {
-    return {
-      cropId: result.cropId,
-      status: "error",
-      beforeBbox: { x: 0, y: 0, width: 0, height: 0 },
-      beforeCropPath: "",
-      qaStatus: result.status,
-      qaIssues: result.issues,
-      error: "Crop candidate not found for flagged QA result."
-    };
-  }
-
-  const stem = `${safeFileName(paper.id)}__crop-repair-pass-${repairPass}-${safeFileName(
-    candidate.id
-  )}__${safeFileName(model)}`;
-  const rawPath = path.join(cropRepairRoot, `${stem}.json`);
-  const beforeBbox = { ...candidate.bbox };
-  const beforeCropPath = candidate.cropPath;
-
-  try {
-    const response = !force ? await readCachedRaw(rawPath) : undefined;
-    const completion =
-      response ??
-      (await callOpenRouterJson({
-        apiKey,
-        model,
-        title: "GoalCheck HSC crop repair",
-        maxTokens: 1500,
-        messages: [
-          {
-            role: "system",
-            content:
-              "You repair proposed visual crop bounding boxes for NSW HSC mathematics exam pages. Return JSON only."
-          },
-          {
-            role: "user",
-            content: [
-              {
-                type: "text",
-                text: buildCropRepairPrompt(candidate, result)
-              },
-              {
-                type: "image_url",
-                image_url: { url: await imageDataUrl(candidate.sourcePagePath) }
-              },
-              {
-                type: "image_url",
-                image_url: { url: await imageDataUrl(candidate.cropPath) }
-              }
-            ]
-          }
-        ]
-      }));
-
-    if (!response) {
-      await writeFile(rawPath, `${JSON.stringify(completion.raw, null, 2)}\n`, "utf8");
-    }
-
-    const parsed = CropRepairSchema.parse(parseModelJson(completion.content));
-    if (parsed.action !== "replace-bbox" || !parsed.newBbox) {
-      const fallbackAttempt = await tryDeterministicCropRepair({
-        paper,
-        candidate,
-        result,
-        examPageProposals,
-        cropRoot,
-        repairPass,
-        beforeBbox,
-        beforeCropPath,
-        rawPath,
-        reasonPrefix: `Repair model returned ${parsed.action}; applying deterministic recrop fallback within the QA cycle.`,
-        confidence: parsed.confidence
-      });
-      if (fallbackAttempt) {
-        return fallbackAttempt;
-      }
-
-      return {
-        cropId: candidate.id,
-        status: parsed.action === "manual-review" ? "skipped" : "error",
-        action: parsed.action,
-        beforeBbox,
-        beforeCropPath,
-        qaStatus: result.status,
-        qaIssues: result.issues,
-        reason:
-          parsed.action === "manual-review"
-            ? parsed.reason
-            : "Flagged crops must be recropped with a changed source-page bbox; keep is not accepted.",
-        confidence: parsed.confidence,
-        rawPath: normalisePath(rawPath),
-        error: parsed.action === "keep" ? "Repair model returned keep for a crop that failed QA." : undefined
-      };
-    }
-
-    const sourceImage = await loadImage(await readFile(candidate.sourcePagePath));
-    const repairedBbox = clampBbox(parsed.newBbox, sourceImage.width, sourceImage.height);
-    if (
-      bboxesEquivalent(beforeBbox, repairedBbox) ||
-      repairContradictsQaFinding(beforeBbox, repairedBbox, result)
-    ) {
-      const fallbackAttempt = await tryDeterministicCropRepair({
-        paper,
-        candidate,
-        result,
-        examPageProposals,
-        cropRoot,
-        repairPass,
-        beforeBbox,
-        beforeCropPath,
-        rawPath,
-        reasonPrefix:
-          "Repair model returned a bbox that does not materially fix the failed crop; applying deterministic recrop fallback within the QA cycle.",
-        confidence: parsed.confidence
-      });
-      if (fallbackAttempt) {
-        return fallbackAttempt;
-      }
-
-      return {
-        cropId: candidate.id,
-        status: "skipped",
-        action: "replace-bbox",
-        beforeBbox,
-        afterBbox: repairedBbox,
-        beforeCropPath,
-        qaStatus: result.status,
-        qaIssues: result.issues,
-        reason: "Repair model returned a bbox that does not materially fix the failed crop.",
-        confidence: parsed.confidence,
-        rawPath: normalisePath(rawPath)
-      };
-    }
-
-    const repairedCropPath = path.join(
-      cropRoot,
-      `${safeFileName(paper.id)}__${candidate.id}__repaired-pass-${repairPass}.png`
-    );
-    await writeCropImage(candidate.sourcePagePath, repairedBbox, repairedCropPath);
-
-    candidate.bbox = repairedBbox;
-    candidate.cropPath = normalisePath(repairedCropPath);
-    updateProposalVisualBbox(examPageProposals, candidate, repairedBbox);
-
-    return {
-      cropId: candidate.id,
-      status: "ok",
-      action: parsed.action,
-      beforeBbox,
-      afterBbox: repairedBbox,
-      beforeCropPath,
-      afterCropPath: normalisePath(repairedCropPath),
-      qaStatus: result.status,
-      qaIssues: result.issues,
-      reason: parsed.reason,
-      confidence: parsed.confidence,
-      rawPath: normalisePath(rawPath)
-    };
-  } catch (error: unknown) {
-    return {
-      cropId: candidate.id,
-      status: "error",
-      beforeBbox,
-      beforeCropPath,
-      qaStatus: result.status,
-      qaIssues: result.issues,
-      rawPath: normalisePath(rawPath),
-      error: error instanceof Error ? error.message : String(error)
-    };
-  }
-}
-
-async function tryDeterministicCropRepair({
-  paper,
-  candidate,
-  result,
-  examPageProposals,
-  cropRoot,
-  repairPass,
-  beforeBbox,
-  beforeCropPath,
-  rawPath,
-  reasonPrefix,
-  confidence
-}: {
-  paper: Paper;
-  candidate: CropCandidate;
-  result: CropQaResult;
-  examPageProposals: ExamPageProposal[];
-  cropRoot: string;
-  repairPass: number;
-  beforeBbox: CropCandidate["bbox"];
-  beforeCropPath: string;
-  rawPath: string;
-  reasonPrefix: string;
-  confidence?: number;
-}): Promise<CropRepairAttempt | undefined> {
-  const fallbackBbox = await deterministicCropExpansion(candidate, result);
-  if (!fallbackBbox || bboxesEquivalent(beforeBbox, fallbackBbox)) {
-    return undefined;
-  }
-
-  const fallbackPath = path.join(
-    cropRoot,
-    `${safeFileName(paper.id)}__${candidate.id}__repaired-pass-${repairPass}-deterministic.png`
-  );
-  await writeCropImage(candidate.sourcePagePath, fallbackBbox, fallbackPath);
-  candidate.bbox = fallbackBbox;
-  candidate.cropPath = normalisePath(fallbackPath);
-  updateProposalVisualBbox(examPageProposals, candidate, fallbackBbox);
-
-  return {
-    cropId: candidate.id,
-    status: "ok",
-    action: "replace-bbox",
-    beforeBbox,
-    afterBbox: fallbackBbox,
-    beforeCropPath,
-    afterCropPath: normalisePath(fallbackPath),
-    qaStatus: result.status,
-    qaIssues: result.issues,
-    reason: reasonPrefix,
-    confidence,
-    rawPath: normalisePath(rawPath)
-  };
-}
-
-async function deterministicCropExpansion(
-  candidate: CropCandidate,
-  result: CropQaResult
-): Promise<CropCandidate["bbox"] | undefined> {
-  if (result.status !== "too-tight") {
-    return undefined;
-  }
-
-  const findingText = `${result.issues.join(" ")} ${result.recommendedAction}`.toLowerCase();
-  if (/blank|empty|wrong|re-extract|correct region/.test(findingText)) {
-    const visualBand = await findDenseVisualBandBelow(candidate);
-    if (visualBand) {
-      return visualBand;
-    }
-  }
-
-  const sourceImage = await loadImage(await readFile(candidate.sourcePagePath));
-  const text = findingText;
-  let { x, y, width, height } = candidate.bbox;
-  const pad = 60;
-
-  if (/top|header|above/.test(text)) {
-    y -= pad;
-    height += pad;
-  }
-  if (/bottom|below/.test(text)) {
-    height += pad;
-  }
-  if (/left/.test(text)) {
-    x -= pad;
-    width += pad;
-  }
-  if (/right/.test(text)) {
-    width += pad;
-  }
-  if (!/top|header|above|bottom|below|left|right/.test(text)) {
-    x -= pad;
-    y -= pad;
-    width += pad * 2;
-    height += pad * 2;
-  }
-
-  return clampBbox({ x, y, width, height }, sourceImage.width, sourceImage.height);
-}
-
-async function findDenseVisualBandBelow(
-  candidate: CropCandidate
-): Promise<CropCandidate["bbox"] | undefined> {
-  const sourceImage = await loadImage(await readFile(candidate.sourcePagePath));
-  const canvas = createCanvas(sourceImage.width, sourceImage.height);
-  const context = canvas.getContext("2d");
-  context.drawImage(sourceImage, 0, 0);
-  const pixels = context.getImageData(0, 0, sourceImage.width, sourceImage.height).data;
-  const xStart = clamp(candidate.bbox.x - 160, 0, sourceImage.width - 1);
-  const xEnd = clamp(candidate.bbox.x + candidate.bbox.width + 160, xStart + 1, sourceImage.width);
-  const yStart = clamp(candidate.bbox.y, 0, sourceImage.height - 1);
-  const yEnd = clamp(candidate.bbox.y + candidate.bbox.height + 520, yStart + 1, sourceImage.height);
-  const rowThreshold = Math.max(12, Math.round((xEnd - xStart) * 0.025));
-  const rows: Array<{ y: number; count: number; minX: number; maxX: number }> = [];
-
-  for (let y = yStart; y < yEnd; y += 1) {
-    let count = 0;
-    let minX = sourceImage.width;
-    let maxX = 0;
-
-    for (let x = xStart; x < xEnd; x += 1) {
-      const index = (y * sourceImage.width + x) * 4;
-      const red = pixels[index];
-      const green = pixels[index + 1];
-      const blue = pixels[index + 2];
-
-      if (red < 230 || green < 230 || blue < 230) {
-        count += 1;
-        minX = Math.min(minX, x);
-        maxX = Math.max(maxX, x);
-      }
-    }
-
-    if (count >= rowThreshold) {
-      rows.push({ y, count, minX, maxX });
-    }
-  }
-
-  const groups: Array<{
-    start: number;
-    end: number;
-    minX: number;
-    maxX: number;
-    total: number;
-    maxCount: number;
-  }> = [];
-  let current:
-    | {
-        start: number;
-        end: number;
-        minX: number;
-        maxX: number;
-        total: number;
-        maxCount: number;
-      }
-    | undefined;
-
-  for (const row of rows) {
-    if (!current || row.y > current.end + 2) {
-      if (current) {
-        groups.push(current);
-      }
-      current = {
-        start: row.y,
-        end: row.y,
-        minX: row.minX,
-        maxX: row.maxX,
-        total: row.count,
-        maxCount: row.count
-      };
-    } else {
-      current.end = row.y;
-      current.minX = Math.min(current.minX, row.minX);
-      current.maxX = Math.max(current.maxX, row.maxX);
-      current.total += row.count;
-      current.maxCount = Math.max(current.maxCount, row.count);
-    }
-  }
-
-  if (current) {
-    groups.push(current);
-  }
-
-  const best = groups
-    .filter((group) => group.end - group.start >= 20 && group.total >= 1000)
-    .sort((left, right) => right.total * (right.end - right.start) - left.total * (left.end - left.start))[0];
-
-  if (!best) {
-    return undefined;
-  }
-
-  const pad = 14;
-  return clampBbox(
-    {
-      x: best.minX - pad,
-      y: best.start - pad,
-      width: best.maxX - best.minX + pad * 2,
-      height: best.end - best.start + pad * 2
-    },
-    sourceImage.width,
-    sourceImage.height
-  );
-}
-
-function buildCropRepairPrompt(candidate: CropCandidate, result: CropQaResult): string {
-  return `Repair this proposed crop for an NSW HSC mathematics visual.
-
-The previous QA pass marked this crop as "${result.status}", so the current bbox is not acceptable.
-Return a corrected source-page bounding box whenever the correct visual is visible.
-
-Return JSON only:
-{
-  "cropId": "${candidate.id}",
-  "action": "replace-bbox",
-  "newBbox": {"x": 0, "y": 0, "width": 100, "height": 100},
-  "reason": "why this bbox fixes the crop",
-  "confidence": 0.0
-}
-
-Allowed actions:
-- replace-bbox: return a better bbox in source-page pixel coordinates.
-- manual-review: the full source page is insufficient to identify a reliable crop.
-
-Rules:
-- For too-tight, too-loose, and wrong-content findings, use replace-bbox when the correct visual is visible on the source page.
-- Do not return keep for a crop that failed QA.
-- The newBbox must be materially different from currentBbox and must fix the QA issues.
-- The bbox must include the complete required visual as a standalone public-site asset.
-- Include all axes, axis labels, tick labels, legends, graph labels, table headers, row/column labels, table borders, diagram endpoints, nodes, edge labels, option labels, scales, and geometry/text labels that are part of the visual.
-- Exclude unrelated question prose, answer-writing lines, page headers, footers, page numbers, marks, office-use text, other questions, other diagrams, and excessive blank margins.
-- Include adjacent prose only if it is visually part of the table/diagram itself, not merely the question stem.
-- Coordinates must use the full source-page image coordinate system, not the small crop image coordinate system.
-
-Crop metadata:
-${JSON.stringify(
-  {
-    cropId: candidate.id,
-    questionNumber: candidate.questionNumber,
-    page: candidate.page,
-    kind: candidate.kind,
-    description: candidate.description,
-    currentBbox: candidate.bbox,
-    qaStatus: result.status,
-    qaIssues: result.issues,
-    qaRecommendedAction: result.recommendedAction
-  },
-  null,
-  2
-)}`;
-}
-
-function updateProposalVisualBbox(
-  examPageProposals: ExamPageProposal[],
-  candidate: CropCandidate,
-  bbox: CropCandidate["bbox"]
-) {
-  const proposal = examPageProposals.find((item) => item.page === candidate.page);
-  if (!proposal) {
-    return;
-  }
-
-  let matchingVisualIndex = 0;
-  for (const visual of proposal.visuals) {
-    const questionNumber = toQuestionNumber(visual.questionNumber ?? undefined);
-    if (!visual.shouldExtract || questionNumber === undefined || !visual.bbox) {
-      continue;
-    }
-
-    matchingVisualIndex += 1;
-    if (matchingVisualIndex === candidate.visualIndex) {
-      visual.bbox = bbox;
-      return;
-    }
   }
 }
 
@@ -2709,36 +2399,6 @@ function clampBbox(
   };
 }
 
-function bboxesEquivalent(left: CropCandidate["bbox"], right: CropCandidate["bbox"]): boolean {
-  const tolerance = 2;
-  return (
-    Math.abs(left.x - right.x) <= tolerance &&
-    Math.abs(left.y - right.y) <= tolerance &&
-    Math.abs(left.width - right.width) <= tolerance &&
-    Math.abs(left.height - right.height) <= tolerance
-  );
-}
-
-function repairContradictsQaFinding(
-  before: CropCandidate["bbox"],
-  after: CropCandidate["bbox"],
-  result: CropQaResult
-): boolean {
-  if (result.status !== "too-tight") {
-    return false;
-  }
-
-  const tolerance = 3;
-  const containsPreviousCrop =
-    after.x <= before.x + tolerance &&
-    after.y <= before.y + tolerance &&
-    after.x + after.width >= before.x + before.width - tolerance &&
-    after.y + after.height >= before.y + before.height - tolerance;
-  const expandsArea = after.width * after.height >= before.width * before.height;
-
-  return !containsPreviousCrop || !expandsArea;
-}
-
 function clamp(value: number, min: number, max: number): number {
   return Math.min(Math.max(value, min), max);
 }
@@ -2783,40 +2443,45 @@ async function createCropContactSheet(candidates: CropCandidate[], outputPath: s
 }
 
 function buildSingleCropQaPrompt(candidate: CropCandidate): string {
-  return `Inspect one proposed crop for an NSW HSC mathematics question asset.
+  return `Crop check and repair
+Job:
+- I have attached two files: a page from a Mathematics Exam, and a diagram I have cropped from it.
+- Your job is to check whether the crop is a good crop that includes the whole image and no extraneous material.
+- If it is not a good crop, your job is to identify the boundary box ('bbox') that will allow me to safely and accurately crop the image.
+- The visuals could be things like tables, graphs, and diagrams, or other images that support a mathematics question.
 
-You will receive two images:
-1. The full rendered source exam page.
-2. The proposed crop.
+Rules:
+- The bbox must include the complete required visual as a standalone public-site asset.
+- Include all axes, axis labels, tick labels, legends, graph labels, table headers, row/column labels, table borders, diagram endpoints, nodes, edge labels, option labels, scales, and geometry/text labels that are part of the visual.
+- Exclude unrelated question prose, answer-writing lines, page headers, footers, page numbers, copyright notices, marks, office-use text, other questions, other diagrams, and excessive blank margins.
+- Coordinates must use the full source-page image coordinate system, not the small crop image coordinate system.
+- Include any header, footer, or explanatory text that is directly linked to the visual, such as a heading describing the visual.
+- Include a small margin around the crop area, without intruding on other elements. I will crop exactly where you say and not add my own margin.
+- Where multiple images relate to the same question or question part crop them all together if doing so does not include extraneous material. E.g. a series of related graphs.
 
-Return JSON only:
+Response format:
+- Provide your response strictly in the JSON format below.
+- Include one entry for the crop being checked.
+- questionNumber: Integer representing the question number the question relates to, identified from the exam paper.
+- goodCrop: return true if the existing crop meets the criteria above, return false if it does not.
+- bbox: If you return false for goodCrop, also return a bbox specification for the new proposed crop.
+- x: the x coordinate of the top left of the proposed bbox.
+- y: the y coordinate of the top left of the proposed bbox.
+- width: the width in pixels of the proposed bbox.
+- height: the height in pixels of the proposed bbox.
+
+JSON format:
 {
-  "cropId": "${candidate.id}",
-  "status": "ok",
-  "issues": [],
-  "recommendedAction": "",
-  "confidence": 0.0
+  "visuals": [
+    {
+      "questionNumber": ${candidate.questionNumber},
+      "goodCrop": false,
+      "bbox": {"x": 0, "y": 0, "width": 100, "height": 100},
+      "reason": "why the existing crop is or is not acceptable",
+      "confidence": 0.0
+    }
+  ]
 }
-
-Be strict. Mark "ok" only when the crop is suitable to publish as the standalone public-site asset for this question.
-
-The crop should include:
-- The complete visual described in the metadata: graph, table, diagram, image, map, plan, network, spinner, option diagram set, or card layout.
-- Every required axis, axis label, tick label, legend, graph label, table header, row/column label, table border, diagram endpoint, node, edge label, option label, scale, and geometric/text label that is visually part of the asset.
-- Small visual captions or labels only when they are part of the visual itself.
-
-The crop should exclude:
-- Unrelated question prose before or after the visual.
-- Answer-writing lines, page headers, footers, page numbers, copyright notices, marks, or office-use text.
-- Other questions or unrelated nearby diagrams.
-- Large blank margins. A small margin around the visual is fine.
-
-Allowed statuses:
-- ok: the crop includes exactly the complete required visual with only reasonable margin.
-- too-tight: any part of the visual is clipped, including edges, borders, labels, axes, table rows/columns, or option labels.
-- too-loose: the crop includes unnecessary surrounding prose, other question content, answer lines, headers/footers, or excessive blank area.
-- wrong-content: the crop is blank, mostly text instead of the described visual, or captures a different visual.
-- unclear: you cannot determine quality from the supplied page and crop.
 
 Metadata:
 ${JSON.stringify(

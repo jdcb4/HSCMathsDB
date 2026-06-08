@@ -13,7 +13,7 @@ This workflow turns official NSW source packs into verified question records, ma
 - 2024 Mathematics Extension 1: 14/14 official draft records promoted through the reusable profile importer. Source-reviewed prompt/answer overrides and diagram assets have been added; the ingestion audit reports zero issues for the paper.
 - 2024 Mathematics Extension 2: 16/16 official draft records promoted through the reusable profile importer. Source-reviewed prompt/answer overrides and diagram assets have been added; the ingestion audit reports zero issues for the paper.
 - 2023 Mathematics Standard: source-pack and paper records are seeded. PDFs have been cached locally and all documents rendered. The Gemini proposal engine has completed a full Standard 1 trial with 31/31 prompts, 31/31 marking-guide answers, zero question-level flags, and 16 final crop QA flags after the capped four-cycle crop QA/recrop loop. The latest fresh bounded-parallel run took 141 seconds. Ignored review artifacts live under `var/gemini-ingestion-proposals/std1-2023/` and the published local review copy is generated under `public/ingestion-reports/`; no corpus records have been promoted yet.
-- 2023 Mathematics Extension 1: source-pack and paper records are seeded. PDFs have been cached locally and all documents rendered. The Gemini proposal engine has completed a proposal run with 14/14 prompts, 14/14 marking-guide answers, zero page errors, 2 question-level notation flags, and 5 final crop QA flags. Ignored review artifacts live under `var/gemini-ingestion-proposals/ext1-2023/` and the published local review copy is generated under `public/ingestion-reports/`; no corpus records have been promoted yet.
+- 2023 Mathematics Extension 1: source-pack and paper records are seeded. PDFs have been cached locally and all documents rendered. The Gemini proposal engine has completed a Sonnet visual-bbox proposal run with 14/14 prompts, 14/14 marking-guide answers, zero page errors, zero question-level flags, and 10 crop candidates. Crop QA is intentionally skipped for now so the published draft question preview can be manually reviewed before deciding whether to re-enable AI crop check/repair. Ignored review artifacts live under `var/gemini-ingestion-proposals/ext1-2023/` and the published local review copy is generated under `public/ingestion-reports/`; no corpus records have been promoted yet.
 - 2023 Mathematics Advanced: source PDFs cached, text/candidates extracted, and 44 exam/guide pages rendered under `var/rendered-pages/source-adv-2023/`; Q1-Q32 are promoted as official draft records. Q1, Q2, Q4, Q5, Q6, Q10, Q16, Q18, Q19, Q22, Q23, Q24, Q27, Q28, Q30, and Q32 public diagram assets are already in `public/assets/diagrams/`.
 - 2022 Mathematics Advanced: 32/32 official draft records promoted; source-pack asset status is complete. Source PDFs are cached, text/candidates extracted, embedded-image metadata extracted, and 40 exam pages rendered under `var/rendered-pages/source-adv-2022/`. Q1, Q3, Q7, Q8, Q10, Q11, Q12, Q14, Q16, Q17, Q21, Q24, Q28, Q29, and Q31 public diagram assets are already in `public/assets/diagrams/`.
 - Next import work can continue with older Standard and Extension years using the 2024 and 2025 reviewed imports as quality benchmarks. Keep using `pnpm run data:report-coverage -- <source-pack-id>` as the compact progress check before opening large extracted files.
@@ -111,16 +111,17 @@ pnpm run data:propose-gemini-ingestion -- std1-2023
 pnpm run data:publish-gemini-ingestion-report -- std1-2023
 ```
 
-The command calls `google/gemini-3.1-flash-lite` through OpenRouter, unless `--model` is supplied.
-It writes raw responses, parsed page proposals, deterministic and AI repair artifacts, AI crop-repair
-artifacts, labelled crop QA overview sheets, per-crop source-page QA responses, a reconciled JSON report, and a local HTML report surface under
+The command calls `google/gemini-3.1-flash-lite` through OpenRouter for page transcription and marking-guide extraction, unless `--model` is supplied. Visual bbox discovery defaults to `anthropic/claude-sonnet-4.6` and can be changed with `--visual-model`.
+It writes raw responses, parsed page proposals, standalone visual bbox responses, deterministic and AI repair artifacts, generated crop candidates, labelled crop overview sheets, a reconciled JSON report, and a local HTML report surface under
 `var/gemini-ingestion-proposals/<paperId>/`.
 
 The proposal report is not a corpus write. The default run attempts to resolve raw TeX, currency,
-split-page, source-fidelity, and crop-boundary flags autonomously before final reconciliation. Crop
-QA now judges each candidate one by one against the original rendered page and the proposed crop,
-then cycles through AI-assisted recropping up to four QA passes total. Remaining crop QA flags are a
-corpus-promotion blocker rather than a manual review nicety.
+split-page, and source-fidelity text flags autonomously before final reconciliation. Crop generation
+faithfully executes the bbox coordinates returned by the visual model, after clamping invalid
+out-of-page coordinates to the rendered page bounds; there is no deterministic crop expansion or
+automatic recropping. Crop check/repair is optional and disabled by default. Use `--run-crop-qa` to
+ask the configured crop QA model to judge each crop and propose replacement bboxes without applying
+them.
 
 The publish command writes ignored browser-review copies under `public/ingestion-reports/`. Open
 them through the dev server:

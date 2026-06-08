@@ -1,4 +1,5 @@
-import { copyFile, mkdir, readFile, writeFile } from "node:fs/promises";
+import { readFileSync } from "node:fs";
+import { copyFile, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 type ReportWithAssets = {
@@ -180,6 +181,7 @@ async function copyReportAssets(
   publicAssetPrefix: string,
   cacheKey: string
 ): Promise<Map<string, string>> {
+  await rm(outputAssetRootValue, { recursive: true, force: true });
   await mkdir(outputAssetRootValue, { recursive: true });
 
   const paths = uniqueStrings([
@@ -193,12 +195,18 @@ async function copyReportAssets(
     ...(report.cropQa?.sheets ?? []).map((sheet) => sheet.path)
   ]);
   const assetMap = new Map<string, string>();
+  const usedOutputNames = new Set<string>();
 
-  for (const [index, sourcePath] of paths.entries()) {
+  for (const sourcePath of paths) {
     const extension = path.extname(sourcePath) || ".png";
-    const outputName = `${String(index + 1).padStart(4, "0")}-${safeFileName(
-      path.basename(sourcePath, extension)
-    )}${extension}`;
+    const outputStem = publishedAssetStem(sourcePath, extension, report.paper?.id);
+    let outputName = `${outputStem}${extension}`;
+    let suffix = 2;
+    while (usedOutputNames.has(outputName)) {
+      outputName = `${outputStem}-${suffix}${extension}`;
+      suffix += 1;
+    }
+    usedOutputNames.add(outputName);
     const outputPath = path.join(outputAssetRootValue, outputName);
     await copyFile(path.resolve(sourcePath), outputPath);
     assetMap.set(
@@ -208,6 +216,16 @@ async function copyReportAssets(
   }
 
   return assetMap;
+}
+
+function publishedAssetStem(sourcePath: string, extension: string, paperId?: string): string {
+  const sourceStem = path.basename(sourcePath, extension);
+  const cropPrefix = paperId ? `${paperId}__q` : "";
+  if (cropPrefix && sourceStem.startsWith(cropPrefix)) {
+    return safeFileName(`diagram-q${sourceStem.slice(cropPrefix.length)}`);
+  }
+
+  return safeFileName(`${path.basename(path.dirname(sourcePath))}-${sourceStem}`);
 }
 
 function rewriteAssetUrls(report: ReportWithAssets, assetMap: Map<string, string>) {
@@ -585,7 +603,7 @@ function renderAsset(asset: CropCandidate): string {
   const qa = asset.qa;
   const statusClass = qa?.status && qa.status !== "ok" ? "bad" : "";
   return `<figure>
-    <img src="${escapeHtml(asset.cropUrl ?? "")}" alt="${escapeHtml(asset.description)}" loading="lazy" />
+    <img src="${escapeHtml(inlineImageUrl(asset.cropPath) ?? asset.cropUrl ?? "")}" alt="${escapeHtml(asset.description)}" loading="lazy" />
     <figcaption>
       <span class="pill ${statusClass}">${escapeHtml(qa?.status ?? "not checked")}</span>
       ${escapeHtml(asset.kind)} - ${escapeHtml(asset.description)} - ${escapeHtml(asset.id)}
@@ -596,6 +614,26 @@ function renderAsset(asset: CropCandidate): string {
       }
     </figcaption>
   </figure>`;
+}
+
+function inlineImageUrl(filePath?: string): string | undefined {
+  if (!filePath) {
+    return undefined;
+  }
+
+  const extension = path.extname(filePath).toLowerCase();
+  const mimeType =
+    extension === ".jpg" || extension === ".jpeg"
+      ? "image/jpeg"
+      : extension === ".webp"
+        ? "image/webp"
+        : "image/png";
+
+  try {
+    return `data:${mimeType};base64,${readFileSync(path.resolve(filePath)).toString("base64")}`;
+  } catch {
+    return undefined;
+  }
 }
 
 function renderAnswerPart(part: DraftQuestionPreview["answerParts"][number]): string {

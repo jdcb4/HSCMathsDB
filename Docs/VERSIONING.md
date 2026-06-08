@@ -9,6 +9,7 @@ Before manifests exist, versioning is not active. During initial setup, add vers
 Current version sources:
 
 - `package.json` at the repository root
+- `src/data/hsc-math-advanced.json` `meta.version`
 
 ## Bump rules
 

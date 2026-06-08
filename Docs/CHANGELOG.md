@@ -2,6 +2,14 @@
 
 Newest entries go at the top.
 
+## 0.39.0 - 2026-06-08
+
+- Switched the Gemini ingestion engine's default visual bbox model to `anthropic/claude-sonnet-4.6` while keeping `google/gemini-3.1-flash-lite` as the default page transcription and marking-guide model.
+- Reworked crop generation so public-site crop assets are produced only by faithfully executing model-returned source-page coordinates, with deterministic crop expansion and automatic recropping removed.
+- Made the combined crop check/repair pass optional and off by default; when enabled with `--run-crop-qa`, it reports crop quality and proposed replacement bboxes without applying them.
+- Reingested and published the 2023 Mathematics Extension 1 preview with 14/14 prompts, 14/14 marking-guide answers, zero page errors, zero question flags, and 10 crop candidates for manual review.
+- Updated the report publisher so draft question previews inline crop images and use stable semantic asset filenames, avoiding local browser blocking of generated PNG URLs.
+
 ## 0.38.0 - 2026-06-08
 
 - Reran the visual-bbox prompt trial with Gemini 3.1 Pro Preview and GPT-5.5 using the strict 15-second full-request timeout.

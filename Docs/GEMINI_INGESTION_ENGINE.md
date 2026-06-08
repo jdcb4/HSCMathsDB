@@ -22,21 +22,24 @@ pnpm run data:propose-gemini-ingestion -- std1-2023 --skip-llm
 pnpm run data:publish-gemini-ingestion-report -- std1-2023 --output-id std1-2023-crop-mistral-medium-3-5
 ```
 
-The default model is `google/gemini-3.1-flash-lite` through OpenRouter. The command requires
+The default page transcription and marking-guide model is `google/gemini-3.1-flash-lite` through
+OpenRouter. The default visual bbox model is `anthropic/claude-sonnet-4.6`. The command requires
 `OPENROUTER_API_KEY` unless `--skip-llm` is used.
 
 The engine uses bounded parallelism for independent LLM calls:
 
 - Up to 8 rendered exam/marking-guide page proposal calls at once.
+- Up to 8 standalone visual-bbox calls at once.
 - Up to 8 per-crop QA calls at once inside a crop QA pass.
-- Up to 6 crop-repair calls at once inside a repair cycle.
 
 Additional model controls:
 
 - `--repair-model <model>` changes the model used for unresolved question repair.
-- `--crop-qa-model <model>` changes the model used for per-crop visual QA.
+- `--visual-model <model>` changes the model used for standalone visual bbox discovery.
+- `--crop-qa-model <model>` changes the model used for optional per-crop visual QA.
 - `--judge-model <model>` sets both repair and crop QA to a stronger judgement model.
-- `--skip-repair` and `--skip-crop-qa` disable those downstream passes.
+- `--skip-repair` disables question-text repair.
+- `--run-crop-qa` enables optional combined crop check/repair judgement. Crop QA is off by default.
 - `--force-repair` and `--force-crop-qa` refresh cached downstream AI judgements without rerunning the page proposals.
 
 ## Prerequisites
@@ -54,11 +57,11 @@ pnpm run data:render-pages -- source-std-2023 --all-documents --scale 1.5
 For `std1-2023`, the engine writes:
 
 - `var/gemini-ingestion-proposals/std1-2023/raw/` - cached OpenRouter responses
+- `var/gemini-ingestion-proposals/std1-2023/visual-bbox-raw/` - cached standalone visual bbox responses
 - `var/gemini-ingestion-proposals/std1-2023/parsed/` - parsed page proposals
 - `var/gemini-ingestion-proposals/std1-2023/repairs/` - cached targeted AI repair responses
-- `var/gemini-ingestion-proposals/std1-2023/visual-crops/` - crop candidates produced from Gemini visual bbox proposals
-- `var/gemini-ingestion-proposals/std1-2023/crop-contact-sheets/` - 4x4 labelled crop-sheet overviews and cached per-crop AI QA responses
-- `var/gemini-ingestion-proposals/std1-2023/crop-repairs/` - cached targeted AI crop-repair responses
+- `var/gemini-ingestion-proposals/std1-2023/visual-crops/` - crop candidates produced by executing model visual bbox proposals
+- `var/gemini-ingestion-proposals/std1-2023/crop-contact-sheets/` - 4x4 labelled crop-sheet overviews and optional cached per-crop AI QA responses
 - `var/gemini-ingestion-proposals/std1-2023/report.json` - reconciled machine-readable report
 - `var/gemini-ingestion-proposals/std1-2023/report.html` - local report surface with rendered page images, repair results, and crop QA
 
@@ -76,7 +79,9 @@ Then open these pages while `pnpm run dev` is running:
 - `http://127.0.0.1:5173/ingestion-reports/std1-2023-question-preview.html` for a draft corpus preview that groups prompt, options, extracted assets, official answer, and marking-guide working by question.
 
 The publisher copies referenced page/crop images into `public/ingestion-reports/<paperId>-assets/`
-and rewrites both pages to use relative image URLs. That generated folder is ignored by git.
+and rewrites report pages to use stable relative image URLs. The draft question preview also inlines
+crop images so local browser extensions cannot block the review surface. Generated report folders are
+ignored by git.
 
 To compare crop QA/repair models while holding page transcription and marking-guide extraction steady,
 publish each variant with a distinct `--output-id`, then build a side-by-side crop comparison page:
@@ -92,22 +97,24 @@ the LLM calls.
 ## Pipeline Shape
 
 1. Resolve the `paperId` to its source pack and rendered exam/marking-guide documents.
-2. Send each rendered exam page to Gemini for question transcription, option extraction, and visual
-   asset detection.
+2. Send each rendered exam page to Gemini for question transcription and option extraction. The page
+   proposal intentionally leaves visual bboxes empty.
 3. Send each rendered marking-guide page to Gemini for answer-key, criteria, and sample-answer
    extraction.
-4. Parse model JSON permissively enough to preserve useful proposals when Gemini uses nullable fields
+4. Send each rendered exam page to the visual bbox model with the standalone visual-identification
+   prompt trialled in `data:trial-visual-bbox-prompt`.
+5. Parse model JSON permissively enough to preserve useful proposals when models use nullable fields
    or non-standard visual labels.
-5. Apply deterministic notation repairs for common TeX, inline TeX fragments embedded in prose, and currency issues.
-6. Reconcile question numbers across exam and marking-guide proposals.
-7. Feed unresolved question flags back to the repair model with structured context plus the relevant and adjacent page images.
-8. Re-run deterministic notation repair after AI edits and reconcile again.
-9. Generate visual crop candidates from Gemini bbox proposals and stitch them into 4x4 labelled contact sheets for overview.
-10. Ask the crop QA model to inspect each candidate one by one with the original rendered source page and the proposed crop, requiring the crop to include the whole standalone visual while excluding question prose, page furniture, unrelated diagrams, and excessive blank space.
-11. Feed flagged crop candidates back to the model for corrected source-page bbox proposals, rerun per-crop QA after each repair pass, and stop after four QA cycles total. A failed crop repair must produce materially changed coordinates; too-tight repairs cannot shrink the crop. If the model returns unchanged coordinates, deterministic expansion can be used inside the same cycle, but no extra hidden fallback passes run after the cap.
-12. Flag missing prompt/answer coverage, asset needs, low confidence, raw TeX outside MathJax
+6. Apply deterministic notation repairs for common TeX, inline TeX fragments embedded in prose, and currency issues.
+7. Reconcile question numbers across exam and marking-guide proposals.
+8. Feed unresolved question flags back to the repair model with structured context plus the relevant and adjacent page images.
+9. Re-run deterministic notation repair after AI edits and reconcile again.
+10. Generate visual crop candidates by clamping model bbox coordinates to the rendered source-page bounds and cropping exactly those coordinates. There is no deterministic crop expansion or automatic recropping.
+11. Stitch generated crops into 4x4 labelled contact sheets for overview.
+12. If `--run-crop-qa` is enabled, ask the crop QA model to inspect each candidate one by one with the original rendered source page and the proposed crop. The combined crop check/repair prompt may return `goodCrop: false` plus a proposed replacement bbox, but the workflow does not apply that bbox while crop QA is optional/manual-review mode.
+13. Flag missing prompt/answer coverage, asset needs, low confidence, raw TeX outside MathJax
     delimiters, and risk-like page notes.
-13. Use any remaining unresolved report items as escalation cases before promoting records through the existing importer/corpus path.
+14. Use any remaining unresolved report items as escalation cases before promoting records through the existing importer/corpus path.
 
 ## 2023 Standard 1 Trial
 
@@ -130,9 +137,27 @@ Result after the autonomous repair and crop QA loop:
 
 This is a strong enough signal to use Gemini page-image extraction as the default proposal path for
 new Standard and Extension years, with deterministic repair and targeted AI repair for text. For
-visuals, the latest trial shows that crop QA must be stricter than sheet-level review: per-crop
-source-page comparison plus capped recropping is now the quality gate, and remaining crop flags
-should block corpus promotion until bbox generation or crop repair produces clean standalone assets.
+visuals, later model trials led to the current approach: use the strongest prompt-tested visual bbox
+model for first-pass coordinates, crop exactly those coordinates, and manually review the resulting
+assets before promotion while optional crop QA remains disabled.
+
+## 2023 Extension 1 Sonnet Bbox Trial
+
+The 2023 Mathematics Extension 1 paper was rerun after switching the default visual bbox model to
+`anthropic/claude-sonnet-4.6` and disabling automatic crop QA/repair by default.
+
+Result:
+
+- 20 exam pages processed
+- 25 marking-guide pages processed
+- 14/14 question skeletons reconciled
+- 14/14 questions with prompt proposals
+- 14/14 questions with marking-guide answer proposals
+- 8 questions identified as needing source assets
+- 0 page-level errors
+- 0 question-level reconciliation or notation flags after deterministic and AI repair
+- 10 crop candidates generated from Sonnet visual bbox proposals
+- Crop QA skipped by default; the published draft question preview is the manual review surface
 
 ## 2023 Standard 1 Crop Model Comparison
 
@@ -151,8 +176,8 @@ Observed crop-model results:
 
 Kimi K2.6 and MiMo v2.5 were dropped from the active comparison because they were too slow for routine
 use. Mistral Medium 3.5 produced the best result among the tested crop models, but the residual flags
-show that changing the crop model alone is not enough. The next improvement should target bbox proposal
-and repair instructions or a deterministic crop-expansion pass, not just stronger crop judgement.
+showed that changing the crop model alone was not enough. Later prompt trials shifted the workflow
+toward standalone bbox proposal quality rather than deterministic post-processing.
 
 ## Crop Coordinate Diagnostics
 
@@ -177,8 +202,8 @@ Latest diagnostic result:
   IoU 0.2106.
 
 This indicates the shared crop issues are not caused by a pixel-coordinate translation bug in the local
-crop process. The weak point is the model-produced repair bbox, plus deterministic fallback logic that
-can repeat the same expansion pattern when multiple models report similar crop QA issues.
+crop process. The weak point was model-produced bbox quality, so the active workflow now avoids
+deterministic expansion and crops only the coordinates returned by the visual bbox model.
 
 ## Visual Bbox Prompt Trial
 
