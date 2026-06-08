@@ -3,7 +3,7 @@ import path from "node:path";
 
 type Database = {
   meta: { version: string; updatedAt: string; sourceSummary: string };
-  papers: Array<{ id: string; sourceStatus: string }>;
+  papers: Array<{ id: string; courseId: string; syllabusEra: string; sourceStatus: string }>;
   sourcePacks: Array<{
     id: string;
     paperId?: string;
@@ -13,7 +13,14 @@ type Database = {
     assetStatus: string;
     notes?: string;
   }>;
-  syllabus: Array<{ id: string; topic: string; title: string }>;
+  syllabus: Array<{
+    id: string;
+    course: string;
+    code: string;
+    topic: string;
+    title: string;
+    content: string;
+  }>;
   questions: Question[];
 };
 
@@ -94,30 +101,6 @@ type CropCandidate = {
 const databasePath = "src/data/hsc-math-advanced.json";
 const diagramRoot = path.join("public", "assets", "diagrams");
 
-const syllabusByQuestion: Record<number, string[]> = {
-  1: ["old-me1-c3"],
-  2: ["old-me1-s1"],
-  3: ["old-me1-c3"],
-  4: ["old-me1-c2"],
-  5: ["old-me1-t1"],
-  6: ["old-me1-v1"],
-  7: ["old-me1-t1"],
-  8: ["old-me1-f1"],
-  9: ["old-me1-f1"],
-  10: ["old-me1-a1"],
-  11: ["old-me1-v1", "old-me1-a1", "old-me1-f2", "old-me1-c2", "old-me1-t3", "old-me1-s1"],
-  12: ["old-me1-c2", "old-me1-p1", "old-me1-s1", "old-me1-a1"],
-  13: ["old-me1-c3"],
-  14: ["old-me1-f1", "old-me1-c2", "old-me1-f2", "old-me1-v1", "old-me1-t3"]
-};
-
-const sectionTotals: Record<number, number> = {
-  11: 16,
-  12: 15,
-  13: 15,
-  14: 14
-};
-
 async function main() {
   const paperId = process.argv[2];
   if (!paperId) {
@@ -128,27 +111,35 @@ async function main() {
     await readFile(path.join("var", "gemini-ingestion-proposals", paperId, "report.json"), "utf8")
   ) as Report;
   const database = JSON.parse(await readFile(databasePath, "utf8")) as Database;
+  const paper = database.papers.find((candidate) => candidate.id === paperId);
+  if (!paper) {
+    throw new Error(`Unknown paper id in database: ${paperId}`);
+  }
   const nodeById = new Map(database.syllabus.map((node) => [node.id, node]));
+  const syllabusNodes = syllabusNodesForPaper(database.syllabus, paper);
 
   await mkdir(diagramRoot, { recursive: true });
   const assetsByQuestion = await promoteAssets(report);
-  const questions = buildQuestions(report, nodeById, assetsByQuestion);
+  const questions = buildQuestions(report, nodeById, syllabusNodes, assetsByQuestion);
 
   database.questions = database.questions.filter((question) => question.paperId !== paperId);
   database.questions.push(...questions);
   database.questions.sort(compareQuestions);
 
-  const paper = database.papers.find((candidate) => candidate.id === paperId);
-  if (paper) {
-    paper.sourceStatus = "complete";
-  }
+  paper.sourceStatus = "complete";
 
   const sourcePack = database.sourcePacks.find(
-    (candidate) => candidate.id === report.sourcePack.id || candidate.paperId === paperId
+    (candidate) =>
+      candidate.id === report.sourcePack.id ||
+      candidate.paperId === paperId ||
+      candidate.paperIds?.includes(paperId)
   );
   if (sourcePack) {
     sourcePack.importStatus = "in-progress";
-    sourcePack.importedQuestionCount = questions.length;
+    const packPaperIds = new Set([sourcePack.paperId, ...(sourcePack.paperIds ?? [])].filter(Boolean));
+    sourcePack.importedQuestionCount = database.questions.filter((question) =>
+      packPaperIds.size > 0 ? packPaperIds.has(question.paperId) : question.paperId === paperId
+    ).length;
     sourcePack.assetStatus = "complete";
     sourcePack.notes =
       "Gemini/Sonnet page-image proposal reviewed and promoted as official draft records with exam-derived assets.";
@@ -186,6 +177,7 @@ async function promoteAssets(report: Report): Promise<Map<number, Asset[]>> {
 function buildQuestions(
   report: Report,
   nodeById: Map<string, { id: string; topic: string; title: string }>,
+  syllabusNodes: Array<{ id: string; topic: string; title: string; content?: string; code?: string }>,
   assetsByQuestion: Map<number, Asset[]>
 ): Question[] {
   const questionNumbers = [
@@ -214,21 +206,24 @@ function buildQuestions(
         )
         .filter((part) => Boolean(part.answerLatex?.trim()) || Boolean(part.sampleAnswerLatex?.trim()))
         .sort(compareAnswerParts);
-      const syllabusNodeIds = syllabusByQuestion[questionNumber] ?? ["old-me1-f1"];
+      const promptLatex = promptParts.map(formatPromptPart).filter(Boolean).join("\n\n");
+      const answerLatex =
+        questionNumber <= multipleChoiceCount(report)
+          ? `Official answer: ${answerParts[0]?.answerLatex?.trim() || "not extracted"}.`
+          : formatAnswerParts(answerParts);
+      const syllabusNodeIds = inferSyllabusNodeIds(syllabusNodes, `${promptLatex}\n${answerLatex}`);
       const primaryNode = nodeById.get(syllabusNodeIds[0]);
       if (!primaryNode) {
         throw new Error(`Missing syllabus node ${syllabusNodeIds[0]} for Q${questionNumber}`);
       }
 
-      const marks =
-        questionNumber <= 10 ? 1 : (sectionTotals[questionNumber] ?? sumUniquePromptMarks(promptParts));
+      const marks = questionNumber <= multipleChoiceCount(report) ? 1 : sumUniquePromptMarks(promptParts);
       const style =
-        questionNumber <= 10 ? "multiple-choice" : marks >= 5 ? "extended-response" : "short-answer";
-      const promptLatex = promptParts.map(formatPromptPart).filter(Boolean).join("\n\n");
-      const answerLatex =
-        questionNumber <= 10
-          ? `Official answer: ${answerParts[0]?.answerLatex?.trim() || "not extracted"}.`
-          : formatAnswerParts(answerParts);
+        questionNumber <= multipleChoiceCount(report)
+          ? "multiple-choice"
+          : marks >= 5
+            ? "extended-response"
+            : "short-answer";
 
       return {
         id: `${report.paper.id}-q${questionNumber.toString().padStart(2, "0")}-${slug(primaryNode.title)}`,
@@ -249,7 +244,8 @@ function buildQuestions(
           report.paper.year.toString(),
           questionNumber <= 10 ? "multiple-choice" : "section-ii",
           report.paper.courseName,
-          "gemini-reviewed"
+          "gemini-reviewed",
+          "auto-promoted"
         ],
         assets: assetsByQuestion.get(questionNumber) ?? [],
         source: {
@@ -266,6 +262,60 @@ function buildQuestions(
         }
       };
     });
+}
+
+function multipleChoiceCount(report: Report): number {
+  const optionQuestions = new Set<number>();
+  for (const page of report.examPageProposals) {
+    for (const question of page.questions) {
+      const questionNumber = toQuestionNumber(question.questionNumber);
+      if (questionNumber !== undefined && (question.options ?? []).length > 0) {
+        optionQuestions.add(questionNumber);
+      }
+    }
+  }
+  return optionQuestions.size > 0 ? Math.max(...optionQuestions) : 10;
+}
+
+function syllabusNodesForPaper(
+  syllabus: Database["syllabus"],
+  paper: { courseId: string; syllabusEra: string }
+): Array<{ id: string; topic: string; title: string; content?: string; code?: string }> {
+  const courseLabelById: Record<string, string> = {
+    advanced: "Mathematics Advanced Stage 6",
+    standard: "Mathematics Standard Stage 6",
+    "extension-1": "Mathematics Extension 1 Stage 6",
+    "extension-2": "Mathematics Extension 2 Stage 6",
+    "mathematics-archive": "Mathematics 2 Unit"
+  };
+  const courseLabel = courseLabelById[paper.courseId];
+  const matches = syllabus.filter((node) => node.course === courseLabel);
+  if (matches.length === 0) {
+    throw new Error(`No syllabus nodes found for ${paper.courseId}`);
+  }
+  return matches;
+}
+
+function inferSyllabusNodeIds(
+  nodes: Array<{ id: string; topic: string; title: string; content?: string; code?: string }>,
+  text: string
+): string[] {
+  const haystack = plainText(text).toLowerCase();
+  const scored = nodes
+    .map((node) => ({
+      node,
+      score: keywordScore(haystack, `${node.code ?? ""} ${node.topic} ${node.title} ${node.content ?? ""}`)
+    }))
+    .sort((left, right) => right.score - left.score);
+  const selected = scored.filter((entry) => entry.score > 0).slice(0, 3);
+  return (selected.length > 0 ? selected : scored.slice(0, 1)).map((entry) => entry.node.id);
+}
+
+function keywordScore(haystack: string, source: string): number {
+  return [...new Set(source.toLowerCase().match(/[a-z]{4,}|[0-9]+/g) ?? [])].reduce(
+    (score, word) => score + (haystack.includes(word) ? 1 : 0),
+    0
+  );
 }
 
 function formatPromptPart(part: ExamPageProposal["questions"][number] & { page: number }): string {
@@ -331,7 +381,10 @@ function compareAnswerParts(
 function sumUniquePromptMarks(
   parts: Array<ExamPageProposal["questions"][number] & { page: number }>
 ): number {
-  return parts.filter((part) => (part.marks ?? 0) > 0).reduce((sum, part) => sum + (part.marks ?? 0), 0);
+  const total = parts
+    .filter((part) => (part.marks ?? 0) > 0)
+    .reduce((sum, part) => sum + (part.marks ?? 0), 0);
+  return Math.max(1, total);
 }
 
 function pageRef(pages: number[], prefix: string): string {

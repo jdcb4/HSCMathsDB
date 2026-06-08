@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "0.40.0",
+    "version": "0.43.0",
     "title": "GoalCheck HSC mathematics corpus",
     "updatedAt": "2026-06-08",
     "sourceSummary": "Validated corpus linking NSW mathematics exam-pack sources, Standard and Extension draft imports, the Mathematics archive, 2017 syllabus nodes, and 2024 syllabus conversion nodes."
@@ -559,23 +559,6 @@
       "importedQuestionCount": 0,
       "assetStatus": "pending-extraction",
       "notes": "Visible on the current Mathematics Advanced exam-papers listing. Add a paper record when transcription begins.",
-      "assets": []
-    },
-    {
-      "id": "source-math-2019-archive",
-      "courseId": "mathematics-archive",
-      "paperId": "math-2019-archive",
-      "collectionId": "nesa-mathematics-archive",
-      "year": 2019,
-      "courseName": "Mathematics",
-      "title": "Mathematics 2019 HSC exam pack (archive)",
-      "packPageUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-archive/2019",
-      "syllabusEra": "mathematics-2-unit-archive",
-      "officialListStatus": "listed",
-      "importStatus": "seeded",
-      "importedQuestionCount": 0,
-      "assetStatus": "pending-extraction",
-      "notes": "Visible on the Mathematics archive listing. Legacy syllabus mapping must be reviewed question by question.",
       "assets": []
     },
     {
@@ -1926,41 +1909,9 @@
       "syllabusEra": "advanced-2017",
       "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-advanced",
       "sourceStatus": "source-linked"
-    },
-    {
-      "id": "math-2019-archive",
-      "courseId": "mathematics-archive",
-      "year": 2019,
-      "courseName": "Mathematics",
-      "syllabusEra": "mathematics-2-unit-archive",
-      "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-archive",
-      "sourceStatus": "source-linked"
     }
   ],
   "questions": [
-    {
-      "id": "seed-math-2019-archive-functions",
-      "paperId": "math-2019-archive",
-      "year": 2019,
-      "questionNumber": "Q8",
-      "title": "Legacy function transformation",
-      "marks": 2,
-      "style": "multiple-choice",
-      "topic": "Functions",
-      "subtopic": "Functions and graphs",
-      "syllabusNodeIds": ["ma-f1", "m2u-archive"],
-      "promptLatex": "The graph of \\(y=f(x)\\) is shifted 3 units to the right. Write the transformed function.",
-      "answerLatex": "The transformed function is \\(y=f(x-3)\\).",
-      "workingLatex": ["A horizontal shift right by \\(a\\) replaces \\(x\\) with \\(x-a\\)."],
-      "tags": ["legacy", "transformation", "horizontal shift"],
-      "assets": [],
-      "source": {
-        "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-archive",
-        "pageRef": "Seed only",
-        "markingGuideRef": "Seed only",
-        "transcriptionStatus": "demo"
-      }
-    },
     {
       "id": "adv-2022-q01-linear-graph-options",
       "paperId": "adv-2022",

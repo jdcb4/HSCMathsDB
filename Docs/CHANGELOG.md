@@ -2,6 +2,11 @@
 
 Newest entries go at the top.
 
+## 0.43.0 - 2026-06-08
+
+- Removed the demo-only 2019 archive seed question and its worked-solution sidecar entry from the production corpus.
+- Generalised the Gemini report promoter so new Standard, Advanced, Extension 1, and Extension 2 reports use course-appropriate syllabus nodes instead of the previous Extension 1 2023 hard-code.
+
 ## 0.42.0 - 2026-06-08
 
 - Added `SourceExams/` as the canonical local archive for historical HSC mathematics PDFs and switched source caching to sync from that folder instead of downloading from the web.

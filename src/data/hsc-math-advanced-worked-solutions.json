@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "0.2.0",
-    "generatedAt": "2026-06-06T09:21:24.461Z",
+    "generatedAt": "2026-06-08T02:47:44.434Z",
     "defaultModel": "google/gemini-3.1-flash-lite",
     "promptVersion": "hsc-explanation-v2",
     "notes": "Student-facing worked solutions generated from the validated question corpus. Records retain model, prompt version, source hash, timing, and review status for regeneration and QA."
@@ -4655,42 +4655,6 @@
         "Rounding the balance too early, which leads to significant errors in the final repayment amount."
       ],
       "checkLatex": "Ensure the final repayment is less than the standard monthly repayment of \\(\\$1381.16\\), which it is."
-    },
-    {
-      "questionId": "seed-math-2019-archive-functions",
-      "promptVersion": "hsc-explanation-v2",
-      "model": "minimax/minimax-m2.5:nitro",
-      "generatedAt": "2026-06-06T09:04:10.821Z",
-      "sourceQuestionHash": "3dc1d1a6cc869243d6e5e5a15456a58d9f47d503bc6fd61cf5662ecda1a2f581",
-      "reviewStatus": "generated",
-      "needsReview": false,
-      "reviewNote": "",
-      "latencyMs": 6760,
-      "summaryLatex": "When a graph is shifted horizontally, the transformation affects the x-variable inside the function.",
-      "approachLatex": "Notice the direction: shifting RIGHT means points move to larger x-values. In function notation, this requires subtracting from x inside the function.",
-      "steps": [
-        {
-          "title": "Identify the transformation type",
-          "bodyLatex": "The question specifies a horizontal shift of 3 units to the right. Horizontal shifts move the graph along the x-axis without changing its shape."
-        },
-        {
-          "title": "Apply the horizontal shift rule",
-          "bodyLatex": "For a horizontal shift right by \\(a\\) units, replace every \\(x\\) in the original function with \\((x-a)\\). Here \\(a = 3\\), so we replace \\(x\\) with \\((x-3)\\)."
-        },
-        {
-          "title": "Write the transformed function",
-          "bodyLatex": "Substituting \\((x-3)\\) for \\(x\\) in \\(f(x)\\) gives the transformed function \\(y = f(x-3)\\). This shifts every point on the graph 3 units right."
-        },
-        {
-          "title": "Verify the transformation",
-          "bodyLatex": "A point originally at \\((x,y)\\) now appears at \\((x+3,y)\\). Since the new x-value is \\(3\\) greater, the rule \\(x_{new}=x_{old}+3\\) matches \\(x_{old}=x_{new}-3\\), confirming \\(f(x-3)\\)."
-        }
-      ],
-      "finalAnswerLatex": "The transformed function is \\(y = f(x-3)\\).",
-      "commonMistakesLatex": [
-        "Some students incorrectly add to x instead of subtracting, writing \\(f(x+3)\\). Remember: right shift means subtract from x because the new x-coordinate is larger."
-      ],
-      "checkLatex": "Test with \\(f(x)=x^2\\). Shifting right \\(3\\) gives \\(y=(x-3)^2\\), which opens at \\(x=3\\), confirming the transformation direction."
     }
   ]
 }
