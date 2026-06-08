@@ -2,6 +2,10 @@
 
 Newest entries go at the top.
 
+## 0.50.2 - 2026-06-08
+
+- Updated the public header copy to introduce HSCMathsDB directly and added an info popup explaining the project status and QA caveat.
+
 ## 0.50.1 - 2026-06-08
 
 - Refined the public browsing layout with side-by-side header metrics, a separate collapsible filter panel, always-horizontal question previous/current/next controls, and a collapsed-by-default question list with guidance text.

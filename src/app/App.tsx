@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
-import { BookOpen, ChevronLeft, ChevronRight, FileText, Filter } from "lucide-react";
+import { BookOpen, ChevronLeft, ChevronRight, FileText, Filter, Info, X } from "lucide-react";
 import { QuestionDetail } from "../features/questions/QuestionDetail";
 import { QuestionList } from "../features/questions/QuestionList";
 import {
@@ -49,6 +49,7 @@ export function App({
   const [workedSolutionErrorsByQuestionId, setWorkedSolutionErrorsByQuestionId] = useState<
     Record<string, string>
   >({});
+  const [showInfoToast, setShowInfoToast] = useState(false);
 
   const courseOptions = useMemo(
     () => getCourseOptions(database).filter((course) => course.id !== ARCHIVE_COURSE_ID),
@@ -187,15 +188,49 @@ export function App({
     <div className="min-h-dvh bg-surface-base text-text-primary">
       <header className="border-b border-border-subtle bg-surface-raised">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-4 sm:px-5 lg:px-8">
-          <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-            <div>
-              <p className="text-caption font-semibold uppercase text-accent-info">HSCMathsDB</p>
-              <h1 className="text-h1 font-semibold">Mathematics question database</h1>
+          <div className="relative flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+            <div className="pr-12">
+              <h1 className="text-h1 font-semibold">HSCMathsDB</h1>
+              <p className="mt-2 max-w-3xl text-body text-text-secondary">
+                All the questions from the NSW HSC maths courses since 2020, along with worked solutions.
+              </p>
             </div>
             <div className="flex flex-wrap items-center gap-2">
               <Metric icon={<FileText size={17} />} label="Questions" value={summary.questionCount} />
               <Metric icon={<BookOpen size={17} />} label="Exams" value={summary.paperCount} />
             </div>
+            <button
+              type="button"
+              onClick={() => setShowInfoToast((current) => !current)}
+              className="absolute right-0 top-0 inline-flex min-h-10 min-w-10 items-center justify-center rounded-md border border-border-default text-text-secondary hover:border-border-strong hover:text-text-primary"
+              aria-label="About this project"
+              aria-expanded={showInfoToast}
+            >
+              <Info size={18} />
+            </button>
+            {showInfoToast ? (
+              <div
+                role="status"
+                className="absolute right-0 top-12 z-10 w-full max-w-md rounded-md border border-border-default bg-surface-overlay p-4 shadow-focus"
+              >
+                <div className="flex items-start gap-3">
+                  <Info size={18} className="mt-0.5 shrink-0 text-accent-info" />
+                  <p className="text-body-sm text-text-secondary">
+                    This is a project I'm using to test pdf ingestion and AI answer generation. Most of these
+                    questions and answers haven't been human QA'd. If you have ideas of how to make this more
+                    useful, or spot errors, please let me know.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setShowInfoToast(false)}
+                    className="shrink-0 rounded-md p-1 text-text-subtle hover:text-text-primary"
+                    aria-label="Close project information"
+                  >
+                    <X size={16} />
+                  </button>
+                </div>
+              </div>
+            ) : null}
           </div>
           <details open className="rounded-md border border-border-default bg-surface-sunken p-3 sm:p-4">
             <summary className="cursor-pointer text-h4 font-semibold text-text-primary">

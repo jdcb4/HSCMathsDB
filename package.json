@@ -1,6 +1,6 @@
 {
   "name": "hscmathsdb",
-  "version": "0.50.1",
+  "version": "0.50.2",
   "description": "HSCMathsDB: browse NSW HSC mathematics past-paper questions by course, year, style, and syllabus content.",
   "type": "module",
   "scripts": {
