@@ -2,6 +2,11 @@
 
 Newest entries go at the top.
 
+## 0.39.1 - 2026-06-08
+
+- Tightened the optional crop QA prompt so omitted question text is treated as intentional and not a crop defect.
+- Clarified that crop QA should include only text physically part of the visual itself, such as graph labels, table headers, option labels, diagram annotations, or embedded captions.
+
 ## 0.39.0 - 2026-06-08
 
 - Switched the Gemini ingestion engine's default visual bbox model to `anthropic/claude-sonnet-4.6` while keeping `google/gemini-3.1-flash-lite` as the default page transcription and marking-guide model.

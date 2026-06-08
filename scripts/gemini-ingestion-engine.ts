@@ -1191,8 +1191,9 @@ Rules:
 - The bbox must include the complete required visual as a standalone public-site asset.
 - Include all axes, axis labels, tick labels, legends, graph labels, table headers, row/column labels, table borders, diagram endpoints, nodes, edge labels, option labels, scales, and geometry/text labels that are part of the visual.
 - Exclude unrelated question prose, answer-writing lines, page headers, footers, page numbers, copyright notices, marks, office-use text, other questions, other diagrams, and excessive blank margins.
+- Exclude the question text from the crop. This is intentional: do not mark a crop as bad because the surrounding question stem, instructions, or prose describing the visual has been omitted.
+- Include text only when it is physically part of the visual itself, such as graph labels, table headers, option labels, diagram annotations, or a caption/title embedded in the visual block.
 - Coordinates must use the full source-page image coordinate system, not the small crop image coordinate system.
-- Include any header, footer, or explanatory text that is directly linked to the visual, such as a heading describing the visual.
 - Include a small margin around the crop area, without intruding on other elements. I will crop exactly where you say and not add my own margin.
 - Where multiple images relate to the same question or question part crop them all together if doing so does not include extraneous material. E.g. a series of related graphs.
 
