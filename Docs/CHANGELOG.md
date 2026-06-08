@@ -2,6 +2,10 @@
 
 Newest entries go at the top.
 
+## 0.49.1 - 2026-06-08
+
+- Render simple LaTeX `tabular` environments as HTML tables before MathJax typesetting, fixing user-facing "Unknown environment 'tabular'" errors in table-based questions and answers.
+
 ## 0.49.0 - 2026-06-08
 
 - Renamed the app to HSCMathsDB and added a branded SVG favicon.

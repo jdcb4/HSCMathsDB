@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "0.49.0",
+    "version": "0.49.1",
     "title": "HSCMathsDB mathematics corpus",
     "updatedAt": "2026-06-08",
     "sourceSummary": "Validated corpus linking NSW mathematics exam-pack sources, Standard and Extension draft imports, the Mathematics archive, 2017 syllabus nodes, and 2024 syllabus conversion nodes."
