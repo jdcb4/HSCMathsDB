@@ -2,10 +2,17 @@
 
 Newest entries go at the top.
 
+## 0.44.0 - 2026-06-08
+
+- Seeded the local 2020-onward source catalog from `SourceExams/`, expanding catalog coverage to 30 papers and 28 source packs.
+- Ingested and promoted 2023 Mathematics Extension 2 as 16 official draft question records with 10 Sonnet bbox crop assets.
+- Confirmed `data:audit-ingested-exams -- ext2-2023` reports zero errors and zero warnings.
+
 ## 0.43.0 - 2026-06-08
 
 - Removed the demo-only 2019 archive seed question and its worked-solution sidecar entry from the production corpus.
 - Generalised the Gemini report promoter so new Standard, Advanced, Extension 1, and Extension 2 reports use course-appropriate syllabus nodes instead of the previous Extension 1 2023 hard-code.
+- Added a local source-catalog seeding command for paper/source-pack records backed by `SourceExams/`.
 
 ## 0.42.0 - 2026-06-08
 

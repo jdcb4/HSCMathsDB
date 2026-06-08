@@ -76,6 +76,15 @@ pnpm run data:audit-assets
 
 `data:audit-sources` remains available as an optional live NSW source-drift check, but it is not part of the normal ingestion path.
 
+Seed paper/source-pack records from the local archive when adding a new year range:
+
+```powershell
+pnpm run data:seed-local-source-catalog -- 2020
+```
+
+The command adds missing paper and source-pack records from `SourceExams/` without overwriting imported
+question records.
+
 ## 3. Cache source PDFs for processing
 
 Sync one source pack from `SourceExams/` into ignored working cache:

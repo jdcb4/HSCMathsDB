@@ -43,6 +43,7 @@ GoalCheck HSC is a Vite React TypeScript web app for browsing NSW HSC mathematic
 | `pnpm run data:audit-sources`                   | Optional source-drift check against visible official NSW pack titles.                     |
 | `pnpm run data:audit-assets`                    | Confirm each cataloged pack has required local `SourceExams` PDFs.                        |
 | `pnpm run data:report-source-exams`             | Summarize the local `SourceExams` archive by year, subject, and document type.            |
+| `pnpm run data:seed-local-source-catalog`       | Seed local paper/source-pack records from `SourceExams` for a minimum year.               |
 | `pnpm run data:download-sources`                | Sync local `SourceExams` PDFs into ignored `var/source-assets` with bounded concurrency.  |
 | `pnpm run data:extract-text`                    | Extract raw text from cached PDFs into ignored local output with bounded concurrency.     |
 | `pnpm run data:ingest-additional-maths`         | Ingest configured Standard/Extension paper profiles into draft question records.          |

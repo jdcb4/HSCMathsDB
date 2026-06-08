@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "0.43.0",
+    "version": "0.44.0",
     "title": "GoalCheck HSC mathematics corpus",
     "updatedAt": "2026-06-08",
     "sourceSummary": "Validated corpus linking NSW mathematics exam-pack sources, Standard and Extension draft imports, the Mathematics archive, 2017 syllabus nodes, and 2024 syllabus conversion nodes."
@@ -180,67 +180,6 @@
       ]
     },
     {
-      "id": "source-std-2025",
-      "courseId": "standard",
-      "paperIds": ["std1-2025", "std2-2025"],
-      "collectionId": "nesa-math-standard-papers",
-      "year": 2025,
-      "courseName": "Mathematics Standard",
-      "title": "Mathematics Standard 2025 HSC exam pack",
-      "packPageUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2025",
-      "syllabusEra": "standard-2017",
-      "officialListStatus": "listed",
-      "importStatus": "in-progress",
-      "importedQuestionCount": 68,
-      "assetStatus": "partial",
-      "notes": "Visible on the current Mathematics Standard exam-papers listing. The pack contains separate Standard 1 and Standard 2 exam papers, marking guidelines, and Section II marking feedback PDFs.",
-      "assets": [
-        {
-          "id": "source-std1-2025-paper",
-          "role": "exam-paper",
-          "label": "2025 Standard 1 exam paper",
-          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-10/2025-hsc-maths-standard-1.pdf",
-          "status": "linked"
-        },
-        {
-          "id": "source-std2-2025-paper",
-          "role": "exam-paper",
-          "label": "2025 Standard 2 exam paper",
-          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-10/2025-hsc-maths-standard-2.pdf",
-          "status": "linked"
-        },
-        {
-          "id": "source-std1-2025-marking-guide",
-          "role": "marking-guide",
-          "label": "2025 Standard 1 marking guidelines",
-          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-11/2025-hsc-maths-standard-1-mg.pdf",
-          "status": "linked"
-        },
-        {
-          "id": "source-std2-2025-marking-guide",
-          "role": "marking-guide",
-          "label": "2025 Standard 2 marking guidelines",
-          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-11/2025-hsc-maths-standard-2-mg.pdf",
-          "status": "linked"
-        },
-        {
-          "id": "source-std1-2025-feedback",
-          "role": "marking-feedback",
-          "label": "2025 Standard 1 marking feedback",
-          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-12/2025-hsc-maths-std-1-marking-feedback-section-ii.pdf",
-          "status": "linked"
-        },
-        {
-          "id": "source-std2-2025-feedback",
-          "role": "marking-feedback",
-          "label": "2025 Standard 2 marking feedback",
-          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-12/2025-hsc-maths-std-2-marking-feedback-section-ii.pdf",
-          "status": "linked"
-        }
-      ],
-      "expectedQuestionCount": 68
-    },
-    {
       "id": "source-ext1-2025",
       "courseId": "extension-1",
       "paperId": "ext1-2025",
@@ -321,6 +260,67 @@
       "expectedQuestionCount": 16
     },
     {
+      "id": "source-std-2025",
+      "courseId": "standard",
+      "paperIds": ["std1-2025", "std2-2025"],
+      "collectionId": "nesa-math-standard-papers",
+      "year": 2025,
+      "courseName": "Mathematics Standard",
+      "title": "Mathematics Standard 2025 HSC exam pack",
+      "packPageUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2025",
+      "syllabusEra": "standard-2017",
+      "officialListStatus": "listed",
+      "importStatus": "in-progress",
+      "importedQuestionCount": 68,
+      "assetStatus": "partial",
+      "notes": "Visible on the current Mathematics Standard exam-papers listing. The pack contains separate Standard 1 and Standard 2 exam papers, marking guidelines, and Section II marking feedback PDFs.",
+      "assets": [
+        {
+          "id": "source-std1-2025-paper",
+          "role": "exam-paper",
+          "label": "2025 Standard 1 exam paper",
+          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-10/2025-hsc-maths-standard-1.pdf",
+          "status": "linked"
+        },
+        {
+          "id": "source-std2-2025-paper",
+          "role": "exam-paper",
+          "label": "2025 Standard 2 exam paper",
+          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-10/2025-hsc-maths-standard-2.pdf",
+          "status": "linked"
+        },
+        {
+          "id": "source-std1-2025-marking-guide",
+          "role": "marking-guide",
+          "label": "2025 Standard 1 marking guidelines",
+          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-11/2025-hsc-maths-standard-1-mg.pdf",
+          "status": "linked"
+        },
+        {
+          "id": "source-std2-2025-marking-guide",
+          "role": "marking-guide",
+          "label": "2025 Standard 2 marking guidelines",
+          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-11/2025-hsc-maths-standard-2-mg.pdf",
+          "status": "linked"
+        },
+        {
+          "id": "source-std1-2025-feedback",
+          "role": "marking-feedback",
+          "label": "2025 Standard 1 marking feedback",
+          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-12/2025-hsc-maths-std-1-marking-feedback-section-ii.pdf",
+          "status": "linked"
+        },
+        {
+          "id": "source-std2-2025-feedback",
+          "role": "marking-feedback",
+          "label": "2025 Standard 2 marking feedback",
+          "url": "https://www.nsw.gov.au/sites/default/files/noindex/2025-12/2025-hsc-maths-std-2-marking-feedback-section-ii.pdf",
+          "status": "linked"
+        }
+      ],
+      "expectedQuestionCount": 68
+    },
+    {
       "id": "source-adv-2024",
       "courseId": "advanced",
       "paperId": "adv-2024",
@@ -336,25 +336,26 @@
       "importedQuestionCount": 31,
       "assetStatus": "complete",
       "notes": "Visible on the current Mathematics Advanced exam-papers listing. Source PDFs are cached and all thirty-one official draft questions have been promoted, including diagram crops from the rendered exam paper.",
-      "assets": []
-    },
-    {
-      "id": "source-std-2024",
-      "courseId": "standard",
-      "paperIds": ["std1-2024", "std2-2024"],
-      "collectionId": "nesa-math-standard-papers",
-      "year": 2024,
-      "courseName": "Mathematics Standard",
-      "title": "Mathematics Standard 2024 HSC exam pack",
-      "packPageUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
-      "syllabusEra": "standard-2017",
-      "officialListStatus": "listed",
-      "importStatus": "in-progress",
-      "expectedQuestionCount": 73,
-      "importedQuestionCount": 73,
-      "assetStatus": "partial",
-      "notes": "Visible on the current Mathematics Standard exam-papers listing. The pack contains separate Standard 1 and Standard 2 exam papers, marking guidelines, and Section II marking feedback PDFs.",
-      "assets": []
+      "assets": [
+        {
+          "id": "source-adv-2024-mathematics-advanced-exam-paper",
+          "role": "exam-paper",
+          "label": "2024 Mathematics Advanced exam paper",
+          "status": "linked"
+        },
+        {
+          "id": "source-adv-2024-mathematics-advanced-marking-guide",
+          "role": "marking-guide",
+          "label": "2024 Mathematics Advanced marking guide",
+          "status": "linked"
+        },
+        {
+          "id": "source-adv-2024-mathematics-advanced-marking-feedback",
+          "role": "marking-feedback",
+          "label": "2024 Mathematics Advanced marking feedback",
+          "status": "linked"
+        }
+      ]
     },
     {
       "id": "source-ext1-2024",
@@ -372,7 +373,26 @@
       "importedQuestionCount": 14,
       "assetStatus": "partial",
       "notes": "Visible on the current Mathematics Extension 1 exam-papers listing. Source PDFs need caching, extraction, and profile review before transcription.",
-      "assets": []
+      "assets": [
+        {
+          "id": "source-ext1-2024-mathematics-extension-1-exam-paper",
+          "role": "exam-paper",
+          "label": "2024 Mathematics Extension 1 exam paper",
+          "status": "linked"
+        },
+        {
+          "id": "source-ext1-2024-mathematics-extension-1-marking-guide",
+          "role": "marking-guide",
+          "label": "2024 Mathematics Extension 1 marking guide",
+          "status": "linked"
+        },
+        {
+          "id": "source-ext1-2024-mathematics-extension-1-marking-feedback",
+          "role": "marking-feedback",
+          "label": "2024 Mathematics Extension 1 marking feedback",
+          "status": "linked"
+        }
+      ]
     },
     {
       "id": "source-ext2-2024",
@@ -390,7 +410,118 @@
       "importedQuestionCount": 16,
       "assetStatus": "partial",
       "notes": "Visible on the current Mathematics Extension 2 exam-papers listing. Source PDFs need caching, extraction, and profile review before transcription.",
-      "assets": []
+      "assets": [
+        {
+          "id": "source-ext2-2024-mathematics-extension-2-exam-paper",
+          "role": "exam-paper",
+          "label": "2024 Mathematics Extension 2 exam paper",
+          "status": "linked"
+        },
+        {
+          "id": "source-ext2-2024-mathematics-extension-2-marking-guide",
+          "role": "marking-guide",
+          "label": "2024 Mathematics Extension 2 marking guide",
+          "status": "linked"
+        },
+        {
+          "id": "source-ext2-2024-mathematics-extension-2-marking-feedback",
+          "role": "marking-feedback",
+          "label": "2024 Mathematics Extension 2 marking feedback",
+          "status": "linked"
+        }
+      ]
+    },
+    {
+      "id": "source-std-2024",
+      "courseId": "standard",
+      "paperIds": ["std1-2024", "std2-2024"],
+      "collectionId": "nesa-math-standard-papers",
+      "year": 2024,
+      "courseName": "Mathematics Standard",
+      "title": "Mathematics Standard 2024 HSC exam pack",
+      "packPageUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+      "syllabusEra": "standard-2017",
+      "officialListStatus": "listed",
+      "importStatus": "in-progress",
+      "expectedQuestionCount": 73,
+      "importedQuestionCount": 73,
+      "assetStatus": "partial",
+      "notes": "Visible on the current Mathematics Standard exam-papers listing. The pack contains separate Standard 1 and Standard 2 exam papers, marking guidelines, and Section II marking feedback PDFs.",
+      "assets": [
+        {
+          "id": "source-std-2024-mathematics-standard-1-exam-paper",
+          "role": "exam-paper",
+          "label": "2024 Mathematics Standard 1 exam paper",
+          "status": "linked"
+        },
+        {
+          "id": "source-std-2024-mathematics-standard-1-marking-guide",
+          "role": "marking-guide",
+          "label": "2024 Mathematics Standard 1 marking guide",
+          "status": "linked"
+        },
+        {
+          "id": "source-std-2024-mathematics-standard-1-marking-feedback",
+          "role": "marking-feedback",
+          "label": "2024 Mathematics Standard 1 marking feedback",
+          "status": "linked"
+        },
+        {
+          "id": "source-std-2024-mathematics-standard-2-exam-paper",
+          "role": "exam-paper",
+          "label": "2024 Mathematics Standard 2 exam paper",
+          "status": "linked"
+        },
+        {
+          "id": "source-std-2024-mathematics-standard-2-marking-guide",
+          "role": "marking-guide",
+          "label": "2024 Mathematics Standard 2 marking guide",
+          "status": "linked"
+        },
+        {
+          "id": "source-std-2024-mathematics-standard-2-marking-feedback",
+          "role": "marking-feedback",
+          "label": "2024 Mathematics Standard 2 marking feedback",
+          "status": "linked"
+        }
+      ]
+    },
+    {
+      "id": "source-adv-2023",
+      "courseId": "advanced",
+      "paperId": "adv-2023",
+      "collectionId": "nesa-math-advanced-papers",
+      "year": 2023,
+      "courseName": "Mathematics Advanced",
+      "title": "Mathematics Advanced 2023 HSC exam pack",
+      "packPageUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-advanced/2023",
+      "syllabusEra": "advanced-2017",
+      "officialListStatus": "listed",
+      "importStatus": "in-progress",
+      "expectedQuestionCount": 32,
+      "importedQuestionCount": 32,
+      "assetStatus": "complete",
+      "notes": "Visible on the current Mathematics Advanced exam-papers listing. Source PDFs are cached, text and raw candidates have been extracted, rendered exam pages are available for diagram review, and all thirty-two official draft questions have been promoted.",
+      "assets": [
+        {
+          "id": "source-adv-2023-mathematics-advanced-exam-paper",
+          "role": "exam-paper",
+          "label": "2023 Mathematics Advanced exam paper",
+          "status": "linked"
+        },
+        {
+          "id": "source-adv-2023-mathematics-advanced-marking-guide",
+          "role": "marking-guide",
+          "label": "2023 Mathematics Advanced marking guide",
+          "status": "linked"
+        },
+        {
+          "id": "source-adv-2023-mathematics-advanced-marking-feedback",
+          "role": "marking-feedback",
+          "label": "2023 Mathematics Advanced marking feedback",
+          "status": "linked"
+        }
+      ]
     },
     {
       "id": "source-ext1-2023",
@@ -433,22 +564,40 @@
       ]
     },
     {
-      "id": "source-adv-2023",
-      "courseId": "advanced",
-      "paperId": "adv-2023",
-      "collectionId": "nesa-math-advanced-papers",
+      "id": "source-ext2-2023",
+      "courseId": "extension-2",
+      "paperId": "ext2-2023",
+      "collectionId": "nesa-math-extension-2-papers",
       "year": 2023,
-      "courseName": "Mathematics Advanced",
-      "title": "Mathematics Advanced 2023 HSC exam pack",
-      "packPageUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-advanced/2023",
-      "syllabusEra": "advanced-2017",
+      "courseName": "Mathematics Extension 2",
+      "title": "Mathematics Extension 2 2023 HSC exam pack",
+      "packPageUrl": "https://local.sourceexams.invalid/source-ext2-2023",
+      "syllabusEra": "extension-2-2017",
       "officialListStatus": "listed",
       "importStatus": "in-progress",
-      "expectedQuestionCount": 32,
-      "importedQuestionCount": 32,
+      "importedQuestionCount": 16,
       "assetStatus": "complete",
-      "notes": "Visible on the current Mathematics Advanced exam-papers listing. Source PDFs are cached, text and raw candidates have been extracted, rendered exam pages are available for diagram review, and all thirty-two official draft questions have been promoted.",
-      "assets": []
+      "notes": "Gemini/Sonnet page-image proposal reviewed and promoted as official draft records with exam-derived assets.",
+      "assets": [
+        {
+          "id": "source-ext2-2023-mathematics-extension-2-exam-paper",
+          "role": "exam-paper",
+          "label": "2023 Mathematics Extension 2 exam paper",
+          "status": "linked"
+        },
+        {
+          "id": "source-ext2-2023-mathematics-extension-2-marking-guide",
+          "role": "marking-guide",
+          "label": "2023 Mathematics Extension 2 marking guide",
+          "status": "linked"
+        },
+        {
+          "id": "source-ext2-2023-mathematics-extension-2-marking-feedback",
+          "role": "marking-feedback",
+          "label": "2023 Mathematics Extension 2 marking feedback",
+          "status": "linked"
+        }
+      ]
     },
     {
       "id": "source-std-2023",
@@ -527,7 +676,152 @@
       "importedQuestionCount": 32,
       "assetStatus": "complete",
       "notes": "Visible on the current Mathematics Advanced exam-papers listing. Source PDFs are cached, text and raw candidates have been extracted, rendered exam pages are available for diagram review, and all thirty-two official draft questions have been promoted.",
-      "assets": []
+      "assets": [
+        {
+          "id": "source-adv-2022-mathematics-advanced-exam-paper",
+          "role": "exam-paper",
+          "label": "2022 Mathematics Advanced exam paper",
+          "status": "linked"
+        },
+        {
+          "id": "source-adv-2022-mathematics-advanced-marking-guide",
+          "role": "marking-guide",
+          "label": "2022 Mathematics Advanced marking guide",
+          "status": "linked"
+        },
+        {
+          "id": "source-adv-2022-mathematics-advanced-marking-feedback",
+          "role": "marking-feedback",
+          "label": "2022 Mathematics Advanced marking feedback",
+          "status": "linked"
+        }
+      ]
+    },
+    {
+      "id": "source-ext1-2022",
+      "courseId": "extension-1",
+      "paperId": "ext1-2022",
+      "collectionId": "nesa-math-extension-1-papers",
+      "year": 2022,
+      "courseName": "Mathematics Extension 1",
+      "title": "Mathematics Extension 1 2022 HSC exam pack",
+      "packPageUrl": "https://local.sourceexams.invalid/source-ext1-2022",
+      "syllabusEra": "extension-1-2017",
+      "officialListStatus": "listed",
+      "importStatus": "seeded",
+      "importedQuestionCount": 0,
+      "assetStatus": "pending-extraction",
+      "notes": "Seeded from local SourceExams archive.",
+      "assets": [
+        {
+          "id": "source-ext1-2022-mathematics-extension-1-exam-paper",
+          "role": "exam-paper",
+          "label": "2022 Mathematics Extension 1 exam paper",
+          "status": "linked"
+        },
+        {
+          "id": "source-ext1-2022-mathematics-extension-1-marking-guide",
+          "role": "marking-guide",
+          "label": "2022 Mathematics Extension 1 marking guide",
+          "status": "linked"
+        },
+        {
+          "id": "source-ext1-2022-mathematics-extension-1-marking-feedback",
+          "role": "marking-feedback",
+          "label": "2022 Mathematics Extension 1 marking feedback",
+          "status": "linked"
+        }
+      ]
+    },
+    {
+      "id": "source-ext2-2022",
+      "courseId": "extension-2",
+      "paperId": "ext2-2022",
+      "collectionId": "nesa-math-extension-2-papers",
+      "year": 2022,
+      "courseName": "Mathematics Extension 2",
+      "title": "Mathematics Extension 2 2022 HSC exam pack",
+      "packPageUrl": "https://local.sourceexams.invalid/source-ext2-2022",
+      "syllabusEra": "extension-2-2017",
+      "officialListStatus": "listed",
+      "importStatus": "seeded",
+      "importedQuestionCount": 0,
+      "assetStatus": "pending-extraction",
+      "notes": "Seeded from local SourceExams archive.",
+      "assets": [
+        {
+          "id": "source-ext2-2022-mathematics-extension-2-exam-paper",
+          "role": "exam-paper",
+          "label": "2022 Mathematics Extension 2 exam paper",
+          "status": "linked"
+        },
+        {
+          "id": "source-ext2-2022-mathematics-extension-2-marking-guide",
+          "role": "marking-guide",
+          "label": "2022 Mathematics Extension 2 marking guide",
+          "status": "linked"
+        },
+        {
+          "id": "source-ext2-2022-mathematics-extension-2-marking-feedback",
+          "role": "marking-feedback",
+          "label": "2022 Mathematics Extension 2 marking feedback",
+          "status": "linked"
+        }
+      ]
+    },
+    {
+      "id": "source-std-2022",
+      "courseId": "standard",
+      "paperIds": ["std1-2022", "std2-2022"],
+      "collectionId": "nesa-math-standard-papers",
+      "year": 2022,
+      "courseName": "Mathematics Standard",
+      "title": "Mathematics Standard 2022 HSC exam pack",
+      "packPageUrl": "https://local.sourceexams.invalid/source-std-2022",
+      "syllabusEra": "standard-2017",
+      "officialListStatus": "listed",
+      "importStatus": "seeded",
+      "importedQuestionCount": 0,
+      "assetStatus": "pending-extraction",
+      "notes": "Seeded from local SourceExams archive.",
+      "assets": [
+        {
+          "id": "source-std-2022-mathematics-standard-1-exam-paper",
+          "role": "exam-paper",
+          "label": "2022 Mathematics Standard 1 exam paper",
+          "status": "linked"
+        },
+        {
+          "id": "source-std-2022-mathematics-standard-1-marking-guide",
+          "role": "marking-guide",
+          "label": "2022 Mathematics Standard 1 marking guide",
+          "status": "linked"
+        },
+        {
+          "id": "source-std-2022-mathematics-standard-1-marking-feedback",
+          "role": "marking-feedback",
+          "label": "2022 Mathematics Standard 1 marking feedback",
+          "status": "linked"
+        },
+        {
+          "id": "source-std-2022-mathematics-standard-2-exam-paper",
+          "role": "exam-paper",
+          "label": "2022 Mathematics Standard 2 exam paper",
+          "status": "linked"
+        },
+        {
+          "id": "source-std-2022-mathematics-standard-2-marking-guide",
+          "role": "marking-guide",
+          "label": "2022 Mathematics Standard 2 marking guide",
+          "status": "linked"
+        },
+        {
+          "id": "source-std-2022-mathematics-standard-2-marking-feedback",
+          "role": "marking-feedback",
+          "label": "2022 Mathematics Standard 2 marking feedback",
+          "status": "linked"
+        }
+      ]
     },
     {
       "id": "source-adv-2021",
@@ -539,11 +833,157 @@
       "packPageUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-advanced/2021",
       "syllabusEra": "advanced-2017",
       "officialListStatus": "listed",
-      "importStatus": "not-started",
+      "importStatus": "seeded",
       "importedQuestionCount": 0,
       "assetStatus": "pending-extraction",
       "notes": "Visible on the current Mathematics Advanced exam-papers listing. Add a paper record when transcription begins.",
-      "assets": []
+      "assets": [
+        {
+          "id": "source-adv-2021-mathematics-advanced-exam-paper",
+          "role": "exam-paper",
+          "label": "2021 Mathematics Advanced exam paper",
+          "status": "linked"
+        },
+        {
+          "id": "source-adv-2021-mathematics-advanced-marking-guide",
+          "role": "marking-guide",
+          "label": "2021 Mathematics Advanced marking guide",
+          "status": "linked"
+        },
+        {
+          "id": "source-adv-2021-mathematics-advanced-marking-feedback",
+          "role": "marking-feedback",
+          "label": "2021 Mathematics Advanced marking feedback",
+          "status": "linked"
+        }
+      ],
+      "paperId": "adv-2021"
+    },
+    {
+      "id": "source-ext1-2021",
+      "courseId": "extension-1",
+      "paperId": "ext1-2021",
+      "collectionId": "nesa-math-extension-1-papers",
+      "year": 2021,
+      "courseName": "Mathematics Extension 1",
+      "title": "Mathematics Extension 1 2021 HSC exam pack",
+      "packPageUrl": "https://local.sourceexams.invalid/source-ext1-2021",
+      "syllabusEra": "extension-1-2017",
+      "officialListStatus": "listed",
+      "importStatus": "seeded",
+      "importedQuestionCount": 0,
+      "assetStatus": "pending-extraction",
+      "notes": "Seeded from local SourceExams archive.",
+      "assets": [
+        {
+          "id": "source-ext1-2021-mathematics-extension-1-exam-paper",
+          "role": "exam-paper",
+          "label": "2021 Mathematics Extension 1 exam paper",
+          "status": "linked"
+        },
+        {
+          "id": "source-ext1-2021-mathematics-extension-1-marking-guide",
+          "role": "marking-guide",
+          "label": "2021 Mathematics Extension 1 marking guide",
+          "status": "linked"
+        },
+        {
+          "id": "source-ext1-2021-mathematics-extension-1-marking-feedback",
+          "role": "marking-feedback",
+          "label": "2021 Mathematics Extension 1 marking feedback",
+          "status": "linked"
+        }
+      ]
+    },
+    {
+      "id": "source-ext2-2021",
+      "courseId": "extension-2",
+      "paperId": "ext2-2021",
+      "collectionId": "nesa-math-extension-2-papers",
+      "year": 2021,
+      "courseName": "Mathematics Extension 2",
+      "title": "Mathematics Extension 2 2021 HSC exam pack",
+      "packPageUrl": "https://local.sourceexams.invalid/source-ext2-2021",
+      "syllabusEra": "extension-2-2017",
+      "officialListStatus": "listed",
+      "importStatus": "seeded",
+      "importedQuestionCount": 0,
+      "assetStatus": "pending-extraction",
+      "notes": "Seeded from local SourceExams archive.",
+      "assets": [
+        {
+          "id": "source-ext2-2021-mathematics-extension-2-exam-paper",
+          "role": "exam-paper",
+          "label": "2021 Mathematics Extension 2 exam paper",
+          "status": "linked"
+        },
+        {
+          "id": "source-ext2-2021-mathematics-extension-2-marking-guide",
+          "role": "marking-guide",
+          "label": "2021 Mathematics Extension 2 marking guide",
+          "status": "linked"
+        },
+        {
+          "id": "source-ext2-2021-mathematics-extension-2-marking-feedback",
+          "role": "marking-feedback",
+          "label": "2021 Mathematics Extension 2 marking feedback",
+          "status": "linked"
+        }
+      ]
+    },
+    {
+      "id": "source-std-2021",
+      "courseId": "standard",
+      "paperIds": ["std1-2021", "std2-2021"],
+      "collectionId": "nesa-math-standard-papers",
+      "year": 2021,
+      "courseName": "Mathematics Standard",
+      "title": "Mathematics Standard 2021 HSC exam pack",
+      "packPageUrl": "https://local.sourceexams.invalid/source-std-2021",
+      "syllabusEra": "standard-2017",
+      "officialListStatus": "listed",
+      "importStatus": "seeded",
+      "importedQuestionCount": 0,
+      "assetStatus": "pending-extraction",
+      "notes": "Seeded from local SourceExams archive.",
+      "assets": [
+        {
+          "id": "source-std-2021-mathematics-standard-1-exam-paper",
+          "role": "exam-paper",
+          "label": "2021 Mathematics Standard 1 exam paper",
+          "status": "linked"
+        },
+        {
+          "id": "source-std-2021-mathematics-standard-1-marking-guide",
+          "role": "marking-guide",
+          "label": "2021 Mathematics Standard 1 marking guide",
+          "status": "linked"
+        },
+        {
+          "id": "source-std-2021-mathematics-standard-1-marking-feedback",
+          "role": "marking-feedback",
+          "label": "2021 Mathematics Standard 1 marking feedback",
+          "status": "linked"
+        },
+        {
+          "id": "source-std-2021-mathematics-standard-2-exam-paper",
+          "role": "exam-paper",
+          "label": "2021 Mathematics Standard 2 exam paper",
+          "status": "linked"
+        },
+        {
+          "id": "source-std-2021-mathematics-standard-2-marking-guide",
+          "role": "marking-guide",
+          "label": "2021 Mathematics Standard 2 marking guide",
+          "status": "linked"
+        },
+        {
+          "id": "source-std-2021-mathematics-standard-2-marking-feedback",
+          "role": "marking-feedback",
+          "label": "2021 Mathematics Standard 2 marking feedback",
+          "status": "linked"
+        }
+      ]
     },
     {
       "id": "source-adv-2020",
@@ -555,11 +995,157 @@
       "packPageUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-advanced/2020",
       "syllabusEra": "advanced-2017",
       "officialListStatus": "listed",
-      "importStatus": "not-started",
+      "importStatus": "seeded",
       "importedQuestionCount": 0,
       "assetStatus": "pending-extraction",
       "notes": "Visible on the current Mathematics Advanced exam-papers listing. Add a paper record when transcription begins.",
-      "assets": []
+      "assets": [
+        {
+          "id": "source-adv-2020-mathematics-advanced-exam-paper",
+          "role": "exam-paper",
+          "label": "2020 Mathematics Advanced exam paper",
+          "status": "linked"
+        },
+        {
+          "id": "source-adv-2020-mathematics-advanced-marking-guide",
+          "role": "marking-guide",
+          "label": "2020 Mathematics Advanced marking guide",
+          "status": "linked"
+        },
+        {
+          "id": "source-adv-2020-mathematics-advanced-marking-feedback",
+          "role": "marking-feedback",
+          "label": "2020 Mathematics Advanced marking feedback",
+          "status": "linked"
+        }
+      ],
+      "paperId": "adv-2020"
+    },
+    {
+      "id": "source-ext1-2020",
+      "courseId": "extension-1",
+      "paperId": "ext1-2020",
+      "collectionId": "nesa-math-extension-1-papers",
+      "year": 2020,
+      "courseName": "Mathematics Extension 1",
+      "title": "Mathematics Extension 1 2020 HSC exam pack",
+      "packPageUrl": "https://local.sourceexams.invalid/source-ext1-2020",
+      "syllabusEra": "extension-1-2017",
+      "officialListStatus": "listed",
+      "importStatus": "seeded",
+      "importedQuestionCount": 0,
+      "assetStatus": "pending-extraction",
+      "notes": "Seeded from local SourceExams archive.",
+      "assets": [
+        {
+          "id": "source-ext1-2020-mathematics-extension-1-exam-paper",
+          "role": "exam-paper",
+          "label": "2020 Mathematics Extension 1 exam paper",
+          "status": "linked"
+        },
+        {
+          "id": "source-ext1-2020-mathematics-extension-1-marking-guide",
+          "role": "marking-guide",
+          "label": "2020 Mathematics Extension 1 marking guide",
+          "status": "linked"
+        },
+        {
+          "id": "source-ext1-2020-mathematics-extension-1-marking-feedback",
+          "role": "marking-feedback",
+          "label": "2020 Mathematics Extension 1 marking feedback",
+          "status": "linked"
+        }
+      ]
+    },
+    {
+      "id": "source-ext2-2020",
+      "courseId": "extension-2",
+      "paperId": "ext2-2020",
+      "collectionId": "nesa-math-extension-2-papers",
+      "year": 2020,
+      "courseName": "Mathematics Extension 2",
+      "title": "Mathematics Extension 2 2020 HSC exam pack",
+      "packPageUrl": "https://local.sourceexams.invalid/source-ext2-2020",
+      "syllabusEra": "extension-2-2017",
+      "officialListStatus": "listed",
+      "importStatus": "seeded",
+      "importedQuestionCount": 0,
+      "assetStatus": "pending-extraction",
+      "notes": "Seeded from local SourceExams archive.",
+      "assets": [
+        {
+          "id": "source-ext2-2020-mathematics-extension-2-exam-paper",
+          "role": "exam-paper",
+          "label": "2020 Mathematics Extension 2 exam paper",
+          "status": "linked"
+        },
+        {
+          "id": "source-ext2-2020-mathematics-extension-2-marking-guide",
+          "role": "marking-guide",
+          "label": "2020 Mathematics Extension 2 marking guide",
+          "status": "linked"
+        },
+        {
+          "id": "source-ext2-2020-mathematics-extension-2-marking-feedback",
+          "role": "marking-feedback",
+          "label": "2020 Mathematics Extension 2 marking feedback",
+          "status": "linked"
+        }
+      ]
+    },
+    {
+      "id": "source-std-2020",
+      "courseId": "standard",
+      "paperIds": ["std1-2020", "std2-2020"],
+      "collectionId": "nesa-math-standard-papers",
+      "year": 2020,
+      "courseName": "Mathematics Standard",
+      "title": "Mathematics Standard 2020 HSC exam pack",
+      "packPageUrl": "https://local.sourceexams.invalid/source-std-2020",
+      "syllabusEra": "standard-2017",
+      "officialListStatus": "listed",
+      "importStatus": "seeded",
+      "importedQuestionCount": 0,
+      "assetStatus": "pending-extraction",
+      "notes": "Seeded from local SourceExams archive.",
+      "assets": [
+        {
+          "id": "source-std-2020-mathematics-standard-1-exam-paper",
+          "role": "exam-paper",
+          "label": "2020 Mathematics Standard 1 exam paper",
+          "status": "linked"
+        },
+        {
+          "id": "source-std-2020-mathematics-standard-1-marking-guide",
+          "role": "marking-guide",
+          "label": "2020 Mathematics Standard 1 marking guide",
+          "status": "linked"
+        },
+        {
+          "id": "source-std-2020-mathematics-standard-1-marking-feedback",
+          "role": "marking-feedback",
+          "label": "2020 Mathematics Standard 1 marking feedback",
+          "status": "linked"
+        },
+        {
+          "id": "source-std-2020-mathematics-standard-2-exam-paper",
+          "role": "exam-paper",
+          "label": "2020 Mathematics Standard 2 exam paper",
+          "status": "linked"
+        },
+        {
+          "id": "source-std-2020-mathematics-standard-2-marking-guide",
+          "role": "marking-guide",
+          "label": "2020 Mathematics Standard 2 marking guide",
+          "status": "linked"
+        },
+        {
+          "id": "source-std-2020-mathematics-standard-2-marking-feedback",
+          "role": "marking-feedback",
+          "label": "2020 Mathematics Standard 2 marking feedback",
+          "status": "linked"
+        }
+      ]
     },
     {
       "id": "source-math-2018-archive",
@@ -1771,28 +2357,6 @@
       "sourceStatus": "partially-transcribed"
     },
     {
-      "id": "std1-2025",
-      "courseId": "standard",
-      "year": 2025,
-      "courseName": "Mathematics Standard 1",
-      "syllabusEra": "standard-2017",
-      "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2025",
-      "paperUrl": "https://www.nsw.gov.au/sites/default/files/noindex/2025-10/2025-hsc-maths-standard-1.pdf",
-      "markingGuideUrl": "https://www.nsw.gov.au/sites/default/files/noindex/2025-11/2025-hsc-maths-standard-1-mg.pdf",
-      "sourceStatus": "partially-transcribed"
-    },
-    {
-      "id": "std2-2025",
-      "courseId": "standard",
-      "year": 2025,
-      "courseName": "Mathematics Standard 2",
-      "syllabusEra": "standard-2017",
-      "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2025",
-      "paperUrl": "https://www.nsw.gov.au/sites/default/files/noindex/2025-10/2025-hsc-maths-standard-2.pdf",
-      "markingGuideUrl": "https://www.nsw.gov.au/sites/default/files/noindex/2025-11/2025-hsc-maths-standard-2-mg.pdf",
-      "sourceStatus": "partially-transcribed"
-    },
-    {
       "id": "ext1-2025",
       "courseId": "extension-1",
       "year": 2025,
@@ -1815,6 +2379,28 @@
       "sourceStatus": "partially-transcribed"
     },
     {
+      "id": "std1-2025",
+      "courseId": "standard",
+      "year": 2025,
+      "courseName": "Mathematics Standard 1",
+      "syllabusEra": "standard-2017",
+      "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2025",
+      "paperUrl": "https://www.nsw.gov.au/sites/default/files/noindex/2025-10/2025-hsc-maths-standard-1.pdf",
+      "markingGuideUrl": "https://www.nsw.gov.au/sites/default/files/noindex/2025-11/2025-hsc-maths-standard-1-mg.pdf",
+      "sourceStatus": "partially-transcribed"
+    },
+    {
+      "id": "std2-2025",
+      "courseId": "standard",
+      "year": 2025,
+      "courseName": "Mathematics Standard 2",
+      "syllabusEra": "standard-2017",
+      "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2025",
+      "paperUrl": "https://www.nsw.gov.au/sites/default/files/noindex/2025-10/2025-hsc-maths-standard-2.pdf",
+      "markingGuideUrl": "https://www.nsw.gov.au/sites/default/files/noindex/2025-11/2025-hsc-maths-standard-2-mg.pdf",
+      "sourceStatus": "partially-transcribed"
+    },
+    {
       "id": "adv-2024",
       "courseId": "advanced",
       "year": 2024,
@@ -1822,24 +2408,6 @@
       "syllabusEra": "advanced-2017",
       "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-advanced",
       "sourceStatus": "source-linked"
-    },
-    {
-      "id": "std1-2024",
-      "courseId": "standard",
-      "year": 2024,
-      "courseName": "Mathematics Standard 1",
-      "syllabusEra": "standard-2017",
-      "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
-      "sourceStatus": "partially-transcribed"
-    },
-    {
-      "id": "std2-2024",
-      "courseId": "standard",
-      "year": 2024,
-      "courseName": "Mathematics Standard 2",
-      "syllabusEra": "standard-2017",
-      "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
-      "sourceStatus": "partially-transcribed"
     },
     {
       "id": "ext1-2024",
@@ -1860,6 +2428,33 @@
       "sourceStatus": "partially-transcribed"
     },
     {
+      "id": "std1-2024",
+      "courseId": "standard",
+      "year": 2024,
+      "courseName": "Mathematics Standard 1",
+      "syllabusEra": "standard-2017",
+      "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+      "sourceStatus": "partially-transcribed"
+    },
+    {
+      "id": "std2-2024",
+      "courseId": "standard",
+      "year": 2024,
+      "courseName": "Mathematics Standard 2",
+      "syllabusEra": "standard-2017",
+      "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2024",
+      "sourceStatus": "partially-transcribed"
+    },
+    {
+      "id": "adv-2023",
+      "courseId": "advanced",
+      "year": 2023,
+      "courseName": "Mathematics Advanced",
+      "syllabusEra": "advanced-2017",
+      "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-advanced",
+      "sourceStatus": "source-linked"
+    },
+    {
       "id": "ext1-2023",
       "courseId": "extension-1",
       "year": 2023,
@@ -1871,13 +2466,13 @@
       "sourceStatus": "complete"
     },
     {
-      "id": "adv-2023",
-      "courseId": "advanced",
+      "id": "ext2-2023",
+      "courseId": "extension-2",
       "year": 2023,
-      "courseName": "Mathematics Advanced",
-      "syllabusEra": "advanced-2017",
-      "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-advanced",
-      "sourceStatus": "source-linked"
+      "courseName": "Mathematics Extension 2",
+      "syllabusEra": "extension-2-2017",
+      "examPackUrl": "https://local.sourceexams.invalid/source-ext2-2023",
+      "sourceStatus": "complete"
     },
     {
       "id": "std1-2023",
@@ -1908,6 +2503,132 @@
       "courseName": "Mathematics Advanced",
       "syllabusEra": "advanced-2017",
       "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-advanced",
+      "sourceStatus": "source-linked"
+    },
+    {
+      "id": "ext1-2022",
+      "courseId": "extension-1",
+      "year": 2022,
+      "courseName": "Mathematics Extension 1",
+      "syllabusEra": "extension-1-2017",
+      "examPackUrl": "https://local.sourceexams.invalid/source-ext1-2022",
+      "sourceStatus": "source-linked"
+    },
+    {
+      "id": "ext2-2022",
+      "courseId": "extension-2",
+      "year": 2022,
+      "courseName": "Mathematics Extension 2",
+      "syllabusEra": "extension-2-2017",
+      "examPackUrl": "https://local.sourceexams.invalid/source-ext2-2022",
+      "sourceStatus": "source-linked"
+    },
+    {
+      "id": "std1-2022",
+      "courseId": "standard",
+      "year": 2022,
+      "courseName": "Mathematics Standard 1",
+      "syllabusEra": "standard-2017",
+      "examPackUrl": "https://local.sourceexams.invalid/source-std-2022",
+      "sourceStatus": "source-linked"
+    },
+    {
+      "id": "std2-2022",
+      "courseId": "standard",
+      "year": 2022,
+      "courseName": "Mathematics Standard 2",
+      "syllabusEra": "standard-2017",
+      "examPackUrl": "https://local.sourceexams.invalid/source-std-2022",
+      "sourceStatus": "source-linked"
+    },
+    {
+      "id": "adv-2021",
+      "courseId": "advanced",
+      "year": 2021,
+      "courseName": "Mathematics Advanced",
+      "syllabusEra": "advanced-2017",
+      "examPackUrl": "https://local.sourceexams.invalid/source-adv-2021",
+      "sourceStatus": "source-linked"
+    },
+    {
+      "id": "ext1-2021",
+      "courseId": "extension-1",
+      "year": 2021,
+      "courseName": "Mathematics Extension 1",
+      "syllabusEra": "extension-1-2017",
+      "examPackUrl": "https://local.sourceexams.invalid/source-ext1-2021",
+      "sourceStatus": "source-linked"
+    },
+    {
+      "id": "ext2-2021",
+      "courseId": "extension-2",
+      "year": 2021,
+      "courseName": "Mathematics Extension 2",
+      "syllabusEra": "extension-2-2017",
+      "examPackUrl": "https://local.sourceexams.invalid/source-ext2-2021",
+      "sourceStatus": "source-linked"
+    },
+    {
+      "id": "std1-2021",
+      "courseId": "standard",
+      "year": 2021,
+      "courseName": "Mathematics Standard 1",
+      "syllabusEra": "standard-2017",
+      "examPackUrl": "https://local.sourceexams.invalid/source-std-2021",
+      "sourceStatus": "source-linked"
+    },
+    {
+      "id": "std2-2021",
+      "courseId": "standard",
+      "year": 2021,
+      "courseName": "Mathematics Standard 2",
+      "syllabusEra": "standard-2017",
+      "examPackUrl": "https://local.sourceexams.invalid/source-std-2021",
+      "sourceStatus": "source-linked"
+    },
+    {
+      "id": "adv-2020",
+      "courseId": "advanced",
+      "year": 2020,
+      "courseName": "Mathematics Advanced",
+      "syllabusEra": "advanced-2017",
+      "examPackUrl": "https://local.sourceexams.invalid/source-adv-2020",
+      "sourceStatus": "source-linked"
+    },
+    {
+      "id": "ext1-2020",
+      "courseId": "extension-1",
+      "year": 2020,
+      "courseName": "Mathematics Extension 1",
+      "syllabusEra": "extension-1-2017",
+      "examPackUrl": "https://local.sourceexams.invalid/source-ext1-2020",
+      "sourceStatus": "source-linked"
+    },
+    {
+      "id": "ext2-2020",
+      "courseId": "extension-2",
+      "year": 2020,
+      "courseName": "Mathematics Extension 2",
+      "syllabusEra": "extension-2-2017",
+      "examPackUrl": "https://local.sourceexams.invalid/source-ext2-2020",
+      "sourceStatus": "source-linked"
+    },
+    {
+      "id": "std1-2020",
+      "courseId": "standard",
+      "year": 2020,
+      "courseName": "Mathematics Standard 1",
+      "syllabusEra": "standard-2017",
+      "examPackUrl": "https://local.sourceexams.invalid/source-std-2020",
+      "sourceStatus": "source-linked"
+    },
+    {
+      "id": "std2-2020",
+      "courseId": "standard",
+      "year": 2020,
+      "courseName": "Mathematics Standard 2",
+      "syllabusEra": "standard-2017",
+      "examPackUrl": "https://local.sourceexams.invalid/source-std-2020",
       "sourceStatus": "source-linked"
     }
   ],
@@ -5279,6 +6000,663 @@
         "examPackUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-extension-1/2023",
         "pageRef": "Exam paper pages 14-15",
         "markingGuideRef": "Marking guidelines pages 17-22",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2023-q01-further-proof-by-mathematical-induction",
+      "paperId": "ext2-2023",
+      "year": 2023,
+      "questionNumber": "Q1",
+      "title": "Q1 Which of the following is equal to (a + ib)^3? A. (a^3 - 3ab^2) + i(3a^2b + b^3) B. (a",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Proof",
+      "subtopic": "Further Proof by Mathematical Induction",
+      "syllabusNodeIds": ["old-me2-p2", "old-me2-n2"],
+      "promptLatex": "Which of the following is equal to \\((a + ib)^3\\)?\nA. \\((a^3 - 3ab^2) + i(3a^2b + b^3)\\)\nB. \\((a^3 + 3ab^2) + i(3a^2b + b^3)\\)\nC. \\((a^3 - 3ab^2) + i(3a^2b - b^3)\\)\nD. \\((a^3 + 3ab^2) + i(3a^2b - b^3)\\)",
+      "answerLatex": "Official answer: C.",
+      "workingLatex": [],
+      "tags": [
+        "official-draft",
+        "2023",
+        "multiple-choice",
+        "Mathematics Extension 2",
+        "gemini-reviewed",
+        "auto-promoted"
+      ],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://local.sourceexams.invalid/source-ext2-2023",
+        "pageRef": "Exam paper pages 2",
+        "markingGuideRef": "Marking guidelines pages 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2023-q02-the-nature-of-proof",
+      "paperId": "ext2-2023",
+      "year": 2023,
+      "questionNumber": "Q2",
+      "title": "Q2 Consider the following statement. 'If an animal is a herbivore, then it does not eat m",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Proof",
+      "subtopic": "The Nature of Proof",
+      "syllabusNodeIds": ["old-me2-p1"],
+      "promptLatex": "Consider the following statement.\n\n'If an animal is a herbivore, then it does not eat meat.'\n\nWhich of the following is the converse of this statement?\nA. If an animal is a herbivore, then it eats meat.\nB. If an animal is not a herbivore, then it eats meat.\nC. If an animal eats meat, then it is not a herbivore.\nD. If an animal does not eat meat, then it is a herbivore.",
+      "answerLatex": "Official answer: D.",
+      "workingLatex": [],
+      "tags": [
+        "official-draft",
+        "2023",
+        "multiple-choice",
+        "Mathematics Extension 2",
+        "gemini-reviewed",
+        "auto-promoted"
+      ],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://local.sourceexams.invalid/source-ext2-2023",
+        "pageRef": "Exam paper pages 2",
+        "markingGuideRef": "Marking guidelines pages 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2023-q03-using-complex-numbers",
+      "paperId": "ext2-2023",
+      "year": 2023,
+      "questionNumber": "Q3",
+      "title": "Q3 A complex number z lies on the unit circle in the complex plane, as shown in the diagr",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Complex Numbers",
+      "subtopic": "Using Complex Numbers",
+      "syllabusNodeIds": ["old-me2-n2", "old-me2-n1", "old-me2-p2"],
+      "promptLatex": "A complex number \\(z\\) lies on the unit circle in the complex plane, as shown in the diagram. Which of the following complex numbers is equal to \\(\\bar{z}\\)?\nA. \\(-z\\)\nB. \\(z^2\\)\nC. \\(-z^3\\)\nD. \\(z^4\\)",
+      "answerLatex": "Official answer: B.",
+      "workingLatex": [],
+      "tags": [
+        "official-draft",
+        "2023",
+        "multiple-choice",
+        "Mathematics Extension 2",
+        "gemini-reviewed",
+        "auto-promoted"
+      ],
+      "assets": [
+        {
+          "id": "ext2-2023-q3-p3-v1",
+          "type": "diagram",
+          "label": "Question 3 diagram",
+          "alt": "Unit circle in the complex plane with point z marked at angle π/3 below the negative y-axis, with axes labeled x and y, and points -1, O, and 1 marked.",
+          "path": "/assets/diagrams/ext2-2023-q3-p3-v1.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://local.sourceexams.invalid/source-ext2-2023",
+        "pageRef": "Exam paper pages 3",
+        "markingGuideRef": "Marking guidelines pages 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2023-q04-the-nature-of-proof",
+      "paperId": "ext2-2023",
+      "year": 2023,
+      "questionNumber": "Q4",
+      "title": "Q4 Consider the following statement about real numbers. 'Whichever positive number r you ",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Proof",
+      "subtopic": "The Nature of Proof",
+      "syllabusNodeIds": ["old-me2-p1", "old-me2-n1", "old-me2-p2"],
+      "promptLatex": "Consider the following statement about real numbers.\n\n'Whichever positive number \\(r\\) you pick, it is possible to find a number \\(x\\) greater than 1 such that \\(\\frac{\\ln x}{x^3} < r\\).'\n\nWhen this statement is written in the formal language of proof, which of the following is obtained?\nA. \\(\\forall x > 1 \\quad \\exists r > 0 \\quad \\frac{\\ln x}{x^3} < r\\)\nB. \\(\\exists x > 1 \\quad \\forall r > 0 \\quad \\frac{\\ln x}{x^3} < r\\)\nC. \\(\\forall r > 0 \\quad \\exists x > 1 \\quad \\frac{\\ln x}{x^3} < r\\)\nD. \\(\\exists r > 0 \\quad \\forall x > 1 \\quad \\frac{\\ln x}{x^3} < r\\)",
+      "answerLatex": "Official answer: C.",
+      "workingLatex": [],
+      "tags": [
+        "official-draft",
+        "2023",
+        "multiple-choice",
+        "Mathematics Extension 2",
+        "gemini-reviewed",
+        "auto-promoted"
+      ],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://local.sourceexams.invalid/source-ext2-2023",
+        "pageRef": "Exam paper pages 3",
+        "markingGuideRef": "Marking guidelines pages 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2023-q05-further-work-with-vectors",
+      "paperId": "ext2-2023",
+      "year": 2023,
+      "questionNumber": "Q5",
+      "title": "Q5 Which of the following is a true statement about the lines _1 = pmatrix -1 \\\\ 2 \\\\ 5 p",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Vectors",
+      "subtopic": "Further Work with Vectors",
+      "syllabusNodeIds": ["old-me2-v1", "old-me2-p1", "old-me2-p2"],
+      "promptLatex": "Which of the following is a true statement about the lines \\(\\ell_1 = \\begin{pmatrix} -1 \\\\ 2 \\\\ 5 \\end{pmatrix} + \\lambda \\begin{pmatrix} -1 \\\\ 3 \\\\ 1 \\end{pmatrix}\\) and \\(\\ell_2 = \\begin{pmatrix} 3 \\\\ -10 \\\\ 1 \\end{pmatrix} + \\mu \\begin{pmatrix} 1 \\\\ -3 \\\\ -1 \\end{pmatrix}\\)?\nA. \\(\\ell_1\\) and \\(\\ell_2\\) are the same line.\nB. \\(\\ell_1\\) and \\(\\ell_2\\) are not parallel and they intersect.\nC. \\(\\ell_1\\) and \\(\\ell_2\\) are parallel and they do not intersect.\nD. \\(\\ell_1\\) and \\(\\ell_2\\) are not parallel and they do not intersect.",
+      "answerLatex": "Official answer: A.",
+      "workingLatex": [],
+      "tags": [
+        "official-draft",
+        "2023",
+        "multiple-choice",
+        "Mathematics Extension 2",
+        "gemini-reviewed",
+        "auto-promoted"
+      ],
+      "assets": [
+        {
+          "id": "ext2-2023-q5-p4-v1",
+          "type": "diagram",
+          "label": "Question 5 diagram",
+          "alt": "Vector equation of lines l1 and l2 with column vector notation",
+          "path": "/assets/diagrams/ext2-2023-q5-p4-v1.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://local.sourceexams.invalid/source-ext2-2023",
+        "pageRef": "Exam paper pages 4",
+        "markingGuideRef": "Marking guidelines pages 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2023-q06-applications-of-calculus-to-mechanics",
+      "paperId": "ext2-2023",
+      "year": 2023,
+      "questionNumber": "Q6",
+      "title": "Q6 Which of the following functions does NOT describe simple harmonic motion? A. x = ^2 t",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Mechanics",
+      "subtopic": "Applications of Calculus to Mechanics",
+      "syllabusNodeIds": ["old-me2-m1", "old-me2-p2", "old-me2-n2"],
+      "promptLatex": "Which of the following functions does NOT describe simple harmonic motion?\nA. \\(x = \\cos^2 t - \\sin 2t\\)\nB. \\(x = \\sin 4t + 4 \\cos 2t\\)\nC. \\(x = 2 \\sin 3t - 4 \\cos 3t + 5\\)\nD. \\(x = 4 \\cos \\left( 2t + \\frac{\\pi}{2} \\right) + 5 \\sin \\left( 2t - \\frac{\\pi}{4} \\right)\\)",
+      "answerLatex": "Official answer: B.",
+      "workingLatex": [],
+      "tags": [
+        "official-draft",
+        "2023",
+        "multiple-choice",
+        "Mathematics Extension 2",
+        "gemini-reviewed",
+        "auto-promoted"
+      ],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://local.sourceexams.invalid/source-ext2-2023",
+        "pageRef": "Exam paper pages 4",
+        "markingGuideRef": "Marking guidelines pages 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2023-q07-using-complex-numbers",
+      "paperId": "ext2-2023",
+      "year": 2023,
+      "questionNumber": "Q7",
+      "title": "Q7 Which of the following statements about complex numbers is true? A. For all real numbe",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Complex Numbers",
+      "subtopic": "Using Complex Numbers",
+      "syllabusNodeIds": ["old-me2-n2", "old-me2-n1", "old-me2-v1"],
+      "promptLatex": "Which of the following statements about complex numbers is true?\nA. For all real numbers \\(x, y, \\theta\\) with \\(x \\neq 0\\), \n\\[ \\tan \\theta = \\frac{y}{x} \\implies x + iy = re^{i\\theta}, \\] \nfor some real number \\(r\\).\nB. For all non-zero complex numbers \\(z_1\\) and \\(z_2\\), \n\\[ \\text{Arg}(z_1) = \\theta_1 \\text{ and } \\text{Arg}(z_2) = \\theta_2 \\implies \\text{Arg}(z_1z_2) = \\theta_1 + \\theta_2, \\] \nwhere \\(\\text{Arg}\\) denotes the principal argument.\nC. For all real numbers \\(r_1, r_2, \\theta_1, \\theta_2\\) with \\(r_1, r_2 > 0\\), \n\\[ r_1e^{i\\theta_1} = r_2e^{i\\theta_2} \\implies r_1 = r_2 \\text{ and } \\theta_1 = \\theta_2. \\]\nD. For all real numbers \\(x, y, r, \\theta\\) with \\(r > 0\\) and \\(x \\neq 0\\), \n\\[ x + iy = re^{i\\theta} \\implies \\theta = \\arctan\\left(\\frac{y}{x}\\right). \\]",
+      "answerLatex": "Official answer: A.",
+      "workingLatex": [],
+      "tags": [
+        "official-draft",
+        "2023",
+        "multiple-choice",
+        "Mathematics Extension 2",
+        "gemini-reviewed",
+        "auto-promoted"
+      ],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://local.sourceexams.invalid/source-ext2-2023",
+        "pageRef": "Exam paper pages 5",
+        "markingGuideRef": "Marking guidelines pages 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2023-q08-introduction-to-complex-numbers",
+      "paperId": "ext2-2023",
+      "year": 2023,
+      "questionNumber": "Q8",
+      "title": "Q8 A shaded region on a complex plane is shown. Which relation best describes the region ",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Complex Numbers",
+      "subtopic": "Introduction to Complex Numbers",
+      "syllabusNodeIds": ["old-me2-n1", "old-me2-n2", "old-me2-p1"],
+      "promptLatex": "A shaded region on a complex plane is shown. Which relation best describes the region shaded on the complex plane?\nA. \\( |z - i| > 2|z - 1| \\)\nB. \\( |z - i| < 2|z - 1| \\)\nC. \\( |z - 1| > 2|z - i| \\)\nD. \\( |z - 1| < 2|z - i| \\)",
+      "answerLatex": "Official answer: D.",
+      "workingLatex": [],
+      "tags": [
+        "official-draft",
+        "2023",
+        "multiple-choice",
+        "Mathematics Extension 2",
+        "gemini-reviewed",
+        "auto-promoted"
+      ],
+      "assets": [
+        {
+          "id": "ext2-2023-q8-p6-v1",
+          "type": "graph",
+          "label": "Question 8 graph",
+          "alt": "Complex plane graph showing a shaded region with a dashed circle boundary, axes labeled x and y with tick marks from -3 to 3",
+          "path": "/assets/diagrams/ext2-2023-q8-p6-v1.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://local.sourceexams.invalid/source-ext2-2023",
+        "pageRef": "Exam paper pages 6",
+        "markingGuideRef": "Marking guidelines pages 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2023-q09-further-work-with-vectors",
+      "paperId": "ext2-2023",
+      "year": 2023,
+      "questionNumber": "Q9",
+      "title": "Q9 A particle travels along a curve from O to E in the xy-plane, as shown in the diagram.",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Vectors",
+      "subtopic": "Further Work with Vectors",
+      "syllabusNodeIds": ["old-me2-v1", "old-me2-n2", "old-me2-m1"],
+      "promptLatex": "A particle travels along a curve from \\(O\\) to \\(E\\) in the \\(xy\\)-plane, as shown in the diagram. The position vector of the particle is \\(\\mathbf{r}\\), its velocity is \\(\\mathbf{v}\\), and its acceleration is \\(\\mathbf{a}\\). While travelling from \\(O\\) to \\(E\\), the particle is always slowing down. Which of the following is consistent with the motion of the particle?\nA. \\(\\mathbf{r} \\cdot \\mathbf{v} \\le 0\\) and \\(\\mathbf{a} \\cdot \\mathbf{v} \\ge 0\\)\nB. \\(\\mathbf{r} \\cdot \\mathbf{v} \\le 0\\) and \\(\\mathbf{a} \\cdot \\mathbf{v} \\le 0\\)\nC. \\(\\mathbf{r} \\cdot \\mathbf{v} \\ge 0\\) and \\(\\mathbf{a} \\cdot \\mathbf{v} \\ge 0\\)\nD. \\(\\mathbf{r} \\cdot \\mathbf{v} \\ge 0\\) and \\(\\mathbf{a} \\cdot \\mathbf{v} \\le 0\\)",
+      "answerLatex": "Official answer: D.",
+      "workingLatex": [],
+      "tags": [
+        "official-draft",
+        "2023",
+        "multiple-choice",
+        "Mathematics Extension 2",
+        "gemini-reviewed",
+        "auto-promoted"
+      ],
+      "assets": [
+        {
+          "id": "ext2-2023-q9-p7-v1",
+          "type": "graph",
+          "label": "Question 9 graph",
+          "alt": "xy-plane graph showing a curve from origin O to point E, with the curve starting flat along the x-axis and curving upward to point E in the first quadrant.",
+          "path": "/assets/diagrams/ext2-2023-q9-p7-v1.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://local.sourceexams.invalid/source-ext2-2023",
+        "pageRef": "Exam paper pages 7",
+        "markingGuideRef": "Marking guidelines pages 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2023-q10-further-work-with-vectors",
+      "paperId": "ext2-2023",
+      "year": 2023,
+      "questionNumber": "Q10",
+      "title": "Q10 Consider any three-dimensional vectors a = OA, b = OB and c = OC that satisfy these th",
+      "marks": 1,
+      "style": "multiple-choice",
+      "topic": "Vectors",
+      "subtopic": "Further Work with Vectors",
+      "syllabusNodeIds": ["old-me2-v1", "old-me2-n1", "old-me2-n2"],
+      "promptLatex": "Consider any three-dimensional vectors \\(\\mathbf{a} = \\vec{OA}\\), \\(\\mathbf{b} = \\vec{OB}\\) and \\(\\mathbf{c} = \\vec{OC}\\) that satisfy these three conditions: \\[ \\mathbf{a} \\cdot \\mathbf{b} = 1 \\] \\[ \\mathbf{b} \\cdot \\mathbf{c} = 2 \\] \\[ \\mathbf{c} \\cdot \\mathbf{a} = 3 \\] Which of the following statements about the vectors is true?\nA. Two of \\(\\mathbf{a}\\), \\(\\mathbf{b}\\) and \\(\\mathbf{c}\\) could be unit vectors.\nB. The points \\(A\\), \\(B\\) and \\(C\\) could lie on a sphere centred at \\(O\\).\nC. For any three-dimensional vector \\(\\mathbf{a}\\), vectors \\(\\mathbf{b}\\) and \\(\\mathbf{c}\\) can be found so that \\(\\mathbf{a}\\), \\(\\mathbf{b}\\) and \\(\\mathbf{c}\\) satisfy these three conditions.\nD. \\(\forall \\mathbf{a}, \\mathbf{b}\\) and \\(\\mathbf{c}\\) satisfying the conditions, \\(\\exists r, s\\) and \\(t\\) such that \\(r, s\\) and \\(t\\) are positive real numbers and \\(r\\mathbf{a} + s\\mathbf{b} + t\\mathbf{c} = \\mathbf{0}\\).",
+      "answerLatex": "Official answer: B.",
+      "workingLatex": [],
+      "tags": [
+        "official-draft",
+        "2023",
+        "multiple-choice",
+        "Mathematics Extension 2",
+        "gemini-reviewed",
+        "auto-promoted"
+      ],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://local.sourceexams.invalid/source-ext2-2023",
+        "pageRef": "Exam paper pages 7",
+        "markingGuideRef": "Marking guidelines pages 1",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2023-q11-applications-of-calculus-to-mechanics",
+      "paperId": "ext2-2023",
+      "year": 2023,
+      "questionNumber": "Q11",
+      "title": "Q11 (a) Solve the quadratic equation z^2 - 3z + 4 = 0, where z is a complex number. Give y",
+      "marks": 15,
+      "style": "extended-response",
+      "topic": "Mechanics",
+      "subtopic": "Applications of Calculus to Mechanics",
+      "syllabusNodeIds": ["old-me2-m1", "old-me2-v1", "old-me2-n1"],
+      "promptLatex": "(a) Solve the quadratic equation \\[ z^2 - 3z + 4 = 0, \\] where \\( z \\) is a complex number. Give your answers in Cartesian form.\n\n(b) Find the angle between the vectors \\[ \\underset{\\sim}{a} = \\underset{\\sim}{i} + 2\\underset{\\sim}{j} - 3\\underset{\\sim}{k} \\] \\[ \\underset{\\sim}{b} = -\\underset{\\sim}{i} + 4\\underset{\\sim}{j} + 2\\underset{\\sim}{k}, \\] giving your answer to the nearest degree.\n\n(c) Find a vector equation of the line through the points \\( A(-3, 1, 5) \\) and \\( B(0, 2, 3) \\).\n\n(d) The quadrilaterals \\( ABCD \\) and \\( ABEF \\) are parallelograms. By considering \\( \\vec{AB} \\), show that \\( CDFE \\) is also a parallelogram.\n\n(e) A particle moves in simple harmonic motion described by the equation \\[ \\ddot{x} = -9(x - 4). \\] Find the period and the central point of motion.\n\n(f) Find \\[ \\int_{0}^{2} \\frac{5x - 3}{(x + 1)(x - 3)} \\, dx. \\]",
+      "answerLatex": "Official marking guide excerpt:\n(a) z = \\(\\frac{3}{2} \\pm \\frac{\\sqrt{7}}{2}i\\)\n(b) \\(\\theta \\approx 87^\\circ\\)\n(c) \\(\\underset{\\sim}{r} = \\begin{pmatrix} -3 \\\\ 1 \\\\ 5 \\end{pmatrix} + \\lambda \\begin{pmatrix} 3 \\\\ 1 \\\\ -2 \\end{pmatrix}, \\lambda \\in \\mathbb{R}\\)\n(d)\n(e)\n(f) \\(-\\ln 3\\) or \\(\\ln\\left(\\frac{1}{3}\\right)\\)",
+      "workingLatex": [
+        "(a) \\[ z = \\frac{3 \\pm \\sqrt{9-16}}{2} = \\frac{3 \\pm \\sqrt{-7}}{2} = \\frac{3}{2} \\pm \\frac{\\sqrt{7}}{2}i \\]",
+        "(a) Marking criteria: Provides correct solution; Completes the square OR Uses quadratic formula",
+        "(b) \\[\\underset{\\sim}{a} \\cdot \\underset{\\sim}{b} = (1 \\times (-1)) + (2 \\times 4) + (-3 \\times 2) = -1 + 8 - 6 = 1\\]\n\\[|\\underset{\\sim}{a}| = \\sqrt{1^2 + 2^2 + (-3)^2} = \\sqrt{14}\\]\n\\[|\\underset{\\sim}{b}| = \\sqrt{(-1)^2 + 4^2 + 2^2} = \\sqrt{21}\\]\n\\[\\underset{\\sim}{a} \\cdot \\underset{\\sim}{b} = |\\underset{\\sim}{a}||\\underset{\\sim}{b}|\\cos\\theta\\]\n\\[\\therefore \\cos\\theta = \\frac{1}{\\sqrt{14} \\cdot \\sqrt{21}}\\]\n\\[\\theta = \\cos^{-1}\\left(\\frac{1}{\\sqrt{14} \\cdot \\sqrt{21}}\\right) = 86.656... \\approx 87^\\circ \\text{ (nearest degree)}\\]",
+        "(b) Marking criteria: Provides correct solution; Correctly evaluates \\(\\underset{\\sim}{a} \\cdot \\underset{\\sim}{b}\\) and \\(|\\underset{\\sim}{a}|\\) and \\(|\\underset{\\sim}{b}|\\), or equivalent merit; Evaluates \\(\\underset{\\sim}{a} \\cdot \\underset{\\sim}{b}\\) or \\(|\\underset{\\sim}{a}|\\) or \\(|\\underset{\\sim}{b}|\\), or equivalent merit",
+        "(c) \\(\\overline{AB} = \\overline{AO} + \\overline{OB} = \\overline{OB} + \\overline{OA} = \\begin{pmatrix} 0 \\\\ 2 \\\\ 3 \\end{pmatrix} - \\begin{pmatrix} -3 \\\\ 1 \\\\ 5 \\end{pmatrix} = \\begin{pmatrix} 3 \\\\ 1 \\\\ -2 \\end{pmatrix} \\therefore \\text{A vector equation of the line is } \\underset{\\sim}{r} = \\begin{pmatrix} -3 \\\\ 1 \\\\ 5 \\end{pmatrix} + \\lambda \\begin{pmatrix} 3 \\\\ 1 \\\\ -2 \\end{pmatrix}, \\lambda \\in \\mathbb{R}\\)",
+        "(c) Marking criteria: Provides a correct equation; Finds \\(\\overline{AB}\\), or equivalent merit",
+        "(d) \\(\\overline{AB} = \\overline{DC}\\) (opposite sides of a parallelogram are equal in length and parallel)\nBut in parallelogram \\(ABEF\\)\n\\(\\overline{AB} = \\overline{FE}\\) (opposite sides of a parallelogram are equal in length and parallel)\n\\(\therefore \\overline{DC} = \\overline{FE}\\)\n\\(\therefore CDFE\\) is a parallelogram (one pair of opposite sides both equal in length and parallel)",
+        "(d) Marking criteria: Provides correct proof; Explains why \\(\\overline{AB} = \\overline{DC}\\), or equivalent merit",
+        "(e) \\(\\ddot{x} = -3^2(x - 4)\\)\n\\(\therefore n = 3\\) and \\(c = 4\\)\n\\(\therefore T = \\frac{2\\pi}{n} = \\frac{2\\pi}{3}\\)\n\\(\therefore \\text{Period} = \\frac{2\\pi}{3}\\) and centre is \\(x = 4\\)",
+        "(e) Marking criteria: Provides correct period and central point of motion; Provides correct period or centre, or equivalent merit",
+        "(f) Let \\(\\frac{5x-3}{(x+1)(x-3)} = \\frac{A}{x+1} + \\frac{B}{x-3}\\) \\\\ \\(\\therefore 5x-3 = A(x-3) + B(x+1) = Ax-3A+Bx+B\\) \\\\ Equating coefficients \\\\ \\(5 = A+B\\) (1) \\\\ \\(-3 = -3A+B\\) (2) \\\\ (1)-(2): \\(8=4A\\) \\\\ \\(\\therefore A=2\\) \\\\ In (1) \\(B=3\\) \\\\ \\(\\therefore \\int_{0}^{2} \\frac{5x-3}{(x+1)(x-3)} dx = \\int_{0}^{2} \\left(\\frac{2}{x+1} + \\frac{3}{x-3}\\right) dx\\) \\\\ \\(= [2\\ln|x+1| + 3\\ln|x-3|]_{0}^{2}\\) \\\\ \\(= (2\\ln 3 + 3\\ln|-1|) - (2\\ln 1 + 3\\ln|-3|)\\) \\\\ \\(= 2\\ln 3 - 3\\ln 3\\) \\\\ \\(= -\\ln 3 \\text{ or } \\ln\\left(\\frac{1}{3}\\right)\\)",
+        "(f) Marking criteria: Provides correct solution; Obtains the antiderivative, or equivalent merit; Shows \\(\\frac{5x-3}{(x+1)(x-3)} = \\frac{2}{x+1} + \\frac{3}{x-3}\\), or equivalent merit; Attempts to use partial fractions, or equivalent merit"
+      ],
+      "tags": [
+        "official-draft",
+        "2023",
+        "section-ii",
+        "Mathematics Extension 2",
+        "gemini-reviewed",
+        "auto-promoted"
+      ],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://local.sourceexams.invalid/source-ext2-2023",
+        "pageRef": "Exam paper pages 8",
+        "markingGuideRef": "Marking guidelines pages 2-6",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2023-q12-using-complex-numbers",
+      "paperId": "ext2-2023",
+      "year": 2023,
+      "questionNumber": "Q12",
+      "title": "Q12 (a) Prove that 23 is irrational. (b) Prove that for all real numbers x and y, where x^",
+      "marks": 15,
+      "style": "extended-response",
+      "topic": "Complex Numbers",
+      "subtopic": "Using Complex Numbers",
+      "syllabusNodeIds": ["old-me2-n2", "old-me2-v1", "old-me2-n1"],
+      "promptLatex": "(a) Prove that \\(\\sqrt{23}\\) is irrational.\n\n(b) Prove that for all real numbers \\(x\\) and \\(y\\), where \\(x^2 + y^2 \\neq 0\\), \\[ \\frac{(x + y)^2}{x^2 + y^2} \\leq 2. \\]\n\n(c) An object with mass \\(m\\) kilograms slides down a smooth inclined plane with velocity \\(\\underset{\\sim}{v}(t)\\), where \\(t\\) is the time in seconds after the object started sliding down the plane. The inclined plane makes an angle \\(\\theta\\) with the horizontal, as shown in the diagram. The normal reaction force is \\(\\underset{\\sim}{R}\\). The acceleration due to gravity is \\(\\underset{\\sim}{g}\\). No other forces act on the object.\n\nThe vectors \\(\\underset{\\sim}{i}\\) and \\(\\underset{\\sim}{j}\\) are unit vectors parallel and perpendicular, respectively, to the plane, as shown in the diagram.\n\n(ci) Show that the resultant force on the object is \\(\\underset{\\sim}{F} = -(mg \\sin \\theta) \\underset{\\sim}{i}\\).\n\n(cii) Given that the object is initially at rest, find its velocity \\(\\underset{\\sim}{v}(t)\\) in terms of \\(g\\), \\(\\theta\\), \\(t\\) and \\(\\underset{\\sim}{i}\\).\n\n(d) Find the cube roots of \\(2 - 2i\\). Give your answer in exponential form.\n\n(e) The complex number \\(2 + i\\) is a zero of the polynomial \\[P(z) = z^4 - 3z^3 + cz^2 + dz - 30\\] where \\(c\\) and \\(d\\) are real numbers.\n\n(ei) Explain why \\(2 - i\\) is also a zero of the polynomial \\(P(z)\\).\n\n(eii) Find the remaining zeros of the polynomial \\(P(z)\\).",
+      "answerLatex": "Official marking guide excerpt:\n(a) Assume the contradiction, that \\(\\sqrt{23}\\) is rational. Let \\(\\sqrt{23} = \\frac{p}{q}\\) where \\(p, q \\in \\mathbb{Z}\\) and \\(q \\neq 0\\). Also assume that \\(p\\) and \\(q\\) are coprime. \\[(\\sqrt{23})^2 = \\left(\\frac{p}{q}\\right)^2\\] \\[23 = \\frac{p^2}{q^2}\\] \\[23q^2 = p^2\\] 23 divides LHS, so 23 divides \\(p^2\\). Since 23 is prime, 23 also divides \\(p\\). So \\(p = 23m\\), for some \\(m \\in \\mathbb{Z}\\). \\(\\therefore 23q^2 = (23m)^2\\) \\[q^2 = 23m^2\\] So similarly 23 also divides \\(q\\). But now \\(p\\) and \\(q\\) have a common factor of 23, contradicting the assumption. Therefore, the assumption is false and \\(\\sqrt{23}\\) is irrational.\n(b) \\[ \\frac{(x+y)^2}{x^2+y^2} \\leq 2 \\]\n(c(i)) Resolving parallel and perpendicular to the slope gives \\(R - mg \\cos \\theta \\underset{\\sim}{j} = 0\\) and \\(F - (mg \\sin \\theta) \\underset{\\sim}{i} = 0\\). \\(\\therefore\\) Resultant force is \\(F = -(mg \\sin \\theta) \\underset{\\sim}{i}\\)\n(c(ii)) \\(v = -gt \\sin \\theta\\)\n(d) \\(z = \\sqrt{2}e^{-\\frac{i\\pi}{12}}, \\sqrt{2}e^{\\frac{7i\\pi}{12}}, \\sqrt{2}e^{\\frac{15i\\pi}{12}}\\)\n(e(i)) Since \\(P(z)\\) has real coefficients, zeros occur in complex conjugate pairs. Therefore, \\(2+i\\) is a zero implies \\(2-i\\) is also a zero.\n(e(ii)) The other zeros are \\(z=2\\) and \\(z=-3\\).",
+      "workingLatex": [
+        "(a) Assume the contradiction, that \\(\\sqrt{23}\\) is rational. Let \\(\\sqrt{23} = \\frac{p}{q}\\) where \\(p, q \\in \\mathbb{Z}\\) and \\(q \\neq 0\\). Also assume that \\(p\\) and \\(q\\) are coprime. \\[(\\sqrt{23})^2 = \\left(\\frac{p}{q}\\right)^2\\] \\[23 = \\frac{p^2}{q^2}\\] \\[23q^2 = p^2\\] 23 divides LHS, so 23 divides \\(p^2\\). Since 23 is prime, 23 also divides \\(p\\). So \\(p = 23m\\), for some \\(m \\in \\mathbb{Z}\\). \\(\\therefore 23q^2 = (23m)^2\\) \\[q^2 = 23m^2\\] So similarly 23 also divides \\(q\\). But now \\(p\\) and \\(q\\) have a common factor of 23, contradicting the assumption. Therefore, the assumption is false and \\(\\sqrt{23}\\) is irrational.",
+        "(a) Marking criteria: Provides correct proof; Shows that 23 is a factor of a relevant integer, or equivalent merit; Attempts a proof by contradiction or writes \\(\\sqrt{23} = \\frac{p}{q}\\) for integers \\(p, q\\), or equivalent merit",
+        "(b) \\[ \\frac{(x+y)^2}{x^2+y^2} = \\frac{x^2+2xy+y^2}{x^2+y^2} = 1 + \\frac{2xy}{x^2+y^2} \\] \\n But \\( \\frac{a+b}{2} \\geq \\sqrt{ab} \\), therefore \\( \\frac{x^2+y^2}{2} \\geq \\sqrt{x^2y^2} \\) \\n and \\( x^2+y^2 \\geq 2|xy| \\geq 2xy \\) (since \\( \\sqrt{x^2}=|x| \\) and here we have \\( a, b \\geq 0 \\) \\n \\( 1 \\geq \\frac{2xy}{x^2+y^2} \\) \\n \\( \\therefore \\frac{(x+y)^2}{x^2+y^2} \\leq 1+1 \\leq 2 \\)",
+        "(b) Marking criteria: Provides correct proof; Expands the numerator of the LHS and splits into two fractions, or equivalent merit",
+        "(c(i)) Resolving parallel and perpendicular to the slope gives \\[R - mg \\cos \\theta \\underset{\\sim}{j} = 0\\] and \\[F - (mg \\sin \\theta) \\underset{\\sim}{i} = 0\\] \\[\\therefore \\text{Resultant force is } F = -(mg \\sin \\theta) \\underset{\\sim}{i}\\]",
+        "(c(i)) Marking criteria: Provides correct proof; Attempts to resolve a force into two perpendicular components or writes \\(F = R + mg\\), or equivalent merit",
+        "(c(ii)) \\[ma = -mg \\sin \\theta\\] \\[a = -g \\sin \\theta\\] \\[\\frac{dv}{dt} = -g \\sin \\theta\\] \\[v = -gt \\sin \\theta + C\\] But when \\(t = 0\\), \\(v = 0\\) So \\(v = -gt \\sin \\theta\\)",
+        "(c(ii)) Marking criteria: Provides correct solution; Finds a correct equation for acceleration and attempts to integrate, or equivalent merit",
+        "(d) \\[z^3 = 2 - 2i, \\quad z = re^{i\\theta}, \\quad r \\in \\mathbb{R}\\]\n\\[r^3e^{3i\\theta} = 2 - 2i\\]\n\\[2 - 2i = \\sqrt{8}e^{-\\frac{i\\pi}{4}}\\]\n\\[r^3 = \\sqrt{8}, \\quad 3\\theta = -\\frac{\\pi}{4} \\text{ or } \\frac{7\\pi}{4} \\text{ or } \\frac{15\\pi}{4}\\]\n\\[r = \\sqrt{2}, \\quad \\theta = -\\frac{\\pi}{12} \\text{ or } \\frac{7\\pi}{12} \\text{ or } \\frac{15\\pi}{12}\\]\n\\[z = \\sqrt{2}e^{-\\frac{i\\pi}{12}} \\text{ or } \\sqrt{2}e^{\\frac{7i\\pi}{12}} \\text{ or } \\sqrt{2}e^{\\frac{15i\\pi}{12}}\\]",
+        "(d) Marking criteria: Provides correct solution; Finds one correct cube root, or equivalent merit; Writes \\(2 - 2i\\) in exponential form, or equivalent merit",
+        "(e(i)) Since \\(P(z)\\) has real coefficients, zeros occur in complex conjugate pairs. \\(\\therefore 2+i \\text{ is a zero} \\implies \\overline{2+i} = 2-i \\text{ is also a zero}\\)",
+        "(e(i)) Marking criteria: Provides correct explanation",
+        "(e(ii)) Let \\(P(z) = z^4 - 3z^3 + cz^2 + dz - 30\\). Sum of roots = \\(-\\frac{b}{a} = 3\\). Product of roots = \\(\\frac{e}{a} = -30\\). Let other two zeros be \\(\\alpha\\) and \\(\\beta\\). \\((2+i)+(2-i)+\\alpha+\\beta = 3 \\implies \\alpha+\\beta = -1\\). \\((2+i)(2-i)\\alpha\\beta = -30 \\implies (4+1)\\alpha\\beta = -30 \\implies \\alpha\\beta = -6\\). Therefore, other zeros are \\(z=2\\) and \\(z=-3\\).",
+        "(e(ii)) Marking criteria: Provides correct solution; Writes down a correct equation involving the sum of the roots or the product of the roots, or attempts a long division of polynomials, or equivalent merit"
+      ],
+      "tags": [
+        "official-draft",
+        "2023",
+        "section-ii",
+        "Mathematics Extension 2",
+        "gemini-reviewed",
+        "auto-promoted"
+      ],
+      "assets": [
+        {
+          "id": "ext2-2023-q12-p9-v1",
+          "type": "diagram",
+          "label": "Question 12 diagram",
+          "alt": "Inclined plane diagram showing object sliding down with vectors R (normal reaction), mg (gravity), v (velocity), i (unit vector parallel to plane), j (unit vector perpendicular to plane), and angle theta at the base.",
+          "path": "/assets/diagrams/ext2-2023-q12-p9-v1.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://local.sourceexams.invalid/source-ext2-2023",
+        "pageRef": "Exam paper pages 9-10",
+        "markingGuideRef": "Marking guidelines pages 7-11",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2023-q13-further-proof-by-mathematical-induction",
+      "paperId": "ext2-2023",
+      "year": 2023,
+      "questionNumber": "Q13",
+      "title": "Q13 (a) Find 1-x5-4x-x^2 \\, dx. (bi) Show that k^2 - 2k - 3 0 for k 3. (bii) Hence, or oth",
+      "marks": 15,
+      "style": "extended-response",
+      "topic": "Proof",
+      "subtopic": "Further Proof by Mathematical Induction",
+      "syllabusNodeIds": ["old-me2-p2", "old-me2-v1", "old-me2-n2"],
+      "promptLatex": "(a) Find \\(\\int \\frac{1-x}{\\sqrt{5-4x-x^2}} \\, dx\\).\n\n(bi) Show that \\(k^2 - 2k - 3 \\ge 0\\) for \\(k \\ge 3\\).\n\n(bii) Hence, or otherwise, use mathematical induction to prove that \\(2^n \\ge n^2 - 2\\), for all integers \\(n \\ge 3\\).\n\n(c) A particle of mass \\(1\\text{ kg}\\) is projected from the origin with speed \\(40\\text{ m s}^{-1}\\) at an angle \\(30^\\circ\\) to the horizontal plane.\n\n(ci) Use the information above to show that the initial velocity of the particle is \\(\\mathbf{v}(0) = \\begin{pmatrix} 20\\sqrt{3} \\ 20 \\end{pmatrix}\\).\n\n(cii) The forces acting on the particle are gravity and air resistance. The air resistance is proportional to the velocity vector with a constant of proportionality \\(4\\). Let the acceleration due to gravity be \\(10\\text{ m s}^{-2}\\). The position vector of the particle, at time \\(t\\) seconds after the particle is projected, is \\(\\mathbf{r}(t)\\) and the velocity vector is \\(\\mathbf{v}(t)\\). Show that \\(\\mathbf{v}(t) = \\begin{pmatrix} 20\\sqrt{3}e^{-4t} \\ \\frac{45}{2}e^{-4t} - \\frac{5}{2} \\end{pmatrix}\\).\n\n(ciii) Show that \\(\\mathbf{r}(t) = \\begin{pmatrix} 5\\sqrt{3}(1 - e^{-4t}) \\ \\frac{45}{8}(1 - e^{-4t}) - \\frac{5}{2}t \\end{pmatrix}\\).\n\n(civ) The graphs \\(y = 1 - e^{-4x}\\) and \\(y = \\frac{4x}{9}\\) are given in the diagram below. Using the diagram, find the horizontal range of the particle, giving your answer rounded to one decimal place.",
+      "answerLatex": "Official marking guide excerpt:\n(a) \\[ \\int \\frac{1-x}{\\sqrt{5-4x-x^2}} dx = \\sqrt{5-4x-x^2} + 3\\sin^{-1}\\left(\\frac{x+2}{3}\\right) + C \\]\n(b(i)) \\[ k^2 - 2k - 3 = (k-1)^2 - 4 \\ge 0 \\text{ for all } k \\ge 3 \\]\n(b(ii)) Let \\(P(n)\\) be the statement \\(2^n \\ge n^2 - 2\\). Consider \\(n=3\\) case: \\(LHS = 2^3 = 8\\), \\(RHS = 3^2 - 2 = 7\\). \\(8 \\ge 7\\) so \\(P(3)\\) is true. Assume \\(P(k)\\) is true for some \\(k \\ge 3\\), thus \\(2^k \\ge k^2 - 2\\). Prove \\(P(k+1)\\) is true, i.e., \\(2^{k+1} \\ge (k+1)^2 - 2 = k^2 + 2k - 1\\). \\(LHS = 2^{k+1} = 2(2^k) \\ge 2(k^2 - 2) = 2k^2 - 4 = k^2 + 2k - 1 + k^2 - 2k - 3\\). Using part (i), \\(k^2 - 2k - 3 \\ge 0\\) for \\(k \\ge 3\\), so \\(LHS \\ge k^2 + 2k - 1 = RHS\\). Therefore \\(P(k+1)\\) is true. Hence, by induction, \\(2^n \\ge n^2 - 2\\) for all integers \\(n \\ge 3\\).\n(c(i)) \\(\\mathbf{v}(0) = \\begin{pmatrix} 20\\sqrt{3} \\\\ 20 \\end{pmatrix}\\)\n(c(ii)) \\( \\underset{\\sim}{v}(t) = \\begin{pmatrix} 20\\sqrt{3}e^{-4t} \\\\ \\frac{45}{2}e^{-4t} - \\frac{5}{2} \\end{pmatrix} \\)\n(c(iii)) \\[ \\mathbf{r}(t) = \\begin{pmatrix} 5\\sqrt{3}(1-e^{-4t}) \\\\ \\frac{45}{8}(1-e^{-4t}) - \\frac{5}{2}t \\end{pmatrix} \\]\n(c(iv)) The particle lands on the ground at a time \\(t\\) which satisfies \\(y=0\\), that is, \\[\\frac{45}{8}(1-e^{-4t})-\\frac{5}{2}t=0\\] \\[\\frac{45}{8}(1-e^{-4t})=\\frac{5}{2}t\\] \\[(1-e^{-4t})=\\frac{5}{2}\\times\\frac{8}{45}t\\] \\[1-e^{-4t}=\\frac{4}{9}t\\] Solution \\(t \\approx 2.25\\) according to the diagram provided. \\(\\therefore \\text{range} = 5\\sqrt{3}(1-e^{-4\\times 2.25}) = 8.65918... = 8.7 \\text{ m}\\) (rounded to 1 decimal place)",
+      "workingLatex": [
+        "(a) \\[ \\int \\frac{1-x}{\\sqrt{5-4x-x^2}} dx = \\int \\frac{-2-x}{\\sqrt{5-4x-x^2}} dx + \\int \\frac{3}{\\sqrt{5-4x-x^2}} dx = \\sqrt{5-4x-x^2} + \\int \\frac{3}{\\sqrt{9-(4+4x+x^2)}} dx = \\sqrt{5-4x-x^2} + 3\\sin^{-1}\\left(\\frac{x+2}{3}\\right) + C \\]",
+        "(a) Marking criteria: Provides correct solution; Splits the integral into the sum of two integrals and correctly integrates one, or equivalent merit; Completes the square for \\(5-4x-x^2\\) or writes \\(1-x = \\frac{1}{2}(-4-2x)+3\\) or equivalent merit",
+        "(b(i)) \\[ k^2 - 2k - 3 = k^2 - 2k + 1 - 4 = (k-1)^2 - 4 \\] \n\\[ (k-1)^2 - 4 \\ge 0 \\text{ for all } k \\ge 3 \\] \n\\[ \\therefore k^2 - 2k - 3 \\ge 0 \\text{ for all } k \\ge 3 \\]",
+        "(b(i)) Marking criteria: Provides correct proof",
+        "(b(ii)) Let \\(P(n)\\) be the statement \\(2^n \\ge n^2 - 2\\). Consider \\(n=3\\) case: \\(LHS = 2^3 = 8\\), \\(RHS = 3^2 - 2 = 9 - 2 = 7\\). \\(8 \\ge 7\\) so \\(P(3)\\) is true. Assume \\(P(k)\\) is true for some \\(k \\ge 3\\). Thus, \\(2^k \\ge k^2 - 2, k \\ge 3\\). Prove that \\(P(k+1)\\) is true. i.e. \\(2^{k+1} \\ge (k+1)^2 - 2\\), \\(2^{k+1} \\ge k^2 + 2k - 1\\). \\(LHS = 2^{k+1} = 2(2^k) \\ge 2(k^2 - 2)\\) (since we assumed \\(P(k)\\) is true) \\(= 2k^2 - 4 = k^2 + 2k - 1 + k^2 - 2k - 3\\). \\(\\therefore LHS \\ge k^2 + 2k - 1\\) (using part (i)) \\(= RHS\\). Therefore \\(P(k+1)\\) is true. Hence, using the principle of mathematical induction, \\(2^n \\ge n^2 - 2\\) for all integers \\(n \\ge 3\\).",
+        "(b(ii)) Marking criteria: Provides correct proof; Establishes the inductive step, or equivalent merit; Establishes the base case, or equivalent merit",
+        "(c(i)) \\[t = 0 \\implies \\frac{\\dot{x}}{40} = \\cos30^\\circ \\implies \\dot{x} = 40\\cos 30^\\circ = 20\\sqrt{3} \\\\ t = 0 \\implies \\frac{\\dot{y}}{40} = \\sin30^\\circ \\implies \\dot{y} = 40\\sin 30^\\circ = 20 \\\\ \\therefore \\mathbf{v}(0) = \\begin{pmatrix} 20\\sqrt{3} \\\\ 20 \\end{pmatrix}\\]",
+        "(c(i)) Marking criteria: Provides correct solution",
+        "(c(ii)) The resulting force \\( \\underset{\\sim}{F} = -4\\underset{\\sim}{v} + m\\underset{\\sim}{g} \\)\n\\[ \\underset{\\sim}{F} = 1 \\times \\underset{\\sim}{a}(t) \\]\n\\[ = \\underset{\\sim}{a}(t) \\]\n\\[ \\underset{\\sim}{a}(t) = \\begin{pmatrix} -4\\dot{x} \\\\ -4\\dot{y} - 10 \\end{pmatrix} = \\begin{pmatrix} \\ddot{x} \\\\ \\ddot{y} \\end{pmatrix} \\]\n\\[ \\ddot{x} = -4\\dot{x} \\]\n\\[ \\frac{d\\dot{x}}{dt} = -4\\dot{x} \\implies \\frac{d\\dot{x}}{\\dot{x}} = -4dt \\]\n\\[ \\implies \\ln \\dot{x} = -4t + C \\]\n\\[ \\implies \\dot{x} = Ae^{-4t} \\]\n\\[ \\dot{x} = 20\\sqrt{3}e^{-4t} \\quad \\text{since } \\dot{x} = 20\\sqrt{3} \\text{ when } t = 0 \\]\n\\[ \\ddot{y} = -4\\dot{y} - 10 \\]\n\\[ = -4\\left( \\dot{y} - \\frac{5}{2} \\right) \\]\n\\[ \\text{So } \\dot{y} = -\\frac{5}{2} + Be^{-4t} \\]\n\\[ \\text{When } t = 0 \\quad \\dot{y} = 20 \\]\n\\[ 20 = -\\frac{5}{2} + B \\]\n\\[ \\frac{45}{2} = B \\]\n\\[ \\therefore \\dot{y} = -\\frac{5}{2} + \\frac{45}{2}e^{-4t} \\]\n\\[ \\underset{\\sim}{v}(t) = \\begin{pmatrix} x \\\\ y \\end{pmatrix} = \\begin{pmatrix} 20\\sqrt{3}e^{-4t} \\\\ \\frac{45}{2}e^{-4t} - \\frac{5}{2} \\end{pmatrix} \\]",
+        "(c(ii)) Marking criteria: Provides correct solution; Finds one component of \\( \\underset{\\sim}{v}(t) \\), or equivalent merit; Provides a relevant force or acceleration equation, or equivalent merit",
+        "(c(iii)) By integrating \\(\\mathbf{v}(t)\\) with respect to \\(t\\), we get \\[ \\mathbf{r}(t) = \\begin{pmatrix} \\frac{20\\sqrt{3}}{-4}e^{-4t} + C_1 \\\\ \\frac{45}{-8}e^{-4t} - \\frac{5}{2}t + C_2 \\end{pmatrix} \\] Where \\(C_1\\) and \\(C_2\\) are constants. \\(\\mathbf{r}(0) = \\mathbf{0}\\) therefore \\(-5\\sqrt{3} + C_1 = 0\\) so \\(C_1 = 5\\sqrt{3}\\). \\(-\\frac{45}{8} + C_2 = 0\\) so \\(C_2 = \\frac{45}{8}\\). Substituting back in \\(\\mathbf{r}(t)\\) yields \\[ \\mathbf{r}(t) = \\begin{pmatrix} -5\\sqrt{3}e^{-4t} + 5\\sqrt{3} \\\\ -\\frac{45}{8}e^{-4t} - \\frac{5}{2}t + \\frac{45}{8} \\end{pmatrix} = \\begin{pmatrix} 5\\sqrt{3}(1-e^{-4t}) \\\\ \\frac{45}{8}(1-e^{-4t}) - \\frac{5}{2}t \\end{pmatrix} \\]",
+        "(c(iii)) Marking criteria: Provides correct solution; Finds one component of \\(\\mathbf{r}(t)\\), or equivalent merit",
+        "(c(iv)) The particle lands on the ground at a time \\(t\\) which satisfies \\(y=0\\), that is, \\[\\frac{45}{8}(1-e^{-4t})-\\frac{5}{2}t=0\\] \\[\\frac{45}{8}(1-e^{-4t})=\\frac{5}{2}t\\] \\[(1-e^{-4t})=\\frac{5}{2}\\times\\frac{8}{45}t\\] \\[1-e^{-4t}=\\frac{4}{9}t\\] Solution \\(t \\approx 2.25\\) according to the diagram provided. \\(\\therefore \\text{range} = 5\\sqrt{3}(1-e^{-4\\times 2.25}) = 8.65918... = 8.7 \\text{ m}\\) (rounded to 1 decimal place)",
+        "(c(iv)) Marking criteria: Provides correct answer; Finds time of flight, or equivalent merit"
+      ],
+      "tags": [
+        "official-draft",
+        "2023",
+        "section-ii",
+        "Mathematics Extension 2",
+        "gemini-reviewed",
+        "auto-promoted"
+      ],
+      "assets": [
+        {
+          "id": "ext2-2023-q13-p12-v1",
+          "type": "graph",
+          "label": "Question 13 graph",
+          "alt": "Graph showing two curves: y = 1 - e^(-4x) and y = 4x/9, with intersection point at x0 ≈ 2.25, axes labelled x and y, with y=1 dashed line shown.",
+          "path": "/assets/diagrams/ext2-2023-q13-p12-v1.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://local.sourceexams.invalid/source-ext2-2023",
+        "pageRef": "Exam paper pages 11-12",
+        "markingGuideRef": "Marking guidelines pages 12-18",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2023-q14-further-work-with-vectors",
+      "paperId": "ext2-2023",
+      "year": 2023,
+      "questionNumber": "Q14",
+      "title": "Q14 (a(i)a(ii)a(iii)) Let z be the complex number z = e^i6 and w be the complex number w =",
+      "marks": 15,
+      "style": "extended-response",
+      "topic": "Vectors",
+      "subtopic": "Further Work with Vectors",
+      "syllabusNodeIds": ["old-me2-v1", "old-me2-n1", "old-me2-n2"],
+      "promptLatex": "(a(i)a(ii)a(iii)) Let \\(z\\) be the complex number \\(z = e^{\\frac{i\\pi}{6}}\\) and \\(w\\) be the complex number \\(w = e^{\\frac{3i\\pi}{4}}\\).\n\n(i) By first writing \\(z\\) and \\(w\\) in Cartesian form, or otherwise, show that \\(|z + w|^2 = \\frac{4 - \\sqrt{6} + \\sqrt{2}}{2}\\).\n\n(ii) The complex numbers \\(z\\), \\(w\\) and \\(z + w\\) are represented in the complex plane by the vectors \\(\\vec{OA}\\), \\(\\vec{OB}\\) and \\(\\vec{OC}\\) respectively, where \\(O\\) is the origin. Show that \\(\\angle AOC = \\frac{7\\pi}{24}\\).\n\n(iii) Deduce that \\(\\cos \\frac{7\\pi}{24} = \\frac{\\sqrt{8 - 2\\sqrt{6} + 2\\sqrt{2}}}{4}\\).\n\n(b) The point \\(P\\) is 4 metres to the right of the origin \\(O\\) on a straight line.\n\nA particle is released from rest at \\(P\\) and moves along the straight line in simple harmonic motion about \\(O\\), with period \\(8\\pi\\) seconds.\n\nAfter \\(2\\pi\\) seconds, another particle is released from rest at \\(P\\) and also moves along this straight line in simple harmonic motion about \\(O\\), with period \\(8\\pi\\) seconds.\n\nFind when and where the two particles first collide.\n\n(c(i)c(ii)) A projectile of mass \\(M\\) kg is launched vertically upwards from the origin with an initial speed \\(v_0 \\text{ m s}^{-1}\\). The acceleration due to gravity is \\(g \\text{ m s}^{-2}\\).\n\nThe projectile experiences a resistive force of magnitude \\(kMv^2\\) newtons, where \\(k\\) is a positive constant and \\(v\\) is the speed of the projectile at time \\(t\\) seconds.\n\n(i) The maximum height reached by the particle is \\(H\\) metres. Show that \\(H = \\frac{1}{2k} \\ln \\left( \\frac{kv_0^2 + g}{g} \\right)\\).\n\n(ii) When the projectile lands on the ground, its speed is \\(v_1 \\text{ m s}^{-1}\\), where \\(v_1\\) is less than the magnitude of the terminal velocity. Show that \\(g(v_0^2 - v_1^2) = kv_0^2v_1^2\\).",
+      "answerLatex": "Official marking guide excerpt:\n(a(i)) \\[ |z+w|^2 = \\frac{1}{2}[4-\\sqrt{6}+\\sqrt{2}] \\]\n(a(ii)) \\(\\angle AOC = \\frac{7\\pi}{24}\\)\n(a(iii)) \\[ \\cos \\frac{7\\pi}{24} = \\frac{\\sqrt{8-2\\sqrt{6}+2\\sqrt{2}}}{4} \\]\n(b) Collide \\(2\\sqrt{2}\\) metres left of 0 when \\(t = 5\\pi\\).\n(c(i)) H = \\(\\frac{1}{2k} \\ln \\left( \\frac{kv_0^2 + g}{g} \\right)\\)\n(c(ii)) \\[ \\frac{1}{2k} \\ln \\left( \\frac{g}{g - kv_1^2} \\right) = H \\]\n(c(ii)) \\[ g(v_0^2 - v_1^2) = kv_0^2v_1^2 \\]",
+      "workingLatex": [
+        "(a(i)) We have \\( z = \\frac{\\sqrt{3}}{2} + \\frac{1}{2}i \\) and \\( w = -\\frac{1}{\\sqrt{2}} + \\frac{1}{\\sqrt{2}}i \\)\n\n\\[ z+w = \\left(\\frac{\\sqrt{3}}{2} + \\frac{1}{2}i\\right) + \\left(-\\frac{1}{\\sqrt{2}} + \\frac{1}{\\sqrt{2}}i\\right) \\]\n\\[ = \\left(\\frac{\\sqrt{3}}{2} - \\frac{1}{\\sqrt{2}}\\right) + \\left(\\frac{1}{2} + \\frac{1}{\\sqrt{2}}\\right)i \\]\n\\[ = \\frac{\\sqrt{3}-\\sqrt{2}}{2} + \\left(\\frac{1+\\sqrt{2}}{2}\\right)i \\]\n\n\\[ |z+w|^2 = \\frac{1}{4}\\left[(\\sqrt{3}-\\sqrt{2})^2 + (1+\\sqrt{2})^2\\right] \\]\n\\[ = \\frac{1}{4}[3-2\\sqrt{6}+2+1+2\\sqrt{2}+2] \\]\n\\[ = \\frac{1}{4}[8-2\\sqrt{6}+2\\sqrt{2}] \\]\n\\[ = \\frac{1}{2}[4-\\sqrt{6}+\\sqrt{2}] \\]",
+        "(a(i)) Marking criteria: Provides correct proof; Obtains \\( |z+w|^2 = \\frac{1}{4}((\\sqrt{3}-\\sqrt{2})^2+(1+\\sqrt{2})^2) \\), or equivalent merit; Finds \\( z \\) or \\( w \\) in Cartesian form, or equivalent merit",
+        "(a(ii)) \\(\\angle AOB = \\pi - \\frac{\\pi}{4} - \\frac{\\pi}{6} = \\frac{12\\pi - 3\\pi - 2\\pi}{12} = \\frac{7\\pi}{12}\\) \\\\ \\(OACB\\) is a parallelogram by definition of vector addition. \\\\ Since it has two adjacent sides of equal length, it is a rhombus. \\\\ A diagonal of a rhombus bisects the angle at each vertex \\\\ so \\(\\angle AOC = \\frac{1}{2}\\angle AOB = \\frac{1}{2} \\times \\frac{7\\pi}{12} = \\frac{7\\pi}{24}\\) \\\\ \\(\\angle AOC = \\frac{7\\pi}{24}\\)",
+        "(a(ii)) Marking criteria: Provides correct proof; Provides why \\(\\angle AOB = \\frac{7\\pi}{12}\\) OR \\(\\angle AOC = \\text{Arg}(w) - \\text{Arg}(z + w)\\) OR \\(OACB\\) is a rhombus OR \\(OC\\) bisects \\(\\angle AOB\\) or equivalent merit",
+        "(a(iii)) \\[ \\cos \\frac{7\\pi}{24} = \\frac{1^2 + |z+w|^2 - 1^2}{2 \\times 1 \\times |z+w|} = \\frac{1}{2}|z+w| = \\frac{1}{2} \\times \\frac{\\sqrt{4-\\sqrt{6}+\\sqrt{2}} \\times \\sqrt{2}}{\\sqrt{2} \\times \\sqrt{2}} = \\frac{\\sqrt{8-2\\sqrt{6}+2\\sqrt{2}}}{2 \\times 2} = \\frac{\\sqrt{8-2\\sqrt{6}+2\\sqrt{2}}}{4} \\]",
+        "(a(iii)) Marking criteria: Provides correct proof",
+        "(b) Since period is \\(8\\pi\\), first particle is at 0 when second particle leaves \\(P\\). First particle is at \\(Q\\) when second particle is at 0. \n\\(\therefore\\) Time of collision is \\(5\\pi\\) after first particle is released. \nAmplitude = 4 m, starts at maximum point \nPeriod = \\(8\\pi\\) \\(\therefore \\frac{2\\pi}{n} = 8\\pi \\implies n = \\frac{1}{4}\\) \n\\(\therefore\\) Equation of motion is \\(x = 4\\cos\\left(\\frac{1}{4}t\\right)\\) \nWhen \\(t = 5\\pi\\), \\(x = 4\\cos\\left(\\frac{5\\pi}{4}\\right) = -\\frac{4}{\\sqrt{2}} = -2\\sqrt{2}\\) \n\\(\therefore\\) Collide \\(2\\sqrt{2}\\) metres left of 0 when \\(t = 5\\pi\\).",
+        "(b) Marking criteria: Provides correct solution; Finds when the two particles first collide, or equivalent merit; Obtains equation of motion for the first particle or sketches a relevant diagram related to the motion of the first particle or equivalent merit",
+        "(c(i)) Upward motion: \\( M\\ddot{x} = -kMv^2 - Mg \\) at \\( t=0, x=0, \\dot{x}=v_0 \\). \\\\ \\( \\ddot{x} = -kv^2 - g \\) \\\\ \\( v \\frac{dv}{dx} = -kv^2 - g \\) \\\\ \\( \\int \\frac{v dv}{kv^2 + g} = \\int dx \\) \\\\ \\( -\\frac{1}{2k} \\ln |kv^2 + g| = x + c \\) \\\\ At \\( x=0, v=v_0 \\) therefore \\( -\\frac{1}{2k} \\ln |kv_0^2 + g| = x + c \\) \\\\ \\( \\therefore x = \\frac{1}{2k} \\ln |kv_0^2 + g| - \\frac{1}{2k} \\ln |kv^2 + g| = \\frac{1}{2k} \\ln \\left| \\frac{kv_0^2 + g}{kv^2 + g} \\right| \\) \\\\ When \\( x=H, v=0 \\) \\\\ \\( \\therefore H = \\frac{1}{2k} \\ln \\left| \\frac{kv_0^2 + g}{g} \\right| \\) \\\\ But \\( kv_0^2 + g \\) and \\( g > 0 \\) so \\( H = \\frac{1}{2k} \\ln \\left( \\frac{kv_0^2 + g}{g} \\right) \\)",
+        "(c(i)) Marking criteria: Provides correct solution; Obtains x as a function of v for upwards motion, or equivalent merit; Obtains force equation for upwards part of flight, or equivalent merit",
+        "(c(ii)) Downward motion (downward direction positive) \\(x = 0, v = 0\\) \\n \\(M\\ddot{x} = Mg - kMv^2\\) \\n \\(\\ddot{x} = g - kv^2\\) \\n \\(v \\frac{dv}{dx} = g - kv^2\\) \\n \\(\\int \\frac{v dv}{g - kv^2} = \\int dx\\) \\n \\(-\\frac{1}{2k} \\ln |g - kv^2| = x + c\\) \\n \\(-\\frac{1}{2k} \\ln |g| = 0 + c\\) \\n \\(\\therefore \\frac{1}{2k} \\ln |g| - \\frac{1}{2k} \\ln |g - kv^2| = x\\) \\n \\(\\frac{1}{2k} \\ln \\left| \\frac{g}{g - kv^2} \\right| = x\\) \\n \\(x = H, v = v_1\\) \\n \\(\\frac{1}{2k} \\ln \\left| \\frac{g}{g - kv_1^2} \\right| = H \\quad (1)\\) \\n The particle never reaches terminal velocity so \\(g - kv_1^2 > 0\\) \\n \\(\\frac{1}{2k} \\ln \\left( \\frac{g}{g - kv_1^2} \\right) = H \\quad (2)\\)",
+        "(c(ii)) Marking criteria: Provides correct solution; Equates correct expressions for \\(H\\) from parts (i) and (ii), with absolute values correctly dealt with, or equivalent merit; Finds the force or acceleration equation of the downwards motion",
+        "(c(ii)) \\[ \\frac{1}{2k}\\ln\\left(\\frac{kv_0^2+g}{g}\\right) = \\frac{1}{2k}\\ln\\left(\\frac{g}{g-kv_1^2}\\right) \\implies \\frac{kv_0^2+g}{g} = \\frac{g}{g-kv_1^2} \\implies (kv_0^2+g)(g-kv_1^2) = g^2 \\implies kv_0^2g - k^2v_0^2v_1^2 + g^2 - gkv_1^2 = g^2 \\implies kv_0^2g - k^2v_0^2v_1^2 - gkv_1^2 = 0 \\implies kg(v_0^2 - v_1^2) = k^2v_0^2v_1^2 \\implies g(v_0^2 - v_1^2) = kv_0^2v_1^2 \\]",
+        "(c(ii)) Marking criteria: This page provides the continuation of the algebraic derivation for Question 14 (c) (ii)."
+      ],
+      "tags": [
+        "official-draft",
+        "2023",
+        "section-ii",
+        "Mathematics Extension 2",
+        "gemini-reviewed",
+        "auto-promoted"
+      ],
+      "assets": [],
+      "source": {
+        "examPackUrl": "https://local.sourceexams.invalid/source-ext2-2023",
+        "pageRef": "Exam paper pages 13",
+        "markingGuideRef": "Marking guidelines pages 19-22, 24-26",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2023-q15-using-complex-numbers",
+      "paperId": "ext2-2023",
+      "year": 2023,
+      "questionNumber": "Q15",
+      "title": "Q15 (a(i)) Let J_n = _0^2 ^n \\, d where n 0 is an integer. Show that J_n = n-1n J_n-2 for ",
+      "marks": 36,
+      "style": "extended-response",
+      "topic": "Complex Numbers",
+      "subtopic": "Using Complex Numbers",
+      "syllabusNodeIds": ["old-me2-n2", "old-me2-v1", "old-me2-n1"],
+      "promptLatex": "(a(i)) Let \\(J_n = \\int_0^{\\frac{\\pi}{2}} \\sin^n \\theta \\, d\\theta\\) where \\(n \\ge 0\\) is an integer. Show that \\(J_n = \\frac{n-1}{n} J_{n-2}\\) for all integers \\(n \\ge 2\\).\n\n(a(i)a(ii)a(iii)) Use the Question 15 Writing Booklet.\n\n(a(ii)) Let \\(I_n = \\int_0^1 x^n(1-x)^n \\, dx\\) where \\(n\\) is a positive integer. By using the substitution \\(x = \\sin^2 \\theta\\), or otherwise, show that \\(I_n = \\frac{1}{2^{2n}} \\int_0^{\\frac{\\pi}{2}} \\sin^{2n+1} \\theta \\, d\\theta\\).\n\n(a(iii)) Hence, or otherwise, show that \\(I_n = \\frac{n}{4n+2} I_{n-1}\\), for all integers \\(n \\ge 1\\).\n\n(b) On the triangular pyramid \\(ABCD\\), \\(L\\) is the midpoint of \\(AB\\), \\(M\\) is the midpoint of \\(AC\\), \\(N\\) is the midpoint of \\(AD\\), \\(P\\) is the midpoint of \\(CD\\), \\(Q\\) is the midpoint of \\(BD\\) and \\(R\\) is the midpoint of \\(BC\\). Let \\(\\underset{\\sim}{b} = \\vec{AB}\\), \\(\\underset{\\sim}{c} = \\vec{AC}\\) and \\(\\underset{\\sim}{d} = \\vec{AD}\\).\n\n(b(i)) Show that \\(\\vec{LP} = \\frac{1}{2}(-\\underset{\\sim}{b} + \\underset{\\sim}{c} + \\underset{\\sim}{d})\\).\n\n(b(ii)) It can be shown that \\(\\vec{MQ} = \\frac{1}{2}(\\underset{\\sim}{b} - \\underset{\\sim}{c} + \\underset{\\sim}{d})\\) and \\(\\vec{NR} = \\frac{1}{2}(\\underset{\\sim}{b} + \\underset{\\sim}{c} - \\underset{\\sim}{d})\\). (Do NOT prove these.) Prove that \\(|\\vec{AB}|^2 + |\\vec{AC}|^2 + |\\vec{AD}|^2 + |\\vec{BC}|^2 + |\\vec{BD}|^2 + |\\vec{CD}|^2 = 4(|\\vec{LP}|^2 + |\\vec{MQ}|^2 + |\\vec{NR}|^2)\\).\n\n(c) A curve \\(\\mathcal{C}\\) spirals 3 times around the sphere centred at the origin and with radius 3, as shown. A particle is initially at the point \\((0, 0, -3)\\) and moves along the curve \\(\\mathcal{C}\\) on the surface of the sphere, ending at the point \\((0, 0, 3)\\). By using the diagram below, which shows the graphs of the functions \\(f(x) = \\cos(\\pi x)\\) and \\(g(x) = \\sqrt{9 - x^2}\\), and considering the graph \\(y = f(x)g(x)\\), give a possible set of parametric equations that describe the curve \\(\\mathcal{C}\\).",
+      "answerLatex": "Official marking guide excerpt:\n(a(i)) \\[ J_n = \\frac{n-1}{n} J_{n-2} \\]\n(a(ii)) \\[ I_n = \\frac{1}{2^{2n}} \\int_{0}^{\\frac{\\pi}{2}} \\sin^{2n+1}(2\\theta) \\, d\\theta \\]\n(a(ii)) This page provides a continuation of the derivation for Question 15 (a) (ii), showing the substitution \\(\\phi = 2\\theta\\) and the symmetry property of the integral \\(\\int_{0}^{\\pi} \\sin^{2n+1} \\phi \\, d\\phi = 2 \\int_{0}^{\\frac{\\pi}{2}} \\sin^{2n+1} \\phi \\, d\\phi\\) to demonstrate that \\(I_n = \\frac{1}{2^n} \\int_{0}^{\\frac{\\pi}{2}} \\sin^{2n+1} \\theta \\, d\\theta\\).\n(a(iii)) \\(I_n = \\frac{n}{4n+2}I_{n-1}\\)\n(b(i)) \\(\\vec{LP} = \\frac{1}{2}(-\\underset{\\sim}{b} + \\underset{\\sim}{c} + \\underset{\\sim}{d})\\)\n(b(ii)) \\[ \\overline{MQ} = \\frac{1}{2}(\\underline{d} + \\underline{b} - \\underline{c}) \\] \\[ \\overline{NR} = \\frac{1}{2}(\\underline{b} + \\underline{c} - \\underline{d}) \\] \\[ \\text{RHS} = 4\\left(|\\overline{LP}|^2 + |\\overline{MQ}|^2 + |\\overline{NR}|^2\\right) = \\dots = \\text{LHS} \\]\n(c) \\[ x = \\cos(\\pi t)\\sqrt{9-t^2}, \\quad y = -\\sin(\\pi t)\\sqrt{9-t^2}, \\quad z = t \\]\n(c) \\[ x = \\sqrt{9-t^2} \\cos(\\pi t), \\quad y = -\\sqrt{9-t^2} \\sin(\\pi t), \\quad z = t \\]",
+      "workingLatex": [
+        "(a(i)) \\[ J_n = \\int_0^{\\frac{\\pi}{2}} \\sin^n \\theta \\, d\\theta = \\int_0^{\\frac{\\pi}{2}} \\sin \\theta \\sin^{n-1} \\theta \\, d\\theta \\] \\[ = \\left[-\\cos \\theta \\sin^{n-1} \\theta \\right]_0^{\\frac{\\pi}{2}} - \\int_0^{\\frac{\\pi}{2}} (-\\cos \\theta)(n-1)\\sin^{n-2} \\theta \\cos \\theta \\, d\\theta \\] \\[ = 0 - 0 + (n-1) \\int_0^{\\frac{\\pi}{2}} \\cos^2 \\theta \\sin^{n-2} \\theta \\, d\\theta \\] \\[ = (n-1) \\int_0^{\\frac{\\pi}{2}} (1 - \\sin^2 \\theta) \\sin^{n-2} \\theta \\, d\\theta \\] \\[ = (n-1) \\int_0^{\\frac{\\pi}{2}} \\sin^{n-2} \\theta \\, d\\theta - (n-1) \\int_0^{\\frac{\\pi}{2}} \\sin^n \\theta \\, d\\theta \\] \\[ J_n = (n-1)J_{n-2} - (n-1)J_n \\] \\[ nJ_n = (n-1)J_{n-2} \\] \\[ J_n = \\frac{n-1}{n} J_{n-2} \\]",
+        "(a(i)) Marking criteria: Provides correct proof; Applies integration by parts using \\(\\sin \\theta \\times \\sin^{n-1} \\theta\\) and the limits of integration, or equivalent merit; Writes \\(\\sin^n \\theta = \\sin \\theta \\times \\sin^{n-1} \\theta\\) and attempts integration by parts on these factors OR Applies integration by parts, or equivalent merit",
+        "(a(ii)) \\[ I_n = \\int_{0}^{1} x^n (1-x)^n \\, dx \\]\nIf \\(x = \\sin^2\\theta\\) then \\(\\frac{dx}{d\\theta} = 2\\sin\\theta\\cos\\theta = \\sin 2\\theta\\)\nat \\(x=0, \\theta=0\\)\nat \\(x=1, \\theta=\\frac{\\pi}{2}\\)\n\\[ I_n = \\int_{0}^{1} x^n (1-x)^n \\, dx \\]\n\\[ = \\int_{0}^{\\frac{\\pi}{2}} \\sin^{2n}\\theta (1-\\sin^2\\theta)^n \\sin 2\\theta \\, d\\theta \\]\n\\[ = \\int_{0}^{\\frac{\\pi}{2}} \\sin^{2n}\\theta \\cos^{2n}\\theta \\sin 2\\theta \\, d\\theta \\]\n\\[ = \\frac{1}{2^{2n}} \\int_{0}^{\\frac{\\pi}{2}} \\sin^{2n}(2\\theta) \\sin(2\\theta) \\, d\\theta \\]\n\\[ = \\frac{1}{2^{2n}} \\int_{0}^{\\frac{\\pi}{2}} \\sin^{2n+1}(2\\theta) \\, d\\theta \\]",
+        "(a(ii)) Marking criteria: Provides correct proof; Uses an appropriate substitution to obtain a correct definite integral from 0 to \\(\\pi\\) in terms of \\(\\phi = 2\\theta\\), or equivalent merit; Obtains a definite integral in terms of \\(\\sin 2\\theta\\), or equivalent merit; Correctly uses given substitution to obtain a definite integral in terms of \\(\\theta\\) or equivalent merit",
+        "(a(ii)) See derivation steps: \\(I_n = \\frac{1}{2^n} \\int_{0}^{\\frac{\\pi}{2}} \\sin^{2n+1} \\theta \\, d\\theta\\)",
+        "(a(ii)) Marking criteria: This page contains working out for a previous question part and does not contain specific marking criteria or mark allocations.",
+        "(a(iii)) \\[\\begin{aligned} I_n &= \\frac{1}{2^{2n}} \\int_0^{\\frac{\\pi}{2}} \\sin^{2n+1}\\theta \\, d\\theta \\ &= \\frac{1}{2^{2n}} J_{2n+1} \\ &= \\frac{1}{2^{2n}} \\left( \\frac{(2n+1)-1}{2n+1} \\right) J_{2n-1} \\ &= \\frac{1}{2^{2n}} \\times \\frac{2n}{2n+1} J_{2(n-1)+1} \\ \\text{But } I_n &= \\frac{1}{2^{2n}} J_{2n+1} \\ 2^{2n} I_n &= J_{2n+1} \\ 2^{2(n-1)} I_{n-1} &= J_{2(n-1)+1} = J_{2n-1} \\ I_n &= \\frac{1}{2^{2n}} \\times \\frac{2n}{2n+1} \\times 2^{2(n-1)} I_{n-1} \\ &= \\frac{1}{2^2} \\times \\frac{2n}{2n+1} \\times I_{n-1} \\ &= \\frac{n}{4n+2} I_{n-1} \\end{aligned}\\]",
+        "(a(iii)) Marking criteria: Provides correct proof; Obtains \\(I_n\\) in terms of \\(J_{2n-1}\\), or equivalent merit",
+        "(b(i)) \\[\\begin{aligned} \\vec{LP} &= \\vec{LB} + \\vec{BC} + \\vec{CP} \\\\ &= \\frac{1}{2}\\underset{\\sim}{b} + (\\underset{\\sim}{c} - \\underset{\\sim}{b}) + \\frac{1}{2}(\\underset{\\sim}{d} - \\underset{\\sim}{c}) \\\\ &= \\frac{1}{2}\\underset{\\sim}{b} + \\underset{\\sim}{c} - \\underset{\\sim}{b} + \\frac{1}{2}\\underset{\\sim}{d} - \\frac{1}{2}\\underset{\\sim}{c} \\\\ &= -\\frac{1}{2}\\underset{\\sim}{b} + \\frac{1}{2}\\underset{\\sim}{c} + \\frac{1}{2}\\underset{\\sim}{d} \\\\ &= \\frac{1}{2}(-\\underset{\\sim}{b} + \\underset{\\sim}{c} + \\underset{\\sim}{d}) \\end{aligned}\\]",
+        "(b(i)) Marking criteria: Provides correct solution",
+        "(b(ii)) \\[\\overline{MQ} = \\frac{1}{2}(\\underline{d} + \\underline{b} - \\underline{c}) \\\\ \\overline{NR} = \\frac{1}{2}(\\underline{b} + \\underline{c} - \\underline{d}) \\\\ \\text{RHS} = 4\\left(|\\overline{LP}|^2 + |\\overline{MQ}|^2 + |\\overline{NR}|^2\\right) \\\\ = 4\\left(\\overline{LP} \\cdot \\overline{LP} + \\overline{MQ} \\cdot \\overline{MQ} + \\overline{NR} \\cdot \\overline{NR}\\right) \\\\ = 4\\left(\\frac{1}{4}(-\\underline{b} + \\underline{c} + \\underline{d}) \\cdot (-\\underline{b} + \\underline{c} + \\underline{d}) + \\frac{1}{4}(\\underline{d} + \\underline{b} - \\underline{c}) \\cdot (\\underline{d} + \\underline{b} - \\underline{c}) + \\frac{1}{4}(\\underline{b} + \\underline{c} - \\underline{d}) \\cdot (\\underline{b} + \\underline{c} - \\underline{d})\\right) \\\\ = (\\underline{c} + (\\underline{d} - \\underline{b})) \\cdot (\\underline{c} + (\\underline{d} - \\underline{b})) + (\\underline{d} + (\\underline{b} - \\underline{c})) \\cdot (\\underline{d} + (\\underline{b} - \\underline{c})) + (\\underline{b} + (\\underline{c} - \\underline{d})) \\cdot (\\underline{b} + (\\underline{c} - \\underline{d})) \\\\ = |\\underline{c}|^2 + 2\\underline{c} \\cdot (\\underline{d} - \\underline{b}) + |\\underline{d} - \\underline{b}|^2 + |\\underline{d}|^2 + 2\\underline{d} \\cdot (\\underline{b} - \\underline{c}) + |\\underline{b} - \\underline{c}|^2 + |\\underline{b}|^2 + 2\\underline{b} \\cdot (\\underline{c} - \\underline{d}) + |\\underline{c} - \\underline{d}|^2 \\\\ = |\\underline{b}|^2 + |\\underline{c}|^2 + |\\underline{d}|^2 + |\\underline{b} - \\underline{c}|^2 + |\\underline{d} - \\underline{b}|^2 + |\\underline{c} - \\underline{d}|^2 + 2[\\underline{c} \\cdot \\underline{d} - \\underline{c} \\cdot \\underline{b} + \\underline{d} \\cdot \\underline{b} - \\underline{d} \\cdot \\underline{c} + \\underline{b} \\cdot \\underline{c} - \\underline{b} \\cdot \\underline{d}] \\\\ = |\\overline{AB}|^2 + |\\overline{AC}|^2 + |\\overline{AD}|^2 + |\\overline{BC}|^2 + |\\overline{BD}|^2 + |\\overline{CD}|^2 + 2 \\times 0 \\\\ = \\text{LHS}\\]",
+        "(b(ii)) Marking criteria: Provides correct solution; Correctly expands LHS or RHS in terms of \\(\\underline{b}, \\underline{c}, \\underline{d}\\) using dot products, or equivalent merit; Obtains \\(|\\overline{LP}|^2 = |\\underline{c}|^2 + 2\\underline{c} \\cdot \\underline{d} - 2\\underline{c} \\cdot \\underline{b} + |\\underline{d} - \\underline{b}|^2\\), or equivalent merit",
+        "(c) Graph of \\( y = \\cos(\\pi x)\\sqrt{9-x^2} \\) for \\( -3 \\le x \\le 3 \\). Projecting curve \\( \\mathcal{C} \\) on sphere onto xz-plane gives the curve above. So if \\( z = t \\), \\( x = \\cos(\\pi t)\\sqrt{9-t^2} \\). Similarly, projecting curve onto yz-plane gives \\( y = -\\sin(\\pi t)\\sqrt{9-t^2} \\). Therefore, parametric equations are \\( x = \\cos(\\pi t)\\sqrt{9-t^2} \\), \\( y = -\\sin(\\pi t)\\sqrt{9-t^2} \\), \\( z = t \\).",
+        "(c) Marking criteria: Provides correct solution; Provides parametric equations of a curve that lies on the sphere, or equivalent merit; Sketches the graph \\( y = f(x)g(x) \\), or equivalent merit",
+        "(c) \\[ x = \\sqrt{9-t^2} \\cos(\\pi t) \\] \\[ y = -\\sqrt{9-t^2} \\sin(\\pi t) \\] \\[ z = t \\]",
+        "(c) Marking criteria: Alternative solution provided for Question 15 (c)"
+      ],
+      "tags": [
+        "official-draft",
+        "2023",
+        "section-ii",
+        "Mathematics Extension 2",
+        "gemini-reviewed",
+        "auto-promoted"
+      ],
+      "assets": [
+        {
+          "id": "ext2-2023-q15-p15-v1",
+          "type": "diagram",
+          "label": "Question 15 diagram",
+          "alt": "Triangular pyramid ABCD with midpoints L, M, N, P, Q, R labeled on respective edges",
+          "path": "/assets/diagrams/ext2-2023-q15-p15-v1.png",
+          "sourceStatus": "exam-derived"
+        },
+        {
+          "id": "ext2-2023-q15-p16-v1",
+          "type": "diagram",
+          "label": "Question 15 diagram",
+          "alt": "3D diagram of a curve spiralling 3 times around a sphere of radius 3 centred at the origin, with x, y, z axes and axis labels",
+          "path": "/assets/diagrams/ext2-2023-q15-p16-v1.png",
+          "sourceStatus": "exam-derived"
+        },
+        {
+          "id": "ext2-2023-q15-p16-v2",
+          "type": "graph",
+          "label": "Question 15 graph",
+          "alt": "2D graph showing the functions y = sqrt(9 - x^2) (semicircle) and y = cos(pi*x) plotted on the same axes, with axis labels and tick marks",
+          "path": "/assets/diagrams/ext2-2023-q15-p16-v2.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://local.sourceexams.invalid/source-ext2-2023",
+        "pageRef": "Exam paper pages 14-16",
+        "markingGuideRef": "Marking guidelines pages 27-34",
+        "transcriptionStatus": "draft"
+      }
+    },
+    {
+      "id": "ext2-2023-q16-introduction-to-complex-numbers",
+      "paperId": "ext2-2023",
+      "year": 2023,
+      "questionNumber": "Q16",
+      "title": "Q16 (a) Let w be the complex number w = e^2i3. (ai) Show that 1 + w + w^2 = 0. (aii) The v",
+      "marks": 14,
+      "style": "extended-response",
+      "topic": "Complex Numbers",
+      "subtopic": "Introduction to Complex Numbers",
+      "syllabusNodeIds": ["old-me2-n1", "old-me2-n2", "old-me2-v1"],
+      "promptLatex": "(a) Let \\(w\\) be the complex number \\(w = e^{\\frac{2i\\pi}{3}}\\).\n\n(ai) Show that \\(1 + w + w^2 = 0\\).\n\n(aii) The vertices of a triangle can be labelled \\(A\\), \\(B\\) and \\(C\\) in anticlockwise or clockwise direction, as shown. Three complex numbers \\(a\\), \\(b\\) and \\(c\\) are represented in the complex plane by points \\(A\\), \\(B\\) and \\(C\\) respectively. Show that if triangle \\(ABC\\) is anticlockwise and equilateral, then \\(a + bw + cw^2 = 0\\).\n\n(aiii) It can be shown that if triangle \\(ABC\\) is clockwise and equilateral, then \\(a + bw^2 + cw = 0\\). (Do NOT prove this.) Show that if \\(ABC\\) is an equilateral triangle, then \\[a^2 + b^2 + c^2 = ab + bc + ca.\\]\n\n(b(i)b(ii)) (b) (i) Prove that \\(x > \\ln x\\), for \\(x > 0\\).\n(ii) Using part (i), or otherwise, prove that for all positive integers \\(n\\),\n\\[e^{n^2+n} > (n!)^2.\\]\n\n(c) (c) The complex numbers \\(w\\) and \\(z\\) both have modulus 1, and \\(\\frac{\\pi}{2} < \\text{Arg}\\left(\\frac{z}{w}\\right) < \\pi\\), where Arg denotes the principal argument.\n\nFor real numbers \\(x\\) and \\(y\\), consider the complex number \\(\\frac{xz + yw}{z}\\).\n\nOn an \\(xy\\)-plane, clearly sketch the region that contains all points \\((x, y)\\) for which\n\\[\\frac{\\pi}{2} < \\text{Arg}\\left(\\frac{xz + yw}{z}\\right) < \\pi.\\]",
+      "answerLatex": "Official marking guide excerpt:\n(a(i)) As \\(w \\neq 1\\), \\(1 + w + w^2 = \\frac{1 - w^3}{1 - w} = 0\\) since \\(w^3 = \\left(e^{\\frac{2i\\pi}{3}}\\right)^3 = 1\\)\n(a(ii)) Suppose triangle \\(ABC\\) is equilateral and anticlockwise. Rotating \\(\\overline{AC}\\) by \\(+\\frac{2\\pi}{3}\\) brings it onto \\(\\overline{BA}\\) so \\(w(c - a) = a - b\\). Then \\(a(1 + w) - b - wc = 0 \\Rightarrow -aw^2 - b - wc = 0\\) (by part (i)) \\(\\Rightarrow a + bw + w^2c = 0\\) (multiplying by \\(-w\\))\n(a(iii)) \\[ a^2 + b^2 + c^2 = ab + bc + ac \\]\n(b(i)) Let \\(f(x) = x - \\ln x\\) for \\(x > 0\\). Since \\(f'(x) = 1 - \\frac{1}{x}\\), the minimum occurs at \\(x=1\\) where \\(f(1) = 1 - \\ln 1 = 1\\). Thus \\(f(x) \\ge 1\\) for all \\(x > 0\\), which implies \\(x - \\ln x > 0\\), or \\(x > \\ln x\\).\n(b(ii)) \\[ e^{n^2+n} > (n!)^2 \\]\n(c) The region is identified as lying in the second quadrant of the complex plane.\n(c) This page provides a continuation of the working for Question 16(c). The derivation shows: \\[ \\text{Re}\\left(\\frac{w}{z}\\right) = \\cos(-\\theta) \\] \\[ x + y\\cos(-\\theta) < 0 \\] \\[ x < -\\cos(\\theta)y \\] Given \\(\\cos\\) is even and \\(-1 < \\cos(\\theta) < 0\\) for \\(\\frac{\\pi}{2} < \\theta < \\pi\\), it follows that \\(0 < -\\cos(\\theta) < 1\\), leading to \\(-\\sec(\\theta) > 1\\) and \\(y > -\\sec(\\theta)x\\).",
+      "workingLatex": [
+        "(a(i)) As \\(w \\neq 1\\), \\(1 + w + w^2 = \\frac{1 - w^3}{1 - w} = 0\\) since \\(w^3 = \\left(e^{\\frac{2i\\pi}{3}}\\right)^3 = 1\\)",
+        "(a(i)) Marking criteria: Provides correct proof; Recognises that \\(1 + w + w^2\\) is a factor of \\(1 - w^3\\), or equivalent merit",
+        "(a(ii)) Suppose triangle \\(ABC\\) is equilateral and anticlockwise. Rotating \\(\\overline{AC}\\) by \\(+\\frac{2\\pi}{3}\\) brings it onto \\(\\overline{BA}\\) so \\(w(c - a) = a - b\\). Then \\(a(1 + w) - b - wc = 0 \\Rightarrow -aw^2 - b - wc = 0\\) (by part (i)) \\(\\Rightarrow a + bw + w^2c = 0\\) (multiplying by \\(-w\\))",
+        "(a(ii)) Marking criteria: Provides correct proof; Attempts to use the fact that \\(\\overline{AC}\\) rotated by \\(\\frac{2\\pi}{3}\\) is \\(\\overline{BA}\\), or equivalent merit",
+        "(a(iii)) Suppose \\(ABC\\) is equilateral. It is either anticlockwise or clockwise. Therefore \\(a + bw + cw^2 = 0\\) or \\(a + bw^2 + cw = 0\\). This is equivalent to \\((a + bw + cw^2)(a + bw^2 + cw) = 0\\). Since a product is zero if and only if one of its factors is zero, \\((a + bw + cw^2)(a + bw^2 + cw) = 0 \\iff a^2 + bw^3 + cw^3 + ab(w^2 + w) + bc(w^2 + w^4) + ac(w + w^2) = 0 \\iff a^2 + b^2 + c^2 - (ab + bc + ac) = 0\\) (since \\(w^3 = 1\\) and \\(w + w^2 = -1\\) by part (i)) \\(\\iff a^2 + b^2 + c^2 = ab + bc + ac\\) as required.",
+        "(a(iii)) Marking criteria: Provides correct solution; Identifies that in either situation the product is 0, or equivalent merit",
+        "(b(i)) Let \\(f(x) = x - \\ln x\\) for \\(x > 0\\). \\(f'(x)\\) has the same sign as \\(x - 1\\) when \\(x > 0\\). This shows that \\(\\forall x > 0, f(x) \\ge 1\\), that is, \\(x - \\ln x \\ge 1\\). This implies \\(\\forall x > 0, x - \\ln x > 0\\) so \\(x > \\ln x\\).",
+        "(b(i)) Marking criteria: Provides correct proof; Defines a function \\(f(x) = x - \\ln x\\), or equivalent merit",
+        "(b(ii)) Assume \\(n\\) is a positive integer. \n\\[ \\[\\begin{aligned} n &> \\ln n \\ n-1 &> \\ln(n-1) \\ &\\vdots \\ 2 &> \\ln(2) \\ 1 &> \\ln(1) \\end{aligned}\\] \\] \nAdding all those inequalities gives \\(1 + 2 + \\dots + (n-1) + n > \\ln(n) + \\ln(n-1) + \\dots + \\ln(2) + \\ln 1\\). \n\\[ \\frac{n(n+1)}{2} > \\ln(n!) \\] \n\\[ n^2 + n > 2\\ln(n!) = \\ln((n!)^2) \\] \nBy taking the exponential of both sides, we get \\(e^{n^2+n} > (n!)^2\\) as required.",
+        "(b(ii)) Marking criteria: Provides correct proof; Applies part (i) to each term of \\(\\sum_{i=1}^{n} \\ln i\\) OR Establishes inductive step OR Recognises that the question is equivalent to showing \\(n^2 + n > 2 \\left( \\sum_{i=1}^{n} \\ln i \\right)\\); Uses part (i) to establish base case of induction, or equivalent merit",
+        "(c) Let \\(\\theta = \\text{Arg}\\left(\\frac{z}{w}\\right)\\), then \\(\\frac{\\pi}{2} < \\theta < \\pi\\). As \\(\\left|\\frac{z}{w}\\right| = \\frac{|z|}{|w|} = 1\\), \\(\\frac{w}{z} = \\overline{\\left(\\frac{z}{w}\\right)}\\). So \\(\\text{Arg}\\left(\\frac{w}{z}\\right) = -\\theta\\). \\(\\frac{xz + yw}{z} = x + y\\frac{w}{z} = x + 1 + y\\frac{w}{z}\\). For \\(\\frac{\\pi}{2} < \\text{Arg}\\left(\\frac{xz + yw}{z}\\right) < \\pi\\), the number \\(x + y\\frac{w}{z}\\) must lie in the second quadrant of the complex plane. Clearly \\(y < 0\\), otherwise \\(x + y\\frac{w}{z}\\) lies below the \\(x\\)-axis. The real part of \\(x + y\\frac{w}{z}\\) must be negative.",
+        "(c) Marking criteria: Provides correct sketch; Identifies the quadrant in which the region lies, or equivalent merit; Identifies a quadrant that is excluded, or equivalent merit",
+        "(c) See derivation in answerLatex."
+      ],
+      "tags": [
+        "official-draft",
+        "2023",
+        "section-ii",
+        "Mathematics Extension 2",
+        "gemini-reviewed",
+        "auto-promoted"
+      ],
+      "assets": [
+        {
+          "id": "ext2-2023-q16-p17-v1",
+          "type": "diagram",
+          "label": "Question 16 diagram",
+          "alt": "Two triangles labelled ABC, one anticlockwise and one clockwise, showing vertex labelling directions",
+          "path": "/assets/diagrams/ext2-2023-q16-p17-v1.png",
+          "sourceStatus": "exam-derived"
+        }
+      ],
+      "source": {
+        "examPackUrl": "https://local.sourceexams.invalid/source-ext2-2023",
+        "pageRef": "Exam paper pages 17-18",
+        "markingGuideRef": "Marking guidelines pages 35-40",
         "transcriptionStatus": "draft"
       }
     },
