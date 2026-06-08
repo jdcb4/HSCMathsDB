@@ -2,6 +2,13 @@
 
 Newest entries go at the top.
 
+## 0.40.0 - 2026-06-08
+
+- Added a repeatable Gemini report promotion command, `pnpm run data:promote-gemini-ingestion -- <paperId>`, which turns a reviewed proposal report into draft corpus records and public exam-derived diagram assets.
+- Promoted 2023 Mathematics Extension 1 into the corpus as 14 official draft records with 10 reviewed Sonnet bbox crop assets.
+- Updated the 2023 Mathematics Extension 1 source pack to 14 imported questions, complete public asset status, and complete paper source status.
+- Confirmed the promoted 2023 Mathematics Extension 1 paper passes `data:validate` and `data:audit-ingested-exams -- ext1-2023` with zero errors and zero warnings.
+
 ## 0.39.1 - 2026-06-08
 
 - Tightened the optional crop QA prompt so omitted question text is treated as intentional and not a crop defect.

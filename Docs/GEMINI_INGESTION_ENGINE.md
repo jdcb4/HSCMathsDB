@@ -10,6 +10,7 @@ under ignored `var/` paths.
 ```powershell
 pnpm run data:propose-gemini-ingestion -- std1-2023
 pnpm run data:publish-gemini-ingestion-report -- std1-2023
+pnpm run data:promote-gemini-ingestion -- std1-2023
 ```
 
 Useful scoped runs:
@@ -82,6 +83,16 @@ The publisher copies referenced page/crop images into `public/ingestion-reports/
 and rewrites report pages to use stable relative image URLs. The draft question preview also inlines
 crop images so local browser extensions cannot block the review surface. Generated report folders are
 ignored by git.
+
+After the preview is reviewed and accepted, promote the report into the corpus:
+
+```powershell
+pnpm run data:promote-gemini-ingestion -- std1-2023
+```
+
+The promoter copies accepted crop candidates into `public/assets/diagrams/`, removes any existing
+question records for the paper, writes draft corpus records from the reviewed report, and updates the
+paper/source-pack import counters.
 
 To compare crop QA/repair models while holding page transcription and marking-guide extraction steady,
 publish each variant with a distinct `--output-id`, then build a side-by-side crop comparison page:
@@ -157,7 +168,8 @@ Result:
 - 0 page-level errors
 - 0 question-level reconciliation or notation flags after deterministic and AI repair
 - 10 crop candidates generated from Sonnet visual bbox proposals
-- Crop QA skipped by default; the published draft question preview is the manual review surface
+- The reviewed proposal was promoted to 14 draft corpus records with 10 public exam-derived assets
+- `pnpm run data:audit-ingested-exams -- ext1-2023` reports zero errors and zero warnings
 
 ## 2023 Standard 1 Crop Model Comparison
 

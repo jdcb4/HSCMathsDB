@@ -30,7 +30,7 @@ describe("HSC selectors", () => {
   });
 
   it("sorts question numbers numerically within a year", () => {
-    const results = queryQuestions(database, { year: 2023 });
+    const results = queryQuestions(database, { courseId: "advanced", year: 2023 });
 
     expect(results.slice(0, 12).map((question) => question.questionNumber)).toEqual([
       "Q1",
@@ -301,6 +301,7 @@ describe("HSC selectors", () => {
     expect(database.questions.filter((question) => question.paperId === "std1-2024")).toHaveLength(32);
     expect(database.questions.filter((question) => question.paperId === "std2-2024")).toHaveLength(41);
     expect(database.questions.filter((question) => question.paperId === "ext1-2025")).toHaveLength(14);
+    expect(database.questions.filter((question) => question.paperId === "ext1-2023")).toHaveLength(14);
     expect(database.questions.filter((question) => question.paperId === "ext2-2025")).toHaveLength(16);
     expect(database.questions.filter((question) => question.paperId === "ext1-2024")).toHaveLength(14);
     expect(database.questions.filter((question) => question.paperId === "ext2-2024")).toHaveLength(16);
@@ -315,7 +316,7 @@ describe("HSC selectors", () => {
 
   it("filters question options and source packs by course", () => {
     expect(getFilterOptionsForCourse(database, "standard").years).toEqual([2025, 2024]);
-    expect(getFilterOptionsForCourse(database, "extension-1").years).toEqual([2025, 2024]);
+    expect(getFilterOptionsForCourse(database, "extension-1").years).toEqual([2025, 2024, 2023]);
     expect(getFilterOptionsForCourse(database, "extension-2").years).toEqual([2025, 2024]);
     expect(getSourcePackCoverageForCourse(database, "standard").map((pack) => pack.id)).toEqual([
       "source-std-2025",
@@ -323,7 +324,7 @@ describe("HSC selectors", () => {
       "source-std-2023"
     ]);
     expect(queryQuestions(database, { courseId: "standard" })).toHaveLength(141);
-    expect(queryQuestions(database, { courseId: "extension-1" })).toHaveLength(28);
+    expect(queryQuestions(database, { courseId: "extension-1" })).toHaveLength(42);
     expect(queryQuestions(database, { courseId: "extension-2" })).toHaveLength(32);
     expect(queryQuestions(database, { courseId: "advanced", year: 2025 })).toHaveLength(31);
   });

@@ -55,6 +55,7 @@ GoalCheck HSC is a Vite React TypeScript web app for browsing NSW HSC mathematic
 | `pnpm run data:render-pages`                    | Render cached PDF pages into ignored PNG page images.                                     |
 | `pnpm run data:propose-diagram-crops`           | Generate reviewable diagram crop proposals from inventory and rendered pages.             |
 | `pnpm run data:propose-gemini-ingestion`        | Generate Gemini page-image ingestion proposals and a local review report.                 |
+| `pnpm run data:promote-gemini-ingestion`        | Promote a reviewed Gemini ingestion report into draft corpus records and public assets.   |
 | `pnpm run data:publish-gemini-ingestion-report` | Publish an ignored Gemini ingestion report copy under `public/` for local browser review. |
 | `pnpm run data:generate-explanation-samples`    | Generate ignored LLM explanation comparison samples for manual review.                    |
 | `pnpm run data:generate-worked-solutions`       | Generate or refresh primary worked-solution sidecar records through OpenRouter.           |
