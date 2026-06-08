@@ -1,0 +1,3358 @@
+{
+  "schemaVersion": 2,
+  "updatedAt": "2026-06-06",
+  "purpose": "Map NSW Stage 6 mathematics syllabus nodes from the 2017 syllabuses to the 2024 11-12 syllabuses for future question categorisation and cross-syllabus lookup.",
+  "sourceSummary": "Built from official NSW Government 2017 syllabus pages and DOCX downloads, and official NSW Curriculum 2024 overview/content pages. The app corpus includes displayable Advanced, Standard, Extension 1, and Extension 2 syllabus nodes; future courses can still be staged as conversion-only mappings until their corpora are added.",
+  "courses": [
+    {
+      "id": "advanced",
+      "title": "Mathematics Advanced",
+      "oldSyllabus": {
+        "id": "advanced-2017",
+        "title": "Mathematics Advanced Stage 6 Syllabus (2017)",
+        "sourceUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/mathematics/mathematics-advanced-stage-6-2017",
+        "sourceDocxUrl": "https://www.nsw.gov.au/sites/default/files/noindex/2025-04/mathematics-advanced-stage-6-syllabus-2017.docx",
+        "implementation": {
+          "replacedBy": "advanced-2024",
+          "replacementNotes": "The 2024 syllabus starts Year 11 implementation in 2026, Year 12 implementation in Term 4 2026, with the first HSC exam in 2027."
+        },
+        "nodes": [
+          {
+            "id": "old-ma-f1",
+            "appNodeId": "ma-f1",
+            "code": "MA-F1",
+            "year": 11,
+            "areaOfStudy": "Functions",
+            "title": "Working with Functions",
+            "outcomes": ["MA11-1", "MA11-2", "MA11-8", "MA11-9"],
+            "contentGroups": [
+              {
+                "id": "old-ma-f1-algebraic-techniques",
+                "code": "F1.1",
+                "title": "Algebraic techniques"
+              },
+              {
+                "id": "old-ma-f1-introduction-functions",
+                "code": "F1.2",
+                "title": "Introduction to functions"
+              },
+              {
+                "id": "old-ma-f1-linear-quadratic-cubic",
+                "code": "F1.3",
+                "title": "Linear, quadratic and cubic functions"
+              },
+              {
+                "id": "old-ma-f1-further-functions-relations",
+                "code": "F1.4",
+                "title": "Further functions and relations"
+              }
+            ]
+          },
+          {
+            "id": "old-ma-t1",
+            "appNodeId": "ma-t1",
+            "code": "MA-T1",
+            "year": 11,
+            "areaOfStudy": "Trigonometric Functions",
+            "title": "Trigonometry and Measure of Angles",
+            "outcomes": ["MA11-1", "MA11-3", "MA11-8", "MA11-9"],
+            "contentGroups": [
+              {
+                "id": "old-ma-t1-trigonometry",
+                "code": "T1.1",
+                "title": "Trigonometry"
+              },
+              {
+                "id": "old-ma-t1-radians",
+                "code": "T1.2",
+                "title": "Radians"
+              }
+            ]
+          },
+          {
+            "id": "old-ma-t2",
+            "appNodeId": "ma-t2",
+            "code": "MA-T2",
+            "year": 11,
+            "areaOfStudy": "Trigonometric Functions",
+            "title": "Trigonometric Functions and Identities",
+            "outcomes": ["MA11-1", "MA11-4", "MA11-8", "MA11-9"],
+            "contentGroups": [
+              {
+                "id": "old-ma-t2-identities-equations",
+                "code": "T2",
+                "title": "Reciprocal trigonometric functions, identities, expressions and equations"
+              }
+            ]
+          },
+          {
+            "id": "old-ma-c1",
+            "appNodeId": "ma-c1",
+            "code": "MA-C1",
+            "year": 11,
+            "areaOfStudy": "Calculus",
+            "title": "Introduction to Differentiation",
+            "outcomes": ["MA11-1", "MA11-5", "MA11-8", "MA11-9"],
+            "contentGroups": [
+              {
+                "id": "old-ma-c1-gradients-tangents",
+                "code": "C1.1",
+                "title": "Gradients of tangents"
+              },
+              {
+                "id": "old-ma-c1-difference-quotients",
+                "code": "C1.2",
+                "title": "Difference quotients"
+              },
+              {
+                "id": "old-ma-c1-derivative-function-graph",
+                "code": "C1.3",
+                "title": "The derivative function and its graph"
+              },
+              {
+                "id": "old-ma-c1-calculating-derivatives",
+                "code": "C1.4",
+                "title": "Calculating with derivatives"
+              }
+            ]
+          },
+          {
+            "id": "old-ma-e1",
+            "appNodeId": "ma-e1",
+            "code": "MA-E1",
+            "year": 11,
+            "areaOfStudy": "Exponential and Logarithmic Functions",
+            "title": "Logarithms and Exponentials",
+            "outcomes": ["MA11-6", "MA11-8", "MA11-9"],
+            "contentGroups": [
+              {
+                "id": "old-ma-e1-introducing-logarithms",
+                "code": "E1.1",
+                "title": "Introducing logarithms"
+              }
+            ]
+          },
+          {
+            "id": "old-ma-s1",
+            "appNodeId": "ma-s1",
+            "code": "MA-S1",
+            "year": 11,
+            "areaOfStudy": "Statistical Analysis",
+            "title": "Probability and Discrete Probability Distributions",
+            "outcomes": ["MA11-7", "MA11-8", "MA11-9"],
+            "contentGroups": [
+              {
+                "id": "old-ma-s1-probability-venn-discrete",
+                "code": "S1.1",
+                "title": "Probability, Venn diagrams and discrete probability distributions"
+              }
+            ]
+          },
+          {
+            "id": "old-ma-f2",
+            "appNodeId": "ma-f2",
+            "code": "MA-F2",
+            "year": 12,
+            "areaOfStudy": "Functions",
+            "title": "Graphing Techniques",
+            "outcomes": ["MA12-1", "MA12-9", "MA12-10"],
+            "contentGroups": [
+              {
+                "id": "old-ma-f2-transformations-graphing",
+                "code": "F2",
+                "title": "Function transformations, graph sketching, asymptotes, inequalities and graphical solutions"
+              }
+            ]
+          },
+          {
+            "id": "old-ma-t3",
+            "appNodeId": "ma-t3",
+            "code": "MA-T3",
+            "year": 12,
+            "areaOfStudy": "Trigonometric Functions",
+            "title": "Trigonometric Functions and Graphs",
+            "outcomes": ["MA12-1", "MA12-5", "MA12-9", "MA12-10"],
+            "contentGroups": [
+              {
+                "id": "old-ma-t3-trig-graphs-modelling",
+                "code": "T3",
+                "title": "Transformations, graphs, equations and modelling with trigonometric functions"
+              }
+            ]
+          },
+          {
+            "id": "old-ma-c2",
+            "appNodeId": "ma-c2",
+            "code": "MA-C2",
+            "year": 12,
+            "areaOfStudy": "Calculus",
+            "title": "Differential Calculus",
+            "outcomes": ["MA12-3", "MA12-6", "MA12-9", "MA12-10"],
+            "contentGroups": [
+              {
+                "id": "old-ma-c2-diff-trig-exp-log",
+                "code": "C2.1",
+                "title": "Differentiation of trigonometric, exponential and logarithmic functions"
+              },
+              {
+                "id": "old-ma-c2-rules-differentiation",
+                "code": "C2.2",
+                "title": "Rules of differentiation"
+              }
+            ]
+          },
+          {
+            "id": "old-ma-c3",
+            "appNodeId": "ma-c3",
+            "code": "MA-C3",
+            "year": 12,
+            "areaOfStudy": "Calculus",
+            "title": "Applications of Differentiation",
+            "outcomes": ["MA12-3", "MA12-6", "MA12-9", "MA12-10"],
+            "contentGroups": [
+              {
+                "id": "old-ma-c3-first-second-derivatives",
+                "code": "C3.1",
+                "title": "The first and second derivatives"
+              },
+              {
+                "id": "old-ma-c3-applications-derivative",
+                "code": "C3.2",
+                "title": "Applications of the derivative"
+              }
+            ]
+          },
+          {
+            "id": "old-ma-c4",
+            "appNodeId": "ma-c4",
+            "code": "MA-C4",
+            "year": 12,
+            "areaOfStudy": "Calculus",
+            "title": "Integral Calculus",
+            "outcomes": ["MA12-3", "MA12-7", "MA12-9", "MA12-10"],
+            "contentGroups": [
+              {
+                "id": "old-ma-c4-antiderivative",
+                "code": "C4.1",
+                "title": "The anti-derivative"
+              },
+              {
+                "id": "old-ma-c4-areas-definite-integral",
+                "code": "C4.2",
+                "title": "Areas and the definite integral"
+              }
+            ]
+          },
+          {
+            "id": "old-ma-m1",
+            "appNodeId": "ma-m1",
+            "code": "MA-M1",
+            "year": 12,
+            "areaOfStudy": "Financial Mathematics",
+            "title": "Modelling Financial Situations",
+            "outcomes": ["MA12-2", "MA12-4", "MA12-9", "MA12-10"],
+            "contentGroups": [
+              {
+                "id": "old-ma-m1-investments-loans",
+                "code": "M1.1",
+                "title": "Modelling investments and loans"
+              },
+              {
+                "id": "old-ma-m1-arithmetic-sequences-series",
+                "code": "M1.2",
+                "title": "Arithmetic sequences and series"
+              },
+              {
+                "id": "old-ma-m1-geometric-sequences-series",
+                "code": "M1.3",
+                "title": "Geometric sequences and series"
+              },
+              {
+                "id": "old-ma-m1-financial-applications",
+                "code": "M1.4",
+                "title": "Financial applications of sequences and series"
+              }
+            ]
+          },
+          {
+            "id": "old-ma-s2",
+            "appNodeId": "ma-s2",
+            "code": "MA-S2",
+            "year": 12,
+            "areaOfStudy": "Statistical Analysis",
+            "title": "Descriptive Statistics and Bivariate Data Analysis",
+            "outcomes": ["MA12-8", "MA12-9", "MA12-10"],
+            "contentGroups": [
+              {
+                "id": "old-ma-s2-data-summary-statistics",
+                "code": "S2.1",
+                "title": "Data (grouped and ungrouped) and summary statistics"
+              },
+              {
+                "id": "old-ma-s2-bivariate-data-analysis",
+                "code": "S2.2",
+                "title": "Bivariate data analysis"
+              }
+            ]
+          },
+          {
+            "id": "old-ma-s3",
+            "appNodeId": "ma-s3",
+            "code": "MA-S3",
+            "year": 12,
+            "areaOfStudy": "Statistical Analysis",
+            "title": "Random Variables",
+            "outcomes": ["MA12-8", "MA12-9", "MA12-10"],
+            "contentGroups": [
+              {
+                "id": "old-ma-s3-continuous-random-variables",
+                "code": "S3.1",
+                "title": "Continuous random variables"
+              },
+              {
+                "id": "old-ma-s3-normal-distribution",
+                "code": "S3.2",
+                "title": "The normal distribution"
+              }
+            ]
+          }
+        ]
+      },
+      "newSyllabus": {
+        "id": "advanced-2024",
+        "title": "Mathematics Advanced 11-12 Syllabus (2024)",
+        "overviewUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/overview",
+        "contentUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/content",
+        "nodes": [
+          {
+            "id": "new-fa-working-functions",
+            "sourceFocusAreaId": "fa3d488ed2",
+            "code": "MAV-11-WWF",
+            "year": 11,
+            "areaOfStudy": "Functions",
+            "title": "Working with functions",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/content/year-11/fa3d488ed2",
+            "outcomes": ["MAO-WM-01", "MAV-11-01", "MAV-11-02"],
+            "contentGroups": [
+              {
+                "id": "new-wwf-algebraic-techniques",
+                "sourceContentGroupId": "cg4c05d6e2",
+                "title": "Algebraic techniques"
+              },
+              {
+                "id": "new-wwf-introduction-functions-relations",
+                "sourceContentGroupId": "cg166c86e8",
+                "title": "Introduction to functions and relations"
+              },
+              {
+                "id": "new-wwf-linear-functions",
+                "sourceContentGroupId": "cgfeaaacde",
+                "title": "Linear functions"
+              },
+              {
+                "id": "new-wwf-quadratic-cubic-functions",
+                "sourceContentGroupId": "cgcfbc2f75",
+                "title": "Quadratic and cubic functions"
+              },
+              {
+                "id": "new-wwf-reciprocal-functions",
+                "sourceContentGroupId": "cg9953ac3f",
+                "title": "Reciprocal functions"
+              },
+              {
+                "id": "new-wwf-constructing-using-functions",
+                "sourceContentGroupId": "cg99f49394",
+                "title": "Constructing and using functions"
+              },
+              {
+                "id": "new-wwf-direct-inverse-variation",
+                "sourceContentGroupId": "cg68ca6cfe",
+                "title": "Direct and inverse variation"
+              },
+              {
+                "id": "new-wwf-circles-semicircles",
+                "sourceContentGroupId": "cg1dde956b",
+                "title": "Circles and semicircles"
+              },
+              {
+                "id": "new-wwf-properties-functions-relations-graphs",
+                "sourceContentGroupId": "cgdfd61a5c",
+                "title": "Properties of functions, relations and graphs"
+              },
+              {
+                "id": "new-wwf-piecewise-functions",
+                "sourceContentGroupId": "cgbbe3284c",
+                "title": "Piecewise-defined functions"
+              },
+              {
+                "id": "new-wwf-absolute-value-functions",
+                "sourceContentGroupId": "cg04594b30",
+                "title": "Absolute value functions"
+              }
+            ]
+          },
+          {
+            "id": "new-fa-trig-measure-angles",
+            "sourceFocusAreaId": "fa0b724fc5",
+            "code": "MAV-11-TMA",
+            "year": 11,
+            "areaOfStudy": "Trigonometric functions",
+            "title": "Trigonometry and measure of angles",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/content/year-11/fa0b724fc5",
+            "outcomes": ["MAO-WM-01", "MAV-11-04"],
+            "contentGroups": [
+              {
+                "id": "new-tma-acute-angles",
+                "sourceContentGroupId": "cgf1c8b29f",
+                "title": "Trigonometry with acute angles"
+              },
+              {
+                "id": "new-tma-any-magnitude",
+                "sourceContentGroupId": "cg545b19b2",
+                "title": "Trigonometry with angles of any magnitude"
+              },
+              {
+                "id": "new-tma-radians",
+                "sourceContentGroupId": "cgda4b11f8",
+                "title": "Radians"
+              }
+            ]
+          },
+          {
+            "id": "new-fa-trig-identities-equations",
+            "sourceFocusAreaId": "faa07be39c",
+            "code": "MAV-11-TIE",
+            "year": 11,
+            "areaOfStudy": "Trigonometric functions",
+            "title": "Trigonometric identities and equations",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/content/year-11/faa07be39c",
+            "outcomes": ["MAO-WM-01", "MAV-11-05"],
+            "contentGroups": [
+              {
+                "id": "new-tie-identities-equations",
+                "sourceContentGroupId": "cg9af02c56",
+                "title": "Reciprocal trigonometric functions, identities, expressions and equations"
+              }
+            ]
+          },
+          {
+            "id": "new-fa-intro-differentiation",
+            "sourceFocusAreaId": "fa6bc41678",
+            "code": "MAV-11-ID",
+            "year": 11,
+            "areaOfStudy": "Calculus",
+            "title": "Introduction to differentiation",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/content/year-11/fa6bc41678",
+            "outcomes": ["MAO-WM-01", "MAV-11-06"],
+            "contentGroups": [
+              {
+                "id": "new-id-estimating-change",
+                "sourceContentGroupId": "cg4952c84f",
+                "title": "Estimating change"
+              },
+              {
+                "id": "new-id-derivative",
+                "sourceContentGroupId": "cg30a79e63",
+                "title": "The derivative"
+              },
+              {
+                "id": "new-id-calculations-derivative",
+                "sourceContentGroupId": "cg2b04580a",
+                "title": "Calculations with the derivative"
+              },
+              {
+                "id": "new-id-graphical-applications-derivative",
+                "sourceContentGroupId": "cge53e408d",
+                "title": "Graphical applications of the derivative"
+              },
+              {
+                "id": "new-id-derivative-rate-change",
+                "sourceContentGroupId": "cg1e3c6ade",
+                "title": "The derivative as a rate of change"
+              }
+            ]
+          },
+          {
+            "id": "new-fa-exp-log-functions",
+            "sourceFocusAreaId": "fa576d8dce",
+            "code": "MAV-11-ELF",
+            "year": 11,
+            "areaOfStudy": "Exponential and logarithmic functions",
+            "title": "Exponential and logarithmic functions",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/content/year-11/fa576d8dce",
+            "outcomes": ["MAO-WM-01", "MAV-11-07", "MAV-11-08"],
+            "contentGroups": [
+              {
+                "id": "new-elf-exponential-functions",
+                "sourceContentGroupId": "cgb98ca727",
+                "title": "Exponential functions"
+              },
+              {
+                "id": "new-elf-logarithmic-functions",
+                "sourceContentGroupId": "cg71e4daa8",
+                "title": "Logarithmic functions"
+              }
+            ]
+          },
+          {
+            "id": "new-fa-graph-transformations",
+            "sourceFocusAreaId": "fae9d6fbd3",
+            "code": "MAV-11-GT",
+            "year": 11,
+            "areaOfStudy": "Functions",
+            "title": "Graph transformations",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/content/year-11/fae9d6fbd3",
+            "outcomes": ["MAO-WM-01", "MAV-11-03"],
+            "contentGroups": [
+              {
+                "id": "new-gt-transformations-graphing",
+                "sourceContentGroupId": "cgbc773649",
+                "title": "Function transformations, graphing circles, and order of transformations"
+              }
+            ]
+          },
+          {
+            "id": "new-fa-probability-data",
+            "sourceFocusAreaId": "fa829162c5",
+            "code": "MAV-11-PD",
+            "year": 11,
+            "areaOfStudy": "Statistical analysis",
+            "title": "Probability and data",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/content/year-11/fa829162c5",
+            "outcomes": ["MAO-WM-01", "MAV-11-09", "MAV-11-10"],
+            "contentGroups": [
+              {
+                "id": "new-pd-sets-set-notation",
+                "sourceContentGroupId": "cga5005b2d",
+                "title": "Sets and set notation"
+              },
+              {
+                "id": "new-pd-probability",
+                "sourceContentGroupId": "cgbdd04536",
+                "title": "Probability"
+              },
+              {
+                "id": "new-pd-conditional-probability",
+                "sourceContentGroupId": "cgb9ce9a9a",
+                "title": "Conditional probability"
+              },
+              {
+                "id": "new-pd-data",
+                "sourceContentGroupId": "cgb2bb60c3",
+                "title": "Data"
+              }
+            ]
+          },
+          {
+            "id": "new-fa-further-graph-transformations-modelling",
+            "sourceFocusAreaId": "fa3b2bda67",
+            "code": "MAV-12-FGTM",
+            "year": 12,
+            "areaOfStudy": "Functions",
+            "title": "Further graph transformations and modelling",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/content/year-12/fa3b2bda67",
+            "outcomes": ["MAO-WM-01", "MAV-12-01", "MAV-12-02"],
+            "contentGroups": [
+              {
+                "id": "new-fgtm-trig-transformations",
+                "sourceContentGroupId": "cg613c449c",
+                "title": "Transformations of trigonometric functions"
+              },
+              {
+                "id": "new-fgtm-modelling-functions",
+                "sourceContentGroupId": "cgb380c768",
+                "title": "Modelling with functions"
+              }
+            ]
+          },
+          {
+            "id": "new-fa-sequences-series",
+            "sourceFocusAreaId": "fa8db67617",
+            "code": "MAV-12-SS",
+            "year": 12,
+            "areaOfStudy": "Sequences and series",
+            "title": "Sequences and series",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/content/year-12/fa8db67617",
+            "outcomes": ["MAO-WM-01", "MAV-12-03"],
+            "contentGroups": [
+              {
+                "id": "new-ss-sequences-series",
+                "sourceContentGroupId": "cg0ce6392d",
+                "title": "Sequences and series"
+              },
+              {
+                "id": "new-ss-arithmetic",
+                "sourceContentGroupId": "cg45e1e94e",
+                "title": "Arithmetic sequences and series"
+              },
+              {
+                "id": "new-ss-geometric",
+                "sourceContentGroupId": "cgc76197fe",
+                "title": "Geometric sequences and series"
+              }
+            ]
+          },
+          {
+            "id": "new-fa-differential-calculus",
+            "sourceFocusAreaId": "fa4d003480",
+            "code": "MAV-12-DC",
+            "year": 12,
+            "areaOfStudy": "Calculus",
+            "title": "Differential calculus",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/content/year-12/fa4d003480",
+            "outcomes": ["MAO-WM-01", "MAV-12-04"],
+            "contentGroups": [
+              {
+                "id": "new-dc-diff-exponential",
+                "sourceContentGroupId": "cg7e99227e",
+                "title": "Differentiation with exponential functions"
+              },
+              {
+                "id": "new-dc-diff-logarithmic",
+                "sourceContentGroupId": "cg4ddf2094",
+                "title": "Differentiation with logarithmic functions"
+              },
+              {
+                "id": "new-dc-diff-trigonometric",
+                "sourceContentGroupId": "cg843b3a24",
+                "title": "Differentiation with trigonometric functions"
+              },
+              {
+                "id": "new-dc-using-derivatives",
+                "sourceContentGroupId": "cgad404ef6",
+                "title": "Using derivatives"
+              }
+            ]
+          },
+          {
+            "id": "new-fa-integral-calculus",
+            "sourceFocusAreaId": "fa41f9f88f",
+            "code": "MAV-12-IC",
+            "year": 12,
+            "areaOfStudy": "Calculus",
+            "title": "Integral calculus",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/content/year-12/fa41f9f88f",
+            "outcomes": ["MAO-WM-01", "MAV-12-05"],
+            "contentGroups": [
+              {
+                "id": "new-ic-primitive-functions",
+                "sourceContentGroupId": "cgf485d99f",
+                "title": "Primitive functions"
+              },
+              {
+                "id": "new-ic-definite-integral",
+                "sourceContentGroupId": "cg2415f95b",
+                "title": "The definite integral"
+              },
+              {
+                "id": "new-ic-fundamental-theorem",
+                "sourceContentGroupId": "ms_s6_the_fundamental_theorem_of_calculus",
+                "title": "The Fundamental Theorem of Calculus"
+              },
+              {
+                "id": "new-ic-indefinite-integrals",
+                "sourceContentGroupId": "cg5e0a025b",
+                "title": "Indefinite integrals"
+              },
+              {
+                "id": "new-ic-integration-exponential",
+                "sourceContentGroupId": "cg09ce766a",
+                "title": "Integration with exponential functions"
+              },
+              {
+                "id": "new-ic-integration-logarithmic",
+                "sourceContentGroupId": "cga7faa5dd",
+                "title": "Integration with logarithmic functions"
+              },
+              {
+                "id": "new-ic-integration-trigonometric",
+                "sourceContentGroupId": "cg72fdab6a",
+                "title": "Integration with trigonometric functions"
+              },
+              {
+                "id": "new-ic-areas-definite-integral",
+                "sourceContentGroupId": "cg8eefc314",
+                "title": "Areas and the definite integral"
+              }
+            ]
+          },
+          {
+            "id": "new-fa-applications-calculus",
+            "sourceFocusAreaId": "fa383c9104",
+            "code": "MAV-12-AC",
+            "year": 12,
+            "areaOfStudy": "Calculus",
+            "title": "Applications of calculus",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/content/year-12/fa383c9104",
+            "outcomes": ["MAO-WM-01", "MAV-12-06"],
+            "contentGroups": [
+              {
+                "id": "new-ac-turning-points-inflections-graphing",
+                "sourceContentGroupId": "cgb92587ce",
+                "title": "Turning points, inflections and graphing"
+              },
+              {
+                "id": "new-ac-optimisation",
+                "sourceContentGroupId": "cg304cc52b",
+                "title": "Optimisation"
+              },
+              {
+                "id": "new-ac-rates-change",
+                "sourceContentGroupId": "cg3428831c",
+                "title": "Rates of change"
+              }
+            ]
+          },
+          {
+            "id": "new-fa-random-variables",
+            "sourceFocusAreaId": "fa4579cc54",
+            "code": "MAV-12-RV",
+            "year": 12,
+            "areaOfStudy": "Statistical analysis",
+            "title": "Random variables",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/content/year-12/fa4579cc54",
+            "outcomes": ["MAO-WM-01", "MAV-12-07"],
+            "contentGroups": [
+              {
+                "id": "new-rv-discrete-random-variables",
+                "sourceContentGroupId": "cg5ac57863",
+                "title": "Discrete random variables"
+              },
+              {
+                "id": "new-rv-continuous-random-variables",
+                "sourceContentGroupId": "cg2fe5d29f",
+                "title": "Continuous random variables"
+              },
+              {
+                "id": "new-rv-normal-distribution",
+                "sourceContentGroupId": "cg7ae0f5e4",
+                "title": "The normal distribution"
+              }
+            ]
+          },
+          {
+            "id": "new-fa-financial-mathematics",
+            "sourceFocusAreaId": "fa4572a048",
+            "code": "MAV-12-FM",
+            "year": 12,
+            "areaOfStudy": "Financial mathematics",
+            "title": "Financial mathematics",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-advanced-11-12-2024/content/year-12/fa4572a048",
+            "outcomes": ["MAO-WM-01", "MAV-12-08"],
+            "contentGroups": [
+              {
+                "id": "new-fm-reducing-balance-loans",
+                "sourceContentGroupId": "cg4d9d6f3c",
+                "title": "Reducing balance loans"
+              },
+              {
+                "id": "new-fm-annuities",
+                "sourceContentGroupId": "cg66f433ce",
+                "title": "Annuities"
+              }
+            ]
+          }
+        ]
+      },
+      "mappings": [
+        {
+          "id": "map-ma-f1-working-functions",
+          "oldNodeId": "old-ma-f1",
+          "newNodeId": "new-fa-working-functions",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": [
+            "old-ma-f1-algebraic-techniques",
+            "old-ma-f1-introduction-functions",
+            "old-ma-f1-linear-quadratic-cubic",
+            "old-ma-f1-further-functions-relations"
+          ],
+          "newContentGroupIds": [
+            "new-wwf-algebraic-techniques",
+            "new-wwf-introduction-functions-relations",
+            "new-wwf-linear-functions",
+            "new-wwf-quadratic-cubic-functions",
+            "new-wwf-reciprocal-functions",
+            "new-wwf-constructing-using-functions",
+            "new-wwf-direct-inverse-variation",
+            "new-wwf-circles-semicircles",
+            "new-wwf-properties-functions-relations-graphs",
+            "new-wwf-piecewise-functions",
+            "new-wwf-absolute-value-functions"
+          ],
+          "notes": "Closest direct match. The 2024 node expands and separates some old F1 function and relation work into more explicit content groups."
+        },
+        {
+          "id": "map-ma-f1-to-graph-transformations",
+          "oldNodeId": "old-ma-f1",
+          "newNodeId": "new-fa-graph-transformations",
+          "relationship": "partial",
+          "confidence": "medium",
+          "oldContentGroupIds": ["old-ma-f1-further-functions-relations"],
+          "newContentGroupIds": ["new-gt-transformations-graphing"],
+          "notes": "Use for questions involving function transformations, circles, discontinuities, or graph behaviour beyond basic function notation."
+        },
+        {
+          "id": "map-ma-t1-trig-measure",
+          "oldNodeId": "old-ma-t1",
+          "newNodeId": "new-fa-trig-measure-angles",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": ["old-ma-t1-trigonometry", "old-ma-t1-radians"],
+          "newContentGroupIds": ["new-tma-acute-angles", "new-tma-any-magnitude", "new-tma-radians"],
+          "notes": "Direct match for acute-angle trigonometry, any-magnitude angles, and radians."
+        },
+        {
+          "id": "map-ma-t2-trig-identities-equations",
+          "oldNodeId": "old-ma-t2",
+          "newNodeId": "new-fa-trig-identities-equations",
+          "relationship": "renamed",
+          "confidence": "high",
+          "oldContentGroupIds": ["old-ma-t2-identities-equations"],
+          "newContentGroupIds": ["new-tie-identities-equations"],
+          "notes": "The 2024 focus-area title names equations explicitly; the core identity/equation content remains aligned."
+        },
+        {
+          "id": "map-ma-c1-intro-differentiation",
+          "oldNodeId": "old-ma-c1",
+          "newNodeId": "new-fa-intro-differentiation",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": [
+            "old-ma-c1-gradients-tangents",
+            "old-ma-c1-difference-quotients",
+            "old-ma-c1-derivative-function-graph",
+            "old-ma-c1-calculating-derivatives"
+          ],
+          "newContentGroupIds": [
+            "new-id-estimating-change",
+            "new-id-derivative",
+            "new-id-calculations-derivative",
+            "new-id-graphical-applications-derivative",
+            "new-id-derivative-rate-change"
+          ],
+          "notes": "Direct Year 11 calculus match, with 2024 making rate-of-change and graphical derivative applications more explicit."
+        },
+        {
+          "id": "map-ma-e1-exp-log",
+          "oldNodeId": "old-ma-e1",
+          "newNodeId": "new-fa-exp-log-functions",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": ["old-ma-e1-introducing-logarithms"],
+          "newContentGroupIds": ["new-elf-exponential-functions", "new-elf-logarithmic-functions"],
+          "notes": "Direct match for exponentials, logarithms, laws, equations, and graphs."
+        },
+        {
+          "id": "map-ma-e1-to-further-graph-modelling",
+          "oldNodeId": "old-ma-e1",
+          "newNodeId": "new-fa-further-graph-transformations-modelling",
+          "relationship": "partial",
+          "confidence": "medium",
+          "oldContentGroupIds": ["old-ma-e1-introducing-logarithms"],
+          "newContentGroupIds": ["new-fgtm-modelling-functions"],
+          "notes": "Use for applied logarithmic-scale modelling questions. Do not use for routine exponential/logarithmic algebra unless the 2024 Year 11 node is the better match."
+        },
+        {
+          "id": "map-ma-s1-probability-to-probability-data",
+          "oldNodeId": "old-ma-s1",
+          "newNodeId": "new-fa-probability-data",
+          "relationship": "split",
+          "confidence": "high",
+          "oldContentGroupIds": ["old-ma-s1-probability-venn-discrete"],
+          "newContentGroupIds": [
+            "new-pd-sets-set-notation",
+            "new-pd-probability",
+            "new-pd-conditional-probability"
+          ],
+          "notes": "Probability and conditional probability stay in Year 11. The discrete random variable part of old S1 maps to 2024 Year 12 Random variables."
+        },
+        {
+          "id": "map-ma-s1-discrete-to-random-variables",
+          "oldNodeId": "old-ma-s1",
+          "newNodeId": "new-fa-random-variables",
+          "relationship": "split",
+          "confidence": "high",
+          "oldContentGroupIds": ["old-ma-s1-probability-venn-discrete"],
+          "newContentGroupIds": ["new-rv-discrete-random-variables"],
+          "notes": "Use this for questions involving discrete random variables or probability distributions rather than basic probability rules."
+        },
+        {
+          "id": "map-ma-f2-graphing-to-graph-transformations",
+          "oldNodeId": "old-ma-f2",
+          "newNodeId": "new-fa-graph-transformations",
+          "relationship": "shifted",
+          "confidence": "high",
+          "oldContentGroupIds": ["old-ma-f2-transformations-graphing"],
+          "newContentGroupIds": ["new-gt-transformations-graphing"],
+          "notes": "Most old Year 12 Graphing Techniques content is now a Year 11 Graph transformations focus area."
+        },
+        {
+          "id": "map-ma-f2-to-further-graph-modelling",
+          "oldNodeId": "old-ma-f2",
+          "newNodeId": "new-fa-further-graph-transformations-modelling",
+          "relationship": "partial",
+          "confidence": "medium",
+          "oldContentGroupIds": ["old-ma-f2-transformations-graphing"],
+          "newContentGroupIds": ["new-fgtm-modelling-functions"],
+          "notes": "Use when the question is a modelling problem with functions or transformations rather than routine sketching."
+        },
+        {
+          "id": "map-ma-t3-to-further-graph-modelling",
+          "oldNodeId": "old-ma-t3",
+          "newNodeId": "new-fa-further-graph-transformations-modelling",
+          "relationship": "renamed",
+          "confidence": "high",
+          "oldContentGroupIds": ["old-ma-t3-trig-graphs-modelling"],
+          "newContentGroupIds": ["new-fgtm-trig-transformations", "new-fgtm-modelling-functions"],
+          "notes": "Old trigonometric graphs and periodic modelling are now in the Year 12 functions focus area rather than a standalone Trigonometric functions Year 12 node."
+        },
+        {
+          "id": "map-ma-c2-differential-calculus",
+          "oldNodeId": "old-ma-c2",
+          "newNodeId": "new-fa-differential-calculus",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": ["old-ma-c2-diff-trig-exp-log", "old-ma-c2-rules-differentiation"],
+          "newContentGroupIds": [
+            "new-dc-diff-exponential",
+            "new-dc-diff-logarithmic",
+            "new-dc-diff-trigonometric",
+            "new-dc-using-derivatives"
+          ],
+          "notes": "Direct match for differentiation methods, including trigonometric, exponential and logarithmic functions."
+        },
+        {
+          "id": "map-ma-c3-applications-calculus",
+          "oldNodeId": "old-ma-c3",
+          "newNodeId": "new-fa-applications-calculus",
+          "relationship": "renamed",
+          "confidence": "high",
+          "oldContentGroupIds": ["old-ma-c3-first-second-derivatives", "old-ma-c3-applications-derivative"],
+          "newContentGroupIds": [
+            "new-ac-turning-points-inflections-graphing",
+            "new-ac-optimisation",
+            "new-ac-rates-change"
+          ],
+          "notes": "The 2024 node broadens the title from applications of differentiation to applications of calculus, but the question-level mapping is usually direct."
+        },
+        {
+          "id": "map-ma-c4-integral-calculus",
+          "oldNodeId": "old-ma-c4",
+          "newNodeId": "new-fa-integral-calculus",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": ["old-ma-c4-antiderivative", "old-ma-c4-areas-definite-integral"],
+          "newContentGroupIds": [
+            "new-ic-primitive-functions",
+            "new-ic-definite-integral",
+            "new-ic-fundamental-theorem",
+            "new-ic-indefinite-integrals",
+            "new-ic-areas-definite-integral"
+          ],
+          "notes": "Direct match for primitives, definite integrals, and area. 2024 also separates function-family integration groups."
+        },
+        {
+          "id": "map-ma-c4-to-exp-log-trig-integration",
+          "oldNodeId": "old-ma-c4",
+          "newNodeId": "new-fa-integral-calculus",
+          "relationship": "newly-emphasised",
+          "confidence": "medium",
+          "oldContentGroupIds": ["old-ma-c4-antiderivative"],
+          "newContentGroupIds": [
+            "new-ic-integration-exponential",
+            "new-ic-integration-logarithmic",
+            "new-ic-integration-trigonometric"
+          ],
+          "notes": "Use these 2024 content groups when a question explicitly integrates exponential, logarithmic, or trigonometric functions."
+        },
+        {
+          "id": "map-ma-m1-to-financial-mathematics",
+          "oldNodeId": "old-ma-m1",
+          "newNodeId": "new-fa-financial-mathematics",
+          "relationship": "split",
+          "confidence": "high",
+          "oldContentGroupIds": ["old-ma-m1-investments-loans", "old-ma-m1-financial-applications"],
+          "newContentGroupIds": ["new-fm-reducing-balance-loans", "new-fm-annuities"],
+          "notes": "Financial applications remain financial mathematics. Sequence/series mechanics are now a separate 2024 area of study."
+        },
+        {
+          "id": "map-ma-m1-to-sequences-series",
+          "oldNodeId": "old-ma-m1",
+          "newNodeId": "new-fa-sequences-series",
+          "relationship": "split",
+          "confidence": "high",
+          "oldContentGroupIds": [
+            "old-ma-m1-arithmetic-sequences-series",
+            "old-ma-m1-geometric-sequences-series",
+            "old-ma-m1-financial-applications"
+          ],
+          "newContentGroupIds": ["new-ss-sequences-series", "new-ss-arithmetic", "new-ss-geometric"],
+          "notes": "Arithmetic and geometric sequences/series have moved from old Financial Mathematics into a standalone 2024 area of study."
+        },
+        {
+          "id": "map-ma-s2-to-probability-data",
+          "oldNodeId": "old-ma-s2",
+          "newNodeId": "new-fa-probability-data",
+          "relationship": "partial",
+          "confidence": "medium",
+          "oldContentGroupIds": ["old-ma-s2-data-summary-statistics"],
+          "newContentGroupIds": ["new-pd-data"],
+          "notes": "Use for grouped/ungrouped data and summary statistics. Bivariate data and regression should be flagged for review because it is not a standalone 2024 Advanced focus area."
+        },
+        {
+          "id": "map-ma-s2-bivariate-reduced",
+          "oldNodeId": "old-ma-s2",
+          "newNodeId": "new-fa-probability-data",
+          "relationship": "reduced",
+          "confidence": "medium",
+          "oldContentGroupIds": ["old-ma-s2-bivariate-data-analysis"],
+          "newContentGroupIds": ["new-pd-data"],
+          "notes": "Bivariate analysis has no clear like-for-like 2024 Advanced focus-area node. Keep a specific old content group tag for archived questions and review against the 2024 Data content before displaying as equivalent."
+        },
+        {
+          "id": "map-ma-s3-random-variables",
+          "oldNodeId": "old-ma-s3",
+          "newNodeId": "new-fa-random-variables",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": ["old-ma-s3-continuous-random-variables", "old-ma-s3-normal-distribution"],
+          "newContentGroupIds": ["new-rv-continuous-random-variables", "new-rv-normal-distribution"],
+          "notes": "Direct match for continuous random variables and normal distribution. The 2024 node also includes discrete random variables from old S1."
+        }
+      ]
+    },
+    {
+      "id": "extension-1",
+      "title": "Mathematics Extension 1",
+      "oldSyllabus": {
+        "id": "extension-1-2017",
+        "title": "Mathematics Extension 1 Stage 6 Syllabus (2017)",
+        "sourceUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/mathematics/mathematics-extension-1-stage-6-2017",
+        "sourceDocxUrl": "https://www.nsw.gov.au/sites/default/files/noindex/2025-04/mathematics-extension-1-stage-6-syllabus-2017.docx",
+        "implementation": {
+          "replacedBy": "extension-1-2024",
+          "replacementNotes": "The 2024 syllabus starts Year 11 implementation in 2026, Year 12 implementation in Term 4 2026, with the first HSC exam in 2027."
+        },
+        "nodes": [
+          {
+            "id": "old-me1-f1",
+            "code": "ME-F1",
+            "year": 11,
+            "areaOfStudy": "Functions",
+            "title": "Further Work with Functions",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-me1-f1-graphical",
+                "code": "F1.1",
+                "title": "Graphical relationships"
+              },
+              {
+                "id": "old-me1-f1-inequalities",
+                "code": "F1.2",
+                "title": "Inequalities"
+              },
+              {
+                "id": "old-me1-f1-inverse",
+                "code": "F1.3",
+                "title": "Inverse functions"
+              },
+              {
+                "id": "old-me1-f1-parametric",
+                "code": "F1.4",
+                "title": "Parametric form of a function or relation"
+              }
+            ]
+          },
+          {
+            "id": "old-me1-f2",
+            "code": "ME-F2",
+            "year": 11,
+            "areaOfStudy": "Functions",
+            "title": "Polynomials",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-me1-f2-remainder-factor",
+                "code": "F2.1",
+                "title": "Remainder and factor theorems"
+              },
+              {
+                "id": "old-me1-f2-roots",
+                "code": "F2.2",
+                "title": "Sums and products of roots of polynomials"
+              }
+            ]
+          },
+          {
+            "id": "old-me1-t1",
+            "code": "ME-T1",
+            "year": 11,
+            "areaOfStudy": "Trigonometric Functions",
+            "title": "Inverse Trigonometric Functions",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-me1-t1-inverse-trig",
+                "code": "T1",
+                "title": "Inverse trigonometric functions"
+              }
+            ]
+          },
+          {
+            "id": "old-me1-t2",
+            "code": "ME-T2",
+            "year": 11,
+            "areaOfStudy": "Trigonometric Functions",
+            "title": "Further Trigonometric Identities",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-me1-t2-identities",
+                "code": "T2",
+                "title": "Compound-angle, double-angle and related trigonometric identities"
+              }
+            ]
+          },
+          {
+            "id": "old-me1-c1",
+            "code": "ME-C1",
+            "year": 11,
+            "areaOfStudy": "Calculus",
+            "title": "Rates of Change",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-me1-c1-time",
+                "code": "C1.1",
+                "title": "Rates of change with respect to time"
+              },
+              {
+                "id": "old-me1-c1-exponential",
+                "code": "C1.2",
+                "title": "Exponential growth and decay"
+              },
+              {
+                "id": "old-me1-c1-related",
+                "code": "C1.3",
+                "title": "Related rates of change"
+              }
+            ]
+          },
+          {
+            "id": "old-me1-a1",
+            "code": "ME-A1",
+            "year": 11,
+            "areaOfStudy": "Combinatorics",
+            "title": "Working with Combinatorics",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-me1-a1-permutations-combinations",
+                "code": "A1.1",
+                "title": "Permutations and combinations"
+              },
+              {
+                "id": "old-me1-a1-binomial-expansion",
+                "code": "A1.2",
+                "title": "The binomial expansion and Pascal's triangle"
+              }
+            ]
+          },
+          {
+            "id": "old-me1-p1",
+            "code": "ME-P1",
+            "year": 12,
+            "areaOfStudy": "Proof",
+            "title": "Proof by Mathematical Induction",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-me1-p1-induction",
+                "code": "P1",
+                "title": "Proof by mathematical induction"
+              }
+            ]
+          },
+          {
+            "id": "old-me1-v1",
+            "code": "ME-V1",
+            "year": 12,
+            "areaOfStudy": "Vectors",
+            "title": "Introduction to Vectors",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-me1-v1-introduction",
+                "code": "V1.1",
+                "title": "Introduction to vectors"
+              },
+              {
+                "id": "old-me1-v1-operations",
+                "code": "V1.2",
+                "title": "Further operations with vectors"
+              },
+              {
+                "id": "old-me1-v1-projectiles",
+                "code": "V1.3",
+                "title": "Projectile motion and motion in vector form"
+              }
+            ]
+          },
+          {
+            "id": "old-me1-t3",
+            "code": "ME-T3",
+            "year": 12,
+            "areaOfStudy": "Trigonometric Functions",
+            "title": "Trigonometric Equations",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-me1-t3-equations",
+                "code": "T3",
+                "title": "Trigonometric equations"
+              }
+            ]
+          },
+          {
+            "id": "old-me1-c2",
+            "code": "ME-C2",
+            "year": 12,
+            "areaOfStudy": "Calculus",
+            "title": "Further Calculus Skills",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-me1-c2-derivatives",
+                "code": "C2.1",
+                "title": "Further derivatives of functions"
+              },
+              {
+                "id": "old-me1-c2-integration",
+                "code": "C2.2",
+                "title": "Techniques of integration"
+              }
+            ]
+          },
+          {
+            "id": "old-me1-c3",
+            "code": "ME-C3",
+            "year": 12,
+            "areaOfStudy": "Calculus",
+            "title": "Applications of Calculus",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-me1-c3-polynomial-multiplicity",
+                "code": "C3.1",
+                "title": "Multiplicity of zeroes of polynomial functions"
+              },
+              {
+                "id": "old-me1-c3-rates",
+                "code": "C3.2",
+                "title": "Further rates of change"
+              },
+              {
+                "id": "old-me1-c3-areas-volumes",
+                "code": "C3.3",
+                "title": "Areas between curves and volumes of solids of revolution"
+              },
+              {
+                "id": "old-me1-c3-differential-equations",
+                "code": "C3.4",
+                "title": "Differential equations"
+              }
+            ]
+          },
+          {
+            "id": "old-me1-s1",
+            "code": "ME-S1",
+            "year": 12,
+            "areaOfStudy": "Statistical Analysis",
+            "title": "The Binomial Distribution",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-me1-s1-binomial",
+                "code": "S1",
+                "title": "The binomial distribution"
+              }
+            ]
+          }
+        ]
+      },
+      "newSyllabus": {
+        "id": "extension-1-2024",
+        "title": "Mathematics Extension 1 11-12 Syllabus (2024)",
+        "overviewUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-extension-1-11-12-2024/overview",
+        "contentUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-extension-1-11-12-2024/content",
+        "nodes": [
+          {
+            "id": "new-me1-further-work-functions",
+            "sourceFocusAreaId": "fafd6dbe16",
+            "code": "ME1-11-01",
+            "year": 11,
+            "areaOfStudy": "Functions",
+            "title": "Further work with functions",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-extension-1-11-12-2024/content/year-11/fafd6dbe16",
+            "outcomes": ["ME1-11-01"],
+            "contentGroups": [
+              {
+                "id": "new-me1-fwf-graphical",
+                "sourceContentGroupId": "cgc21de453",
+                "title": "Graphical relationships"
+              },
+              {
+                "id": "new-me1-fwf-inverse",
+                "sourceContentGroupId": "cg3e17c724",
+                "title": "Inverse functions"
+              },
+              {
+                "id": "new-me1-fwf-parametric",
+                "sourceContentGroupId": "cgf13af775",
+                "title": "Parametric form of a function or relation"
+              },
+              {
+                "id": "new-me1-fwf-inequalities",
+                "sourceContentGroupId": "cg0514790e",
+                "title": "Inequalities"
+              }
+            ]
+          },
+          {
+            "id": "new-me1-polynomials",
+            "sourceFocusAreaId": "fa858a6f68",
+            "code": "ME1-11-02",
+            "year": 11,
+            "areaOfStudy": "Functions",
+            "title": "Polynomials",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-extension-1-11-12-2024/content/year-11/fa858a6f68",
+            "outcomes": ["ME1-11-02"],
+            "contentGroups": [
+              {
+                "id": "new-me1-poly-language-graphs",
+                "sourceContentGroupId": "cg64af9b20",
+                "title": "Language and graphs of polynomials"
+              },
+              {
+                "id": "new-me1-poly-remainder-factor",
+                "sourceContentGroupId": "cg3223a3ec",
+                "title": "Remainder and factor theorems"
+              },
+              {
+                "id": "new-me1-poly-zeroes",
+                "sourceContentGroupId": "cg46ae41c0",
+                "title": "Sums and products of zeroes of polynomials"
+              }
+            ]
+          },
+          {
+            "id": "new-me1-further-trigonometry",
+            "sourceFocusAreaId": "fa788a073e",
+            "code": "ME1-11-03",
+            "year": 11,
+            "areaOfStudy": "Trigonometric functions",
+            "title": "Further trigonometry",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-extension-1-11-12-2024/content/year-11/fa788a073e",
+            "outcomes": ["ME1-11-03"],
+            "contentGroups": [
+              {
+                "id": "new-me1-ft-3d",
+                "sourceContentGroupId": "cg4ac89d21",
+                "title": "Trigonometry in three dimensions"
+              },
+              {
+                "id": "new-me1-ft-identities",
+                "sourceContentGroupId": "cg23486f04",
+                "title": "Further trigonometric identities"
+              },
+              {
+                "id": "new-me1-ft-equations",
+                "sourceContentGroupId": "cg18eeba3d",
+                "title": "Further trigonometric equations"
+              }
+            ]
+          },
+          {
+            "id": "new-me1-permutations-combinations",
+            "sourceFocusAreaId": "fa40471150",
+            "code": "ME1-11-04",
+            "year": 11,
+            "areaOfStudy": "Combinatorics",
+            "title": "Permutations and combinations",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-extension-1-11-12-2024/content/year-11/fa40471150",
+            "outcomes": ["ME1-11-04"],
+            "contentGroups": [
+              {
+                "id": "new-me1-pc-permutations-combinations",
+                "sourceContentGroupId": "cg12a87eb6",
+                "title": "Permutations and combinations"
+              }
+            ]
+          },
+          {
+            "id": "new-me1-binomial-theorem",
+            "sourceFocusAreaId": "fa00679960",
+            "code": "ME1-11-05",
+            "year": 11,
+            "areaOfStudy": "Combinatorics",
+            "title": "The binomial theorem",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-extension-1-11-12-2024/content/year-11/fa00679960",
+            "outcomes": ["ME1-11-05"],
+            "contentGroups": [
+              {
+                "id": "new-me1-bt-binomial-theorem",
+                "sourceContentGroupId": "cge34ebe0d",
+                "title": "The binomial theorem"
+              }
+            ]
+          },
+          {
+            "id": "new-me1-induction",
+            "sourceFocusAreaId": "fa0cde2f55",
+            "code": "ME1-12-01",
+            "year": 12,
+            "areaOfStudy": "Proof",
+            "title": "Proof by mathematical induction",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-extension-1-11-12-2024/content/year-12/fa0cde2f55",
+            "outcomes": ["ME1-12-01"],
+            "contentGroups": [
+              {
+                "id": "new-me1-pmi-induction",
+                "sourceContentGroupId": "cgab68aa7e",
+                "title": "Proof by mathematical induction"
+              }
+            ]
+          },
+          {
+            "id": "new-me1-vectors",
+            "sourceFocusAreaId": "fa682e9b47",
+            "code": "ME1-12-02",
+            "year": 12,
+            "areaOfStudy": "Vectors",
+            "title": "Introduction to vectors",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-extension-1-11-12-2024/content/year-12/fa682e9b47",
+            "outcomes": ["ME1-12-02"],
+            "contentGroups": [
+              {
+                "id": "new-me1-vectors-notation",
+                "sourceContentGroupId": "cg84bc531b",
+                "title": "Vector representation and notation"
+              },
+              {
+                "id": "new-me1-vectors-2d-3d",
+                "sourceContentGroupId": "cg77b61e28",
+                "title": "Introduction to 2D and 3D vectors"
+              },
+              {
+                "id": "new-me1-vectors-operating",
+                "sourceContentGroupId": "cg7ca46257",
+                "title": "Operating with vectors"
+              },
+              {
+                "id": "new-me1-vectors-further",
+                "sourceContentGroupId": "cg650bd7ba",
+                "title": "Further operations with vectors"
+              },
+              {
+                "id": "new-me1-vectors-motion",
+                "sourceContentGroupId": "cgab92b2f3",
+                "title": "Motion in vector form in two dimensions"
+              },
+              {
+                "id": "new-me1-vectors-projectile",
+                "sourceContentGroupId": "cg8d12240c",
+                "title": "Projectile motion"
+              }
+            ]
+          },
+          {
+            "id": "new-me1-inverse-trig",
+            "sourceFocusAreaId": "fab9c2c5a7",
+            "code": "ME1-12-03",
+            "year": 12,
+            "areaOfStudy": "Trigonometric functions",
+            "title": "Inverse trigonometric functions",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-extension-1-11-12-2024/content/year-12/fab9c2c5a7",
+            "outcomes": ["ME1-12-03"],
+            "contentGroups": [
+              {
+                "id": "new-me1-it-definitions",
+                "sourceContentGroupId": "cgcb5ea42b",
+                "title": "Definitions of inverse trigonometric functions"
+              },
+              {
+                "id": "new-me1-it-graphs",
+                "sourceContentGroupId": "cgebe3ac2e",
+                "title": "Graphs of inverse trigonometric functions"
+              }
+            ]
+          },
+          {
+            "id": "new-me1-calculus-skills",
+            "sourceFocusAreaId": "fa8f1cef28",
+            "code": "ME1-12-04",
+            "year": 12,
+            "areaOfStudy": "Calculus",
+            "title": "Further calculus skills",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-extension-1-11-12-2024/content/year-12/fa8f1cef28",
+            "outcomes": ["ME1-12-04"],
+            "contentGroups": [
+              {
+                "id": "new-me1-fcs-derivatives",
+                "sourceContentGroupId": "cg640d76d5",
+                "title": "Further derivatives of functions"
+              },
+              {
+                "id": "new-me1-fcs-integration",
+                "sourceContentGroupId": "cgf97d64ba",
+                "title": "Techniques of integration"
+              }
+            ]
+          },
+          {
+            "id": "new-me1-calculus-applications",
+            "sourceFocusAreaId": "faed7f98f9",
+            "code": "ME1-12-05",
+            "year": 12,
+            "areaOfStudy": "Calculus",
+            "title": "Further applications of calculus",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-extension-1-11-12-2024/content/year-12/faed7f98f9",
+            "outcomes": ["ME1-12-05"],
+            "contentGroups": [
+              {
+                "id": "new-me1-fac-zeroes",
+                "sourceContentGroupId": "cg751d3708",
+                "title": "Multiplicity of zeroes of polynomial functions"
+              },
+              {
+                "id": "new-me1-fac-rates",
+                "sourceContentGroupId": "cg045f3111",
+                "title": "Further rates of change"
+              },
+              {
+                "id": "new-me1-fac-areas-volumes",
+                "sourceContentGroupId": "cgeabf57a7",
+                "title": "Areas between curves and volumes of solids of revolution"
+              },
+              {
+                "id": "new-me1-fac-differential-equations",
+                "sourceContentGroupId": "cga4176d03",
+                "title": "Differential equations"
+              }
+            ]
+          },
+          {
+            "id": "new-me1-binomial-sampling",
+            "sourceFocusAreaId": "fab1724c5e",
+            "code": "ME1-12-06",
+            "year": 12,
+            "areaOfStudy": "Statistical analysis",
+            "title": "The binomial distribution and sampling distribution of the mean",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-extension-1-11-12-2024/content/year-12/fab1724c5e",
+            "outcomes": ["ME1-12-06"],
+            "contentGroups": [
+              {
+                "id": "new-me1-bsd-bernoulli",
+                "sourceContentGroupId": "cgb5fa40e5",
+                "title": "Bernoulli distributions"
+              },
+              {
+                "id": "new-me1-bsd-binomial",
+                "sourceContentGroupId": "cg09c85371",
+                "title": "Binomial distributions"
+              },
+              {
+                "id": "new-me1-bsd-sampling",
+                "sourceContentGroupId": "cg4348a208",
+                "title": "Sampling distribution of the mean and the central limit theorem"
+              }
+            ]
+          }
+        ]
+      },
+      "mappings": [
+        {
+          "id": "map-me1-f1-further-work-functions",
+          "oldNodeId": "old-me1-f1",
+          "newNodeId": "new-me1-further-work-functions",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Direct focus-area match for graphical relationships, inverse functions, parametric forms and inequalities."
+        },
+        {
+          "id": "map-me1-f2-polynomials",
+          "oldNodeId": "old-me1-f2",
+          "newNodeId": "new-me1-polynomials",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Direct focus-area match for polynomial language, graphs, factor/remainder theorems and roots."
+        },
+        {
+          "id": "map-me1-f2-multiplicity",
+          "oldNodeId": "old-me1-f2",
+          "newNodeId": "new-me1-calculus-applications",
+          "relationship": "partial",
+          "confidence": "medium",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Questions focused on multiplicity and curve behaviour may display under the 2024 Further applications of calculus zeroes group."
+        },
+        {
+          "id": "map-me1-t1-inverse-trig",
+          "oldNodeId": "old-me1-t1",
+          "newNodeId": "new-me1-inverse-trig",
+          "relationship": "shifted",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "The inverse trigonometric functions content moves from Year 11 in 2017 to Year 12 in 2024."
+        },
+        {
+          "id": "map-me1-t2-further-trig",
+          "oldNodeId": "old-me1-t2",
+          "newNodeId": "new-me1-further-trigonometry",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Further trigonometric identities remain in the 2024 Further trigonometry focus area."
+        },
+        {
+          "id": "map-me1-c1-rates",
+          "oldNodeId": "old-me1-c1",
+          "newNodeId": "new-me1-calculus-applications",
+          "relationship": "split",
+          "confidence": "medium",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Related rates and applied rate-of-change modelling align most closely with 2024 Further applications of calculus."
+        },
+        {
+          "id": "map-me1-c1-calculus-skills",
+          "oldNodeId": "old-me1-c1",
+          "newNodeId": "new-me1-calculus-skills",
+          "relationship": "partial",
+          "confidence": "medium",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Routine derivative-skill questions from the 2017 Rates of Change subtopic can also display under 2024 Further calculus skills."
+        },
+        {
+          "id": "map-me1-a1-permutations",
+          "oldNodeId": "old-me1-a1",
+          "newNodeId": "new-me1-permutations-combinations",
+          "relationship": "split",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Permutation and combination content remains a Year 11 combinatorics focus area."
+        },
+        {
+          "id": "map-me1-a1-binomial",
+          "oldNodeId": "old-me1-a1",
+          "newNodeId": "new-me1-binomial-theorem",
+          "relationship": "split",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "The 2017 binomial expansion and Pascal's triangle content is now separated as The binomial theorem."
+        },
+        {
+          "id": "map-me1-p1-induction",
+          "oldNodeId": "old-me1-p1",
+          "newNodeId": "new-me1-induction",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Direct match for proof by mathematical induction."
+        },
+        {
+          "id": "map-me1-v1-vectors",
+          "oldNodeId": "old-me1-v1",
+          "newNodeId": "new-me1-vectors",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Direct match for vector notation, operations, motion and projectiles."
+        },
+        {
+          "id": "map-me1-t3-trig-equations",
+          "oldNodeId": "old-me1-t3",
+          "newNodeId": "new-me1-further-trigonometry",
+          "relationship": "shifted",
+          "confidence": "medium",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "2017 Year 12 trigonometric equations align with the 2024 Year 11 Further trigonometric equations group."
+        },
+        {
+          "id": "map-me1-c2-calculus-skills",
+          "oldNodeId": "old-me1-c2",
+          "newNodeId": "new-me1-calculus-skills",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Direct match for further derivatives and integration techniques."
+        },
+        {
+          "id": "map-me1-c3-calculus-applications",
+          "oldNodeId": "old-me1-c3",
+          "newNodeId": "new-me1-calculus-applications",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Direct match for multiplicity, rates, areas, volumes and differential equations."
+        },
+        {
+          "id": "map-me1-s1-binomial-sampling",
+          "oldNodeId": "old-me1-s1",
+          "newNodeId": "new-me1-binomial-sampling",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "The binomial distribution is retained and expanded with sampling distribution content in 2024."
+        }
+      ]
+    },
+    {
+      "id": "extension-2",
+      "title": "Mathematics Extension 2",
+      "oldSyllabus": {
+        "id": "extension-2-2017",
+        "title": "Mathematics Extension 2 Stage 6 Syllabus (2017)",
+        "sourceUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/mathematics/mathematics-extension-2-stage-6-2017",
+        "sourceDocxUrl": "https://www.nsw.gov.au/sites/default/files/noindex/2025-04/mathematics-extension-2-stage-6-syllabus-2017.docx",
+        "implementation": {
+          "replacedBy": "extension-2-2024",
+          "replacementNotes": "The 2024 syllabus starts implementation for Year 12 in Term 4 2026, with the first HSC exam in 2027."
+        },
+        "nodes": [
+          {
+            "id": "old-me2-p1",
+            "code": "MEX-P1",
+            "year": 12,
+            "areaOfStudy": "Proof",
+            "title": "The Nature of Proof",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-me2-p1-proof",
+                "code": "P1",
+                "title": "The nature and language of proof"
+              }
+            ]
+          },
+          {
+            "id": "old-me2-p2",
+            "code": "MEX-P2",
+            "year": 12,
+            "areaOfStudy": "Proof",
+            "title": "Further Proof by Mathematical Induction",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-me2-p2-induction",
+                "code": "P2",
+                "title": "Further proof by mathematical induction"
+              }
+            ]
+          },
+          {
+            "id": "old-me2-v1",
+            "code": "MEX-V1",
+            "year": 12,
+            "areaOfStudy": "Vectors",
+            "title": "Further Work with Vectors",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-me2-v1-lines-curves",
+                "code": "V1.1",
+                "title": "Vector equations of lines and curves"
+              },
+              {
+                "id": "old-me2-v1-geometry",
+                "code": "V1.2",
+                "title": "Vectors and geometry"
+              }
+            ]
+          },
+          {
+            "id": "old-me2-n1",
+            "code": "MEX-N1",
+            "year": 12,
+            "areaOfStudy": "Complex Numbers",
+            "title": "Introduction to Complex Numbers",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-me2-n1-arithmetic",
+                "code": "N1.1",
+                "title": "Arithmetic and algebra of complex numbers"
+              },
+              {
+                "id": "old-me2-n1-geometry",
+                "code": "N1.2",
+                "title": "Geometric representation of complex numbers"
+              },
+              {
+                "id": "old-me2-n1-forms",
+                "code": "N1.3",
+                "title": "Other representations of complex numbers"
+              }
+            ]
+          },
+          {
+            "id": "old-me2-n2",
+            "code": "MEX-N2",
+            "year": 12,
+            "areaOfStudy": "Complex Numbers",
+            "title": "Using Complex Numbers",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-me2-n2-equations",
+                "code": "N2.1",
+                "title": "Solving equations with complex numbers"
+              },
+              {
+                "id": "old-me2-n2-geometry",
+                "code": "N2.2",
+                "title": "Geometrical implications of complex numbers"
+              }
+            ]
+          },
+          {
+            "id": "old-me2-c1",
+            "code": "MEX-C1",
+            "year": 12,
+            "areaOfStudy": "Calculus",
+            "title": "Further Integration",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-me2-c1-integration",
+                "code": "C1",
+                "title": "Further integration"
+              }
+            ]
+          },
+          {
+            "id": "old-me2-m1",
+            "code": "MEX-M1",
+            "year": 12,
+            "areaOfStudy": "Mechanics",
+            "title": "Applications of Calculus to Mechanics",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-me2-m1-shm",
+                "code": "M1.1",
+                "title": "Simple harmonic motion"
+              },
+              {
+                "id": "old-me2-m1-motion",
+                "code": "M1.2",
+                "title": "Modelling motion without resistance"
+              },
+              {
+                "id": "old-me2-m1-resisted",
+                "code": "M1.3",
+                "title": "Resisted motion"
+              },
+              {
+                "id": "old-me2-m1-projectiles",
+                "code": "M1.4",
+                "title": "Projectiles and resisted motion"
+              }
+            ]
+          }
+        ]
+      },
+      "newSyllabus": {
+        "id": "extension-2-2024",
+        "title": "Mathematics Extension 2 11-12 Syllabus (2024)",
+        "overviewUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-extension-2-11-12-2024/overview",
+        "contentUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-extension-2-11-12-2024/content",
+        "nodes": [
+          {
+            "id": "new-me2-proof",
+            "sourceFocusAreaId": "faabcfa8e0",
+            "code": "ME2-12-01",
+            "year": 12,
+            "areaOfStudy": "Proof",
+            "title": "The nature of proof",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-extension-2-11-12-2024/content/year-12/faabcfa8e0",
+            "outcomes": ["ME2-12-01"],
+            "contentGroups": [
+              {
+                "id": "new-me2-proof-language",
+                "sourceContentGroupId": "cg6e1e01c2",
+                "title": "The language and notation of proof"
+              },
+              {
+                "id": "new-me2-proof-illustrations",
+                "sourceContentGroupId": "cg8425a290",
+                "title": "Illustrations of proofs"
+              },
+              {
+                "id": "new-me2-proof-inequalities",
+                "sourceContentGroupId": "cg86e714df",
+                "title": "Proof of inequalities"
+              },
+              {
+                "id": "new-me2-proof-induction",
+                "sourceContentGroupId": "cg9ae9e21f",
+                "title": "Further proof by mathematical induction"
+              }
+            ]
+          },
+          {
+            "id": "new-me2-vectors",
+            "sourceFocusAreaId": "fa9ab552db",
+            "code": "ME2-12-02",
+            "year": 12,
+            "areaOfStudy": "Vectors",
+            "title": "Further work with vectors",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-extension-2-11-12-2024/content/year-12/fa9ab552db",
+            "outcomes": ["ME2-12-02"],
+            "contentGroups": [
+              {
+                "id": "new-me2-vectors-lines-curves",
+                "sourceContentGroupId": "cg867882dd",
+                "title": "Vector equations of lines and curves"
+              },
+              {
+                "id": "new-me2-vectors-geometry",
+                "sourceContentGroupId": "cge8d2614e",
+                "title": "Vectors and geometry"
+              }
+            ]
+          },
+          {
+            "id": "new-me2-complex",
+            "sourceFocusAreaId": "fa0be3067b",
+            "code": "ME2-12-03",
+            "year": 12,
+            "areaOfStudy": "Complex numbers",
+            "title": "Introduction to complex numbers",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-extension-2-11-12-2024/content/year-12/fa0be3067b",
+            "outcomes": ["ME2-12-03"],
+            "contentGroups": [
+              {
+                "id": "new-me2-complex-arithmetic",
+                "sourceContentGroupId": "cg7bdbd83e",
+                "title": "Arithmetic of complex numbers"
+              },
+              {
+                "id": "new-me2-complex-geometric",
+                "sourceContentGroupId": "cgd02072b7",
+                "title": "Geometric representation of complex numbers"
+              },
+              {
+                "id": "new-me2-complex-equations",
+                "sourceContentGroupId": "cg1f68d9fe",
+                "title": "Solving equations with complex numbers"
+              },
+              {
+                "id": "new-me2-complex-powers-roots",
+                "sourceContentGroupId": "cgd79bb009",
+                "title": "Powers and roots of complex numbers"
+              },
+              {
+                "id": "new-me2-complex-regions",
+                "sourceContentGroupId": "cg94d7c903",
+                "title": "Describing lines, curves and regions"
+              }
+            ]
+          },
+          {
+            "id": "new-me2-integration",
+            "sourceFocusAreaId": "fa812ef8f0",
+            "code": "ME2-12-04",
+            "year": 12,
+            "areaOfStudy": "Calculus",
+            "title": "Further integration",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-extension-2-11-12-2024/content/year-12/fa812ef8f0",
+            "outcomes": ["ME2-12-04"],
+            "contentGroups": [
+              {
+                "id": "new-me2-integration-techniques",
+                "sourceContentGroupId": "cg5f95c413",
+                "title": "Further integration"
+              }
+            ]
+          },
+          {
+            "id": "new-me2-mechanics",
+            "sourceFocusAreaId": "fa86b7acff",
+            "code": "ME2-12-05",
+            "year": 12,
+            "areaOfStudy": "Mechanics",
+            "title": "Applications of calculus to mechanics",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-extension-2-11-12-2024/content/year-12/fa86b7acff",
+            "outcomes": ["ME2-12-05"],
+            "contentGroups": [
+              {
+                "id": "new-me2-mechanics-forces",
+                "sourceContentGroupId": "cg80261a3f",
+                "title": "Forces and further motion in a straight line"
+              },
+              {
+                "id": "new-me2-mechanics-shm",
+                "sourceContentGroupId": "cga3f1b18e",
+                "title": "Simple harmonic motion"
+              },
+              {
+                "id": "new-me2-mechanics-without-resistance",
+                "sourceContentGroupId": "cg6cca7e94",
+                "title": "Modelling motion without resistance"
+              },
+              {
+                "id": "new-me2-mechanics-rectilinear-resisted",
+                "sourceContentGroupId": "cg4628511c",
+                "title": "Rectilinear resisted motion"
+              },
+              {
+                "id": "new-me2-mechanics-vertical-resisted",
+                "sourceContentGroupId": "cg79a1aa69",
+                "title": "Vertical resisted motion"
+              },
+              {
+                "id": "new-me2-mechanics-projectiles",
+                "sourceContentGroupId": "cg3328f458",
+                "title": "Projectiles and resisted motion"
+              }
+            ]
+          }
+        ]
+      },
+      "mappings": [
+        {
+          "id": "map-me2-p1-proof",
+          "oldNodeId": "old-me2-p1",
+          "newNodeId": "new-me2-proof",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Direct match for nature, notation and illustrations of proof, including inequalities."
+        },
+        {
+          "id": "map-me2-p2-induction",
+          "oldNodeId": "old-me2-p2",
+          "newNodeId": "new-me2-proof",
+          "relationship": "merged",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Further induction is now a content group inside the 2024 The nature of proof focus area."
+        },
+        {
+          "id": "map-me2-v1-vectors",
+          "oldNodeId": "old-me2-v1",
+          "newNodeId": "new-me2-vectors",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Direct match for vector equations and vector geometry."
+        },
+        {
+          "id": "map-me2-n1-complex",
+          "oldNodeId": "old-me2-n1",
+          "newNodeId": "new-me2-complex",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Introductory complex-number arithmetic, geometry and representation remain in one 2024 focus area."
+        },
+        {
+          "id": "map-me2-n2-complex",
+          "oldNodeId": "old-me2-n2",
+          "newNodeId": "new-me2-complex",
+          "relationship": "merged",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Using complex numbers is merged into the 2024 Introduction to complex numbers focus area."
+        },
+        {
+          "id": "map-me2-c1-integration",
+          "oldNodeId": "old-me2-c1",
+          "newNodeId": "new-me2-integration",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Direct match for further integration techniques."
+        },
+        {
+          "id": "map-me2-m1-mechanics",
+          "oldNodeId": "old-me2-m1",
+          "newNodeId": "new-me2-mechanics",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Direct match for mechanics, simple harmonic motion, resisted motion and projectiles."
+        }
+      ]
+    },
+    {
+      "id": "standard",
+      "title": "Mathematics Standard",
+      "oldSyllabus": {
+        "id": "standard-2017",
+        "title": "Mathematics Standard Stage 6 Syllabus (2017)",
+        "sourceUrl": "https://www.nsw.gov.au/education-and-training/nesa/curriculum/mathematics/mathematics-standard-stage-6-2017",
+        "sourceDocxUrl": "https://www.nsw.gov.au/sites/default/files/noindex/2025-04/mathematics-standard-stage-6-2017-syllabus-word.docx",
+        "implementation": {
+          "replacedBy": "standard-2024",
+          "replacementNotes": "The 2024 syllabus starts Year 11 implementation in 2026, Year 12 implementation in Term 4 2026, with the first HSC exam in 2027."
+        },
+        "nodes": [
+          {
+            "id": "old-ms-a1",
+            "code": "MS-A1",
+            "year": 11,
+            "areaOfStudy": "Algebra",
+            "title": "Formulae and Equations",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-ms-a1-formulae",
+                "code": "A1",
+                "title": "Formulae and equations"
+              }
+            ]
+          },
+          {
+            "id": "old-ms-a2",
+            "code": "MS-A2",
+            "year": 11,
+            "areaOfStudy": "Algebra",
+            "title": "Linear Relationships",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-ms-a2-linear",
+                "code": "A2",
+                "title": "Linear relationships"
+              }
+            ]
+          },
+          {
+            "id": "old-ms-m1",
+            "code": "MS-M1",
+            "year": 11,
+            "areaOfStudy": "Measurement",
+            "title": "Applications of Measurement",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-ms-m1-measurement",
+                "code": "M1",
+                "title": "Applications of measurement"
+              }
+            ]
+          },
+          {
+            "id": "old-ms-m2",
+            "code": "MS-M2",
+            "year": 11,
+            "areaOfStudy": "Measurement",
+            "title": "Working with Time",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-ms-m2-time",
+                "code": "M2",
+                "title": "Working with time"
+              }
+            ]
+          },
+          {
+            "id": "old-ms-f1",
+            "code": "MS-F1",
+            "year": 11,
+            "areaOfStudy": "Financial Mathematics",
+            "title": "Money Matters",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-ms-f1-money",
+                "code": "F1",
+                "title": "Money matters"
+              }
+            ]
+          },
+          {
+            "id": "old-ms-s1",
+            "code": "MS-S1",
+            "year": 11,
+            "areaOfStudy": "Statistical Analysis",
+            "title": "Data Analysis",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-ms-s1-data",
+                "code": "S1",
+                "title": "Data analysis"
+              }
+            ]
+          },
+          {
+            "id": "old-ms-s2",
+            "code": "MS-S2",
+            "year": 11,
+            "areaOfStudy": "Statistical Analysis",
+            "title": "Relative Frequency and Probability",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-ms-s2-probability",
+                "code": "S2",
+                "title": "Relative frequency and probability"
+              }
+            ]
+          },
+          {
+            "id": "old-ms-a3",
+            "code": "MS-A3",
+            "year": 12,
+            "areaOfStudy": "Algebra",
+            "title": "Types of Relationships",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-ms-a3-relationships",
+                "code": "A3",
+                "title": "Types of relationships"
+              }
+            ]
+          },
+          {
+            "id": "old-ms-m3",
+            "code": "MS-M3",
+            "year": 12,
+            "areaOfStudy": "Measurement",
+            "title": "Right-angled Triangles",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-ms-m3-triangles",
+                "code": "M3",
+                "title": "Right-angled triangles"
+              }
+            ]
+          },
+          {
+            "id": "old-ms-m4",
+            "code": "MS-M4",
+            "year": 12,
+            "areaOfStudy": "Measurement",
+            "title": "Rates",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-ms-m4-rates",
+                "code": "M4",
+                "title": "Rates"
+              }
+            ]
+          },
+          {
+            "id": "old-ms-m5",
+            "code": "MS-M5",
+            "year": 12,
+            "areaOfStudy": "Measurement",
+            "title": "Scale Drawings",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-ms-m5-scale",
+                "code": "M5",
+                "title": "Scale drawings"
+              }
+            ]
+          },
+          {
+            "id": "old-ms-f2",
+            "code": "MS-F2",
+            "year": 12,
+            "areaOfStudy": "Financial Mathematics",
+            "title": "Investment",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-ms-f2-investment",
+                "code": "F2",
+                "title": "Investment"
+              }
+            ]
+          },
+          {
+            "id": "old-ms-f3",
+            "code": "MS-F3",
+            "year": 12,
+            "areaOfStudy": "Financial Mathematics",
+            "title": "Depreciation and Loans",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-ms-f3-depreciation-loans",
+                "code": "F3",
+                "title": "Depreciation and loans"
+              }
+            ]
+          },
+          {
+            "id": "old-ms-s3",
+            "code": "MS-S3",
+            "year": 12,
+            "areaOfStudy": "Statistical Analysis",
+            "title": "Further Statistical Analysis",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-ms-s3-further-statistics",
+                "code": "S3",
+                "title": "Further statistical analysis"
+              }
+            ]
+          },
+          {
+            "id": "old-ms-n1",
+            "code": "MS-N1",
+            "year": 12,
+            "areaOfStudy": "Networks",
+            "title": "Networks and Paths",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-ms-n1-networks-paths",
+                "code": "N1",
+                "title": "Networks and paths"
+              }
+            ]
+          },
+          {
+            "id": "old-ms-a4",
+            "code": "MS-A4",
+            "year": 12,
+            "areaOfStudy": "Algebra",
+            "title": "Types of Relationships",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-ms-a4-relationships",
+                "code": "A4",
+                "title": "Types of relationships"
+              }
+            ]
+          },
+          {
+            "id": "old-ms-m6",
+            "code": "MS-M6",
+            "year": 12,
+            "areaOfStudy": "Measurement",
+            "title": "Non-right-angled Trigonometry",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-ms-m6-trigonometry",
+                "code": "M6",
+                "title": "Non-right-angled trigonometry"
+              }
+            ]
+          },
+          {
+            "id": "old-ms-m7",
+            "code": "MS-M7",
+            "year": 12,
+            "areaOfStudy": "Measurement",
+            "title": "Rates and Ratios",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-ms-m7-rates-ratios",
+                "code": "M7",
+                "title": "Rates and ratios"
+              }
+            ]
+          },
+          {
+            "id": "old-ms-f4",
+            "code": "MS-F4",
+            "year": 12,
+            "areaOfStudy": "Financial Mathematics",
+            "title": "Investments and Loans",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-ms-f4-investments-loans",
+                "code": "F4",
+                "title": "Investments and loans"
+              }
+            ]
+          },
+          {
+            "id": "old-ms-f5",
+            "code": "MS-F5",
+            "year": 12,
+            "areaOfStudy": "Financial Mathematics",
+            "title": "Annuities",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-ms-f5-annuities",
+                "code": "F5",
+                "title": "Annuities"
+              }
+            ]
+          },
+          {
+            "id": "old-ms-s4",
+            "code": "MS-S4",
+            "year": 12,
+            "areaOfStudy": "Statistical Analysis",
+            "title": "Bivariate Data Analysis",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-ms-s4-bivariate",
+                "code": "S4",
+                "title": "Bivariate data analysis"
+              }
+            ]
+          },
+          {
+            "id": "old-ms-s5",
+            "code": "MS-S5",
+            "year": 12,
+            "areaOfStudy": "Statistical Analysis",
+            "title": "The Normal Distribution",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-ms-s5-normal",
+                "code": "S5",
+                "title": "The normal distribution"
+              }
+            ]
+          },
+          {
+            "id": "old-ms-n2",
+            "code": "MS-N2",
+            "year": 12,
+            "areaOfStudy": "Networks",
+            "title": "Network Concepts",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-ms-n2-concepts",
+                "code": "N2",
+                "title": "Network concepts"
+              }
+            ]
+          },
+          {
+            "id": "old-ms-n3",
+            "code": "MS-N3",
+            "year": 12,
+            "areaOfStudy": "Networks",
+            "title": "Critical Path Analysis",
+            "outcomes": [],
+            "contentGroups": [
+              {
+                "id": "old-ms-n3-critical-path",
+                "code": "N3",
+                "title": "Critical path analysis"
+              }
+            ]
+          }
+        ]
+      },
+      "newSyllabus": {
+        "id": "standard-2024",
+        "title": "Mathematics Standard 11-12 Syllabus (2024)",
+        "overviewUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/overview",
+        "contentUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content",
+        "nodes": [
+          {
+            "id": "new-ms-formulas-equations",
+            "sourceFocusAreaId": "fa346f5353",
+            "code": "MST-11-01",
+            "year": 11,
+            "areaOfStudy": "Algebra",
+            "title": "Formulas and equations",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-11/fa346f5353",
+            "outcomes": ["MST-11-01"],
+            "contentGroups": [
+              {
+                "id": "new-ms-fe-formulas",
+                "sourceContentGroupId": "cg40872307",
+                "title": "Formulas and equations"
+              }
+            ]
+          },
+          {
+            "id": "new-ms-linear-relationships",
+            "sourceFocusAreaId": "fabe84d89c",
+            "code": "MST-11-02",
+            "year": 11,
+            "areaOfStudy": "Algebra",
+            "title": "Linear relationships",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-11/fabe84d89c",
+            "outcomes": ["MST-11-02"],
+            "contentGroups": [
+              {
+                "id": "new-ms-lr-linear-modelling",
+                "sourceContentGroupId": "cg93c52a35",
+                "title": "Linear modelling"
+              },
+              {
+                "id": "new-ms-lr-direct-variation",
+                "sourceContentGroupId": "cg0f642d1b",
+                "title": "Direct variation"
+              }
+            ]
+          },
+          {
+            "id": "new-ms-earning-money",
+            "sourceFocusAreaId": "faacdf9b3d",
+            "code": "MST-11-03",
+            "year": 11,
+            "areaOfStudy": "Financial mathematics",
+            "title": "Earning money",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-11/faacdf9b3d",
+            "outcomes": ["MST-11-03"],
+            "contentGroups": [
+              {
+                "id": "new-ms-em-ways",
+                "sourceContentGroupId": "cg63a4933e",
+                "title": "Ways of earning"
+              },
+              {
+                "id": "new-ms-em-taxation",
+                "sourceContentGroupId": "cgb766c06a",
+                "title": "Taxation"
+              }
+            ]
+          },
+          {
+            "id": "new-ms-managing-money",
+            "sourceFocusAreaId": "fa8d2fb431",
+            "code": "MST-11-04",
+            "year": 11,
+            "areaOfStudy": "Financial mathematics",
+            "title": "Managing money",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-11/fa8d2fb431",
+            "outcomes": ["MST-11-04"],
+            "contentGroups": [
+              {
+                "id": "new-ms-mm-purchasing",
+                "sourceContentGroupId": "cg1615fe85",
+                "title": "Purchasing goods"
+              },
+              {
+                "id": "new-ms-mm-budgeting",
+                "sourceContentGroupId": "cgdacbadc7",
+                "title": "Budgeting"
+              }
+            ]
+          },
+          {
+            "id": "new-ms-applications-measurement",
+            "sourceFocusAreaId": "fad74ae493",
+            "code": "MST-11-05",
+            "year": 11,
+            "areaOfStudy": "Measurement",
+            "title": "Applications of measurement",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-11/fad74ae493",
+            "outcomes": ["MST-11-05"],
+            "contentGroups": [
+              {
+                "id": "new-ms-am-practicalities",
+                "sourceContentGroupId": "cg5555a727",
+                "title": "Practicalities of measurement"
+              },
+              {
+                "id": "new-ms-am-perimeter-area-volume",
+                "sourceContentGroupId": "cga68cc8aa",
+                "title": "Perimeter, area and volume"
+              }
+            ]
+          },
+          {
+            "id": "new-ms-time-location",
+            "sourceFocusAreaId": "fa136ea49c",
+            "code": "MST-11-06",
+            "year": 11,
+            "areaOfStudy": "Measurement",
+            "title": "Time and location",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-11/fa136ea49c",
+            "outcomes": ["MST-11-06"],
+            "contentGroups": [
+              {
+                "id": "new-ms-tl-earth",
+                "sourceContentGroupId": "cg5bb36359",
+                "title": "Positions on the Earth's surface"
+              },
+              {
+                "id": "new-ms-tl-time",
+                "sourceContentGroupId": "cgcc3ec175",
+                "title": "Time and time differences"
+              }
+            ]
+          },
+          {
+            "id": "new-ms-networks-paths-trees",
+            "sourceFocusAreaId": "fabf235394",
+            "code": "MST-11-07",
+            "year": 11,
+            "areaOfStudy": "Networks",
+            "title": "Networks, paths and trees",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-11/fabf235394",
+            "outcomes": ["MST-11-07"],
+            "contentGroups": [
+              {
+                "id": "new-ms-npt-concepts",
+                "sourceContentGroupId": "cgf7e160ad",
+                "title": "Network concepts"
+              },
+              {
+                "id": "new-ms-npt-shortest-spanning",
+                "sourceContentGroupId": "cg35487678",
+                "title": "Shortest paths and spanning trees"
+              }
+            ]
+          },
+          {
+            "id": "new-ms-data-analysis",
+            "sourceFocusAreaId": "fa4de413b8",
+            "code": "MST-11-08",
+            "year": 11,
+            "areaOfStudy": "Statistical analysis",
+            "title": "Data analysis",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-11/fa4de413b8",
+            "outcomes": ["MST-11-08"],
+            "contentGroups": [
+              {
+                "id": "new-ms-da-investigation",
+                "sourceContentGroupId": "cga70dc1c8",
+                "title": "Statistical investigation process"
+              },
+              {
+                "id": "new-ms-da-population-sample",
+                "sourceContentGroupId": "cgc1245735",
+                "title": "Population and sample"
+              },
+              {
+                "id": "new-ms-da-classification",
+                "sourceContentGroupId": "cga6895dc1",
+                "title": "Data classification"
+              },
+              {
+                "id": "new-ms-da-display",
+                "sourceContentGroupId": "cgb48df320",
+                "title": "Display and interpret grouped and ungrouped data"
+              },
+              {
+                "id": "new-ms-da-centre-spread",
+                "sourceContentGroupId": "cg9286511b",
+                "title": "Measures of centre and spread"
+              },
+              {
+                "id": "new-ms-da-quartiles",
+                "sourceContentGroupId": "cg462c047b",
+                "title": "Quartiles and interquartile range"
+              },
+              {
+                "id": "new-ms-da-box-plots",
+                "sourceContentGroupId": "cg6e2e56e0",
+                "title": "Five-number summary and box plots"
+              },
+              {
+                "id": "new-ms-da-outliers",
+                "sourceContentGroupId": "cg1efbe333",
+                "title": "Clusters and outliers"
+              }
+            ]
+          },
+          {
+            "id": "new-ms-s1-algebraic-relationships",
+            "sourceFocusAreaId": "fa493dfdfb",
+            "code": "MST-12-S1-01",
+            "year": 12,
+            "areaOfStudy": "Algebra",
+            "title": "Algebraic relationships",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12/fa493dfdfb",
+            "outcomes": ["MST-12-S1-01"],
+            "contentGroups": [
+              {
+                "id": "new-ms-s1-ar-simultaneous",
+                "sourceContentGroupId": "cgd275ce3f",
+                "title": "Simultaneous linear equations"
+              },
+              {
+                "id": "new-ms-s1-ar-graphs",
+                "sourceContentGroupId": "cge01dfd07",
+                "title": "Graphs of practical situations"
+              }
+            ]
+          },
+          {
+            "id": "new-ms-s2-algebraic-relationships",
+            "sourceFocusAreaId": "faf5e47f4a",
+            "code": "MST-12-S2-01",
+            "year": 12,
+            "areaOfStudy": "Algebra",
+            "title": "Algebraic relationships",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12/faf5e47f4a",
+            "outcomes": ["MST-12-S2-01"],
+            "contentGroups": [
+              {
+                "id": "new-ms-s2-ar-simultaneous",
+                "sourceContentGroupId": "cg32f234b7",
+                "title": "Simultaneous linear equations"
+              },
+              {
+                "id": "new-ms-s2-ar-exponential",
+                "sourceContentGroupId": "cgffefd0c3",
+                "title": "Exponential relationships"
+              },
+              {
+                "id": "new-ms-s2-ar-quadratic",
+                "sourceContentGroupId": "cg3d5eb2cf",
+                "title": "Quadratic relationships"
+              },
+              {
+                "id": "new-ms-s2-ar-reciprocal",
+                "sourceContentGroupId": "cgddd67825",
+                "title": "Reciprocal relationships"
+              }
+            ]
+          },
+          {
+            "id": "new-ms-s1-investment",
+            "sourceFocusAreaId": "faf818a3d6",
+            "code": "MST-12-S1-02",
+            "year": 12,
+            "areaOfStudy": "Financial mathematics",
+            "title": "Investment",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12/faf818a3d6",
+            "outcomes": ["MST-12-S1-02"],
+            "contentGroups": [
+              {
+                "id": "new-ms-s1-investment",
+                "sourceContentGroupId": "cgd287c7f4",
+                "title": "Investment"
+              }
+            ]
+          },
+          {
+            "id": "new-ms-s1-depreciation-loans",
+            "sourceFocusAreaId": "fa9ea10adb",
+            "code": "MST-12-S1-03",
+            "year": 12,
+            "areaOfStudy": "Financial mathematics",
+            "title": "Depreciation and loans",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12/fa9ea10adb",
+            "outcomes": ["MST-12-S1-03"],
+            "contentGroups": [
+              {
+                "id": "new-ms-s1-dl-depreciation",
+                "sourceContentGroupId": "cg5a992bb8",
+                "title": "Depreciation"
+              },
+              {
+                "id": "new-ms-s1-dl-loans",
+                "sourceContentGroupId": "cge2b7be47",
+                "title": "Loans"
+              },
+              {
+                "id": "new-ms-s1-dl-credit-cards",
+                "sourceContentGroupId": "cg97ebb567",
+                "title": "Credit cards"
+              }
+            ]
+          },
+          {
+            "id": "new-ms-s1-right-triangles",
+            "sourceFocusAreaId": "fa9c5d0bea",
+            "code": "MST-12-S1-04",
+            "year": 12,
+            "areaOfStudy": "Measurement",
+            "title": "Right-angled triangles",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12/fa9c5d0bea",
+            "outcomes": ["MST-12-S1-04"],
+            "contentGroups": [
+              {
+                "id": "new-ms-s1-rt-triangles",
+                "sourceContentGroupId": "cgeb205889",
+                "title": "Right-angled triangles"
+              }
+            ]
+          },
+          {
+            "id": "new-ms-s1-ratios-rates",
+            "sourceFocusAreaId": "faf13dc7b0",
+            "code": "MST-12-S1-05",
+            "year": 12,
+            "areaOfStudy": "Measurement",
+            "title": "Ratios and rates",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12/faf13dc7b0",
+            "outcomes": ["MST-12-S1-05"],
+            "contentGroups": [
+              {
+                "id": "new-ms-s1-rr-ratios",
+                "sourceContentGroupId": "cg04e0d86a",
+                "title": "Ratios"
+              },
+              {
+                "id": "new-ms-s1-rr-rates",
+                "sourceContentGroupId": "cg24cb2e7d",
+                "title": "Rates"
+              }
+            ]
+          },
+          {
+            "id": "new-ms-s1-bivariate",
+            "sourceFocusAreaId": "faf283a852",
+            "code": "MST-12-S1-06",
+            "year": 12,
+            "areaOfStudy": "Statistical analysis",
+            "title": "Bivariate data analysis",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12/faf283a852",
+            "outcomes": ["MST-12-S1-06"],
+            "contentGroups": [
+              {
+                "id": "new-ms-s1-bd-datasets",
+                "sourceContentGroupId": "cg4230c027",
+                "title": "Bivariate datasets"
+              },
+              {
+                "id": "new-ms-s1-bd-scatter",
+                "sourceContentGroupId": "cg0ed9c1e0",
+                "title": "Scatter plots and lines of best fit"
+              }
+            ]
+          },
+          {
+            "id": "new-ms-s1-relative-probability",
+            "sourceFocusAreaId": "fa473a4513",
+            "code": "MST-12-S1-07",
+            "year": 12,
+            "areaOfStudy": "Statistical analysis",
+            "title": "Relative frequency and probability",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12/fa473a4513",
+            "outcomes": ["MST-12-S1-07"],
+            "contentGroups": [
+              {
+                "id": "new-ms-s1-rfp",
+                "sourceContentGroupId": "cgb1b1bc1f",
+                "title": "Relative frequency and probability"
+              }
+            ]
+          },
+          {
+            "id": "new-ms-s2-investment-loans",
+            "sourceFocusAreaId": "fac80cab35",
+            "code": "MST-12-S2-02",
+            "year": 12,
+            "areaOfStudy": "Financial mathematics",
+            "title": "Investment and loans",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12/fac80cab35",
+            "outcomes": ["MST-12-S2-02"],
+            "contentGroups": [
+              {
+                "id": "new-ms-s2-il-investment",
+                "sourceContentGroupId": "cgab762358",
+                "title": "Investment"
+              },
+              {
+                "id": "new-ms-s2-il-depreciation",
+                "sourceContentGroupId": "cg60ed70e6",
+                "title": "Depreciation"
+              },
+              {
+                "id": "new-ms-s2-il-loans",
+                "sourceContentGroupId": "cg95b04f0d",
+                "title": "Loans"
+              },
+              {
+                "id": "new-ms-s2-il-credit-cards",
+                "sourceContentGroupId": "cg944eb8d6",
+                "title": "Credit cards"
+              }
+            ]
+          },
+          {
+            "id": "new-ms-s2-annuities",
+            "sourceFocusAreaId": "faa14f8aa3",
+            "code": "MST-12-S2-03",
+            "year": 12,
+            "areaOfStudy": "Financial mathematics",
+            "title": "Annuities",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12/faa14f8aa3",
+            "outcomes": ["MST-12-S2-03"],
+            "contentGroups": [
+              {
+                "id": "new-ms-s2-annuities",
+                "sourceContentGroupId": "cg034bd170",
+                "title": "Annuities"
+              }
+            ]
+          },
+          {
+            "id": "new-ms-s2-trigonometry",
+            "sourceFocusAreaId": "fa6dd765ae",
+            "code": "MST-12-S2-04",
+            "year": 12,
+            "areaOfStudy": "Measurement",
+            "title": "Trigonometry",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12/fa6dd765ae",
+            "outcomes": ["MST-12-S2-04"],
+            "contentGroups": [
+              {
+                "id": "new-ms-s2-trigonometry",
+                "sourceContentGroupId": "cgbc1736f4",
+                "title": "Trigonometry"
+              }
+            ]
+          },
+          {
+            "id": "new-ms-s2-ratios-rates",
+            "sourceFocusAreaId": "fa96edbda5",
+            "code": "MST-12-S2-05",
+            "year": 12,
+            "areaOfStudy": "Measurement",
+            "title": "Ratios and rates",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12/fa96edbda5",
+            "outcomes": ["MST-12-S2-05"],
+            "contentGroups": [
+              {
+                "id": "new-ms-s2-rr-ratios",
+                "sourceContentGroupId": "cg9a8f007a",
+                "title": "Ratios"
+              },
+              {
+                "id": "new-ms-s2-rr-rates",
+                "sourceContentGroupId": "cg897b3edb",
+                "title": "Rates"
+              }
+            ]
+          },
+          {
+            "id": "new-ms-s2-network-flow",
+            "sourceFocusAreaId": "fafe0a915b",
+            "code": "MST-12-S2-06",
+            "year": 12,
+            "areaOfStudy": "Networks",
+            "title": "Network flow",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12/fafe0a915b",
+            "outcomes": ["MST-12-S2-06"],
+            "contentGroups": [
+              {
+                "id": "new-ms-s2-network-flow",
+                "sourceContentGroupId": "cg01b4e566",
+                "title": "Network flow"
+              }
+            ]
+          },
+          {
+            "id": "new-ms-s2-critical-path",
+            "sourceFocusAreaId": "fa9c92c4c6",
+            "code": "MST-12-S2-07",
+            "year": 12,
+            "areaOfStudy": "Networks",
+            "title": "Critical path analysis",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12/fa9c92c4c6",
+            "outcomes": ["MST-12-S2-07"],
+            "contentGroups": [
+              {
+                "id": "new-ms-s2-cpa",
+                "sourceContentGroupId": "cg7c627052",
+                "title": "Critical path analysis"
+              }
+            ]
+          },
+          {
+            "id": "new-ms-s2-bivariate",
+            "sourceFocusAreaId": "fadb5e412c",
+            "code": "MST-12-S2-08",
+            "year": 12,
+            "areaOfStudy": "Statistical analysis",
+            "title": "Bivariate data analysis",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12/fadb5e412c",
+            "outcomes": ["MST-12-S2-08"],
+            "contentGroups": [
+              {
+                "id": "new-ms-s2-bd-datasets",
+                "sourceContentGroupId": "cg56f0323e",
+                "title": "Bivariate datasets"
+              },
+              {
+                "id": "new-ms-s2-bd-scatter",
+                "sourceContentGroupId": "ms_s6_y12_bivariate_datasets__copy_",
+                "title": "Scatter plots and lines of best fit"
+              }
+            ]
+          },
+          {
+            "id": "new-ms-s2-relative-probability",
+            "sourceFocusAreaId": "fae778ced4",
+            "code": "MST-12-S2-09",
+            "year": 12,
+            "areaOfStudy": "Statistical analysis",
+            "title": "Relative frequency and probability",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12/fae778ced4",
+            "outcomes": ["MST-12-S2-09"],
+            "contentGroups": [
+              {
+                "id": "new-ms-s2-rfp",
+                "sourceContentGroupId": "cgacb1074f",
+                "title": "Relative frequency and probability"
+              }
+            ]
+          },
+          {
+            "id": "new-ms-s2-normal",
+            "sourceFocusAreaId": "fa92309f60",
+            "code": "MST-12-S2-10",
+            "year": 12,
+            "areaOfStudy": "Statistical analysis",
+            "title": "The normal distribution",
+            "sourceUrl": "https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12/fa92309f60",
+            "outcomes": ["MST-12-S2-10"],
+            "contentGroups": [
+              {
+                "id": "new-ms-s2-normal-datasets",
+                "sourceContentGroupId": "cg97e7f5b9",
+                "title": "Normally distributed datasets"
+              },
+              {
+                "id": "new-ms-s2-normal-zscores",
+                "sourceContentGroupId": "cg725a18b2",
+                "title": "Calculating z-scores"
+              },
+              {
+                "id": "new-ms-s2-normal-probability",
+                "sourceContentGroupId": "cg0dfc35c2",
+                "title": "Probability using z-scores"
+              }
+            ]
+          }
+        ]
+      },
+      "mappings": [
+        {
+          "id": "map-ms-a1-formulas",
+          "oldNodeId": "old-ms-a1",
+          "newNodeId": "new-ms-formulas-equations",
+          "relationship": "renamed",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Formulae and Equations is renamed Formulas and equations in 2024."
+        },
+        {
+          "id": "map-ms-a2-linear",
+          "oldNodeId": "old-ms-a2",
+          "newNodeId": "new-ms-linear-relationships",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Direct match for linear modelling and direct variation."
+        },
+        {
+          "id": "map-ms-m1-measurement",
+          "oldNodeId": "old-ms-m1",
+          "newNodeId": "new-ms-applications-measurement",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Direct Year 11 measurement match."
+        },
+        {
+          "id": "map-ms-m2-time",
+          "oldNodeId": "old-ms-m2",
+          "newNodeId": "new-ms-time-location",
+          "relationship": "renamed",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Working with Time is broadened to Time and location."
+        },
+        {
+          "id": "map-ms-f1-earning",
+          "oldNodeId": "old-ms-f1",
+          "newNodeId": "new-ms-earning-money",
+          "relationship": "split",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Money Matters splits into earning and managing money in 2024."
+        },
+        {
+          "id": "map-ms-f1-managing",
+          "oldNodeId": "old-ms-f1",
+          "newNodeId": "new-ms-managing-money",
+          "relationship": "split",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Money Matters splits into earning and managing money in 2024."
+        },
+        {
+          "id": "map-ms-s1-data",
+          "oldNodeId": "old-ms-s1",
+          "newNodeId": "new-ms-data-analysis",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Direct data analysis match."
+        },
+        {
+          "id": "map-ms-s2-standard1-probability",
+          "oldNodeId": "old-ms-s2",
+          "newNodeId": "new-ms-s1-relative-probability",
+          "relationship": "shifted",
+          "confidence": "medium",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Relative frequency and probability moves into Year 12 Standard 1."
+        },
+        {
+          "id": "map-ms-s2-standard2-probability",
+          "oldNodeId": "old-ms-s2",
+          "newNodeId": "new-ms-s2-relative-probability",
+          "relationship": "shifted",
+          "confidence": "medium",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Relative frequency and probability moves into Year 12 Standard 2."
+        },
+        {
+          "id": "map-ms-a3-s1-algebraic",
+          "oldNodeId": "old-ms-a3",
+          "newNodeId": "new-ms-s1-algebraic-relationships",
+          "relationship": "renamed",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Standard 1 Types of Relationships becomes Algebraic relationships."
+        },
+        {
+          "id": "map-ms-m3-right-triangles",
+          "oldNodeId": "old-ms-m3",
+          "newNodeId": "new-ms-s1-right-triangles",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Direct match for right-angled triangles."
+        },
+        {
+          "id": "map-ms-m4-rates",
+          "oldNodeId": "old-ms-m4",
+          "newNodeId": "new-ms-s1-ratios-rates",
+          "relationship": "renamed",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Standard 1 Rates is now grouped with ratios and rates."
+        },
+        {
+          "id": "map-ms-m5-scale",
+          "oldNodeId": "old-ms-m5",
+          "newNodeId": "new-ms-s1-ratios-rates",
+          "relationship": "reduced",
+          "confidence": "medium",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Scale drawing questions should be reviewed against 2024 ratios and rates because there is no like-for-like focus area."
+        },
+        {
+          "id": "map-ms-f2-investment",
+          "oldNodeId": "old-ms-f2",
+          "newNodeId": "new-ms-s1-investment",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Direct Standard 1 investment match."
+        },
+        {
+          "id": "map-ms-f3-depreciation-loans",
+          "oldNodeId": "old-ms-f3",
+          "newNodeId": "new-ms-s1-depreciation-loans",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Direct Standard 1 depreciation and loans match."
+        },
+        {
+          "id": "map-ms-s3-bivariate",
+          "oldNodeId": "old-ms-s3",
+          "newNodeId": "new-ms-s1-bivariate",
+          "relationship": "partial",
+          "confidence": "medium",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Further statistical analysis maps primarily to Standard 1 bivariate data analysis; probability questions should use the relative-frequency mapping."
+        },
+        {
+          "id": "map-ms-s3-probability",
+          "oldNodeId": "old-ms-s3",
+          "newNodeId": "new-ms-s1-relative-probability",
+          "relationship": "partial",
+          "confidence": "medium",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Use for Standard 1 further-statistics questions involving relative frequency or probability."
+        },
+        {
+          "id": "map-ms-n1-networks",
+          "oldNodeId": "old-ms-n1",
+          "newNodeId": "new-ms-networks-paths-trees",
+          "relationship": "shifted",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Standard 1 networks and paths content is now introduced in Year 11 Networks, paths and trees."
+        },
+        {
+          "id": "map-ms-a4-s2-algebraic",
+          "oldNodeId": "old-ms-a4",
+          "newNodeId": "new-ms-s2-algebraic-relationships",
+          "relationship": "renamed",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Standard 2 Types of Relationships becomes Algebraic relationships."
+        },
+        {
+          "id": "map-ms-m6-trigonometry",
+          "oldNodeId": "old-ms-m6",
+          "newNodeId": "new-ms-s2-trigonometry",
+          "relationship": "renamed",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Non-right-angled Trigonometry is represented by the 2024 Standard 2 Trigonometry focus area."
+        },
+        {
+          "id": "map-ms-m7-ratios-rates",
+          "oldNodeId": "old-ms-m7",
+          "newNodeId": "new-ms-s2-ratios-rates",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Direct Standard 2 ratios and rates match."
+        },
+        {
+          "id": "map-ms-f4-investments-loans",
+          "oldNodeId": "old-ms-f4",
+          "newNodeId": "new-ms-s2-investment-loans",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Direct Standard 2 investment and loans match."
+        },
+        {
+          "id": "map-ms-f5-annuities",
+          "oldNodeId": "old-ms-f5",
+          "newNodeId": "new-ms-s2-annuities",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Direct Standard 2 annuities match."
+        },
+        {
+          "id": "map-ms-s4-bivariate",
+          "oldNodeId": "old-ms-s4",
+          "newNodeId": "new-ms-s2-bivariate",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Direct Standard 2 bivariate data analysis match."
+        },
+        {
+          "id": "map-ms-s5-normal",
+          "oldNodeId": "old-ms-s5",
+          "newNodeId": "new-ms-s2-normal",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Direct Standard 2 normal distribution match."
+        },
+        {
+          "id": "map-ms-n2-networks",
+          "oldNodeId": "old-ms-n2",
+          "newNodeId": "new-ms-networks-paths-trees",
+          "relationship": "partial",
+          "confidence": "medium",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Use for foundational network-concept questions."
+        },
+        {
+          "id": "map-ms-n2-network-flow",
+          "oldNodeId": "old-ms-n2",
+          "newNodeId": "new-ms-s2-network-flow",
+          "relationship": "partial",
+          "confidence": "medium",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Use for network-flow questions under Standard 2."
+        },
+        {
+          "id": "map-ms-n3-critical-path",
+          "oldNodeId": "old-ms-n3",
+          "newNodeId": "new-ms-s2-critical-path",
+          "relationship": "equivalent",
+          "confidence": "high",
+          "oldContentGroupIds": [],
+          "newContentGroupIds": [],
+          "notes": "Direct Standard 2 critical path analysis match."
+        }
+      ]
+    }
+  ],
+  "questionCategorisationModel": {
+    "recommendedPrimaryKey": "syllabusTags[].nodeIds",
+    "recommendedSecondaryKey": "syllabusTags[].contentGroupIds",
+    "reviewStates": ["draft", "reviewed", "verified"],
+    "guidance": [
+      "Tag the syllabus version the paper was examined under as primary.",
+      "Resolve cross-syllabus display through mappings rather than duplicating tags manually.",
+      "When a question crosses topics, store multiple nodeIds and contentGroupIds.",
+      "For future non-Advanced courses, add displayable corpus syllabus nodes whose IDs match the conversion node IDs before importing exam questions.",
+      "Use mapping relationship and confidence to decide whether to show a direct equivalent, a related-content warning, or a reviewer note."
+    ]
+  }
+}
