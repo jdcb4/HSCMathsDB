@@ -2,6 +2,12 @@
 
 Newest entries go at the top.
 
+## 0.36.0 - 2026-06-08
+
+- Updated the visual-bbox prompt trial schema to require models to report the full source image size they believe they are reviewing.
+- Reran the prompt trial with Gemini 3.1 Flash Lite and Mistral Medium 3.5 only; both models reported `893 x 1263` for all mock and real pages, matching the actual rendered PNG dimensions.
+- Updated the local comparison UX to show reported-vs-actual image size checks for each model/page result.
+
 ## 0.35.0 - 2026-06-08
 
 - Added a repeatable visual-bbox prompt trial harness that runs the standalone crop-discovery prompt across Gemini 3.1 Flash Lite, Mistral Medium 3.5, Nemotron 3.5 Safety, and Step 3.7 Flash.

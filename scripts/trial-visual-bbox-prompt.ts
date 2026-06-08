@@ -25,6 +25,8 @@ type ModelPageResult = {
   status: "ok" | "error";
   latencyMs: number;
   rawPath: string;
+  sourceImageSize?: { width: number; height: number };
+  reportedImageSize?: { width: number; height: number };
   overlayPath?: string;
   visuals: VisualResult[];
   expectedMatches?: Array<{ expectedLabel: string; bestIou: number; bestBbox?: BBox }>;
@@ -33,6 +35,10 @@ type ModelPageResult = {
 
 const VisualPromptResponseSchema = z
   .object({
+    imageSize: z.object({
+      width: z.number(),
+      height: z.number()
+    }),
     visuals: z
       .array(
         z.object({
@@ -49,13 +55,9 @@ const VisualPromptResponseSchema = z
   })
   .passthrough();
 
-const models = [
-  "google/gemini-3.1-flash-lite",
-  "mistralai/mistral-medium-3-5",
-  "nvidia/nemotron-3.5-content-safety:free",
-  "stepfun/step-3.7-flash"
-];
+const models = ["google/gemini-3.1-flash-lite", "mistralai/mistral-medium-3-5"];
 
+const promptTrialVersion = "image-size-v1";
 const outputRoot = path.join("var", "visual-bbox-prompt-trials");
 const publicAssetRoot = path.join("public", "ingestion-reports", "visual-bbox-prompt-trial-assets");
 const publicReportPath = path.join("public", "ingestion-reports", "visual-bbox-prompt-trial.html");
@@ -237,11 +239,15 @@ async function runModelPageTrial({
   model: string;
 }): Promise<ModelPageResult> {
   const startedAt = Date.now();
-  const rawPath = path.join(outputRoot, `${safeFileName(page.id)}__${safeFileName(model)}.json`);
+  const rawPath = path.join(
+    outputRoot,
+    `${safeFileName(page.id)}__${promptTrialVersion}__${safeFileName(model)}.json`
+  );
   const overlayPath = path.join(outputRoot, `${safeFileName(page.id)}__${safeFileName(model)}__overlay.png`);
+  const image = await loadImage(await readFile(page.sourcePath));
+  const sourceImageSize = { width: image.width, height: image.height };
 
   try {
-    const image = await loadImage(await readFile(page.sourcePath));
     const raw = existsSync(rawPath)
       ? JSON.parse(await readFile(rawPath, "utf8"))
       : await callOpenRouterJson({
@@ -284,6 +290,8 @@ async function runModelPageTrial({
       status: "ok",
       latencyMs: Date.now() - startedAt,
       rawPath,
+      sourceImageSize,
+      reportedImageSize: parsed.imageSize,
       overlayPath,
       visuals,
       expectedMatches: page.expected?.map((expected) => {
@@ -304,6 +312,7 @@ async function runModelPageTrial({
       status: "error",
       latencyMs: Date.now() - startedAt,
       rawPath,
+      sourceImageSize,
       visuals: [],
       error: error instanceof Error ? error.message : String(error)
     };
@@ -336,9 +345,11 @@ Response format:
 - y: the y coordinate of the top left of the proposed bbox.
 - width: the width in pixels of the proposed bbox.
 - height: the height in pixels of the proposed bbox.
+- imageSize: the width and height, in pixels, of the full source-page image you are reviewing. Report the image size as you perceive it after any processing applied before your visual reasoning.
 
 JSON format:
 {
+  "imageSize": {"width": ${width}, "height": ${height}},
   "visuals": [
     {
       "questionNumber": 1,
@@ -523,6 +534,8 @@ function buildHtml(pages: TrialPage[], results: ModelPageResult[]): string {
       .bad { background: #f8e8e3; color: #a23b2a; }
       pre { max-height: 180px; overflow: auto; white-space: pre-wrap; background: #1f2328; color: #f5f7fa; border-radius: 6px; padding: 10px; }
       .crops { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+      .size-ok { color: #0b6f68; font-weight: 700; }
+      .size-bad { color: #a23b2a; font-weight: 700; }
     </style>
   </head>
   <body>
@@ -566,10 +579,22 @@ function renderModelResult(result: ModelPageResult): string {
     <p><span class="pill ${result.status === "ok" ? "" : "bad"}">${result.status}</span> <span class="muted">${result.latencyMs} ms</span></p>
     ${
       result.status === "ok"
-        ? `<p>${result.visuals.length} visual(s)</p>${renderExpectedMatches(result)}<img src="${publicUrl(result.overlayPath)}" alt="Overlay for ${escapeHtml(result.model)}" /><div class="crops">${result.visuals.map((_visual, index) => `<img src="${publicUrl(cropPathFor(result.pageId, result.model, index))}" alt="Crop ${index + 1}" />`).join("")}</div><pre>${escapeHtml(JSON.stringify(result.visuals, null, 2))}</pre>`
+        ? `<p>${result.visuals.length} visual(s)</p>${renderImageSizeCheck(result)}${renderExpectedMatches(result)}<img src="${publicUrl(result.overlayPath)}" alt="Overlay for ${escapeHtml(result.model)}" /><div class="crops">${result.visuals.map((_visual, index) => `<img src="${publicUrl(cropPathFor(result.pageId, result.model, index))}" alt="Crop ${index + 1}" />`).join("")}</div><pre>${escapeHtml(JSON.stringify({ imageSize: result.reportedImageSize, visuals: result.visuals }, null, 2))}</pre>`
         : `<pre>${escapeHtml(result.error ?? "Unknown error")}</pre>`
     }
   </article>`;
+}
+
+function renderImageSizeCheck(result: ModelPageResult): string {
+  const source = result.sourceImageSize;
+  const reported = result.reportedImageSize;
+  if (!source || !reported) {
+    return "";
+  }
+
+  const matches =
+    source.width === Math.round(reported.width) && source.height === Math.round(reported.height);
+  return `<p class="${matches ? "size-ok" : "size-bad"}">reported image ${Math.round(reported.width)} x ${Math.round(reported.height)}; actual ${source.width} x ${source.height}</p>`;
 }
 
 function renderExpectedMatches(result: ModelPageResult): string {
