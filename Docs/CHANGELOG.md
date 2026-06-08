@@ -2,6 +2,12 @@
 
 Newest entries go at the top.
 
+## 0.38.0 - 2026-06-08
+
+- Reran the visual-bbox prompt trial with Gemini 3.1 Pro Preview and GPT-5.5 using the strict 15-second full-request timeout.
+- Gemini 3.1 Pro Preview completed all mock and real pages but produced weak mock-page bboxes, with IoU `0.3632` and `0.1642`.
+- GPT-5.5 produced very strong mock-page bboxes with IoU `0.9672` and `0.9812`, but timed out on all three real Standard 1 2023 pages under the 15-second cap.
+
 ## 0.37.0 - 2026-06-08
 
 - Updated the visual-bbox prompt trial to run Claude Sonnet 4.6, Gemini 3.5 Flash, and GPT-4o mini with all page/model calls executed in parallel and a 15-second timeout per model call.

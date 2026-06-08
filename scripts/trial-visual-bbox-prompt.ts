@@ -55,9 +55,9 @@ const VisualPromptResponseSchema = z
   })
   .passthrough();
 
-const models = ["anthropic/claude-sonnet-4.6", "google/gemini-3.5-flash", "openai/gpt-4o-mini"];
+const models = ["google/gemini-3.1-pro-preview", "openai/gpt-5.5"];
 
-const promptTrialVersion = "related-visuals-v1";
+const promptTrialVersion = "pro-gpt55-timeout-v3";
 const modelCallTimeoutMs = 15_000;
 const outputRoot = path.join("var", "visual-bbox-prompt-trials");
 const publicAssetRoot = path.join("public", "ingestion-reports", "visual-bbox-prompt-trial-assets");
@@ -373,29 +373,46 @@ async function callOpenRouterJson({
   messages: Array<{ role: "system"; content: string } | { role: "user"; content: unknown }>;
 }) {
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), modelCallTimeoutMs);
-  const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-      "HTTP-Referer": "https://github.com/jdcb4/HSCMathsDB",
-      "X-Title": "GoalCheck HSC visual bbox prompt trial"
-    },
-    body: JSON.stringify({
-      model,
-      messages,
-      max_tokens: 2000,
-      temperature: 0,
-      response_format: { type: "json_object" }
-    }),
-    signal: controller.signal
-  }).finally(() => clearTimeout(timeout));
+  let timeout: NodeJS.Timeout | undefined;
+  const timeoutPromise = new Promise<never>((_resolve, reject) => {
+    timeout = setTimeout(() => {
+      controller.abort();
+      reject(new Error(`Model call exceeded ${modelCallTimeoutMs / 1000} second timeout.`));
+    }, modelCallTimeoutMs);
+  });
+  const raw = await Promise.race([
+    fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+        "HTTP-Referer": "https://github.com/jdcb4/HSCMathsDB",
+        "X-Title": "GoalCheck HSC visual bbox prompt trial"
+      },
+      body: JSON.stringify({
+        model,
+        messages,
+        max_tokens: 2000,
+        temperature: 0,
+        response_format: { type: "json_object" }
+      }),
+      signal: controller.signal
+    }).then(async (response) => {
+      const rawResponse = (await response
+        .json()
+        .catch(async () => ({ rawText: await response.text() }))) as unknown;
+      if (!response.ok) {
+        throw new Error(`OpenRouter ${response.status}: ${JSON.stringify(rawResponse)}`);
+      }
 
-  const raw = (await response.json().catch(async () => ({ rawText: await response.text() }))) as unknown;
-  if (!response.ok) {
-    throw new Error(`OpenRouter ${response.status}: ${JSON.stringify(raw)}`);
-  }
+      return rawResponse;
+    }),
+    timeoutPromise
+  ]).finally(() => {
+    if (timeout) {
+      clearTimeout(timeout);
+    }
+  });
 
   return raw;
 }

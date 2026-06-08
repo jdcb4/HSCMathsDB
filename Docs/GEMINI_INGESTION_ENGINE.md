@@ -199,16 +199,16 @@ The harness keeps the user's prompt intent but makes these ingestion-safe change
 - It wraps the example response in a top-level JSON object, `{ "imageSize": ..., "visuals": [...] }`,
   so the output can be parsed and validated.
 
-The latest run tested Claude Sonnet 4.6, Gemini 3.5 Flash, and GPT-4o mini on one mock page plus
-Standard 1 2023 pages 3, 4, and 5. Calls are run in parallel with a 15-second timeout per model call.
-The report is published at `public/ingestion-reports/visual-bbox-prompt-trial.html`.
+The latest run tested Gemini 3.1 Pro Preview and GPT-5.5 on one mock page plus Standard 1 2023 pages
+3, 4, and 5. Calls are run in parallel with a strict 15-second timeout around the full model request
+and JSON body read. The report is published at
+`public/ingestion-reports/visual-bbox-prompt-trial.html`.
 
 Headline result:
 
-- All three models reported `893 x 1263` as the reviewed source image size for all four pages, matching
-  the actual rendered PNG dimensions. That continues to make silent model-side coordinate resizing
-  unlikely as the primary cause of the crop errors.
-- Claude Sonnet 4.6 produced the strongest mock-page boxes, with IoU `0.9127` for the prism target and
-  `0.9288` for the table target.
-- Gemini 3.5 Flash and GPT-4o mini returned parseable responses, but their mock-page boxes were much
-  less accurate than Claude's.
+- Both models reported `893 x 1263` for every completed page, matching the actual rendered PNG
+  dimensions.
+- Gemini 3.1 Pro Preview completed all pages but was weak on the mock targets, with IoU `0.3632` for
+  the prism and `0.1642` for the table.
+- GPT-5.5 was excellent on the mock targets, with IoU `0.9672` and `0.9812`, but timed out on all
+  three real Standard 1 2023 pages under the 15-second cap.
