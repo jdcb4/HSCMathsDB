@@ -321,8 +321,20 @@ function keywordScore(haystack: string, source: string): number {
 function formatPromptPart(part: ExamPageProposal["questions"][number] & { page: number }): string {
   const labels = part.partLabels ?? [];
   const label = labels.length > 0 ? `(${labels.join("")}) ` : "";
-  const options = (part.options ?? []).map((option) => `${option.label}. ${option.textLatex}`).join("\n");
+  const options = (part.options ?? [])
+    .map((option) => `${option.label}. ${normaliseOptionLatex(option.textLatex)}`)
+    .join("\n");
   return `${label}${part.promptLatex.trim()}${options ? `\n${options}` : ""}`;
+}
+
+function normaliseOptionLatex(value: string): string {
+  const trimmed = value.trim();
+  const displayInsideInline = trimmed.match(/^\\\(\s*\\\[([\s\S]+?)\\\]\s*\\text\{\s*for\s*\}\s*([\s\S]+?)\s*\\\)$/);
+  if (displayInsideInline) {
+    return `\\(${displayInsideInline[1].trim()}\\) for \\(${displayInsideInline[2].trim()}\\)`;
+  }
+
+  return trimmed;
 }
 
 function formatAnswerParts(

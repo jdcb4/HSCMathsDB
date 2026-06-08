@@ -2,6 +2,13 @@
 
 Newest entries go at the top.
 
+## 0.46.0 - 2026-06-08
+
+- Ingested and promoted the full 2021 modern-course set: Mathematics Advanced, Mathematics Standard 1, Mathematics Standard 2, Mathematics Extension 1, and Mathematics Extension 2.
+- Added 135 official draft 2021 question records with 95 exam-derived public diagram assets, all passing `data:audit-ingested-exams -- adv-2021 std1-2021 std2-2021 ext1-2021 ext2-2021` with zero errors and zero warnings.
+- Generated worked-solution drafts for all 135 newly promoted 2021 records, using Gemini 3.1 Flash Lite with MiniMax, GLM, and Sonnet fallbacks for syntax-contract failures.
+- Normalised multiple-choice option promotion for model outputs that nest display MathJax inside inline MathJax, and manually recovered the missing 2021 Extension 1 Q8 semicircle crop from the rendered exam page.
+
 ## 0.45.0 - 2026-06-08
 
 - Ingested and promoted the remaining 2022 modern-course papers: Mathematics Standard 1, Mathematics Standard 2, Mathematics Extension 1, and Mathematics Extension 2.
