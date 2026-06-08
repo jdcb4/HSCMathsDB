@@ -4,7 +4,28 @@ import { loadHscRuntimeData, type HscRuntimeData } from "../services/hscRuntimeD
 const mathJaxConfig = {
   loader: { load: ["input/tex", "output/chtml"] },
   options: {
-    enableMenu: false
+    enableMenu: false,
+    enableEnrichment: false,
+    enableSpeech: false,
+    enableBraille: false,
+    enableExplorer: false,
+    enableComplexity: false,
+    enableAssistiveMml: false,
+    menuOptions: {
+      settings: {
+        enrich: false,
+        collapsible: false,
+        speech: false,
+        braille: false,
+        assistiveMml: false
+      }
+    },
+    a11y: {
+      speech: false,
+      braille: false,
+      subtitles: false,
+      voicing: false
+    }
   },
   tex: {
     inlineMath: [
