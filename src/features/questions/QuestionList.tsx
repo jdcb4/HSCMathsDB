@@ -12,10 +12,13 @@ export function QuestionList({
   onSelectQuestion: (questionId: string) => void;
 }) {
   return (
-    <div className="rounded-md border border-border-default bg-surface-raised">
-      <div className="border-b border-border-subtle px-3 py-2 sm:px-4 sm:py-3">
-        <h2 className="text-h4 font-semibold">{questions.length} questions</h2>
-      </div>
+    <details className="rounded-md border border-border-default bg-surface-raised">
+      <summary className="cursor-pointer border-b border-border-subtle px-3 py-2 sm:px-4 sm:py-3">
+        <span className="block text-h4 font-semibold">{questions.length} questions</span>
+        <span className="mt-1 block text-body-sm text-text-secondary">
+          Select from here, or use the Previous and Next buttons to move through questions.
+        </span>
+      </summary>
       <div className="max-h-56 overflow-y-auto sm:max-h-72 lg:max-h-[calc(100dvh-245px)]">
         {questions.map((question) => {
           const selected = question.id === selectedQuestionId;
@@ -47,6 +50,6 @@ export function QuestionList({
           <p className="px-4 py-6 text-body-sm text-text-secondary">No matches.</p>
         ) : null}
       </div>
-    </div>
+    </details>
   );
 }

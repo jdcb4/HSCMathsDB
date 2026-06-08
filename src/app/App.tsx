@@ -192,13 +192,19 @@ export function App({
               <p className="text-caption font-semibold uppercase text-accent-info">HSCMathsDB</p>
               <h1 className="text-h1 font-semibold">Mathematics question database</h1>
             </div>
-            <div className="grid gap-2 sm:grid-cols-2">
+            <div className="flex flex-wrap items-center gap-2">
               <Metric icon={<FileText size={17} />} label="Questions" value={summary.questionCount} />
               <Metric icon={<BookOpen size={17} />} label="Exams" value={summary.paperCount} />
             </div>
           </div>
-          <div className="flex flex-col gap-3">
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <details open className="rounded-md border border-border-default bg-surface-sunken p-3 sm:p-4">
+            <summary className="cursor-pointer text-h4 font-semibold text-text-primary">
+              Choose what questions you want
+            </summary>
+            <p className="mt-2 text-body-sm text-text-secondary">
+              Filter by course, year, question style, or syllabus content.
+            </p>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               <FilterSelect label="Course" value={selectedCourse?.id ?? ""} onChange={setCourse}>
                 {courseOptions.map((course) => (
                   <option key={course.id} value={course.id}>
@@ -239,7 +245,7 @@ export function App({
                 ))}
               </FilterSelect>
             </div>
-          </div>
+          </details>
         </div>
       </header>
 
@@ -347,11 +353,11 @@ function QuestionNavigator({
 
   return (
     <nav
-      className="flex flex-col gap-2 rounded-md border border-border-default bg-surface-raised p-2 sm:flex-row sm:items-center sm:justify-between"
+      className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2 rounded-md border border-border-default bg-surface-raised p-2"
       aria-label="Question navigation"
     >
       <QuestionNavButton direction="previous" label={previousTitle} onClick={onPrevious} />
-      <div className="order-first text-center text-caption font-medium text-text-secondary sm:order-none">
+      <div className="text-center text-caption font-medium text-text-secondary">
         Question {position} of {total}
       </div>
       <QuestionNavButton direction="next" label={nextTitle} onClick={onNext} />
@@ -375,7 +381,9 @@ function QuestionNavButton({
       type="button"
       onClick={onClick}
       disabled={!onClick}
-      className="inline-flex min-h-10 items-center justify-center gap-2 rounded-md border border-border-default px-3 py-2 text-body-sm font-medium text-text-secondary hover:border-border-strong hover:text-text-primary disabled:cursor-not-allowed disabled:opacity-45"
+      className={`inline-flex min-h-10 min-w-0 items-center gap-2 rounded-md border border-border-default px-3 py-2 text-body-sm font-medium text-text-secondary hover:border-border-strong hover:text-text-primary disabled:cursor-not-allowed disabled:opacity-45 ${
+        isPrevious ? "justify-start" : "justify-end"
+      }`}
     >
       {isPrevious ? <ChevronLeft size={16} /> : null}
       <span>{isPrevious ? "Previous" : "Next"}</span>
