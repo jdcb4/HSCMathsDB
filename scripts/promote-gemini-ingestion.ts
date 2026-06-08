@@ -329,7 +329,9 @@ function formatPromptPart(part: ExamPageProposal["questions"][number] & { page: 
 
 function normaliseOptionLatex(value: string): string {
   const trimmed = value.trim();
-  const displayInsideInline = trimmed.match(/^\\\(\s*\\\[([\s\S]+?)\\\]\s*\\text\{\s*for\s*\}\s*([\s\S]+?)\s*\\\)$/);
+  const displayInsideInline = trimmed.match(
+    /^\\\(\s*\\\[([\s\S]+?)\\\]\s*\\text\{\s*for\s*\}\s*([\s\S]+?)\s*\\\)$/
+  );
   if (displayInsideInline) {
     return `\\(${displayInsideInline[1].trim()}\\) for \\(${displayInsideInline[2].trim()}\\)`;
   }

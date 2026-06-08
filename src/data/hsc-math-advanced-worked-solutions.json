@@ -2525,9 +2525,7 @@
         }
       ],
       "finalAnswerLatex": "C. 1 hour 30 minutes",
-      "commonMistakesLatex": [
-        "Confusing the conversion of 0.5 hours as 50 minutes instead of 30 minutes."
-      ],
+      "commonMistakesLatex": ["Confusing the conversion of 0.5 hours as 50 minutes instead of 30 minutes."],
       "checkLatex": "Check the result by multiplying speed by time: \\(50\\text{ km/h} \\times 1.5\\text{ h} = 75\\text{ km}\\), which matches the given distance."
     },
     {
@@ -9133,9 +9131,7 @@
         }
       ],
       "finalAnswerLatex": "\\(3.9\\) km/h",
-      "commonMistakesLatex": [
-        "Forgetting to convert units, especially from cm to m or minutes to hours."
-      ],
+      "commonMistakesLatex": ["Forgetting to convert units, especially from cm to m or minutes to hours."],
       "checkLatex": "Check: \\(3.9 \\text{ km/h} \\times \\frac{1000}{60} \\approx 65\\) m/min. \\(65 \\times 12 = 780\\) m. Correct."
     },
     {
