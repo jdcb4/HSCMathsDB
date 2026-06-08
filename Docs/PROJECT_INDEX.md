@@ -27,11 +27,10 @@ GoalCheck HSC is a Vite React TypeScript web app for browsing NSW HSC mathematic
 - `var/source-assets` - ignored local cache for official PDFs downloaded during import.
 - `var/extracted-text` - ignored local text extraction output used during transcription.
 - `var/question-candidates` - ignored raw candidate records extracted from source text.
-- `var/extracted-images` - ignored embedded-image extraction output used during diagram review.
-- `var/layout-inventory` - ignored PDF layout metadata for text blocks, images, and vector drawing clusters.
 - `var/rendered-pages` - ignored rendered PDF pages used for vector diagram review.
-- `var/diagram-crop-proposals` - ignored proposed crop rectangles generated from layout inventory and rendered pages.
 - `var/diagram-crops` - ignored crop candidates produced from rendered PDF pages.
+- `var/gemini-ingestion-proposals` - ignored Gemini/Sonnet page-image ingestion proposals, crop candidates, cached LLM responses, and local report source data.
+- `var/visual-bbox-prompt-trials` - ignored visual-bbox model benchmark output.
 - `Docs` - durable project documentation.
 
 ## Commands
@@ -42,28 +41,26 @@ GoalCheck HSC is a Vite React TypeScript web app for browsing NSW HSC mathematic
 | `pnpm run data:validate`                        | Validate the JSON corpus through the TypeScript Zod schema.                               |
 | `pnpm run data:audit-sources`                   | Compare the source catalog with visible official NSW pack titles.                         |
 | `pnpm run data:audit-assets`                    | Confirm each cataloged pack exposes exam, marking, and feedback PDFs.                     |
-| `pnpm run data:download-sources`                | Download official PDFs into ignored local cache.                                          |
-| `pnpm run data:extract-text`                    | Extract raw text from cached PDFs into ignored local output.                              |
+| `pnpm run data:download-sources`                | Download official PDFs into ignored local cache with bounded concurrency.                 |
+| `pnpm run data:extract-text`                    | Extract raw text from cached PDFs into ignored local output with bounded concurrency.     |
 | `pnpm run data:ingest-additional-maths`         | Ingest configured Standard/Extension paper profiles into draft question records.          |
-| `pnpm run data:promote-2025-additional-maths`   | Promote the 2025 Standard and Extension source text into draft question records.          |
 | `pnpm run data:extract-candidates`              | Create ignored raw candidate records from extracted source text.                          |
 | `pnpm run data:validate-candidates`             | Validate ignored raw candidate records before review.                                     |
 | `pnpm run data:report-candidates`               | Summarize ignored candidate extraction output.                                            |
 | `pnpm run data:audit-ingested-exams`            | Audit promoted question records for ingestion-quality regressions.                        |
-| `pnpm run data:extract-images`                  | Extract embedded PDF images into ignored local output.                                    |
-| `pnpm run data:inventory-layout`                | Inventory cached PDF text, image, and vector drawing layout into ignored JSON.            |
-| `pnpm run data:render-pages`                    | Render cached PDF pages into ignored PNG page images.                                     |
-| `pnpm run data:propose-diagram-crops`           | Generate reviewable diagram crop proposals from inventory and rendered pages.             |
-| `pnpm run data:propose-gemini-ingestion`        | Generate Gemini page-image ingestion proposals and a local review report.                 |
+| `pnpm run data:extract-images`                  | Diagnostic helper: extract embedded PDF images into ignored local output.                 |
+| `pnpm run data:inventory-layout`                | Diagnostic helper: inventory cached PDF text, image, and vector drawing layout.           |
+| `pnpm run data:render-pages`                    | Render cached PDF pages into ignored PNG page images with bounded concurrency.            |
+| `pnpm run data:propose-gemini-ingestion`        | Generate Gemini/Sonnet page-image ingestion proposals and a local review report.          |
 | `pnpm run data:promote-gemini-ingestion`        | Promote a reviewed Gemini ingestion report into draft corpus records and public assets.   |
 | `pnpm run data:publish-gemini-ingestion-report` | Publish an ignored Gemini ingestion report copy under `public/` for local browser review. |
 | `pnpm run data:generate-explanation-samples`    | Generate ignored LLM explanation comparison samples for manual review.                    |
 | `pnpm run data:generate-worked-solutions`       | Generate or refresh primary worked-solution sidecar records through OpenRouter.           |
 | `pnpm run data:report-worked-solutions`         | Report worked-solution sidecar coverage and model counts.                                 |
 | `pnpm run data:report-renders`                  | Summarize ignored page render metadata.                                                   |
-| `pnpm run data:crop-render`                     | Crop a rendered PDF page into an ignored diagram candidate.                               |
-| `pnpm run data:diagnose-crop-coordinates`       | Generate synthetic bbox tests and a local crop-coordinate diagnostics UX.                 |
-| `pnpm run data:trial-visual-bbox-prompt`        | Trial the standalone visual-bbox prompt across configured models and pages.               |
+| `pnpm run data:crop-render`                     | Diagnostic helper: crop a rendered PDF page by explicit pixel coordinates.                |
+| `pnpm run data:diagnose-crop-coordinates`       | Diagnostic helper: verify local bbox coordinate handling against synthetic pages.         |
+| `pnpm run data:trial-visual-bbox-prompt`        | Diagnostic helper: trial the standalone visual-bbox prompt across configured models.      |
 | `pnpm run typecheck`                            | TypeScript checking.                                                                      |
 | `pnpm run lint`                                 | ESLint.                                                                                   |
 | `pnpm run format`                               | Prettier check.                                                                           |

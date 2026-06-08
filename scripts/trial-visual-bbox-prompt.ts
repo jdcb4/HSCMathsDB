@@ -55,10 +55,10 @@ const VisualPromptResponseSchema = z
   })
   .passthrough();
 
-const models = ["google/gemini-3.1-pro-preview", "openai/gpt-5.5"];
-
-const promptTrialVersion = "pro-gpt55-timeout-v3";
-const modelCallTimeoutMs = 15_000;
+const args = parseArgs(process.argv.slice(2));
+const models = args.models;
+const promptTrialVersion = args.outputId;
+const modelCallTimeoutMs = args.timeoutMs;
 const outputRoot = path.join("var", "visual-bbox-prompt-trials");
 const publicAssetRoot = path.join("public", "ingestion-reports", "visual-bbox-prompt-trial-assets");
 const publicReportPath = path.join("public", "ingestion-reports", "visual-bbox-prompt-trial.html");
@@ -83,6 +83,63 @@ await writeFile(
 await writeFile(publicReportPath, buildHtml(pages, results), "utf8");
 
 console.log(`Published ${normalisePath(publicReportPath)}`);
+
+function parseArgs(values: string[]) {
+  const models: string[] = ["anthropic/claude-sonnet-4.6", "google/gemini-3.1-flash-lite"];
+  let outputId = "default-bbox-trial";
+  let timeoutMs = 15_000;
+
+  for (let index = 0; index < values.length; index += 1) {
+    const value = values[index];
+
+    if (value === "--models") {
+      models.splice(0, models.length, ...parseCsv(values[index + 1], "--models"));
+      index += 1;
+      continue;
+    }
+
+    if (value === "--output-id") {
+      outputId = values[index + 1] ?? "";
+      index += 1;
+      continue;
+    }
+
+    if (value === "--timeout-ms") {
+      timeoutMs = parsePositiveInteger(values[index + 1], "--timeout-ms");
+      index += 1;
+      continue;
+    }
+
+    throw new Error(`Unexpected argument: ${value}`);
+  }
+
+  if (!outputId) {
+    throw new Error("--output-id must not be empty");
+  }
+
+  return { models, outputId, timeoutMs };
+}
+
+function parseCsv(value: string | undefined, label: string): string[] {
+  const parsed = (value ?? "")
+    .split(",")
+    .map((entry) => entry.trim())
+    .filter(Boolean);
+
+  if (parsed.length === 0) {
+    throw new Error(`${label} must include at least one model id`);
+  }
+
+  return parsed;
+}
+
+function parsePositiveInteger(value: string | undefined, label: string): number {
+  const parsed = Number(value);
+  if (!Number.isInteger(parsed) || parsed < 1) {
+    throw new Error(`${label} must be a positive integer`);
+  }
+  return parsed;
+}
 
 async function buildTrialPages(): Promise<TrialPage[]> {
   const realRoot = path.join(

@@ -44,7 +44,7 @@ for (const pack of selectedPacks) {
     documents: []
   };
 
-  for (const pdfPath of pdfFiles) {
+  metadata.documents = await mapWithConcurrency(pdfFiles, args.concurrency, async (pdfPath) => {
     const data = new Uint8Array(await readFile(pdfPath));
     const document = await pdfjs.getDocument({ data, disableWorker: true } as unknown as Record<
       string,
@@ -85,9 +85,9 @@ for (const pack of selectedPacks) {
       });
     }
 
-    metadata.documents.push(renderedDocument);
     console.log(`${path.basename(pdfPath)}: rendered ${renderedDocument.renderedPages.length} page(s)`);
-  }
+    return renderedDocument;
+  });
 
   const metadataPath = path.join(outputDirectory, "metadata.json");
   await writeFile(metadataPath, JSON.stringify(metadata, null, 2), "utf-8");
@@ -99,6 +99,7 @@ function parseArgs(rawArgs: string[]) {
   let pages: string | undefined;
   let includeAllDocuments = false;
   let scale = 1.5;
+  let concurrency = 3;
 
   for (let index = 0; index < rawArgs.length; index += 1) {
     const arg = rawArgs[index];
@@ -115,6 +116,12 @@ function parseArgs(rawArgs: string[]) {
       continue;
     }
 
+    if (arg === "--concurrency") {
+      concurrency = parsePositiveInteger(rawArgs[index + 1], "--concurrency");
+      index += 1;
+      continue;
+    }
+
     if (arg === "--all-documents") {
       includeAllDocuments = true;
       continue;
@@ -127,7 +134,15 @@ function parseArgs(rawArgs: string[]) {
     throw new Error("--scale must be a positive number");
   }
 
-  return { packIds, pages, includeAllDocuments, scale };
+  return { packIds, pages, includeAllDocuments, scale, concurrency };
+}
+
+function parsePositiveInteger(value: string | undefined, label: string): number {
+  const parsed = Number(value);
+  if (!Number.isInteger(parsed) || parsed < 1) {
+    throw new Error(`${label} must be a positive integer`);
+  }
+  return parsed;
 }
 
 function selectPacks(packIds: string[]): SourcePack[] {
@@ -192,4 +207,26 @@ function resolvePages(pageCount: number, pages?: string): number[] {
 
 function normalisePath(value: string): string {
   return value.replace(/\\/g, "/");
+}
+
+async function mapWithConcurrency<T, U>(
+  values: T[],
+  concurrency: number,
+  mapper: (value: T, index: number) => Promise<U>
+): Promise<U[]> {
+  const results = new Array<U>(values.length);
+  let nextIndex = 0;
+  const workerCount = Math.max(1, Math.min(concurrency, values.length));
+
+  await Promise.all(
+    Array.from({ length: workerCount }, async () => {
+      while (nextIndex < values.length) {
+        const currentIndex = nextIndex;
+        nextIndex += 1;
+        results[currentIndex] = await mapper(values[currentIndex], currentIndex);
+      }
+    })
+  );
+
+  return results;
 }

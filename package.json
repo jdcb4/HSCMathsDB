@@ -1,6 +1,6 @@
 {
   "name": "goalcheck-hsc",
-  "version": "0.40.0",
+  "version": "0.41.0",
   "description": "Browse NSW HSC mathematics past-paper questions and source packs by course, year, topic, style, and syllabus content.",
   "type": "module",
   "scripts": {
@@ -16,7 +16,6 @@
     "data:extract-text": "tsx scripts/extract-source-text.ts",
     "data:extract-images": "python scripts/extract-source-images.py",
     "data:inventory-layout": "python scripts/inventory-pdf-layout.py",
-    "data:propose-diagram-crops": "python scripts/propose-diagram-crops.py",
     "data:propose-gemini-ingestion": "tsx scripts/gemini-ingestion-engine.ts",
     "data:promote-gemini-ingestion": "tsx scripts/promote-gemini-ingestion.ts",
     "data:publish-crop-model-comparison": "tsx scripts/publish-crop-model-comparison.ts",
@@ -28,7 +27,6 @@
     "data:audit-ingested-exams": "tsx scripts/audit-ingested-exams.ts",
     "data:benchmark-ingestion-methods": "tsx scripts/benchmark-ingestion-methodologies.ts",
     "data:ingest-additional-maths": "tsx scripts/ingest-additional-maths.ts",
-    "data:promote-2025-additional-maths": "tsx scripts/ingest-additional-maths.ts",
     "data:report-worked-solutions": "tsx scripts/report-worked-solutions.ts",
     "data:report-coverage": "tsx scripts/report-import-coverage.ts",
     "data:report-candidates": "python scripts/report-question-candidates.py",

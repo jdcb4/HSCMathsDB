@@ -18,6 +18,7 @@ Useful scoped runs:
 ```powershell
 pnpm run data:propose-gemini-ingestion -- std1-2023 --pages 2-6 --guide-pages 1-4
 pnpm run data:propose-gemini-ingestion -- std1-2023 --force
+pnpm run data:propose-gemini-ingestion -- std1-2023 --page-concurrency 10
 pnpm run data:propose-gemini-ingestion -- std1-2023 --judge-model <openrouter-model-id>
 pnpm run data:propose-gemini-ingestion -- std1-2023 --skip-llm
 pnpm run data:publish-gemini-ingestion-report -- std1-2023 --output-id std1-2023-crop-mistral-medium-3-5
@@ -29,9 +30,9 @@ OpenRouter. The default visual bbox model is `anthropic/claude-sonnet-4.6`. The 
 
 The engine uses bounded parallelism for independent LLM calls:
 
-- Up to 8 rendered exam/marking-guide page proposal calls at once.
-- Up to 8 standalone visual-bbox calls at once.
-- Up to 8 per-crop QA calls at once inside a crop QA pass.
+- Up to 8 rendered exam/marking-guide page proposal calls at once by default.
+- Up to 8 standalone visual-bbox calls at once by default.
+- Up to 8 per-crop QA calls at once inside a crop QA pass by default.
 
 Additional model controls:
 
@@ -39,6 +40,8 @@ Additional model controls:
 - `--visual-model <model>` changes the model used for standalone visual bbox discovery.
 - `--crop-qa-model <model>` changes the model used for optional per-crop visual QA.
 - `--judge-model <model>` sets both repair and crop QA to a stronger judgement model.
+- `--page-concurrency <n>` changes the bounded concurrency for exam-page, marking-guide-page, and visual-bbox proposal calls.
+- `--crop-qa-concurrency <n>` changes the bounded concurrency for optional per-crop QA calls.
 - `--skip-repair` disables question-text repair.
 - `--run-crop-qa` enables optional combined crop check/repair judgement. Crop QA is off by default.
 - `--force-repair` and `--force-crop-qa` refresh cached downstream AI judgements without rerunning the page proposals.
@@ -50,7 +53,7 @@ the relevant pages must be rendered:
 
 ```powershell
 pnpm run data:download-sources -- source-std-2023
-pnpm run data:render-pages -- source-std-2023 --all-documents --scale 1.5
+pnpm run data:render-pages -- source-std-2023 --all-documents --scale 1.5 --concurrency 3
 ```
 
 ## Outputs
@@ -103,7 +106,8 @@ pnpm run data:publish-crop-model-comparison -- std1-2023-crop-model-comparison "
 
 That writes `public/ingestion-reports/std1-2023-crop-model-comparison.html`. The comparison page reads
 the embedded draft-preview data from each published variant, so it can be regenerated without rerunning
-the LLM calls.
+the LLM calls. This is a diagnostic helper, not part of the default ingestion flow. Remove generated
+`public/ingestion-reports/` output after the comparison is no longer under active review.
 
 ## Pipeline Shape
 
@@ -223,6 +227,7 @@ Use this harness to test the standalone visual-identification prompt against fix
 
 ```powershell
 pnpm run data:trial-visual-bbox-prompt
+pnpm run data:trial-visual-bbox-prompt -- --models "anthropic/claude-sonnet-4.6,google/gemini-3.1-flash-lite" --timeout-ms 15000 --output-id sonnet-gemini-smoke
 ```
 
 The harness keeps the user's prompt intent but makes these ingestion-safe changes before sending it:
@@ -236,12 +241,13 @@ The harness keeps the user's prompt intent but makes these ingestion-safe change
 - It wraps the example response in a top-level JSON object, `{ "imageSize": ..., "visuals": [...] }`,
   so the output can be parsed and validated.
 
-The latest run tested Gemini 3.1 Pro Preview and GPT-5.5 on one mock page plus Standard 1 2023 pages
-3, 4, and 5. Calls are run in parallel with a strict 15-second timeout around the full model request
-and JSON body read. The report is published at
+The default run tests Sonnet 4.6 and Gemini 3.1 Flash Lite on one mock page plus Standard 1 2023 pages
+3, 4, and 5. Use `--models`, `--timeout-ms`, and `--output-id` to run future comparisons without
+editing the script. Calls are run in parallel with a strict timeout around the full model request and
+JSON body read. The report is published at
 `public/ingestion-reports/visual-bbox-prompt-trial.html`.
 
-Headline result:
+Historical headline result from the 2026-06-08 GPT-5.5/Gemini Pro trial:
 
 - Both models reported `893 x 1263` for every completed page, matching the actual rendered PNG
   dimensions.

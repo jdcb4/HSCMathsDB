@@ -41,22 +41,21 @@ overrides. The 2025 Standard 1 review showed three recurring causes:
 
 ## Feasible Automation Lanes
 
-### 1. Question-Aware Layout and Crop Proposals
+### 1. Question-Aware Visual Proposals
 
-Status: partially implemented.
+Status: superseded by the Gemini/Sonnet page-image engine.
 
-`data:inventory-layout`, `data:render-pages`, and `data:propose-diagram-crops` already use PyMuPDF layout metadata and
-rendered pages to produce reviewable crop proposals. PyMuPDF supports extracting vector drawing commands through
-`Page.get_drawings()`, which is why it is useful for NESA vector diagrams.
+`data:inventory-layout` and `data:render-pages` still support source investigation. The previous
+layout-based `data:propose-diagram-crops` direction has been removed from the active workflow because
+it encouraged deterministic crop proposals that did not understand question semantics.
 
-Next improvement: make proposals question-aware. The script should combine:
+The active direction is the page-image visual-bbox pass in `data:propose-gemini-ingestion`, which asks
+the configured visual model to identify standalone public-site assets and returns full rendered-page
+pixel coordinates. The cropper then faithfully executes those coordinates after basic validation and
+clamping.
 
-- the profile's question boundaries and page refs
-- text-block keywords such as "shown", "diagram", "graph", "table", "map", "network", "not to scale"
-- vector drawing clusters and embedded image blocks on the same page
-- existing asset coverage from the corpus
-
-Expected result: fewer manual coordinate choices and fewer missed visuals.
+Expected result: fewer paper-specific crop overrides, less manual coordinate selection, and no
+parallel deterministic crop proposal path to maintain.
 
 Sources:
 
@@ -147,7 +146,7 @@ Build a benchmark/proposal layer rather than adding another direct importer:
    already-reviewed papers.
 2. Add a comparison report against the reviewed corpus with metrics for question split accuracy, formula warnings,
    visual-reference coverage, and manual override count.
-3. Extend `data:propose-diagram-crops` into a question-aware asset proposal command.
+3. Use the visual-bbox pass in `data:propose-gemini-ingestion` as the question-aware asset proposal command.
 4. Add an optional `data:propose-question-normalization` script that calls MiniMax/Gemini only for audit-failing
    questions and writes ignored proposal JSON.
 5. Keep `scripts/additional-maths-profiles.ts` as the durable source of reviewed overrides, but make overrides smaller
@@ -162,10 +161,10 @@ pnpm run data:benchmark-ingestion-methods
 ```
 
 The script writes raw responses and full local results to ignored `var/ingestion-methodology-benchmark/`, and writes a
-reviewable UX to:
+reviewable UX to ignored local browser-review output:
 
-- `public/ingestion-methodology-benchmark-report.html`
-- `public/ingestion-methodology-benchmark-results.json`
+- `public/ingestion-reports/ingestion-methodology-benchmark-report.html`
+- `public/ingestion-reports/ingestion-methodology-benchmark-results.json`
 
 The benchmark compared five methodology families against the reviewed 2025 Extension 1 and Extension 2 imports:
 

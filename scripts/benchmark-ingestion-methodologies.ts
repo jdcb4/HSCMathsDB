@@ -78,8 +78,16 @@ type BenchmarkReport = {
 const promptVersion = "ingestion-methodology-benchmark-v1";
 const outputRoot = path.join("var", "ingestion-methodology-benchmark");
 const rawRoot = path.join(outputRoot, "raw");
-const reportJsonPath = path.join("public", "ingestion-methodology-benchmark-results.json");
-const reportHtmlPath = path.join("public", "ingestion-methodology-benchmark-report.html");
+const reportJsonPath = path.join(
+  "public",
+  "ingestion-reports",
+  "ingestion-methodology-benchmark-results.json"
+);
+const reportHtmlPath = path.join(
+  "public",
+  "ingestion-reports",
+  "ingestion-methodology-benchmark-report.html"
+);
 
 const defaultModels = [
   "google/gemini-3.1-flash-lite",
@@ -200,6 +208,7 @@ async function main() {
   loadDotEnv();
   const args = parseArgs(process.argv.slice(2));
   await mkdir(rawRoot, { recursive: true });
+  await mkdir(path.dirname(reportJsonPath), { recursive: true });
 
   if (args.renderOnly) {
     const report = JSON.parse(await readFile(reportJsonPath, "utf8")) as BenchmarkReport;

@@ -45,27 +45,29 @@ These checks use the live NSW website, so they are source-drift checks rather th
 Download one source pack:
 
 ```powershell
-pnpm run data:download-sources -- source-adv-2025
+pnpm run data:download-sources -- source-std-2023
 ```
 
 Download every cataloged source pack:
 
 ```powershell
-pnpm run data:download-sources
+pnpm run data:download-sources -- --concurrency 4
 ```
 
 Downloaded PDFs are written to `var/source-assets/`, which is ignored by git.
+Use `--concurrency <n>` to tune independent PDF downloads. The default is `4`, which is fast enough
+for batch intake without putting unnecessary pressure on the source site.
 
 ## 4. Extract raw text
 
 ```powershell
-pnpm run data:extract-text -- source-adv-2025
+pnpm run data:extract-text -- source-adv-2025 --concurrency 4
 ```
 
 Extracted text is written to `var/extracted-text/`, which is ignored by git. This text is raw source material for manual or assisted transcription. It may contain OCR/PDF extraction artefacts and must be reviewed before any question is marked as `verified`.
 
-For configured Mathematics Standard, Extension 1, and Extension 2 source packs, promote the extracted
-official text into draft app records with:
+For configured Mathematics Standard, Extension 1, and Extension 2 source packs that already have
+deterministic profiles, promote the extracted official text into draft app records with:
 
 ```powershell
 pnpm run data:ingest-additional-maths -- std1-2025
@@ -83,6 +85,10 @@ one profile.
 This script rewrites the relevant draft records in `src/data/hsc-math-advanced.json`, promotes the
 required Standard/Extension syllabus nodes, attaches marking-guide excerpts, and imports Section II
 marking feedback where the official feedback PDFs expose parseable bullet sections.
+
+For new unprofiled years, prefer the Gemini/Sonnet page-image path in section 5A before creating
+paper-specific deterministic boundaries. Add deterministic profile logic only when it gives a clear
+repeatability benefit over the general proposal engine.
 
 ## 5. Create question candidates
 
@@ -106,8 +112,8 @@ rendered:
 
 ```powershell
 pnpm run data:download-sources -- source-std-2023
-pnpm run data:render-pages -- source-std-2023 --all-documents --scale 1.5
-pnpm run data:propose-gemini-ingestion -- std1-2023
+pnpm run data:render-pages -- source-std-2023 --all-documents --scale 1.5 --concurrency 3
+pnpm run data:propose-gemini-ingestion -- std1-2023 --page-concurrency 8
 pnpm run data:publish-gemini-ingestion-report -- std1-2023
 pnpm run data:promote-gemini-ingestion -- std1-2023
 ```
@@ -115,6 +121,14 @@ pnpm run data:promote-gemini-ingestion -- std1-2023
 The command calls `google/gemini-3.1-flash-lite` through OpenRouter for page transcription and marking-guide extraction, unless `--model` is supplied. Visual bbox discovery defaults to `anthropic/claude-sonnet-4.6` and can be changed with `--visual-model`.
 It writes raw responses, parsed page proposals, standalone visual bbox responses, deterministic and AI repair artifacts, generated crop candidates, labelled crop overview sheets, a reconciled JSON report, and a local HTML report surface under
 `var/gemini-ingestion-proposals/<paperId>/`.
+
+The automated path uses bounded parallelism for independent work:
+
+- `data:download-sources -- --concurrency <n>` downloads independent PDFs in parallel.
+- `data:extract-text -- <source-pack-id> --concurrency <n>` extracts independent PDFs in parallel while keeping pages ordered inside each PDF.
+- `data:render-pages -- <source-pack-id> --concurrency <n>` renders independent PDFs in parallel while keeping pages ordered inside each PDF.
+- `data:propose-gemini-ingestion -- <paperId> --page-concurrency <n>` runs independent exam-page, marking-guide-page, and visual-bbox model calls in parallel.
+- `data:propose-gemini-ingestion -- <paperId> --run-crop-qa --crop-qa-concurrency <n>` runs optional per-crop QA calls in parallel.
 
 The proposal report is not a corpus write. The default run attempts to resolve raw TeX, currency,
 split-page, and source-fidelity text flags autonomously before final reconciliation. Crop generation
@@ -190,7 +204,15 @@ pnpm run data:ingest-marking-feedback -- --write
 
 Marking feedback is usually available only for Section II, so Section I multiple-choice questions may legitimately have no feedback card. Treat extracted feedback as official feedback context, but review formula-heavy bullets against the rendered/source PDF before marking a question as `verified`.
 
-## 8. Extract diagrams and images
+## 8. Retained visual diagnostics
+
+The primary visual path is now the Sonnet visual-bbox pass inside
+`data:propose-gemini-ingestion`. It crops exactly the model-returned source-page coordinates after
+validating/clamping them to the rendered page bounds. Do not add deterministic crop proposal,
+expansion, or automatic recropping logic to the normal ingestion path.
+
+The older visual tools are retained only as diagnostics for source investigation or coordinate
+debugging.
 
 Scan cached PDFs for embedded raster images:
 
@@ -213,19 +235,11 @@ This writes ignored JSON under `var/layout-inventory/` with page text blocks, em
 Render PDF pages:
 
 ```powershell
-pnpm run data:render-pages -- source-adv-2025 --pages 10-14 --scale 1.25
+pnpm run data:render-pages -- source-adv-2025 --pages 10-14 --scale 1.25 --concurrency 3
 pnpm run data:report-renders -- source-adv-2025
 ```
 
 Rendered pages are written to `var/rendered-pages/`, which is ignored by git.
-
-Generate reviewable crop proposals from the layout inventory and rendered pages:
-
-```powershell
-pnpm run data:propose-diagram-crops -- source-adv-2025
-```
-
-Crop proposal metadata is written to `var/diagram-crop-proposals/`, including rendered-page paths, pixel crop rectangles, and ready-to-run `data:crop-render` commands. Treat proposals as candidates: review the rendered crop before copying anything into `public/assets/diagrams/`.
 
 Create a crop candidate from a rendered page:
 
@@ -233,7 +247,9 @@ Create a crop candidate from a rendered page:
 pnpm run data:crop-render -- --input var/rendered-pages/source-adv-2025/source-adv-2025-exam-paper-2025-hsc-maths-advanced/page-012.png --x 115 --y 185 --width 505 --height 300 --output var/diagram-crops/source-adv-2025/q14-scatterplot.png
 ```
 
-Crop candidates and crop metadata are written to `var/diagram-crops/`, which is ignored by git. Crops should be reviewed before being copied into `public/assets/diagrams/`.
+Crop candidates and crop metadata are written to `var/diagram-crops/`, which is ignored by git.
+This explicit-coordinate cropper is for isolated diagnostics or source inspection, not for proposing
+normal ingestion assets.
 
 If the crop is reviewed during creation, write reviewed metadata directly:
 
@@ -255,12 +271,15 @@ The 2025 import worked best when the workflow used official PDF caches, raw cand
 
 The slowest steps were repeatedly rereading large JSON/candidate files and manually patching crop metadata after visual review. The `data:report-coverage` script and `--review-status reviewed` crop option reduce those repeat reads and manual edits.
 
-For future years, parallelise in two lanes after PDFs are cached and candidates are generated:
+For future years, parallelise in two lanes after PDFs are cached and pages are rendered:
 
-- Text lane: draft prompt, answer, working, tags, and syllabus mapping from candidate JSON and marking-grid text.
-- Visual lane: render pages, crop diagrams, review dimensions, and prepare public asset paths.
+- Proposal lane: Gemini page transcription, marking-guide extraction, deterministic repair, targeted AI repair, reconciliation, and syllabus-mapping preparation.
+- Visual lane: Sonnet visual-bbox proposals, exact-coordinate crop generation, crop overview sheet review, and public asset promotion.
 
-These lanes can be assigned to sub-agents by year or by page range. A cheaper model is suitable for first-pass candidate summarisation, page/crop inventory, alt-text drafting, and syllabus-code lookup from the marking grid. Keep final question promotion, mathematical answer checking, and browser verification on the stronger model.
+These lanes can be assigned to sub-agents by year or by page range. Gemini 3.1 Flash Lite is the
+default fast model for first-pass page transcription, marking-guide extraction, and repair. Sonnet 4.6
+is the default visual-bbox model. Keep final question promotion, mathematical answer checking, and
+browser verification on the stronger model or a human-reviewed acceptance pass.
 
 ## 10. Generate student explanations
 

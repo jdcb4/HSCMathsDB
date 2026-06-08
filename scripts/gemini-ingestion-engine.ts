@@ -23,6 +23,8 @@ type Args = {
   skipLlm: boolean;
   skipRepair: boolean;
   skipCropQa: boolean;
+  pageConcurrency: number;
+  cropQaConcurrency: number;
 };
 
 type RenderedPage = {
@@ -446,8 +448,8 @@ type EngineReport = {
 const promptVersion = "gemini-page-ingestion-v2";
 const repairCacheVersion = "repair-v2";
 const cropQaCacheVersion = "crop-qa-v2-single";
-const pageProposalConcurrency = 8;
-const cropQaConcurrency = 8;
+const defaultPageConcurrency = 8;
+const defaultCropQaConcurrency = 8;
 
 main().catch((error: unknown) => {
   console.error(error instanceof Error ? (error.stack ?? error.message) : error);
@@ -482,7 +484,7 @@ async function main() {
   const guidePages = markingGuideDocument ? selectRenderedPages(markingGuideDocument, args.guidePages) : [];
   const apiKey = args.skipLlm ? undefined : getOpenRouterApiKey();
 
-  const examPageProposals = await mapWithConcurrency(examPages, pageProposalConcurrency, async (page) =>
+  const examPageProposals = await mapWithConcurrency(examPages, args.pageConcurrency, async (page) =>
     proposeExamPage({
       apiKey,
       model: args.model,
@@ -503,23 +505,21 @@ async function main() {
     examPageProposals,
     rawRoot: visualRawRoot,
     force: args.force,
-    skipLlm: args.skipLlm
+    skipLlm: args.skipLlm,
+    concurrency: args.pageConcurrency
   });
 
-  const markingGuidePageProposals = await mapWithConcurrency(
-    guidePages,
-    pageProposalConcurrency,
-    async (page) =>
-      proposeMarkingGuidePage({
-        apiKey,
-        model: args.model,
-        paper,
-        page,
-        rawRoot,
-        parsedRoot,
-        force: args.force,
-        skipLlm: args.skipLlm
-      })
+  const markingGuidePageProposals = await mapWithConcurrency(guidePages, args.pageConcurrency, async (page) =>
+    proposeMarkingGuidePage({
+      apiKey,
+      model: args.model,
+      paper,
+      page,
+      rawRoot,
+      parsedRoot,
+      force: args.force,
+      skipLlm: args.skipLlm
+    })
   );
 
   const deterministicActions = applyDeterministicRepairs(examPageProposals, markingGuidePageProposals);
@@ -549,6 +549,7 @@ async function main() {
     examPageProposals,
     cropRoot,
     sheetRoot,
+    concurrency: args.cropQaConcurrency,
     force: args.forceCropQa,
     skip: args.skipCropQa || args.skipLlm
   });
@@ -624,7 +625,9 @@ function parseArgs(values: string[]): Args {
     forceCropQa: false,
     skipLlm: false,
     skipRepair: false,
-    skipCropQa: true
+    skipCropQa: true,
+    pageConcurrency: defaultPageConcurrency,
+    cropQaConcurrency: defaultCropQaConcurrency
   };
 
   for (let index = 0; index < values.length; index += 1) {
@@ -647,6 +650,12 @@ function parseArgs(values: string[]): Args {
       index += 1;
     } else if (value === "--crop-qa-model") {
       args.cropQaModel = values[index + 1] ?? "";
+      index += 1;
+    } else if (value === "--page-concurrency") {
+      args.pageConcurrency = parsePositiveInteger(values[index + 1], "--page-concurrency");
+      index += 1;
+    } else if (value === "--crop-qa-concurrency") {
+      args.cropQaConcurrency = parsePositiveInteger(values[index + 1], "--crop-qa-concurrency");
       index += 1;
     } else if (value === "--judge-model") {
       args.repairModel = values[index + 1] ?? "";
@@ -696,6 +705,14 @@ function parseArgs(values: string[]): Args {
   }
 
   return args;
+}
+
+function parsePositiveInteger(value: string | undefined, label: string): number {
+  const parsed = Number(value);
+  if (!Number.isInteger(parsed) || parsed < 1) {
+    throw new Error(`${label} must be a positive integer`);
+  }
+  return parsed;
 }
 
 function findPaper(paperId: string): Paper {
@@ -1005,7 +1022,8 @@ async function applyVisualBboxProposals({
   examPageProposals,
   rawRoot,
   force,
-  skipLlm
+  skipLlm,
+  concurrency
 }: {
   apiKey?: string;
   model: string;
@@ -1015,10 +1033,11 @@ async function applyVisualBboxProposals({
   rawRoot: string;
   force: boolean;
   skipLlm: boolean;
+  concurrency: number;
 }): Promise<void> {
   const pagesByNumber = new Map(pages.map((page) => [page.page, page]));
 
-  await mapWithConcurrency(examPageProposals, pageProposalConcurrency, async (proposal) => {
+  await mapWithConcurrency(examPageProposals, concurrency, async (proposal) => {
     const page = pagesByNumber.get(proposal.page);
     if (!page || proposal.status !== "ok") {
       proposal.visuals = [];
@@ -2128,6 +2147,7 @@ async function runCropQa({
   examPageProposals,
   cropRoot,
   sheetRoot,
+  concurrency,
   force,
   skip
 }: {
@@ -2137,6 +2157,7 @@ async function runCropQa({
   examPageProposals: ExamPageProposal[];
   cropRoot: string;
   sheetRoot: string;
+  concurrency: number;
   force: boolean;
   skip: boolean;
 }): Promise<CropQaReport> {
@@ -2148,6 +2169,7 @@ async function runCropQa({
     candidates,
     sheetRoot,
     sheetPrefix: "crop-qa-pass-1",
+    concurrency,
     force,
     skip
   });
@@ -2173,6 +2195,7 @@ async function evaluateCropCandidates({
   candidates,
   sheetRoot,
   sheetPrefix,
+  concurrency,
   force,
   skip
 }: {
@@ -2182,6 +2205,7 @@ async function evaluateCropCandidates({
   candidates: CropCandidate[];
   sheetRoot: string;
   sheetPrefix: string;
+  concurrency: number;
   force: boolean;
   skip: boolean;
 }): Promise<CropQaReport["sheets"]> {
@@ -2204,7 +2228,7 @@ async function evaluateCropCandidates({
       continue;
     }
 
-    const results = await mapWithConcurrency(batch, cropQaConcurrency, async (candidate) =>
+    const results = await mapWithConcurrency(batch, concurrency, async (candidate) =>
       evaluateSingleCropCandidate({
         apiKey,
         model,

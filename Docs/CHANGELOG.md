@@ -2,6 +2,14 @@
 
 Newest entries go at the top.
 
+## 0.41.0 - 2026-06-08
+
+- Rationalised the ingestion workflow around the Gemini/Sonnet page-image proposal engine as the default path for new Standard and Extension papers.
+- Added explicit bounded-concurrency controls to source download, text extraction, page rendering, Gemini page/visual proposals, and optional crop QA.
+- Removed the orphaned one-off 2025 promotion script and the legacy layout-based deterministic crop proposal command from the active script surface.
+- Updated ingestion documentation so retained crop/layout scripts are described as diagnostics rather than normal asset-generation workflow.
+- Cleared stale ignored ingestion-report and visual-bbox trial outputs from the local workspace.
+
 ## 0.40.0 - 2026-06-08
 
 - Added a repeatable Gemini report promotion command, `pnpm run data:promote-gemini-ingestion -- <paperId>`, which turns a reviewed proposal report into draft corpus records and public exam-derived diagram assets.
