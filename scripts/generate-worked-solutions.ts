@@ -25,6 +25,7 @@ type Args = {
   questionId?: string;
   paperId?: string;
   importSamples: boolean;
+  missingOnly: boolean;
 };
 
 type GenerationError = {
@@ -82,6 +83,11 @@ async function main() {
       const sourceQuestionHash = hashQuestionInput(task.questionInput);
       const existing = solutionsByQuestionId.get(task.question.id);
 
+      if (args.missingOnly && existing && !args.force) {
+        console.log(`Skipped existing ${task.question.id}`);
+        continue;
+      }
+
       if (
         existing &&
         !args.force &&
@@ -98,7 +104,6 @@ async function main() {
 
       if (sample && !args.force) {
         solutionsByQuestionId.set(task.question.id, sample);
-        await writeSidecar(solutionsByQuestionId, args.model);
         console.log(`Imported sample ${task.question.id}`);
         continue;
       }
@@ -128,12 +133,10 @@ async function main() {
             content: result.content
           })
         );
-        await writeSidecar(solutionsByQuestionId, args.model);
         console.log(`Generated ${task.question.id} in ${Math.round(result.latencyMs / 100) / 10}s`);
       } catch (error: unknown) {
         const message = error instanceof Error ? error.message : String(error);
         errors.push({ questionId: task.question.id, model: args.model, error: message });
-        await writeFile(errorPath, `${JSON.stringify(errors, null, 2)}\n`, "utf8");
         console.log(`Failed ${task.question.id}: ${message}`);
       }
     }
@@ -165,7 +168,8 @@ function parseArgs(values: string[]): Args {
     concurrency: 3,
     force: false,
     dryRun: false,
-    importSamples: true
+    importSamples: true,
+    missingOnly: false
   };
 
   for (let index = 0; index < values.length; index += 1) {
@@ -192,6 +196,8 @@ function parseArgs(values: string[]): Args {
       args.dryRun = true;
     } else if (value === "--no-import-samples") {
       args.importSamples = false;
+    } else if (value === "--missing-only") {
+      args.missingOnly = true;
     }
   }
 
