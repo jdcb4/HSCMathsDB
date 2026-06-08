@@ -179,3 +179,30 @@ Latest diagnostic result:
 This indicates the shared crop issues are not caused by a pixel-coordinate translation bug in the local
 crop process. The weak point is the model-produced repair bbox, plus deterministic fallback logic that
 can repeat the same expansion pattern when multiple models report similar crop QA issues.
+
+## Visual Bbox Prompt Trial
+
+Use this harness to test the standalone visual-identification prompt against fixed pages and models:
+
+```powershell
+pnpm run data:trial-visual-bbox-prompt
+```
+
+The harness keeps the user's prompt intent but makes two ingestion-safe changes before sending it:
+
+- It adds the rendered source-page image size to the prompt because the response coordinates must be
+  full-page pixels.
+- It wraps the example response in a top-level JSON object, `{ "visuals": [...] }`, so the output can
+  be parsed and validated.
+
+The latest run tested Gemini 3.1 Flash Lite, Mistral Medium 3.5, Nemotron 3.5 Safety, and Step 3.7
+Flash on one mock page plus Standard 1 2023 pages 3, 4, and 5. The report is published at
+`public/ingestion-reports/visual-bbox-prompt-trial.html`.
+
+Headline result:
+
+- Gemini 3.1 Flash Lite returned parseable results for all four pages and found the real Q8 card
+  diagram at a plausible page location.
+- Mistral Medium 3.5 returned parseable results but often guessed broad or shifted bboxes.
+- Nemotron 3.5 Safety did not produce usable JSON for any page in this trial.
+- Step 3.7 Flash was slow, failed one real page, and returned no visual for the Q8 card page.

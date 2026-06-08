@@ -62,6 +62,7 @@ GoalCheck HSC is a Vite React TypeScript web app for browsing NSW HSC mathematic
 | `pnpm run data:report-renders`                  | Summarize ignored page render metadata.                                                   |
 | `pnpm run data:crop-render`                     | Crop a rendered PDF page into an ignored diagram candidate.                               |
 | `pnpm run data:diagnose-crop-coordinates`       | Generate synthetic bbox tests and a local crop-coordinate diagnostics UX.                 |
+| `pnpm run data:trial-visual-bbox-prompt`        | Trial the standalone visual-bbox prompt across configured models and pages.               |
 | `pnpm run typecheck`                            | TypeScript checking.                                                                      |
 | `pnpm run lint`                                 | ESLint.                                                                                   |
 | `pnpm run format`                               | Prettier check.                                                                           |

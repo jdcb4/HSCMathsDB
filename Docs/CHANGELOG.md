@@ -2,6 +2,12 @@
 
 Newest entries go at the top.
 
+## 0.35.0 - 2026-06-08
+
+- Added a repeatable visual-bbox prompt trial harness that runs the standalone crop-discovery prompt across Gemini 3.1 Flash Lite, Mistral Medium 3.5, Nemotron 3.5 Safety, and Step 3.7 Flash.
+- Published a local comparison UX at `public/ingestion-reports/visual-bbox-prompt-trial.html` showing source pages, model overlays, crop thumbnails, parsed JSON, and mock-page IoU scores.
+- Trialled the prompt on one mock page with known target boxes and three real 2023 Mathematics Standard 1 visual pages: Q4 diagram options, Q5 credit table, and Q8 card diagram.
+
 ## 0.34.0 - 2026-06-07
 
 - Added a repeatable crop-coordinate diagnostic harness that generates synthetic exam pages with known target bboxes, verifies the deterministic cropper against exact pixel dimensions, and runs Mistral Medium 3.5, Nemotron 3.5 Safety, and Step 3.7 Flash through the same model-to-crop path.

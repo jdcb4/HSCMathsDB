@@ -1,6 +1,6 @@
 {
   "name": "goalcheck-hsc",
-  "version": "0.34.0",
+  "version": "0.35.0",
   "description": "Browse NSW HSC mathematics past-paper questions and source packs by course, year, topic, style, and syllabus content.",
   "type": "module",
   "scripts": {
@@ -12,6 +12,7 @@
     "data:extract-candidates": "python scripts/extract-question-candidates.py",
     "data:crop-render": "tsx scripts/crop-rendered-page.ts",
     "data:diagnose-crop-coordinates": "tsx scripts/diagnose-crop-coordinate-flow.ts",
+    "data:trial-visual-bbox-prompt": "tsx scripts/trial-visual-bbox-prompt.ts",
     "data:extract-text": "tsx scripts/extract-source-text.ts",
     "data:extract-images": "python scripts/extract-source-images.py",
     "data:inventory-layout": "python scripts/inventory-pdf-layout.py",
