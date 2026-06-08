@@ -315,17 +315,22 @@ describe("HSC selectors", () => {
   });
 
   it("filters question options and source packs by course", () => {
-    expect(getFilterOptionsForCourse(database, "standard").years).toEqual([2025, 2024]);
-    expect(getFilterOptionsForCourse(database, "extension-1").years).toEqual([2025, 2024, 2023]);
-    expect(getFilterOptionsForCourse(database, "extension-2").years).toEqual([2025, 2024]);
+    const modernYears = [2025, 2024, 2023, 2022, 2021, 2020];
+
+    expect(getFilterOptionsForCourse(database, "standard").years).toEqual(modernYears);
+    expect(getFilterOptionsForCourse(database, "extension-1").years).toEqual(modernYears);
+    expect(getFilterOptionsForCourse(database, "extension-2").years).toEqual(modernYears);
     expect(getSourcePackCoverageForCourse(database, "standard").map((pack) => pack.id)).toEqual([
       "source-std-2025",
       "source-std-2024",
-      "source-std-2023"
+      "source-std-2023",
+      "source-std-2022",
+      "source-std-2021",
+      "source-std-2020"
     ]);
-    expect(queryQuestions(database, { courseId: "standard" })).toHaveLength(141);
-    expect(queryQuestions(database, { courseId: "extension-1" })).toHaveLength(42);
-    expect(queryQuestions(database, { courseId: "extension-2" })).toHaveLength(32);
+    expect(queryQuestions(database, { courseId: "standard" })).toHaveLength(418);
+    expect(queryQuestions(database, { courseId: "extension-1" })).toHaveLength(84);
+    expect(queryQuestions(database, { courseId: "extension-2" })).toHaveLength(96);
     expect(queryQuestions(database, { courseId: "advanced", year: 2025 })).toHaveLength(31);
   });
 
@@ -414,13 +419,15 @@ describe("HSC selectors", () => {
 
   it("tracks source packs separately from imported question records", () => {
     const sourcePacks = getSourcePackCoverage(database);
-    const notStartedPack = sourcePacks.find((pack) => pack.id === "source-adv-2021");
+    const notStartedPack = sourcePacks.find((pack) => pack.id === "source-math-2018-archive");
     const seededPack = sourcePacks.find((pack) => pack.id === "source-adv-2025");
     const inProgressPack = sourcePacks.find((pack) => pack.id === "source-adv-2024");
     const preparedPack = sourcePacks.find((pack) => pack.id === "source-adv-2023");
     const startedPack = sourcePacks.find((pack) => pack.id === "source-adv-2022");
+    const standardPack = sourcePacks.find((pack) => pack.id === "source-std-2025");
 
-    expect(sourcePacks.length).toBeGreaterThan(database.papers.length);
+    expect(sourcePacks.length).not.toBe(database.papers.length);
+    expect(standardPack?.paperIds).toEqual(["std1-2025", "std2-2025"]);
     expect(notStartedPack?.importStatus).toBe("not-started");
     expect(seededPack?.expectedQuestionCount).toBe(31);
     expect(seededPack?.importedQuestionCount).toBe(31);
