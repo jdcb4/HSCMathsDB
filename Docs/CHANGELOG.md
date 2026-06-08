@@ -2,6 +2,12 @@
 
 Newest entries go at the top.
 
+## 0.48.0 - 2026-06-08
+
+- Backfilled worked-solution drafts for all remaining included corpus questions, bringing coverage to 789/789 records.
+- Confirmed the worked-solution math audit reports zero issues after normalization.
+- Used Gemini 3.1 Flash Lite as the primary generation model with MiniMax, GLM, and Sonnet fallbacks for syntax-contract failures.
+
 ## 0.47.0 - 2026-06-08
 
 - Ingested and promoted the full 2020 modern-course set: Mathematics Advanced, Mathematics Standard 1, Mathematics Standard 2, Mathematics Extension 1, and Mathematics Extension 2.
