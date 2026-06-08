@@ -2,6 +2,14 @@
 
 Newest entries go at the top.
 
+## 0.42.0 - 2026-06-08
+
+- Added `SourceExams/` as the canonical local archive for historical HSC mathematics PDFs and switched source caching to sync from that folder instead of downloading from the web.
+- Added local source filename parsing, local source coverage reporting, and local source asset auditing for modern and historical artifact types.
+- Extended source asset roles to include historical `marking-report` and `sample-answers` artifacts.
+- Updated the Gemini ingestion engine to report and render local underscore-named source files without web discovery.
+- Documented course-name lineage and the initial 2015-onward ingestion focus.
+
 ## 0.41.0 - 2026-06-08
 
 - Rationalised the ingestion workflow around the Gemini/Sonnet page-image proposal engine as the default path for new Standard and Extension papers.

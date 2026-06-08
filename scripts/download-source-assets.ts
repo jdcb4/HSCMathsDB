@@ -1,10 +1,17 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { copyFile, mkdir, rm } from "node:fs/promises";
 import path from "node:path";
+
 import { database } from "../src/services/hscDatabase";
-import { discoverSourceAssets, filenameForAsset } from "./source-asset-discovery";
+import {
+  defaultSourceExamRoot,
+  findLocalSourceExamsForPack,
+  labelForLocalSourceExam,
+  normalisePath
+} from "./local-source-exams";
 
 const outputRoot = path.resolve("var/source-assets");
 const args = parseArgs(process.argv.slice(2));
+
 await mkdir(outputRoot, { recursive: true });
 
 const selectedPacks =
@@ -20,26 +27,30 @@ if (args.packIds.size > 0 && selectedPacks.length !== args.packIds.size) {
 
 await mapWithConcurrency(selectedPacks, args.concurrency, async (pack) => {
   const packDirectory = path.join(outputRoot, pack.id);
+  const localFiles = await findLocalSourceExamsForPack(pack, args.sourceRoot);
+
+  if (localFiles.length === 0) {
+    console.warn(`No local SourceExams files matched ${pack.id} (${pack.courseName} ${pack.year})`);
+    return;
+  }
+
+  if (args.clean) {
+    await rm(packDirectory, { recursive: true, force: true });
+  }
+
   await mkdir(packDirectory, { recursive: true });
-
-  const assets = await discoverSourceAssets(pack);
-
-  await mapWithConcurrency(assets, args.concurrency, async (asset) => {
-    const response = await fetch(asset.url);
-
-    if (!response.ok) {
-      throw new Error(`Could not download ${asset.url}: ${response.status} ${response.statusText}`);
-    }
-
-    const outputPath = path.join(packDirectory, filenameForAsset(pack, asset));
-    await writeFile(outputPath, Buffer.from(await response.arrayBuffer()));
-    console.log(`Downloaded ${asset.label} -> ${outputPath}`);
+  await mapWithConcurrency(localFiles, args.concurrency, async (file) => {
+    const outputPath = path.join(packDirectory, file.fileName);
+    await copyFile(file.path, outputPath);
+    console.log(`Cached ${labelForLocalSourceExam(file)} -> ${normalisePath(outputPath)}`);
   });
 });
 
 function parseArgs(values: string[]) {
   const packIds = new Set<string>();
   let concurrency = 4;
+  let sourceRoot = defaultSourceExamRoot;
+  let clean = true;
 
   for (let index = 0; index < values.length; index += 1) {
     const value = values[index];
@@ -50,10 +61,25 @@ function parseArgs(values: string[]) {
       continue;
     }
 
+    if (value === "--source-root") {
+      sourceRoot = values[index + 1] ?? "";
+      index += 1;
+      continue;
+    }
+
+    if (value === "--no-clean") {
+      clean = false;
+      continue;
+    }
+
     packIds.add(value);
   }
 
-  return { packIds, concurrency };
+  if (!sourceRoot) {
+    throw new Error("--source-root must not be empty");
+  }
+
+  return { packIds, concurrency, sourceRoot, clean };
 }
 
 function parsePositiveInteger(value: string | undefined, label: string): number {

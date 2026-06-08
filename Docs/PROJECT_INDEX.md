@@ -22,9 +22,10 @@ GoalCheck HSC is a Vite React TypeScript web app for browsing NSW HSC mathematic
 - `src/data` - local JSON corpus, worked-solution sidecar, and syllabus conversion map.
 - `src/styles` - Tailwind entry CSS and design tokens.
 - `src/tests` - shared test setup.
+- `SourceExams` - canonical local archive of official HSC mathematics PDFs, named `[Year]_[Subject]_[Document Type].pdf`.
 - `SyllabusConversion` - separate staging area for building and reviewing syllabus conversion expansions before merging them into app data artifacts.
 - `public/assets/diagrams` - static diagram and image assets referenced by the corpus.
-- `var/source-assets` - ignored local cache for official PDFs downloaded during import.
+- `var/source-assets` - ignored working cache populated from `SourceExams` during import.
 - `var/extracted-text` - ignored local text extraction output used during transcription.
 - `var/question-candidates` - ignored raw candidate records extracted from source text.
 - `var/rendered-pages` - ignored rendered PDF pages used for vector diagram review.
@@ -39,9 +40,10 @@ GoalCheck HSC is a Vite React TypeScript web app for browsing NSW HSC mathematic
 | ----------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | `pnpm run dev`                                  | Start the development server.                                                             |
 | `pnpm run data:validate`                        | Validate the JSON corpus through the TypeScript Zod schema.                               |
-| `pnpm run data:audit-sources`                   | Compare the source catalog with visible official NSW pack titles.                         |
-| `pnpm run data:audit-assets`                    | Confirm each cataloged pack exposes exam, marking, and feedback PDFs.                     |
-| `pnpm run data:download-sources`                | Download official PDFs into ignored local cache with bounded concurrency.                 |
+| `pnpm run data:audit-sources`                   | Optional source-drift check against visible official NSW pack titles.                     |
+| `pnpm run data:audit-assets`                    | Confirm each cataloged pack has required local `SourceExams` PDFs.                        |
+| `pnpm run data:report-source-exams`             | Summarize the local `SourceExams` archive by year, subject, and document type.            |
+| `pnpm run data:download-sources`                | Sync local `SourceExams` PDFs into ignored `var/source-assets` with bounded concurrency.  |
 | `pnpm run data:extract-text`                    | Extract raw text from cached PDFs into ignored local output with bounded concurrency.     |
 | `pnpm run data:ingest-additional-maths`         | Ingest configured Standard/Extension paper profiles into draft question records.          |
 | `pnpm run data:extract-candidates`              | Create ignored raw candidate records from extracted source text.                          |

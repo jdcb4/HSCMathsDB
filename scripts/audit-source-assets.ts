@@ -1,24 +1,25 @@
 import { database } from "../src/services/hscDatabase";
-import { discoverSourceAssets } from "./source-asset-discovery";
+import { findLocalSourceExamsForPack } from "./local-source-exams";
 
-const requiredRoles = ["exam-paper", "marking-guide", "marking-feedback"] as const;
+const requiredModernRoles = ["exam-paper", "marking-guide", "marking-feedback"] as const;
+const sourceRoot = "SourceExams";
+
 let issueCount = 0;
 
 for (const pack of database.sourcePacks) {
-  const assets = await discoverSourceAssets(pack);
-  const foundRoles = new Set(assets.map((asset) => asset.role));
-  const missingRoles = requiredRoles.filter((role) => !foundRoles.has(role));
+  const assets = await findLocalSourceExamsForPack(pack, sourceRoot);
+  const roles = new Set(assets.map((asset) => asset.role));
+  const requiredRoles = pack.year >= 2015 ? requiredModernRoles : (["exam-paper"] as const);
+  const missing = requiredRoles.filter((role) => !roles.has(role));
 
-  console.log(`${pack.title}: ${assets.length} PDF assets discovered`);
-
-  if (missingRoles.length > 0) {
-    issueCount += missingRoles.length;
-    console.log(`Missing roles: ${missingRoles.join(", ")}`);
+  if (missing.length > 0) {
+    issueCount += 1;
+    console.error(`${pack.id}: missing local SourceExams asset(s): ${missing.join(", ")}`);
   }
 }
 
 if (issueCount > 0) {
-  throw new Error(`${issueCount} required source asset role(s) were missing`);
+  process.exitCode = 1;
+} else {
+  console.log("All cataloged source packs have the required local SourceExams assets.");
 }
-
-console.log("All source packs expose exam paper, marking guide, and marking feedback PDFs.");

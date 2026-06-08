@@ -7,7 +7,7 @@ import { z } from "zod";
 import type { Paper, SourcePack } from "../src/domain/hscSchemas";
 import { database } from "../src/services/hscDatabase";
 import { getOpenRouterApiKey, loadDotEnv, safeFileName } from "./llm-worked-solution-tools";
-import { discoverSourceAssets, filenameForAsset, type DiscoveredSourceAsset } from "./source-asset-discovery";
+import { findLocalSourceExamsForPack, labelForLocalSourceExam } from "./local-source-exams";
 
 type Args = {
   paperId: string;
@@ -734,25 +734,13 @@ function findSourcePack(paper: Paper): SourcePack {
 }
 
 async function discoverAssets(pack: SourcePack): Promise<EngineReport["sourceAssets"]> {
-  const assets =
-    pack.assets.length > 0 ? pack.assets.filter((asset) => asset.url) : await discoverSourceAssets(pack);
-  return assets.filter(isDownloadablePdfAsset).map((asset) => ({
+  const localAssets = await findLocalSourceExamsForPack(pack);
+  return localAssets.map((asset) => ({
     role: asset.role,
-    label: asset.label,
-    url: asset.url,
-    expectedCachePath: normalisePath(
-      path.join("var", "source-assets", pack.id, filenameForAsset(pack, asset))
-    )
+    label: labelForLocalSourceExam(asset),
+    url: normalisePath(asset.path),
+    expectedCachePath: normalisePath(path.join("var", "source-assets", pack.id, asset.fileName))
   }));
-}
-
-function isDownloadablePdfAsset(
-  asset: SourcePack["assets"][number] | DiscoveredSourceAsset
-): asset is DiscoveredSourceAsset {
-  return (
-    typeof asset.url === "string" &&
-    (asset.role === "exam-paper" || asset.role === "marking-guide" || asset.role === "marking-feedback")
-  );
 }
 
 async function readRenderMetadata(pack: SourcePack): Promise<RenderMetadata> {
@@ -772,8 +760,8 @@ function findRenderedDocument(metadata: RenderMetadata, paper: Paper, role: "exa
     const paperMatches = documentMatchesPaper(basename, paper);
     const roleMatches =
       role === "exam"
-        ? basename.includes("exam-paper") || (basename.includes("exam") && !basename.includes("mg"))
-        : basename.includes("marking-guide") || basename.includes("-mg") || basename.endsWith("mg.pdf");
+        ? /exam[-_]?paper/.test(basename) || (basename.includes("exam") && !basename.includes("mg"))
+        : /marking[-_]?guide/.test(basename) || basename.includes("-mg") || basename.endsWith("mg.pdf");
     return paperMatches && roleMatches;
   });
 
@@ -791,19 +779,19 @@ function findRenderedDocument(metadata: RenderMetadata, paper: Paper, role: "exa
 
 function documentMatchesPaper(basename: string, paper: Paper): boolean {
   if (paper.id.includes("std1")) {
-    return /std(?:andard)?-?1|standard-?1/.test(basename);
+    return /std(?:andard)?[-_]?1|standard[-_]?1/.test(basename);
   }
 
   if (paper.id.includes("std2")) {
-    return /std(?:andard)?-?2|standard-?2/.test(basename);
+    return /std(?:andard)?[-_]?2|standard[-_]?2/.test(basename);
   }
 
   if (paper.id.includes("ext1")) {
-    return /ext(?:ension)?-?1|extension-?1/.test(basename);
+    return /ext(?:ension)?[-_]?1|extension[-_]?1/.test(basename);
   }
 
   if (paper.id.includes("ext2")) {
-    return /ext(?:ension)?-?2|extension-?2/.test(basename);
+    return /ext(?:ension)?[-_]?2|extension[-_]?2/.test(basename);
   }
 
   return basename.includes(paper.year.toString());

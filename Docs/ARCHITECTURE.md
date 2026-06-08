@@ -57,8 +57,8 @@ See `Docs/IMPORT_WORKFLOW.md`.
 
 The current import pipeline can:
 
-- discover official PDF assets from each cataloged pack detail page
-- download PDFs into ignored `var/source-assets/` with bounded concurrency
+- use `SourceExams/` as the canonical local PDF archive
+- sync PDFs from `SourceExams/` into ignored `var/source-assets/` with bounded concurrency
 - extract raw text into ignored `var/extracted-text/` with bounded concurrency
 - segment raw text into ignored `var/question-candidates/` review candidates
 - promote configured Standard and Extension source text through `data:ingest-additional-maths` where a deterministic profile exists
@@ -67,7 +67,7 @@ The current import pipeline can:
 - promote reviewed Gemini reports through `data:promote-gemini-ingestion`
 - run retained diagnostic helpers for embedded-image extraction, layout inventory, explicit pixel cropping, visual-bbox model trials, and crop-coordinate checks
 
-Question normalization, syllabus mapping, and diagram extraction still require review before records can be marked `verified`. The target operating model is that new Standard and Extension years use the Gemini/Sonnet proposal path first, with deterministic profile importers retained for already-profiled years or narrow fallback cases.
+Question normalization, syllabus mapping, and diagram extraction still require review before records can be marked `verified`. The target operating model is that new Standard and Extension years use the Gemini/Sonnet proposal path first, with deterministic profile importers retained for already-profiled years or narrow fallback cases. Source discovery from the web is no longer part of the normal ingestion path; web checks are only source-drift diagnostics.
 
 After extraction, a local script may generate draft student explanations through OpenRouter from the reviewed normalized corpus. Generated explanations stay in ignored `var/llm-explanations/` until structurally validated and mathematically reviewed, then promoted into the public explanation sidecar.
 

@@ -155,3 +155,13 @@ Record these during setup if they are known:
 **Rejected alternatives:** Direct LLM-to-corpus writes were rejected because model output still needs source review and syntax gating. Keeping Gemini only as a deep fallback was rejected because the page-image results are strong enough to reduce the current profile-override burden materially.
 
 **Supersedes:** Not applicable.
+
+## 2026-06-08: Use SourceExams as the canonical source PDF archive
+
+**Decision:** Treat `SourceExams/` as the canonical local archive for official HSC mathematics PDFs and sync files from it into ignored processing caches under `var/source-assets/`.
+
+**Reasoning:** The project now has a broad historical PDF archive with a consistent naming convention. Local source files make ingestion faster, repeatable, and independent of NSW website changes or network availability. The ignored cache can be regenerated from `SourceExams/`, while rendered pages, extracted text, and LLM proposals remain disposable processing artifacts.
+
+**Rejected alternatives:** Continuing to fetch PDFs from the NSW website during normal ingestion was rejected because it is slower, less repeatable, and vulnerable to source URL drift. Moving the archive directly into `var/` was rejected because `var/` is an ignored processing area; the source archive should remain explicit and reviewable.
+
+**Supersedes:** Not applicable.

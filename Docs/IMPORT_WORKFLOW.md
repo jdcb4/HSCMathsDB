@@ -1,6 +1,42 @@
 # Import Workflow
 
-This workflow turns official NSW source packs into verified question records, marking-guide answers, and diagram assets.
+This workflow turns official NSW source PDFs into verified question records, marking-guide answers, and diagram assets. The normal source path is the local `SourceExams/` archive, not live web downloads.
+
+## Source archive conventions
+
+`SourceExams/` is the canonical local archive of official HSC mathematics PDFs. Files use:
+
+```text
+[Year]_[Subject]_[Document Type].pdf
+```
+
+Subjects:
+
+- `Mathematics_Advanced`
+- `Mathematics_Extension_1`
+- `Mathematics_Extension_2`
+- `Mathematics_General`
+- `Mathematics_Standard_1`
+- `Mathematics_Standard_2`
+
+Document types:
+
+- `exam_paper`
+- `marking_feedback`
+- `marking_guide`
+- `marking_report`
+- `sample_answers`
+
+Modern years, at least from 2015 onward, normally have `exam_paper`, `marking_feedback`, and `marking_guide`. Earlier years may instead use `marking_report` and/or `sample_answers`; treat those as historical answer/feedback sources and preserve their artifact role rather than forcing them into modern labels.
+
+Course-name lineage is normalized into four durable course families:
+
+- Mathematics Advanced: Mathematics 2/3U -> Mathematics -> Mathematics Advanced Stage 6 (2017) -> Mathematics Advanced 11-12 (2024)
+- Mathematics Standard: Mathematics General -> Mathematics Standard Stage 6 (2017), including Standard 1 and Standard 2 -> Mathematics Standard 11-12 (2024)
+- Mathematics Extension 1: Mathematics 3U -> Mathematics Extension 1 -> Mathematics Extension 1 Stage 6 (2017) -> Mathematics Extension 1 11-12 (2024)
+- Mathematics Extension 2: Mathematics 4U -> Mathematics Extension 2 -> Mathematics Extension 2 Stage 6 (2017) -> Mathematics Extension 2 11-12 (2024)
+
+Initial bulk-ingestion work should focus on 2015 onward because exam structure and artifact coverage are comparatively consistent.
 
 ## Current Import Handoff - 2026-06-06
 
@@ -27,36 +63,35 @@ pnpm run data:validate
 
 This checks `src/data/hsc-math-advanced.json` against the TypeScript Zod schema.
 
-## 2. Audit official source pages
+## 2. Audit local source coverage
 
 ```powershell
-pnpm run data:audit-sources
+pnpm run data:report-source-exams
 pnpm run data:audit-assets
 ```
 
-`data:audit-sources` checks that the local `sourcePacks` catalog represents the currently visible NSW listing pages.
+`data:report-source-exams` summarizes local archive coverage by year, subject, and document type.
 
-`data:audit-assets` visits each pack detail page and confirms the page exposes an exam paper PDF, marking guidelines PDF, and marking feedback PDF.
+`data:audit-assets` checks cataloged source packs against local `SourceExams/` files. For modern packs, it expects `exam_paper`, `marking_guide`, and `marking_feedback`. For earlier packs, it checks at least the exam paper and allows historical answer/feedback artifacts to vary.
 
-These checks use the live NSW website, so they are source-drift checks rather than deterministic build checks.
+`data:audit-sources` remains available as an optional live NSW source-drift check, but it is not part of the normal ingestion path.
 
-## 3. Cache official PDFs locally
+## 3. Cache source PDFs for processing
 
-Download one source pack:
+Sync one source pack from `SourceExams/` into ignored working cache:
 
 ```powershell
 pnpm run data:download-sources -- source-std-2023
 ```
 
-Download every cataloged source pack:
+Sync every cataloged source pack:
 
 ```powershell
 pnpm run data:download-sources -- --concurrency 4
 ```
 
-Downloaded PDFs are written to `var/source-assets/`, which is ignored by git.
-Use `--concurrency <n>` to tune independent PDF downloads. The default is `4`, which is fast enough
-for batch intake without putting unnecessary pressure on the source site.
+Cached PDFs are written to `var/source-assets/`, which is ignored by git. The sync cleans each selected pack cache before copying matching local files unless `--no-clean` is supplied.
+Use `--concurrency <n>` to tune independent file copies. The default is `4`, which is fast enough for batch intake without creating noisy disk contention.
 
 ## 4. Extract raw text
 
@@ -124,7 +159,7 @@ It writes raw responses, parsed page proposals, standalone visual bbox responses
 
 The automated path uses bounded parallelism for independent work:
 
-- `data:download-sources -- --concurrency <n>` downloads independent PDFs in parallel.
+- `data:download-sources -- --concurrency <n>` syncs independent local PDFs in parallel.
 - `data:extract-text -- <source-pack-id> --concurrency <n>` extracts independent PDFs in parallel while keeping pages ordered inside each PDF.
 - `data:render-pages -- <source-pack-id> --concurrency <n>` renders independent PDFs in parallel while keeping pages ordered inside each PDF.
 - `data:propose-gemini-ingestion -- <paperId> --page-concurrency <n>` runs independent exam-page, marking-guide-page, and visual-bbox model calls in parallel.

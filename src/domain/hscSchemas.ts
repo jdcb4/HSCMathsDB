@@ -64,7 +64,15 @@ export const PaperSchema = z.object({
 
 export const SourceAssetSchema = z.object({
   id: z.string().min(1),
-  role: z.enum(["exam-paper", "marking-guide", "marking-feedback", "standards-material", "syllabus"]),
+  role: z.enum([
+    "exam-paper",
+    "marking-guide",
+    "marking-feedback",
+    "marking-report",
+    "sample-answers",
+    "standards-material",
+    "syllabus"
+  ]),
   label: z.string().min(1),
   url: z.string().url().optional(),
   status: z.enum(["linked", "pending", "not-applicable"])

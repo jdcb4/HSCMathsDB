@@ -48,8 +48,9 @@ Additional model controls:
 
 ## Prerequisites
 
-The source pack must exist in `src/data/hsc-math-advanced.json`, the official PDFs must be cached, and
-the relevant pages must be rendered:
+The source pack must exist in `src/data/hsc-math-advanced.json`, matching PDFs must exist in
+`SourceExams/`, the PDFs must be synced into the working cache, and the relevant pages must be
+rendered:
 
 ```powershell
 pnpm run data:download-sources -- source-std-2023
