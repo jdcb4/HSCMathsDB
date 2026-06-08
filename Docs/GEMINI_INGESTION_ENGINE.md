@@ -194,18 +194,21 @@ The harness keeps the user's prompt intent but makes these ingestion-safe change
   full-page pixels.
 - It requires the model to return the full source image size it believes it is reviewing as
   `imageSize`.
+- It asks the model to group multiple related visuals for the same question or question part into one
+  crop when doing so does not include extraneous material.
 - It wraps the example response in a top-level JSON object, `{ "imageSize": ..., "visuals": [...] }`,
   so the output can be parsed and validated.
 
-The latest run tested Gemini 3.1 Flash Lite and Mistral Medium 3.5 on one mock page plus Standard 1
-2023 pages 3, 4, and 5. The report is published at
-`public/ingestion-reports/visual-bbox-prompt-trial.html`.
+The latest run tested Claude Sonnet 4.6, Gemini 3.5 Flash, and GPT-4o mini on one mock page plus
+Standard 1 2023 pages 3, 4, and 5. Calls are run in parallel with a 15-second timeout per model call.
+The report is published at `public/ingestion-reports/visual-bbox-prompt-trial.html`.
 
 Headline result:
 
-- Both models reported `893 x 1263` as the reviewed source image size for all four pages, matching the
-  actual rendered PNG dimensions. That makes silent model-side coordinate resizing unlikely as the
-  primary cause of the crop errors in this trial.
-- Gemini 3.1 Flash Lite returned parseable results for all four pages and found the real Q8 card
-  diagram at a plausible page location.
-- Mistral Medium 3.5 returned parseable results but often guessed broad or shifted bboxes.
+- All three models reported `893 x 1263` as the reviewed source image size for all four pages, matching
+  the actual rendered PNG dimensions. That continues to make silent model-side coordinate resizing
+  unlikely as the primary cause of the crop errors.
+- Claude Sonnet 4.6 produced the strongest mock-page boxes, with IoU `0.9127` for the prism target and
+  `0.9288` for the table target.
+- Gemini 3.5 Flash and GPT-4o mini returned parseable responses, but their mock-page boxes were much
+  less accurate than Claude's.

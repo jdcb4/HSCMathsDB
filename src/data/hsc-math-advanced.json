@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "0.36.0",
+    "version": "0.37.0",
     "title": "GoalCheck HSC mathematics corpus",
     "updatedAt": "2026-06-07",
     "sourceSummary": "Validated corpus linking NSW mathematics exam-pack sources, Standard and Extension draft imports, the Mathematics archive, 2017 syllabus nodes, and 2024 syllabus conversion nodes."

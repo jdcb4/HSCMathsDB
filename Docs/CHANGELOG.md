@@ -2,6 +2,12 @@
 
 Newest entries go at the top.
 
+## 0.37.0 - 2026-06-08
+
+- Updated the visual-bbox prompt trial to run Claude Sonnet 4.6, Gemini 3.5 Flash, and GPT-4o mini with all page/model calls executed in parallel and a 15-second timeout per model call.
+- Added the related-visuals prompt rule: multiple images for the same question or part should be cropped together when that does not include extraneous material.
+- Reran the prompt trial on the mock page and three real Standard 1 2023 visual pages; all three models reported the correct `893 x 1263` source image size, and Claude Sonnet 4.6 produced the strongest mock-page bboxes with IoU `0.9127` and `0.9288`.
+
 ## 0.36.0 - 2026-06-08
 
 - Updated the visual-bbox prompt trial schema to require models to report the full source image size they believe they are reviewing.

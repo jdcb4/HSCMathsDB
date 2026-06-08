@@ -55,9 +55,10 @@ const VisualPromptResponseSchema = z
   })
   .passthrough();
 
-const models = ["google/gemini-3.1-flash-lite", "mistralai/mistral-medium-3-5"];
+const models = ["anthropic/claude-sonnet-4.6", "google/gemini-3.5-flash", "openai/gpt-4o-mini"];
 
-const promptTrialVersion = "image-size-v1";
+const promptTrialVersion = "related-visuals-v1";
+const modelCallTimeoutMs = 15_000;
 const outputRoot = path.join("var", "visual-bbox-prompt-trials");
 const publicAssetRoot = path.join("public", "ingestion-reports", "visual-bbox-prompt-trial-assets");
 const publicReportPath = path.join("public", "ingestion-reports", "visual-bbox-prompt-trial.html");
@@ -69,13 +70,9 @@ await createSyntheticPage(syntheticPagePath);
 
 const pages = await buildTrialPages();
 const apiKey = getOpenRouterApiKey();
-const results: ModelPageResult[] = [];
-
-for (const page of pages) {
-  for (const model of models) {
-    results.push(await runModelPageTrial({ apiKey, page, model }));
-  }
-}
+const results = await Promise.all(
+  pages.flatMap((page) => models.map((model) => runModelPageTrial({ apiKey, page, model })))
+);
 
 await publishPageAssets(pages, results);
 await writeFile(
@@ -306,6 +303,12 @@ async function runModelPageTrial({
       })
     };
   } catch (error: unknown) {
+    const errorMessage =
+      error instanceof Error && error.name === "AbortError"
+        ? `Model call exceeded ${modelCallTimeoutMs / 1000} second timeout.`
+        : error instanceof Error
+          ? error.message
+          : String(error);
     return {
       pageId: page.id,
       model,
@@ -314,7 +317,7 @@ async function runModelPageTrial({
       rawPath,
       sourceImageSize,
       visuals: [],
-      error: error instanceof Error ? error.message : String(error)
+      error: errorMessage
     };
   }
 }
@@ -336,6 +339,7 @@ Rules:
 - Coordinates must use the full source-page image coordinate system, not the small crop image coordinate system.
 - Include any header, footer, or explanatory text that is directly linked to the visual, such as a heading describing the visual.
 - Include a small margin around the crop area, without intruding on other elements. I will crop exactly where you say and not add my own margin.
+- Where multiple images relate to the same question or question part crop them all together if doing so does not include extraneous material. E.g. a series of related graphs.
 
 Response format:
 - Provide your response strictly in the JSON format below.
@@ -368,6 +372,8 @@ async function callOpenRouterJson({
   model: string;
   messages: Array<{ role: "system"; content: string } | { role: "user"; content: unknown }>;
 }) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), modelCallTimeoutMs);
   const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
     method: "POST",
     headers: {
@@ -382,8 +388,9 @@ async function callOpenRouterJson({
       max_tokens: 2000,
       temperature: 0,
       response_format: { type: "json_object" }
-    })
-  });
+    }),
+    signal: controller.signal
+  }).finally(() => clearTimeout(timeout));
 
   const raw = (await response.json().catch(async () => ({ rawText: await response.text() }))) as unknown;
   if (!response.ok) {

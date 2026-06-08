@@ -1,6 +1,6 @@
 {
   "name": "goalcheck-hsc",
-  "version": "0.36.0",
+  "version": "0.37.0",
   "description": "Browse NSW HSC mathematics past-paper questions and source packs by course, year, topic, style, and syllabus content.",
   "type": "module",
   "scripts": {
