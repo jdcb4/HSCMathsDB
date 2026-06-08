@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "0.2.0",
-    "generatedAt": "2026-06-08T02:56:03.101Z",
-    "defaultModel": "z-ai/glm-4.7:nitro",
+    "generatedAt": "2026-06-08T03:03:52.947Z",
+    "defaultModel": "google/gemini-3.1-flash-lite",
     "promptVersion": "hsc-explanation-v2",
     "notes": "Student-facing worked solutions generated from the validated question corpus. Records retain model, prompt version, source hash, timing, and review status for regeneration and QA."
   },
@@ -2360,6 +2360,450 @@
         "Swapping the upper and lower functions in the integral, which would lead to a negative area."
       ],
       "checkLatex": "For (b), if \\(k = -0.1\\), the quadratic \\(u^2 - u + 0.1 = 0\\) has roots \\(u = \\frac{1 \\pm \\sqrt{0.6}}{2}\\), both of which are positive, confirming the range is correct."
+    },
+    {
+      "questionId": "ext2-2023-q01-further-proof-by-mathematical-induction",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:03:41.221Z",
+      "sourceQuestionHash": "ce4462e6d2e7109f993799cd21e84fb3c5019356a909c3549edbb38b9bd2ddfd",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3614,
+      "summaryLatex": "This problem requires the expansion of a binomial expression involving complex numbers using the binomial theorem or algebraic expansion.",
+      "approachLatex": "Recognise that \\((a + ib)^3\\) follows the binomial expansion pattern \\((x+y)^3 = x^3 + 3x^2y + 3xy^2 + y^3\\). Substituting \\(x=a\\) and \\(y=ib\\) allows for direct expansion.",
+      "steps": [
+        {
+          "title": "Apply the binomial expansion",
+          "bodyLatex": "Using the identity \\((x+y)^3 = x^3 + 3x^2y + 3xy^2 + y^3\\), substitute \\(x=a\\) and \\(y=ib\\). This gives \\((a + ib)^3 = a^3 + 3(a^2)(ib) + 3(a)(ib)^2 + (ib)^3\\)."
+        },
+        {
+          "title": "Simplify powers of i",
+          "bodyLatex": "Recall that \\(i^2 = -1\\) and \\(i^3 = -i\\). Applying these to the terms: \\(3(a^2)(ib) = i(3a^2b)\\), \\(3(a)(ib)^2 = 3a(i^2b^2) = 3a(-b^2) = -3ab^2\\), and \\((ib)^3 = i^3b^3 = -ib^3\\)."
+        },
+        {
+          "title": "Group real and imaginary parts",
+          "bodyLatex": "Substitute the simplified terms back into the expression: \\(a^3 + i(3a^2b) - 3ab^2 - ib^3\\). Now, group the real parts together and the imaginary parts together: \\((a^3 - 3ab^2) + i(3a^2b - b^3)\\)."
+        },
+        {
+          "title": "Compare with options",
+          "bodyLatex": "The resulting expression \\((a^3 - 3ab^2) + i(3a^2b - b^3)\\) matches option C exactly."
+        }
+      ],
+      "finalAnswerLatex": "C",
+      "commonMistakesLatex": [
+        "Forgetting that \\(i^2 = -1\\), which leads to an incorrect sign for the \\(3ab^2\\) term.",
+        "Miscalculating the sign of the \\(i^3\\) term, resulting in an incorrect sign for the \\(b^3\\) component."
+      ],
+      "checkLatex": "Test with \\(a=1, b=1\\). Then \\((1+i)^3 = 1+3i+3i^2+i^3 = 1+3i-3-i = -2+2i\\). Using option C: \\((1^3 - 3(1)(1)^2) + i(3(1)^2(1) - 1^3) = (1-3) + i(3-1) = -2+2i\\). The result is consistent."
+    },
+    {
+      "questionId": "ext2-2023-q02-the-nature-of-proof",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:03:41.237Z",
+      "sourceQuestionHash": "7dc9f551cbac7cd1db368769557cc8c7effd66218f968900db08d52e1235160a",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3098,
+      "summaryLatex": "This question tests the definition of the converse of a conditional statement.",
+      "approachLatex": "A conditional statement is written in the form 'If \\(P\\), then \\(Q\\)'. The converse is formed by swapping the hypothesis and the conclusion to get 'If \\(Q\\), then \\(P\\)'.",
+      "steps": [
+        {
+          "title": "Identify the components",
+          "bodyLatex": "Break the original statement into its two parts. Let \\(P\\) be the statement 'an animal is a herbivore' and \\(Q\\) be the statement 'it does not eat meat'. The original statement is 'If \\(P\\), then \\(Q\\)'."
+        },
+        {
+          "title": "Form the converse",
+          "bodyLatex": "The converse of 'If \\(P\\), then \\(Q\\)' is defined as 'If \\(Q\\), then \\(P\\)'. By substituting our components back in, we get: 'If an animal does not eat meat, then it is a herbivore'."
+        },
+        {
+          "title": "Compare with options",
+          "bodyLatex": "We now look for the option that matches our constructed statement. Option D states: 'If an animal does not eat meat, then it is a herbivore'."
+        },
+        {
+          "title": "Verify against other types",
+          "bodyLatex": "Note that Option C ('If an animal eats meat, then it is not a herbivore') is the contrapositive, not the converse. Therefore, D is the only correct choice."
+        }
+      ],
+      "finalAnswerLatex": "D",
+      "commonMistakesLatex": [
+        "Confusing the converse with the contrapositive or the inverse. Remember: Converse swaps \\(P\\) and \\(Q\\), Inverse negates both, and Contrapositive swaps and negates both."
+      ],
+      "checkLatex": "The converse of 'If \\(P\\), then \\(Q\\)' is 'If \\(Q\\), then \\(P\\)'. Since \\(Q\\) is 'does not eat meat' and \\(P\\) is 'is a herbivore', the converse is 'If does not eat meat, then is a herbivore'."
+    },
+    {
+      "questionId": "ext2-2023-q03-using-complex-numbers",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:03:41.237Z",
+      "sourceQuestionHash": "f52440e166ec7954c4078419b748fedce4cafdc75376a548be44c51d288b03d2",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 4066,
+      "summaryLatex": "This problem uses the geometric properties of complex numbers on the unit circle, specifically the relationship between a complex number and its conjugate.",
+      "approachLatex": "Recognise that for any complex number \\(z\\) on the unit circle, the conjugate \\(\bar{z}\\) is the reflection of \\(z\\) across the real axis. Since \\(|z|=1\\), we also know that \\(\bar{z} = \\frac{1}{z} = z^{-1}\\).",
+      "steps": [
+        {
+          "title": "Identify the position of z",
+          "bodyLatex": "From the diagram, \\(z\\) is located at an angle \\(\\theta\\) in the fourth quadrant. Since it lies on the unit circle, we can write \\(z = e^{i\\theta} = \\cos \\theta + i \\sin \\theta\\), where \\(\\theta\\) is a negative angle."
+        },
+        {
+          "title": "Determine the conjugate",
+          "bodyLatex": "The conjugate \\(\bar{z}\\) is defined as \\(\\overline{\\cos \\theta + i \\sin \\theta} = \\cos \\theta - i \\sin \\theta = \\cos(-\\theta) + i \\sin(-\\theta) = e^{-i\\theta}\\). Geometrically, this is the reflection of \\(z\\) across the real axis."
+        },
+        {
+          "title": "Evaluate the options",
+          "bodyLatex": "We check the options against the property \\(\bar{z} = z^{-1}\\). Option B is \\(z^2\\). If \\(z = e^{i\\theta}\\), then \\(z^2 = e^{i2\\theta}\\). This only equals \\(e^{-i\\theta}\\) if \\(2\\theta = -\\theta + 2k\\pi\\), implying \\(3\\theta = 2k\\pi\\)."
+        },
+        {
+          "title": "Verify the specific angle",
+          "bodyLatex": "The diagram shows \\(z\\) at an angle of \\(\\theta = -\\frac{2\\pi}{3}\\) (or \\(240^\\circ\\) clockwise). Thus, \\(z^2 = e^{i(-4\\pi/3)} = e^{i(2\\pi/3)}\\), while \\(\bar{z} = e^{i(2\\pi/3)}\\). Since these match, option B is correct."
+        }
+      ],
+      "finalAnswerLatex": "B",
+      "commonMistakesLatex": [
+        "Confusing the conjugate \\(\bar{z}\\) with the reciprocal \\(\\frac{1}{z}\\) (though they are equal on the unit circle, students often forget this property).",
+        "Misinterpreting the angle in the diagram by reading the quadrant incorrectly."
+      ],
+      "checkLatex": "Since \\(|z|=1\\), \\(z\bar{z} = |z|^2 = 1\\), so \\(\bar{z} = \\frac{1}{z}\\). For the given angle \\(\\theta = -120^\\circ\\), \\(z = \\cos(-120^\\circ) + i\\sin(-120^\\circ)\\). Calculating \\(z^2\\) gives \\(\\cos(-240^\\circ) + i\\sin(-240^\\circ) = \\cos(120^\\circ) + i\\sin(120^\\circ)\\), which is the conjugate."
+    },
+    {
+      "questionId": "ext2-2023-q04-the-nature-of-proof",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:03:41.238Z",
+      "sourceQuestionHash": "876378ad3bf985eca7af4135100fd63c6ef29785153bf9565b01f1401a5845df",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3696,
+      "summaryLatex": "This question tests the translation of natural language statements into formal logical notation using quantifiers.",
+      "approachLatex": "Identify the order of the quantifiers by reading the sentence carefully. The phrase 'Whichever positive number \\(r\\) you pick' implies a universal quantifier for \\(r\\), while 'it is possible to find a number \\(x\\)' implies an existential quantifier for \\(x\\).",
+      "steps": [
+        {
+          "title": "Translate the universal quantifier",
+          "bodyLatex": "The phrase 'Whichever positive number \\(r\\) you pick' means that the statement must hold for every positive number \\(r\\). In formal logic, this is represented by the universal quantifier \\(\\forall r > 0\\)."
+        },
+        {
+          "title": "Translate the existential quantifier",
+          "bodyLatex": "The phrase 'it is possible to find a number \\(x\\) greater than 1' means there exists at least one such \\(x\\) for the given \\(r\\). This is represented by the existential quantifier \\(\\exists x > 1\\)."
+        },
+        {
+          "title": "Combine the quantifiers",
+          "bodyLatex": "Since the choice of \\(x\\) depends on the chosen \\(r\\), the universal quantifier must come first. The structure is: for every \\(r > 0\\), there exists an \\(x > 1\\) such that the inequality holds. This gives the sequence \\(\\forall r > 0 \\quad \\exists x > 1\\)."
+        },
+        {
+          "title": "Finalise the logical statement",
+          "bodyLatex": "Combining the quantifiers with the given inequality, we obtain the full formal statement: \\(\\forall r > 0 \\quad \\exists x > 1 \\quad \\frac{\\ln x}{x^3} < r\\). This matches option C."
+        }
+      ],
+      "finalAnswerLatex": "C",
+      "commonMistakesLatex": [
+        "Swapping the order of quantifiers. Writing \\(\\exists x \\forall r\\) would mean there is one specific \\(x\\) that works for every possible \\(r\\), which changes the meaning of the statement entirely."
+      ],
+      "checkLatex": "Check the order: 'For every \\(r\\), there exists an \\(x\\)' is the standard structure for limits or bounds where the choice of \\(x\\) is dependent on the target value \\(r\\)."
+    },
+    {
+      "questionId": "ext2-2023-q05-further-work-with-vectors",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:03:41.238Z",
+      "sourceQuestionHash": "5a0cd34461f1f1fb30304245948a12501f0eb49f1801d246cbc365e35c170291",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3625,
+      "summaryLatex": "Determine the relationship between two lines by comparing their direction vectors and checking if a point on one line lies on the other.",
+      "approachLatex": "First, identify the direction vectors to check for parallelism. If they are parallel, test if the lines are coincident by checking if the starting point of one line satisfies the equation of the other.",
+      "steps": [
+        {
+          "title": "Identify direction vectors",
+          "bodyLatex": "The lines are given in the form \\(\\mathbf{r} = \\mathbf{a} + t\\mathbf{v}\\). For \\(\\ell_1\\), the direction vector is \\(\\mathbf{v}_1 = \begin{pmatrix} -1 \\ 3 \\ 1 \\end{pmatrix}\\). For \\(\\ell_2\\), the direction vector is \\(\\mathbf{v}_2 = \begin{pmatrix} 1 \\ -3 \\ -1 \\end{pmatrix}\\)."
+        },
+        {
+          "title": "Check for parallelism",
+          "bodyLatex": "Two lines are parallel if their direction vectors are scalar multiples of each other. Notice that \\(\\mathbf{v}_2 = -1 \\times \\mathbf{v}_1\\). Since \\(\\mathbf{v}_2 = k\\mathbf{v}_1\\) where \\(k = -1\\), the lines are parallel."
+        },
+        {
+          "title": "Check if lines are coincident",
+          "bodyLatex": "To see if they are the same line, check if the point \\(\\mathbf{a}_1 = \begin{pmatrix} -1 \\ 2 \\ 5 \\end{pmatrix}\\) from \\(\\ell_1\\) lies on \\(\\ell_2\\). We set \\(\begin{pmatrix} 3 \\ -10 \\ 1 \\end{pmatrix} + \\mu \begin{pmatrix} 1 \\ -3 \\ -1 \\end{pmatrix} = \begin{pmatrix} -1 \\ 2 \\ 5 \\end{pmatrix}\\)."
+        },
+        {
+          "title": "Solve for the parameter",
+          "bodyLatex": "From the first component: \\(3 + \\mu = -1 \\implies \\mu = -4\\). Checking this in the second component: \\(-10 - 3(-4) = -10 + 12 = 2\\). Checking the third: \\(1 - 1(-4) = 1 + 4 = 5\\). Since the point satisfies all components, the lines are identical."
+        }
+      ],
+      "finalAnswerLatex": "A",
+      "commonMistakesLatex": [
+        "Assuming lines are distinct just because the starting vectors \\(\\mathbf{a}_1\\) and \\(\\mathbf{a}_2\\) are different. Always check if one point lies on the other line."
+      ],
+      "checkLatex": "Since the direction vectors are parallel and a point from \\(\\ell_1\\) satisfies the equation for \\(\\ell_2\\), the lines must be the same."
+    },
+    {
+      "questionId": "ext2-2023-q06-applications-of-calculus-to-mechanics",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:03:41.239Z",
+      "sourceQuestionHash": "358bc326c450cdf390ad7cf316dcf454e9724d39ec246f047ac937543e561dca",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 5242,
+      "summaryLatex": "Simple harmonic motion (SHM) is defined by the differential equation \\(\\ddot{x} = -n^2(x - c)\\), where \\(c\\) is the equilibrium position.",
+      "approachLatex": "Recognise that any function representing SHM must be expressible in the form \\(x(t) = A \\sin(nt + \\alpha) + c\\). We check each option to see if it can be simplified to a single sinusoidal term plus a constant.",
+      "steps": [
+        {
+          "title": "Analyse Option A",
+          "bodyLatex": "Using the identity \\(\\cos^2 t = \\frac{1 + \\cos 2t}{2}\\), the expression becomes \\(x = \\frac{1}{2} + \\frac{1}{2} \\cos 2t - \\sin 2t\\). This is a linear combination of \\(\\sin 2t\\) and \\(\\cos 2t\\) plus a constant, which is a standard form for SHM with frequency \\(n=2\\)."
+        },
+        {
+          "title": "Analyse Option B",
+          "bodyLatex": "The expression is \\(x = \\sin 4t + 4 \\cos 2t\\). This contains two different frequencies: \\(n_1 = 4\\) and \\(n_2 = 2\\). Since SHM requires a single frequency \\(n\\), this function represents a superposition of two different harmonic motions, not a single SHM motion."
+        },
+        {
+          "title": "Analyse Option C",
+          "bodyLatex": "Using the harmonic addition formula, \\(2 \\sin 3t - 4 \\cos 3t\\) can be written as \\(R \\sin(3t - \\alpha)\\) where \\(R = \\sqrt{2^2 + (-4)^2} = \\sqrt{20}\\). Thus, \\(x = \\sqrt{20} \\sin(3t - \\alpha) + 5\\), which is clearly SHM."
+        },
+        {
+          "title": "Analyse Option D",
+          "bodyLatex": "Both terms have the same frequency \\(n=2\\). The sum of two sinusoids with the same frequency is always another sinusoid of that same frequency, possibly with a phase shift and a constant offset. Therefore, this represents SHM."
+        }
+      ],
+      "finalAnswerLatex": "B",
+      "commonMistakesLatex": [
+        "Assuming that any sum of trigonometric functions is SHM; remember that all terms must share the same frequency \\(n\\)."
+      ],
+      "checkLatex": "For option B, the acceleration is \\(\\ddot{x} = -16 \\sin 4t - 16 \\cos 2t\\). This cannot be written in the form \\(-n^2(x-c)\\) for any constant \\(n\\) and \\(c\\), confirming it is not SHM."
+    },
+    {
+      "questionId": "ext2-2023-q08-introduction-to-complex-numbers",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:03:44.835Z",
+      "sourceQuestionHash": "395d181e85978ed5ef8676f8cd4838fd52b13fedc4ea29f8b51c7a1304d45ecf",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3354,
+      "summaryLatex": "This problem involves identifying the locus of points defined by the ratio of distances between a complex number \\(z\\) and two fixed points.",
+      "approachLatex": "Recognise that \\(|z - z_0|\\) represents the distance between \\(z\\) and \\(z_0\\). The inequality \\(|z - z_1| < k|z - z_2|\\) defines the interior of an Apollonian circle. We identify the fixed points \\(z_1 = 1\\) and \\(z_2 = i\\) and determine which side of the boundary is shaded.",
+      "steps": [
+        {
+          "title": "Interpret the geometric notation",
+          "bodyLatex": "The expression \\(|z - 1|\\) represents the distance from \\(z\\) to the point \\(1\\) on the real axis, while \\(|z - i|\\) represents the distance from \\(z\\) to the point \\(i\\) on the imaginary axis. The boundary of the region is given by the equation \\(|z - 1| = 2|z - i|\\)."
+        },
+        {
+          "title": "Test a point in the region",
+          "bodyLatex": "To determine the correct inequality, pick a point inside the shaded region. If the origin \\(z = 0\\) is inside the shaded region, substitute it into the expressions: \\(|0 - 1| = 1\\) and \\(|0 - i| = 1\\). Since \\(1 < 2(1)\\), the inequality \\(|z - 1| < 2|z - i|\\) holds true for the origin."
+        },
+        {
+          "title": "Verify the boundary condition",
+          "bodyLatex": "The boundary is a circle where the distance to \\(1\\) is twice the distance to \\(i\\). Because the inequality is strict (indicated by the dashed line), we use either \\(<\\) or \\(>\\). Our test point \\(z=0\\) satisfies the inequality \\(|z - 1| < 2|z - i|\\), confirming this is the correct relation."
+        },
+        {
+          "title": "Select the correct option",
+          "bodyLatex": "Comparing our derived inequality \\(|z - 1| < 2|z - i|\\) with the given options, we see it matches option D."
+        }
+      ],
+      "finalAnswerLatex": "D",
+      "commonMistakesLatex": [
+        "Confusing the points \\(1\\) and \\(i\\) with their coordinates, leading to incorrect distance expressions.",
+        "Assuming the region is defined by a simple half-plane rather than an Apollonian circle."
+      ],
+      "checkLatex": "Check the point \\(z=1\\). Here \\(|1-1|=0\\) and \\(|1-i|=\\sqrt{2}\\). Since \\(0 < 2\\sqrt{2}\\), the point \\(z=1\\) must be inside the shaded region, which is consistent with the inequality \\(|z - 1| < 2|z - i|\\)."
+    },
+    {
+      "questionId": "ext2-2023-q10-further-work-with-vectors",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:03:44.934Z",
+      "sourceQuestionHash": "e9ef66666558318bc44b5eb43cc52da61533fa9353afb4ca8f457c5ac1576205",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3927,
+      "summaryLatex": "This problem explores the geometric constraints imposed by dot products on vectors in three-dimensional space.",
+      "approachLatex": "Examine the properties of the dot products to test the validity of each statement. Specifically, consider the relationship between the magnitudes of the vectors and the origin.",
+      "steps": [
+        {
+          "title": "Evaluate Option B",
+          "bodyLatex": "If points \\(A, B, C\\) lie on a sphere centred at the origin \\(O\\), then the vectors must have equal magnitude, so \\(\\|\\mathbf{a}\\| = \\|\\mathbf{b}\\| = \\|\\mathbf{c}\\| = R\\). The dot products become \\(R^2 \\cos \\theta_{ab} = 1\\), \\(R^2 \\cos \\theta_{bc} = 2\\), and \\(R^2 \\cos \\theta_{ca} = 3\\). Since \\(\\|\\cos \\theta\\| \\le 1\\), we require \\(R^2 \\ge 3\\). This is possible for any \\(R \\ge \\sqrt{3}\\), so the points can lie on a sphere."
+        },
+        {
+          "title": "Evaluate Option A",
+          "bodyLatex": "If two vectors were unit vectors, say \\(\\|\\mathbf{a}\\| = 1\\) and \\(\\|\\mathbf{b}\\| = 1\\), then \\(\\|\\mathbf{a}\\|\\|\\mathbf{b}\\| \\cos \\theta = 1\\) implies \\(\\cos \\theta = 1\\), meaning \\(\\mathbf{a} = \\mathbf{b}\\). If \\(\\mathbf{a} = \\mathbf{b}\\), then \\(\\mathbf{a} \\cdot \\mathbf{c} = 3\\) and \\(\\mathbf{b} \\cdot \\mathbf{c} = 2\\) would imply \\(3 = 2\\), which is a contradiction. Thus, they cannot be unit vectors."
+        },
+        {
+          "title": "Evaluate Option C",
+          "bodyLatex": "For any \\(\\mathbf{a}\\), we need \\(\\mathbf{b}\\) and \\(\\mathbf{c}\\) to satisfy the system. If \\(\\mathbf{a} = \\mathbf{0}\\), then \\(\\mathbf{a} \\cdot \\mathbf{b} = 0\\), but the condition requires \\(\\mathbf{a} \\cdot \\mathbf{b} = 1\\). Therefore, \\(\\mathbf{a}\\) cannot be the zero vector, making the statement false."
+        },
+        {
+          "title": "Evaluate Option D",
+          "bodyLatex": "The condition \\(r\\mathbf{a} + s\\mathbf{b} + t\\mathbf{c} = \\mathbf{0}\\) with \\(r, s, t > 0\\) implies the vectors are linearly dependent and lie in a plane. However, the dot products do not force the vectors to be coplanar. For example, in \\(\\mathbb{R}^3\\), we can choose vectors that are linearly independent, meaning no such positive coefficients exist."
+        }
+      ],
+      "finalAnswerLatex": "B",
+      "commonMistakesLatex": [
+        "Assuming that the vectors must be coplanar without checking the constraints on the dot products.",
+        "Failing to test the zero vector case when evaluating universal quantifiers like 'for any vector'."
+      ],
+      "checkLatex": "For option B, if \\(\\|\\mathbf{a}\\| = \\|\\mathbf{b}\\| = \\|\\mathbf{c}\\| = 2\\), then \\(\\cos \\theta_{ab} = 0.25\\), \\(\\cos \\theta_{bc} = 0.5\\), and \\(\\cos \\theta_{ca} = 0.75\\). These are all valid angles, confirming the sphere exists."
+    },
+    {
+      "questionId": "ext2-2023-q11-applications-of-calculus-to-mechanics",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:03:45.303Z",
+      "sourceQuestionHash": "611bfcb408ecf66fb9e958decbb9ddf5d60a983b41b8ea45c8daf52583941814",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 4496,
+      "summaryLatex": "This response covers complex numbers, vector geometry, simple harmonic motion, and partial fraction integration.",
+      "approachLatex": "Each part requires applying specific syllabus techniques: quadratic formula for complex roots, dot product for angles, vector line equations, geometric properties of vectors, SHM standard form identification, and partial fraction decomposition for integration.",
+      "steps": [
+        {
+          "title": "Complex Numbers and Vectors",
+          "bodyLatex": "For (a), use the quadratic formula \\(z = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}\\) with \\(a=1, b=-3, c=4\\). For (b), use the dot product formula \\(\\cos \\theta = \\frac{\\underset{\\sim}{a} \\cdot \\underset{\\sim}{b}}{|\\underset{\\sim}{a}||\\underset{\\sim}{b}|}\\). Calculate \\(\\underset{\\sim}{a} \\cdot \\underset{\\sim}{b} = 1(-1) + 2(4) + (-3)(2) = 1\\), then divide by the product of the magnitudes \\(\\sqrt{14}\\) and \\(\\sqrt{21}\\)."
+        },
+        {
+          "title": "Vector Lines and Geometry",
+          "bodyLatex": "For (c), the direction vector is \\(\\vec{AB} = B - A = (0 - (-3))\\underset{\\sim}{i} + (2 - 1)\\underset{\\sim}{j} + (3 - 5)\\underset{\\sim}{k} = 3\\underset{\\sim}{i} + \\underset{\\sim}{j} - 2\\underset{\\sim}{k}\\). Use point \\(A\\) as the position vector. For (d), note that in parallelogram \\(ABCD\\), \\(\\vec{AB} = \\vec{DC}\\). In \\(ABEF\\), \\(\\vec{AB} = \\vec{FE}\\). Thus \\(\\vec{DC} = \\vec{FE}\\), which proves \\(CDFE\\) is a parallelogram."
+        },
+        {
+          "title": "Simple Harmonic Motion",
+          "bodyLatex": "For (e), compare \\(\\ddot{x} = -9(x - 4)\\) to the standard form \\(\\ddot{x} = -n^2(x - c)\\), where \\(c\\) is the centre and \\(n\\) is the angular frequency. Here \\(n^2 = 9\\), so \\(n = 3\\). The period is \\(T = \\frac{2\\pi}{n} = \\frac{2\\pi}{3}\\). The centre is the value of \\(x\\) where acceleration is zero, which is \\(x = 4\\)."
+        },
+        {
+          "title": "Integration by Partial Fractions",
+          "bodyLatex": "For (f), decompose the integrand: \\(\\frac{5x-3}{(x+1)(x-3)} = \\frac{A}{x+1} + \\frac{B}{x-3}\\). Solving gives \\(A=2\\) and \\(B=3\\). Integrate to get \\([2\\ln|x+1| + 3\\ln|x-3|]_0^2\\). Evaluating at the limits: \\((2\\ln 3 + 3\\ln 1) - (2\\ln 1 + 3\\ln 3) = 2\\ln 3 - 3\\ln 3 = -\\ln 3\\)."
+        }
+      ],
+      "finalAnswerLatex": "(a) \\(z = \\frac{3}{2} \\pm \\frac{\\sqrt{7}}{2}i\\); (b) \\(\\theta \\approx 87^\\circ\\); (c) \\(\\underset{\\sim}{r} = \\begin{pmatrix} -3 \\\\ 1 \\\\ 5 \\end{pmatrix} + \\lambda \\begin{pmatrix} 3 \\\\ 1 \\\\ -2 \\end{pmatrix}\\); (d) Proof provided; (e) Period \\(\\frac{2\\pi}{3}\\), centre \\(x=4\\); (f) \\(-\\ln 3\\).",
+      "commonMistakesLatex": [
+        "In (b), forgetting to take the inverse cosine of the result.",
+        "In (e), confusing the centre of motion with the amplitude.",
+        "In (f), failing to use absolute value signs inside the logarithm during integration."
+      ],
+      "checkLatex": "For (f), check the partial fraction sum: \\(\\frac{2(x-3) + 3(x+1)}{(x+1)(x-3)} = \\frac{2x-6+3x+3}{(x+1)(x-3)} = \\frac{5x-3}{(x+1)(x-3)}\\). This matches the original integrand."
+    },
+    {
+      "questionId": "ext2-2023-q13-further-proof-by-mathematical-induction",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:03:47.716Z",
+      "sourceQuestionHash": "1a45f636d9381f451f5783abae232e06c752fd923a6e81a9229d862b2fbbae81",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 4314,
+      "summaryLatex": "This problem involves integrating a function with a quadratic denominator, proving an inequality using mathematical induction, and solving a projectile motion problem with air resistance.",
+      "approachLatex": "For the integral, complete the square in the denominator and split the numerator to match the derivative of the quadratic expression. For the induction, use the base case and the inequality from part (i) to bridge the gap between \\(P(k)\\) and \\(P(k+1)\\). For the projectile motion, use Newton's Second Law to set up differential equations for velocity, integrate to find position, and solve for the range.",
+      "steps": [
+        {
+          "title": "Integration by substitution and standard forms",
+          "bodyLatex": "First, complete the square: \\(5-4x-x^2 = 9-(x+2)^2\\). Rewrite the numerator as \\(1-x = \\frac{1}{2}(-4-2x) + 3\\). The integral becomes \\(\\int \\frac{\\frac{1}{2}(-4-2x)}{\\sqrt{9-(x+2)^2}} dx + \\int \\frac{3}{\\sqrt{9-(x+2)^2}} dx\\). The first part is solved by substitution \\(u = 9-(x+2)^2\\), giving \\(\\sqrt{9-(x+2)^2}\\). The second part is a standard inverse sine form, \\(3\\sin^{-1}\\left(\\frac{x+2}{3}\\right)\\)."
+        },
+        {
+          "title": "Mathematical induction",
+          "bodyLatex": "For \\(P(n): 2^n \\ge n^2-2\\), verify \\(n=3\\): \\(2^3=8\\) and \\(3^2-2=7\\), so \\(8 \\ge 7\\). Assume \\(P(k)\\) is true: \\(2^k \\ge k^2-2\\). For \\(P(k+1)\\), consider \\(2^{k+1} = 2 \\cdot 2^k \\ge 2(k^2-2) = 2k^2-4\\). We need to show \\(2k^2-4 \\ge (k+1)^2-2 = k^2+2k-1\\). This simplifies to \\(k^2-2k-3 \\ge 0\\), which is true for \\(k \\ge 3\\) by part (i)."
+        },
+        {
+          "title": "Projectile motion with air resistance",
+          "bodyLatex": "The net force is \\(\\mathbf{F} = m\\mathbf{a} = -4\\mathbf{v} + m\\mathbf{g}\\). With \\(m=1\\) and \\(\\mathbf{g} = \\begin{pmatrix} 0 \\\\ -10 \\end{pmatrix}\\), we have \\(\\ddot{x} = -4\\dot{x}\\) and \\(\\ddot{y} = -4\\dot{y}-10\\). Solve these first-order linear differential equations using separation of variables or integrating factors, applying initial conditions \\(\\dot{x}(0) = 20\\sqrt{3}\\) and \\(\\dot{y}(0) = 20\\) to find \\(\\mathbf{v}(t)\\)."
+        },
+        {
+          "title": "Finding the range",
+          "bodyLatex": "Integrate \\(\\mathbf{v}(t)\\) to find \\(\\mathbf{r}(t)\\), using \\(\\mathbf{r}(0) = \\mathbf{0}\\) to determine constants. The particle hits the ground when the vertical component \\(y(t) = 0\\). This leads to the equation \\(1-e^{-4t} = \\frac{4}{9}t\\). Using the provided graph, the intersection occurs at \\(t \\approx 2.25\\). Substitute this time into the horizontal position component \\(x(t) = 5\\sqrt{3}(1-e^{-4t})\\) to calculate the range."
+        }
+      ],
+      "finalAnswerLatex": "(a) \\(\\sqrt{5-4x-x^2} + 3\\sin^{-1}\\left(\\frac{x+2}{3}\\right) + C\\); (b) Proof by induction; (c) Range \\(\\approx 8.7\\text{ m}\\).",
+      "commonMistakesLatex": [
+        "Forgetting the constant of integration \\(C\\) in the indefinite integral.",
+        "In the induction step, failing to explicitly use the result from part (i) to complete the inequality.",
+        "Misinterpreting the air resistance force as acting only on one component rather than the velocity vector."
+      ],
+      "checkLatex": "For the integral, differentiate the result to verify it returns the original integrand. For the projectile motion, check that \\(\\mathbf{r}(0) = \\mathbf{0}\\) and \\(\\mathbf{v}(0) = \\begin{pmatrix} 20\\sqrt{3} \\\\ 20 \\end{pmatrix}\\)."
+    },
+    {
+      "questionId": "ext2-2023-q14-further-work-with-vectors",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:03:47.956Z",
+      "sourceQuestionHash": "4ae7021e91acf1185fafe8c63a6c7ee0c3a5d56d4a9d7d4647973868823640a6",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 4412,
+      "summaryLatex": "This problem involves complex number geometry, simple harmonic motion (SHM) equations, and solving differential equations for projectile motion with air resistance.",
+      "approachLatex": "For (a), use Cartesian forms to evaluate the modulus. For (b), model the SHM using the standard form \\(x(t) = A \\cos(nt)\\). For (c), use the chain rule \\(\\ddot{x} = v \\frac{dv}{dx}\\) to relate velocity and displacement.",
+      "steps": [
+        {
+          "title": "Complex number geometry",
+          "bodyLatex": "Convert \\(z = e^{i\\pi/6}\\) and \\(w = e^{3i\\pi/4}\\) to Cartesian form: \\(z = \\frac{\\sqrt{3}}{2} + \\frac{1}{2}i\\) and \\(w = -\\frac{1}{\\sqrt{2}} + \\frac{1}{\\sqrt{2}}i\\). Sum these to find \\(z+w\\). Calculate \\(|z+w|^2\\) by squaring the real and imaginary parts. Since \\(|z|=|w|=1\\), the vectors form a rhombus, meaning the diagonal \\(OC\\) bisects the angle \\(\\angle AOB\\)."
+        },
+        {
+          "title": "Simple Harmonic Motion",
+          "bodyLatex": "The motion is \\(x(t) = 4 \\cos(\\frac{1}{4}t)\\) because the amplitude is 4 and the period \\(8\\pi = \\frac{2\\pi}{n}\\) gives \\(n = \\frac{1}{4}\\). The second particle starts at \\(t = 2\\pi\\), so its position is \\(x_2(t) = 4 \\cos(\\frac{1}{4}(t - 2\\pi))\\). Set \\(x_1(t) = x_2(t)\\) and solve for \\(t\\). The particles collide when \\(t = 5\\pi\\), at position \\(x = 4 \\cos(\\frac{5\\pi}{4}) = -2\\sqrt{2}\\)."
+        },
+        {
+          "title": "Upward projectile motion",
+          "bodyLatex": "Use Newton's Second Law: \\(M\\ddot{x} = -Mg - kMv^2\\), so \\(\\ddot{x} = -(g + kv^2)\\). Substitute \\(\\ddot{x} = v \\frac{dv}{dx}\\) and separate variables: \\(\\int \\frac{v}{g + kv^2} dv = \\int -dx\\). Integrate to get \\(x = \\frac{1}{2k} \\ln(\\frac{kv_0^2 + g}{kv^2 + g})\\). At maximum height \\(H\\), \\(v=0\\), yielding \\(H = \\frac{1}{2k} \\ln(\\frac{kv_0^2 + g}{g})\\)."
+        },
+        {
+          "title": "Downward projectile motion",
+          "bodyLatex": "For the downward journey, the force equation is \\(M\\ddot{x} = Mg - kMv^2\\). Following the same integration method, we find \\(H = \\frac{1}{2k} \\ln(\\frac{g}{g - kv_1^2})\\). Equating the two expressions for \\(H\\) allows us to cancel the logarithmic terms and rearrange the resulting algebraic equation to show \\(g(v_0^2 - v_1^2) = kv_0^2v_1^2\\)."
+        }
+      ],
+      "finalAnswerLatex": "The particles collide at \\(t = 5\\pi\\) seconds at a position \\(2\\sqrt{2}\\) metres to the left of the origin.",
+      "commonMistakesLatex": [
+        "In SHM, forgetting to shift the time variable for the second particle.",
+        "In projectile motion, failing to correctly handle the sign of the resistive force during the downward phase.",
+        "In complex numbers, confusing the argument of the sum with the sum of the arguments."
+      ],
+      "checkLatex": "For (b), at \\(t=5\\pi\\), \\(x_1 = 4\\cos(5\\pi/4) = -2\\sqrt{2}\\) and \\(x_2 = 4\\cos(3\\pi/4) = -2\\sqrt{2}\\). The positions match."
+    },
+    {
+      "questionId": "ext2-2023-q16-introduction-to-complex-numbers",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:03:48.862Z",
+      "sourceQuestionHash": "7e321c38594b617ba082289aeff3d3710c339c1e524ad3ad1d90beb714a0141e",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 4049,
+      "summaryLatex": "This question explores the geometric properties of complex numbers in equilateral triangles and uses calculus to prove an inequality involving factorials.",
+      "approachLatex": "For part (a), use the properties of roots of unity and rotation in the complex plane. For part (b), use calculus to establish a base inequality and then sum it to handle the factorial. For part (c), interpret the complex expression as a vector combination in the complex plane.",
+      "steps": [
+        {
+          "title": "Equilateral Triangle Geometry",
+          "bodyLatex": "For an anticlockwise equilateral triangle, rotating the vector \\((c-a)\\) by \\(\\frac{2\\pi}{3}\\) maps it to \\((b-a)\\). Thus, \\(w(c-a) = b-a\\), which rearranges to \\(a(1-w) + bw - cw = 0\\). Using \\(1+w+w^2=0\\), we substitute \\((1-w) = w^2+2w+1\\) or similar identities to reach \\(a+bw+cw^2=0\\). For the general case, the product \\((a+bw+cw^2)(a+bw^2+cw)=0\\) expands to the required identity."
+        },
+        {
+          "title": "Proving the Inequality \\(x > \\ln x\\)",
+          "bodyLatex": "Define \\(f(x) = x - \\ln x\\) for \\(x > 0\\). The derivative is \\(f'(x) = 1 - \\frac{1}{x}\\). Setting \\(f'(x) = 0\\) gives a critical point at \\(x=1\\). Since \\(f''(x) = \\frac{1}{x^2} > 0\\), this is a global minimum. The minimum value is \\(f(1) = 1 - \\ln(1) = 1\\). Since the minimum value is \\(1 > 0\\), it follows that \\(x - \\ln x > 0\\), hence \\(x > \\ln x\\)."
+        },
+        {
+          "title": "Applying the Inequality to Factorials",
+          "bodyLatex": "Apply the inequality \\(k > \\ln k\\) for each integer \\(k=1, 2, \\dots, n\\). Summing these gives \\(\\sum_{k=1}^n k > \\sum_{k=1}^n \\ln k\\). The left side is the arithmetic sum \\(\\frac{n(n+1)}{2}\\), and the right side is \\(\\ln(n!)\\). Multiplying by 2 gives \\(n^2+n > 2\\ln(n!) = \\ln((n!)^2)\\). Exponentiating both sides yields \\(e^{n^2+n} > (n!)^2\\)."
+        },
+        {
+          "title": "Region in the Complex Plane",
+          "bodyLatex": "Let \\(u = \\frac{w}{z}\\). Since \\(|w|=|z|=1\\), \\(|u|=1\\). The expression is \\(x + yu\\). The condition \\(\\frac{\\pi}{2} < \\text{Arg}(x+yu) < \\pi\\) implies the complex number lies in the second quadrant. This requires the real part \\(\\text{Re}(x+yu) < 0\\) and the imaginary part \\(\\text{Im}(x+yu) > 0\\). By substituting \\(u = \\cos\\theta + i\\sin\\theta\\), you define the boundary lines in the \\(xy\\)-plane."
+        }
+      ],
+      "finalAnswerLatex": "The proofs follow from the properties of roots of unity for (a) and the summation of logarithmic inequalities for (b).",
+      "commonMistakesLatex": [
+        "In (a), forgetting that \\(w^3=1\\) is crucial for simplifying the product.",
+        "In (b), failing to justify that the minimum of the function is greater than zero.",
+        "In (c), confusing the complex plane coordinates with the \\(xy\\)-plane variables."
+      ],
+      "checkLatex": "For (a), test with \\(a=1, b=w, c=w^2\\). Then \\(a+bw+cw^2 = 1 + w^2 + w^4 = 1 + w^2 + w = 0\\), which confirms the identity."
     },
     {
       "questionId": "adv-2024-q01-linear-function-equation",
