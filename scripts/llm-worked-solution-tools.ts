@@ -411,12 +411,14 @@ function extractFirstJsonObject(value: string): string {
 }
 
 function repairJsonEscapes(value: string): string {
-  return value.replace(/(?<!\\)\\(?!["\\/bfnrtu])/g, "\\\\");
+  return value
+    .replace(/(?<!\\)\\u(?![0-9a-fA-F]{4})/g, "\\\\u")
+    .replace(/(?<!\\)\\(?!["\\/bfnrtu])/g, "\\\\");
 }
 
 function repairTexJsonEscapes(value: string): string {
   return value.replace(
-    /(?<!\\)\\(?=(?:alpha|beta|theta|pi|sin|cos|tan|ln|log|frac|dfrac|sqrt|left|right|text|times|cdot|to|approx|leq|geq|neq|infty|cosec|sec|operatorname)\b)/g,
+    /(?<!\\)\\(?=(?:alpha|beta|theta|pi|sin|cos|tan|ln|log|frac|dfrac|sqrt|left|right|text|times|cdot|to|approx|leq|geq|neq|infty|cosec|sec|operatorname|begin|end|vec|overrightarrow|underline|angle|therefore|ell|lambda|mu)\b)/g,
     "\\\\"
   );
 }

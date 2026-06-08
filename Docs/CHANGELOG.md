@@ -2,6 +2,13 @@
 
 Newest entries go at the top.
 
+## 0.45.0 - 2026-06-08
+
+- Ingested and promoted the remaining 2022 modern-course papers: Mathematics Standard 1, Mathematics Standard 2, Mathematics Extension 1, and Mathematics Extension 2.
+- Added 100 official draft 2022 question records with 81 exam-derived public diagram assets, all passing `data:audit-ingested-exams -- std1-2022 std2-2022 ext1-2022 ext2-2022` with zero errors and zero warnings.
+- Generated worked-solution drafts for all 100 newly promoted 2022 records, using Gemini 3.1 Flash Lite with MiniMax, GLM, and Sonnet fallbacks for syntax-contract failures.
+- Hardened Gemini report promotion against raw marking-guide LaTeX artifacts and hardened worked-solution JSON parsing for TeX commands such as `\underline`, `\vec`, `\angle`, `\lambda`, and `\mu`.
+
 ## 0.44.0 - 2026-06-08
 
 - Seeded the local 2020-onward source catalog from `SourceExams/`, expanding catalog coverage to 30 papers and 28 source packs.

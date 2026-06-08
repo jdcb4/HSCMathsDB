@@ -331,10 +331,11 @@ function formatAnswerParts(
   const lines = ["Official marking guide excerpt:"];
   for (const part of parts) {
     const label = normalisePartLabel(part.partLabel);
+    const answerLatex = normaliseGuideLatex(part.answerLatex);
     if (label) {
-      lines.push(`${label} ${part.answerLatex?.trim() ?? ""}`.trim());
-    } else if (part.answerLatex?.trim()) {
-      lines.push(part.answerLatex.trim());
+      lines.push(`${label} ${answerLatex}`.trim());
+    } else if (answerLatex) {
+      lines.push(answerLatex);
     }
   }
   return lines.join("\n");
@@ -346,14 +347,53 @@ function buildWorkingParts(
   return parts.flatMap((part) => {
     const label = normalisePartLabel(part.partLabel);
     const values: string[] = [];
-    if (part.sampleAnswerLatex?.trim()) {
-      values.push(`${label ? `${label} ` : ""}${part.sampleAnswerLatex.trim()}`.trim());
+    const sampleAnswerLatex = normaliseGuideLatex(part.sampleAnswerLatex);
+    if (sampleAnswerLatex) {
+      values.push(`${label ? `${label} ` : ""}${sampleAnswerLatex}`.trim());
     }
     if (part.markingCriteria?.length) {
       values.push(`${label ? `${label} ` : ""}Marking criteria: ${part.markingCriteria.join("; ")}`);
     }
     return values;
   });
+}
+
+function normaliseGuideLatex(value?: string | null): string {
+  let text = value?.trim() ?? "";
+  if (!text) return "";
+
+  text = text
+    .replace(/\\begin\{itemize\}/g, "")
+    .replace(/\\end\{itemize\}/g, "")
+    .replace(/^\s*\\item\s*/gm, "- ")
+    .replace(/\\text\{([^{}]*)\}/g, "$1")
+    .replace(/[ \t]+\n/g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+
+  if (hasRawLatexOutsideDelimiters(text) && isMostlyMathematicalGuideText(text)) {
+    const displayBody = text
+      .replace(/\\\[/g, "")
+      .replace(/\\\]/g, "")
+      .replace(/\\\(/g, "")
+      .replace(/\\\)/g, "")
+      .replace(/\s*\\\\\s*/g, " \\\\\n")
+      .trim();
+    return `\\[${displayBody}\\]`;
+  }
+
+  return text;
+}
+
+function hasRawLatexOutsideDelimiters(value: string): boolean {
+  const textOutsideTex = value.replace(/\\\([\s\S]*?\\\)/g, " ").replace(/\\\[[\s\S]*?\\\]/g, " ");
+  return /\\[A-Za-z]+|\\\\/.test(textOutsideTex);
+}
+
+function isMostlyMathematicalGuideText(value: string): boolean {
+  return /\\\\|\\begin\{|\\frac|\\sqrt|\\sin|\\cos|\\tan|\\int|\\sum|\\vec|\\left|\\right|\\begin\{pmatrix\}|\\therefore|\\quad|\\cdot|\\ln|\\angle|\\ell|\\lambda|\\mu/.test(
+    value
+  );
 }
 
 function normalisePartLabel(value?: string | null): string {
