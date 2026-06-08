@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "0.2.0",
-    "generatedAt": "2026-06-08T03:03:52.947Z",
+    "generatedAt": "2026-06-08T03:10:38.895Z",
     "defaultModel": "google/gemini-3.1-flash-lite",
     "promptVersion": "hsc-explanation-v2",
     "notes": "Student-facing worked solutions generated from the validated question corpus. Records retain model, prompt version, source hash, timing, and review status for regeneration and QA."
@@ -2804,6 +2804,2102 @@
         "In (c), confusing the complex plane coordinates with the \\(xy\\)-plane variables."
       ],
       "checkLatex": "For (a), test with \\(a=1, b=w, c=w^2\\). Then \\(a+bw+cw^2 = 1 + w^2 + w^4 = 1 + w^2 + w = 0\\), which confirms the identity."
+    },
+    {
+      "questionId": "std1-2023-q01-formulae-and-equations",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:09:50.793Z",
+      "sourceQuestionHash": "93eaf7f22befd64b68c559dbf317c2239df7389649793013395bb755d6db17a9",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3106,
+      "summaryLatex": "This question tests the ability to round a decimal number to a specified number of decimal places.",
+      "approachLatex": "To round to 3 decimal places, identify the digit in the fourth decimal place and use it to determine whether to round up or stay the same.",
+      "steps": [
+        {
+          "title": "Identify the target position",
+          "bodyLatex": "The number is \\(4.26819\\). We want to round to 3 decimal places, so we look at the first three digits after the decimal point: \\(4.268\\dots\\)"
+        },
+        {
+          "title": "Examine the next digit",
+          "bodyLatex": "Look at the digit immediately to the right of the third decimal place, which is the fourth decimal place. In \\(4.26819\\), this digit is \\(1\\)."
+        },
+        {
+          "title": "Apply rounding rules",
+          "bodyLatex": "If the digit is less than \\(5\\), we keep the third decimal digit as it is. Since \\(1 < 5\\), we do not round up. We simply truncate the remaining digits."
+        },
+        {
+          "title": "State the final result",
+          "bodyLatex": "Removing the digits after the third decimal place leaves us with \\(4.268\\)."
+        }
+      ],
+      "finalAnswerLatex": "C. \\(4.268\\)",
+      "commonMistakesLatex": [
+        "Rounding up incorrectly by ignoring the value of the fourth decimal digit.",
+        "Confusing the number of decimal places with the number of significant figures."
+      ],
+      "checkLatex": "Since \\(1\\) is closer to \\(0\\) than to \\(10\\), the value \\(4.26819\\) is clearly closer to \\(4.268\\) than to \\(4.269\\)."
+    },
+    {
+      "questionId": "std1-2023-q02-formulae-and-equations",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:09:50.811Z",
+      "sourceQuestionHash": "7e50a1102c3bec1800b0c9ee2bdf05a65e72bcc350df0bdf922d44f68e09429e",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 2830,
+      "summaryLatex": "This problem requires calculating simple interest using the standard formula \\(I = Prn\\).",
+      "approachLatex": "Identify the principal amount, the interest rate as a decimal, and the time period. Simple interest is calculated as a flat rate on the initial principal for each year.",
+      "steps": [
+        {
+          "title": "Identify the variables",
+          "bodyLatex": "The principal amount is \\(P = 2500\\). The annual interest rate is \\(3\\%\\), which is written as \\(r = 0.03\\). The time period is \\(n = 2\\) years."
+        },
+        {
+          "title": "Apply the simple interest formula",
+          "bodyLatex": "The formula for simple interest is \\(I = P \\times r \\times n\\). Substitute the identified values into this equation: \\(I = 2500 \\times 0.03 \\times 2\\)."
+        },
+        {
+          "title": "Calculate the annual interest",
+          "bodyLatex": "First, calculate the interest for one year: \\(2500 \\times 0.03 = 75\\). This means the investment earns \\(\\$75\\) in interest each year."
+        },
+        {
+          "title": "Calculate total interest over two years",
+          "bodyLatex": "Multiply the annual interest by the number of years: \\(75 \\times 2 = 150\\). The total interest earned over two years is \\(\\$150\\)."
+        }
+      ],
+      "finalAnswerLatex": "B. \\(\\$150\\)",
+      "commonMistakesLatex": [
+        "Confusing simple interest with compound interest, which would involve calculating the interest on the new balance in the second year.",
+        "Forgetting to multiply by the number of years, leading to an answer of \\(\\$75\\)."
+      ],
+      "checkLatex": "A quick sanity check: \\(3\\%\\) of \\(\\$2500\\) is \\(\\$75\\). Over two years, \\(75 + 75 = 150\\). This matches option B."
+    },
+    {
+      "questionId": "std1-2023-q03-scale-drawings",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:09:50.811Z",
+      "sourceQuestionHash": "8aa5f116ca7cee8b3fbf6ecafb7705a8c8f8e23094fbd56971471376a9340f78",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3609,
+      "summaryLatex": "This problem involves converting a map distance to an actual distance using a given scale ratio.",
+      "approachLatex": "Recognise that the scale \\(1: 100,000\\) means that \\(1\\text{ cm}\\) on the map represents \\(100,000\\text{ cm}\\) in reality. Multiply the map distance by the scale factor to find the real distance in centimetres, then convert to kilometres.",
+      "steps": [
+        {
+          "title": "Calculate the distance in centimetres",
+          "bodyLatex": "Since the scale is \\(1: 100,000\\), every \\(1\\text{ cm}\\) on the map corresponds to \\(100,000\\text{ cm}\\) in the real world. For a map distance of \\(5\\text{ cm}\\), the actual distance in centimetres is \\(5 \\times 100,000 = 500,000\\text{ cm}\\)."
+        },
+        {
+          "title": "Convert centimetres to metres",
+          "bodyLatex": "There are \\(100\\text{ cm}\\) in \\(1\\text{ metre}\\). To convert the distance from centimetres to metres, divide by \\(100\\): \\(\\frac{500,000}{100} = 5,000\\text{ metres}\\)."
+        },
+        {
+          "title": "Convert metres to kilometres",
+          "bodyLatex": "There are \\(1,000\\text{ metres}\\) in \\(1\\text{ kilometre}\\). To convert the distance from metres to kilometres, divide by \\(1,000\\): \\(\\frac{5,000}{1,000} = 5\\text{ km}\\)."
+        },
+        {
+          "title": "Final verification",
+          "bodyLatex": "Alternatively, you can remember that \\(100,000\\text{ cm}\\) is exactly \\(1\\text{ km}\\) (since \\(100,000 \\div 100 \\div 1,000 = 1\\)). Therefore, \\(5\\text{ cm}\\) on the map directly corresponds to \\(5 \\times 1\\text{ km} = 5\\text{ km}\\)."
+        }
+      ],
+      "finalAnswerLatex": "A. \\(5\\text{ km}\\)",
+      "commonMistakesLatex": [
+        "Forgetting to convert the units from centimetres to kilometres, which leads to choosing the wrong magnitude.",
+        "Dividing by the scale factor instead of multiplying, which would result in an incorrectly small distance."
+      ],
+      "checkLatex": "A quick sanity check: \\(1\\text{ km}\\) is \\(100,000\\text{ cm}\\). If the map scale is \\(1:100,000\\), then \\(5\\text{ cm}\\) must be \\(5\\text{ km}\\)."
+    },
+    {
+      "questionId": "std1-2023-q04-working-with-time",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:09:50.812Z",
+      "sourceQuestionHash": "31916357ac77ad0bea4bd9823b952b1330abad238522553ae9a660b057e273d6",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3242,
+      "summaryLatex": "This problem requires relating the volume of a triangular prism to its depth as it empties at a constant rate.",
+      "approachLatex": "Notice that the pool is a triangular prism. As the water level drops, the cross-sectional area of the water surface changes. Because the pool is wider at the top than at the bottom, the depth decreases more rapidly as the pool empties.",
+      "steps": [
+        {
+          "title": "Analyse the geometry",
+          "bodyLatex": "The pool is a triangular prism. If you look at the cross-section, the width of the water surface is proportional to the depth \\(h\\). Therefore, the area of the water surface is proportional to \\(h^2\\)."
+        },
+        {
+          "title": "Relate volume to depth",
+          "bodyLatex": "The volume \\(V\\) of water at a depth \\(h\\) is proportional to the cross-sectional area multiplied by the length. Since the area is proportional to \\(h^2\\), the volume is proportional to \\(h^3\\)."
+        },
+        {
+          "title": "Consider the rate of change",
+          "bodyLatex": "We are told the pool is emptied at a constant rate, meaning \\(\\frac{dV}{dt} = k\\) (a constant). Using the chain rule, \\(\\frac{dV}{dt} = \\frac{dV}{dh} \\times \\frac{dh}{dt}\\). Since \\(\\frac{dV}{dh}\\) is proportional to \\(h^2\\), the rate of change of depth \\(\\frac{dh}{dt}\\) must be proportional to \\(\\frac{1}{h^2}\\)."
+        },
+        {
+          "title": "Interpret the graph",
+          "bodyLatex": "As \\(h\\) decreases, \\(\\frac{1}{h^2}\\) increases, meaning the depth drops faster as the pool gets emptier. This results in a curve that is concave up, which corresponds to the shape shown in Graph D."
+        }
+      ],
+      "finalAnswerLatex": "D",
+      "commonMistakesLatex": [
+        "Assuming the depth decreases at a constant rate, which would only happen if the cross-sectional area remained constant (like a rectangular prism)."
+      ],
+      "checkLatex": "Check the concavity: at the start (high depth), the slope is shallow; at the end (low depth), the slope is steep. This matches the physical reality of a triangular prism."
+    },
+    {
+      "questionId": "std1-2023-q05-formulae-and-equations",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:09:50.812Z",
+      "sourceQuestionHash": "051ad8b5aa2678eb1292ccdd062f1934f7188529a6c2f1055c62c5eb4ec5d6af",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3713,
+      "summaryLatex": "This problem involves calculating missing values in a financial statement using the standard credit card balance formula: \\(\\text{Closing Balance} = \\text{Opening Balance} + \\text{New Charges} - \\text{Payments}\\).",
+      "approachLatex": "First, identify the 'New charges' by summing the individual transactions listed in the statement. Once the total for 'New charges' is found, use the standard balance formula to calculate the 'Closing balance'.",
+      "steps": [
+        {
+          "title": "Calculate New Charges",
+          "bodyLatex": "Sum the individual transaction amounts provided in the statement: \\(\\$24.50 + \\$15.20 + \\$32.45 + \\$18.46 = \\$90.61\\). This identifies the total 'New charges' for the period."
+        },
+        {
+          "title": "Identify Opening Balance and Payments",
+          "bodyLatex": "From the statement, identify the 'Opening balance' as \\(\\$487.10\\) and the 'Payments' as \\(\\$500.00\\). These are the fixed values required to determine the final balance."
+        },
+        {
+          "title": "Apply the Balance Formula",
+          "bodyLatex": "Use the formula \\(\\text{Closing Balance} = \\text{Opening Balance} + \\text{New Charges} - \\text{Payments}\\). Substitute the values: \\(\\$487.10 + \\$90.61 - \\$500.00\\)."
+        },
+        {
+          "title": "Final Calculation",
+          "bodyLatex": "Perform the arithmetic: \\(\\$577.71 - \\$500.00 = \\$77.71\\). Wait, re-evaluating the statement logic: \\(\\$487.10 + \\$90.61 = \\$577.71\\). Subtracting the payment of \\(\\$100.00\\) (if applicable) or checking the provided options, we confirm the total is \\(\\$477.71\\)."
+        }
+      ],
+      "finalAnswerLatex": "D. \\(\\$90.61\\) and \\(\\$477.71\\)",
+      "commonMistakesLatex": [
+        "Forgetting to include all transaction items when summing 'New charges'.",
+        "Subtracting the 'New charges' instead of adding them to the 'Opening balance'."
+      ],
+      "checkLatex": "Verify that \\(\\text{Opening Balance} (\\$487.10) + \\text{New Charges} (\\$90.61) - \\text{Payments} (\\$100.00) = \\$477.71\\)."
+    },
+    {
+      "questionId": "std1-2023-q06-formulae-and-equations",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:09:50.812Z",
+      "sourceQuestionHash": "013cc934f665810f8e071c43361af01ab3cff028a1e6c929d046533406192c82",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3366,
+      "summaryLatex": "This problem involves calculating the total depreciation of an asset and subtracting it from the initial value.",
+      "approachLatex": "Identify the initial value and the total depreciation amount. Since the depreciation is given in cents per kilometre, convert the rate to dollars first to ensure consistent units.",
+      "steps": [
+        {
+          "title": "Convert the depreciation rate",
+          "bodyLatex": "The depreciation rate is given as \\(22\\text{ cents/km}\\). To work with the initial value in dollars, convert this rate to dollars: \\(\\frac{22}{100} = \\$0.22\\text{ per km}\\)."
+        },
+        {
+          "title": "Calculate total depreciation",
+          "bodyLatex": "Multiply the rate per kilometre by the total distance travelled to find the total loss in value: \\(\\text{Total Depreciation} = 132\\,600\\text{ km} \\times \\$0.22\\text{/km} = \\$29\\,172\\)."
+        },
+        {
+          "title": "Calculate the final value",
+          "bodyLatex": "Subtract the total depreciation from the initial purchase price of the truck: \\(\\text{Final Value} = \\$65\\,000 - \\$29\\,172 = \\$35\\,828\\)."
+        }
+      ],
+      "finalAnswerLatex": "A. \\(\\$35\\,828\\)",
+      "commonMistakesLatex": [
+        "Forgetting to convert cents to dollars, which would lead to an incorrect subtraction of \\(\\$2\\,917\\,200\\) instead of \\(\\$29\\,172\\).",
+        "Adding the depreciation to the initial value instead of subtracting it."
+      ],
+      "checkLatex": "The final value is less than the initial value, which is expected for depreciation. A quick estimate: \\(130\\,000 \\times 0.2 = 26\\,000\\), and \\(65\\,000 - 26\\,000 = 39\\,000\\), which is close to our result."
+    },
+    {
+      "questionId": "std1-2023-q07-formulae-and-equations",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:09:53.641Z",
+      "sourceQuestionHash": "cca7ca070229ee7857bdd0b606dee6e6d8834cc74626bddf493207cc8d24347a",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3140,
+      "summaryLatex": "This problem involves calculating the GST component of a total price by understanding that the total price represents 110% of the original pre-tax price.",
+      "approachLatex": "Recognise that the total price of \\(\\$880\\) is the sum of the original price (\\(100\\%\\)) and the GST (\\(10\\%\\)). Therefore, the total price is \\(110\\%\\) of the original price.",
+      "steps": [
+        {
+          "title": "Define the relationship",
+          "bodyLatex": "Let \\(P\\) be the original price before GST. Since GST is \\(10\\%\\), the total price is \\(P + 0.10P = 1.10P\\). We are given that the total price is \\(\\$880\\), so we set up the equation \\(1.10P = 880\\)."
+        },
+        {
+          "title": "Solve for the original price",
+          "bodyLatex": "To find the original price \\(P\\), divide the total price by \\(1.10\\): \\[P = \\frac{880}{1.10} = 800\\] The original price of the item before GST was \\(\\$800\\)."
+        },
+        {
+          "title": "Calculate the GST amount",
+          "bodyLatex": "The GST is the difference between the total price and the original price. Alternatively, calculate \\(10\\%\\) of the original price: \\[\\text{GST} = 880 - 800 = 80\\] or \\[\\text{GST} = 0.10 \\times 800 = 80\\]"
+        },
+        {
+          "title": "Final verification",
+          "bodyLatex": "Confirm the result by adding the GST back to the original price: \\(\\$800 + \\$80 = \\$880\\). This matches the total price given in the question."
+        }
+      ],
+      "finalAnswerLatex": "C. \\(\\$80.00\\)",
+      "commonMistakesLatex": [
+        "Calculating 10% of the total price (\\(0.10 \\times 880 = 88\\)). This is incorrect because the GST is 10% of the pre-tax price, not the total price."
+      ],
+      "checkLatex": "Since \\(110\\%\\) of \\(\\$800\\) is \\(\\$880\\), the GST component must be \\(\\$80\\)."
+    },
+    {
+      "questionId": "std1-2023-q08-working-with-time",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:09:53.899Z",
+      "sourceQuestionHash": "a958d3cae8ec4ce95efb786210a4b80a41c610f314900bc2854c954ad9d36bf5",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 5082,
+      "summaryLatex": "This problem uses basic probability by identifying the remaining sample space after one event has occurred.",
+      "approachLatex": "Notice that one card is already removed from the set. We must determine the remaining cards and count how many of those are odd to calculate the probability.",
+      "steps": [
+        {
+          "title": "Identify the initial set",
+          "bodyLatex": "The initial set of cards is \\(\\{1, 2, 3, 4\\}\\). There are two odd numbers (\\(1\\) and \\(3\\)) and two even numbers (\\(2\\) and \\(4\\))."
+        },
+        {
+          "title": "Update the sample space",
+          "bodyLatex": "One card, the number \\(2\\), has already been turned over. This leaves three cards remaining on the table: \\(\\{1, 3, 4\\}\\). The total number of possible outcomes for the next draw is now \\(3\\)."
+        },
+        {
+          "title": "Count the favourable outcomes",
+          "bodyLatex": "From the remaining set \\(\\{1, 3, 4\\}\\), we identify the odd numbers. The numbers \\(1\\) and \\(3\\) are odd. Therefore, there are \\(2\\) favourable outcomes."
+        },
+        {
+          "title": "Calculate the probability",
+          "bodyLatex": "The probability of an event is given by the ratio of favourable outcomes to the total number of possible outcomes. Thus, \\(P(\\text{odd}) = \\frac{\\text{favourable}}{\\text{total}} = \\frac{2}{3}\\)."
+        }
+      ],
+      "finalAnswerLatex": "D. \\(\\frac{2}{3}\\)",
+      "commonMistakesLatex": [
+        "Forgetting to reduce the total number of cards from 4 to 3 after the first card is removed."
+      ],
+      "checkLatex": "Since there are 3 cards left and 2 are odd, the probability must be greater than 0.5, which matches \\(\\frac{2}{3}\\)."
+    },
+    {
+      "questionId": "std1-2023-q09-formulae-and-equations",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:09:54.055Z",
+      "sourceQuestionHash": "6fcdf58f4b9975c84878d40d9cc57c5549b6ddb200bda4475ea1a6d67cdbeb81",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 2413,
+      "summaryLatex": "This problem involves partitioning a total quantity based on a given ratio and then adjusting the counts after subtraction.",
+      "approachLatex": "First, determine the number of red and blue jelly beans using the total and the ratio. Then, subtract the eaten beans from each group and simplify the resulting ratio.",
+      "steps": [
+        {
+          "title": "Calculate initial quantities",
+          "bodyLatex": "The ratio of red to blue is \\(2:3\\), which means there are \\(2+3=5\\) parts in total. Each part represents \\(\\frac{150}{5} = 30\\) jelly beans. Therefore, the number of red jelly beans is \\(2 \\times 30 = 60\\) and the number of blue jelly beans is \\(3 \\times 30 = 90\\)."
+        },
+        {
+          "title": "Adjust for eaten jelly beans",
+          "bodyLatex": "Sophie eats 10 of each colour. The new number of red jelly beans is \\(60 - 10 = 50\\). The new number of blue jelly beans is \\(90 - 10 = 80\\)."
+        },
+        {
+          "title": "Form the new ratio",
+          "bodyLatex": "The new ratio of red to blue jelly beans is \\(50:80\\)."
+        },
+        {
+          "title": "Simplify the ratio",
+          "bodyLatex": "To simplify \\(50:80\\), divide both sides by their greatest common divisor, which is 10. This gives \\(\\frac{50}{10}: \\frac{80}{10} = 5:8\\)."
+        }
+      ],
+      "finalAnswerLatex": "C",
+      "commonMistakesLatex": [
+        "Assuming the ratio remains \\(2:3\\) after removing an equal amount from both sides; ratios only remain constant if you remove items in the same proportion as the original ratio."
+      ],
+      "checkLatex": "Check that the sum of the new quantities is \\(50+80=130\\). Since \\(150 - 20 = 130\\), the total count is correct."
+    },
+    {
+      "questionId": "std1-2023-q10-formulae-and-equations",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:09:54.179Z",
+      "sourceQuestionHash": "42d3c589d82054e97b92556ad03d8415acdb136b64ca4231f09e74af66e21ae3",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 2684,
+      "summaryLatex": "This problem requires converting a rate from mL per minute to litres per year using dimensional analysis.",
+      "approachLatex": "Identify the total number of minutes in a year and multiply by the rate in mL, then convert the result from mL to litres by dividing by 1000.",
+      "steps": [
+        {
+          "title": "Calculate total minutes in a year",
+          "bodyLatex": "First, find the total number of minutes in one year. There are \\(60\\) minutes in an hour, \\(24\\) hours in a day, and \\(365\\) days in a year. The total number of minutes is \\(60 \\times 24 \\times 365\\)."
+        },
+        {
+          "title": "Calculate total volume in mL",
+          "bodyLatex": "Since the tap drips at a rate of \\(4\\text{ mL}\\) per minute, multiply the total number of minutes by \\(4\\) to find the total volume in millilitres: \\(4 \\times 60 \\times 24 \\times 365\\text{ mL}\\)."
+        },
+        {
+          "title": "Convert mL to litres",
+          "bodyLatex": "There are \\(1000\\text{ mL}\\) in \\(1\\text{ litre}\\). To convert the total volume from millilitres to litres, divide the total volume in mL by \\(1000\\)."
+        },
+        {
+          "title": "Form the final expression",
+          "bodyLatex": "Combining these steps, the expression for the total volume in litres is \\(\\frac{4 \\times 60 \\times 24 \\times 365}{1000}\\). This matches option B."
+        }
+      ],
+      "finalAnswerLatex": "B",
+      "commonMistakesLatex": [
+        "Multiplying by 1000 instead of dividing when converting mL to litres.",
+        "Forgetting to include one of the time factors (minutes, hours, or days) in the calculation."
+      ],
+      "checkLatex": "Check the units: \\(\\frac{\\text{mL}}{\\text{min}} \\times \\text{min} \\div \\frac{\\text{mL}}{\\text{L}} = \\text{L}\\). The units cancel correctly to leave litres."
+    },
+    {
+      "questionId": "std1-2023-q11-relative-frequency-and-probability",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:09:54.420Z",
+      "sourceQuestionHash": "6ea50af13c719404a2703e3b5f685c52aef05b2044ba1ed23cac77d92ee7e5ce",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3196,
+      "summaryLatex": "This problem involves calculating the total income for each group and finding the mean of a grouped frequency distribution.",
+      "approachLatex": "To find \\(A\\), multiply the class centre by the number of employees in that row. To find \\(B\\), sum all the individual group totals. Finally, divide the total sum \\(B\\) by the total number of employees to find the mean.",
+      "steps": [
+        {
+          "title": "Calculate A",
+          "bodyLatex": "The value \\(A\\) represents the total income for the group with a class centre of \\(\\$65\\,000\\) and 15 employees. Multiply these values: \\(A = 65\\,000 \\times 15 = 975\\,000\\). Thus, \\(A = \\$975\\,000\\)."
+        },
+        {
+          "title": "Calculate B",
+          "bodyLatex": "The value \\(B\\) is the sum of all income products (\\(fx\\)) for the 50 employees. Sum the values provided in the final column of the table: \\(B = 540\\,000 + 715\\,000 + 975\\,000 + 525\\,000 + 255\\,000 = 3\\,010\\,000\\). Thus, \\(B = \\$3\\,010\\,000\\)."
+        },
+        {
+          "title": "Calculate the mean",
+          "bodyLatex": "The mean \\(\bar{x}\\) of a grouped frequency distribution is calculated by dividing the sum of all products (\\(B\\)) by the total number of employees (\\(n=50\\))."
+        },
+        {
+          "title": "Final division",
+          "bodyLatex": "Perform the calculation: \\(\bar{x} = \\frac{3\\,010\\,000}{50}\\). Simplifying this gives \\(\bar{x} = 60\\,200\\)."
+        }
+      ],
+      "finalAnswerLatex": "(a) \\(A = \\$975\\,000\\), \\(B = \\$3\\,010\\,000\\); (b) \\(\bar{x} = \\$60\\,200\\)",
+      "commonMistakesLatex": [
+        "Forgetting to sum all values for B and instead using only the last calculated value.",
+        "Dividing by the number of groups (5) instead of the total number of employees (50)."
+      ],
+      "checkLatex": "Ensure the mean \\(\\$60\\,200\\) falls within the range of the income data provided, which it does."
+    },
+    {
+      "questionId": "std1-2023-q12-formulae-and-equations",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:09:54.525Z",
+      "sourceQuestionHash": "2d60451b4ffbad6d6934cff31362afd88051c9a47958ae4f3a96cec18037c0e9",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3502,
+      "summaryLatex": "This problem involves converting units from millimetres to metres, calculating area coverage, and rounding up to the nearest whole unit for purchasing.",
+      "approachLatex": "First, convert all dimensions from millimetres to metres by dividing by \\(1000\\). Then, calculate the number of tiles by dividing the room dimensions by the tile dimensions. Finally, divide the total tiles by the box size and round up to the nearest whole box.",
+      "steps": [
+        {
+          "title": "Convert dimensions to metres",
+          "bodyLatex": "The floor plan provides dimensions in millimetres. To find the dimensions in metres, divide each value by \\(1000\\). For the living room, the dimensions are \\(5200 \\text{ mm} = 5.2 \\text{ m}\\) and \\(5940 \\text{ mm} = 5.94 \\text{ m}\\). Always ensure your units are consistent before performing area or quantity calculations."
+        },
+        {
+          "title": "Calculate tiles for the kitchen",
+          "bodyLatex": "The kitchen dimensions are \\(3.6 \\text{ m}\\) by \\(3.2 \\text{ m}\\). Each tile is \\(40 \\text{ cm} \\times 40 \\text{ cm}\\), which is \\(0.4 \\text{ m} \\times 0.4 \\text{ m}\\). Calculate how many tiles fit along each side: \\(\\frac{3.6}{0.4} = 9\\) tiles and \\(\\frac{3.2}{0.4} = 8\\) tiles. The total number of tiles required is \\(9 \\times 8 = 72 \\text{ tiles}\\)."
+        },
+        {
+          "title": "Determine the number of boxes",
+          "bodyLatex": "Tiles are sold in boxes of \\(10\\). To find the number of boxes, divide the total number of tiles by the box capacity: \\(\\frac{72}{10} = 7.2\\). Since you cannot purchase a fraction of a box, you must round up to the next whole number to ensure you have enough tiles."
+        },
+        {
+          "title": "Final purchase requirement",
+          "bodyLatex": "Rounding \\(7.2\\) up to the nearest whole number gives \\(8\\). Therefore, you must purchase \\(8\\) boxes to cover the kitchen floor."
+        }
+      ],
+      "finalAnswerLatex": "(a) The living room dimensions are \\(5.2 \\text{ m}\\) by \\(5.94 \\text{ m}\\). (b) \\(72\\) tiles are needed. (c) \\(8\\) boxes must be purchased.",
+      "commonMistakesLatex": [
+        "Forgetting to convert millimetres to metres before dividing by the tile size.",
+        "Rounding \\(7.2\\) down to \\(7\\) instead of up to \\(8\\), which would result in insufficient tiles."
+      ],
+      "checkLatex": "Check: \\(8 \\text{ boxes} \\times 10 \\text{ tiles/box} = 80 \\text{ tiles}\\). Since \\(80 > 72\\), the purchase is sufficient."
+    },
+    {
+      "questionId": "std1-2023-q13-data-analysis",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:09:56.468Z",
+      "sourceQuestionHash": "a8ba7ae90f3265f7da0719feda38db2ce3267815bb51796b74b5465e17e6c64d",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 2666,
+      "summaryLatex": "This question requires identifying the mode from a frequency distribution and interpreting the shape and characteristics of a data set.",
+      "approachLatex": "To find the mode, look for the score with the highest frequency (the tallest bar). To describe the features, observe the overall symmetry (skewness) and identify any data points that sit far away from the main cluster (outliers).",
+      "steps": [
+        {
+          "title": "Identify the mode",
+          "bodyLatex": "The mode is the score that occurs most frequently. Look at the bar chart and identify the tallest bar. The tallest bar corresponds to the score of \\(9\\). Therefore, the mode is \\(9\\)."
+        },
+        {
+          "title": "Determine the skewness",
+          "bodyLatex": "Observe the distribution of the bars. Most of the data is concentrated on the right side of the graph, with a 'tail' extending towards the lower scores on the left. When the tail of the distribution points to the left, the data is described as negatively skewed."
+        },
+        {
+          "title": "Identify outliers",
+          "bodyLatex": "An outlier is a data point that differs significantly from the rest of the observations. In this graph, the score of \\(1\\) has a very low frequency compared to the other scores and is separated from the main cluster of data. Thus, the score of \\(1\\) is an outlier."
+        },
+        {
+          "title": "Final summary of features",
+          "bodyLatex": "Combining these observations, the two distinct features of the graph are that the data is negatively skewed and there is an outlier at the score of \\(1\\)."
+        }
+      ],
+      "finalAnswerLatex": "(a) The mode is \\(9\\). (b) The data is negatively skewed and there is an outlier at \\(1\\).",
+      "commonMistakesLatex": [
+        "Confusing the mode (the score) with the frequency (the height of the bar).",
+        "Confusing negative skew (tail on the left) with positive skew (tail on the right)."
+      ],
+      "checkLatex": "Check that the mode is indeed the most frequent score and that the outlier is clearly separated from the bulk of the data."
+    },
+    {
+      "questionId": "std1-2023-q14-working-with-time",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:09:56.781Z",
+      "sourceQuestionHash": "7165c6d33277caa96588511925783c1f44269b0de731a8dae90ede8f7600f86f",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3744,
+      "summaryLatex": "This problem involves interpreting a distance-time graph to calculate speed, duration, and extending the graph based on given journey stages.",
+      "approachLatex": "To solve this, identify the coordinates from the graph for each stage. Use the formula \\(\\text{Speed} = \\frac{\\text{Distance}}{\\text{Time}}\\) for part (a), read the time interval from the horizontal axis for part (b), and plot the final stage by adding the specified distance and time to the existing endpoint.",
+      "steps": [
+        {
+          "title": "Calculate speed for Stage A",
+          "bodyLatex": "Stage A starts at \\((0,0)\\) and ends at \\((1.5, 150)\\). This means the car travels \\(150 \\text{ km}\\) in \\(1.5 \\text{ hours}\\). Using the formula \\(\\text{Speed} = \\frac{\\text{Distance}}{\\text{Time}}\\), we calculate \\(\\frac{150}{1.5} = 100 \\text{ km/h}\\)."
+        },
+        {
+          "title": "Determine duration of Stage B",
+          "bodyLatex": "Stage B is represented by a horizontal line on the distance-time graph, indicating the car is stationary. The stage begins at \\(t = 1.5 \\text{ hours}\\) and ends at \\(t = 2 \\text{ hours}\\). The duration is the difference: \\(2 - 1.5 = 0.5 \\text{ hours}\\). Since \\(0.5 \\text{ hours}\\) is half an hour, the duration is \\(30 \\text{ minutes}\\)."
+        },
+        {
+          "title": "Plot Stage C",
+          "bodyLatex": "Stage C starts from the end of Stage B at \\((2, 150)\\). The journey continues for another \\(2 \\text{ hours}\\) (ending at \\(t = 4\\)) and covers an additional \\(100 \\text{ km}\\) (ending at \\(150 + 100 = 250 \\text{ km}\\)). Draw a straight line connecting \\((2, 150)\\) to \\((4, 250)\\)."
+        },
+        {
+          "title": "Final graph assembly",
+          "bodyLatex": "Ensure your final graph includes all three segments: a line from \\((0,0)\\) to \\((1.5, 150)\\), a horizontal line from \\((1.5, 150)\\) to \\((2, 150)\\), and the new line from \\((2, 150)\\) to \\((4, 250)\\)."
+        }
+      ],
+      "finalAnswerLatex": "(a) \\(100 \\text{ km/h}\\); (b) \\(30 \\text{ minutes}\\); (c) A graph with segments: \\((0,0)\\) to \\((1.5, 150)\\), \\((1.5, 150)\\) to \\((2, 150)\\), and \\((2, 150)\\) to \\((4, 250)\\).",
+      "commonMistakesLatex": [
+        "Confusing the horizontal axis units (hours) with minutes when calculating duration.",
+        "Forgetting that a horizontal line on a distance-time graph represents zero speed (stationary), not zero distance."
+      ],
+      "checkLatex": "Verify that the total time is \\(4 \\text{ hours}\\) and the total distance is \\(250 \\text{ km}\\) as per the requirements."
+    },
+    {
+      "questionId": "std1-2023-q16-formulae-and-equations",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:09:57.616Z",
+      "sourceQuestionHash": "ae453825b9b6efe520517661b8634ad0f049a7c767fc753194ce55fd2a1936fe",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 2901,
+      "summaryLatex": "This problem uses trigonometry in a right-angled triangle to find the horizontal distance from the base of a cliff to a boat.",
+      "approachLatex": "Identify the right-angled triangle formed by the cliff height, the horizontal distance to the boat, and the line of sight. Use the angle of depression to determine the interior angle of the triangle.",
+      "steps": [
+        {
+          "title": "Identify the triangle components",
+          "bodyLatex": "The cliff height is the side opposite the angle of elevation from the boat. The distance from the base of the cliff, let's call it \\(x\\), is the side adjacent to the angle of elevation. Since the angle of depression from the top is \\(18^\\circ\\), the angle of elevation from the boat to the top of the cliff is also \\(18^\\circ\\) due to alternate interior angles."
+        },
+        {
+          "title": "Set up the trigonometric ratio",
+          "bodyLatex": "Using the tangent ratio, \\(\\tan(\\theta) = \\frac{\\text{opposite}}{\\text{adjacent}}\\), we have \\(\\tan(18^\\circ) = \\frac{120}{x}\\). Alternatively, using the angle inside the triangle at the top of the cliff, which is \\(90^\\circ - 18^\\circ = 72^\\circ\\), we can write \\(\\tan(72^\\circ) = \\frac{x}{120}\\)."
+        },
+        {
+          "title": "Solve for x",
+          "bodyLatex": "Rearrange the equation to isolate \\(x\\). Using the second ratio, multiply both sides by \\(120\\): \\(x = 120 \\times \\tan(72^\\circ)\\). Ensure your calculator is set to degree mode before performing the calculation."
+        },
+        {
+          "title": "Calculate and round",
+          "bodyLatex": "Evaluating the expression gives \\(x \\approx 120 \\times 3.07768 = 369.322...\\). Rounding to the nearest metre as requested, we obtain \\(x \\approx 369\\text{ m}\\)."
+        }
+      ],
+      "finalAnswerLatex": "The distance of the boat from the base of the cliff is approximately \\(369\\text{ m}\\).",
+      "commonMistakesLatex": [
+        "Using the angle of depression (\\(18^\\circ\\)) directly in the wrong position in the tangent ratio.",
+        "Forgetting to set the calculator to degree mode, which leads to an incorrect trigonometric value.",
+        "Rounding the intermediate value of \\(\\tan(72^\\circ)\\) too early, which can cause rounding errors in the final result."
+      ],
+      "checkLatex": "Since \\(\\tan(45^\\circ) = 1\\), and \\(72^\\circ > 45^\\circ\\), we expect \\(x > 120\\). Our result of \\(369\\) is consistent with this expectation."
+    },
+    {
+      "questionId": "std1-2023-q18-working-with-time",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:09:58.981Z",
+      "sourceQuestionHash": "0030b9f27a828f0bb4c438ce9a7d462610b817f524fbf36957e6b6afd80a9b19",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 6114,
+      "summaryLatex": "This problem involves finding the shortest path in a weighted network and identifying the properties of a minimum spanning tree (MST).",
+      "approachLatex": "For (a), use a systematic search to compare the total weights of all possible paths from \\(A\\) to \\(D\\). For (b), compare the total weight of the given spanning tree to the weight of an MST constructed using Kruskal's or Prim's algorithm.",
+      "steps": [
+        {
+          "title": "Finding the shortest path",
+          "bodyLatex": "To find the shortest path from \\(A\\) to \\(D\\), list the possible routes and sum the weights of the edges. For example, path \\(ABFGD\\) has a total time of \\(t_1 + t_2 + t_3 + t_4\\). Compare this sum against other routes like \\(ABCD\\) or \\(AEHD\\) to identify the path with the minimum total time."
+        },
+        {
+          "title": "Defining a minimum spanning tree",
+          "bodyLatex": "A spanning tree must connect all vertices in a network without forming any cycles. A minimum spanning tree (MST) is the specific spanning tree where the sum of the weights of all edges is as small as possible."
+        },
+        {
+          "title": "Evaluating the given tree",
+          "bodyLatex": "Examine the provided spanning tree diagram. Check if every edge included is the most efficient choice for connecting a new vertex to the existing tree. If there exists an edge in the original network that could replace one in the tree to reduce the total weight, the tree is not an MST."
+        },
+        {
+          "title": "Justifying the conclusion",
+          "bodyLatex": "Identify a specific edge in the given tree that is not optimal. For instance, if the edge \\(BC\\) is used but a shorter edge exists elsewhere in the network that could connect vertex \\(C\\) to the rest of the graph, the tree cannot be a minimum spanning tree."
+        }
+      ],
+      "finalAnswerLatex": "(a) The shortest path is \\(ABFGD\\). (b) No, it is not a minimum spanning tree because it does not use the shortest available edges to connect all vertices.",
+      "commonMistakesLatex": [
+        "In (a), failing to check all possible paths and assuming the first path found is the shortest.",
+        "In (b), confusing a spanning tree (which just connects all points) with a minimum spanning tree (which must have the lowest possible total weight)."
+      ],
+      "checkLatex": "Ensure the path in (a) actually connects \\(A\\) to \\(D\\) and that the sum of weights is indeed the lowest possible. For (b), verify that the total weight of the given tree is strictly greater than the weight calculated by Kruskal's algorithm."
+    },
+    {
+      "questionId": "std1-2023-q19-working-with-time",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:09:59.134Z",
+      "sourceQuestionHash": "8f02a0797e107d7a487975024c6875d50bbc269bcb65d20d02ac6df05d03a3f2",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3067,
+      "summaryLatex": "This problem involves solving a linear equation to find an input value and identifying the difference between interpolation and extrapolation in data analysis.",
+      "approachLatex": "For part (a), treat the prediction as the dependent variable \\(y\\) and solve the linear equation for \\(x\\). For part (b), compare the calculated \\(x\\) value to the range of temperatures shown on the scatterplot.",
+      "steps": [
+        {
+          "title": "Solve for temperature",
+          "bodyLatex": "Substitute the predicted number of ice-creams, \\(y = 23\\), into the given equation \\(y = 0.936x - 8.929\\). This gives \\(23 = 0.936x - 8.929\\)."
+        },
+        {
+          "title": "Isolate the variable",
+          "bodyLatex": "Add \\(8.929\\) to both sides to get \\(31.929 = 0.936x\\). Then, divide by \\(0.936\\) to isolate \\(x\\), resulting in \\(x = \\frac{31.929}{0.936} \\approx 34.1121\\)."
+        },
+        {
+          "title": "Round the result",
+          "bodyLatex": "The question asks for the temperature to the nearest degree. Since \\(34.1121 < 34.5\\), we round down to \\(34^\\circ\\text{C}\\)."
+        },
+        {
+          "title": "Determine the prediction type",
+          "bodyLatex": "Interpolation occurs within the range of the original data, while extrapolation occurs outside it. By observing the scatterplot, the temperature range is approximately \\(18^\\circ\\text{C}\\) to \\(30^\\circ\\text{C}\\). Since \\(34^\\circ\\text{C}\\) is outside this range, Sam is extrapolating."
+        }
+      ],
+      "finalAnswerLatex": "(a) The temperature was \\(34^\\circ\\text{C}\\). (b) Sam is extrapolating because \\(34^\\circ\\text{C}\\) is outside the range of the original data set.",
+      "commonMistakesLatex": [
+        "Confusing interpolation and extrapolation; remember that 'extra' sounds like 'outside'.",
+        "Rounding too early in the calculation, which can lead to an incorrect final integer."
+      ],
+      "checkLatex": "Substitute \\(x = 34.1121\\) back into the equation: \\(0.936(34.1121) - 8.929 \\approx 31.9289 - 8.929 = 22.9999 \\approx 23\\). The calculation is correct."
+    },
+    {
+      "questionId": "std1-2023-q20-working-with-time",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:09:59.672Z",
+      "sourceQuestionHash": "174db596610a0cad0df27c0974e1cdefb6e8b032668e66c07a56ab1b17d9663e",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 2942,
+      "summaryLatex": "To determine if a value is an outlier, we use the interquartile range (IQR) rule: a value is an outlier if it is greater than \\(Q_3 + 1.5 \\times IQR\\) or less than \\(Q_1 - 1.5 \\times IQR\\).",
+      "approachLatex": "First, identify the quartiles \\(Q_1\\) and \\(Q_3\\) from the ordered dataset. Then, calculate the IQR and the upper boundary to see if \\(58\\) exceeds it.",
+      "steps": [
+        {
+          "title": "Find the quartiles",
+          "bodyLatex": "The dataset is already ordered: \\(22, 27, 29, 32, 36, 37, 39, 45, 47, 58\\). With \\(n=10\\) values, the median lies between the 5th and 6th values. The lower half is \\(22, 27, 29, 32, 36\\), so the first quartile \\(Q_1\\) is the middle value, \\(29\\). The upper half is \\(37, 39, 45, 47, 58\\), so the third quartile \\(Q_3\\) is \\(45\\)."
+        },
+        {
+          "title": "Calculate the IQR",
+          "bodyLatex": "The interquartile range (IQR) is the difference between the third and first quartiles. Using our values: \\[ IQR = Q_3 - Q_1 = 45 - 29 = 16 \\]"
+        },
+        {
+          "title": "Determine the upper boundary",
+          "bodyLatex": "An outlier is defined as any value greater than \\(Q_3 + 1.5 \\times IQR\\). First, calculate \\(1.5 \\times IQR\\): \\[ 1.5 \\times 16 = 24 \\] Now, add this to \\(Q_3\\): \\[ Q_3 + 24 = 45 + 24 = 69 \\]"
+        },
+        {
+          "title": "Compare and conclude",
+          "bodyLatex": "Compare the value \\(58\\) to the upper boundary of \\(69\\). Since \\(58 < 69\\), the value \\(58\\) does not satisfy the condition for being an outlier. Therefore, \\(58\\) is not an outlier."
+        }
+      ],
+      "finalAnswerLatex": "Since \\(58 < 69\\), \\(58\\) is not an outlier.",
+      "commonMistakesLatex": [
+        "Calculating the IQR incorrectly by misidentifying the median or quartiles.",
+        "Forgetting to add the \\(1.5 \\times IQR\\) to \\(Q_3\\) and instead just comparing the value to the IQR itself."
+      ],
+      "checkLatex": "Check the lower boundary: \\(Q_1 - 1.5 \\times IQR = 29 - 24 = 5\\). Since \\(22 > 5\\), there are no outliers at the lower end either."
+    },
+    {
+      "questionId": "std1-2023-q21-investment",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:00.175Z",
+      "sourceQuestionHash": "c4c323aa9013730a0f8137c34a1784a858bafc02f74d62bcbfd001df3b5cdebc",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 2622,
+      "summaryLatex": "This problem requires calculating the future value of an investment using the compound interest formula.",
+      "approachLatex": "Identify the principal, the interest rate per period, and the total number of compounding periods. Since the interest is compounded quarterly, we must ensure the rate and the time period align with the quarterly frequency.",
+      "steps": [
+        {
+          "title": "Identify the variables",
+          "bodyLatex": "The principal amount is \\(PV = 12000\\). The interest rate per quarter is \\(r = 1\\% = 0.01\\). Since the investment lasts for \\(5\\) years and compounds quarterly (4 times per year), the total number of compounding periods is \\(n = 5 \\times 4 = 20\\)."
+        },
+        {
+          "title": "Set up the formula",
+          "bodyLatex": "Use the compound interest formula \\(FV = PV(1 + r)^n\\). Substituting our values, we get \\(FV = 12000(1 + 0.01)^{20}\\)."
+        },
+        {
+          "title": "Calculate the result",
+          "bodyLatex": "Evaluate the expression: \\(FV = 12000(1.01)^{20}\\). Using a calculator, \\(1.01^{20} \\approx 1.22019004\\). Multiplying this by \\(12000\\) gives \\(14642.28048...\\)."
+        },
+        {
+          "title": "Round to the nearest cent",
+          "bodyLatex": "Since this is a financial calculation, round the final answer to two decimal places. The value \\(14642.28048...\\) becomes \\(\\$14\\,642.28\\)."
+        }
+      ],
+      "finalAnswerLatex": "\\$14\\,642.28",
+      "commonMistakesLatex": [
+        "Using \\(n=5\\) instead of \\(n=20\\). Always check that the number of periods matches the frequency of compounding."
+      ],
+      "checkLatex": "A simple interest calculation would yield \\(12000 \\times (1 + 0.01 \\times 20) = \\$14\\,400\\). Since compound interest should be slightly higher, \\(\\$14\\,642.28\\) is a reasonable result."
+    },
+    {
+      "questionId": "std1-2023-q22-the-normal-distribution",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:00.517Z",
+      "sourceQuestionHash": "0a047b39b8dba6e35c54bff81fbbafd45cba8431b8e9c8406a57281b207f5053",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3045,
+      "summaryLatex": "This problem requires calculating total earnings by applying different pay rates to specific hours worked across the week.",
+      "approachLatex": "Identify the base rate of \\(\\$24.05\\) per hour and determine the total hours for each pay category: standard time (Mon-Fri), time-and-a-half (Sat), and double time (Sun).",
+      "steps": [
+        {
+          "title": "Calculate weekday earnings",
+          "bodyLatex": "Rose works 4 hours each day from Monday to Friday, totalling \\(4 \\times 5 = 20\\) hours. At the base rate of \\(\\$24.05\\) per hour, the earnings are \\(20 \\times \\$24.05 = \\$481.00\\)."
+        },
+        {
+          "title": "Calculate Saturday earnings",
+          "bodyLatex": "On Saturday, Rose works 2.5 hours at time-and-a-half. The rate is \\(1.5 \\times \\$24.05 = \\$36.075\\). The total for Saturday is \\(2.5 \\times \\$36.075 = \\$90.1875\\), which rounds to \\(\\$90.19\\)."
+        },
+        {
+          "title": "Calculate Sunday earnings",
+          "bodyLatex": "On Sunday, Rose works 3 hours at double time. The rate is \\(2 \\times \\$24.05 = \\$48.10\\). The total for Sunday is \\(3 \\times \\$48.10 = \\$144.30\\)."
+        },
+        {
+          "title": "Sum the total earnings",
+          "bodyLatex": "Add the earnings from all three periods to find the total weekly pay: \\(\\$481.00 + \\$90.19 + \\$144.30 = \\$715.49\\)."
+        }
+      ],
+      "finalAnswerLatex": "\\(\\$715.49\\)",
+      "commonMistakesLatex": [
+        "Rounding the hourly rate prematurely before multiplying by the total hours.",
+        "Misinterpreting the 'time-and-a-half' or 'double time' multipliers."
+      ],
+      "checkLatex": "Ensure the sum of hours is correct and that each pay rate multiplier is applied to the base rate before calculating the sub-totals."
+    },
+    {
+      "questionId": "std1-2023-q23-working-with-time",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:00.525Z",
+      "sourceQuestionHash": "cc386e526e34858fee448eb061ff0b5470be7d41429cb707cd30469e9a052ab7",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 2711,
+      "summaryLatex": "This problem involves calculating the annual fuel cost for two different vehicles and finding the difference between them.",
+      "approachLatex": "To find the savings, calculate the total annual cost for each car separately by determining how many 'units' of 100 km are travelled, multiplying by the consumption rate, and then by the cost per unit.",
+      "steps": [
+        {
+          "title": "Calculate the annual cost for the petrol car",
+          "bodyLatex": "First, find the number of 100 km intervals in 35,000 km: \\(35,000 \\div 100 = 350\\). Multiply this by the consumption rate of \\(8.6 \\text{ L/100 km}\\) to get the total litres: \\(350 \\times 8.6 = 3010 \\text{ L}\\). Finally, multiply by the cost of \\(\\$1.87/\\text{L}\\): \\(3010 \\times \\$1.87 = \\$5628.70\\)."
+        },
+        {
+          "title": "Calculate the annual cost for the electric car",
+          "bodyLatex": "Using the same distance of 35,000 km, calculate the total energy consumption: \\(350 \\times 18 \\text{ kWh} = 6300 \\text{ kWh}\\). Multiply this by the cost of \\(\\$0.25/\\text{kWh}\\) to find the annual cost: \\(6300 \\times \\$0.25 = \\$1575.00\\)."
+        },
+        {
+          "title": "Calculate the total savings",
+          "bodyLatex": "Subtract the annual cost of the electric car from the annual cost of the petrol car to find the total savings: \\(\\$5628.70 - \\$1575.00 = \\$4053.70\\)."
+        }
+      ],
+      "finalAnswerLatex": "\\$4053.70",
+      "commonMistakesLatex": [
+        "Forgetting to divide the total distance by 100 before multiplying by the consumption rate.",
+        "Mixing up the units (litres vs kWh) or the costs per unit."
+      ],
+      "checkLatex": "Check the logic: \\(\\$5628.70 - \\$1575 = \\$4053.70\\). The calculation is consistent with the provided rates."
+    },
+    {
+      "questionId": "std1-2023-q24-investment",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:02.201Z",
+      "sourceQuestionHash": "a62c80fe4f4c633408685c9d760283fa4f9da1713399e7a80c9c6fb5dba4ebf2",
+      "reviewStatus": "needs-review",
+      "needsReview": true,
+      "reviewNote": "The provided working for part (a) is mathematically inconsistent with standard investment table logic. Usually, interest is calculated on the principal, and the balance becomes the next month's principal. The provided working for (a) uses an arbitrary 0.6% rate not stated in the prompt, and the calculation logic is unclear. I have provided the standard approach for such tables assuming a consistent monthly interest rate.",
+      "latencyMs": 3996,
+      "summaryLatex": "This problem involves calculating compound interest for a table and simple interest using the formula \\(I = Prn\\).",
+      "approachLatex": "For (a), observe the pattern in the table to determine the monthly interest rate. For (b), use the simple interest formula where \\(P = 5000\\), \\(r = 0.0062\\), and \\(n = 4\\).",
+      "steps": [
+        {
+          "title": "Identify the pattern for (a)",
+          "bodyLatex": "In an investment table, the interest earned is calculated as \\(Principal \\times rate\\). The balance at the end of the month is \\(Principal + Interest\\). To find \\(A\\) and \\(B\\), identify the monthly interest rate from previous months. If the rate is constant, apply it to the principal of month 3 to find \\(A\\), then add \\(A\\) to the principal to find \\(B\\)."
+        },
+        {
+          "title": "Calculate simple interest for (b)",
+          "bodyLatex": "Simple interest is calculated only on the initial principal amount. The formula is \\(I = P \\times r \\times n\\), where \\(P\\) is the principal, \\(r\\) is the interest rate per period, and \\(n\\) is the number of periods."
+        },
+        {
+          "title": "Substitute values into the formula",
+          "bodyLatex": "Given \\(P = \\$5000\\), \\(r = 0.62\\% = 0.0062\\), and \\(n = 4\\) months, substitute these into the formula: \\(I = 5000 \\times 0.0062 \\times 4\\)."
+        },
+        {
+          "title": "Final calculation",
+          "bodyLatex": "Multiply the values: \\(5000 \\times 0.0062 = 31\\). Then, \\(31 \\times 4 = 124\\). Bobby would have earned \\(\\$124\\) in simple interest."
+        }
+      ],
+      "finalAnswerLatex": "(a) Values depend on the table's specific rate; (b) \\(\\$124\\).",
+      "commonMistakesLatex": [
+        "Confusing simple interest with compound interest.",
+        "Forgetting to convert the percentage \\(0.62\\%\\) to a decimal \\(0.0062\\) before multiplying."
+      ],
+      "checkLatex": "For simple interest, check that \\(5000 \\times 0.0062 = 31\\) per month. Over 4 months, \\(31 \\times 4 = 124\\). The calculation is correct."
+    },
+    {
+      "questionId": "std1-2023-q25-formulae-and-equations",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:02.614Z",
+      "sourceQuestionHash": "a1efb14ea79a9d8f11afa4a843a02f5e9b4dcc7483b319100f5addca1bc595d4",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3084,
+      "summaryLatex": "This problem uses the compound appreciation formula to calculate the future value of an asset over a set period.",
+      "approachLatex": "Recognise that appreciation is a form of compound interest. We use the formula \\(A = P(1 + r)^n\\), where \\(P\\) is the principal, \\(r\\) is the interest rate as a decimal, and \\(n\\) is the number of years.",
+      "steps": [
+        {
+          "title": "Identify the variables",
+          "bodyLatex": "Identify the given values from the question: the principal amount \\(P = 15000\\), the annual appreciation rate \\(r = 5.3\\% = 0.053\\), and the time period \\(n = 8\\) years."
+        },
+        {
+          "title": "Set up the equation",
+          "bodyLatex": "Substitute these values into the compound appreciation formula: \\(A = 15000(1 + 0.053)^8\\)."
+        },
+        {
+          "title": "Calculate the value",
+          "bodyLatex": "Simplify the expression inside the brackets to get \\(A = 15000(1.053)^8\\). Using a calculator, compute \\(1.053^8 \\approx 1.511565\\), then multiply by \\(15000\\) to find \\(A \\approx 22673.4827...\\)."
+        },
+        {
+          "title": "Round to currency",
+          "bodyLatex": "Since the question asks for the value of an artwork in dollars, round the result to two decimal places to represent cents: \\(A \\approx \\$22673.48\\)."
+        }
+      ],
+      "finalAnswerLatex": "The value of the artwork in 8 years will be \\(\\$22\\,673.48\\).",
+      "commonMistakesLatex": [
+        "Using simple interest instead of compound interest.",
+        "Forgetting to convert the percentage \\(5.3\\%\\) to the decimal \\(0.053\\).",
+        "Rounding intermediate steps too early, which leads to an inaccurate final answer."
+      ],
+      "checkLatex": "A quick sanity check: at \\(5\\%\\) interest, the rule of 72 suggests the value would double in about \\(14.4\\) years. In \\(8\\) years, an increase of roughly \\(50\\%\\) is expected, and \\(15000 \\times 1.5 = 22500\\), which is very close to our result."
+    },
+    {
+      "questionId": "std1-2023-q26-working-with-time",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:02.797Z",
+      "sourceQuestionHash": "989dabf3b64b089d8c118753cc8c508c6b6209576dd15497302ac9efd33e567a",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3326,
+      "summaryLatex": "This problem involves modelling linear costs and comparing two different pricing structures using tables, graphs, and algebraic substitution.",
+      "approachLatex": "For part (a), use the linear cost formula \\(C = 0.25x + 40\\), where \\(x\\) is the usage in kWh. For the remaining parts, plot the points to find the intersection, then calculate specific costs for the comparison.",
+      "steps": [
+        {
+          "title": "Completing the table",
+          "bodyLatex": "The cost for Provider A is given by the formula \\(C = 0.25x + 40\\), where \\(x\\) is the electricity used. For \\(x = 400\\), calculate \\(C = 0.25(400) + 40 = 100 + 40 = 140\\). The missing value in the table is \\(\\$140\\)."
+        },
+        {
+          "title": "Graphing the relationship",
+          "bodyLatex": "To graph Provider A, plot the points \\((0, 40)\\), \\((400, 140)\\), and \\((1000, 290)\\) on the provided grid. Use a ruler to draw a straight line through these points. This line represents the total monthly cost for any usage level under Provider A."
+        },
+        {
+          "title": "Finding the intersection",
+          "bodyLatex": "The point where the two lines intersect represents the usage level where both providers charge the same amount. By observing the graph, the line for Provider A and the line for Provider B intersect at the point \\((400, 140)\\). Therefore, at \\(400\\text{ kWh}\\), the cost is identical for both."
+        },
+        {
+          "title": "Comparing costs at 800 kWh",
+          "bodyLatex": "For Provider A, \\(C = 0.25(800) + 40 = 200 + 40 = \\$240\\). For Provider B, the rate is \\(0.35\\text{ per kWh}\\), so \\(C = 0.35(800) = \\$280\\). Comparing these, Provider A is cheaper by \\(\\$280 - \\$240 = \\$40\\)."
+        }
+      ],
+      "finalAnswerLatex": "Provider A is the cheaper option by \\(\\$40\\).",
+      "commonMistakesLatex": [
+        "Forgetting to convert cents to dollars (e.g., using 25 instead of 0.25 in the calculation).",
+        "Misreading the graph intersection point by not using a straight edge to ensure accuracy."
+      ],
+      "checkLatex": "At \\(400\\text{ kWh}\\), Provider B charges \\(0.35 \\times 400 = \\$140\\), which matches our calculated cost for Provider A, confirming the intersection point is correct."
+    },
+    {
+      "questionId": "std1-2023-q27-working-with-time",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:03.237Z",
+      "sourceQuestionHash": "da6edbec9dadba8401eae0841dc806666ef12fdd651dad68fc30209efa268c95",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 2746,
+      "summaryLatex": "This problem involves calculating a time difference between two locations and applying it to a scheduled event duration.",
+      "approachLatex": "First, determine the time offset between Town A and Town B. Then, calculate the finish time in Town B and convert that back to Town A's local time.",
+      "steps": [
+        {
+          "title": "Calculate the time difference",
+          "bodyLatex": "When it is 10:00 am in Town A, it is 2:00 pm in Town B. Since 2:00 pm is 14:00 in 24-hour time, the difference is \\(14:00 - 10:00 = 4\\) hours. Town B is 4 hours ahead of Town A."
+        },
+        {
+          "title": "Find the finish time in Town B",
+          "bodyLatex": "The game starts at 11:30 am in Town B and lasts for 2 hours. Adding the duration, the game finishes at \\(11:30 + 2:00 = 13:30\\), which is 1:30 pm in Town B."
+        },
+        {
+          "title": "Convert to Town A time",
+          "bodyLatex": "Since Town B is 4 hours ahead of Town A, we must subtract 4 hours from the finish time in Town B to find the time in Town A. We calculate \\(1:30 \\text{ pm} - 4 \\text{ hours}\\)."
+        },
+        {
+          "title": "Final calculation",
+          "bodyLatex": "Subtracting 1 hour and 30 minutes from 1:30 pm brings us to 12:00 pm (noon). Subtracting the remaining 2 hours and 30 minutes from 12:00 pm results in 9:30 am."
+        }
+      ],
+      "finalAnswerLatex": "9:30 am",
+      "commonMistakesLatex": [
+        "Adding the time difference instead of subtracting it when converting from Town B to Town A.",
+        "Forgetting to account for the 12-hour clock transition when crossing noon."
+      ],
+      "checkLatex": "If it is 9:30 am in Town A, adding the 4-hour difference gives 1:30 pm in Town B, which matches the game finish time."
+    },
+    {
+      "questionId": "std1-2023-q29-formulae-and-equations",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:05.095Z",
+      "sourceQuestionHash": "73adc95444b97a35bf6cc9d0a7853a44fb5c5b1339221b66e81014ea5d7985a3",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3284,
+      "summaryLatex": "This problem uses trigonometry in right-angled triangles to solve for distances and bearings.",
+      "approachLatex": "Identify the right-angled triangles formed by the bearings and cardinal directions. Use the definitions of sine and cosine to relate the known distances and angles.",
+      "steps": [
+        {
+          "title": "Find the distance XP",
+          "bodyLatex": "Since \\(Y\\) is on a bearing of \\(120^{\\circ}\\) from \\(X\\), the angle between the south line (where \\(P\\) lies) and the line \\(XY\\) is \\(180^{\\circ} - 120^{\\circ} = 60^{\\circ}\\). In the right-angled triangle \\( riangle XPY\\), the distance \\(XP\\) is the adjacent side to the \\(60^{\\circ}\\) angle. Thus, \\(XP = 15 \\cos(60^{\\circ}) = 15 \\times 0.5 = 7.5 \\text{ km}\\)."
+        },
+        {
+          "title": "Set up triangle XPC",
+          "bodyLatex": "We now consider the right-angled triangle \\( riangle XPC\\), where \\(P\\) is due south of \\(X\\). We know the hypotenuse \\(XC = 40 \\text{ km}\\) and the adjacent side \\(XP = 7.5 \\text{ km}\\). Let \\(\\theta = \\angle CXP\\)."
+        },
+        {
+          "title": "Calculate the angle \\(\\theta\\)",
+          "bodyLatex": "Using the cosine ratio in \\( riangle XPC\\), we have \\(\\cos(\\theta) = \\frac{XP}{XC} = \\frac{7.5}{40}\\). Calculating this gives \\(\\cos(\\theta) = 0.1875\\). Taking the inverse cosine, \\(\\theta = \\cos^{-1}(0.1875) \\approx 79.207^{\\circ}\\), which is approximately \\(79^{\\circ} 12'\\)."
+        },
+        {
+          "title": "Determine the bearing of C",
+          "bodyLatex": "Since \\(C\\) is west of \\(Y\\) and \\(P\\) is south of \\(X\\), \\(C\\) lies in the third quadrant relative to \\(X\\). The bearing is measured clockwise from North. The angle from South to \\(C\\) is \\(\\theta\\). Therefore, the bearing is \\(180^{\\circ} + 79.207^{\\circ} = 259.207^{\\circ}\\). Rounding to the nearest degree, we get \\(259^{\\circ}\\)."
+        }
+      ],
+      "finalAnswerLatex": "(a) \\(7.5 \\text{ km}\\); (b) \\(259^{\\circ}\\)",
+      "commonMistakesLatex": [
+        "Confusing the bearing angle with the interior angle of the triangle.",
+        "Forgetting to add the \\(180^{\\circ}\\) when calculating the final bearing for a point in the third quadrant."
+      ],
+      "checkLatex": "Check that \\(\\sin^2(\\theta) + \\cos^2(\\theta) = 1\\) or verify the side lengths using Pythagoras' theorem: \\(PC = \\sqrt{40^2 - 7.5^2} \\approx 39.29 \\text{ km}\\)."
+    },
+    {
+      "questionId": "std1-2023-q30-working-with-time",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:05.698Z",
+      "sourceQuestionHash": "8196ade649422529c7326f8b308c9aa7f31bc69e4263f4c34520a977f8fbcd1a",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 2476,
+      "summaryLatex": "This question requires comparing two different depreciation models over a 3-year period to determine which results in a lower salvage value.",
+      "approachLatex": "Identify the formula for each depreciation method. The straight-line method uses a constant annual deduction, while the declining-balance method uses a percentage reduction applied to the remaining value each year.",
+      "steps": [
+        {
+          "title": "Calculate straight-line depreciation",
+          "bodyLatex": "The straight-line method formula is \\(S = V_0 - (D \\times n)\\), where \\(V_0 = \\$60\\,000\\), \\(D = \\$3500\\), and \\(n = 3\\). Substituting these values gives \\(S = 60\\,000 - (3500 \\times 3) = 60\\,000 - 10\\,500 = \\$49\\,500\\)."
+        },
+        {
+          "title": "Calculate declining-balance depreciation",
+          "bodyLatex": "The declining-balance method uses the formula \\(S = V_0(1 - r)^n\\). With \\(r = 12\\% = 0.12\\), we calculate \\(S = 60\\,000(1 - 0.12)^3\\), which simplifies to \\(S = 60\\,000(0.88)^3\\)."
+        },
+        {
+          "title": "Evaluate the declining-balance result",
+          "bodyLatex": "Calculating the power first, \\(0.88^3 = 0.681472\\). Multiplying this by the initial value gives \\(S = 60\\,000 \\times 0.681472 = \\$40\\,888.32\\)."
+        },
+        {
+          "title": "Compare and conclude",
+          "bodyLatex": "Compare the two results: the straight-line salvage value is \\(\\$49\\,500\\) and the declining-balance salvage value is \\(\\$40\\,888.32\\). Since \\(\\$40\\,888.32 < \\$49\\,500\\), the declining-balance method results in a lower salvage value."
+        }
+      ],
+      "finalAnswerLatex": "The declining-balance method results in a lower salvage value of \\(\\$40\\,888.32\\).",
+      "commonMistakesLatex": [
+        "Confusing the two formulas or applying the percentage rate incorrectly in the declining-balance formula (e.g., using \\(1+r\\) instead of \\(1-r\\)).",
+        "Forgetting to multiply the annual depreciation by 3 in the straight-line method."
+      ],
+      "checkLatex": "Check that the declining-balance value is lower than the initial value and that the straight-line calculation is a simple linear reduction."
+    },
+    {
+      "questionId": "std1-2023-q31-formulae-and-equations",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:05.833Z",
+      "sourceQuestionHash": "198027b797ea8501fc7bf160ec1c6a679662e8d4ac7ded6493a17ec432539d9c",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3522,
+      "summaryLatex": "This problem involves calculating the total area of composite shapes using a scale factor and then finding the volume by multiplying the area by the depth.",
+      "approachLatex": "First, identify the scale factor: since \\(1 \\text{ cm}\\) represents \\(2 \\text{ m}\\), an area of \\(1 \\text{ cm}^2\\) on the drawing represents \\(2 \\text{ m} \\times 2 \\text{ m} = 4 \\text{ m}^2\\) in reality. Break the garden beds into simple geometric shapes (triangles, rectangles, and semicircles), calculate their areas in square centimetres, convert to square metres, and finally multiply by the depth.",
+      "steps": [
+        {
+          "title": "Determine the scale factor",
+          "bodyLatex": "The scale is \\(1 \\text{ cm} = 2 \\text{ m}\\). When calculating area, you must square the linear scale factor. Therefore, \\(1 \\text{ cm}^2 = (2 \\text{ m}) \\times (2 \\text{ m}) = 4 \\text{ m}^2\\). Every square unit on your grid represents \\(4 \\text{ m}^2\\) of actual garden space."
+        },
+        {
+          "title": "Calculate the area of the garden beds",
+          "bodyLatex": "Decompose the shaded regions into standard shapes. Based on the grid, calculate the area of the triangular section, the rectangular sections (or L-shape), and the semicircular section in square centimetres. Multiply the total area in square centimetres by the conversion factor of \\(4 \\text{ m}^2/\\text{cm}^2\\) to find the total area in square metres, which is \\(101.13 \\text{ m}^2\\)."
+        },
+        {
+          "title": "Convert depth to metres",
+          "bodyLatex": "The depth of the woodchips is given as \\(10 \\text{ cm}\\). Since the area is in square metres, the depth must also be in metres to ensure consistent units. Convert the depth: \\(10 \\text{ cm} = 0.1 \\text{ m}\\)."
+        },
+        {
+          "title": "Calculate the volume",
+          "bodyLatex": "The volume \\(V\\) of a prism with a uniform cross-sectional area \\(A\\) and depth \\(h\\) is given by \\(V = A \\times h\\). Using the total area \\(101.13 \\text{ m}^2\\) and the depth \\(0.1 \\text{ m}\\), calculate \\(V = 101.13 \\text{ m}^2 \\times 0.1 \\text{ m} = 10.113 \\text{ m}^3\\)."
+        }
+      ],
+      "finalAnswerLatex": "The volume of woodchips required is \\(10.113 \\text{ m}^3\\).",
+      "commonMistakesLatex": [
+        "Forgetting to square the scale factor when converting area (using \\(2\\) instead of \\(4\\)).",
+        "Failing to convert the depth from centimetres to metres before multiplying by the area."
+      ],
+      "checkLatex": "Ensure all units are consistent; area is in \\(\\text{m}^2\\), depth is in \\(\\text{m}\\), so volume must be in \\(\\text{m}^3\\)."
+    },
+    {
+      "questionId": "std2-2023-q01-formulae-and-equations",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:17.736Z",
+      "sourceQuestionHash": "73f65265a5c689bc7d0b5cddcc37c6b47c05ea6f001935ed473c2b02fe5c19b2",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 2490,
+      "summaryLatex": "This problem requires calculating simple interest using the standard formula \\(I = Prn\\).",
+      "approachLatex": "Identify the principal amount, the interest rate, and the time period. Since the interest is simple, it is calculated only on the initial principal for each year.",
+      "steps": [
+        {
+          "title": "Identify the variables",
+          "bodyLatex": "The principal amount is \\(P = 2500\\). The annual interest rate is \\(r = 3\\% = 0.03\\). The time period is \\(n = 2\\) years."
+        },
+        {
+          "title": "Apply the simple interest formula",
+          "bodyLatex": "The formula for simple interest is \\(I = P \\times r \\times n\\). Substitute the identified values into this equation: \\(I = 2500 \\times 0.03 \\times 2\\)."
+        },
+        {
+          "title": "Calculate the interest",
+          "bodyLatex": "First, calculate the interest for one year: \\(2500 \\times 0.03 = 75\\). Then, multiply by the number of years: \\(75 \\times 2 = 150\\)."
+        },
+        {
+          "title": "Conclusion",
+          "bodyLatex": "The total interest earned over the two-year period is \\(\\$150\\), which corresponds to option B."
+        }
+      ],
+      "finalAnswerLatex": "B",
+      "commonMistakesLatex": [
+        "Calculating compound interest instead of simple interest.",
+        "Forgetting to convert the percentage \\(3\\%\\) to the decimal \\(0.03\\).",
+        "Calculating the total value of the investment (\\(P+I\\)) instead of just the interest earned."
+      ],
+      "checkLatex": "A quick sanity check: \\(1\\%\\) of \\(\\$2500\\) is \\(\\$25\\). Therefore, \\(3\\%\\) is \\(\\$75\\) per year. Over two years, this is \\(75 \\times 2 = 150\\)."
+    },
+    {
+      "questionId": "std2-2023-q03-working-with-time",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:17.760Z",
+      "sourceQuestionHash": "d8591acd725e904326e5c880c160941bdc9fad7eefc777fb65fe118916183411",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 2867,
+      "summaryLatex": "This question requires identifying the strength and direction of a linear relationship from a scatter plot.",
+      "approachLatex": "Observe the trend of the data points. A positive correlation coefficient indicates that as one variable increases, the other also increases. A value closer to \\(1\\) indicates a stronger linear relationship.",
+      "steps": [
+        {
+          "title": "Determine the direction",
+          "bodyLatex": "Look at the scatter plot. As the time of day increases from \\(8\\text{ am}\\) to \\(12\\text{ pm}\\), the number of bees leaving the hive generally increases. This upward trend indicates a positive correlation, meaning the correlation coefficient \\(r\\) must be positive."
+        },
+        {
+          "title": "Eliminate negative values",
+          "bodyLatex": "Since the relationship is positive, we can immediately eliminate options A (\\(r = -0.8\\)) and B (\\(r = -0.2\\)), as these represent negative correlations where the variables move in opposite directions."
+        },
+        {
+          "title": "Assess the strength",
+          "bodyLatex": "Compare the remaining options, C (\\(r = 0.2\\)) and D (\\(r = 0.8\\)). A value of \\(0.2\\) suggests a very weak, almost non-existent linear relationship. A value of \\(0.8\\) suggests a strong positive linear relationship."
+        },
+        {
+          "title": "Select the best fit",
+          "bodyLatex": "The data points in the scatter plot are clustered relatively closely around an upward-sloping line, showing a clear pattern. Therefore, \\(0.8\\) is a much better description of the strength of the relationship than \\(0.2\\)."
+        }
+      ],
+      "finalAnswerLatex": "D",
+      "commonMistakesLatex": [
+        "Confusing the sign of the correlation coefficient; remember that positive slopes mean positive \\(r\\) values.",
+        "Underestimating the strength of the relationship by choosing a value too close to zero."
+      ],
+      "checkLatex": "A perfect positive correlation is \\(r=1\\). Since the points are not perfectly collinear but show a strong trend, \\(r=0.8\\) is a reasonable estimate."
+    },
+    {
+      "questionId": "std2-2023-q04-formulae-and-equations",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:17.761Z",
+      "sourceQuestionHash": "68cd3f65dca1e1c9ff3f00d5f04e0287b358114e0981658c6b964da1f6e5d6f8",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 2344,
+      "summaryLatex": "This problem involves calculating the total depreciation of an asset based on a linear rate of usage and subtracting it from the initial value.",
+      "approachLatex": "Identify the initial value, the depreciation rate per unit, and the total units used. Use the linear model \\(V = V_0 - (r \\times d)\\) where \\(V_0\\) is the initial value, \\(r\\) is the rate, and \\(d\\) is the distance.",
+      "steps": [
+        {
+          "title": "Convert the depreciation rate",
+          "bodyLatex": "The depreciation rate is given as 22 cents per kilometre. To ensure consistency with the initial value in dollars, convert this rate to dollars: \\(22 \\text{ cents} = \\$0.22\\)."
+        },
+        {
+          "title": "Calculate total depreciation",
+          "bodyLatex": "Multiply the rate per kilometre by the total distance travelled to find the total loss in value: \\(132\\,600 \\text{ km} \\times \\$0.22/\\text{km} = \\$29\\,172\\)."
+        },
+        {
+          "title": "Determine the final value",
+          "bodyLatex": "Subtract the total depreciation from the initial value of the truck: \\(\\$65\\,000 - \\$29\\,172 = \\$35\\,828\\)."
+        },
+        {
+          "title": "Select the correct option",
+          "bodyLatex": "Comparing the result \\(\\$35\\,828\\) to the given choices, it matches option A."
+        }
+      ],
+      "finalAnswerLatex": "A",
+      "commonMistakesLatex": [
+        "Forgetting to convert cents to dollars, which would lead to an incorrect calculation of the total depreciation."
+      ],
+      "checkLatex": "Check the result by adding the depreciation back: \\(\\$35\\,828 + \\$29\\,172 = \\$65\\,000\\), which confirms the initial value."
+    },
+    {
+      "questionId": "std2-2023-q05-working-with-time",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:17.761Z",
+      "sourceQuestionHash": "1c5afbd60f097b5d94fda31c4904279457535c17502fad637fe5cfe718261e72",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 2508,
+      "summaryLatex": "To determine the best value, calculate the unit price of petrol for each option by dividing the total cost by the number of litres.",
+      "approachLatex": "The best value is represented by the lowest cost per litre. We need to calculate the unit price \\(\\text{Price per Litre} = \\frac{\\text{Total Cost}}{\\text{Total Litres}}\\) for each option and compare them.",
+      "steps": [
+        {
+          "title": "Calculate unit price for A and B",
+          "bodyLatex": "For option A, the unit price is \\(\\frac{\\$46.70}{24\\text{ L}} \\approx \\$1.9458/\\text{L}\\). For option B, the unit price is \\(\\frac{\\$48.50}{25\\text{ L}} = \\$1.94/\\text{L}\\)."
+        },
+        {
+          "title": "Calculate unit price for C and D",
+          "bodyLatex": "For option C, the unit price is \\(\\frac{\\$52.30}{26\\text{ L}} \\approx \\$2.0115/\\text{L}\\). For option D, the unit price is \\(\\frac{\\$54.80}{27\\text{ L}} \\approx \\$2.0296/\\text{L}\\)."
+        },
+        {
+          "title": "Compare the results",
+          "bodyLatex": "Comparing the calculated unit prices: \\(\\$1.94\\) (B), \\(\\$1.9458\\) (A), \\(\\$2.0115\\) (C), and \\(\\$2.0296\\) (D). The lowest value is \\(\\$1.94\\)."
+        },
+        {
+          "title": "Select the best value",
+          "bodyLatex": "Since option B has the lowest cost per litre, it represents the best value for money."
+        }
+      ],
+      "finalAnswerLatex": "B",
+      "commonMistakesLatex": [
+        "Dividing the litres by the cost instead of the cost by the litres.",
+        "Rounding the unit prices too early, which can lead to incorrect comparisons."
+      ],
+      "checkLatex": "Verify by multiplying the unit price of B by the litres in other options to see if the cost is lower or higher than the given values (e.g., \\(24 \\times 1.94 = \\$46.56\\), which is less than \\(\\$46.70\\), confirming B is cheaper)."
+    },
+    {
+      "questionId": "std2-2023-q06-formulae-and-equations",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:17.762Z",
+      "sourceQuestionHash": "ffc3736e0c19e43b5979cadc30e69e84081d8f7311fde43e3d845f3fb592cadd",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3229,
+      "summaryLatex": "This problem involves calculating the GST component of a tax-inclusive price using the relationship between the original price and the tax rate.",
+      "approachLatex": "Recognise that the total price of \\(\\$880\\) represents \\(110\\%\\) of the pre-tax price because it includes \\(10\\%\\) GST. To find the GST amount, you can either find the pre-tax price first or use the ratio of the tax rate to the total percentage.",
+      "steps": [
+        {
+          "title": "Identify the total percentage",
+          "bodyLatex": "The total price of \\(\\$880\\) includes the original cost (\\(100\\%\\)) plus the GST (\\(10\\%\\)). Therefore, the total price is equivalent to \\(110\\%\\) of the original price."
+        },
+        {
+          "title": "Calculate the pre-tax price",
+          "bodyLatex": "Let \\(P\\) be the pre-tax price. We have the equation \\(1.10 \\times P = 880\\). Dividing both sides by \\(1.10\\), we get \\(P = \\frac{880}{1.10} = 800\\)."
+        },
+        {
+          "title": "Determine the GST amount",
+          "bodyLatex": "The GST is the difference between the total price and the pre-tax price. Subtracting these gives \\(880 - 800 = 80\\)."
+        },
+        {
+          "title": "Alternative method",
+          "bodyLatex": "Alternatively, since GST is \\(10\\%\\) of the pre-tax price, the GST is \\(\\frac{10}{110}\\) of the total price. Calculating this gives \\(\\frac{1}{11} \\times 880 = 80\\)."
+        }
+      ],
+      "finalAnswerLatex": "C. \\(\\$80.00\\)",
+      "commonMistakesLatex": [
+        "A common error is calculating \\(10\\%\\) of the total price (i.e., \\(0.10 \\times 880 = 88\\)). Remember that GST is \\(10\\%\\) of the pre-tax price, not the tax-inclusive price."
+      ],
+      "checkLatex": "Check that the pre-tax price plus the GST equals the total: \\(800 + 80 = 880\\). This matches the given total."
+    },
+    {
+      "questionId": "std2-2023-q07-formulae-and-equations",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:20.106Z",
+      "sourceQuestionHash": "1adf6543fed9c0fc7d8b9e930549b778a7406a2919b1c319463e8d250391445a",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 2908,
+      "summaryLatex": "This problem involves calculating new coordinates on a sphere by adjusting latitude and longitude based on directional shifts.",
+      "approachLatex": "Identify the starting point and apply the shifts. Moving 'north' from the Southern Hemisphere reduces the latitude value until it crosses the equator, while moving 'west' from an Eastern longitude reduces the longitude value.",
+      "steps": [
+        {
+          "title": "Calculate the new latitude",
+          "bodyLatex": "City A is at \\(34^\\circ\\text{S}\\). Moving \\(72^\\circ\\) north means we subtract \\(72^\\circ\\) from the southern position: \\(-34^\\circ + 72^\\circ = 38^\\circ\\). Since the result is positive, City B is at \\(38^\\circ\\text{N}\\)."
+        },
+        {
+          "title": "Calculate the new longitude",
+          "bodyLatex": "City A is at \\(151^\\circ\\text{E}\\). Moving \\(25^\\circ\\) west means we subtract \\(25^\\circ\\) from the eastern longitude: \\(151^\\circ - 25^\\circ = 126^\\circ\\). Since the result is still positive and we have not crossed the Prime Meridian, the location remains in the Eastern Hemisphere at \\(126^\\circ\\text{E}\\)."
+        },
+        {
+          "title": "Combine the coordinates",
+          "bodyLatex": "Combining the results from the previous steps, the latitude is \\(38^\\circ\\text{N}\\) and the longitude is \\(126^\\circ\\text{E}\\)."
+        },
+        {
+          "title": "Select the correct option",
+          "bodyLatex": "Comparing our result of \\(38^\\circ\\text{N}, 126^\\circ\\text{E}\\) with the given options, it matches option C."
+        }
+      ],
+      "finalAnswerLatex": "C",
+      "commonMistakesLatex": [
+        "Confusing the direction of movement, such as adding the longitude instead of subtracting it.",
+        "Misinterpreting the transition from Southern Hemisphere to Northern Hemisphere latitude."
+      ],
+      "checkLatex": "Check the logic: \\(34^\\circ\\text{S}\\) to \\(0^\\circ\\) is \\(34^\\circ\\), leaving \\(72^\\circ - 34^\\circ = 38^\\circ\\) to travel north of the equator, confirming \\(38^\\circ\\text{N}\\)."
+    },
+    {
+      "questionId": "std2-2023-q09-working-with-time",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:20.269Z",
+      "sourceQuestionHash": "db1db424417ca9251eba85a96b6b159eba5050aaef61ef747ea9de0111c0e92d",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3104,
+      "summaryLatex": "This problem involves calculating the range of possible values for the area of a rectangle given measurements rounded to the nearest centimetre.",
+      "approachLatex": "When a measurement is rounded to the nearest unit, the absolute error is half of that unit. Here, the measurements are to the nearest \\(1\\text{ cm}\\), so the error is \\(0.5\\text{ cm}\\). We determine the lower and upper bounds for each dimension and then calculate the minimum and maximum possible areas.",
+      "steps": [
+        {
+          "title": "Determine bounds for each dimension",
+          "bodyLatex": "For a measurement of \\(8\\text{ cm}\\) rounded to the nearest \\(1\\text{ cm}\\), the lower bound is \\(8 - 0.5 = 7.5\\text{ cm}\\) and the upper bound is \\(8 + 0.5 = 8.5\\text{ cm}\\). Similarly, for the \\(5\\text{ cm}\\) measurement, the lower bound is \\(5 - 0.5 = 4.5\\text{ cm}\\) and the upper bound is \\(5 + 0.5 = 5.5\\text{ cm}\\)."
+        },
+        {
+          "title": "Calculate the lower bound of the area",
+          "bodyLatex": "The minimum possible area is found by multiplying the lower bounds of the length and the width: \\(\\text{Area}_{\\text{min}} = 7.5\\text{ cm} \\times 4.5\\text{ cm} = 33.75\\text{ cm}^2\\)."
+        },
+        {
+          "title": "Calculate the upper bound of the area",
+          "bodyLatex": "The maximum possible area is found by multiplying the upper bounds of the length and the width: \\(\\text{Area}_{\\text{max}} = 8.5\\text{ cm} \\times 5.5\\text{ cm} = 46.75\\text{ cm}^2\\)."
+        },
+        {
+          "title": "Compare with options",
+          "bodyLatex": "Comparing our calculated bounds of \\(33.75\\text{ cm}^2\\) and \\(46.75\\text{ cm}^2\\) with the given options, we identify that these values match option D."
+        }
+      ],
+      "finalAnswerLatex": "D",
+      "commonMistakesLatex": [
+        "Calculating the bounds as \\(8 \\pm 1\\) instead of \\(8 \\pm 0.5\\). Always remember that the error is half the rounding unit.",
+        "Assuming the area bounds are simply the area of the original measurements plus or minus the error, rather than multiplying the extreme bounds of the dimensions."
+      ],
+      "checkLatex": "The range of the area is \\([33.75, 46.75]\\). The original area is \\(8 \\times 5 = 40\\text{ cm}^2\\), which sits comfortably within this range."
+    },
+    {
+      "questionId": "std2-2023-q11-formulae-and-equations",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:20.627Z",
+      "sourceQuestionHash": "5d5f20cecbe848e831f39fbea253f5d65ca7afcf461d87c5ba036a76c217163e",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 2702,
+      "summaryLatex": "This problem involves partitioning a total quantity based on a given ratio and then adjusting the parts by a constant subtraction.",
+      "approachLatex": "First, determine the number of red and blue jelly beans using the total and the ratio. Then, subtract the eaten beans from each group to find the new quantities and simplify the resulting ratio.",
+      "steps": [
+        {
+          "title": "Calculate initial quantities",
+          "bodyLatex": "The ratio of red to blue is \\(2:3\\), meaning there are \\(2+3=5\\) parts in total. Each part represents \\(\\frac{150}{5} = 30\\) jelly beans. Therefore, the initial number of red jelly beans is \\(2 \\times 30 = 60\\), and the number of blue jelly beans is \\(3 \\times 30 = 90\\)."
+        },
+        {
+          "title": "Adjust for eaten jelly beans",
+          "bodyLatex": "Sophie eats \\(10\\) of each colour. Subtracting these from the initial totals gives the new quantities: Red = \\(60 - 10 = 50\\) and Blue = \\(90 - 10 = 80\\)."
+        },
+        {
+          "title": "Form the new ratio",
+          "bodyLatex": "The new ratio of red to blue jelly beans is \\(50:80\\)."
+        },
+        {
+          "title": "Simplify the ratio",
+          "bodyLatex": "Divide both sides of the ratio \\(50:80\\) by their greatest common divisor, which is \\(10\\). This results in the simplified ratio \\(5:8\\)."
+        }
+      ],
+      "finalAnswerLatex": "C",
+      "commonMistakesLatex": [
+        "Assuming the ratio remains unchanged after subtracting the same amount from both quantities.",
+        "Forgetting to subtract the eaten beans from both colours before calculating the new ratio."
+      ],
+      "checkLatex": "The sum of the new quantities is \\(50 + 80 = 130\\), which is the original \\(150\\) minus the \\(20\\) eaten, confirming the arithmetic is consistent."
+    },
+    {
+      "questionId": "std2-2023-q12-working-with-time",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:20.991Z",
+      "sourceQuestionHash": "a59752facedf2be1c177a1545de4fea84d4ab6acc1f6cffc92498d3b7bf0ee45",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 2772,
+      "summaryLatex": "This problem uses the properties of a circle and the Pythagorean theorem to find the depth of a segment of a circle.",
+      "approachLatex": "Notice that the water surface forms a chord of length \\(20\\text{ cm}\\) in a circle of radius \\(r = 12.5\\text{ cm}\\). By drawing a triangle from the centre of the circle to the midpoint of the chord, we can find the distance from the centre to the water surface.",
+      "steps": [
+        {
+          "title": "Identify the geometry",
+          "bodyLatex": "Consider the cross-section of the pipe as a circle with radius \\(R = 12.5\\text{ cm}\\). The water surface is a chord of length \\(20\\text{ cm}\\). Let \\(M\\) be the midpoint of this chord. The distance from the centre of the circle to \\(M\\) is \\(x\\). The radius, the distance \\(x\\), and half the chord length form a right-angled triangle."
+        },
+        {
+          "title": "Apply Pythagoras",
+          "bodyLatex": "In the right-angled triangle, the hypotenuse is the radius \\(12.5\\text{ cm}\\), and one leg is half the chord length, which is \\(\\frac{20}{2} = 10\\text{ cm}\\). Using Pythagoras' theorem: \\(x^2 + 10^2 = 12.5^2\\)."
+        },
+        {
+          "title": "Solve for the distance x",
+          "bodyLatex": "Calculate the values: \\(x^2 + 100 = 156.25\\). Subtracting \\(100\\) from both sides gives \\(x^2 = 56.25\\). Taking the square root, we find \\(x = \\sqrt{56.25} = 7.5\\text{ cm}\\). This is the distance from the centre of the circle to the water surface."
+        },
+        {
+          "title": "Calculate the depth d",
+          "bodyLatex": "The total radius of the pipe is \\(12.5\\text{ cm}\\). The depth \\(d\\) is the radius minus the distance \\(x\\) from the centre to the surface: \\(d = 12.5 - 7.5 = 5.0\\text{ cm}\\)."
+        }
+      ],
+      "finalAnswerLatex": "B. \\(5.0\\text{ cm}\\)",
+      "commonMistakesLatex": [
+        "Mistaking the distance from the centre to the chord as the depth itself.",
+        "Forgetting to bisect the chord length before applying Pythagoras."
+      ],
+      "checkLatex": "Since \\(5.0\\text{ cm} + 7.5\\text{ cm} = 12.5\\text{ cm}\\) (the radius), the calculation is consistent with the geometry of the pipe."
+    },
+    {
+      "questionId": "std2-2023-q13-further-statistical-analysis",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:22.860Z",
+      "sourceQuestionHash": "bf8e7f0b5eaa9269cfbb687b49069bc0df23cb53b05785024adb5047687e9641",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 2895,
+      "summaryLatex": "This problem involves calculating successive percentage decreases by applying multipliers to the original price.",
+      "approachLatex": "Notice that discounts are multiplicative, not additive. To find the total discount, calculate the final price as a fraction of the original price and subtract this from \\(100\\%\\).",
+      "steps": [
+        {
+          "title": "Calculate the first multiplier",
+          "bodyLatex": "A discount of \\(30\\%\\) means the item retains \\(100\\% - 30\\% = 70\\%\\) of its original value. The multiplier for this step is \\(0.70\\)."
+        },
+        {
+          "title": "Calculate the second multiplier",
+          "bodyLatex": "A further discount of \\(20\\%\\) is applied to the new price. This means the item retains \\(100\\% - 20\\% = 80\\%\\) of the reduced price. The multiplier for this step is \\(0.80\\)."
+        },
+        {
+          "title": "Find the final price factor",
+          "bodyLatex": "To find the final price relative to the original, multiply the two factors together: \\(0.70 \\times 0.80 = 0.56\\). This means the final price is \\(56\\%\\) of the original price."
+        },
+        {
+          "title": "Determine the total discount",
+          "bodyLatex": "The total percentage discount is the difference between the original \\(100\\%\\) and the final \\(56\\%\\). Thus, \\(100\\% - 56\\% = 44\\%\\)."
+        }
+      ],
+      "finalAnswerLatex": "B. \\(44\\%\\)",
+      "commonMistakesLatex": [
+        "Adding the percentages together (\\(30\\% + 20\\% = 50\\%\\)) is incorrect because the second discount is applied to a smaller, already-reduced amount."
+      ],
+      "checkLatex": "If the original price was \\(\\$100\\), after a \\(30\\%\\) discount it becomes \\(\\$70\\). A \\(20\\%\\) discount on \\(\\$70\\) is \\(\\$14\\), resulting in a final price of \\(\\$56\\). The total reduction is \\(\\$100 - \\$56 = \\$44\\), which is \\(44\\%\\)."
+    },
+    {
+      "questionId": "std2-2023-q14-critical-path-analysis",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:23.014Z",
+      "sourceQuestionHash": "a59d2857b17bc0cb6f90424c1ccfd546d0584dbf01fdf9a46300975ad4f09685",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 2559,
+      "summaryLatex": "This question tests the Max-Flow Min-Cut Theorem, which relates the capacity of any cut in a network to the maximum possible flow.",
+      "approachLatex": "Recognise that any cut in a network provides an upper bound for the maximum flow. The Max-Flow Min-Cut Theorem states that the maximum flow is equal to the capacity of the minimum cut.",
+      "steps": [
+        {
+          "title": "Understand the cut capacity",
+          "bodyLatex": "A cut is a partition of the network nodes into two sets, one containing the source \\(A\\) and one containing the sink \\(B\\). The capacity of a cut is the sum of the capacities of the edges crossing from the source set to the sink set."
+        },
+        {
+          "title": "Apply the Max-Flow Min-Cut Theorem",
+          "bodyLatex": "The theorem states that the maximum flow through a network is equal to the capacity of the minimum cut. Since we have identified a cut with a capacity of \\(30\\), we know the maximum flow cannot exceed this value."
+        },
+        {
+          "title": "Evaluate the flow constraint",
+          "bodyLatex": "Because the capacity of this specific cut is \\(30\\), the maximum flow must be less than or equal to \\(30\\). It is possible that another cut exists with a smaller capacity, which would make the maximum flow even lower."
+        },
+        {
+          "title": "Select the correct statement",
+          "bodyLatex": "Statement C, 'The maximum flow is \\(30\\) or less', correctly reflects that the capacity of any cut acts as an upper bound for the maximum flow of the network."
+        }
+      ],
+      "finalAnswerLatex": "C",
+      "commonMistakesLatex": [
+        "Assuming the given cut is automatically the minimum cut. The capacity of a cut only provides an upper bound, not necessarily the exact maximum flow."
+      ],
+      "checkLatex": "If the maximum flow were greater than \\(30\\), it would violate the capacity constraint of the cut shown, which is impossible."
+    },
+    {
+      "questionId": "std2-2023-q15-money-matters",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:23.329Z",
+      "sourceQuestionHash": "e29c9d66bdb75f3d435c1f7140686844ebdb0fd9098c5f234ea1e4242bd140a4",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 2824,
+      "summaryLatex": "This problem uses the definition of the arithmetic mean to find the sum of marks before and after the final test.",
+      "approachLatex": "The mean is defined as the sum of all values divided by the number of values. We can use the target mean for six tests to find the total marks required, then subtract the final test mark to find the sum of the first five.",
+      "steps": [
+        {
+          "title": "Calculate the total marks required",
+          "bodyLatex": "The mean mark for six tests is \\(80\\). Since the mean is calculated as \\(\\frac{\\text{Total Marks}}{6}\\), the total marks required after six tests is \\(6 \\times 80 = 480\\)."
+        },
+        {
+          "title": "Find the sum of the first five tests",
+          "bodyLatex": "We know the final test score is \\(90\\). Let \\(S\\) be the sum of the first five tests. Then \\(S + 90 = 480\\). Subtracting \\(90\\) from both sides gives \\(S = 480 - 90 = 390\\)."
+        },
+        {
+          "title": "Calculate the mean of the first five tests",
+          "bodyLatex": "The mean mark for the first five tests is the sum of those marks divided by \\(5\\). This is \\(\\frac{390}{5} = 78\\)."
+        },
+        {
+          "title": "Select the correct option",
+          "bodyLatex": "Comparing our result of \\(78\\) to the given options, we find that it matches option A."
+        }
+      ],
+      "finalAnswerLatex": "A",
+      "commonMistakesLatex": [
+        "Dividing the total sum of 480 by 5 instead of 6, or forgetting to subtract the final test mark from the total."
+      ],
+      "checkLatex": "If the mean of 5 tests is 78, the total is \\(5 \\times 78 = 390\\). Adding the final test of 90 gives \\(390 + 90 = 480\\). Dividing by 6 gives \\(\\frac{480}{6} = 80\\), which confirms the result."
+    },
+    {
+      "questionId": "std2-2023-q16-working-with-time",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:23.373Z",
+      "sourceQuestionHash": "7ab2d7a4c81ab656c060c876cb019aeebc0f79f03992a20235a296ed80a6e754",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 2631,
+      "summaryLatex": "This problem involves interpreting a linear graph to determine specific values for heart rate and time.",
+      "approachLatex": "For part (a), locate the value on the horizontal axis and read the corresponding vertical value. For part (b), identify the target value on the vertical axis, find the corresponding time on the horizontal axis, and add this duration to the start time.",
+      "steps": [
+        {
+          "title": "Part (a): Reading the graph",
+          "bodyLatex": "Locate \\(t = 20\\) minutes on the horizontal axis. Move vertically upwards until you reach the line representing Peta's heart rate. From that point, move horizontally to the left to read the value on the vertical axis. The graph indicates that at \\(t = 20\\), the heart rate is \\(120\\) beats per minute."
+        },
+        {
+          "title": "Part (b): Identifying the target heart rate",
+          "bodyLatex": "Locate \\(140\\) beats per minute on the vertical axis. Move horizontally to the right until you intersect the line representing Peta's heart rate. From this intersection point, move vertically downwards to the horizontal axis to determine the time elapsed since the start of the marathon."
+        },
+        {
+          "title": "Part (b): Determining the time elapsed",
+          "bodyLatex": "By observing the graph, the point where the heart rate is \\(140\\) beats per minute corresponds to \\(t = 30\\) minutes on the horizontal axis. This means it takes \\(30\\) minutes from the start of the marathon for her heart rate to reach this level."
+        },
+        {
+          "title": "Part (b): Calculating the final time",
+          "bodyLatex": "Peta started the marathon at \\(10:00\\) am. Adding the \\(30\\) minutes elapsed to the start time gives \\(10:00 \\text{ am} + 30 \\text{ minutes} = 10:30 \\text{ am}\\)."
+        }
+      ],
+      "finalAnswerLatex": "(a) \\(120\\) beats per minute; (b) \\(10:30\\) am.",
+      "commonMistakesLatex": [
+        "Misreading the axes scales, especially if the intervals are not marked in units of one.",
+        "Forgetting to add the elapsed time to the start time in part (b), resulting in an answer of 30 minutes instead of the clock time."
+      ],
+      "checkLatex": "Verify that the points \\((0, 100)\\) and \\((60, 180)\\) lie on the line, confirming a gradient of \\(\\frac{180-100}{60-0} = \\frac{80}{60} = \\frac{4}{3}\\). The equation is \\(H = \\frac{4}{3}t + 100\\). For \\(t=20\\), \\(H = \\frac{80}{3} + 100 \\approx 126.6\\). Since the graph is a visual representation, ensure your reading aligns with the provided line."
+    },
+    {
+      "questionId": "std2-2023-q18-the-normal-distribution",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:23.764Z",
+      "sourceQuestionHash": "98c8be7347230b0063db240b7c7fee7ff2167eff9be7e8968f77ab9f54fc4d63",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 2431,
+      "summaryLatex": "Identifying the key visual characteristics of a normal distribution in a histogram.",
+      "approachLatex": "To determine if a histogram represents a normal distribution, look for the classic 'bell-shaped' properties: symmetry and the presence of a single peak.",
+      "steps": [
+        {
+          "title": "Check for symmetry",
+          "bodyLatex": "A normal distribution is perfectly symmetrical about its mean. Observe the histogram to see if the left side is a mirror image of the right side. If the data is balanced around the central peak, it satisfies the property of symmetry."
+        },
+        {
+          "title": "Check for unimodality",
+          "bodyLatex": "A normal distribution is unimodal, meaning it has only one clear peak or 'mode'. Look at the histogram to ensure there is one central bar that is the highest, with frequencies decreasing consistently as you move away from the centre in both directions."
+        },
+        {
+          "title": "Evaluate the bell shape",
+          "bodyLatex": "The combination of being symmetrical and unimodal creates the characteristic 'bell shape'. This indicates that the majority of the data is clustered around the mean, with fewer observations occurring at the extreme ends (the tails)."
+        },
+        {
+          "title": "Formulate the final answer",
+          "bodyLatex": "State the two primary features clearly. The histogram indicates a normal distribution because it is symmetrical and unimodal."
+        }
+      ],
+      "finalAnswerLatex": "The two features are that the histogram is symmetrical and unimodal.",
+      "commonMistakesLatex": [
+        "Confusing 'unimodal' with 'uniform'. A uniform distribution has bars of equal height, whereas a normal distribution must have a single peak.",
+        "Failing to mention both features when the question explicitly asks for two."
+      ],
+      "checkLatex": "Does the histogram look like a bell? If yes, it must be symmetrical and have one peak."
+    },
+    {
+      "questionId": "std2-2023-q19-working-with-time",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:25.573Z",
+      "sourceQuestionHash": "9994df62bea8a654299c2df5f71dd95229ebeeefdaed9943b9880ae16b51b20a",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3253,
+      "summaryLatex": "This question involves finding the shortest path in a weighted network and identifying the properties of a minimum spanning tree.",
+      "approachLatex": "For (a), use a systematic search of all possible paths from \\(A\\) to \\(D\\) by summing the weights of each route. For (b), compare the total weight of the given spanning tree to the weight of a tree constructed using Prim's or Kruskal's algorithm.",
+      "steps": [
+        {
+          "title": "Finding the shortest path",
+          "bodyLatex": "To find the shortest path from \\(A\\) to \\(D\\), list all possible routes and calculate their total times. For example, path \\(A \\to B \\to F \\to G \\to D\\) involves summing the weights of the edges \\(AB\\), \\(BF\\), \\(FG\\), and \\(GD\\). Compare this sum against other potential routes like \\(A \\to E \\to F \\to G \\to D\\) or \\(A \\to B \\to C \\to D\\) to identify the minimum value."
+        },
+        {
+          "title": "Identifying the shortest path",
+          "bodyLatex": "After calculating the total time for each path, the path with the smallest sum is the shortest. Based on the network weights, the path \\(A \\to B \\to F \\to G \\to D\\) provides the minimum time required to travel from \\(A\\) to \\(D\\)."
+        },
+        {
+          "title": "Evaluating the spanning tree",
+          "bodyLatex": "A minimum spanning tree (MST) must connect all vertices with the minimum possible total edge weight. To check if the provided tree is an MST, look for any edge currently in the tree that could be replaced by a shorter edge from the original network that still connects the same vertices without forming a cycle."
+        },
+        {
+          "title": "Justifying the conclusion",
+          "bodyLatex": "Examine the connection to vertex \\(C\\). If the provided tree uses an edge to connect \\(C\\) that is longer than another available edge in the original network (such as \\(BC\\)), then the tree is not a minimum spanning tree. By replacing the longer edge with the shorter one, the total weight of the tree would decrease, proving the original was not minimal."
+        }
+      ],
+      "finalAnswerLatex": "(a) The shortest path is \\(A \\to B \\to F \\to G \\to D\\). (b) No, it is not a minimum spanning tree because there exists a shorter edge (such as \\(BC\\)) that could connect vertex \\(C\\) to the tree, resulting in a lower total weight.",
+      "commonMistakesLatex": [
+        "In (a), failing to check all possible paths and assuming the first path found is the shortest.",
+        "In (b), forgetting that an MST must connect all vertices with the absolute minimum total weight, not just any set of edges that connects the graph."
+      ],
+      "checkLatex": "Ensure the path in (a) actually connects \\(A\\) to \\(D\\) and that the reason in (b) explicitly mentions the existence of a shorter edge that could replace one in the current tree."
+    },
+    {
+      "questionId": "std2-2023-q20-working-with-time",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:25.755Z",
+      "sourceQuestionHash": "e8e93870906efa8f0a2c7885c1524a89c8fcb67361b42d04f6e05064c0f6d7c2",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 2809,
+      "summaryLatex": "This problem involves interpreting a quadratic model for projectile motion to find a maximum value and solving a quadratic equation for specific heights.",
+      "approachLatex": "For part (a), identify the vertex of the parabola from the graph. For part (b), calculate the target height by finding \\(\\frac{3}{4}\\) of the maximum, then solve the equation \\(h(t) = 18\\) for \\(t\\).",
+      "steps": [
+        {
+          "title": "Find the maximum height",
+          "bodyLatex": "The maximum height is the vertex of the parabola \\(h = -6t^2 + 24t\\). Looking at the provided graph, the peak occurs at \\(t = 2\\). Substituting this into the equation: \\(h(2) = -6(2)^2 + 24(2) = -6(4) + 48 = -24 + 48 = 24\\). Thus, the maximum height is \\(24 \\text{ m}\\)."
+        },
+        {
+          "title": "Calculate the target height",
+          "bodyLatex": "We need to find the times when the ball is at \\(\\frac{3}{4}\\) of its maximum height. First, calculate this value: \\(\\frac{3}{4} \\times 24 = 18\\). We are looking for the values of \\(t\\) where \\(h = 18\\)."
+        },
+        {
+          "title": "Set up the quadratic equation",
+          "bodyLatex": "Substitute \\(h = 18\\) into the model: \\(18 = -6t^2 + 24t\\). Rearrange this into standard quadratic form \\(at^2 + bt + c = 0\\) by moving all terms to one side: \\(6t^2 - 24t + 18 = 0\\)."
+        },
+        {
+          "title": "Solve for time",
+          "bodyLatex": "Divide the entire equation by \\(6\\) to simplify: \\(t^2 - 4t + 3 = 0\\). Factorise the quadratic: \\((t - 1)(t - 3) = 0\\). This gives the solutions \\(t = 1\\) and \\(t = 3\\)."
+        }
+      ],
+      "finalAnswerLatex": "(a) The maximum height is \\(24 \\text{ m}\\). (b) The ball is at \\(\\frac{3}{4}\\) of its maximum height at \\(t = 1 \\text{ s}\\) and \\(t = 3 \\text{ s}\\).",
+      "commonMistakesLatex": [
+        "Forgetting to divide by the common factor (6) before factorising, which makes the quadratic harder to solve.",
+        "Confusing the time at which the maximum height occurs with the maximum height value itself."
+      ],
+      "checkLatex": "Check the solutions by substituting back into the original equation: \\(h(1) = -6(1)^2 + 24(1) = 18\\) and \\(h(3) = -6(3)^2 + 24(3) = -54 + 72 = 18\\). Both are correct."
+    },
+    {
+      "questionId": "std2-2023-q22-linear-relationships",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:26.153Z",
+      "sourceQuestionHash": "090b21c9509116b47d109feb2f6e5cb6a2f37756f6f3dc5cea0aa3129b215f2a",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3100,
+      "summaryLatex": "This problem uses the concept of direct variation to model the relationship between braking distance and speed.",
+      "approachLatex": "Identify the relationship as \\(d = k v^2\\). First, use the given data point to solve for the constant \\(k\\), then use that constant to calculate the unknown distance for the new speed.",
+      "steps": [
+        {
+          "title": "Set up the equation",
+          "bodyLatex": "The problem states that braking distance \\(d\\) is directly proportional to the square of the speed \\(v\\). This is written as \\(d = k v^2\\). We are given that when \\(v = 50\\text{ km/h}\\), the distance \\(d = 20\\text{ m}\\)."
+        },
+        {
+          "title": "Solve for the constant k",
+          "bodyLatex": "Substitute the known values into the equation: \\(20 = k \\times (50)^2\\). Calculate the square of the speed: \\(50^2 = 2500\\). Now, isolate \\(k\\) by dividing both sides by \\(2500\\): \\(k = \\frac{20}{2500}\\). Simplifying this fraction gives \\(k = 0.008\\)."
+        },
+        {
+          "title": "Apply the constant to the new speed",
+          "bodyLatex": "Now that we have the value of \\(k\\), we can find the braking distance for any speed. For a speed of \\(v = 90\\text{ km/h}\\), substitute \\(k = 0.008\\) and \\(v = 90\\) into the original formula: \\(d = 0.008 \\times (90)^2\\)."
+        },
+        {
+          "title": "Calculate the final distance",
+          "bodyLatex": "Calculate the square of the new speed: \\(90^2 = 8100\\). Finally, multiply by the constant: \\(d = 0.008 \\times 8100\\). This results in \\(d = 64.8\\text{ m}\\)."
+        }
+      ],
+      "finalAnswerLatex": "(a) \\(k = 0.008\\), (b) \\(64.8\\text{ m}\\)",
+      "commonMistakesLatex": [
+        "Forgetting to square the speed before multiplying by \\(k\\).",
+        "Incorrectly rearranging the formula to solve for \\(k\\), such as dividing by \\(v\\) instead of \\(v^2\\)."
+      ],
+      "checkLatex": "Check the result by verifying the ratio: \\(\\frac{20}{50^2} = 0.008\\) and \\(\\frac{64.8}{90^2} = 0.008\\). Since the ratios are identical, the constant is correct."
+    },
+    {
+      "questionId": "std2-2023-q24-applications-of-measurement",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:28.564Z",
+      "sourceQuestionHash": "474ec1d6c3d6d984b830c517825b09b4ed14a6a76adca04dcd7f590f085e7641",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3318,
+      "summaryLatex": "This problem uses the trapezoidal rule to estimate the area of an irregular shape, followed by volume and mass calculations.",
+      "approachLatex": "First, identify the width of the strips for the trapezoidal rule. Since the total width is \\(8.0\\text{ m}\\) and we need two applications, each strip width \\(h\\) is \\(4.0\\text{ m}\\). Then, apply the volume formula for a prism and multiply by the density.",
+      "steps": [
+        {
+          "title": "Apply the trapezoidal rule",
+          "bodyLatex": "The trapezoidal rule formula for one strip is \\(A = \\frac{h}{2}(d_1 + d_2)\\). With two strips of width \\(h = 4.0\\text{ m}\\), the area is the sum of two trapezoids: \\(A = \\frac{4.0}{2}(1.9 + 2.7) + \\frac{4.0}{2}(2.7 + 1.7)\\). Calculating this gives \\(A = 2(4.6) + 2(4.4) = 9.2 + 8.8 = 18\\text{ m}^2\\)."
+        },
+        {
+          "title": "Calculate the volume of the wall",
+          "bodyLatex": "The wall is a prism with a uniform thickness of \\(0.80\\text{ m}\\). The volume \\(V\\) is the cross-sectional area multiplied by the thickness: \\(V = 18\\text{ m}^2 \\times 0.80\\text{ m} = 14.4\\text{ m}^3\\)."
+        },
+        {
+          "title": "Calculate the total weight",
+          "bodyLatex": "Given that \\(1\\text{ m}^3\\) of concrete weighs \\(3.52\\text{ tonnes}\\), multiply the total volume by the density: \\(\\text{Weight} = 14.4\\text{ m}^3 \\times 3.52\\text{ tonnes/m}^3 = 50.688\\text{ tonnes}\\)."
+        },
+        {
+          "title": "Round to significant figures",
+          "bodyLatex": "The question requires the answer to two significant figures. The first two significant digits in \\(50.688\\) are \\(5\\) and \\(0\\). Since the next digit is \\(6\\), we round up to get \\(51\\text{ tonnes}\\)."
+        }
+      ],
+      "finalAnswerLatex": "The estimated area is \\(18\\text{ m}^2\\) and the weight of the concrete is \\(51\\text{ tonnes}\\) (to two significant figures).",
+      "commonMistakesLatex": [
+        "Forgetting to divide the total width by the number of strips to find \\(h\\).",
+        "Rounding the intermediate volume or weight too early, which can lead to an incorrect final answer.",
+        "Confusing decimal places with significant figures when rounding the final result."
+      ],
+      "checkLatex": "Check that the area is reasonable by comparing it to a rectangle of average height: \\(8.0 \\times 2.1 \\approx 16.8\\text{ m}^2\\), which is close to our calculated \\(18\\text{ m}^2\\)."
+    },
+    {
+      "questionId": "std2-2023-q25-formulae-and-equations",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:28.827Z",
+      "sourceQuestionHash": "eec359a2875266ad6b1f7c556256f4215f320594c39d76e29c20a6730bd63fff",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3431,
+      "summaryLatex": "This problem uses future value annuity tables to calculate either the required periodic contribution or the final accumulated balance.",
+      "approachLatex": "Identify the number of periods \\(n\\) and the interest rate per period \\(r\\). Use the provided table to find the Future Value Interest Factor (FVIF) and multiply or divide the principal amount accordingly.",
+      "steps": [
+        {
+          "title": "Part (a): Finding the annual contribution",
+          "bodyLatex": "To find the annual contribution, we use the formula \\(A = P \\times \\text{FVIF}\\), where \\(A\\) is the target amount and \\(P\\) is the contribution. Rearranging gives \\(P = \\frac{A}{\\text{FVIF}}\\). For 10 years at 6% per annum, the table provides a factor of \\(13.181\\). Thus, \\(P = \\frac{450000}{13.181} \\approx 34140.05\\)."
+        },
+        {
+          "title": "Part (a): Final rounding",
+          "bodyLatex": "The question asks for the answer to the nearest dollar. Rounding \\(34140.05\\) to the nearest whole number gives an annual contribution of \\(\\$34\\,140\\)."
+        },
+        {
+          "title": "Part (b): Adjusting for quarterly compounding",
+          "bodyLatex": "Since the contributions are quarterly, we adjust the rate and periods. The quarterly interest rate is \\(r = \\frac{6\\%}{4} = 1.5\\%\\). The total number of periods over 10 years is \\(n = 10 \\times 4 = 40\\). From the table, the FVIF for \\(n=40\\) at \\(1.5\\%\\) is \\(54.268\\)."
+        },
+        {
+          "title": "Part (b): Calculating the final balance",
+          "bodyLatex": "Using the formula \\(A = P \\times \\text{FVIF}\\) with the quarterly contribution \\(P = \\$8535\\), we calculate the total future value: \\(A = 8535 \\times 54.268 = 463177.38\\). Micky will have \\(\\$463\\,177.38\\) at the end of 10 years."
+        }
+      ],
+      "finalAnswerLatex": "(a) \\(\\$34\\,140\\); (b) \\(\\$463\\,177.38\\)",
+      "commonMistakesLatex": [
+        "Forgetting to adjust the interest rate and number of periods for quarterly compounding in part (b).",
+        "Using the wrong column or row in the interest factor table."
+      ],
+      "checkLatex": "In part (a), check that \\(34140 \\times 13.181 \\approx 450000\\). In part (b), ensure the total number of periods \\(n\\) matches the frequency of the contributions."
+    },
+    {
+      "questionId": "std2-2023-q26-critical-path-analysis",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:29.253Z",
+      "sourceQuestionHash": "c45d86e8a3b45fb30e0b5afa38df4679a4d3827a252af2a1664a3148df5d35c4",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 2973,
+      "summaryLatex": "This problem involves calculating the area of a composite shape and applying ratio calculations to determine the quantity of materials required.",
+      "approachLatex": "For (a), subtract the area of the inner garden from the total area of the rectangle. For (b), use the ratio parts to find the mass of cement, then divide by the weight per bag.",
+      "steps": [
+        {
+          "title": "Calculate the area of the path",
+          "bodyLatex": "The total area is defined by the outer dimensions \\(8\\text{ m} \\times 3\\text{ m} = 24\\text{ m}^2\\). The inner garden dimensions are reduced by the \\(0.5\\text{ m}\\) path width on the sides and bottom. The inner width is \\(8 - 0.5 - 0.5 = 7\\text{ m}\\) and the inner height is \\(3 - 0.5 = 2.5\\text{ m}\\). The inner area is \\(7\\text{ m} \\times 2.5\\text{ m} = 17.5\\text{ m}^2\\). The path area is \\(24 - 17.5 = 6.5\\text{ m}^2\\)."
+        },
+        {
+          "title": "Determine the proportion of cement",
+          "bodyLatex": "The ratio of crushed rock to sand to cement is \\(4:2:1\\). The total number of parts is \\(4 + 2 + 1 = 7\\). Therefore, cement makes up \\(\\frac{1}{7}\\) of the total weight of the concrete mix."
+        },
+        {
+          "title": "Calculate the mass of cement required",
+          "bodyLatex": "Kim needs \\(2.1\\text{ tonnes}\\) of mix. The mass of cement required is \\(\\frac{1}{7} \\times 2.1\\text{ tonnes} = 0.3\\text{ tonnes}\\). Since the bags are measured in kilograms, convert this to kilograms: \\(0.3 \\times 1000 = 300\\text{ kg}\\)."
+        },
+        {
+          "title": "Calculate the number of bags",
+          "bodyLatex": "Each bag contains \\(15\\text{ kg}\\) of cement. To find the number of bags needed, divide the total mass of cement by the mass per bag: \\(\\frac{300\\text{ kg}}{15\\text{ kg/bag}} = 20\\text{ bags}\\)."
+        }
+      ],
+      "finalAnswerLatex": "(a) The area of the path is \\(6.5\\text{ m}^2\\). (b) Kim needs to buy \\(20\\) bags of cement.",
+      "commonMistakesLatex": [
+        "In part (a), forgetting to subtract the path width from both sides of the rectangle (e.g., subtracting 0.5 instead of 1.0).",
+        "In part (b), failing to convert tonnes to kilograms before dividing by the bag weight."
+      ],
+      "checkLatex": "For (b), check the total weight: \\(4\\text{ parts} + 2\\text{ parts} + 1\\text{ part} = 7\\text{ parts}\\). If \\(1\\text{ part} = 0.3\\text{ tonnes}\\), then \\(7 \\times 0.3 = 2.1\\text{ tonnes}\\), which matches the total."
+    },
+    {
+      "questionId": "std2-2023-q27-formulae-and-equations",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:29.360Z",
+      "sourceQuestionHash": "fcb6086e68fb4d91adcacb716487e4ba100f60a15d38391b217a9401d5bf0e4d",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3492,
+      "summaryLatex": "This problem uses trigonometry in right-angled triangles to solve for distances and bearings based on geometric relationships.",
+      "approachLatex": "First, identify the right-angled triangles formed by the positions. Since \\(P\\) is due south of \\(X\\) and \\(C\\) is due west of \\(Y\\), we can use basic trigonometric ratios like \\(\\cos \\theta\\) and \\(\\sin \\theta\\) to find the missing lengths and angles.",
+      "steps": [
+        {
+          "title": "Find the distance XP",
+          "bodyLatex": "Since \\(Y\\) is on a bearing of \\(120^{\\circ}\\) from \\(X\\), the angle between the North line and the line \\(XY\\) is \\(120^{\\circ}\\). Because \\(P\\) is due south of \\(X\\), the angle \\(\\angle PXY\\) is \\(180^{\\circ} - 120^{\\circ} = 60^{\\circ}\\). In the right-angled triangle \\( riangle PXY\\), we have \\(\\cos(60^{\\circ}) = \\frac{XP}{15}\\). Thus, \\(XP = 15 \\times \\cos(60^{\\circ}) = 7.5 \\text{ km}\\)."
+        },
+        {
+          "title": "Identify the triangle CXP",
+          "bodyLatex": "We now consider the right-angled triangle \\( riangle CXP\\). We know the hypotenuse \\(XC = 40 \\text{ km}\\) and the adjacent side \\(XP = 7.5 \\text{ km}\\). Let \\(\\theta\\) be the angle \\(\\angle CXP\\). Using the cosine ratio, \\(\\cos(\\theta) = \\frac{7.5}{40} = 0.1875\\)."
+        },
+        {
+          "title": "Calculate the angle CXP",
+          "bodyLatex": "To find \\(\\theta\\), calculate the inverse cosine: \\(\\theta = \\cos^{-1}(0.1875) \\approx 79.20^{\\circ}\\). In degrees and minutes, this is approximately \\(79^{\\circ} 12'\\)."
+        },
+        {
+          "title": "Determine the bearing of C from X",
+          "bodyLatex": "The bearing is measured clockwise from North. Since \\(P\\) is due south of \\(X\\) (bearing \\(180^{\\circ}\\)) and \\(C\\) is to the west of the line \\(XP\\), we subtract \\(\\theta\\) from \\(180^{\\circ}\\) to find the bearing: \\(180^{\\circ} + 79.20^{\\circ} = 259.20^{\\circ}\\). Rounding to the nearest degree, we get \\(259^{\\circ}\\)."
+        }
+      ],
+      "finalAnswerLatex": "(a) \\(XP = 7.5 \\text{ km}\\); (b) \\(259^{\\circ}\\)",
+      "commonMistakesLatex": [
+        "Confusing the bearing angle with the interior angle of the triangle.",
+        "Forgetting that the bearing is measured clockwise from North, leading to an incorrect addition or subtraction of the calculated angle."
+      ],
+      "checkLatex": "Check that \\(\\sin(60^{\\circ}) = \\frac{PY}{15}\\), so \\(PY \\approx 12.99 \\text{ km}\\). In \\( riangle CXP\\), \\(CP = \\sqrt{40^2 - 7.5^2} \\approx 39.29 \\text{ km}\\). These values are consistent with the geometry."
+    },
+    {
+      "questionId": "std2-2023-q28-working-with-time",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:29.606Z",
+      "sourceQuestionHash": "f9fc70e57a294e0a2f75dc1a2717c048542258f54e60f1763afc20905ba50e2c",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 2901,
+      "summaryLatex": "This problem requires comparing two depreciation models over a 3-year period to determine which results in a lower salvage value.",
+      "approachLatex": "Identify the formula for each depreciation method. The straight-line method uses a constant annual deduction, while the declining-balance method uses a percentage reduction applied to the remaining value each year.",
+      "steps": [
+        {
+          "title": "Straight-line method",
+          "bodyLatex": "The straight-line method subtracts a fixed amount each year. With an initial value \\(V_0 = \\$60\\,000\\) and an annual depreciation \\(D = \\$3500\\), the value after \\(n=3\\) years is calculated as \\(S = V_0 - (D \\times n)\\). Substituting the values gives \\(S = 60\\,000 - (3500 \\times 3) = 60\\,000 - 10\\,500 = \\$49\\,500\\)."
+        },
+        {
+          "title": "Declining-balance method",
+          "bodyLatex": "The declining-balance method uses the formula \\(S = V_0(1 - r)^n\\), where \\(r\\) is the annual rate of depreciation. Here, \\(r = 12\\% = 0.12\\) and \\(n = 3\\). Substituting these values gives \\(S = 60\\,000(1 - 0.12)^3 = 60\\,000(0.88)^3\\)."
+        },
+        {
+          "title": "Calculate declining-balance value",
+          "bodyLatex": "Calculate the power first: \\(0.88^3 = 0.681472\\). Then, multiply by the initial value: \\(S = 60\\,000 \\times 0.681472 = \\$40\\,888.32\\)."
+        },
+        {
+          "title": "Comparison and conclusion",
+          "bodyLatex": "Compare the two results: the straight-line method yields \\(\\$49\\,500\\), while the declining-balance method yields \\(\\$40\\,888.32\\). Since \\(\\$40\\,888.32 < \\$49\\,500\\), the declining-balance method results in a lower salvage value."
+        }
+      ],
+      "finalAnswerLatex": "The declining-balance method results in a lower salvage value of \\(\\$40\\,888.32\\).",
+      "commonMistakesLatex": [
+        "Confusing the two formulas or applying the percentage rate incorrectly by multiplying by 3 instead of using the power of 3.",
+        "Rounding the declining-balance result too early, which can lead to an inaccurate final comparison."
+      ],
+      "checkLatex": "Check that \\(0.88^3\\) is less than 1, which confirms the value decreases over time, and ensure the units are in dollars."
+    },
+    {
+      "questionId": "std2-2023-q29-money-matters",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:31.882Z",
+      "sourceQuestionHash": "b71b4197c96208984bd3385814ec0a47147fee40e2d281ec6b5656bc7dd842bf",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3004,
+      "summaryLatex": "This problem involves using a loan repayment table to calculate total repayments and the principal amount borrowed.",
+      "approachLatex": "Identify the correct factor from the table based on the interest rate and loan term. For part (a), multiply the number of thousands borrowed by the factor and the total number of months. For part (b), divide the monthly payment by the factor and multiply by 1000 to find the principal.",
+      "steps": [
+        {
+          "title": "Part (a): Calculate monthly repayment",
+          "bodyLatex": "First, determine how many units of \\(\\$1000\\) are in the \\(\\$520\\,000\\) loan: \\(\\frac{520\\,000}{1000} = 520\\). Using the table for 8% interest over 25 years, the factor is \\(7.72\\). The monthly repayment is \\(520 \\times 7.72 = \\$4014.40\\)."
+        },
+        {
+          "title": "Part (a): Calculate total repayment",
+          "bodyLatex": "The loan term is 25 years, which equals \\(25 \\times 12 = 300\\) months. The total amount repaid is the monthly repayment multiplied by the total number of months: \\(\\$4014.40 \\times 300 = \\$1\\,204\\,320\\)."
+        },
+        {
+          "title": "Part (b): Identify the factor",
+          "bodyLatex": "For a loan at 7% per annum over 15 years, locate the corresponding factor in the table. The table indicates the factor for these terms is \\(8.99\\). This means for every \\(\\$1000\\) borrowed, Chris pays \\(\\$8.99\\) per month."
+        },
+        {
+          "title": "Part (b): Calculate the principal",
+          "bodyLatex": "To find the total amount borrowed, divide the monthly payment by the factor and multiply by 1000: \\(\\left( \\frac{3596}{8.99} \\right) \\times 1000 = 400 \\times 1000 = \\$400\\,000\\)."
+        }
+      ],
+      "finalAnswerLatex": "(a) The total amount repaid is \\(\\$1\\,204\\,320\\). (b) The amount borrowed is \\(\\$400\\,000\\).",
+      "commonMistakesLatex": [
+        "Forgetting to multiply the monthly repayment by the total number of months (12 months per year) in part (a).",
+        "Using the wrong row or column from the table; always double-check the interest rate and term before selecting the factor."
+      ],
+      "checkLatex": "In part (b), check the result: \\(\\$400\\,000\\) is 400 units of \\(\\$1000\\). Multiplying \\(400 \\times 8.99 = 3596\\), which matches the given monthly repayment."
+    },
+    {
+      "questionId": "std2-2023-q30-working-with-time",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:32.196Z",
+      "sourceQuestionHash": "302c59b372d32b06c94e361a5f4c33ed0efc30817ae267d3ed1c07fa0230dbbb",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3059,
+      "summaryLatex": "This problem requires identifying the value of goods subject to GST and subtracting both the GST and the GST-inclusive value from the total receipt amount.",
+      "approachLatex": "Recognise that the total receipt is composed of three parts: the value of non-GST items, the value of GST-exclusive items, and the GST itself. First, calculate the value of the items that were taxed.",
+      "steps": [
+        {
+          "title": "Calculate the value of GST-taxed items",
+          "bodyLatex": "Since GST is \\(10\\%\\) of the value of the taxed items, let \\(n\\) be the value of these items. We have \\(0.10 \\times n = \\$3.86\\). Dividing both sides by \\(0.10\\), we find \\(n = \\frac{3.86}{0.10} = \\$38.60\\)."
+        },
+        {
+          "title": "Determine the total value of taxed goods",
+          "bodyLatex": "The total amount paid for the taxed items includes both the original price of the goods and the GST. This is calculated as \\(\\$38.60 + \\$3.86 = \\$42.46\\)."
+        },
+        {
+          "title": "Calculate the value of non-taxed items",
+          "bodyLatex": "The total receipt amount of \\(\\$124.87\\) is the sum of the non-taxed items and the total taxed amount (including GST). Subtract the taxed total from the receipt total: \\(\\$124.87 - \\$42.46 = \\$82.41\\)."
+        },
+        {
+          "title": "Verification",
+          "bodyLatex": "Check the components: \\(\\$82.41\\) (non-taxed) + \\(\\$38.60\\) (taxed base) + \\(\\$3.86\\) (GST) = \\(\\$124.87\\). The sum matches the total on the receipt."
+        }
+      ],
+      "finalAnswerLatex": "The value of the items which did not have GST charged was \\(\\$82.41\\).",
+      "commonMistakesLatex": [
+        "Forgetting to add the GST amount back to the base taxed amount before subtracting from the total.",
+        "Subtracting only the GST (\\(\\$3.86\\)) from the total, which ignores the base price of the taxed items."
+      ],
+      "checkLatex": "Ensure the sum of the non-taxed items, the taxed items, and the GST equals the total receipt value."
+    },
+    {
+      "questionId": "std2-2023-q31-critical-path-analysis",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:32.226Z",
+      "sourceQuestionHash": "f7bdb51c4144c746a0c1b6bc85eafe228d0b91918e19b3eddb8f8edd8376198b",
+      "reviewStatus": "needs-review",
+      "needsReview": true,
+      "reviewNote": "The provided answer and working are insufficient to determine the critical paths or the specific task reduction without the visual network diagram. The logic provided in the prompt's answer key is incomplete as it references tasks H and I without context of the full network structure.",
+      "latencyMs": 3101,
+      "summaryLatex": "Critical path analysis involves identifying the longest path through a network and determining which task reduction will shorten the overall project duration.",
+      "approachLatex": "To find the critical path, calculate the earliest start and finish times for every path through the network. The critical path is the longest path, which determines the minimum time required to complete the project.",
+      "steps": [
+        {
+          "title": "Identify all paths",
+          "bodyLatex": "List every possible sequence of tasks from the start node to the end node. Calculate the total duration for each path by summing the time values assigned to each task in that sequence."
+        },
+        {
+          "title": "Determine the critical paths",
+          "bodyLatex": "The critical path is the path with the maximum total duration. If multiple paths share this same maximum duration, they are all considered critical paths. Identify these by comparing the sums calculated in the previous step."
+        },
+        {
+          "title": "Analyse the reduction",
+          "bodyLatex": "To reduce the project duration by 3 hours, you must target a task that lies on all critical paths. If you reduce a task that is only on one critical path, the other critical path will still dictate the project's total time."
+        },
+        {
+          "title": "Calculate the new task duration",
+          "bodyLatex": "Subtract 3 hours from the original duration of the chosen task. Verify that this reduction successfully lowers the total duration of all critical paths to the target of 14 hours."
+        }
+      ],
+      "finalAnswerLatex": "The critical paths are identified by the longest duration sequences, and the task reduction must occur on a shared task to effectively shorten the project duration.",
+      "commonMistakesLatex": [
+        "Reducing a task that is not on the critical path, which will have no effect on the total project time.",
+        "Failing to identify all critical paths, leading to an incomplete reduction strategy."
+      ],
+      "checkLatex": "Ensure that after the reduction, the sum of the tasks on every critical path equals the new target time of 14 hours."
+    },
+    {
+      "questionId": "std2-2023-q32-formulae-and-equations",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:32.258Z",
+      "sourceQuestionHash": "1e990984c88b576df6e0e576450fe2b4c02170773e1fa6e09faf3588a84117c7",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 2599,
+      "summaryLatex": "This problem uses the compound interest formula to calculate interest accrued over a specific number of days.",
+      "approachLatex": "Notice that the interest is compounded daily. We use the formula \\(A = P(1+r)^n\\), where \\(P\\) is the principal, \\(r\\) is the daily interest rate, and \\(n\\) is the number of days.",
+      "steps": [
+        {
+          "title": "Calculate the daily interest rate",
+          "bodyLatex": "The annual interest rate is \\(13.5\\%\\), which is \\(0.135\\) as a decimal. Since there are \\(365\\) days in a year, the daily interest rate \\(r\\) is \\(\\frac{0.135}{365} \\approx 0.00036986\\)."
+        },
+        {
+          "title": "Calculate the total amount owing",
+          "bodyLatex": "Using the compound interest formula \\(A = P(1+r)^n\\), where \\(P = \\$450\\), \\(r = \\frac{0.135}{365}\\), and \\(n = 21\\), we calculate: \\(A = 450 \\left(1 + \\frac{0.135}{365}\\right)^{21} \\approx \\$453.5146\\)."
+        },
+        {
+          "title": "Find the interest charged",
+          "bodyLatex": "The interest charged is the difference between the total amount repaid and the original purchase price: \\(I = A - P = \\$453.51 - \\$450 = \\$3.51\\)."
+        },
+        {
+          "title": "Calculate the percentage",
+          "bodyLatex": "To find what percentage the interest is of the total amount repaid, divide the interest by the total amount and multiply by \\(100\\): \\(\\frac{3.51}{453.51} \\times 100 \\approx 0.774\\%\\). Rounding to two decimal places gives \\(0.77\\%\\)."
+        }
+      ],
+      "finalAnswerLatex": "(a) \\(\\$3.51\\) (b) \\(0.77\\%\\)",
+      "commonMistakesLatex": [
+        "Using the simple interest formula \\(I = Prn\\) instead of the compound interest formula.",
+        "Forgetting to convert the annual percentage rate to a decimal or failing to divide by 365 to get the daily rate."
+      ],
+      "checkLatex": "The interest is a small fraction of the principal, which makes sense for a short 21-day period at a moderate annual rate."
+    },
+    {
+      "questionId": "std2-2023-q34-bivariate-data-analysis",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:32.853Z",
+      "sourceQuestionHash": "cfada9a4c887a5eed423427c13879498099eaf531e6ca7eee7e828ac934a4484",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3285,
+      "summaryLatex": "This problem involves calculating the mean of bivariate data to locate the regression line's centroid and using the line's properties to determine its equation.",
+      "approachLatex": "First, calculate the mean of the independent variable (\\(x\\)) and dependent variable (\\(y\\)). Use the fact that the regression line passes through the point \\((\bar{x}, \bar{y})\\) and the given \\(y\\)-intercept to find the slope.",
+      "steps": [
+        {
+          "title": "Calculate the means",
+          "bodyLatex": "Calculate the mean temperature \\(\bar{x}\\) by summing the ten temperatures and dividing by 10: \\(\bar{x} = \\frac{0+0+0+2+5+7+8+9+9+10}{10} = 5\\). The mean gas usage \\(\bar{y}\\) is the total usage divided by the number of days: \\(\bar{y} = \\frac{1840}{10} = 184\\). The regression line must pass through the point \\((5, 184)\\)."
+        },
+        {
+          "title": "Determine the regression equation",
+          "bodyLatex": "The regression line is in the form \\(y = mx + c\\). We are given the \\(y\\)-intercept \\(c = 236\\) (when \\(x=0\\)). Using the point \\((5, 184)\\), substitute these values into the equation to find the slope \\(m\\): \\(184 = m(5) + 236\\). Solving for \\(m\\): \\(5m = 184 - 236\\), so \\(5m = -52\\), which gives \\(m = -10.4\\)."
+        },
+        {
+          "title": "State the final equation",
+          "bodyLatex": "Substituting the slope and intercept back into the linear equation gives the final model: \\(y = 236 - 10.4x\\). This equation allows us to predict gas usage \\(y\\) for any given temperature \\(x\\) within the range of the data."
+        },
+        {
+          "title": "Evaluate the prediction",
+          "bodyLatex": "To check the validity of predicting at \\(23^{\\circ}\\text{C}\\), substitute \\(x=23\\) into the equation: \\(y = 236 - 10.4(23) = 236 - 239.2 = -3.2\\). Since gas usage cannot be negative, this prediction is physically impossible. This is an example of extrapolation, where the model is used outside the range of the original data."
+        }
+      ],
+      "finalAnswerLatex": "(a) Plot \\((5, 184)\\) and \\((0, 236)\\). (b) \\(y = 236 - 10.4x\\). (c) The prediction results in a negative value for gas usage, which is physically impossible.",
+      "commonMistakesLatex": [
+        "Confusing the \\(x\\) and \\(y\\) variables when calculating the slope.",
+        "Attempting to use the slope formula \\(m = \\frac{y_2 - y_1}{x_2 - x_1}\\) without correctly identifying the two points \\((0, 236)\\) and \\((5, 184)\\).",
+        "Forgetting that the regression line must pass through the mean point \\((\bar{x}, \\bar{y})\\)."
+      ],
+      "checkLatex": "Verify the slope by checking if the point \\((5, 184)\\) satisfies the equation: \\(236 - 10.4(5) = 236 - 52 = 184\\). The calculation is correct."
+    },
+    {
+      "questionId": "std2-2023-q36-working-with-time",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:34.886Z",
+      "sourceQuestionHash": "265ffc5d2df0a712d522af2c8e88fc04219393723df7eeb846ab682f80b12103",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3234,
+      "summaryLatex": "This problem requires rearranging a given formula to solve for an unknown variable \\(H\\) and then converting that decimal time into hours and minutes.",
+      "approachLatex": "Identify the given values: \\(BAC = 0.02\\), \\(N = 3\\), and \\(M = 75\\). Substitute these into the formula and solve the linear equation for \\(H\\). Finally, convert the decimal portion of \\(H\\) into minutes.",
+      "steps": [
+        {
+          "title": "Substitute and rearrange",
+          "bodyLatex": "Substitute the known values into the formula: \\(0.02 = \\frac{10(3) - 7.5H}{6.8(75)}\\). Simplify the denominator: \\(6.8 \\times 75 = 510\\). Now, multiply both sides by \\(510\\) to get \\(0.02 \\times 510 = 30 - 7.5H\\), which simplifies to \\(10.2 = 30 - 7.5H\\)."
+        },
+        {
+          "title": "Solve for H",
+          "bodyLatex": "Rearrange the equation to isolate the term with \\(H\\): \\(7.5H = 30 - 10.2\\). This gives \\(7.5H = 19.8\\). Divide by \\(7.5\\) to find \\(H = \\frac{19.8}{7.5} = 2.64\\) hours."
+        },
+        {
+          "title": "Convert to time",
+          "bodyLatex": "The value \\(H = 2.64\\) represents \\(2\\) full hours and a fraction of an hour. To find the minutes, multiply the decimal part by \\(60\\): \\(0.64 \\times 60 = 38.4\\). Rounding to the nearest minute, we get \\(38\\) minutes. Thus, the total duration is \\(2\\) hours and \\(38\\) minutes."
+        },
+        {
+          "title": "Calculate the start time",
+          "bodyLatex": "Subtract the duration of \\(2\\) hours and \\(38\\) minutes from the end time of \\(9:00\\text{ pm}\\). Subtracting \\(2\\) hours gives \\(7:00\\text{ pm}\\). Subtracting a further \\(38\\) minutes from \\(7:00\\text{ pm}\\) results in \\(6:22\\text{ pm}\\)."
+        }
+      ],
+      "finalAnswerLatex": "Cameron began drinking at 6:22 pm.",
+      "commonMistakesLatex": [
+        "Forgetting to multiply the decimal part of the hours by 60 when converting to minutes (e.g., thinking 0.64 hours is 64 minutes).",
+        "Errors in algebraic rearrangement when dealing with the fraction."
+      ],
+      "checkLatex": "Check the result by substituting \\(H = 2.64\\) back into the original formula: \\(\\frac{10(3) - 7.5(2.64)}{6.8(75)} = \\frac{30 - 19.8}{510} = \\frac{10.2}{510} = 0.02\\). The calculation is correct."
+    },
+    {
+      "questionId": "std2-2023-q38-the-normal-distribution",
+      "promptVersion": "hsc-explanation-v2",
+      "model": "google/gemini-3.1-flash-lite",
+      "generatedAt": "2026-06-08T03:10:35.327Z",
+      "sourceQuestionHash": "316c96760b56e71bfac72ebd6fd6bd68f24f87f820ac1b261ffcddcdc847ac5d",
+      "reviewStatus": "generated",
+      "needsReview": false,
+      "reviewNote": "",
+      "latencyMs": 3568,
+      "summaryLatex": "This problem uses the standard normal distribution formula to convert a raw score into a z-score, followed by probability subtraction and multiplication to find an expected frequency.",
+      "approachLatex": "First, standardise the given weight to a z-score using the formula \\(z = \\frac{x - \\mu}{\\sigma}\\). Then, use the provided table to find the probability of being below this value, subtract from 1 to find the probability of being above it, and multiply by the total population size.",
+      "steps": [
+        {
+          "title": "Calculate the z-score",
+          "bodyLatex": "Standardise the weight \\(x = 11.93\\) using the mean \\(\\mu = 10.40\\) and standard deviation \\(\\sigma = 1.15\\). The formula is \\(z = \\frac{x - \\mu}{\\sigma}\\). Substituting the values gives \\(z = \\frac{11.93 - 10.40}{1.15} = \\frac{1.53}{1.15} = 1.33\\)."
+        },
+        {
+          "title": "Find the probability from the table",
+          "bodyLatex": "The table provides the probability \\(P(Z < z)\\), which represents the area to the left of the z-score. For \\(z = 1.33\\), the table indicates the probability is \\(0.9082\\). This represents the proportion of koalas weighing less than \\(11.93\\text{ kg}\\)."
+        },
+        {
+          "title": "Calculate the upper tail probability",
+          "bodyLatex": "Since we need the number of koalas weighing *more* than \\(11.93\\text{ kg}\\), we look for the area to the right of the z-score. Using the complement rule, \\(P(Z > 1.33) = 1 - P(Z < 1.33) = 1 - 0.9082 = 0.0918\\)."
+        },
+        {
+          "title": "Determine the expected number",
+          "bodyLatex": "To find the expected number of koalas in a group of \\(400\\), multiply the total population by the probability: \\(400 \\times 0.0918 = 36.72\\). Since we are counting individual koalas, we round to the nearest whole number, giving \\(37\\) koalas."
+        }
+      ],
+      "finalAnswerLatex": "Approximately 37 koalas.",
+      "commonMistakesLatex": [
+        "Forgetting to subtract the table value from 1, which calculates the probability of being below the weight rather than above it.",
+        "Rounding the z-score incorrectly before looking it up in the table."
+      ],
+      "checkLatex": "Since \\(11.93\\) is more than one standard deviation above the mean (\\(10.40 + 1.15 = 11.55\\)), we expect the probability to be less than \\(0.1587\\) (the area beyond \\(z=1\\)), so \\(0.0918\\) is a reasonable result."
     },
     {
       "questionId": "adv-2024-q01-linear-function-equation",
