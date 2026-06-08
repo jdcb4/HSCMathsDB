@@ -157,6 +157,20 @@ export const WorkedSolutionsDatabaseSchema = z.object({
   workedSolutions: z.array(WorkedSolutionSchema)
 });
 
+export const WorkedSolutionsIndexSchema = z.object({
+  meta: WorkedSolutionsDatabaseSchema.shape.meta,
+  totalQuestions: z.number().int().min(0),
+  workedSolutionCount: z.number().int().min(0),
+  byPaper: z.record(
+    z.string().min(1),
+    z.object({
+      paperId: z.string().min(1),
+      count: z.number().int().min(0),
+      path: z.string().min(1)
+    })
+  )
+});
+
 export const SyllabusConversionContentGroupSchema = z.object({
   id: z.string().min(1),
   code: z.string().min(1).optional(),
@@ -401,6 +415,7 @@ export type Paper = z.infer<typeof PaperSchema>;
 export type SourcePack = z.infer<typeof SourcePackSchema>;
 export type WorkedSolution = z.infer<typeof WorkedSolutionSchema>;
 export type WorkedSolutionsDatabase = z.infer<typeof WorkedSolutionsDatabaseSchema>;
+export type WorkedSolutionsIndex = z.infer<typeof WorkedSolutionsIndexSchema>;
 export type SyllabusConversion = z.infer<typeof SyllabusConversionSchema>;
 export type SyllabusConversionCourse = z.infer<typeof SyllabusConversionCourseSchema>;
 export type SyllabusConversionNode = z.infer<typeof SyllabusConversionNodeSchema>;

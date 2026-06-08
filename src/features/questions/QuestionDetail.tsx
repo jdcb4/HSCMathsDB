@@ -2,7 +2,7 @@ import { ExternalLink, Image as ImageIcon } from "lucide-react";
 import { type SyntheticEvent, useState } from "react";
 import type { Paper, Question, SyllabusNode, WorkedSolution } from "../../domain/hscSchemas";
 import { MathText } from "../math/MathText";
-import { resolvePublicAssetPath } from "./questionAssetPaths";
+import { resolvePublicAssetPath, resolvePublicWebpAssetPath } from "./questionAssetPaths";
 import { formatMultipartQuestionPrompt } from "./questionPromptFormatting";
 
 type DetailPanelKey = "officialAnswer" | "markingFeedback" | "workedSolution";
@@ -21,15 +21,21 @@ export function QuestionDetail({
   question,
   paper,
   workedSolution,
+  workedSolutionLoading = false,
+  workedSolutionError,
   syllabusNodes,
   syllabusViewLabel,
+  onRequestWorkedSolution,
   onOpenSyllabusNode
 }: {
   question: Question;
   paper?: Paper;
   workedSolution?: WorkedSolution;
+  workedSolutionLoading?: boolean;
+  workedSolutionError?: string;
   syllabusNodes: SyllabusNode[];
   syllabusViewLabel: string;
+  onRequestWorkedSolution: () => void;
   onOpenSyllabusNode: (nodeId: string) => void;
 }) {
   const [panelState, setPanelState] = useState<DetailPanelState>({
@@ -50,6 +56,9 @@ export function QuestionDetail({
   );
   const handlePanelToggle = (panel: DetailPanelKey) => (event: SyntheticEvent<HTMLDetailsElement>) => {
     const isOpen = event.currentTarget.open;
+    if (panel === "workedSolution" && isOpen) {
+      onRequestWorkedSolution();
+    }
 
     setPanelState((current) => {
       const base =
@@ -98,22 +107,31 @@ export function QuestionDetail({
         </div>
         {question.assets.length > 0 ? (
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
-            {question.assets.map((asset) => (
-              <figure
-                key={asset.id}
-                className="rounded-md border border-border-default bg-surface-raised p-3"
-              >
-                <img
-                  src={resolvePublicAssetPath(asset.path)}
-                  alt={asset.alt}
-                  className="h-auto w-full rounded-sm"
-                />
-                <figcaption className="mt-2 flex items-center gap-2 text-caption text-text-secondary">
-                  <ImageIcon size={14} />
-                  {asset.label}
-                </figcaption>
-              </figure>
-            ))}
+            {question.assets.map((asset) => {
+              const webpPath = resolvePublicWebpAssetPath(asset.path);
+
+              return (
+                <figure
+                  key={asset.id}
+                  className="rounded-md border border-border-default bg-surface-raised p-3"
+                >
+                  <picture>
+                    {webpPath ? <source srcSet={webpPath} type="image/webp" /> : null}
+                    <img
+                      src={resolvePublicAssetPath(asset.path)}
+                      alt={asset.alt}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-auto w-full rounded-sm"
+                    />
+                  </picture>
+                  <figcaption className="mt-2 flex items-center gap-2 text-caption text-text-secondary">
+                    <ImageIcon size={14} />
+                    {asset.label}
+                  </figcaption>
+                </figure>
+              );
+            })}
           </div>
         ) : null}
       </section>
@@ -182,86 +200,101 @@ export function QuestionDetail({
         </details>
       ) : null}
 
-      {workedSolution ? (
-        <details
-          open={openPanels.workedSolution}
-          onToggle={handlePanelToggle("workedSolution")}
-          className="rounded-md border border-border-subtle bg-surface-sunken p-4"
-        >
-          <summary className="cursor-pointer text-h4 font-semibold text-text-primary">
-            Worked Solution
-          </summary>
-          <div className="mt-4 space-y-4">
-            <div className="flex flex-col gap-2 lg:flex-row lg:items-start lg:justify-between">
-              <div>
-                <p className="text-caption text-text-secondary">Generated with {workedSolution.model}</p>
+      <details
+        open={openPanels.workedSolution}
+        onToggle={handlePanelToggle("workedSolution")}
+        className="rounded-md border border-border-subtle bg-surface-sunken p-4"
+      >
+        <summary className="cursor-pointer text-h4 font-semibold text-text-primary">Worked Solution</summary>
+        <div className="mt-4 space-y-4">
+          {workedSolutionLoading ? (
+            <p className="rounded-md border border-border-subtle bg-surface-raised p-3 text-body-sm text-text-secondary">
+              Loading worked solution...
+            </p>
+          ) : null}
+          {workedSolutionError ? (
+            <p className="rounded-md border border-accent-danger bg-surface-raised p-3 text-body-sm text-text-secondary">
+              {workedSolutionError}
+            </p>
+          ) : null}
+          {!workedSolution && !workedSolutionLoading && !workedSolutionError ? (
+            <p className="rounded-md border border-border-subtle bg-surface-raised p-3 text-body-sm text-text-secondary">
+              Open this panel to load the worked solution.
+            </p>
+          ) : null}
+          {workedSolution ? (
+            <>
+              <div className="flex flex-col gap-2 lg:flex-row lg:items-start lg:justify-between">
+                <div>
+                  <p className="text-caption text-text-secondary">Generated with {workedSolution.model}</p>
+                </div>
+                <span className="inline-flex w-fit rounded-md border border-border-default px-2 py-1 text-caption font-medium text-text-secondary">
+                  {workedSolution.reviewStatus}
+                </span>
               </div>
-              <span className="inline-flex w-fit rounded-md border border-border-default px-2 py-1 text-caption font-medium text-text-secondary">
-                {workedSolution.reviewStatus}
-              </span>
-            </div>
 
-            {workedSolution.needsReview ? (
-              <div className="rounded-md border border-accent-warning bg-surface-raised p-3 text-body-sm text-text-secondary">
-                {workedSolution.reviewNote}
+              {workedSolution.needsReview ? (
+                <div className="rounded-md border border-accent-warning bg-surface-raised p-3 text-body-sm text-text-secondary">
+                  {workedSolution.reviewNote}
+                </div>
+              ) : null}
+
+              <div className="space-y-3">
+                <div className="rounded-md border border-border-subtle bg-surface-raised p-3">
+                  <h4 className="mb-2 text-body-sm font-semibold">Idea</h4>
+                  <MathText block>{workedSolution.summaryLatex}</MathText>
+                </div>
+                <div className="rounded-md border border-border-subtle bg-surface-raised p-3">
+                  <h4 className="mb-2 text-body-sm font-semibold">How to start</h4>
+                  <MathText block>{workedSolution.approachLatex}</MathText>
+                </div>
               </div>
-            ) : null}
 
-            <div className="space-y-3">
-              <div className="rounded-md border border-border-subtle bg-surface-raised p-3">
-                <h4 className="mb-2 text-body-sm font-semibold">Idea</h4>
-                <MathText block>{workedSolution.summaryLatex}</MathText>
-              </div>
-              <div className="rounded-md border border-border-subtle bg-surface-raised p-3">
-                <h4 className="mb-2 text-body-sm font-semibold">How to start</h4>
-                <MathText block>{workedSolution.approachLatex}</MathText>
-              </div>
-            </div>
-
-            <section className="rounded-md border border-border-subtle bg-surface-raised p-3">
-              <h4 className="mb-3 text-body-sm font-semibold">Steps</h4>
-              <ol className="space-y-3">
-                {workedSolution.steps.map((step, index) => (
-                  <li
-                    key={`${workedSolution.questionId}-worked-step-${index}`}
-                    className="rounded-md border border-border-subtle bg-surface-sunken p-3"
-                  >
-                    <p className="mb-2 text-body-sm font-semibold">
-                      Step {index + 1}: {step.title}
-                    </p>
-                    <MathText block>{step.bodyLatex}</MathText>
-                  </li>
-                ))}
-              </ol>
-            </section>
-
-            <div className="rounded-md border border-border-subtle bg-surface-raised p-3">
-              <h4 className="mb-2 text-body-sm font-semibold">Final answer</h4>
-              <MathText block>{workedSolution.finalAnswerLatex}</MathText>
-            </div>
-
-            {workedSolution.commonMistakesLatex.length > 0 ? (
-              <div className="rounded-md border border-border-subtle bg-surface-raised p-3">
-                <h4 className="mb-2 text-body-sm font-semibold">Common mistakes</h4>
-                <ul className="space-y-2 text-body-sm text-text-secondary">
-                  {workedSolution.commonMistakesLatex.map((mistake, index) => (
-                    <li key={`${workedSolution.questionId}-mistake-${index}`}>
-                      <MathText block>{mistake}</MathText>
+              <section className="rounded-md border border-border-subtle bg-surface-raised p-3">
+                <h4 className="mb-3 text-body-sm font-semibold">Steps</h4>
+                <ol className="space-y-3">
+                  {workedSolution.steps.map((step, index) => (
+                    <li
+                      key={`${workedSolution.questionId}-worked-step-${index}`}
+                      className="rounded-md border border-border-subtle bg-surface-sunken p-3"
+                    >
+                      <p className="mb-2 text-body-sm font-semibold">
+                        Step {index + 1}: {step.title}
+                      </p>
+                      <MathText block>{step.bodyLatex}</MathText>
                     </li>
                   ))}
-                </ul>
-              </div>
-            ) : null}
+                </ol>
+              </section>
 
-            {workedSolution.checkLatex ? (
               <div className="rounded-md border border-border-subtle bg-surface-raised p-3">
-                <h4 className="mb-2 text-body-sm font-semibold">Quick check</h4>
-                <MathText block>{workedSolution.checkLatex}</MathText>
+                <h4 className="mb-2 text-body-sm font-semibold">Final answer</h4>
+                <MathText block>{workedSolution.finalAnswerLatex}</MathText>
               </div>
-            ) : null}
-          </div>
-        </details>
-      ) : null}
+
+              {workedSolution.commonMistakesLatex.length > 0 ? (
+                <div className="rounded-md border border-border-subtle bg-surface-raised p-3">
+                  <h4 className="mb-2 text-body-sm font-semibold">Common mistakes</h4>
+                  <ul className="space-y-2 text-body-sm text-text-secondary">
+                    {workedSolution.commonMistakesLatex.map((mistake, index) => (
+                      <li key={`${workedSolution.questionId}-mistake-${index}`}>
+                        <MathText block>{mistake}</MathText>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+
+              {workedSolution.checkLatex ? (
+                <div className="rounded-md border border-border-subtle bg-surface-raised p-3">
+                  <h4 className="mb-2 text-body-sm font-semibold">Quick check</h4>
+                  <MathText block>{workedSolution.checkLatex}</MathText>
+                </div>
+              ) : null}
+            </>
+          ) : null}
+        </div>
+      </details>
 
       <section className="rounded-md border border-border-subtle bg-surface-sunken p-4">
         <h3 className="mb-3 text-h4 font-semibold">{syllabusViewLabel} links</h3>

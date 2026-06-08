@@ -38,7 +38,7 @@ Record these during setup if they are known:
 
 ## 2026-06-06: Use Vite React TypeScript for the web app
 
-**Decision:** Build GoalCheck HSC as a Vite React TypeScript static web app.
+**Decision:** Build HSCMathsDB as a Vite React TypeScript static web app.
 
 **Reasoning:** The first product surface is an interactive browser for a local corpus, so a static client app keeps setup small while still supporting MathJax rendering, filters, and future static deployment.
 
@@ -128,7 +128,7 @@ Record these during setup if they are known:
 
 ## 2026-06-06: Deploy the static app to GitHub Pages
 
-**Decision:** Deploy GoalCheck HSC from the `main` branch to GitHub Pages using a GitHub Actions workflow that builds the Vite app and publishes `dist/`.
+**Decision:** Deploy HSCMathsDB from the `main` branch to GitHub Pages using a GitHub Actions workflow that builds the Vite app and publishes `dist/`.
 
 **Reasoning:** The app is a static client-side corpus browser with no runtime server, database, auth, or secrets, so GitHub Pages fits the current hosting needs and keeps deployment close to the repository.
 
@@ -163,5 +163,15 @@ Record these during setup if they are known:
 **Reasoning:** The project now has a broad historical PDF archive with a consistent naming convention. Local source files make ingestion faster, repeatable, and independent of NSW website changes or network availability. The ignored cache can be regenerated from `SourceExams/`, while rendered pages, extracted text, and LLM proposals remain disposable processing artifacts.
 
 **Rejected alternatives:** Continuing to fetch PDFs from the NSW website during normal ingestion was rejected because it is slower, less repeatable, and vulnerable to source URL drift. Moving the archive directly into `var/` was rejected because `var/` is an ignored processing area; the source archive should remain explicit and reviewable.
+
+**Supersedes:** Not applicable.
+
+## 2026-06-08: Generate public runtime data for the static app
+
+**Decision:** Keep `src/data` as the canonical validated corpus, but generate `public/data` runtime JSON during dev and production builds.
+
+**Reasoning:** The full corpus and worked-solution sidecar are large enough to materially slow the first app bundle when statically imported. Public JSON keeps GitHub Pages deployment static while allowing the browser to fetch the corpus, syllabus conversion, and paper-level worked-solution files separately.
+
+**Rejected alternatives:** Moving canonical data directly into `public` was rejected because ingestion, tests, and validation scripts already use `src/data` as their source of truth. Adding a backend or database was rejected because JSON remains sufficient for the current static app.
 
 **Supersedes:** Not applicable.

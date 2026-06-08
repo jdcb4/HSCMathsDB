@@ -11,3 +11,11 @@ export function resolvePublicAssetPath(assetPath: string, baseUrl = import.meta.
 
   return `${normalizedBase}/${assetPath}`;
 }
+
+export function resolvePublicWebpAssetPath(assetPath: string): string | undefined {
+  if (!assetPath.toLowerCase().endsWith(".png")) {
+    return undefined;
+  }
+
+  return resolvePublicAssetPath(assetPath.replace(/\.png$/i, ".webp"));
+}

@@ -4,7 +4,7 @@ The first stop for navigating this project. Keep this file factual: it should de
 
 ## What this project is
 
-GoalCheck HSC is a Vite React TypeScript web app for browsing NSW HSC mathematics question records and source packs by course, year, topic, style, and syllabus content. It currently includes browseable Mathematics Advanced, Mathematics Standard, Mathematics Extension 1, Mathematics Extension 2, and archived Mathematics 2 Unit question records. It supports question-to-syllabus and syllabus-to-question navigation using a validated JSON corpus, with toggleable 2017 and 2024 syllabus views resolved through a multi-course conversion map.
+HSCMathsDB is a Vite React TypeScript web app for browsing NSW HSC mathematics question records and source packs by course, year, topic, style, and syllabus content. It currently includes browseable Mathematics Advanced, Mathematics Standard, Mathematics Extension 1, Mathematics Extension 2, and archived Mathematics 2 Unit question records. It supports question-to-syllabus and syllabus-to-question navigation using a validated JSON corpus, with toggleable 2017 and 2024 syllabus views resolved through a multi-course conversion map.
 
 ## Current setup state
 
@@ -25,6 +25,7 @@ GoalCheck HSC is a Vite React TypeScript web app for browsing NSW HSC mathematic
 - `SourceExams` - canonical local archive of official HSC mathematics PDFs, named `[Year]_[Subject]_[Document Type].pdf`.
 - `SyllabusConversion` - separate staging area for building and reviewing syllabus conversion expansions before merging them into app data artifacts.
 - `public/assets/diagrams` - static diagram and image assets referenced by the corpus.
+- `public/data` - ignored generated runtime JSON copied and split from `src/data` during dev and production builds.
 - `var/source-assets` - ignored working cache populated from `SourceExams` during import.
 - `var/extracted-text` - ignored local text extraction output used during transcription.
 - `var/question-candidates` - ignored raw candidate records extracted from source text.
@@ -38,12 +39,13 @@ GoalCheck HSC is a Vite React TypeScript web app for browsing NSW HSC mathematic
 
 | Command                                         | Purpose                                                                                   |
 | ----------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `pnpm run dev`                                  | Start the development server.                                                             |
+| `pnpm run dev`                                  | Generate runtime data/WebP assets and start the development server.                       |
 | `pnpm run data:validate`                        | Validate the JSON corpus through the TypeScript Zod schema.                               |
 | `pnpm run data:audit-sources`                   | Optional source-drift check against visible official NSW pack titles.                     |
 | `pnpm run data:audit-assets`                    | Confirm each cataloged pack has required local `SourceExams` PDFs.                        |
 | `pnpm run data:report-source-exams`             | Summarize the local `SourceExams` archive by year, subject, and document type.            |
 | `pnpm run data:seed-local-source-catalog`       | Seed local paper/source-pack records from `SourceExams` for a minimum year.               |
+| `pnpm run data:sync-public-runtime`             | Generate ignored `public/data` runtime JSON from canonical `src/data`.                    |
 | `pnpm run data:download-sources`                | Sync local `SourceExams` PDFs into ignored `var/source-assets` with bounded concurrency.  |
 | `pnpm run data:extract-text`                    | Extract raw text from cached PDFs into ignored local output with bounded concurrency.     |
 | `pnpm run data:ingest-additional-maths`         | Ingest configured Standard/Extension paper profiles into draft question records.          |
@@ -54,6 +56,7 @@ GoalCheck HSC is a Vite React TypeScript web app for browsing NSW HSC mathematic
 | `pnpm run data:extract-images`                  | Diagnostic helper: extract embedded PDF images into ignored local output.                 |
 | `pnpm run data:inventory-layout`                | Diagnostic helper: inventory cached PDF text, image, and vector drawing layout.           |
 | `pnpm run data:render-pages`                    | Render cached PDF pages into ignored PNG page images with bounded concurrency.            |
+| `pnpm run assets:optimize-diagrams`             | Generate ignored WebP diagram assets beside canonical PNG crops for production delivery.  |
 | `pnpm run data:propose-gemini-ingestion`        | Generate Gemini/Sonnet page-image ingestion proposals and a local review report.          |
 | `pnpm run data:promote-gemini-ingestion`        | Promote a reviewed Gemini ingestion report into draft corpus records and public assets.   |
 | `pnpm run data:publish-gemini-ingestion-report` | Publish an ignored Gemini ingestion report copy under `public/` for local browser review. |

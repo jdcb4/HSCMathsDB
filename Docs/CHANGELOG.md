@@ -2,6 +2,14 @@
 
 Newest entries go at the top.
 
+## 0.49.0 - 2026-06-08
+
+- Renamed the app to HSCMathsDB and added a branded SVG favicon.
+- Split runtime corpus data out of the initial app bundle by generating public JSON data files during dev and production builds.
+- Added paper-level lazy loading for worked solutions so the full worked-solution sidecar is no longer loaded on startup.
+- Added generated WebP diagram assets, WebP-first image rendering with PNG fallback, and lazy/async image loading for question diagrams.
+- Deferred the main app and MathJax module loading behind the runtime data bootstrap to reduce the first JavaScript payload.
+
 ## 0.48.0 - 2026-06-08
 
 - Backfilled worked-solution drafts for all remaining included corpus questions, bringing coverage to 789/789 records.

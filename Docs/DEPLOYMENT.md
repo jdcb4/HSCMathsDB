@@ -1,6 +1,6 @@
 # Deployment
 
-GoalCheck HSC deploys as a static Vite site to GitHub Pages from the `main` branch.
+HSCMathsDB deploys as a static Vite site to GitHub Pages from the `main` branch.
 
 ## GitHub Pages
 

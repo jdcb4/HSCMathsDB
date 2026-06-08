@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { ArrowLeftRight, BookOpen, Database, FileText, Filter, Link as LinkIcon, Search } from "lucide-react";
 import { QuestionDetail } from "../features/questions/QuestionDetail";
 import { QuestionList } from "../features/questions/QuestionList";
@@ -14,13 +14,11 @@ import {
   getQuestionsForSyllabusNode,
   getSyllabusNodesForView,
   getSourcePackCoverageForCourse,
-  getWorkedSolutionCoverage,
-  getWorkedSolutionForQuestion,
   queryQuestions,
   type SyllabusEraView
 } from "../domain/hscSelectors";
-import { database, syllabusConversion, workedSolutionsDatabase } from "../services/hscDatabase";
-import type { QuestionStyle } from "../domain/hscSchemas";
+import type { HscDatabase, QuestionStyle, SyllabusConversion, WorkedSolution } from "../domain/hscSchemas";
+import type { WorkedSolutionCoverageSummary } from "../services/hscRuntimeData";
 
 type ViewMode = "questions" | "syllabus" | "sources";
 
@@ -42,35 +40,51 @@ const defaultFilters: Filters = {
   syllabusNodeId: "all"
 };
 
-export function App() {
+export function App({
+  database,
+  syllabusConversion,
+  workedSolutionCoverage,
+  loadWorkedSolution
+}: {
+  database: HscDatabase;
+  syllabusConversion: SyllabusConversion;
+  workedSolutionCoverage: WorkedSolutionCoverageSummary;
+  loadWorkedSolution: (paperId: string, questionId: string) => Promise<WorkedSolution | undefined>;
+}) {
   const [filters, setFilters] = useState<Filters>(defaultFilters);
   const [selectedQuestionId, setSelectedQuestionId] = useState(database.questions[0]?.id ?? "");
   const [selectedSyllabusNodeId, setSelectedSyllabusNodeId] = useState(database.syllabus[0]?.id ?? "");
   const [preferredSyllabusEra, setPreferredSyllabusEra] = useState<SyllabusEraView>("advanced-2017");
   const [viewMode, setViewMode] = useState<ViewMode>("questions");
+  const [workedSolutionsByQuestionId, setWorkedSolutionsByQuestionId] = useState<
+    Record<string, WorkedSolution | null>
+  >({});
+  const [loadingWorkedSolutionId, setLoadingWorkedSolutionId] = useState("");
+  const [workedSolutionErrorsByQuestionId, setWorkedSolutionErrorsByQuestionId] = useState<
+    Record<string, string>
+  >({});
 
-  const courseOptions = useMemo(() => getCourseOptions(database), []);
+  const courseOptions = useMemo(() => getCourseOptions(database), [database]);
   const selectedCourse = courseOptions.find((course) => course.id === filters.courseId) ?? courseOptions[0];
   const selectedSyllabusEra =
     selectedCourse?.syllabusEras.find((era) => era.id === preferredSyllabusEra) ??
     selectedCourse?.syllabusEras[0];
-  const options = useMemo(() => getFilterOptionsForCourse(database, selectedCourse?.id), [selectedCourse]);
-  const summary = useMemo(() => getDatasetSummary(database), []);
+  const options = useMemo(
+    () => getFilterOptionsForCourse(database, selectedCourse?.id),
+    [database, selectedCourse]
+  );
+  const summary = useMemo(() => getDatasetSummary(database), [database]);
   const visibleSyllabusNodes = useMemo(
     () => getSyllabusNodesForView(database, preferredSyllabusEra),
-    [preferredSyllabusEra]
+    [database, preferredSyllabusEra]
   );
   const visibleQuestionCountsBySyllabusNode = useMemo(
     () => getQuestionCountsBySyllabusNode(database, preferredSyllabusEra, syllabusConversion),
-    [preferredSyllabusEra]
-  );
-  const workedSolutionCoverage = useMemo(
-    () => getWorkedSolutionCoverage(database, workedSolutionsDatabase),
-    []
+    [database, preferredSyllabusEra, syllabusConversion]
   );
   const sourcePacks = useMemo(
     () => getSourcePackCoverageForCourse(database, selectedCourse?.id),
-    [selectedCourse]
+    [database, selectedCourse]
   );
 
   const filteredQuestions = useMemo(
@@ -84,19 +98,19 @@ export function App() {
         syllabusNodeId: filters.syllabusNodeId === "all" ? undefined : filters.syllabusNodeId,
         syllabusConversion
       }),
-    [filters, selectedCourse]
+    [database, filters, selectedCourse, syllabusConversion]
   );
 
   const selectedQuestion = useMemo(
     () => database.questions.find((question) => question.id === selectedQuestionId) ?? filteredQuestions[0],
-    [filteredQuestions, selectedQuestionId]
+    [database, filteredQuestions, selectedQuestionId]
   );
 
   const selectedQuestionSyllabus = selectedQuestion
     ? getDisplaySyllabusNodesForQuestion(database, selectedQuestion, preferredSyllabusEra, syllabusConversion)
     : [];
   const selectedWorkedSolution = selectedQuestion
-    ? getWorkedSolutionForQuestion(workedSolutionsDatabase, selectedQuestion.id)
+    ? (workedSolutionsByQuestionId[selectedQuestion.id] ?? undefined)
     : undefined;
   const selectedSyllabusNode =
     visibleSyllabusNodes.find((node) => node.id === selectedSyllabusNodeId) ?? visibleSyllabusNodes[0];
@@ -121,8 +135,43 @@ export function App() {
           ];
         })
       ),
-    [filteredQuestions, preferredSyllabusEra]
+    [database, filteredQuestions, preferredSyllabusEra, syllabusConversion]
   );
+
+  const requestSelectedWorkedSolution = useCallback(async () => {
+    if (!selectedQuestion) {
+      return;
+    }
+
+    if (
+      selectedQuestion.id in workedSolutionsByQuestionId ||
+      loadingWorkedSolutionId === selectedQuestion.id
+    ) {
+      return;
+    }
+
+    setLoadingWorkedSolutionId(selectedQuestion.id);
+    setWorkedSolutionErrorsByQuestionId((current) => {
+      const next = { ...current };
+      delete next[selectedQuestion.id];
+      return next;
+    });
+
+    try {
+      const workedSolution = await loadWorkedSolution(selectedQuestion.paperId, selectedQuestion.id);
+      setWorkedSolutionsByQuestionId((current) => ({
+        ...current,
+        [selectedQuestion.id]: workedSolution ?? null
+      }));
+    } catch (error) {
+      setWorkedSolutionErrorsByQuestionId((current) => ({
+        ...current,
+        [selectedQuestion.id]: error instanceof Error ? error.message : "Failed to load the worked solution."
+      }));
+    } finally {
+      setLoadingWorkedSolutionId((current) => (current === selectedQuestion.id ? "" : current));
+    }
+  }, [loadWorkedSolution, loadingWorkedSolutionId, selectedQuestion, workedSolutionsByQuestionId]);
 
   const setFilter = (name: keyof Filters, value: string) => {
     setFilters((current) => ({ ...current, [name]: value }));
@@ -181,8 +230,8 @@ export function App() {
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-5 px-5 py-5 lg:px-8">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div>
-              <p className="text-caption font-semibold uppercase text-accent-info">GoalCheck HSC</p>
-              <h1 className="text-h1 font-semibold">Mathematics question map</h1>
+              <p className="text-caption font-semibold uppercase text-accent-info">HSCMathsDB</p>
+              <h1 className="text-h1 font-semibold">Mathematics question database</h1>
             </div>
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
               <Metric icon={<FileText size={17} />} label="Questions" value={summary.questionCount} />
@@ -326,8 +375,11 @@ export function App() {
               question={selectedQuestion}
               paper={database.papers.find((paper) => paper.id === selectedQuestion.paperId)}
               workedSolution={selectedWorkedSolution}
+              workedSolutionLoading={loadingWorkedSolutionId === selectedQuestion.id}
+              workedSolutionError={workedSolutionErrorsByQuestionId[selectedQuestion.id]}
               syllabusNodes={selectedQuestionSyllabus}
               syllabusViewLabel={selectedSyllabusEra?.label ?? "Selected syllabus"}
+              onRequestWorkedSolution={requestSelectedWorkedSolution}
               onOpenSyllabusNode={openSyllabusNode}
             />
           ) : viewMode === "syllabus" && selectedSyllabusNode ? (
