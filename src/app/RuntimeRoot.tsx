@@ -108,7 +108,6 @@ export function RuntimeRoot() {
       <App
         database={data.database}
         syllabusConversion={data.syllabusConversion}
-        workedSolutionCoverage={data.workedSolutionCoverage}
         loadWorkedSolution={data.loadWorkedSolution}
       />
     </MathJaxContext>

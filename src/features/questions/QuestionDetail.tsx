@@ -25,8 +25,7 @@ export function QuestionDetail({
   workedSolutionError,
   syllabusNodes,
   syllabusViewLabel,
-  onRequestWorkedSolution,
-  onOpenSyllabusNode
+  onRequestWorkedSolution
 }: {
   question: Question;
   paper?: Paper;
@@ -36,7 +35,6 @@ export function QuestionDetail({
   syllabusNodes: SyllabusNode[];
   syllabusViewLabel: string;
   onRequestWorkedSolution: () => void;
-  onOpenSyllabusNode: (nodeId: string) => void;
 }) {
   const [panelState, setPanelState] = useState<DetailPanelState>({
     questionId: question.id,
@@ -296,26 +294,26 @@ export function QuestionDetail({
         </div>
       </details>
 
-      <section className="rounded-md border border-border-subtle bg-surface-sunken p-4">
-        <h3 className="mb-3 text-h4 font-semibold">{syllabusViewLabel} links</h3>
-        <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
+      <details className="rounded-md border border-border-subtle bg-surface-sunken p-4">
+        <summary className="cursor-pointer text-h4 font-semibold text-text-primary">
+          {syllabusViewLabel} links
+        </summary>
+        <div className="mt-4 grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
           {syllabusNodes.map((node) => (
-            <button
+            <div
               key={node.id}
-              type="button"
-              onClick={() => onOpenSyllabusNode(node.id)}
-              className="w-full rounded-md border border-border-default bg-surface-raised p-3 text-left hover:border-accent-info"
+              className="w-full rounded-md border border-border-default bg-surface-raised p-3 text-left"
             >
               <p className="text-caption font-semibold uppercase text-accent-info">{node.code}</p>
               <p className="text-body-sm font-medium">{node.title}</p>
               <p className="mt-1 text-caption text-text-secondary">{node.topic}</p>
-            </button>
+            </div>
           ))}
           {syllabusNodes.length === 0 ? (
             <p className="text-body-sm text-text-secondary">No mapped syllabus link.</p>
           ) : null}
         </div>
-      </section>
+      </details>
 
       <footer className="flex flex-wrap items-center gap-2 text-caption text-text-subtle">
         <span>Transcription: {question.source.transcriptionStatus}</span>

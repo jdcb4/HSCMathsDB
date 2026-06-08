@@ -2,6 +2,11 @@
 
 Newest entries go at the top.
 
+## 0.50.0 - 2026-06-08
+
+- Simplified the public browsing UX for students by removing developer-facing corpus status, source/syllabus tabs, search, topic filtering, 2 Unit archive course selection, and the visible syllabus-era selector.
+- Added compact mobile question-list rendering, top-of-question previous/next navigation, streamlined header metrics, and collapsed-by-default syllabus links.
+
 ## 0.49.1 - 2026-06-08
 
 - Render simple LaTeX `tabular` environments as HTML tables before MathJax typesetting, fixing user-facing "Unknown environment 'tabular'" errors in table-based questions and answers.

@@ -13,10 +13,10 @@ export function QuestionList({
 }) {
   return (
     <div className="rounded-md border border-border-default bg-surface-raised">
-      <div className="border-b border-border-subtle px-4 py-3">
+      <div className="border-b border-border-subtle px-3 py-2 sm:px-4 sm:py-3">
         <h2 className="text-h4 font-semibold">{questions.length} questions</h2>
       </div>
-      <div className="max-h-[calc(100dvh-285px)] overflow-y-auto">
+      <div className="max-h-56 overflow-y-auto sm:max-h-72 lg:max-h-[calc(100dvh-245px)]">
         {questions.map((question) => {
           const selected = question.id === selectedQuestionId;
 
@@ -25,7 +25,7 @@ export function QuestionList({
               key={question.id}
               type="button"
               onClick={() => onSelectQuestion(question.id)}
-              className={`block w-full border-b border-border-subtle px-4 py-3 text-left last:border-b-0 ${
+              className={`block w-full border-b border-border-subtle px-3 py-2 text-left last:border-b-0 sm:px-4 sm:py-3 ${
                 selected ? "bg-surface-sunken" : "hover:bg-surface-sunken"
               }`}
             >
@@ -34,8 +34,10 @@ export function QuestionList({
                 <span>{question.questionNumber}</span>
                 <span>{question.marks} marks</span>
               </div>
-              <p className="mt-1 text-body-sm font-semibold text-text-primary">{question.title}</p>
-              <p className="mt-1 text-caption text-text-secondary">
+              <p className="mt-1 overflow-hidden text-body-sm font-semibold text-text-primary [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2]">
+                {question.title}
+              </p>
+              <p className="mt-1 hidden text-caption text-text-secondary sm:block">
                 {syllabusSummariesByQuestionId[question.id] ?? `${question.topic} / ${question.subtopic}`}
               </p>
             </button>

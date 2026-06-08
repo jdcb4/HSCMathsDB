@@ -1,61 +1,47 @@
 import { useCallback, useMemo, useState } from "react";
-import { ArrowLeftRight, BookOpen, Database, FileText, Filter, Link as LinkIcon, Search } from "lucide-react";
+import { BookOpen, ChevronLeft, ChevronRight, FileText, Filter } from "lucide-react";
 import { QuestionDetail } from "../features/questions/QuestionDetail";
 import { QuestionList } from "../features/questions/QuestionList";
-import { SourceCatalog } from "../features/sources/SourceCatalog";
-import { SyllabusBrowser } from "../features/syllabus/SyllabusBrowser";
 import {
   getDatasetSummary,
   getCourseOptions,
   getDefaultSyllabusEraForCourse,
   getDisplaySyllabusNodesForQuestion,
   getFilterOptionsForCourse,
-  getQuestionCountsBySyllabusNode,
-  getQuestionsForSyllabusNode,
   getSyllabusNodesForView,
-  getSourcePackCoverageForCourse,
   queryQuestions,
   type SyllabusEraView
 } from "../domain/hscSelectors";
 import type { HscDatabase, QuestionStyle, SyllabusConversion, WorkedSolution } from "../domain/hscSchemas";
-import type { WorkedSolutionCoverageSummary } from "../services/hscRuntimeData";
-
-type ViewMode = "questions" | "syllabus" | "sources";
 
 type Filters = {
-  search: string;
   courseId: string;
   year: string;
-  topic: string;
   style: string;
   syllabusNodeId: string;
 };
 
 const defaultFilters: Filters = {
-  search: "",
   courseId: "advanced",
   year: "all",
-  topic: "all",
   style: "all",
   syllabusNodeId: "all"
 };
 
+const ARCHIVE_COURSE_ID = "mathematics-archive";
+
 export function App({
   database,
   syllabusConversion,
-  workedSolutionCoverage,
   loadWorkedSolution
 }: {
   database: HscDatabase;
   syllabusConversion: SyllabusConversion;
-  workedSolutionCoverage: WorkedSolutionCoverageSummary;
   loadWorkedSolution: (paperId: string, questionId: string) => Promise<WorkedSolution | undefined>;
 }) {
   const [filters, setFilters] = useState<Filters>(defaultFilters);
   const [selectedQuestionId, setSelectedQuestionId] = useState(database.questions[0]?.id ?? "");
-  const [selectedSyllabusNodeId, setSelectedSyllabusNodeId] = useState(database.syllabus[0]?.id ?? "");
   const [preferredSyllabusEra, setPreferredSyllabusEra] = useState<SyllabusEraView>("advanced-2017");
-  const [viewMode, setViewMode] = useState<ViewMode>("questions");
   const [workedSolutionsByQuestionId, setWorkedSolutionsByQuestionId] = useState<
     Record<string, WorkedSolution | null>
   >({});
@@ -64,7 +50,10 @@ export function App({
     Record<string, string>
   >({});
 
-  const courseOptions = useMemo(() => getCourseOptions(database), [database]);
+  const courseOptions = useMemo(
+    () => getCourseOptions(database).filter((course) => course.id !== ARCHIVE_COURSE_ID),
+    [database]
+  );
   const selectedCourse = courseOptions.find((course) => course.id === filters.courseId) ?? courseOptions[0];
   const selectedSyllabusEra =
     selectedCourse?.syllabusEras.find((era) => era.id === preferredSyllabusEra) ??
@@ -78,22 +67,12 @@ export function App({
     () => getSyllabusNodesForView(database, preferredSyllabusEra),
     [database, preferredSyllabusEra]
   );
-  const visibleQuestionCountsBySyllabusNode = useMemo(
-    () => getQuestionCountsBySyllabusNode(database, preferredSyllabusEra, syllabusConversion),
-    [database, preferredSyllabusEra, syllabusConversion]
-  );
-  const sourcePacks = useMemo(
-    () => getSourcePackCoverageForCourse(database, selectedCourse?.id),
-    [database, selectedCourse]
-  );
 
   const filteredQuestions = useMemo(
     () =>
       queryQuestions(database, {
-        search: filters.search,
         courseId: selectedCourse?.id,
         year: filters.year === "all" ? undefined : Number(filters.year),
-        topic: filters.topic === "all" ? undefined : filters.topic,
         style: filters.style === "all" ? undefined : (filters.style as QuestionStyle),
         syllabusNodeId: filters.syllabusNodeId === "all" ? undefined : filters.syllabusNodeId,
         syllabusConversion
@@ -112,11 +91,6 @@ export function App({
   const selectedWorkedSolution = selectedQuestion
     ? (workedSolutionsByQuestionId[selectedQuestion.id] ?? undefined)
     : undefined;
-  const selectedSyllabusNode =
-    visibleSyllabusNodes.find((node) => node.id === selectedSyllabusNodeId) ?? visibleSyllabusNodes[0];
-  const syllabusQuestions = selectedSyllabusNode
-    ? getQuestionsForSyllabusNode(database, selectedSyllabusNode.id, syllabusConversion)
-    : [];
   const syllabusSummariesByQuestionId = useMemo(
     () =>
       Object.fromEntries(
@@ -137,6 +111,15 @@ export function App({
       ),
     [database, filteredQuestions, preferredSyllabusEra, syllabusConversion]
   );
+  const selectedQuestionIndex = selectedQuestion
+    ? filteredQuestions.findIndex((question) => question.id === selectedQuestion.id)
+    : -1;
+  const previousQuestion =
+    selectedQuestionIndex > 0 ? filteredQuestions[selectedQuestionIndex - 1] : undefined;
+  const nextQuestion =
+    selectedQuestionIndex >= 0 && selectedQuestionIndex < filteredQuestions.length - 1
+      ? filteredQuestions[selectedQuestionIndex + 1]
+      : undefined;
 
   const requestSelectedWorkedSolution = useCallback(async () => {
     if (!selectedQuestion) {
@@ -180,18 +163,15 @@ export function App({
   const setCourse = (courseId: string) => {
     const nextCourse = courseOptions.find((course) => course.id === courseId);
     const nextSyllabusEra = getDefaultSyllabusEraForCourse(nextCourse);
-    const nextNodes = getSyllabusNodesForView(database, nextSyllabusEra);
 
     setFilters((currentFilters) => ({
       ...currentFilters,
       courseId,
       year: "all",
-      topic: "all",
       style: "all",
       syllabusNodeId: "all"
     }));
     setPreferredSyllabusEra(nextSyllabusEra);
-    setSelectedSyllabusNodeId(nextNodes[0]?.id ?? "");
     setSelectedQuestionId(
       database.questions.find(
         (question) => database.papers.find((paper) => paper.id === question.paperId)?.courseId === courseId
@@ -199,70 +179,26 @@ export function App({
     );
   };
 
-  const setSyllabusEra = (syllabusEra: SyllabusEraView) => {
-    const nextNodes = getSyllabusNodesForView(database, syllabusEra);
-
-    setPreferredSyllabusEra(syllabusEra);
-    setSelectedSyllabusNodeId((currentNodeId) =>
-      nextNodes.some((node) => node.id === currentNodeId) ? currentNodeId : (nextNodes[0]?.id ?? "")
-    );
-    setFilters((currentFilters) =>
-      currentFilters.syllabusNodeId === "all" ||
-      nextNodes.some((node) => node.id === currentFilters.syllabusNodeId)
-        ? currentFilters
-        : { ...currentFilters, syllabusNodeId: "all" }
-    );
-  };
-
-  const openSyllabusNode = (nodeId: string) => {
-    setSelectedSyllabusNodeId(nodeId);
-    setViewMode("syllabus");
-  };
-
   const openQuestion = (questionId: string) => {
     setSelectedQuestionId(questionId);
-    setViewMode("questions");
   };
 
   return (
     <div className="min-h-dvh bg-surface-base text-text-primary">
       <header className="border-b border-border-subtle bg-surface-raised">
-        <div className="mx-auto flex w-full max-w-7xl flex-col gap-5 px-5 py-5 lg:px-8">
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-4 sm:px-5 lg:px-8">
+          <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <p className="text-caption font-semibold uppercase text-accent-info">HSCMathsDB</p>
               <h1 className="text-h1 font-semibold">Mathematics question database</h1>
             </div>
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+            <div className="grid gap-2 sm:grid-cols-2">
               <Metric icon={<FileText size={17} />} label="Questions" value={summary.questionCount} />
-              <Metric icon={<BookOpen size={17} />} label="Syllabus" value={visibleSyllabusNodes.length} />
-              <Metric icon={<Database size={17} />} label="Sources" value={summary.sourcePackCount} />
-              <Metric
-                icon={<LinkIcon size={17} />}
-                label="Worked"
-                value={workedSolutionCoverage.workedSolutionCount}
-              />
+              <Metric icon={<BookOpen size={17} />} label="Exams" value={summary.paperCount} />
             </div>
           </div>
-          <div className="rounded-md border border-border-default bg-surface-sunken px-4 py-3 text-body-sm text-text-secondary">
-            Corpus status: {summary.transcriptionCounts.demo} demo, {summary.transcriptionCounts.draft} draft,{" "}
-            {summary.transcriptionCounts.verified} verified questions. Full official-paper transcription and
-            diagram extraction are tracked in the source catalog.
-          </div>
           <div className="flex flex-col gap-3">
-            <label className="flex min-w-0 flex-col gap-1 text-caption font-medium text-text-secondary">
-              Search
-              <span className="flex items-center gap-2 rounded-md border border-border-default bg-surface-sunken px-3 py-2 text-body text-text-primary focus-within:shadow-focus">
-                <Search size={17} className="shrink-0 text-text-subtle" />
-                <input
-                  value={filters.search}
-                  onChange={(event) => setFilter("search", event.target.value)}
-                  className="w-full bg-transparent outline-none"
-                  aria-label="Search questions"
-                />
-              </span>
-            </label>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               <FilterSelect label="Course" value={selectedCourse?.id ?? ""} onChange={setCourse}>
                 {courseOptions.map((course) => (
                   <option key={course.id} value={course.id}>
@@ -275,18 +211,6 @@ export function App({
                 {options.years.map((year) => (
                   <option key={year} value={year}>
                     {year}
-                  </option>
-                ))}
-              </FilterSelect>
-              <FilterSelect
-                label="Topic"
-                value={filters.topic}
-                onChange={(value) => setFilter("topic", value)}
-              >
-                <option value="all">All topics</option>
-                {options.topics.map((topic) => (
-                  <option key={topic} value={topic}>
-                    {topic}
                   </option>
                 ))}
               </FilterSelect>
@@ -314,147 +238,49 @@ export function App({
                   </option>
                 ))}
               </FilterSelect>
-              <SyllabusViewControl
-                value={preferredSyllabusEra}
-                onChange={setSyllabusEra}
-                label={selectedSyllabusEra?.label ?? "No syllabus view"}
-                eras={selectedCourse?.syllabusEras ?? []}
-              />
             </div>
           </div>
         </div>
       </header>
 
-      <main className="mx-auto grid w-full max-w-7xl gap-5 px-5 py-5 lg:grid-cols-[390px_minmax(0,1fr)] lg:px-8">
-        <aside className="space-y-4">
-          <div className="flex rounded-md border border-border-default bg-surface-raised p-1">
-            <ModeButton
-              active={viewMode === "questions"}
-              icon={<FileText size={17} />}
-              onClick={() => setViewMode("questions")}
-            >
-              Questions
-            </ModeButton>
-            <ModeButton
-              active={viewMode === "syllabus"}
-              icon={<BookOpen size={17} />}
-              onClick={() => setViewMode("syllabus")}
-            >
-              Syllabus
-            </ModeButton>
-            <ModeButton
-              active={viewMode === "sources"}
-              icon={<Database size={17} />}
-              onClick={() => setViewMode("sources")}
-            >
-              Sources
-            </ModeButton>
-          </div>
-          {viewMode === "questions" ? (
-            <QuestionList
-              questions={filteredQuestions}
-              selectedQuestionId={selectedQuestion?.id ?? ""}
-              syllabusSummariesByQuestionId={syllabusSummariesByQuestionId}
-              onSelectQuestion={setSelectedQuestionId}
-            />
-          ) : viewMode === "syllabus" ? (
-            <SyllabusBrowser
-              nodes={visibleSyllabusNodes}
-              selectedNodeId={selectedSyllabusNode?.id ?? ""}
-              questionCountsByNode={visibleQuestionCountsBySyllabusNode}
-              onSelectNode={setSelectedSyllabusNodeId}
-            />
-          ) : (
-            <SourceCatalog packs={sourcePacks} />
-          )}
+      <main className="mx-auto grid w-full max-w-7xl gap-4 px-4 py-4 lg:grid-cols-[330px_minmax(0,1fr)] lg:px-8 xl:grid-cols-[360px_minmax(0,1fr)]">
+        <aside>
+          <QuestionList
+            questions={filteredQuestions}
+            selectedQuestionId={selectedQuestion?.id ?? ""}
+            syllabusSummariesByQuestionId={syllabusSummariesByQuestionId}
+            onSelectQuestion={setSelectedQuestionId}
+          />
         </aside>
 
         <section className="min-w-0">
-          {viewMode === "questions" && selectedQuestion ? (
-            <QuestionDetail
-              question={selectedQuestion}
-              paper={database.papers.find((paper) => paper.id === selectedQuestion.paperId)}
-              workedSolution={selectedWorkedSolution}
-              workedSolutionLoading={loadingWorkedSolutionId === selectedQuestion.id}
-              workedSolutionError={workedSolutionErrorsByQuestionId[selectedQuestion.id]}
-              syllabusNodes={selectedQuestionSyllabus}
-              syllabusViewLabel={selectedSyllabusEra?.label ?? "Selected syllabus"}
-              onRequestWorkedSolution={requestSelectedWorkedSolution}
-              onOpenSyllabusNode={openSyllabusNode}
-            />
-          ) : viewMode === "syllabus" && selectedSyllabusNode ? (
-            <div className="space-y-4 rounded-md border border-border-default bg-surface-raised p-5">
-              <div className="flex flex-col gap-2 lg:flex-row lg:items-start lg:justify-between">
-                <div>
-                  <p className="text-caption font-semibold uppercase text-accent-info">
-                    {selectedSyllabusNode.code}
-                  </p>
-                  <h2 className="text-h2 font-semibold">{selectedSyllabusNode.title}</h2>
-                  <p className="mt-2 max-w-3xl text-body text-text-secondary">
-                    {selectedSyllabusNode.content}
-                  </p>
-                </div>
-                <a
-                  href={selectedSyllabusNode.sourceUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-md border border-border-default px-3 py-2 text-body-sm font-medium text-text-secondary hover:border-border-strong hover:text-text-primary"
-                >
-                  <LinkIcon size={16} />
-                  Source
-                </a>
-              </div>
-              <div className="grid gap-3">
-                {syllabusQuestions.map((question) => (
-                  <button
-                    key={question.id}
-                    type="button"
-                    onClick={() => openQuestion(question.id)}
-                    className="rounded-md border border-border-default bg-surface-sunken p-4 text-left hover:border-accent-info"
-                  >
-                    <div className="flex flex-wrap items-center gap-2 text-caption text-text-subtle">
-                      <span>{question.year}</span>
-                      <span>{question.questionNumber}</span>
-                      <span>{question.style}</span>
-                    </div>
-                    <p className="mt-1 text-body font-medium">{question.title}</p>
-                  </button>
-                ))}
-              </div>
-            </div>
-          ) : viewMode === "syllabus" ? (
-            <div className="space-y-4 rounded-md border border-border-default bg-surface-raised p-5">
-              <div>
-                <p className="text-caption font-semibold uppercase text-accent-info">
-                  {selectedCourse?.shortTitle ?? "Course"}
-                </p>
-                <h2 className="text-h2 font-semibold">No displayable syllabus nodes</h2>
-                <p className="mt-2 max-w-3xl text-body text-text-secondary">
-                  No syllabus nodes are available for the selected course and syllabus view.
-                </p>
-              </div>
+          {selectedQuestion ? (
+            <div className="space-y-3">
+              <QuestionNavigator
+                currentIndex={selectedQuestionIndex}
+                total={filteredQuestions.length}
+                previousTitle={previousQuestion?.questionNumber}
+                nextTitle={nextQuestion?.questionNumber}
+                onPrevious={previousQuestion ? () => openQuestion(previousQuestion.id) : undefined}
+                onNext={nextQuestion ? () => openQuestion(nextQuestion.id) : undefined}
+              />
+              <QuestionDetail
+                question={selectedQuestion}
+                paper={database.papers.find((paper) => paper.id === selectedQuestion.paperId)}
+                workedSolution={selectedWorkedSolution}
+                workedSolutionLoading={loadingWorkedSolutionId === selectedQuestion.id}
+                workedSolutionError={workedSolutionErrorsByQuestionId[selectedQuestion.id]}
+                syllabusNodes={selectedQuestionSyllabus}
+                syllabusViewLabel={selectedSyllabusEra?.label ?? "2017 syllabus"}
+                onRequestWorkedSolution={requestSelectedWorkedSolution}
+              />
             </div>
           ) : (
-            <div className="space-y-4 rounded-md border border-border-default bg-surface-raised p-5">
-              <div>
-                <p className="text-caption font-semibold uppercase text-accent-info">Import coverage</p>
-                <h2 className="text-h2 font-semibold">Official source catalog</h2>
-                <p className="mt-2 max-w-3xl text-body text-text-secondary">
-                  This catalog tracks official NSW exam-pack pages separately from question transcriptions. It
-                  is the intake checklist for turning source packs into verified question records,
-                  marking-guide answers, and extracted diagram assets.
-                </p>
-              </div>
-              <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-                <CoverageMetric label="Source packs listed" value={summary.sourcePackCount} />
-                <CoverageMetric label="Paper records" value={summary.paperCount} />
-                <CoverageMetric label="Verified questions" value={summary.verifiedQuestionCount} />
-                <CoverageMetric label="Seed questions" value={summary.transcriptionCounts.demo} />
-              </div>
-              <div className="rounded-md border border-border-subtle bg-surface-sunken p-4 text-body-sm text-text-secondary">
-                Run <code className="text-text-primary">pnpm run data:audit-sources</code> to compare the
-                local source catalog with the official NSW current and archive listing pages visible today.
-              </div>
+            <div className="rounded-md border border-border-default bg-surface-raised p-5">
+              <h2 className="text-h2 font-semibold">No questions match these filters</h2>
+              <p className="mt-2 text-body text-text-secondary">
+                Try a different year, course, style, or syllabus content.
+              </p>
             </div>
           )}
         </section>
@@ -463,21 +289,12 @@ export function App({
   );
 }
 
-function CoverageMetric({ label, value }: { label: string; value: number }) {
-  return (
-    <div className="rounded-md border border-border-default bg-surface-sunken p-4">
-      <div className="text-h2 font-semibold">{value}</div>
-      <div className="text-caption text-text-secondary">{label}</div>
-    </div>
-  );
-}
-
 function Metric({ icon, label, value }: { icon: React.ReactNode; label: string; value: number }) {
   return (
-    <div className="min-w-28 rounded-md border border-border-default bg-surface-sunken px-3 py-2">
-      <div className="flex items-center gap-2 text-text-subtle">{icon}</div>
-      <div className="mt-1 text-h3 font-semibold">{value}</div>
-      <div className="text-caption text-text-secondary">{label}</div>
+    <div className="flex min-w-32 items-center gap-2 rounded-md border border-border-default bg-surface-sunken px-3 py-2">
+      <span className="shrink-0 text-text-subtle">{icon}</span>
+      <span className="text-h4 font-semibold">{value}</span>
+      <span className="text-caption text-text-secondary">{label}</span>
     </div>
   );
 }
@@ -511,86 +328,59 @@ function FilterSelect({
   );
 }
 
-function SyllabusViewControl({
-  value,
-  onChange,
-  label,
-  eras
+function QuestionNavigator({
+  currentIndex,
+  total,
+  previousTitle,
+  nextTitle,
+  onPrevious,
+  onNext
 }: {
-  value: SyllabusEraView;
-  onChange: (value: SyllabusEraView) => void;
-  label: string;
-  eras: Array<{ id: string; label: string }>;
+  currentIndex: number;
+  total: number;
+  previousTitle?: string;
+  nextTitle?: string;
+  onPrevious?: () => void;
+  onNext?: () => void;
 }) {
+  const position = currentIndex >= 0 ? currentIndex + 1 : 0;
+
   return (
-    <div className="flex min-w-0 flex-col gap-1 text-caption font-medium text-text-secondary">
-      Syllabus view
-      <div
-        className="flex items-center gap-1 rounded-md border border-border-default bg-surface-sunken p-1 text-body-sm"
-        aria-label={`Current syllabus view: ${label}`}
-      >
-        {eras.map((era) => (
-          <SyllabusViewButton key={era.id} active={value === era.id} onClick={() => onChange(era.id)}>
-            {era.label.replace(" syllabus", "")}
-          </SyllabusViewButton>
-        ))}
-        {eras.length === 0 ? (
-          <span className="inline-flex min-h-9 flex-1 items-center justify-center rounded-sm px-3 text-body-sm text-text-secondary">
-            None
-          </span>
-        ) : null}
+    <nav
+      className="flex flex-col gap-2 rounded-md border border-border-default bg-surface-raised p-2 sm:flex-row sm:items-center sm:justify-between"
+      aria-label="Question navigation"
+    >
+      <QuestionNavButton direction="previous" label={previousTitle} onClick={onPrevious} />
+      <div className="order-first text-center text-caption font-medium text-text-secondary sm:order-none">
+        Question {position} of {total}
       </div>
-    </div>
+      <QuestionNavButton direction="next" label={nextTitle} onClick={onNext} />
+    </nav>
   );
 }
 
-function SyllabusViewButton({
-  active,
-  onClick,
-  children
+function QuestionNavButton({
+  direction,
+  label,
+  onClick
 }: {
-  active: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
+  direction: "previous" | "next";
+  label?: string;
+  onClick?: () => void;
 }) {
+  const isPrevious = direction === "previous";
+
   return (
     <button
       type="button"
       onClick={onClick}
-      className={`inline-flex min-h-9 flex-1 items-center justify-center rounded-sm px-3 text-body-sm font-medium ${
-        active
-          ? "bg-accent-primary text-text-onAccent"
-          : "text-text-secondary hover:bg-surface-raised hover:text-text-primary"
-      }`}
+      disabled={!onClick}
+      className="inline-flex min-h-10 items-center justify-center gap-2 rounded-md border border-border-default px-3 py-2 text-body-sm font-medium text-text-secondary hover:border-border-strong hover:text-text-primary disabled:cursor-not-allowed disabled:opacity-45"
     >
-      {children}
-    </button>
-  );
-}
-
-function ModeButton({
-  active,
-  icon,
-  onClick,
-  children
-}: {
-  active: boolean;
-  icon: React.ReactNode;
-  onClick: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`inline-flex min-h-10 flex-1 items-center justify-center gap-2 rounded-sm px-3 text-body-sm font-medium ${
-        active
-          ? "bg-accent-primary text-text-onAccent"
-          : "text-text-secondary hover:bg-surface-sunken hover:text-text-primary"
-      }`}
-    >
-      {active ? <ArrowLeftRight size={16} /> : icon}
-      {children}
+      {isPrevious ? <ChevronLeft size={16} /> : null}
+      <span>{isPrevious ? "Previous" : "Next"}</span>
+      {label ? <span className="hidden text-caption text-text-subtle sm:inline">{label}</span> : null}
+      {!isPrevious ? <ChevronRight size={16} /> : null}
     </button>
   );
 }

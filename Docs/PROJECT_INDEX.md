@@ -4,7 +4,7 @@ The first stop for navigating this project. Keep this file factual: it should de
 
 ## What this project is
 
-HSCMathsDB is a Vite React TypeScript web app for browsing NSW HSC mathematics question records and source packs by course, year, topic, style, and syllabus content. It currently includes browseable Mathematics Advanced, Mathematics Standard, Mathematics Extension 1, Mathematics Extension 2, and archived Mathematics 2 Unit question records. It supports question-to-syllabus and syllabus-to-question navigation using a validated JSON corpus, with toggleable 2017 and 2024 syllabus views resolved through a multi-course conversion map.
+HSCMathsDB is a Vite React TypeScript web app for browsing NSW HSC mathematics question records by course, year, style, and syllabus content. The public UI is targeted to students and currently exposes Mathematics Advanced, Mathematics Standard, Mathematics Extension 1, and Mathematics Extension 2 questions with 2017 syllabus mappings shown as collapsed reference links. The validated JSON corpus also retains source-pack metadata, syllabus conversion data, and archived Mathematics 2 Unit records for internal workflows.
 
 ## Current setup state
 

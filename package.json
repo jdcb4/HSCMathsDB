@@ -1,7 +1,7 @@
 {
   "name": "hscmathsdb",
-  "version": "0.49.1",
-  "description": "HSCMathsDB: browse NSW HSC mathematics past-paper questions and source packs by course, year, topic, style, and syllabus content.",
+  "version": "0.50.0",
+  "description": "HSCMathsDB: browse NSW HSC mathematics past-paper questions by course, year, style, and syllabus content.",
   "type": "module",
   "scripts": {
     "dev": "pnpm run data:sync-public-runtime && pnpm run assets:optimize-diagrams && vite",
