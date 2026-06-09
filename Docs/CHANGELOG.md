@@ -2,6 +2,12 @@
 
 Newest entries go at the top.
 
+## 0.53.0 - 2026-06-09
+
+- Added a Cloudflare Pages build target that keeps Vite assets rooted at `/` while retaining the existing GitHub Pages `/HSCMathsDB/` build.
+- Documented Cloudflare Pages setup settings for GitHub-connected deployment.
+- Ignored `.codex-remote-attachments/` local attachment folders.
+
 ## 0.52.0 - 2026-06-09
 
 - Added question selection and a PDF export preview for selected questions.

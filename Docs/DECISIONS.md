@@ -175,3 +175,13 @@ Record these during setup if they are known:
 **Rejected alternatives:** Moving canonical data directly into `public` was rejected because ingestion, tests, and validation scripts already use `src/data` as their source of truth. Adding a backend or database was rejected because JSON remains sufficient for the current static app.
 
 **Supersedes:** Not applicable.
+
+## 2026-06-09: Support Cloudflare Pages as a second static host
+
+**Decision:** Keep GitHub Pages as the existing deployment path and add a separate Cloudflare Pages build script that uses Vite base path `/`.
+
+**Reasoning:** GitHub Pages serves the repository site under `/HSCMathsDB/`, while Cloudflare Pages serves from a project domain or custom domain root. Separate scripts make the required base path explicit and avoid changing the app runtime model, dependencies, or generated `dist/` output structure.
+
+**Rejected alternatives:** Reusing the GitHub Pages build on Cloudflare was rejected because it would bake `/HSCMathsDB/` into asset URLs. Replacing GitHub Pages was rejected because dual static deployment gives a low-risk migration path.
+
+**Supersedes:** Not applicable.

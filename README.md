@@ -10,7 +10,7 @@ The current corpus is not a complete transcription of all NESA papers. Entries m
 - Git repository: initialised and connected to `jdcb4/HSCMathsDB`.
 - Dependencies: installed with pnpm.
 - Package scripts: available in `package.json`.
-- Deployment: GitHub Pages through GitHub Actions.
+- Deployment: GitHub Pages through GitHub Actions, with a Cloudflare Pages build target.
 
 ## Quick start
 
@@ -29,6 +29,12 @@ Build the GitHub Pages artefact:
 
 ```powershell
 pnpm run build:github-pages
+```
+
+Build the Cloudflare Pages artefact:
+
+```powershell
+pnpm run build:cloudflare-pages
 ```
 
 Data-specific checks:

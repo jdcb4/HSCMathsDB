@@ -1,6 +1,6 @@
 {
   "name": "hscmathsdb",
-  "version": "0.52.0",
+  "version": "0.53.0",
   "description": "HSCMathsDB: browse NSW HSC mathematics past-paper questions by course, year, style, and syllabus content.",
   "type": "module",
   "scripts": {
@@ -45,6 +45,7 @@
     "test:watch": "vitest",
     "build": "pnpm run data:sync-public-runtime && pnpm run assets:optimize-diagrams && tsc --noEmit && vite build",
     "build:github-pages": "pnpm run data:sync-public-runtime && pnpm run assets:optimize-diagrams && tsc --noEmit && vite build --base=/HSCMathsDB/",
+    "build:cloudflare-pages": "pnpm run data:sync-public-runtime && pnpm run assets:optimize-diagrams && tsc --noEmit && vite build --base=/",
     "verify": "pnpm run data:validate && pnpm run typecheck && pnpm run lint && pnpm test && pnpm run build"
   },
   "keywords": [],

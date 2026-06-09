@@ -11,7 +11,7 @@ HSCMathsDB is a Vite React TypeScript web app for browsing NSW HSC mathematics q
 - App scaffold: Vite + React + TypeScript.
 - Git repository: initialised locally.
 - Package manager: pnpm.
-- Runtime/deployment target: static Vite web app deployed to GitHub Pages from GitHub Actions.
+- Runtime/deployment target: static Vite web app deployable to GitHub Pages from GitHub Actions and Cloudflare Pages from a GitHub-connected Pages project.
 
 ## Important folders
 
@@ -74,6 +74,7 @@ HSCMathsDB is a Vite React TypeScript web app for browsing NSW HSC mathematics q
 | `pnpm run test:watch`                           | Vitest in watch mode.                                                                     |
 | `pnpm run build`                                | Production build.                                                                         |
 | `pnpm run build:github-pages`                   | Production build with the `/HSCMathsDB/` base path required by GitHub Pages.              |
+| `pnpm run build:cloudflare-pages`               | Production build with the `/` base path required by Cloudflare Pages.                     |
 | `pnpm run verify`                               | Data validation + typecheck + lint + test + build.                                        |
 
 ## Key docs
