@@ -56,3 +56,306 @@ select option {
 .math-text mjx-container[display="true"] {
   display: block;
 }
+
+.pdf-export-document {
+  background: hsl(var(--export-paper));
+  color: hsl(var(--text-export));
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.pdf-export-preview {
+  margin: 0 auto;
+  max-width: 210mm;
+  border: 1px solid hsl(var(--border-export));
+  border-radius: 6px;
+  box-shadow: 0 16px 40px hsl(var(--text-primary) / 0.16);
+}
+
+.pdf-export-document h1,
+.pdf-export-document h2,
+.pdf-export-document h3,
+.pdf-export-document p {
+  margin: 0;
+}
+
+.pdf-export-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: start;
+  border-bottom: 1.5px solid hsl(var(--text-export));
+  padding: 14mm 15mm 0.75rem;
+}
+
+.pdf-export-header.compact {
+  break-before: page;
+  page-break-before: always;
+}
+
+.pdf-export-header h1 {
+  font-size: 1.45rem;
+  line-height: 1.1;
+}
+
+.pdf-export-header p:not(.pdf-export-eyebrow) {
+  margin-top: 0.35rem;
+  color: hsl(var(--text-export));
+}
+
+.pdf-export-header aside {
+  border: 1px solid hsl(var(--border-export));
+  border-radius: 6px;
+  padding: 0.45rem 0.6rem;
+  color: hsl(var(--text-export));
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.pdf-export-eyebrow {
+  margin-bottom: 0.2rem;
+  color: hsl(var(--text-export));
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pdf-export-section {
+  padding: 0.75rem 15mm 0;
+}
+
+.pdf-export-section:last-child {
+  padding-bottom: 14mm;
+}
+
+.pdf-export-section-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.65rem;
+  color: hsl(var(--text-export));
+}
+
+.pdf-export-section-heading h2 {
+  color: hsl(var(--text-export));
+  font-size: 1.05rem;
+}
+
+.pdf-export-section-heading p {
+  color: hsl(var(--text-export));
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pdf-export-card {
+  margin-bottom: 0.75rem;
+  border: 1px solid hsl(var(--border-export));
+  border-radius: 7px;
+  padding: 0.7rem;
+  background: hsl(var(--export-paper));
+}
+
+.pdf-export-answer-card {
+  break-before: page;
+  page-break-before: always;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.pdf-export-answer-booklet .pdf-export-answer-card:first-of-type {
+  break-before: auto;
+  page-break-before: auto;
+}
+
+.pdf-export-question-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  align-items: start;
+  margin-bottom: 0.6rem;
+  border-bottom: 1px solid hsl(var(--border-export));
+  padding-bottom: 0.5rem;
+  break-after: avoid;
+  page-break-after: avoid;
+}
+
+.pdf-export-question-header.compact {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.pdf-export-question-header h2 {
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.pdf-export-question-header p:not(.pdf-export-eyebrow),
+.pdf-export-card footer,
+.pdf-export-syllabus-link small,
+.pdf-export-asset-grid figcaption {
+  color: hsl(var(--text-export));
+  font-size: 0.72rem;
+}
+
+.pdf-export-question-header > strong {
+  min-width: 2.6rem;
+  border-radius: 6px;
+  border: 1px solid hsl(var(--border-export));
+  background: hsl(var(--export-paper));
+  color: hsl(var(--text-export));
+  padding: 0.3rem 0.4rem;
+  font-size: 1.15rem;
+  line-height: 1;
+  text-align: center;
+}
+
+.pdf-export-question-header > strong span {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.52rem;
+  text-transform: uppercase;
+}
+
+.pdf-export-component {
+  margin-top: 0.5rem;
+  border: 1px solid hsl(var(--border-export));
+  border-radius: 6px;
+  background: hsl(var(--export-paper));
+  padding: 0.55rem 0.6rem;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.pdf-export-component h3 {
+  margin-bottom: 0.4rem;
+  color: hsl(var(--text-export));
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pdf-export-question-block {
+  background: hsl(var(--export-paper));
+}
+
+.pdf-export-answer-block {
+  background: hsl(var(--export-paper));
+}
+
+.pdf-export-answer-block h3 {
+  color: hsl(var(--text-export));
+}
+
+.pdf-export-asset-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-top: 0.55rem;
+}
+
+.pdf-export-asset-grid figure {
+  margin: 0;
+  border: 1px solid hsl(var(--border-export));
+  border-radius: 6px;
+  background: hsl(var(--export-paper));
+  padding: 0.5rem;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.pdf-export-asset-grid img {
+  display: block;
+  width: 100%;
+  max-height: 56mm;
+  object-fit: contain;
+}
+
+.pdf-export-worked-steps {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0.5rem 0 0;
+  padding-left: 1.2rem;
+}
+
+.pdf-export-worked-steps li {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.pdf-export-final-answer {
+  margin-top: 0.55rem;
+  border-top: 1px solid hsl(var(--border-export));
+  padding-top: 0.45rem;
+}
+
+.pdf-export-final-answer > strong {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.pdf-export-syllabus-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.4rem;
+}
+
+.pdf-export-syllabus-link {
+  display: block;
+  border: 1px solid hsl(var(--border-export));
+  border-radius: 6px;
+  background: hsl(var(--export-paper));
+  padding: 0.45rem 0.5rem;
+  text-decoration: none;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.pdf-export-syllabus-link strong {
+  display: block;
+  color: hsl(var(--text-export));
+  font-size: 0.68rem;
+}
+
+.pdf-export-syllabus-link span {
+  display: block;
+  font-weight: 700;
+}
+
+.pdf-export-card footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+@media print {
+  html {
+    background: hsl(var(--export-paper));
+  }
+
+  .pdf-export-document {
+    width: auto;
+    min-height: 297mm;
+    font-size: 10.5pt;
+  }
+
+  .pdf-export-preview {
+    max-width: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .pdf-export-header {
+    padding-top: 14mm;
+  }
+}

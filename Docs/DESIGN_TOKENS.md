@@ -56,6 +56,7 @@ Use this document when the project has a UI and a token system. If the scaffold 
 - `surface-raised` — cards, raised panels.
 - `surface-overlay` — modals, popovers.
 - `surface-sunken` — input fills, recessed areas.
+- `export-paper` - fixed white PDF export paper surface.
 
 ### Text (use as `text-text-*`)
 
@@ -63,6 +64,7 @@ Use this document when the project has a UI and a token system. If the scaffold 
 - `text-text-secondary` — secondary copy.
 - `text-text-subtle` — tertiary / placeholder.
 - `text-text-on-accent` — text rendered on a strong accent fill.
+- `text-text-export` - fixed black PDF export ink.
 
 ### Accents
 
@@ -77,6 +79,7 @@ Use this document when the project has a UI and a token system. If the scaffold 
 - `border-border-default` — default rule.
 - `border-border-subtle` — barely-there separator.
 - `border-border-strong` — emphasised divider.
+- `border-border-export` - fixed PDF export rule colour.
 
 ### Typography sizes (use as `text-*`)
 

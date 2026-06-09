@@ -9,6 +9,7 @@ This document describes the project's runtime shape and module boundaries.
 - Deployment target: not chosen; any static host that can serve Vite's `dist/` output should work.
 - Persistence model: validated local JSON corpus in `src/data/hsc-math-advanced.json`, with sidecar artifacts for worked solutions and syllabus conversion.
 - Rendering: TeX/LaTeX strings are rendered in-browser with MathJax through `better-react-mathjax`.
+- PDF export: selected questions render through a client-side print view that reuses the browser, MathJax, public diagram assets, and print CSS. Users save the browser print output as PDF.
 - Source boundary: official NESA pages are linked in the corpus; promoted records start as draft transcriptions until reviewed against the PDFs.
 
 ## Module boundaries
