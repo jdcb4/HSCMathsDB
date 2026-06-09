@@ -1,7 +1,10 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { BookOpen, ChevronLeft, ChevronRight, FileText, Filter, Info, X } from "lucide-react";
 import { QuestionDetail } from "../features/questions/QuestionDetail";
 import { QuestionList } from "../features/questions/QuestionList";
+import { PdfExportPanel } from "../features/questions/PdfExportPanel";
+import { buildPdfExportQuestions } from "../features/questions/pdfExportSelectors";
+import { defaultPdfExportOptions, type PdfExportOptions } from "../features/questions/pdfExportTypes";
 import {
   getDatasetSummary,
   getCourseOptions,
@@ -50,6 +53,9 @@ export function App({
     Record<string, string>
   >({});
   const [showInfoToast, setShowInfoToast] = useState(false);
+  const [selectedExportQuestionIds, setSelectedExportQuestionIds] = useState<string[]>([]);
+  const [showPdfExport, setShowPdfExport] = useState(false);
+  const [pdfExportOptions, setPdfExportOptions] = useState<PdfExportOptions>(defaultPdfExportOptions);
 
   const courseOptions = useMemo(
     () => getCourseOptions(database).filter((course) => course.id !== ARCHIVE_COURSE_ID),
@@ -121,6 +127,43 @@ export function App({
     selectedQuestionIndex >= 0 && selectedQuestionIndex < filteredQuestions.length - 1
       ? filteredQuestions[selectedQuestionIndex + 1]
       : undefined;
+  const selectedExportQuestionIdSet = useMemo(
+    () => new Set(selectedExportQuestionIds),
+    [selectedExportQuestionIds]
+  );
+  const pdfExportQuestions = useMemo(
+    () =>
+      buildPdfExportQuestions({
+        database,
+        questionIds: selectedExportQuestionIdSet,
+        orderedQuestions: filteredQuestions,
+        syllabusEra: preferredSyllabusEra,
+        syllabusConversion,
+        workedSolutionsByQuestionId
+      }),
+    [
+      database,
+      filteredQuestions,
+      preferredSyllabusEra,
+      selectedExportQuestionIdSet,
+      syllabusConversion,
+      workedSolutionsByQuestionId
+    ]
+  );
+  const exportWorkedSolutionsLoading =
+    showPdfExport &&
+    pdfExportOptions.includeWorkedSolution &&
+    pdfExportQuestions.some(
+      (item) =>
+        !(item.question.id in workedSolutionsByQuestionId) || loadingWorkedSolutionId === item.question.id
+    );
+
+  useEffect(() => {
+    const visibleQuestionIds = new Set(filteredQuestions.map((question) => question.id));
+    setSelectedExportQuestionIds((current) =>
+      current.filter((questionId) => visibleQuestionIds.has(questionId))
+    );
+  }, [filteredQuestions]);
 
   const requestSelectedWorkedSolution = useCallback(async () => {
     if (!selectedQuestion) {
@@ -157,6 +200,65 @@ export function App({
     }
   }, [loadWorkedSolution, loadingWorkedSolutionId, selectedQuestion, workedSolutionsByQuestionId]);
 
+  const loadWorkedSolutionForQuestion = useCallback(
+    async (paperId: string, questionId: string) => {
+      if (questionId in workedSolutionsByQuestionId || loadingWorkedSolutionId === questionId) {
+        return;
+      }
+
+      setLoadingWorkedSolutionId(questionId);
+      setWorkedSolutionErrorsByQuestionId((current) => {
+        const next = { ...current };
+        delete next[questionId];
+        return next;
+      });
+
+      try {
+        const workedSolution = await loadWorkedSolution(paperId, questionId);
+        setWorkedSolutionsByQuestionId((current) => ({
+          ...current,
+          [questionId]: workedSolution ?? null
+        }));
+      } catch (error) {
+        setWorkedSolutionsByQuestionId((current) => ({
+          ...current,
+          [questionId]: null
+        }));
+        setWorkedSolutionErrorsByQuestionId((current) => ({
+          ...current,
+          [questionId]: error instanceof Error ? error.message : "Failed to load the worked solution."
+        }));
+      } finally {
+        setLoadingWorkedSolutionId((current) => (current === questionId ? "" : current));
+      }
+    },
+    [loadWorkedSolution, loadingWorkedSolutionId, workedSolutionsByQuestionId]
+  );
+
+  useEffect(() => {
+    if (!showPdfExport || !pdfExportOptions.includeWorkedSolution) {
+      return;
+    }
+
+    const nextQuestion = pdfExportQuestions.find(
+      (item) =>
+        !(item.question.id in workedSolutionsByQuestionId) && loadingWorkedSolutionId !== item.question.id
+    );
+
+    if (!nextQuestion) {
+      return;
+    }
+
+    void loadWorkedSolutionForQuestion(nextQuestion.question.paperId, nextQuestion.question.id);
+  }, [
+    loadWorkedSolutionForQuestion,
+    loadingWorkedSolutionId,
+    pdfExportOptions.includeWorkedSolution,
+    pdfExportQuestions,
+    showPdfExport,
+    workedSolutionsByQuestionId
+  ]);
+
   const setFilter = (name: keyof Filters, value: string) => {
     setFilters((current) => ({ ...current, [name]: value }));
   };
@@ -184,149 +286,198 @@ export function App({
     setSelectedQuestionId(questionId);
   };
 
+  const toggleExportQuestion = (questionId: string) => {
+    setSelectedExportQuestionIds((current) =>
+      current.includes(questionId)
+        ? current.filter((candidate) => candidate !== questionId)
+        : [...current, questionId]
+    );
+  };
+
+  const toggleVisibleExportQuestions = () => {
+    const visibleQuestionIds = filteredQuestions.map((question) => question.id);
+    const allVisibleSelected =
+      visibleQuestionIds.length > 0 &&
+      visibleQuestionIds.every((questionId) => selectedExportQuestionIdSet.has(questionId));
+
+    setSelectedExportQuestionIds((current) => {
+      if (allVisibleSelected) {
+        const visibleQuestionIdSet = new Set(visibleQuestionIds);
+        return current.filter((questionId) => !visibleQuestionIdSet.has(questionId));
+      }
+
+      return [...new Set([...current, ...visibleQuestionIds])];
+    });
+  };
+
+  const printPdfExport = async () => {
+    await waitForMathJax();
+    window.print();
+  };
+
   return (
-    <div className="min-h-dvh bg-surface-base text-text-primary">
-      <header className="border-b border-border-subtle bg-surface-raised">
-        <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-4 sm:px-5 lg:px-8">
-          <div className="relative flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-            <div className="pr-12">
-              <h1 className="text-h1 font-semibold">HSCMathsDB</h1>
-              <p className="mt-2 max-w-3xl text-body text-text-secondary">
-                All the questions from the NSW HSC maths courses since 2020, along with worked solutions.
-              </p>
-            </div>
-            <div className="flex flex-wrap items-center gap-2">
-              <Metric icon={<FileText size={17} />} label="Questions" value={summary.questionCount} />
-              <Metric icon={<BookOpen size={17} />} label="Exams" value={summary.paperCount} />
-            </div>
-            <button
-              type="button"
-              onClick={() => setShowInfoToast((current) => !current)}
-              className="absolute right-0 top-0 inline-flex min-h-10 min-w-10 items-center justify-center rounded-md border border-border-default text-text-secondary hover:border-border-strong hover:text-text-primary"
-              aria-label="About this project"
-              aria-expanded={showInfoToast}
-            >
-              <Info size={18} />
-            </button>
-            {showInfoToast ? (
-              <div
-                role="status"
-                className="absolute right-0 top-12 z-10 w-full max-w-md rounded-md border border-border-default bg-surface-overlay p-4 shadow-focus"
-              >
-                <div className="flex items-start gap-3">
-                  <Info size={18} className="mt-0.5 shrink-0 text-accent-info" />
-                  <p className="text-body-sm text-text-secondary">
-                    This is a project I'm using to test pdf ingestion and AI answer generation. Most of these
-                    questions and answers haven't been human QA'd. If you have ideas of how to make this more
-                    useful, or spot errors, please let me know.
-                  </p>
-                  <button
-                    type="button"
-                    onClick={() => setShowInfoToast(false)}
-                    className="shrink-0 rounded-md p-1 text-text-subtle hover:text-text-primary"
-                    aria-label="Close project information"
-                  >
-                    <X size={16} />
-                  </button>
-                </div>
+    <>
+      <div className="min-h-dvh bg-surface-base text-text-primary print:hidden">
+        <header className="border-b border-border-subtle bg-surface-raised">
+          <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-4 sm:px-5 lg:px-8">
+            <div className="relative flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+              <div className="pr-12">
+                <h1 className="text-h1 font-semibold">HSCMathsDB</h1>
+                <p className="mt-2 max-w-3xl text-body text-text-secondary">
+                  All the questions from the NSW HSC maths courses since 2020, along with worked solutions.
+                </p>
               </div>
-            ) : null}
-          </div>
-          <details open className="rounded-md border border-border-default bg-surface-sunken p-3 sm:p-4">
-            <summary className="cursor-pointer text-h4 font-semibold text-text-primary">
-              Choose what questions you want
-            </summary>
-            <p className="mt-2 text-body-sm text-text-secondary">
-              Filter by course, year, question style, or syllabus content.
-            </p>
-            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              <FilterSelect label="Course" value={selectedCourse?.id ?? ""} onChange={setCourse}>
-                {courseOptions.map((course) => (
-                  <option key={course.id} value={course.id}>
-                    {course.shortTitle}
-                  </option>
-                ))}
-              </FilterSelect>
-              <FilterSelect label="Year" value={filters.year} onChange={(value) => setFilter("year", value)}>
-                <option value="all">All years</option>
-                {options.years.map((year) => (
-                  <option key={year} value={year}>
-                    {year}
-                  </option>
-                ))}
-              </FilterSelect>
-              <FilterSelect
-                label="Style"
-                value={filters.style}
-                onChange={(value) => setFilter("style", value)}
+              <div className="flex flex-wrap items-center gap-2">
+                <Metric icon={<FileText size={17} />} label="Questions" value={summary.questionCount} />
+                <Metric icon={<BookOpen size={17} />} label="Exams" value={summary.paperCount} />
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowInfoToast((current) => !current)}
+                className="absolute right-0 top-0 inline-flex min-h-10 min-w-10 items-center justify-center rounded-md border border-border-default text-text-secondary hover:border-border-strong hover:text-text-primary"
+                aria-label="About this project"
+                aria-expanded={showInfoToast}
               >
-                <option value="all">All styles</option>
-                {options.styles.map((style) => (
-                  <option key={style} value={style}>
-                    {style}
-                  </option>
-                ))}
-              </FilterSelect>
-              <FilterSelect
-                label="Syllabus content"
-                value={filters.syllabusNodeId}
-                onChange={(value) => setFilter("syllabusNodeId", value)}
-              >
-                <option value="all">All content</option>
-                {visibleSyllabusNodes.map((node) => (
-                  <option key={node.id} value={node.id}>
-                    {node.code} {node.title}
-                  </option>
-                ))}
-              </FilterSelect>
+                <Info size={18} />
+              </button>
+              {showInfoToast ? (
+                <div
+                  role="status"
+                  className="absolute right-0 top-12 z-10 w-full max-w-md rounded-md border border-border-default bg-surface-overlay p-4 shadow-focus"
+                >
+                  <div className="flex items-start gap-3">
+                    <Info size={18} className="mt-0.5 shrink-0 text-accent-info" />
+                    <p className="text-body-sm text-text-secondary">
+                      This is a project I'm using to test pdf ingestion and AI answer generation. Most of
+                      these questions and answers haven't been human QA'd. If you have ideas of how to make
+                      this more useful, or spot errors, please let me know.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => setShowInfoToast(false)}
+                      className="shrink-0 rounded-md p-1 text-text-subtle hover:text-text-primary"
+                      aria-label="Close project information"
+                    >
+                      <X size={16} />
+                    </button>
+                  </div>
+                </div>
+              ) : null}
             </div>
-          </details>
-        </div>
-      </header>
-
-      <main className="mx-auto grid w-full max-w-7xl gap-4 px-4 py-4 lg:grid-cols-[330px_minmax(0,1fr)] lg:px-8 xl:grid-cols-[360px_minmax(0,1fr)]">
-        <aside>
-          <QuestionList
-            questions={filteredQuestions}
-            selectedQuestionId={selectedQuestion?.id ?? ""}
-            syllabusSummariesByQuestionId={syllabusSummariesByQuestionId}
-            onSelectQuestion={setSelectedQuestionId}
-          />
-        </aside>
-
-        <section className="min-w-0">
-          {selectedQuestion ? (
-            <div className="space-y-3">
-              <QuestionNavigator
-                currentIndex={selectedQuestionIndex}
-                total={filteredQuestions.length}
-                previousTitle={previousQuestion?.questionNumber}
-                nextTitle={nextQuestion?.questionNumber}
-                onPrevious={previousQuestion ? () => openQuestion(previousQuestion.id) : undefined}
-                onNext={nextQuestion ? () => openQuestion(nextQuestion.id) : undefined}
-              />
-              <QuestionDetail
-                question={selectedQuestion}
-                paper={database.papers.find((paper) => paper.id === selectedQuestion.paperId)}
-                workedSolution={selectedWorkedSolution}
-                workedSolutionLoading={loadingWorkedSolutionId === selectedQuestion.id}
-                workedSolutionError={workedSolutionErrorsByQuestionId[selectedQuestion.id]}
-                syllabusNodes={selectedQuestionSyllabus}
-                syllabusViewLabel={selectedSyllabusEra?.label ?? "2017 syllabus"}
-                onRequestWorkedSolution={requestSelectedWorkedSolution}
-              />
-            </div>
-          ) : (
-            <div className="rounded-md border border-border-default bg-surface-raised p-5">
-              <h2 className="text-h2 font-semibold">No questions match these filters</h2>
-              <p className="mt-2 text-body text-text-secondary">
-                Try a different year, course, style, or syllabus content.
+            <details open className="rounded-md border border-border-default bg-surface-sunken p-3 sm:p-4">
+              <summary className="cursor-pointer text-h4 font-semibold text-text-primary">
+                Choose what questions you want
+              </summary>
+              <p className="mt-2 text-body-sm text-text-secondary">
+                Filter by course, year, question style, or syllabus content.
               </p>
-            </div>
-          )}
-        </section>
-      </main>
-    </div>
+              <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                <FilterSelect label="Course" value={selectedCourse?.id ?? ""} onChange={setCourse}>
+                  {courseOptions.map((course) => (
+                    <option key={course.id} value={course.id}>
+                      {course.shortTitle}
+                    </option>
+                  ))}
+                </FilterSelect>
+                <FilterSelect
+                  label="Year"
+                  value={filters.year}
+                  onChange={(value) => setFilter("year", value)}
+                >
+                  <option value="all">All years</option>
+                  {options.years.map((year) => (
+                    <option key={year} value={year}>
+                      {year}
+                    </option>
+                  ))}
+                </FilterSelect>
+                <FilterSelect
+                  label="Style"
+                  value={filters.style}
+                  onChange={(value) => setFilter("style", value)}
+                >
+                  <option value="all">All styles</option>
+                  {options.styles.map((style) => (
+                    <option key={style} value={style}>
+                      {style}
+                    </option>
+                  ))}
+                </FilterSelect>
+                <FilterSelect
+                  label="Syllabus content"
+                  value={filters.syllabusNodeId}
+                  onChange={(value) => setFilter("syllabusNodeId", value)}
+                >
+                  <option value="all">All content</option>
+                  {visibleSyllabusNodes.map((node) => (
+                    <option key={node.id} value={node.id}>
+                      {node.code} {node.title}
+                    </option>
+                  ))}
+                </FilterSelect>
+              </div>
+            </details>
+          </div>
+        </header>
+
+        <main className="mx-auto grid w-full max-w-7xl gap-4 px-4 py-4 lg:grid-cols-[330px_minmax(0,1fr)] lg:px-8 xl:grid-cols-[360px_minmax(0,1fr)]">
+          <aside>
+            <QuestionList
+              questions={filteredQuestions}
+              selectedQuestionId={selectedQuestion?.id ?? ""}
+              selectedExportQuestionIds={selectedExportQuestionIdSet}
+              syllabusSummariesByQuestionId={syllabusSummariesByQuestionId}
+              onSelectQuestion={setSelectedQuestionId}
+              onToggleExportQuestion={toggleExportQuestion}
+              onToggleVisibleExportQuestions={toggleVisibleExportQuestions}
+              onClearExportSelection={() => setSelectedExportQuestionIds([])}
+              onOpenPdfExport={() => setShowPdfExport(true)}
+            />
+          </aside>
+
+          <section className="min-w-0">
+            {selectedQuestion ? (
+              <div className="space-y-3">
+                <QuestionNavigator
+                  currentIndex={selectedQuestionIndex}
+                  total={filteredQuestions.length}
+                  previousTitle={previousQuestion?.questionNumber}
+                  nextTitle={nextQuestion?.questionNumber}
+                  onPrevious={previousQuestion ? () => openQuestion(previousQuestion.id) : undefined}
+                  onNext={nextQuestion ? () => openQuestion(nextQuestion.id) : undefined}
+                />
+                <QuestionDetail
+                  question={selectedQuestion}
+                  paper={database.papers.find((paper) => paper.id === selectedQuestion.paperId)}
+                  workedSolution={selectedWorkedSolution}
+                  workedSolutionLoading={loadingWorkedSolutionId === selectedQuestion.id}
+                  workedSolutionError={workedSolutionErrorsByQuestionId[selectedQuestion.id]}
+                  syllabusNodes={selectedQuestionSyllabus}
+                  syllabusViewLabel={selectedSyllabusEra?.label ?? "2017 syllabus"}
+                  onRequestWorkedSolution={requestSelectedWorkedSolution}
+                />
+              </div>
+            ) : (
+              <div className="rounded-md border border-border-default bg-surface-raised p-5">
+                <h2 className="text-h2 font-semibold">No questions match these filters</h2>
+                <p className="mt-2 text-body text-text-secondary">
+                  Try a different year, course, style, or syllabus content.
+                </p>
+              </div>
+            )}
+          </section>
+        </main>
+      </div>
+      <PdfExportPanel
+        open={showPdfExport}
+        exportQuestions={pdfExportQuestions}
+        options={pdfExportOptions}
+        workedSolutionsLoading={exportWorkedSolutionsLoading}
+        onOptionsChange={setPdfExportOptions}
+        onClose={() => setShowPdfExport(false)}
+        onPrint={printPdfExport}
+      />
+    </>
   );
 }
 
@@ -338,6 +489,22 @@ function Metric({ icon, label, value }: { icon: React.ReactNode; label: string; 
       <span className="text-caption text-text-secondary">{label}</span>
     </div>
   );
+}
+
+async function waitForMathJax() {
+  await new Promise((resolve) => window.setTimeout(resolve, 250));
+
+  const mathJax = (
+    window as Window & {
+      MathJax?: {
+        startup?: { promise?: Promise<void> };
+        typesetPromise?: () => Promise<void>;
+      };
+    }
+  ).MathJax;
+
+  await mathJax?.startup?.promise;
+  await mathJax?.typesetPromise?.();
 }
 
 function FilterSelect({

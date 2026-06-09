@@ -2,6 +2,13 @@
 
 Newest entries go at the top.
 
+## 0.52.0 - 2026-06-09
+
+- Added question selection and a PDF export preview for selected questions.
+- Added export options for answers, worked solutions, syllabus links, and inline versus answer-booklet answer placement.
+- Added print styling that keeps export question, answer, worked-solution step, diagram, and syllabus-link blocks together where they fit on an A4 page.
+- Fixed the PDF export document to use black text on a white background regardless of the active app theme.
+
 ## 0.50.2 - 2026-06-08
 
 - Updated the public header copy to introduce HSCMathsDB directly and added an info popup explaining the project status and QA caveat.

@@ -11,13 +11,15 @@ export default {
           base: withOpacity("--surface-base"),
           raised: withOpacity("--surface-raised"),
           overlay: withOpacity("--surface-overlay"),
-          sunken: withOpacity("--surface-sunken")
+          sunken: withOpacity("--surface-sunken"),
+          export: withOpacity("--export-paper")
         },
         text: {
           primary: withOpacity("--text-primary"),
           secondary: withOpacity("--text-secondary"),
           subtle: withOpacity("--text-subtle"),
-          onAccent: withOpacity("--text-on-accent")
+          onAccent: withOpacity("--text-on-accent"),
+          export: withOpacity("--text-export")
         },
         accent: {
           primary: withOpacity("--accent-primary"),
@@ -30,7 +32,8 @@ export default {
         border: {
           default: withOpacity("--border-default"),
           subtle: withOpacity("--border-subtle"),
-          strong: withOpacity("--border-strong")
+          strong: withOpacity("--border-strong"),
+          export: withOpacity("--border-export")
         }
       },
       fontSize: {
