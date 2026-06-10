@@ -2,6 +2,13 @@
 
 Newest entries go at the top.
 
+## 0.54.0 - 2026-06-10
+
+- Added a Cloudflare Pages feedback endpoint for question quality reports, backed by D1 and basic rate limiting.
+- Added a question-level feedback modal that submits issue type, message, optional contact email, and question metadata.
+- Added Wrangler-based feedback review scripts for listing reports, updating status, and exporting an HTML dashboard.
+- Ignored generated `output/` artifacts.
+
 ## 0.53.0 - 2026-06-09
 
 - Added a Cloudflare Pages build target that keeps Vite assets rooted at `/` while retaining the existing GitHub Pages `/HSCMathsDB/` build.

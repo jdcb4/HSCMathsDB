@@ -1,7 +1,8 @@
-import { ExternalLink, Image as ImageIcon } from "lucide-react";
+import { ExternalLink, Flag, Image as ImageIcon } from "lucide-react";
 import { type SyntheticEvent, useState } from "react";
 import type { Paper, Question, SyllabusNode, WorkedSolution } from "../../domain/hscSchemas";
 import { MathText } from "../math/MathText";
+import { QuestionFeedbackDialog } from "./QuestionFeedbackDialog";
 import { resolvePublicAssetPath, resolvePublicWebpAssetPath } from "./questionAssetPaths";
 import { formatMultipartQuestionPrompt } from "./questionPromptFormatting";
 
@@ -25,6 +26,7 @@ export function QuestionDetail({
   workedSolutionError,
   syllabusNodes,
   syllabusViewLabel,
+  appVersion,
   onRequestWorkedSolution
 }: {
   question: Question;
@@ -34,8 +36,10 @@ export function QuestionDetail({
   workedSolutionError?: string;
   syllabusNodes: SyllabusNode[];
   syllabusViewLabel: string;
+  appVersion: string;
   onRequestWorkedSolution: () => void;
 }) {
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
   const [panelState, setPanelState] = useState<DetailPanelState>({
     questionId: question.id,
     ...closedDetailPanels
@@ -87,15 +91,25 @@ export function QuestionDetail({
           </div>
           <h2 className="mt-2 text-h2 font-semibold">{question.title}</h2>
         </div>
-        <a
-          href={question.source.examPackUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center gap-2 rounded-md border border-border-default px-3 py-2 text-body-sm font-medium text-text-secondary hover:border-border-strong hover:text-text-primary"
-        >
-          <ExternalLink size={16} />
-          Exam pack
-        </a>
+        <div className="flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setFeedbackOpen(true)}
+            className="inline-flex items-center gap-2 rounded-md border border-border-default px-3 py-2 text-body-sm font-medium text-text-secondary hover:border-border-strong hover:text-text-primary"
+          >
+            <Flag size={16} />
+            Report issue
+          </button>
+          <a
+            href={question.source.examPackUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-md border border-border-default px-3 py-2 text-body-sm font-medium text-text-secondary hover:border-border-strong hover:text-text-primary"
+          >
+            <ExternalLink size={16} />
+            Exam pack
+          </a>
+        </div>
       </div>
 
       <section className="rounded-md border border-border-subtle bg-surface-sunken p-4">
@@ -320,6 +334,13 @@ export function QuestionDetail({
         {question.source.pageRef ? <span>Paper: {question.source.pageRef}</span> : null}
         {question.source.markingGuideRef ? <span>Guide: {question.source.markingGuideRef}</span> : null}
       </footer>
+      <QuestionFeedbackDialog
+        open={feedbackOpen}
+        question={question}
+        paper={paper}
+        appVersion={appVersion}
+        onClose={() => setFeedbackOpen(false)}
+      />
     </article>
   );
 }

@@ -19,6 +19,7 @@
   },
   "include": [
     "src",
+    "functions/**/*.ts",
     "scripts/**/*.ts",
     "vite.config.ts",
     "eslint.config.js",

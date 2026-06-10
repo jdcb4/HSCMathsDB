@@ -44,6 +44,48 @@ Recommended Cloudflare Pages project settings:
 
 Cloudflare's Pages build configuration documentation lists React (Vite) output as `dist` and uses a framework build command for the site. Its GitHub integration can connect a Pages project to the repository and automatically deploy branch pushes.
 
+### Feedback Functions
+
+Question feedback is Cloudflare-only. The static GitHub Pages deployment can still serve the app, but `/api/feedback` only works on Cloudflare Pages.
+
+Create the D1 database once:
+
+```powershell
+pnpm exec wrangler login
+pnpm exec wrangler d1 create hscmathsdb-feedback
+```
+
+Apply the schema migration:
+
+```powershell
+pnpm exec wrangler d1 migrations apply hscmathsdb-feedback --remote
+```
+
+In the Cloudflare Pages project, configure:
+
+- D1 binding: `FEEDBACK_DB` -> `hscmathsdb-feedback`
+- secret variable: `FEEDBACK_IP_SALT` -> a long random string
+
+The Pages Function lives at `functions/api/feedback.ts` and handles `POST /api/feedback`. It validates request bodies, rejects cross-origin submissions, hashes the client IP with `FEEDBACK_IP_SALT`, and rate-limits obvious overuse before inserting into D1.
+
+For local Cloudflare-style testing after a build:
+
+```powershell
+pnpm run build:cloudflare-pages
+pnpm exec wrangler pages dev dist --d1 FEEDBACK_DB=hscmathsdb-feedback --compatibility-date=2026-06-10
+```
+
+Feedback review is local and private through Wrangler:
+
+```powershell
+pnpm run feedback:list -- --limit 50
+pnpm run feedback:list -- --status new
+pnpm run feedback:update -- 123 triaged --note "Checked source paper."
+pnpm run feedback:export -- --out output/feedback-dashboard.html
+```
+
+The scripts default to the remote D1 database `hscmathsdb-feedback`. Use `FEEDBACK_D1_NAME` or `--database <name>` if the database is renamed, and use `--local` for local Wrangler state.
+
 ## Local verification before deploy
 
 Run `pnpm run verify`.
