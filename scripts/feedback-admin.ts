@@ -1,6 +1,7 @@
 import { spawnSync } from "node:child_process";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 type FeedbackStatus = "new" | "triaged" | "fixed" | "wontfix" | "spam";
 
@@ -28,6 +29,8 @@ const command = process.argv[2];
 const args = process.argv.slice(3);
 const databaseName = getOption("database") ?? process.env.FEEDBACK_D1_NAME ?? "hscmathsdb-feedback";
 const remoteFlag = args.includes("--local") ? "--local" : "--remote";
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const wranglerEntry = path.join(repoRoot, "node_modules", "wrangler", "bin", "wrangler.js");
 
 switch (command) {
   case "list":
@@ -118,27 +121,31 @@ function runSelect(sql: string): FeedbackReport[] {
 
 function runD1(sql: string): Record<string, unknown>[] {
   const result = spawnSync(
-    process.platform === "win32" ? "pnpm.cmd" : "pnpm",
-    ["exec", "wrangler", "d1", "execute", databaseName, remoteFlag, "--json", "--command", sql],
+    process.execPath,
+    [wranglerEntry, "d1", "execute", databaseName, remoteFlag, "--json", "--command", sql],
     {
       encoding: "utf8",
       shell: false
     }
   );
 
+  const stdout = result.stdout ?? "";
+  const stderr = result.stderr ?? "";
+
   if (result.status !== 0) {
     throw new Error(
       [
         `Wrangler D1 command failed for database "${databaseName}" (${remoteFlag}).`,
-        result.stdout.trim(),
-        result.stderr.trim()
+        result.error ? `Spawn error: ${result.error.message}` : "",
+        stdout.trim(),
+        stderr.trim()
       ]
         .filter(Boolean)
         .join("\n")
     );
   }
 
-  const parsed = parseWranglerJson(result.stdout);
+  const parsed = parseWranglerJson(stdout);
   const firstResult = Array.isArray(parsed) ? parsed[0] : parsed;
   const rows = firstResult?.results ?? firstResult?.result?.[0]?.results ?? [];
 
