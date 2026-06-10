@@ -1,6 +1,6 @@
 {
   "name": "hscmathsdb",
-  "version": "0.52.0",
+  "version": "0.54.0",
   "description": "HSCMathsDB: browse NSW HSC mathematics past-paper questions by course, year, style, and syllabus content.",
   "type": "module",
   "scripts": {
@@ -37,6 +37,9 @@
     "data:report-renders": "tsx scripts/report-source-renders.ts",
     "data:validate-candidates": "python scripts/validate-question-candidates.py",
     "data:validate": "tsx scripts/validate-data.ts",
+    "feedback:list": "tsx scripts/feedback-admin.ts list",
+    "feedback:update": "tsx scripts/feedback-admin.ts update",
+    "feedback:export": "tsx scripts/feedback-admin.ts export",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "format": "prettier . --check",
@@ -45,6 +48,7 @@
     "test:watch": "vitest",
     "build": "pnpm run data:sync-public-runtime && pnpm run assets:optimize-diagrams && tsc --noEmit && vite build",
     "build:github-pages": "pnpm run data:sync-public-runtime && pnpm run assets:optimize-diagrams && tsc --noEmit && vite build --base=/HSCMathsDB/",
+    "build:cloudflare-pages": "pnpm run data:sync-public-runtime && pnpm run assets:optimize-diagrams && tsc --noEmit && vite build --base=/",
     "verify": "pnpm run data:validate && pnpm run typecheck && pnpm run lint && pnpm test && pnpm run build"
   },
   "keywords": [],
@@ -52,6 +56,7 @@
   "license": "UNLICENSED",
   "dependencies": {
     "better-react-mathjax": "^3.0.1",
+    "hono": "^4.12.25",
     "lucide-react": "^1.17.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
@@ -80,6 +85,7 @@
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.60.1",
     "vite": "^8.0.16",
-    "vitest": "^4.1.8"
+    "vitest": "^4.1.8",
+    "wrangler": "^4.98.0"
   }
 }

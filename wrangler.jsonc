@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "hscmathsdb",
+  "compatibility_date": "2026-06-10",
+  "pages_build_output_dir": "dist",
+  "d1_databases": [
+    {
+      "binding": "FEEDBACK_DB",
+      "database_name": "hscmathsdb-feedback",
+      "database_id": "e6942549-295b-49cc-bd70-3604a3f65481"
+    }
+  ]
+}

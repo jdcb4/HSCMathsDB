@@ -5,9 +5,9 @@ This document describes the project's runtime shape and module boundaries.
 ## Runtime shape
 
 - App type: static web app.
-- Framework/runtime: Vite, React, TypeScript, Tailwind CSS.
-- Deployment target: not chosen; any static host that can serve Vite's `dist/` output should work.
-- Persistence model: validated local JSON corpus in `src/data/hsc-math-advanced.json`, with sidecar artifacts for worked solutions and syllabus conversion.
+- Framework/runtime: Vite, React, TypeScript, Tailwind CSS, with Cloudflare Pages Functions for Cloudflare-only feedback submission.
+- Deployment target: GitHub Pages for static hosting and Cloudflare Pages for static hosting plus `/api/feedback`.
+- Persistence model: validated local JSON corpus in `src/data/hsc-math-advanced.json`, sidecar artifacts for worked solutions and syllabus conversion, and Cloudflare D1 for runtime question feedback.
 - Rendering: TeX/LaTeX strings are rendered in-browser with MathJax through `better-react-mathjax`.
 - PDF export: selected questions render through a client-side print view that reuses the browser, MathJax, public diagram assets, and print CSS. Users save the browser print output as PDF.
 - Source boundary: official NESA pages are linked in the corpus; promoted records start as draft transcriptions until reviewed against the PDFs.
@@ -21,6 +21,8 @@ This document describes the project's runtime shape and module boundaries.
 - `src/data` - local JSON corpus, worked-solution sidecar, and syllabus conversion map.
 - `src/styles` - token CSS and Tailwind entrypoint.
 - `src/tests` - shared test setup.
+- `functions` - Cloudflare Pages Functions.
+- `migrations` - Cloudflare D1 migrations.
 
 ## Boundary rules
 
@@ -45,6 +47,8 @@ Student-facing worked explanations are planned as a separate validated sidecar k
 The 2017-to-2024 syllabus conversion is a separate validated multi-course artifact in `src/data/syllabus-conversion.json`. The current corpus contains displayable nodes for both syllabus eras across Mathematics Advanced, Standard, Extension 1, and Extension 2, but questions only need native `syllabusNodeIds`; selectors resolve alternate-era display through the conversion map. See `Docs/SYLLABUS_CONVERSION.md`.
 
 Move to SQLite, Postgres, or a search index only when the complete corpus, full-text search, collaborative editing, or ingestion workflow makes JSON unsuitable. Document that migration in `Docs/DECISIONS.md`.
+
+Question-quality feedback is separate from the canonical corpus. It is submitted to `POST /api/feedback` on Cloudflare Pages, stored in D1, and reviewed with local Wrangler scripts. Feedback rows are moderation/workflow data, not source-of-truth question records.
 
 ## Validation
 
@@ -74,7 +78,7 @@ After extraction, a local script may generate draft student explanations through
 
 ## Configuration
 
-No environment variables are required for the current static app. If configuration is added, create `src/config/env.ts` and validate it with Zod.
+The static app does not require browser environment variables. The Cloudflare feedback Function requires a D1 binding named `FEEDBACK_DB` and should have a secret `FEEDBACK_IP_SALT` for stable IP hashing.
 
 ## Testing
 

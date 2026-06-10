@@ -11,7 +11,7 @@ HSCMathsDB is a Vite React TypeScript web app for browsing NSW HSC mathematics q
 - App scaffold: Vite + React + TypeScript.
 - Git repository: initialised locally.
 - Package manager: pnpm.
-- Runtime/deployment target: static Vite web app deployed to GitHub Pages from GitHub Actions.
+- Runtime/deployment target: static Vite web app deployable to GitHub Pages from GitHub Actions and Cloudflare Pages from a GitHub-connected Pages project.
 
 ## Important folders
 
@@ -22,6 +22,8 @@ HSCMathsDB is a Vite React TypeScript web app for browsing NSW HSC mathematics q
 - `src/data` - local JSON corpus, worked-solution sidecar, and syllabus conversion map.
 - `src/styles` - Tailwind entry CSS and design tokens.
 - `src/tests` - shared test setup.
+- `functions` - Cloudflare Pages Functions for Cloudflare-only runtime APIs.
+- `migrations` - Cloudflare D1 migrations for runtime feedback storage.
 - `SourceExams` - canonical local archive of official HSC mathematics PDFs, named `[Year]_[Subject]_[Document Type].pdf`.
 - `SyllabusConversion` - separate staging area for building and reviewing syllabus conversion expansions before merging them into app data artifacts.
 - `public/assets/diagrams` - static diagram and image assets referenced by the corpus.
@@ -41,6 +43,9 @@ HSCMathsDB is a Vite React TypeScript web app for browsing NSW HSC mathematics q
 | ----------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | `pnpm run dev`                                  | Generate runtime data/WebP assets and start the development server.                       |
 | `pnpm run data:validate`                        | Validate the JSON corpus through the TypeScript Zod schema.                               |
+| `pnpm run feedback:list`                        | List recent Cloudflare D1 question feedback reports through Wrangler.                     |
+| `pnpm run feedback:update`                      | Update a feedback report status through Wrangler.                                         |
+| `pnpm run feedback:export`                      | Export D1 feedback reports to an ignored local HTML dashboard.                            |
 | `pnpm run data:audit-sources`                   | Optional source-drift check against visible official NSW pack titles.                     |
 | `pnpm run data:audit-assets`                    | Confirm each cataloged pack has required local `SourceExams` PDFs.                        |
 | `pnpm run data:report-source-exams`             | Summarize the local `SourceExams` archive by year, subject, and document type.            |
@@ -74,6 +79,7 @@ HSCMathsDB is a Vite React TypeScript web app for browsing NSW HSC mathematics q
 | `pnpm run test:watch`                           | Vitest in watch mode.                                                                     |
 | `pnpm run build`                                | Production build.                                                                         |
 | `pnpm run build:github-pages`                   | Production build with the `/HSCMathsDB/` base path required by GitHub Pages.              |
+| `pnpm run build:cloudflare-pages`               | Production build with the `/` base path required by Cloudflare Pages.                     |
 | `pnpm run verify`                               | Data validation + typecheck + lint + test + build.                                        |
 
 ## Key docs

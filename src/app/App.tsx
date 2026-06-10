@@ -454,6 +454,7 @@ export function App({
                   workedSolutionError={workedSolutionErrorsByQuestionId[selectedQuestion.id]}
                   syllabusNodes={selectedQuestionSyllabus}
                   syllabusViewLabel={selectedSyllabusEra?.label ?? "2017 syllabus"}
+                  appVersion={database.meta.version}
                   onRequestWorkedSolution={requestSelectedWorkedSolution}
                 />
               </div>

@@ -10,7 +10,7 @@ The current corpus is not a complete transcription of all NESA papers. Entries m
 - Git repository: initialised and connected to `jdcb4/HSCMathsDB`.
 - Dependencies: installed with pnpm.
 - Package scripts: available in `package.json`.
-- Deployment: GitHub Pages through GitHub Actions.
+- Deployment: GitHub Pages through GitHub Actions, plus Cloudflare Pages with a feedback Function.
 
 ## Quick start
 
@@ -31,6 +31,19 @@ Build the GitHub Pages artefact:
 pnpm run build:github-pages
 ```
 
+Build the Cloudflare Pages artefact:
+
+```powershell
+pnpm run build:cloudflare-pages
+```
+
+Review Cloudflare D1 feedback reports:
+
+```powershell
+pnpm run feedback:list
+pnpm run feedback:export
+```
+
 Data-specific checks:
 
 ```powershell
@@ -40,7 +53,11 @@ pnpm run data:audit-sources
 
 ## Data
 
-The local corpus lives at `src/data/hsc-math-advanced.json` and is validated on import by Zod schemas in `src/domain/hscSchemas.ts`. It contains course metadata, question records, and a separate `sourcePacks` catalog for official NSW exam-pack sources. The current browseable question corpus includes Mathematics Advanced, 2025 Mathematics Standard, 2025 Mathematics Extension 1, 2025 Mathematics Extension 2, and a Mathematics 2 Unit archive seed. Supporting images and diagrams live under `public/assets/diagrams/`.
+The local corpus lives at `src/data/hsc-math-advanced.json` and is validated on import by Zod schemas in `src/domain/hscSchemas.ts`. It contains course metadata, question records, and a separate `sourcePacks` catalog for official NSW exam-pack sources. The current browseable question corpus includes Mathematics Advanced, Standard 1, Standard 2, Extension 1, and Extension 2 papers for 2020-2025. Supporting images and diagrams live under `public/assets/diagrams/`.
+
+## Feedback
+
+Question-level feedback is submitted to `POST /api/feedback` on the Cloudflare Pages deployment. Reports are stored in Cloudflare D1 and reviewed locally through Wrangler scripts. See `Docs/DEPLOYMENT.md` for the D1 setup, binding, migration, and dashboard export workflow.
 
 ## License
 

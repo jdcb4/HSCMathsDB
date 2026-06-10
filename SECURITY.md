@@ -25,6 +25,8 @@ These rules apply to all contributors, including AI agents. They apply even befo
 
 - Validate every external input: forms, URL params, request bodies, localStorage reads, JSON file loads, third-party API responses, and realtime events.
 - Treat data on disk as untrusted on read.
+- Validate Cloudflare Function request bodies before writing to D1.
+- Do not store raw client IP addresses in feedback records; hash them with a secret salt for rate limiting.
 
 ### Auth
 
@@ -34,6 +36,7 @@ Do not implement authentication unless the user has explicitly asked for it. Add
 
 - Avoid `dangerouslySetInnerHTML` and `eval`-style APIs.
 - Sanitize user-supplied content before rendering as HTML.
+- Escape feedback report fields in generated dashboard exports because report messages are user supplied.
 
 ### CI and supply chain
 

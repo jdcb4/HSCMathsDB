@@ -175,3 +175,23 @@ Record these during setup if they are known:
 **Rejected alternatives:** Moving canonical data directly into `public` was rejected because ingestion, tests, and validation scripts already use `src/data` as their source of truth. Adding a backend or database was rejected because JSON remains sufficient for the current static app.
 
 **Supersedes:** Not applicable.
+
+## 2026-06-09: Support Cloudflare Pages as a second static host
+
+**Decision:** Keep GitHub Pages as the existing deployment path and add a separate Cloudflare Pages build script that uses Vite base path `/`.
+
+**Reasoning:** GitHub Pages serves the repository site under `/HSCMathsDB/`, while Cloudflare Pages serves from a project domain or custom domain root. Separate scripts make the required base path explicit and avoid changing the app runtime model, dependencies, or generated `dist/` output structure.
+
+**Rejected alternatives:** Reusing the GitHub Pages build on Cloudflare was rejected because it would bake `/HSCMathsDB/` into asset URLs. Replacing GitHub Pages was rejected because dual static deployment gives a low-risk migration path.
+
+**Supersedes:** Not applicable.
+
+## 2026-06-10: Use Cloudflare Pages Functions and D1 for question feedback
+
+**Decision:** Collect anonymous question-quality feedback through a Cloudflare Pages Function implemented with Hono and store reports in Cloudflare D1.
+
+**Reasoning:** The feedback path needs server-side persistence and rate limiting, but it should not require user accounts, a separate server, or a public GitHub issue workflow. Pages Functions keep the API beside the static Cloudflare deployment, D1 is enough for a small moderation queue, and Wrangler scripts provide private review/export tooling without adding app authentication.
+
+**Rejected alternatives:** GitHub issues were rejected because reporters need GitHub accounts. A public admin UI was rejected because it would require authentication. External form services were rejected because they add another data processor and less control over question metadata.
+
+**Supersedes:** Not applicable.
