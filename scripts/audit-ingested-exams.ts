@@ -87,7 +87,7 @@ function auditTextField(question: Question, field: string, value: string, collec
 
 function auditMultipleChoice(question: Question, collectedIssues: AuditIssue[]) {
   const prompt = question.promptLatex;
-  const labels = [...prompt.matchAll(/\b[A-D]\./g)].map((match) => match[0]);
+  const labels = [...prompt.matchAll(/(?:^|\n)\s*[A-D]\./g)].map((match) => match[0]);
 
   if (labels.length > 0 && labels.length !== 4) {
     collectedIssues.push({
@@ -123,15 +123,19 @@ function auditVisualReferences(question: Question, collectedIssues: AuditIssue[]
     /\b(diagram|figure|scatterplot|scatter plot|box plot|network|tree diagram|direction field)\b/.test(
       text
     ) ||
-    /\b(?:following|given|provided|standard normal|normal distribution)?\s*table\b/.test(text) ||
+    /\b(?:following|given|provided|standard normal|normal distribution)\s+table\b/.test(text) ||
     /\btable\b.{0,80}\b(?:shown|below|provided|values|normal)\b/.test(text) ||
     /\bgraph\b.{0,80}\b(shown|below|provided|drawn)\b/.test(text) ||
     /\b(shown|below|provided|drawn)\b.{0,80}\bgraph\b/.test(text) ||
-    /from the graph|shown below|following graphs|following diagram/.test(text);
+    /from the graph|following graphs|following diagram/.test(text);
 
-  const methodOnlyDiagramReference = /\busing a Venn diagram,\s+or otherwise\b/i.test(question.promptLatex);
+  const methodOnlyDiagramReference =
+    /\busing a Venn diagram,\s+or otherwise\b/i.test(question.promptLatex) ||
+    /\bprobability tree diagram,\s+or otherwise\b/i.test(question.promptLatex) ||
+    /\bsketch the graph\b/i.test(question.promptLatex);
+  const hasInlineMarkdownTable = /(^|\n)\s*\|.+\|\s*(\n|$)/.test(question.promptLatex);
 
-  if (visualCue && !methodOnlyDiagramReference && question.assets.length === 0) {
+  if (visualCue && !methodOnlyDiagramReference && !hasInlineMarkdownTable && question.assets.length === 0) {
     collectedIssues.push({
       severity: "error",
       questionId: question.id,
@@ -199,6 +203,10 @@ function auditMathNotation(question: Question, collectedIssues: AuditIssue[]) {
 
 async function auditAssets(question: Question, collectedIssues: AuditIssue[]) {
   for (const asset of question.assets) {
+    if (asset.sourceStatus === "pending") {
+      continue;
+    }
+
     const publicPath = path.resolve("public", asset.path.replace(/^\//, ""));
     try {
       await access(publicPath);

@@ -2,6 +2,13 @@
 
 Newest entries go at the top.
 
+## 0.55.0 - 2026-06-13
+
+- Ingested the processed exam export from `InputProcessedExams`, replacing overlapping corpus records and expanding coverage to 1065 questions across 43 papers from 2017-2025.
+- Added first-class marking criteria records to questions and a collapsible marking-criteria panel in the question detail view.
+- Replaced the worked-solution sidecar with the processed 1065-solution corpus and imported 555 reviewed diagram PNGs into `public/assets/diagrams`.
+- Added `pnpm run data:ingest-processed-exams` for repeatable processed-export ingestion and updated audits/rendering to handle inline markdown tables and pending visual assets.
+
 ## 0.54.0 - 2026-06-10
 
 - Added a Cloudflare Pages feedback endpoint for question quality reports, backed by D1 and basic rate limiting.

@@ -21,7 +21,7 @@ describe("PDF export selectors", () => {
 
     expect(exportQuestions.map((item) => item.question.id)).toEqual(orderedQuestions.map((item) => item.id));
     expect(exportQuestions[0]?.paper?.courseName).toBe("Mathematics Advanced");
-    expect(exportQuestions[0]?.syllabusNodes.map((node) => node.code)).toEqual(["MA-E1"]);
+    expect(exportQuestions[0]?.syllabusNodes.map((node) => node.code)).toEqual(["MA-E1", "MA-F2"]);
   });
 
   it("attaches available worked solutions and tolerates missing ones", () => {

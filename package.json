@@ -1,6 +1,6 @@
 {
   "name": "hscmathsdb",
-  "version": "0.54.0",
+  "version": "0.55.0",
   "description": "HSCMathsDB: browse NSW HSC mathematics past-paper questions by course, year, style, and syllabus content.",
   "type": "module",
   "scripts": {
@@ -25,6 +25,7 @@
     "data:publish-crop-model-comparison": "tsx scripts/publish-crop-model-comparison.ts",
     "data:publish-gemini-ingestion-report": "tsx scripts/publish-gemini-ingestion-report.ts",
     "data:render-pages": "tsx scripts/render-source-pages.ts",
+    "data:ingest-processed-exams": "tsx scripts/ingest-processed-exams.ts",
     "data:generate-explanation-samples": "tsx scripts/generate-llm-explanation-samples.ts",
     "data:generate-worked-solutions": "tsx scripts/generate-worked-solutions.ts",
     "data:ingest-marking-feedback": "tsx scripts/ingest-marking-feedback.ts",

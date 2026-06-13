@@ -4,7 +4,7 @@ The first stop for navigating this project. Keep this file factual: it should de
 
 ## What this project is
 
-HSCMathsDB is a Vite React TypeScript web app for browsing NSW HSC mathematics question records by course, year, style, and syllabus content. The public UI is targeted to students and currently exposes Mathematics Advanced, Mathematics Standard, Mathematics Extension 1, and Mathematics Extension 2 questions with 2017 syllabus mappings shown as collapsed reference links. The validated JSON corpus also retains source-pack metadata, syllabus conversion data, and archived Mathematics 2 Unit records for internal workflows.
+HSCMathsDB is a Vite React TypeScript web app for browsing NSW HSC mathematics question records by course, year, style, and syllabus content. The public UI is targeted to students and currently exposes Mathematics Advanced, Mathematics Standard, Mathematics Extension 1, and Mathematics Extension 2 questions with 2017 syllabus mappings shown as collapsed reference links. The validated JSON corpus currently contains 1065 draft question records across 43 papers from 2017-2025, plus worked solutions, marking criteria, source-pack metadata, syllabus conversion data, and archived Mathematics 2 Unit records for internal workflows.
 
 ## Current setup state
 
@@ -51,6 +51,7 @@ HSCMathsDB is a Vite React TypeScript web app for browsing NSW HSC mathematics q
 | `pnpm run data:report-source-exams`             | Summarize the local `SourceExams` archive by year, subject, and document type.            |
 | `pnpm run data:seed-local-source-catalog`       | Seed local paper/source-pack records from `SourceExams` for a minimum year.               |
 | `pnpm run data:sync-public-runtime`             | Generate ignored `public/data` runtime JSON from canonical `src/data`.                    |
+| `pnpm run data:ingest-processed-exams`          | Import `InputProcessedExams` paper JSON, solutions, marking criteria, and diagram assets. |
 | `pnpm run data:download-sources`                | Sync local `SourceExams` PDFs into ignored `var/source-assets` with bounded concurrency.  |
 | `pnpm run data:extract-text`                    | Extract raw text from cached PDFs into ignored local output with bounded concurrency.     |
 | `pnpm run data:ingest-additional-maths`         | Ingest configured Standard/Extension paper profiles into draft question records.          |

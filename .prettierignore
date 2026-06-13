@@ -2,5 +2,7 @@ node_modules/
 dist/
 coverage/
 pnpm-lock.yaml
+Backup20260613/
+InputProcessedExams/
 Docs/AGENT_REFERENCE.md
 Docs/DESIGN_TOKENS.md

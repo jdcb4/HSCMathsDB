@@ -153,6 +153,10 @@ function subjectForPaperId(paperId: string): LocalSourceExamSubject | undefined 
     return "Mathematics_Standard_2";
   }
 
+  if (paperId.startsWith("gen-")) {
+    return "Mathematics_General";
+  }
+
   if (paperId.startsWith("ext1-")) {
     return "Mathematics_Extension_1";
   }

@@ -35,6 +35,18 @@ export const MarkingFeedbackSchema = z.object({
   improvementAreas: z.array(z.string().min(1)).default([])
 });
 
+export const MarkingCriterionSchema = z.object({
+  part: z.string().optional(),
+  marks: z.string().min(1),
+  criterion: z.string().min(1)
+});
+
+export const MarkingCriteriaSchema = z.object({
+  sourceRef: z.string().min(1),
+  guidePages: z.array(z.number().int().min(1)).default([]),
+  criteria: z.array(MarkingCriterionSchema).default([])
+});
+
 export const CourseSchema = z.object({
   id: z.string().min(1),
   title: z.string().min(1),
@@ -113,6 +125,7 @@ export const QuestionSchema = z.object({
   answerLatex: z.string().min(1),
   workingLatex: z.array(z.string().min(1)).default([]),
   markingFeedback: MarkingFeedbackSchema.optional(),
+  markingCriteria: MarkingCriteriaSchema.optional(),
   tags: z.array(z.string().min(1)).default([]),
   assets: z.array(AssetSchema).default([]),
   source: z.object({

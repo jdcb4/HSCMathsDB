@@ -421,13 +421,15 @@ function PdfSyllabusLinks({ item }: { item: PdfExportQuestion }) {
 }
 
 function PdfQuestionAssets({ item }: { item: PdfExportQuestion }) {
-  if (item.question.assets.length === 0) {
+  const displayableAssets = item.question.assets.filter((asset) => asset.sourceStatus !== "pending");
+
+  if (displayableAssets.length === 0) {
     return null;
   }
 
   return (
     <div className="pdf-export-asset-grid">
-      {item.question.assets.map((asset) => {
+      {displayableAssets.map((asset) => {
         const webpPath = resolvePublicWebpAssetPath(asset.path);
 
         return (

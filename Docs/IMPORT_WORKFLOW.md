@@ -40,6 +40,9 @@ Initial bulk-ingestion work should focus on 2015 onward because exam structure a
 
 ## Current Import Handoff - 2026-06-06
 
+- 2026-06-13 processed-export intake: `InputProcessedExams` has been imported through `pnpm run data:ingest-processed-exams`, replacing overlapping paper/question records and expanding the draft corpus to 1065 questions across 43 papers from 2017-2025. The import also loads the processed 1065 worked-solution sidecar, 555 reviewed diagram PNGs, and per-question marking criteria from `extras/*.extras.json`.
+- Processed-export ingestion keeps absent visual placeholders as `sourceStatus: "pending"` assets so the data records the gap without rendering broken images. The current import has 7 pending visual references.
+- The full ingestion audit currently reports zero errors and 45 whitespace warnings. `pnpm run data:audit-worked-solution-math` reports remaining worked-solution notation issues from the processed solution corpus; treat those as solution-side QA work before claiming worked-solution math formatting is clean.
 - 2025 Mathematics Advanced: 31/31 official draft records promoted; source-pack asset status is complete.
 - 2025 Mathematics Standard: 68/68 official draft records promoted across Standard 1 and Standard 2 with marking-guide excerpts and Section II marking feedback where extractable. Standard 1 and Standard 2 have reviewed exam-derived assets and source-reviewed overrides for the visual and notation issues identified in the 2025 audit; `pnpm run data:audit-ingested-exams -- std1-2025 std2-2025` reports zero issues across all 68 questions.
 - 2025 Mathematics Extension 1: 14/14 official draft records promoted through the reusable profile importer with source-reviewed Section I notation fixes, Section II prompt/answer overrides, and reviewed exam-derived assets. `pnpm run data:audit-ingested-exams -- ext1-2025 ext2-2025` reports zero issues across the 2025 Extension papers.
@@ -62,6 +65,23 @@ pnpm run data:validate
 ```
 
 This checks `src/data/hsc-math-advanced.json` against the TypeScript Zod schema.
+
+## 1A. Import processed exam exports
+
+When a reviewed processed export is staged under `InputProcessedExams`, import it with:
+
+```powershell
+pnpm run data:ingest-processed-exams
+```
+
+The importer reads:
+
+- `papers/*.json` into `src/data/hsc-math-advanced.json`
+- `solutions/all-solutions.json` into `src/data/hsc-math-advanced-worked-solutions.json`
+- `extras/*.extras.json` into each question's `markingCriteria`
+- `assets/diagrams/*.png` into `public/assets/diagrams/`, overwriting matching filenames
+
+It preserves existing app metadata such as courses, source collections, syllabus nodes, and syllabus conversion data, while replacing any existing paper, question, and source-pack records that clash with the incoming paper IDs.
 
 ## 2. Audit local source coverage
 

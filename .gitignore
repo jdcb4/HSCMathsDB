@@ -9,6 +9,8 @@ __pycache__/
 .env.*
 !.env.example
 .codex-remote-attachments/
+Backup20260613/
+InputProcessedExams/
 output/
 .DS_Store
 Thumbs.db

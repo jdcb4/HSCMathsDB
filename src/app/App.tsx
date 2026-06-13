@@ -324,7 +324,7 @@ export function App({
               <div className="pr-12">
                 <h1 className="text-h1 font-semibold">HSCMathsDB</h1>
                 <p className="mt-2 max-w-3xl text-body text-text-secondary">
-                  All the questions from the NSW HSC maths courses since 2020, along with worked solutions.
+                  All the questions from the NSW HSC maths courses since 2017, along with worked solutions.
                 </p>
               </div>
               <div className="flex flex-wrap items-center gap-2">

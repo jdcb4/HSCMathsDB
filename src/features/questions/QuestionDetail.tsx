@@ -6,7 +6,7 @@ import { QuestionFeedbackDialog } from "./QuestionFeedbackDialog";
 import { resolvePublicAssetPath, resolvePublicWebpAssetPath } from "./questionAssetPaths";
 import { formatMultipartQuestionPrompt } from "./questionPromptFormatting";
 
-type DetailPanelKey = "officialAnswer" | "markingFeedback" | "workedSolution";
+type DetailPanelKey = "officialAnswer" | "markingFeedback" | "markingCriteria" | "workedSolution";
 
 type DetailPanelState = Record<DetailPanelKey, boolean> & {
   questionId: string;
@@ -15,6 +15,7 @@ type DetailPanelState = Record<DetailPanelKey, boolean> & {
 const closedDetailPanels = {
   officialAnswer: false,
   markingFeedback: false,
+  markingCriteria: false,
   workedSolution: false
 } satisfies Record<DetailPanelKey, boolean>;
 
@@ -56,6 +57,7 @@ export function QuestionDetail({
   const groupedImprovementFeedback = groupItemsByQuestionPart(
     question.markingFeedback?.improvementAreas ?? []
   );
+  const displayableAssets = question.assets.filter((asset) => asset.sourceStatus !== "pending");
   const handlePanelToggle = (panel: DetailPanelKey) => (event: SyntheticEvent<HTMLDetailsElement>) => {
     const isOpen = event.currentTarget.open;
     if (panel === "workedSolution" && isOpen) {
@@ -117,9 +119,9 @@ export function QuestionDetail({
         <div className="text-body text-text-primary">
           <MathText block>{formatMultipartQuestionPrompt(question.promptLatex)}</MathText>
         </div>
-        {question.assets.length > 0 ? (
+        {displayableAssets.length > 0 ? (
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
-            {question.assets.map((asset) => {
+            {displayableAssets.map((asset) => {
               const webpPath = resolvePublicWebpAssetPath(asset.path);
 
               return (
@@ -208,6 +210,54 @@ export function QuestionDetail({
                 <p className="text-body-sm text-text-secondary">No improvement feedback recorded.</p>
               )}
             </div>
+          </div>
+        </details>
+      ) : null}
+
+      {question.markingCriteria && question.markingCriteria.criteria.length > 0 ? (
+        <details
+          open={openPanels.markingCriteria}
+          onToggle={handlePanelToggle("markingCriteria")}
+          className="rounded-md border border-border-subtle bg-surface-sunken p-4"
+        >
+          <summary className="cursor-pointer text-h4 font-semibold text-text-primary">
+            Marking Criteria
+          </summary>
+          <div className="mt-4 flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
+            <h3 className="sr-only">Marking Criteria</h3>
+            <span className="text-caption text-text-subtle">{question.markingCriteria.sourceRef}</span>
+            {question.markingCriteria.guidePages.length > 0 ? (
+              <span className="text-caption text-text-subtle">
+                Guide pages {formatPageList(question.markingCriteria.guidePages)}
+              </span>
+            ) : null}
+          </div>
+          <div className="mt-4 overflow-hidden rounded-md border border-border-subtle bg-surface-raised">
+            <table className="w-full border-collapse text-left text-body-sm">
+              <thead className="bg-surface-sunken text-caption uppercase text-text-subtle">
+                <tr>
+                  <th className="border-b border-border-subtle px-3 py-2 font-semibold">Part</th>
+                  <th className="border-b border-border-subtle px-3 py-2 font-semibold">Marks</th>
+                  <th className="border-b border-border-subtle px-3 py-2 font-semibold">Criterion</th>
+                </tr>
+              </thead>
+              <tbody>
+                {question.markingCriteria.criteria.map((criterion, index) => (
+                  <tr
+                    key={`${question.id}-criteria-${index}`}
+                    className="border-b border-border-subtle last:border-b-0"
+                  >
+                    <td className="w-20 px-3 py-2 text-text-secondary">
+                      {criterion.part ? `(${criterion.part})` : "Whole"}
+                    </td>
+                    <td className="w-20 px-3 py-2 text-text-secondary">{criterion.marks}</td>
+                    <td className="px-3 py-2 text-text-primary">
+                      <MathText block>{criterion.criterion}</MathText>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </details>
       ) : null}
@@ -451,4 +501,8 @@ function parsePartPrefix(item: string): { part?: string; text: string } {
   }
 
   return { text: item };
+}
+
+function formatPageList(pages: number[]): string {
+  return [...new Set(pages)].sort((left, right) => left - right).join(", ");
 }

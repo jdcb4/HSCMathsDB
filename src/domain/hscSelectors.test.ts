@@ -33,18 +33,18 @@ describe("HSC selectors", () => {
     const results = queryQuestions(database, { courseId: "advanced", year: 2023 });
 
     expect(results.slice(0, 12).map((question) => question.questionNumber)).toEqual([
-      "Q1",
-      "Q2",
-      "Q3",
-      "Q4",
-      "Q5",
-      "Q6",
-      "Q7",
-      "Q8",
-      "Q9",
-      "Q10",
-      "Q11",
-      "Q12"
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12"
     ]);
     expect(
       ["Q1", "Q10", "Q2"].sort((left, right) =>
@@ -230,10 +230,7 @@ describe("HSC selectors", () => {
     const logarithmResults = queryQuestions(database, { syllabusNodeId: "ma-e1" });
 
     expect(logarithmResults.map((question) => question.id)).toEqual(
-      expect.arrayContaining([
-        "adv-2025-q17-reducing-balance-loan",
-        "adv-2025-q21-continuous-random-variable"
-      ])
+      expect.arrayContaining(["adv-2025-q02-exponential-graph", "adv-2024-q13-population-models"])
     );
   });
 
@@ -275,24 +272,24 @@ describe("HSC selectors", () => {
       "mathematics-archive"
     ]);
     expect(database.papers.find((paper) => paper.id === "ext1-2025")?.courseId).toBe("extension-1");
-    expect(database.sourcePacks.find((pack) => pack.id === "source-std-2025")?.paperIds).toEqual([
-      "std1-2025",
-      "std2-2025"
-    ]);
+    expect(database.sourcePacks.find((pack) => pack.id === "pack-std1-2025")?.paperId).toBe("std1-2025");
+    expect(database.sourcePacks.find((pack) => pack.id === "pack-std2-2025")?.paperId).toBe("std2-2025");
   });
 
   it("tracks the 2025 Standard and Extension source editions", () => {
     const sourcePacks = getSourcePackCoverage(database);
 
     expect(sourcePacks.map((pack) => pack.id)).toEqual(
-      expect.arrayContaining(["source-std-2025", "source-ext1-2025", "source-ext2-2025"])
+      expect.arrayContaining(["pack-std1-2025", "pack-std2-2025", "pack-ext1-2025", "pack-ext2-2025"])
     );
-    expect(sourcePacks.find((pack) => pack.id === "source-std-2025")?.assets).toHaveLength(6);
-    expect(sourcePacks.find((pack) => pack.id === "source-ext1-2025")?.assets).toHaveLength(3);
-    expect(sourcePacks.find((pack) => pack.id === "source-ext2-2025")?.assets).toHaveLength(3);
-    expect(sourcePacks.find((pack) => pack.id === "source-std-2025")?.importedQuestionCount).toBe(68);
-    expect(sourcePacks.find((pack) => pack.id === "source-ext1-2025")?.importedQuestionCount).toBe(14);
-    expect(sourcePacks.find((pack) => pack.id === "source-ext2-2025")?.importedQuestionCount).toBe(16);
+    expect(sourcePacks.find((pack) => pack.id === "pack-std1-2025")?.assets).toHaveLength(3);
+    expect(sourcePacks.find((pack) => pack.id === "pack-std2-2025")?.assets).toHaveLength(3);
+    expect(sourcePacks.find((pack) => pack.id === "pack-ext1-2025")?.assets).toHaveLength(3);
+    expect(sourcePacks.find((pack) => pack.id === "pack-ext2-2025")?.assets).toHaveLength(3);
+    expect(sourcePacks.find((pack) => pack.id === "pack-std1-2025")?.importedQuestionCount).toBe(28);
+    expect(sourcePacks.find((pack) => pack.id === "pack-std2-2025")?.importedQuestionCount).toBe(40);
+    expect(sourcePacks.find((pack) => pack.id === "pack-ext1-2025")?.importedQuestionCount).toBe(14);
+    expect(sourcePacks.find((pack) => pack.id === "pack-ext2-2025")?.importedQuestionCount).toBe(16);
   });
 
   it("tracks the promoted Standard and Extension draft records", () => {
@@ -315,22 +312,32 @@ describe("HSC selectors", () => {
   });
 
   it("filters question options and source packs by course", () => {
-    const modernYears = [2025, 2024, 2023, 2022, 2021, 2020];
+    const importedYears = [2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017];
 
-    expect(getFilterOptionsForCourse(database, "standard").years).toEqual(modernYears);
-    expect(getFilterOptionsForCourse(database, "extension-1").years).toEqual(modernYears);
-    expect(getFilterOptionsForCourse(database, "extension-2").years).toEqual(modernYears);
+    expect(getFilterOptionsForCourse(database, "standard").years).toEqual(importedYears);
+    expect(getFilterOptionsForCourse(database, "extension-1").years).toEqual(importedYears);
+    expect(getFilterOptionsForCourse(database, "extension-2").years).toEqual(importedYears);
     expect(getSourcePackCoverageForCourse(database, "standard").map((pack) => pack.id)).toEqual([
-      "source-std-2025",
-      "source-std-2024",
-      "source-std-2023",
-      "source-std-2022",
-      "source-std-2021",
-      "source-std-2020"
+      "pack-std1-2025",
+      "pack-std2-2025",
+      "pack-std1-2024",
+      "pack-std2-2024",
+      "pack-std1-2023",
+      "pack-std2-2023",
+      "pack-std1-2022",
+      "pack-std2-2022",
+      "pack-std1-2021",
+      "pack-std2-2021",
+      "pack-std1-2020",
+      "pack-std2-2020",
+      "pack-std1-2019",
+      "pack-std2-2019",
+      "pack-gen-2018",
+      "pack-gen-2017"
     ]);
-    expect(queryQuestions(database, { courseId: "standard" })).toHaveLength(418);
-    expect(queryQuestions(database, { courseId: "extension-1" })).toHaveLength(84);
-    expect(queryQuestions(database, { courseId: "extension-2" })).toHaveLength(96);
+    expect(queryQuestions(database, { courseId: "standard" })).toHaveLength(556);
+    expect(queryQuestions(database, { courseId: "extension-1" })).toHaveLength(126);
+    expect(queryQuestions(database, { courseId: "extension-2" })).toHaveLength(144);
     expect(queryQuestions(database, { courseId: "advanced", year: 2025 })).toHaveLength(31);
   });
 
@@ -410,24 +417,24 @@ describe("HSC selectors", () => {
     const coverage = getMarkingFeedbackCoverage(database);
 
     expect(coverage.totalQuestions).toBe(database.questions.length);
-    expect(coverage.feedbackQuestionCount).toBe(197);
-    expect(coverage.byYear[2025]).toBe(74);
+    expect(coverage.feedbackQuestionCount).toBe(559);
+    expect(coverage.byYear[2025]).toBe(71);
     expect(coverage.byYear[2024]).toBe(79);
-    expect(coverage.byYear[2023]).toBe(22);
-    expect(coverage.byYear[2022]).toBe(22);
+    expect(coverage.byYear[2023]).toBe(65);
+    expect(coverage.byYear[2022]).toBe(79);
   });
 
   it("tracks source packs separately from imported question records", () => {
     const sourcePacks = getSourcePackCoverage(database);
     const notStartedPack = sourcePacks.find((pack) => pack.id === "source-math-2018-archive");
-    const seededPack = sourcePacks.find((pack) => pack.id === "source-adv-2025");
-    const inProgressPack = sourcePacks.find((pack) => pack.id === "source-adv-2024");
-    const preparedPack = sourcePacks.find((pack) => pack.id === "source-adv-2023");
-    const startedPack = sourcePacks.find((pack) => pack.id === "source-adv-2022");
-    const standardPack = sourcePacks.find((pack) => pack.id === "source-std-2025");
+    const seededPack = sourcePacks.find((pack) => pack.id === "pack-adv-2025");
+    const inProgressPack = sourcePacks.find((pack) => pack.id === "pack-adv-2024");
+    const preparedPack = sourcePacks.find((pack) => pack.id === "pack-adv-2023");
+    const startedPack = sourcePacks.find((pack) => pack.id === "pack-adv-2022");
+    const standardPack = sourcePacks.find((pack) => pack.id === "pack-std1-2025");
 
     expect(sourcePacks.length).not.toBe(database.papers.length);
-    expect(standardPack?.paperIds).toEqual(["std1-2025", "std2-2025"]);
+    expect(standardPack?.paperId).toBe("std1-2025");
     expect(notStartedPack?.importStatus).toBe("not-started");
     expect(seededPack?.expectedQuestionCount).toBe(31);
     expect(seededPack?.importedQuestionCount).toBe(31);
@@ -437,8 +444,9 @@ describe("HSC selectors", () => {
     expect(preparedPack?.importedQuestionCount).toBe(32);
     expect(startedPack?.expectedQuestionCount).toBe(32);
     expect(startedPack?.importedQuestionCount).toBe(32);
-    expect(sourcePacks.find((pack) => pack.id === "source-std-2025")?.importedQuestionCount).toBe(68);
-    expect(sourcePacks.find((pack) => pack.id === "source-ext1-2025")?.importedQuestionCount).toBe(14);
-    expect(sourcePacks.find((pack) => pack.id === "source-ext2-2025")?.importedQuestionCount).toBe(16);
+    expect(sourcePacks.find((pack) => pack.id === "pack-std1-2025")?.importedQuestionCount).toBe(28);
+    expect(sourcePacks.find((pack) => pack.id === "pack-std2-2025")?.importedQuestionCount).toBe(40);
+    expect(sourcePacks.find((pack) => pack.id === "pack-ext1-2025")?.importedQuestionCount).toBe(14);
+    expect(sourcePacks.find((pack) => pack.id === "pack-ext2-2025")?.importedQuestionCount).toBe(16);
   });
 });
